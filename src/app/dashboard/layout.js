@@ -1,9 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  SidebarHeader,
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export const metadata = {
   title: "DASHBOARD -NXTCV",
@@ -16,7 +13,7 @@ export default function RootLayout({ children }) {
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <SidebarHeader />
+          <SiteHeader />
           {children}
         </SidebarInset>
       </SidebarProvider>

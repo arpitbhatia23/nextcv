@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export const asycHandler = (handler) => {
+export const asyncHandler = (handler) => {
   return async (req, ctx) => {
     try {
       return await handler(req, ctx);
