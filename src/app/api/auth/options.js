@@ -22,16 +22,18 @@ const authOptions = {
       },
       async authorize(credentials) {
         await dbConnect();
+        console.log(credentials);
         const user = await User.findOne({ email: credentials.email });
         if (!user) {
           throw new Error("user not found");
         }
+
         const ispaswordVaild = await bcrypt.compare(
           credentials.password,
           user.password
         );
-        if (ispaswordVaild) {
-          throw new Error("inavaild password");
+        if (!ispaswordVaild) {
+          throw new apiError("inavaild password");
         }
         return user;
       },

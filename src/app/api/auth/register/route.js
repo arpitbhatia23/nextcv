@@ -3,11 +3,12 @@ import apiError from "@/utils/apiError";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
+import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   await dbConnect();
-  const { email, password } = await req.json();
-  if ([email, password].some((field) => field.trim() === "")) {
+  const { name, email, password } = await req.json();
+  if ([name, email, password].some((field) => field.trim() === "")) {
     throw new apiError(400, "all fields are required");
   }
 
@@ -17,6 +18,7 @@ const handler = async (req) => {
   }
   const hashpassword = await bcrypt.hash(password, 10);
   const newuser = await User.create({
+    name: name,
     email: email,
     password: hashpassword,
     role: "admin",

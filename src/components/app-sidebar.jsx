@@ -32,6 +32,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Logo from "./logo";
+import Logo2 from "./Logo2";
 
 const data = {
   user: {
@@ -61,11 +63,10 @@ export function AppSidebar({ ...props }) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-7.5"
             >
               <a href="#">
-                <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">NXTCV</span>
+                <Logo2 />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

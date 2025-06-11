@@ -5,7 +5,8 @@ export const asyncHandler = (handler) => {
     try {
       return await handler(req, ctx);
     } catch (error) {
-      NextResponse.json(error.message || " Internal Server Error", {
+      console.log(error);
+      return NextResponse.json(error.message || " Internal Server Error", {
         status: error.status || 500,
       });
     }

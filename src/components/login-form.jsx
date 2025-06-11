@@ -14,8 +14,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export function LoginForm({ className, ...props }) {
+  const router = useRouter();
   const loginSchema = z.object({
     email: z.string().email({ message: "vaild email is required" }),
     password: z.string().min(3, { message: "Password is required" }),
@@ -35,6 +37,11 @@ export function LoginForm({ className, ...props }) {
       password: data.password,
     });
     console.log(res);
+    if (res.ok) {
+      router.push("/dashboard");
+    } else {
+      console.log("invalid email and password");
+    }
   };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>

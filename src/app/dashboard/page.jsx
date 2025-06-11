@@ -2,6 +2,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Logo2 from "@/components/Logo2";
+import Beam from "@/components/beam";
 export default function Home() {
   const [motionPath, setMotionPath] = useState(0);
   const pathref = useRef(null);
@@ -77,6 +79,7 @@ export default function Home() {
             </motion.linearGradient>
           </defs>
         </svg>
+        <Logo2 /> <Beam />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
