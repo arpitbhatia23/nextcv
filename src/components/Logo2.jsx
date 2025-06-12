@@ -22,12 +22,6 @@ const Logo2 = () => {
         <motion.path
           d="M77.3536 39L75 36H76.1219L78 38.5132L79.878 36H81L78.6463 39H77.3536Z"
           fill="black"
-          animate={{ rotate: [0, 15, -15, 0] }}
-          transition={{
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 2,
-          }}
         />
 
         {/* Text path, animate opacity */}

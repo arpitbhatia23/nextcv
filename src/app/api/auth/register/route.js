@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   await dbConnect();
-  const { name, email, password } = await req.json();
+  const { name, email, password, role } = await req.json();
   if ([name, email, password].some((field) => field.trim() === "")) {
     throw new apiError(400, "all fields are required");
   }
@@ -21,7 +21,7 @@ const handler = async (req) => {
     name: name,
     email: email,
     password: hashpassword,
-    role: "admin",
+    role: role || "user",
   });
   if (!newuser) {
     throw new apiError(500, "something went wrong while registering user");

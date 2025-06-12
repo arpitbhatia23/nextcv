@@ -54,7 +54,7 @@ const Beam = () => {
             x2="77"
             y2="40"
             gradientUnits="userSpaceOnUse"
-            initial={{ x1: 1, x2: 0, y1: 2, y2: 9 }}
+            initial={{ pathLength: 0 }}
             animate={{
               x1: -10,
               x2: -10,
