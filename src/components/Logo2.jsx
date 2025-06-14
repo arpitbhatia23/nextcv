@@ -1,17 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Logo2 = () => {
+const Logo2 = ({ ClassName, size }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, ease: "easeOut" }}
+      className={`${ClassName}`}
     >
       <motion.svg
-        width="80"
-        height="90"
-        viewBox="0 0 81 60"
+        width={size || "70"}
+        height={size || "60"}
+        viewBox="0 0 80 60"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         initial={{ y: -20, opacity: 0 }}

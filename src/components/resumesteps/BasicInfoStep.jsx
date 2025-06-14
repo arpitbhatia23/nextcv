@@ -1,21 +1,14 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   User,
@@ -28,9 +21,22 @@ import {
   Briefcase,
 } from "lucide-react";
 import Logo2 from "../Logo2";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "../ui/button";
+import React, { useEffect } from "react";
 
 const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
+  const schema = z.object({
+    name: z.string().min(1, { message: "Name is required" }),
+    phone: z.string().min(1, { message: "Phone number is required" }),
+    email: z.string().email({ message: "Invalid email address" }),
+    address: z.string().min(1, { message: "Address is required" }),
+    jobRole: z.string().min(1, { message: "Job role is required" }),
+  });
+
   const form = useForm({
+    resolver: zodResolver(schema),
     defaultValues: {
       name: formData?.name || "",
       phone: formData?.phone || "",
@@ -44,28 +50,23 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   });
 
   const watchedValues = form.watch();
-  const progress =
-    (Object.values(watchedValues).filter((value) => value.trim() !== "")
-      .length /
-      8) *
-    100;
 
-  const handleNext = () => {
+  const handlesave = () => {
     updateForm(watchedValues);
     next();
   };
-
+  console.log("render");
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
+        {/* <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
             Create Your Resume
           </h1>
           <p className="text-gray-600">
             Fill in your basic information to get started
           </p>
-        </div>
+        </div> */}
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Form Section */}
@@ -77,9 +78,12 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                   Basic Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-6">
+              <CardContent>
                 <Form {...form}>
-                  <form className="space-y-6">
+                  <form
+                    className="space-y-6 p-4"
+                    onSubmit={form.handleSubmit(handlesave)}
+                  >
                     <div className="grid md:grid-cols-2 gap-4">
                       <FormField
                         name="name"
@@ -97,6 +101,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                                 className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                               />
                             </FormControl>
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
@@ -117,6 +122,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                                 className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                               />
                             </FormControl>
+                            <FormMessage />
                           </FormItem>
                         )}
                       />
@@ -139,6 +145,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                               className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                             />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -151,7 +158,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                           <FormItem>
                             <FormLabel className="flex items-center gap-2 text-gray-700 font-medium">
                               <Linkedin className="w-4 h-4" />
-                              LinkedIn Profile
+                              LinkedIn Profile {"(optional)"}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -171,7 +178,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                           <FormItem>
                             <FormLabel className="flex items-center gap-2 text-gray-700 font-medium">
                               <Github className="w-4 h-4" />
-                              GitHub Profile
+                              GitHub Profile {"(optional)"}
                             </FormLabel>
                             <FormControl>
                               <Input
@@ -192,7 +199,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                         <FormItem>
                           <FormLabel className="flex items-center gap-2 text-gray-700 font-medium">
                             <Globe className="w-4 h-4" />
-                            Portfolio Website
+                            Portfolio Website {"(optional)"}
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -201,6 +208,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                               className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                             />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -221,6 +229,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                               className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                             />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -241,91 +250,77 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                               className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                             />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
+                    <div className="flex justify-end items-center">
+                      <Button
+                        className={
+                          "bg-gradient-to-b from-indigo-600 to-purple-600 text-white relative "
+                        }
+                        type="submit"
+                      >
+                        next
+                      </Button>
+                    </div>
                   </form>
                 </Form>
-              </CardContent>
-            </Card>
-
-            {/* Progress and Navigation */}
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm p-0">
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700">
-                        Form Completion
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {Math.round(progress)}%
-                      </span>
-                    </div>
-                    <Progress value={progress} className="h-2" />
-                  </div>
-
-                  <Pagination className="justify-center">
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious
-                          onClick={previous}
-                          className="cursor-pointer hover:bg-gray-100"
-                        />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationNext
-                          onClick={handleNext}
-                          className="cursor-pointer hover:bg-blue-50 hover:text-blue-600"
-                        />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </div>
               </CardContent>
             </Card>
           </div>
 
           {/* Resume Preview Section */}
-          <div className="space-y-6">
+          <div className="hidden sm:block space-y-6">
             <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm p-0">
               <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg p-3">
-                <CardTitle>Resume Preview</CardTitle>
+                <CardTitle
+                  className={
+                    "flex items-center justify-center gap-2 text-black"
+                  }
+                >
+                  <Logo2 />
+                  Resume Preview
+                </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="bg-white border rounded-lg p-6 min-h-[600px] shadow-inner">
+                <div className="bg-white border rounded-lg p-6 min-h-[150px] shadow-inner">
                   {/* Resume Template */}
                   <div className="space-y-4">
                     {/* Header */}
                     <div className="text-center border-b pb-4">
                       <h2 className="text-2xl font-bold text-gray-800">
-                        {watchedValues.name || "Your Name"}
+                        {watchedValues.name || formData?.name || "Your Name"}
                       </h2>
                       <p className="text-lg text-gray-600 mt-1">
-                        {watchedValues.jobRole || "Your Job Role"}
+                        {watchedValues.jobRole ||
+                          formData?.jobRole ||
+                          "Your Job Role"}
                       </p>
                       <div className="flex flex-wrap justify-center gap-4 mt-3 text-sm text-gray-600">
                         {watchedValues.email && (
                           <span className="flex items-center gap-1">
                             <Mail className="w-3 h-3" />
-                            {watchedValues.email}
+                            {watchedValues.email || formData.email}
                           </span>
                         )}
-                        {watchedValues.phone && (
-                          <span className="flex items-center gap-1">
-                            <Phone className="w-3 h-3" />
-                            {watchedValues.phone}
-                          </span>
-                        )}
-                        {watchedValues.address && (
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3" />
-                            {watchedValues.address}
-                          </span>
-                        )}
+                        {watchedValues.phone ||
+                          (formData?.phone && (
+                            <span className="flex items-center gap-1">
+                              <Phone className="w-3 h-3" />
+                              {watchedValues.phone || formData?.phone}
+                            </span>
+                          ))}
+                        {watchedValues.address ||
+                          (formData?.address && (
+                            <span className="flex items-center gap-1">
+                              <MapPin className="w-3 h-3" />
+                              {watchedValues?.address || formData?.address}
+                            </span>
+                          ))}
                       </div>
                       <div className="flex flex-wrap justify-center gap-4 mt-2 text-sm">
-                        {watchedValues.linkedin && (
+                        {(watchedValues.linkedin || formData?.linkedin) && (
                           <a
                             href="#"
                             className="flex items-center gap-1 text-blue-600 hover:underline"
@@ -334,7 +329,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                             LinkedIn
                           </a>
                         )}
-                        {watchedValues.github && (
+                        {(watchedValues.github || formData?.github) && (
                           <a
                             href="#"
                             className="flex items-center gap-1 text-gray-700 hover:underline"
@@ -343,7 +338,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                             GitHub
                           </a>
                         )}
-                        {watchedValues.portfolio && (
+                        {(watchedValues.portfolio || formData?.portfolio) && (
                           <a
                             href="#"
                             className="flex items-center gap-1 text-green-600 hover:underline"
@@ -353,9 +348,6 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                           </a>
                         )}
                       </div>
-                    </div>
-                    <div className="felx justify-center items-center text-center">
-                      <Logo2 className="text-center w-12 h-12" />
                     </div>
                   </div>
                 </div>
@@ -368,4 +360,4 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   );
 };
 
-export default BasicInfoStep;
+export default React.memo(BasicInfoStep);
