@@ -90,17 +90,7 @@ const Resume = () => {
     summary: "",
     experience: [],
     skills: [],
-    education: [
-      {
-        institution: "Harvard University",
-        degree: "B.Tech",
-        startYear: "2019",
-        endYear: "2024",
-        description:
-          "Studied Computer Science at Harvard, focusing on software engineering and data structures.",
-        grade: "9.0 CGPA",
-      },
-    ],
+    education: [],
     projects: [],
   });
 

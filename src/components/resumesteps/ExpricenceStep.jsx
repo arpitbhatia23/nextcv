@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { z } from "zod";
+import { Textarea } from "../ui/textarea";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(
@@ -34,6 +35,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
       position: "",
       startDate: "",
       endDate: "",
+      description: "",
     },
   });
 
@@ -132,7 +134,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>Start Date *</FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} />
+                          <Input type="date" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -145,14 +147,26 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>End Date</FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} />
+                          <Input type="DATE" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
-
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl>
+                        <Textarea type="text" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div className="flex justify-end gap-2 items-center">
                   <Button
                     type="submit"
@@ -194,7 +208,8 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {experienceList.length === 0 ? (
+            {experienceList.length === 0 ||
+            experienceList[0].position === "" ? (
               <div className="text-center py-8 text-gray-500">
                 <Briefcase className="w-16 h-16 mx-auto mb-4 text-gray-300" />
                 <p>No experience added yet.</p>
@@ -236,6 +251,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     <div className="text-sm text-gray-600">
                       <span className="font-medium">Duration:</span>{" "}
                       {exp.startDate} - {exp.endDate || "Present"}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {exp.description}
                     </div>
                   </div>
                 ))}

@@ -140,7 +140,11 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                     <FormItem>
                       <FormLabel>Date</FormLabel>
                       <FormControl>
-                        <Input placeholder="MM/YYYY or YYYY" {...field} />
+                        <Input
+                          placeholder="MM/YYYY or YYYY"
+                          type={"date"}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -238,7 +242,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                 </p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 p-4">
                 {projectList.map((project) => (
                   <div
                     key={project.id}

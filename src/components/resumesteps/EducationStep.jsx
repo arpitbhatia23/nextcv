@@ -33,6 +33,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "date is required" }),
     endYear: z.string({ message: "end date is required" }),
     grade: z.string({ message: "grade is required" }),
+    description: z.string().optional(),
   });
   const form = useForm({
     resolver: zodResolver(schema),
@@ -65,6 +66,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     form.reset();
   };
 
+  console.log(educationList);
   const handleEdit = (education) => {
     form.reset(education);
     setIsEditing(true);
@@ -141,7 +143,11 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>Start Year</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., 2018" {...field} />
+                          <Input
+                            placeholder="e.g., 2018"
+                            type={"date"}
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -154,7 +160,11 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>End Year</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., 2022" {...field} />
+                          <Input
+                            placeholder="e.g., 2022"
+                            type={"date"}
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -244,7 +254,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                 </p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 p-4">
                 {educationList.map((education, index) => (
                   <div
                     key={index}

@@ -19,16 +19,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SkillStep = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(formData.skills || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
+  const schema = z.object({
+    name: z.string().min(2, { message: "name is required" }),
+    level: z.string({ message: "level is required" }),
+  });
   const form = useForm({
+    resolver: zodResolver(schema),
     defaultValues: {
       name: "",
-      level: "", // optional: Beginner / Intermediate / Expert
+      level: "",
     },
   });
 
@@ -141,7 +148,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="p-0">
+          <CardFooter className="">
             <div className="bg-blue-50 p-4 w-full">
               <h3 className="font-medium text-blue-900 mb-2">
                 Tips for adding skills:
@@ -171,7 +178,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                 <p className="text-sm">Add your first skill using the form.</p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 p-4">
                 {skillList.map((skill, index) => (
                   <div
                     key={index}

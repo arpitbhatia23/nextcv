@@ -271,7 +271,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
           </div>
 
           {/* Resume Preview Section */}
-          <div className="hidden sm:block space-y-6">
+          <div className=" space-y-6 p-4">
             <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm p-0">
               <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg p-3">
                 <CardTitle

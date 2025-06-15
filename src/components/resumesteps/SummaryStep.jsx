@@ -77,6 +77,16 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
+                <div className="flex justify-start">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="text-sm text-indigo-600 border-indigo-500 hover:bg-indigo-50"
+                  >
+                    Generate using AI
+                  </Button>
+                </div>
+
                 <div className="flex justify-end gap-2 items-center">
                   <Button
                     type="submit"

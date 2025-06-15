@@ -7,9 +7,38 @@ import {
   View,
   StyleSheet,
   Link,
+  Svg,
+  Path,
 } from "@react-pdf/renderer";
 
-// Elegant and modern PDF resume styles
+// SVG Icons for LinkedIn, GitHub, Portfolio
+const LinkedInIcon = () => (
+  <Svg width="12" height="12" viewBox="0 0 24 24">
+    <Path
+      fill="#0A66C2"
+      d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.54 20h-2.46v-8h2.46v8zm-1.23-9.21c-.79 0-1.43-.64-1.43-1.43s.64-1.43 1.43-1.43 1.43.64 1.43 1.43-.64 1.43-1.43 1.43zm14.23 9.21h-2.46v-4.18c0-1-.02-2.29-1.39-2.29-1.39 0-1.61 1.09-1.61 2.22v4.25h-2.46v-8h2.36v1.09h.03c.33-.62 1.13-1.27 2.33-1.27 2.49 0 2.95 1.64 2.95 3.77v4.41z"
+    />
+  </Svg>
+);
+
+const GitHubIcon = () => (
+  <Svg width="12" height="12" viewBox="0 0 24 24">
+    <Path
+      fill="#171515"
+      d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.415-4.033-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.469-2.381 1.236-3.221-.123-.304-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 013.004-.404c1.018.004 2.045.138 3.004.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.241 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.369.823 1.096.823 2.211v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+    />
+  </Svg>
+);
+
+const PortfolioIcon = () => (
+  <Svg width="12" height="12" viewBox="0 0 24 24">
+    <Path
+      fill="#4f8cff"
+      d="M2 7V6a5 5 0 0110 0v1h8a2 2 0 012 2v10a2 2 0 01-2 2H2a2 2 0 01-2-2V9a2 2 0 012-2zm8-1a3 3 0 10-6 0v1h6V6zm10 3H2v10h18V9zm-6 2v2h-2v-2h2zm-4 0v2H6v-2h2z"
+    />
+  </Svg>
+);
+
 const styles = StyleSheet.create({
   page: {
     padding: 36,
@@ -49,11 +78,21 @@ const styles = StyleSheet.create({
     marginBottom: 1,
   },
   links: {
-    fontSize: 9,
-    color: "#4f8cff",
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 2,
+    marginTop: 4,
+    gap: 8,
+  },
+  linkItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  linkText: {
+    fontSize: 9,
+    color: "#4f8cff",
+    marginLeft: 3,
+    textDecoration: "underline",
   },
   section: {
     marginBottom: 18,
@@ -142,7 +181,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFResumeTemplate = ({ data }) => (
+const ModernPDFResumeTemplate = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
@@ -157,21 +196,28 @@ const PDFResumeTemplate = ({ data }) => (
           </Text>
           <View style={styles.links}>
             {data.linkedin && (
-              <Text>
-                <Link src={data.linkedin}>LinkedIn</Link>
-                {"  "}
-              </Text>
+              <View style={styles.linkItem}>
+                <LinkedInIcon />
+                <Link src={data.linkedin} style={styles.linkText}>
+                  LinkedIn
+                </Link>
+              </View>
             )}
             {data.github && (
-              <Text>
-                <Link src={data.github}>GitHub</Link>
-                {"  "}
-              </Text>
+              <View style={styles.linkItem}>
+                <GitHubIcon />
+                <Link src={data.github} style={styles.linkText}>
+                  GitHub
+                </Link>
+              </View>
             )}
             {data.portfolio && (
-              <Text>
-                <Link src={data.portfolio}>Portfolio</Link>
-              </Text>
+              <View style={styles.linkItem}>
+                <PortfolioIcon />
+                <Link src={data.portfolio} style={styles.linkText}>
+                  Portfolio
+                </Link>
+              </View>
             )}
           </View>
         </View>
@@ -267,4 +313,4 @@ const PDFResumeTemplate = ({ data }) => (
   </Document>
 );
 
-export default PDFResumeTemplate;
+export default ModernPDFResumeTemplate;
