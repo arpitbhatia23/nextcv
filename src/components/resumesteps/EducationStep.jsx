@@ -145,7 +145,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                         <FormControl>
                           <Input
                             placeholder="e.g., 2018"
-                            type={"date"}
+                            type={"month"}
                             {...field}
                           />
                         </FormControl>
@@ -162,7 +162,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                         <FormControl>
                           <Input
                             placeholder="e.g., 2022"
-                            type={"date"}
+                            type={"month"}
                             {...field}
                           />
                         </FormControl>

@@ -142,7 +142,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                       <FormControl>
                         <Input
                           placeholder="MM/YYYY or YYYY"
-                          type={"date"}
+                          type={"month"}
                           {...field}
                         />
                       </FormControl>

@@ -134,7 +134,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>Start Date *</FormLabel>
                         <FormControl>
-                          <Input type="date" {...field} />
+                          <Input type="month" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -147,7 +147,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>End Date</FormLabel>
                         <FormControl>
-                          <Input type="DATE" {...field} />
+                          <Input type="month" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
