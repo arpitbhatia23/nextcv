@@ -18,6 +18,8 @@ import PDFResumeTemplate from "../../../templates/resume-pdf/morden";
 import ClassicTemplate from "../../../templates/resume-pdf/classic";
 import ModernPDFResumeTemplate from "../../../templates/resume-pdf/morden";
 import ClassicMinimalistPDFResume from "../../../templates/resume-pdf/Minimalist";
+import ModernBlueSidebarPDFResume from "../../../templates/resume-pdf/ModernBlueSideBar";
+import CleanBusinessAnalystPDFResume from "../../../templates/resume-pdf/businessAnalistTemplate";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -29,7 +31,7 @@ const FinalStep = ({ formData }) => {
   const [showSparkle, setShowSparkle] = useState(false);
   const buttonRef = useRef();
   const [confettiOrigin, setConfettiOrigin] = useState(null);
-
+  const [numPages, setNumPages] = useState(null);
   const templates = [
     {
       key: "modernTemplate",
@@ -45,6 +47,21 @@ const FinalStep = ({ formData }) => {
       key: "MinimalistTemplate",
       label: "Minimalist",
       component: ClassicMinimalistPDFResume,
+    },
+    {
+      key: "MordenBluesidebar",
+      label: "Morden blue sidebar",
+      component: ModernBlueSidebarPDFResume,
+    },
+    {
+      key: "ModernFullStack",
+      label: "MordenFullStack",
+      component: ModernPDFResumeTemplate,
+    },
+    {
+      key: "Businessanlayist",
+      label: "BusinessAnalyst",
+      component: CleanBusinessAnalystPDFResume,
     },
   ];
 
@@ -103,14 +120,14 @@ const FinalStep = ({ formData }) => {
           <CardHeader>
             <CardTitle className="text-lg">Choose a Template</CardTitle>
           </CardHeader>
-          <CardContent className="flex gap-2">
+          <CardContent className="flex gap-2 flex-wrap sm:flex-nowrap">
             {templates.map((template) => (
               <Button
                 key={template.key}
                 variant={
                   selectedTemplate === template.key ? "default" : "outline"
                 }
-                className={`flex-1 ${
+                className={`flex-1 min-w-0 ${
                   selectedTemplate === template.key
                     ? "ring-2 ring-indigo-500"
                     : ""
@@ -131,8 +148,24 @@ const FinalStep = ({ formData }) => {
           <CardContent>
             <div className="flex justify-center overflow-x-auto">
               {pdfUrl ? (
-                <Document file={pdfUrl}>
-                  <Page pageNumber={1} width={260} />
+                <Document
+                  file={pdfUrl}
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                >
+                  {Array.from({ length: numPages || 0 }).map((_, idx) => (
+                    <div key={idx}>
+                      <Page pageNumber={idx + 1} width={400} />
+                      {/* Insert divider after each page except the last */}
+                      {idx < (numPages || 1) - 1 && (
+                        <div
+                          style={{
+                            margin: "24px 0",
+                            borderTop: "2px dashed #bbb",
+                          }}
+                        />
+                      )}
+                    </div>
+                  ))}
                 </Document>
               ) : (
                 <div>Loading preview...</div>
@@ -253,20 +286,24 @@ const FinalStep = ({ formData }) => {
                 <CardContent>
                   <div className="flex justify-center   overflow-x-auto">
                     {pdfUrl ? (
-                      <Document file={pdfUrl}>
-                        <div>
-                          <Page pageNumber={1} width={400} />
-                        </div>
-                        {/* Visible horizontal line as a break */}
-                        <div
-                          style={{
-                            margin: "24px 0",
-                            borderTop: "2px dashed #bbb",
-                          }}
-                        />
-                        <div>
-                          <Page pageNumber={2} width={400} />
-                        </div>
+                      <Document
+                        file={pdfUrl}
+                        onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                      >
+                        {Array.from({ length: numPages || 0 }).map((_, idx) => (
+                          <div key={idx}>
+                            <Page pageNumber={idx + 1} width={400} />
+                            {/* Insert divider after each page except the last */}
+                            {idx < (numPages || 1) - 1 && (
+                              <div
+                                style={{
+                                  margin: "24px 0",
+                                  borderTop: "2px dashed #bbb",
+                                }}
+                              />
+                            )}
+                          </div>
+                        ))}
                       </Document>
                     ) : (
                       <div>Loading preview...</div>
