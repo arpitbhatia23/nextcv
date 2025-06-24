@@ -20,6 +20,15 @@ import ModernPDFResumeTemplate from "../../../templates/resume-pdf/morden";
 import ClassicMinimalistPDFResume from "../../../templates/resume-pdf/Minimalist";
 import ModernBlueSidebarPDFResume from "../../../templates/resume-pdf/ModernBlueSideBar";
 import CleanBusinessAnalystPDFResume from "../../../templates/resume-pdf/businessAnalistTemplate";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import axios from "axios";
+import { toast } from "sonner";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -77,10 +86,14 @@ const FinalStep = ({ formData }) => {
   };
 
   const handleSaveDraft = () => {
-    // Save as draft logic (e.g., localStorage or API)
-    localStorage.setItem("resumeDraft", JSON.stringify(formData));
-    setShowSparkle(true);
-    setTimeout(() => setShowSparkle(false), 1500);
+    const res = axios.post("/api/resume/savedraft", {
+      resumeType: selectedTemplate,
+      ...formData,
+    });
+    console.log(res);
+    if (res.data.success) {
+      toast("saved draft sucessfully");
+    }
   };
 
   useEffect(() => {
@@ -121,22 +134,22 @@ const FinalStep = ({ formData }) => {
             <CardTitle className="text-lg">Choose a Template</CardTitle>
           </CardHeader>
           <CardContent className="flex gap-2 flex-wrap sm:flex-nowrap">
-            {templates.map((template) => (
-              <Button
-                key={template.key}
-                variant={
-                  selectedTemplate === template.key ? "default" : "outline"
-                }
-                className={`flex-1 min-w-0 ${
-                  selectedTemplate === template.key
-                    ? "ring-2 ring-indigo-500"
-                    : ""
-                }`}
-                onClick={() => setSelectedTemplate(template.key)}
-              >
-                {template.label}
-              </Button>
-            ))}
+            <Select>
+              <SelectTrigger className={"w-full"}>
+                <SelectValue placeholder="Choose a Template" />
+              </SelectTrigger>
+              <SelectContent>
+                {templates.map((template) => (
+                  <SelectItem
+                    key={template.key}
+                    onClick={() => setSelectedTemplate(template.key)}
+                    value={template.key}
+                  >
+                    {template.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </CardContent>
         </Card>
 

@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 const resumeSchema = new Schema(
   {
+    status: {
+      type: String,
+      enum: ["paid", "draft"],
+    },
     ResumeType: {
       type: String,
       required: true,
@@ -26,6 +30,7 @@ const resumeSchema = new Schema(
       type: String,
     },
     github: { type: String },
+    portfolio: { type: String },
     summary: {
       type: String,
       required: true,
@@ -93,6 +98,7 @@ const resumeSchema = new Schema(
         },
       },
     ],
+
     certifications: [
       {
         title: {

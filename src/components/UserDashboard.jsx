@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, IndianRupee, Plus, Timer, Zap } from "lucide-react";
+import Link from "next/link";
 
 const UserDashboard = () => {
   return (
@@ -19,20 +20,22 @@ const UserDashboard = () => {
         {/* Main Create Resume Card */}
         <Card className="mb-8 border-2 border-purple-200 shadow-lg bg-white">
           <CardContent className="p-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
-                <Plus size={32} className="text-purple-600" />
+            <Link href={"dashboard/resumeform"}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4">
+                  <Plus size={32} className="text-purple-600" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Create Your AI-Powered Resume
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  Get started with your professional resume in minutes
+                </p>
+                <button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
+                  Start Creating
+                </button>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                Create Your AI-Powered Resume
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Get started with your professional resume in minutes
-              </p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
-                Start Creating
-              </button>
-            </div>
+            </Link>
           </CardContent>
         </Card>
 
