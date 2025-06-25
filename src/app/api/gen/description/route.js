@@ -4,11 +4,15 @@ import { streamText } from "ai";
 export const maxDuration = 30;
 
 export async function POST(req) {
-  const { messages } = await req.json();
+  const { type, data } = await req.json();
+
+  const strategy = PromptStrategies[type];
+
+  const prompt = strategy(data);
 
   const result = streamText({
     model: createVertex({}),
-    messages,
+    messages: [{ role: "user", content: prompt }],
   });
 
   return result.toDataStreamResponse();
