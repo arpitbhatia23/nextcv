@@ -56,7 +56,7 @@ function Footer() {
             </div>
 
             {/* Newsletter */}
-            <div className="bg-gray-800 p-6 md:p-8 rounded-xl space-y-4">
+            {/* <div className="bg-gray-800 p-6 md:p-8 rounded-xl space-y-4">
                 <h3 className="font-semibold text-lg">Stay Updated</h3>
                 <p className="text-gray-400">Get career tips and resume advice delivered to your inbox.</p>
                 <form className="flex flex-col sm:flex-row gap-4">
@@ -73,7 +73,7 @@ function Footer() {
                         Subscribe
                     </button>
                 </form>
-            </div>
+            </div> */}
 
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
