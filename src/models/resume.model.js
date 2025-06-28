@@ -35,10 +35,18 @@ const resumeSchema = new Schema(
       type: String,
       required: true,
     },
-    skills: {
-      type: [String],
-      required: true,
-    },
+    skills: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        level: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     education: [
       {
         degree: {
@@ -49,23 +57,29 @@ const resumeSchema = new Schema(
           type: String,
           required: true,
         },
-        startDate: {
+        startYear: {
           type: Date,
           required: true,
         },
-        endDate: {
+        endYear: {
           type: Date,
           required: true,
+        },
+        grade: {
+          type: String,
+        },
+        description: {
+          type: String,
         },
       },
     ],
     experience: [
       {
-        jobTitle: {
+        position: {
           type: String,
           required: true,
         },
-        company: {
+        companyName: {
           type: String,
           required: true,
         },
@@ -89,6 +103,10 @@ const resumeSchema = new Schema(
           type: String,
           required: true,
         },
+        roleOrType: {
+          type: String,
+          required: true,
+        },
         description: {
           type: String,
           required: true,
@@ -96,25 +114,21 @@ const resumeSchema = new Schema(
         link: {
           type: String,
         },
+        date: {
+          type: String,
+          required: String,
+        },
+        technologiesOrTopics: {
+          type: String,
+          required: true,
+        },
+        organization: {
+          type: String,
+          required: true,
+        },
       },
     ],
 
-    certifications: [
-      {
-        title: {
-          type: String,
-          required: true,
-        },
-        issuer: {
-          type: String,
-          required: true,
-        },
-        date: {
-          type: Date,
-          required: true,
-        },
-      },
-    ],
     jobRole: {
       type: String,
     },

@@ -29,6 +29,8 @@ import {
 } from "../ui/select";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { templates } from "@/utils/template";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -42,38 +44,39 @@ const FinalStep = ({ formData }) => {
   const [confettiOrigin, setConfettiOrigin] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [discount, setDiscount] = useState(0);
-  const templates = [
-    {
-      key: "modernTemplate",
-      label: "Modern",
-      component: ModernPDFResumeTemplate,
-    },
-    {
-      key: "classicTemplate",
-      label: "Classic",
-      component: ClassicTemplate,
-    },
-    {
-      key: "MinimalistTemplate",
-      label: "Minimalist",
-      component: ClassicMinimalistPDFResume,
-    },
-    {
-      key: "MordenBluesidebar",
-      label: "Morden blue sidebar",
-      component: ModernBlueSidebarPDFResume,
-    },
-    {
-      key: "ModernFullStack",
-      label: "MordenFullStack",
-      component: ModernPDFResumeTemplate,
-    },
-    {
-      key: "Businessanlayist",
-      label: "BusinessAnalyst",
-      component: CleanBusinessAnalystPDFResume,
-    },
-  ];
+  const router = useRouter();
+  // const templates = [
+  //   {
+  //     key: "modernTemplate",
+  //     label: "Modern",
+  //     component: ModernPDFResumeTemplate,
+  //   },
+  //   {
+  //     key: "classicTemplate",
+  //     label: "Classic",
+  //     component: ClassicTemplate,
+  //   },
+  //   {
+  //     key: "MinimalistTemplate",
+  //     label: "Minimalist",
+  //     component: ClassicMinimalistPDFResume,
+  //   },
+  //   {
+  //     key: "MordenBluesidebar",
+  //     label: "Morden blue sidebar",
+  //     component: ModernBlueSidebarPDFResume,
+  //   },
+  //   {
+  //     key: "ModernFullStack",
+  //     label: "MordenFullStack",
+  //     component: ModernPDFResumeTemplate,
+  //   },
+  //   {
+  //     key: "Businessanlayist",
+  //     label: "BusinessAnalyst",
+  //     component: CleanBusinessAnalystPDFResume,
+  //   },
+  // ];
 
   const handleClick = () => {
     if (buttonRef.current) {
@@ -115,15 +118,19 @@ const FinalStep = ({ formData }) => {
   }, [formData, selectedTemplate]);
 
   const handelPayment = async () => {
-    const amount = Math.floor(100 - discount) * 10;
+    const amount = Math.floor(100 - discount) * 100;
     console.log(amount);
 
     const res = await axios.post("/api/payment/order", {
       amount,
       ...formData,
-      resumeType: selectedTemplate,
+      ResumeType: selectedTemplate,
     });
-    console.log(res);
+    if (res.data.success) {
+      const { data } = res.data;
+      const paymentUrl = data?.redirectUrl;
+      window.location.href = paymentUrl;
+    }
   };
 
   return (
