@@ -23,7 +23,7 @@ function Herosection() {
     ];
 
     return (
-        <section name="Home" className="bg-blue-500 text-white py-16 px-4 dark:bg-gray-950 sm:px-8 md:px-16 w-full">
+        <section name="Home" className="bg-blue-500 text-white py-24 px-4 dark:bg-gray-950 sm:px-8 md:px-16 w-full">
             <Card className="mx-auto grid grid-cols-1 sm:grid-cols-2 items-center gap-12 dark:bg-gray-800">
                 {/* Left Text Content */}
                 <div className="space-y-6 max-w-2xl p-4 ">
@@ -53,7 +53,7 @@ function Herosection() {
                 </div>
 
                 {/* Right Image */}
-                <div className="w-full">
+                <div className="w-full pr-4">
                     <img
                         src="https://images.unsplash.com/photo-1549923746-9507eec27243?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MzQ2fDB8MXxzZWFyY2h8MXx8cmVzdW1lJTI1MjB3b3Jrc3BhY2UlMjUyMG1vZGVybiUyNTIwYnJpZ2h0JTI1MjBpbGx1c3RyYXRpb258ZW58MXwwfHx8MTc0OTM5NTIwM3ww&ixlib=rb-4.1.0&q=80&w=1080"
                         alt="Resume workspace"

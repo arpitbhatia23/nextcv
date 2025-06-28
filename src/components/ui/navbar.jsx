@@ -56,7 +56,7 @@ export default function Nav() {
                 {/* Desktop Nav */}
                 <NavigationMenu className="hidden md:flex">
                     <NavigationMenuList className="flex items-center space-x-6">
-                        {['Home', 'How it work', 'Why Choose Us', 'Templates', 'Testimonial', 'Get Started'].map((item) => (
+                        {['Home', 'Why Choose Us', 'Templates', 'How it work',  'Get Started','Testimonial'].map((item) => (
                             <NavigationMenuItem key={item}>
                                 <NavigationMenuLink asChild>
                                     <a onClick={(e) => { e.preventDefault; scrollTo(item) }}>{item}</a>
