@@ -1,4 +1,5 @@
 const React = require('react');
+const { default: Logo2 } = require('../Logo2');
 const FaFacebookF = require('react-icons/fa').FaFacebookF;
 const FaTwitter = require('react-icons/fa').FaTwitter;
 const FaLinkedinIn = require('react-icons/fa').FaLinkedinIn;
@@ -21,7 +22,7 @@ function Footer() {
             {/* Top Section */}
             <div className="flex flex-col md:flex-row justify-between gap-8">
                 <div className="space-y-4 max-w-md">
-                    <h2 className="text-2xl font-bold">0</h2>
+                    <Logo2 className="text-white"/>
                     <p className="text-gray-400">
                         Build professional, ATS-optimized resumes with AI in minutes. Join thousands of successful job seekers who landed their dream jobs with Next CV.
                     </p>
@@ -33,7 +34,7 @@ function Footer() {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap md:flex-nowrap gap-12 text-sm">
+                <div className="flex flex-wrap md:flex-nowrap gap-28 text-sm pr-20">
                     <div>
                         <h4 className="font-semibold mb-3">Quick Links</h4>
                         <ul className="space-y-2 text-gray-400">
@@ -78,10 +79,10 @@ function Footer() {
             {/* Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {[
-                    { label: 'Resumes Created', value: 0, color: 'text-indigo-400' },
-                    { label: 'Success Rate', value: 0, color: 'text-green-400' },
-                    { label: 'Average Time', value: 0, color: 'text-purple-400' },
-                    { label: 'Fixed Price', value: 0, color: 'text-cyan-400' },
+                    { label: 'Resumes Created', value: "1 K+", color: 'text-indigo-400' },
+                    { label: 'Success Rate', value: "95%", color: 'text-green-400' },
+                    { label: 'Average Time', value: "2 min", color: 'text-purple-400' },
+                    { label: 'Fixed Price', value: "100", color: 'text-cyan-400' },
                 ].map(function (item) {
                     return (
                         <div key={item.label} className="bg-gray-800 p-6 rounded-lg text-center">
