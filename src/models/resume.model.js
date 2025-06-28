@@ -115,7 +115,7 @@ const resumeSchema = new Schema(
         },
       },
     ],
-    profilepic: {
+    jobRole: {
       type: String,
     },
   },

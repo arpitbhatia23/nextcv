@@ -41,6 +41,7 @@ const FinalStep = ({ formData }) => {
   const buttonRef = useRef();
   const [confettiOrigin, setConfettiOrigin] = useState(null);
   const [numPages, setNumPages] = useState(null);
+  const [discount, setDiscount] = useState(0);
   const templates = [
     {
       key: "modernTemplate",
@@ -112,6 +113,18 @@ const FinalStep = ({ formData }) => {
     };
     // eslint-disable-next-line
   }, [formData, selectedTemplate]);
+
+  const handelPayment = async () => {
+    const amount = Math.floor(100 - discount) * 10;
+    console.log(amount);
+
+    const res = await axios.post("/api/payment/order", {
+      amount,
+      ...formData,
+      resumeType: selectedTemplate,
+    });
+    console.log(res);
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center py-4 px-2 md:p-6">
@@ -208,7 +221,10 @@ const FinalStep = ({ formData }) => {
             {applied && (
               <p className="text-green-600">Coupon applied successfully!</p>
             )}
-            <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+            <Button
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+              onClick={handelPayment}
+            >
               <IndianRupee className="mr-2 h-4 w-4" />
               Proceed to Payment
             </Button>
@@ -221,7 +237,7 @@ const FinalStep = ({ formData }) => {
               <Save className="h-4 w-4" />
               Save as Draft
             </Button>
-            {pdfUrl && (
+            {/* {pdfUrl && (
               <div className="mt-3 flex justify-center">
                 <a
                   href={pdfUrl}
@@ -231,7 +247,7 @@ const FinalStep = ({ formData }) => {
                   Download PDF
                 </a>
               </div>
-            )}
+            )} */}
           </CardContent>
         </Card>
       </div>
@@ -347,11 +363,14 @@ const FinalStep = ({ formData }) => {
                       Coupon applied successfully!
                     </p>
                   )}
-                  <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                  <Button
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                    onClick={handelPayment}
+                  >
                     <IndianRupee className="mr-2 h-4 w-4" />
                     Proceed to Payment
                   </Button>
-                  {pdfUrl && (
+                  {/* {pdfUrl && (
                     <div className="mt-4 flex justify-center">
                       <a
                         href={pdfUrl}
@@ -361,7 +380,7 @@ const FinalStep = ({ formData }) => {
                         Download PDF
                       </a>
                     </div>
-                  )}
+                  )} */}
                 </CardContent>
               </Card>
             </ScrollArea>

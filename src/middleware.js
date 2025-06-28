@@ -9,14 +9,14 @@ export async function middleware(req) {
   }
 
   // Redirect signed-in users away from sign-in/sign-up
-  if (
-    token &&
-    (url.pathname.startsWith("/sign-in") ||
-      url.pathname.startsWith("/sign-up") ||
-      url.pathname === "/")
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
+  // if (
+  //   token &&
+  //   (url.pathname.startsWith("/sign-in") ||
+  //     url.pathname.startsWith("/sign-up") ||
+  //     url.pathname === "/")
+  // ) {
+  //   return NextResponse.redirect(new URL("/dashboard", req.url));
+  // }
 
   // If not signed in and trying to access protected route
   if (!token && url.pathname.startsWith("/dashboard")) {
