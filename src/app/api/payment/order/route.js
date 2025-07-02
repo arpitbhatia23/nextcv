@@ -46,6 +46,7 @@ const handler = async (req) => {
     ResumeType,
   } = reqData;
   const session = await getServerSession(authOptions);
+  console.log(session)
   if (!session && !session?.user) {
     throw new apiError(401, "unauthorizes access");
   }

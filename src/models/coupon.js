@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 const couponSchema = new Schema(
   {
-    coupounCode: {
+    couponCode: {
       type: String,
       reqrired: true,
     },
@@ -9,7 +9,7 @@ const couponSchema = new Schema(
       type: Number,
       required: true,
     },
-    expriy: {
+    expiry: {
       type: Date,
       required: true,
     },
