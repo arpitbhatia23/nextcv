@@ -45,33 +45,34 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       await dbConnect();
-      await User.findOneAndUpdate(
-        { email: user.email },
-        {
-          $set: {
-            name: user.name,
-            image: user.image,
-            provider: account.provider || "credentials",
-          },
-          $setOnInsert: {
-            email: user.email,
-          },
-        },
-        { upsert: true, new: true }
-      );
+      const finduser = await User.findOne({ email: user?.email });
+      if (!finduser) {
+        const newUser = await User.create({
+          name: user.name,
+          email: user.email,
+          role: "user",
+          provider: account.provider,
+        });
+
+        user = newUser;
+      }
       return true;
     },
 
     async jwt({ token, user, trigger }) {
+      await dbConnect();
       const finduser = await User.findOne({ email: user?.email });
+      console.log(finduser);
       if (finduser) {
         token.user = finduser;
       }
+
       return token;
     },
 
     async session({ session, token }) {
       session.user = token?.user;
+
       return session;
     },
   },
