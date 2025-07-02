@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { z } from "zod";
 import { Textarea } from "../ui/textarea";
+import axios from "axios";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(
@@ -28,6 +29,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   );
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -35,6 +37,8 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
       position: "",
       startDate: "",
       endDate: "",
+      work: [],
+      tools: [],
       description: "",
     },
   });
@@ -74,6 +78,35 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
     setEditingId(null);
   };
 
+  const handelAiGenration = async () => {
+    try {
+      const educationdetail = form.getValues();
+      console.log(educationdetail);
+      const isValid = Object.entries(educationdetail)
+        .filter(([key]) => key !== "description")
+        .some(([, val]) => val && val.trim() !== "");
+
+      if (!isValid) {
+        toast("Please fill in all education field before generating");
+      } else {
+        setIsGenerating(true);
+
+        const res = await axios.post("/api/gen/description", {
+          type: "experience",
+          data: educationdetail,
+        });
+
+        if (res.data?.data) {
+          form.setValue("description", String(res.data.data));
+        }
+      }
+    } catch (err) {
+      console.error("AI generation failed:", err);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -108,7 +141,6 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={form.control}
                   name="position"
@@ -125,7 +157,6 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     </FormItem>
                   )}
                 />
-
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -156,24 +187,115 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                 </div>
                 <FormField
                   control={form.control}
+                  name="work"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Work Responsibilities</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., UI development, API integration"
+                          value={
+                            Array.isArray(field.value)
+                              ? field.value.join(", ")
+                              : field.value || ""
+                          }
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value
+                                ? e.target.value.split(",").map((s) => s.trim())
+                                : []
+                            )
+                          }
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      <p className="text-xs text-gray-500">
+                        Separate multiple items with commas.
+                      </p>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="tools"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tools & Technologies Used</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., React, Tailwind CSS"
+                          value={
+                            Array.isArray(field.value)
+                              ? field.value.join(", ")
+                              : field.value || ""
+                          }
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value
+                                ? e.target.value.split(",").map((s) => s.trim())
+                                : []
+                            )
+                          }
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      <p className="text-xs text-gray-500">
+                        Separate multiple items with commas.
+                      </p>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="description"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea type="text" {...field} />
-                      </FormControl>
+                      <div className="relative">
+                        <FormControl>
+                          <Textarea
+                            placeholder="Brief achievements or coursework"
+                            rows={3}
+                            {...field}
+                            className={
+                              isGenerating ? "text-gray-400 bg-gray-100" : ""
+                            }
+                            disabled={isGenerating}
+                          />
+                        </FormControl>
+
+                        {/* Dream shimmer overlay */}
+                        {isGenerating && (
+                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
+                            ✨ Dreaming up your description...
+                          </div>
+                        )}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 <div className="flex justify-start">
                   <Button
                     type="button"
                     variant="outline"
-                    className="text-sm text-indigo-600 border-indigo-500 hover:bg-indigo-50"
+                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
+                      isGenerating
+                        ? "text-gray-400 animate-pulse cursor-not-allowed"
+                        : "text-indigo-600"
+                    }`}
+                    disabled={isGenerating}
+                    onClick={handelAiGenration}
                   >
-                    Generate using AI
+                    {isGenerating ? (
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                        Generating...
+                      </div>
+                    ) : (
+                      "Generate using AI"
+                    )}
                   </Button>
                 </div>
 
@@ -262,9 +384,45 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                       <span className="font-medium">Duration:</span>{" "}
                       {exp.startDate} - {exp.endDate || "Present"}
                     </div>
-                    <div className="text-sm text-gray-600">
-                      {exp.description}
-                    </div>
+
+                    <ul className="list-disc ml-5 text-sm text-gray-600 space-y-2">
+                      {exp.description.split(".").map((section, idx) => {
+                        const trimmed = section.trim();
+                        if (!trimmed) return null;
+
+                        // Check for "Key responsibilities include:" or "Tools and technologies used:"
+                        const [heading, rest] = trimmed.split(/:(.+)/);
+
+                        if (!rest) {
+                          // Just a simple sentence or intro
+                          return (
+                            <li key={idx} className="text-gray-700">
+                              {heading}
+                            </li>
+                          );
+                        }
+
+                        // Render heading as bold, rest as sub-bullets
+                        return (
+                          <li key={idx}>
+                            <span className="font-medium text-gray-800">
+                              {heading}:
+                            </span>
+                            <ul className="list-disc ml-5 mt-1 space-y-1">
+                              {rest.split(",").map((point, i) => {
+                                const item = point.trim();
+                                if (!item) return null;
+                                return (
+                                  <li key={i} className="text-gray-600">
+                                    {item}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 ))}
               </div>

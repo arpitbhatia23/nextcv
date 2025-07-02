@@ -6,6 +6,7 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
+import { toast } from "sonner";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -14,24 +15,20 @@ const DownloadPage = () => {
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const searchParams = useSearchParams();
   const resumeId = searchParams.get("resumeId");
 
   const fetchResumeData = async () => {
     setLoading(true);
-    setError("");
     try {
-      const res = await axios.get(
-        `/api/resume/getResumeById/${resumeId || "685f95aa2764bb4f72bf36e7"}`
-      );
+      const res = await axios.get(`/api/resume/getResumeById/${resumeId}`);
       if (res.data.success) {
         setResumeData(res.data.data);
       } else {
-        setError("Failed to fetch resume data.");
+        toast(res.data.message || "something went wrong");
       }
     } catch (err) {
-      setError("Error fetching resume data.");
+      toast(err.message || "something went wrong");
     }
     setLoading(false);
   };
@@ -47,7 +44,6 @@ const DownloadPage = () => {
       if (!resumeData) return;
       const selected = templates.find((t) => t.key === resumeData?.ResumeType);
       if (!selected) {
-        setError("Template not found.");
         return;
       }
       const TemplateComponent = selected.component;
@@ -80,10 +76,8 @@ const DownloadPage = () => {
           <div className="w-full md:w-2/3 flex justify-center">
             {loading ? (
               <div className="text-gray-500 text-lg py-12">Loading...</div>
-            ) : error ? (
-              <div className="text-red-500 text-lg py-12">{error}</div>
             ) : pdfUrl ? (
-              <div className="border rounded shadow overflow-auto bg-gray-100 max-h-[80vh]">
+              <div className="border rounded shadow overflow-auto bg-gray-400 max-h-[80vh]">
                 <Document
                   file={pdfUrl}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
@@ -93,8 +87,8 @@ const DownloadPage = () => {
                     <Page
                       key={`page_${idx + 1}`}
                       pageNumber={idx + 1}
-                      width={350}
-                      className="mx-auto my-2"
+                      width={450}
+                      className="mx-auto "
                     />
                   ))}
                 </Document>

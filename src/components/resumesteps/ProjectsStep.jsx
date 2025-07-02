@@ -14,11 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
 
 const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -29,6 +31,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
       technologiesOrTopics: "",
       link: "",
       description: "",
+      features: "",
     },
   });
 
@@ -65,6 +68,34 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
     form.reset();
     setIsEditing(false);
     setEditingId(null);
+  };
+  const handelAiGenration = async () => {
+    try {
+      const detail = form.getValues();
+      console.log(detail);
+      const isValid = Object.entries(detail)
+        .filter(([key]) => key !== "description")
+        .some(([, val]) => val && val.trim() !== "");
+
+      if (!isValid) {
+        toast("Please fill in all project field before generating");
+      } else {
+        setIsGenerating(true);
+
+        const res = await axios.post("/api/gen/description", {
+          type: "project",
+          data: detail,
+        });
+
+        if (res.data?.data) {
+          form.setValue("description", String(res.data.data));
+        }
+      }
+    } catch (err) {
+      console.error("AI generation failed:", err);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -167,6 +198,19 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="features"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Features</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Features of project" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={form.control}
@@ -191,23 +235,51 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Brief summary of your project or research"
-                          {...field}
-                        />
-                      </FormControl>
+                      <div className="relative">
+                        <FormControl>
+                          <Textarea
+                            placeholder="Brief achievements or coursework"
+                            rows={3}
+                            {...field}
+                            className={
+                              isGenerating ? "text-gray-400 bg-gray-100" : ""
+                            }
+                            disabled={isGenerating}
+                          />
+                        </FormControl>
+
+                        {/* Dream shimmer overlay */}
+                        {isGenerating && (
+                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
+                            ✨ Dreaming up your description...
+                          </div>
+                        )}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 <div className="flex justify-start">
                   <Button
                     type="button"
                     variant="outline"
-                    className="text-sm text-indigo-600 border-indigo-500 hover:bg-indigo-50"
+                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
+                      isGenerating
+                        ? "text-gray-400 animate-pulse cursor-not-allowed"
+                        : "text-indigo-600"
+                    }`}
+                    disabled={isGenerating}
+                    onClick={handelAiGenration}
                   >
-                    Generate using AI
+                    {isGenerating ? (
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                        Generating...
+                      </div>
+                    ) : (
+                      "Generate using AI"
+                    )}
                   </Button>
                 </div>
 
@@ -300,11 +372,42 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                       </div>
                     </div>
 
-                    {project.description && (
-                      <p className="text-gray-700 text-sm">
-                        {project.description}
-                      </p>
-                    )}
+                    {project.description.split(".").map((section, idx) => {
+                      const trimmed = section.trim();
+                      if (!trimmed) return null;
+
+                      // Check for "Key responsibilities include:" or "Tools and technologies used:"
+                      const [heading, rest] = trimmed.split(/:(.+)/);
+
+                      if (!rest) {
+                        // Just a simple sentence or intro
+                        return (
+                          <li key={idx} className="text-gray-700">
+                            {heading}
+                          </li>
+                        );
+                      }
+
+                      // Render heading as bold, rest as sub-bullets
+                      return (
+                        <li key={idx}>
+                          <span className="font-medium text-gray-800">
+                            {heading}:
+                          </span>
+                          <ul className="list-disc ml-5 mt-1 space-y-1">
+                            {rest.split(",").map((point, i) => {
+                              const item = point.trim();
+                              if (!item) return null;
+                              return (
+                                <li key={i} className="text-gray-600">
+                                  {item}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </li>
+                      );
+                    })}
                   </div>
                 ))}
               </div>

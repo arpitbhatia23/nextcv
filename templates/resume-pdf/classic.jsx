@@ -129,7 +129,33 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: "#444",
   },
+  bulletList: {
+    marginLeft: 12,
+    fontSize: 10,
+    color: "#444",
+    marginTop: 2,
+    marginBottom: 2,
+  },
+  bulletItem: {
+    flexDirection: "row",
+    marginBottom: 2,
+  },
+  bulletSymbol: {
+    width: 10,
+    fontWeight: "bold",
+  },
 });
+
+const splitToBullets = (desc) => {
+  if (Array.isArray(desc)) return desc;
+  if (typeof desc === "string") {
+    return desc
+      .split(/[\.\n;]/)
+      .map((b) => b && b.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
 
 const ClassicTemplate = ({ data }) => (
   <Document>
@@ -160,7 +186,6 @@ const ClassicTemplate = ({ data }) => (
           )}
         </View>
       </View>
-
       {/* Summary */}
       {data.summary && (
         <View style={styles.section}>
@@ -168,7 +193,6 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.summaryText}>{data.summary}</Text>
         </View>
       )}
-
       {/* Skills */}
       {data.skills?.length > 0 && (
         <View style={styles.section}>
@@ -183,7 +207,6 @@ const ClassicTemplate = ({ data }) => (
           </View>
         </View>
       )}
-
       {/* Education */}
       {data.education?.length > 0 && (
         <View style={styles.section}>
@@ -202,7 +225,6 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
-
       {/* Experience */}
       {data.experience?.length > 0 && (
         <View style={styles.section}>
@@ -216,13 +238,19 @@ const ClassicTemplate = ({ data }) => (
                 {exp.startDate} - {exp.endDate}
               </Text>
               {exp.description && (
-                <Text style={styles.expDesc}>{exp.description}</Text>
+                <View style={styles.bulletList}>
+                  {splitToBullets(exp.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletSymbol}>•</Text>
+                      <Text>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
               )}
             </View>
           ))}
         </View>
       )}
-
       {/* Projects */}
       {data.projects?.length > 0 && (
         <View style={styles.section}>
@@ -241,7 +269,14 @@ const ClassicTemplate = ({ data }) => (
                 </Text>
               )}
               {proj.description && (
-                <Text style={styles.projDesc}>{proj.description}</Text>
+                <View style={styles.bulletList}>
+                  {splitToBullets(proj.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletSymbol}>•</Text>
+                      <Text>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
               )}
             </View>
           ))}

@@ -1,32 +1,32 @@
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import ProcessWorks from '../processWorks/ProcessWorks';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import ProcessWorks from "../processWorks/ProcessWorks";
 
 function HowitWork() {
   const works = [
     {
-      icon: '📝',
-      title: 'Fill Out Info',
+      icon: "📝",
+      title: "Fill Out Info",
       description:
-        'Enter your personal details, work experience, education, and skills in our user-friendly form.',
+        "Enter your personal details, work experience, education, and skills in our user-friendly form.",
     },
     {
-      icon: '🤖',
-      title: 'Generate with AI',
+      icon: "🤖",
+      title: "Generate with AI",
       description:
-        'Our smart AI analyzes your information and creates a professional, ATS-optimized resume instantly.',
+        "Our smart AI analyzes your information and creates a professional, ATS-optimized resume instantly.",
     },
     {
-      icon: '👀',
-      title: 'Preview & Pay',
+      icon: "👀",
+      title: "Preview & Pay",
       description:
-        'Review your generated resume, make any final adjustments, and pay just ₹100 for the final version.',
+        "Review your generated resume, make any final adjustments, and pay just ₹100 for the final version.",
     },
     {
-      icon: '📄',
-      title: 'Download PDF',
+      icon: "📄",
+      title: "Download PDF",
       description:
-        'Instantly download your professional resume in high-quality PDF format, ready to send to employers.',
+        "Instantly download your professional resume in high-quality PDF format, ready to send to employers.",
     },
   ];
 
@@ -38,7 +38,8 @@ function HowitWork() {
           <div className="text-center space-y-4">
             <h1 className="text-3xl sm:text-4xl font-bold">How It Works</h1>
             <h2 className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
-              Create your professional resume in just 4 simple steps. Our AI-powered platform makes it fast and easy.
+              Create your professional resume in just 4 simple steps. Our
+              AI-powered platform makes it fast and easy.
             </h2>
           </div>
 
@@ -57,7 +58,9 @@ function HowitWork() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-amber-100 dark: px-6 py-4 rounded-2xl shadow-inner w-full sm:w-max mx-auto">
             <h1 className="text-4xl">⏱️</h1>
             <div className="text-center sm:text-left">
-              <h2 className="font-bold text-lg dark:text-black">Average Time: 5 Minutes</h2>
+              <h2 className="font-bold text-lg dark:text-black">
+                Average Time: 5 Minutes
+              </h2>
               <h3 className="text-gray-600 text-sm">From start to download</h3>
             </div>
           </div>

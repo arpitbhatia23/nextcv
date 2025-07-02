@@ -13,9 +13,12 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <div className="ml-auto flex items-center gap-2 font-semibold">
+        <div
+          className="ml-auto flex items-center gap-2 font-semibold cursor-pointer"
+          onClick={signOut}
+        >
           logout
-          <LogOut onClick={signOut} size={20} />
+          <LogOut size={20} />
         </div>
       </div>
     </header>

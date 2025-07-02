@@ -179,9 +179,24 @@ const styles = StyleSheet.create({
     fontSize: 9,
     color: "#444",
   },
+  bulletList: {
+    marginLeft: 12,
+    fontSize: 10,
+    color: "#444",
+    marginTop: 2,
+    marginBottom: 2,
+  },
+  bulletItem: {
+    flexDirection: "row",
+    marginBottom: 2,
+  },
+  bulletSymbol: {
+    width: 10,
+    fontWeight: "bold",
+  },
 });
 
-const ModernPDFResumeTemplate = ({ data }) => (
+const morden = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
@@ -277,9 +292,25 @@ const ModernPDFResumeTemplate = ({ data }) => (
               <Text style={styles.expMeta}>
                 {exp.startDate} - {exp.endDate}
               </Text>
-              {exp.description && (
-                <Text style={styles.expDesc}>{exp.description}</Text>
-              )}
+              <View style={styles.bulletList}>
+                {Array.isArray(exp.description)
+                  ? exp.description.map((bullet, idx) => (
+                      <View key={idx} style={styles.bulletItem}>
+                        <Text style={styles.bulletSymbol}>•</Text>
+                        <Text>{bullet}</Text>
+                      </View>
+                    ))
+                  : exp.description.split(".").map((section, idx) => {
+                      const trimmed = section.trim();
+                      if (!trimmed) return null;
+                      return (
+                        <View key={idx} style={styles.bulletItem}>
+                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text>{trimmed}</Text>
+                        </View>
+                      );
+                    })}
+              </View>
             </View>
           ))}
         </View>
@@ -303,7 +334,25 @@ const ModernPDFResumeTemplate = ({ data }) => (
                 </Text>
               )}
               {proj.description && (
-                <Text style={styles.projDesc}>{proj.description}</Text>
+                <View style={styles.bulletList}>
+                  {Array.isArray(proj.description)
+                    ? proj.description.map((bullet, idx) => (
+                        <View key={idx} style={styles.bulletItem}>
+                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text>{bullet}</Text>
+                        </View>
+                      ))
+                    : proj.description.split(".").map((section, idx) => {
+                        const trimmed = section.trim();
+                        if (!trimmed) return null;
+                        return (
+                          <View key={idx} style={styles.bulletItem}>
+                            <Text style={styles.bulletSymbol}>•</Text>
+                            <Text>{trimmed}</Text>
+                          </View>
+                        );
+                      })}
+                </View>
               )}
             </View>
           ))}
@@ -313,4 +362,4 @@ const ModernPDFResumeTemplate = ({ data }) => (
   </Document>
 );
 
-export default ModernPDFResumeTemplate;
+export default morden;

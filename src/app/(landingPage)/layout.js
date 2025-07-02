@@ -1,10 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
-
-export const metadata = {
-  title: "NXTCV",
-  description: "A modern Ai resume builder.",
-};
+import Nav from "@/components/ui/navbar";
+import { Footer } from "@/components/footer/Footer";
 
 export default function RootLayout({ children }) {
-  return <section className={` antialiased`}>{children}</section>;
+  return (
+    <section className={` antialiased`}>
+      <Nav />
+      {children}
+      <Footer />
+    </section>
+  );
 }

@@ -5,14 +5,16 @@ const PromptStrategies = {
     duration = "",
     subjects = [],
     achievements = "",
-  }) => `
-Write 2-3 professional bullet points for the following education:
-Degree: ${degree}
-Institute: ${institute}
-Duration: ${duration}
-Key Subjects: ${subjects.join(", ")}
-Achievements: ${achievements}
-Output should be in array format like ["...", "..."]`,
+  }) => {
+    `
+    Write 2-3 professional bullet points for the following education:
+    Degree: ${degree}
+    Institute: ${institute}
+    Duration: ${duration}
+    Key Subjects: ${subjects.join(", ")}
+    Achievements: ${achievements}
+    Output should be in array format like ["...", "..."]`;
+  },
 
   project: ({ title = "", techStack = [], features = [], role = "" }) => `
 Write 2-3 bullet points for the following project for resume use:

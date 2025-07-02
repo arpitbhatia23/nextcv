@@ -16,9 +16,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 const SummaryStep = ({ next, previous, formData, updateForm }) => {
   const [summary, setSummary] = useState(formData.summary || "");
+  const [isGenerating, setIsGenerating] = useState(false);
+
   const schema = z.object({
     summary: z.string().min(20, { message: "summary is reuired" }),
   });
@@ -38,6 +41,24 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
     form.reset();
   };
 
+  const handelAiGenration = async () => {
+    try {
+      setIsGenerating(true);
+
+      const res = await axios.post("/api/gen/description", {
+        type: "summary",
+        data: formData,
+      });
+
+      if (res.data?.data) {
+        form.setValue("summary", String(res.data.data));
+      }
+    } catch (err) {
+      console.error("AI generation failed:", err);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
   return (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -59,19 +80,27 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                   name="summary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Summary{" "}
-                        <span className="text-xs text-muted-foreground">
-                          (AI Generated or manual)
-                        </span>
-                      </FormLabel>
-                      <FormControl>
-                        <Textarea
-                          rows={5}
-                          placeholder="Write a short professional summary..."
-                          {...field}
-                        />
-                      </FormControl>
+                      <FormLabel>sumarry</FormLabel>
+                      <div className="relative">
+                        <FormControl>
+                          <Textarea
+                            placeholder="Brief achievements or coursework"
+                            rows={3}
+                            {...field}
+                            className={
+                              isGenerating ? "text-gray-400 bg-gray-100" : ""
+                            }
+                            disabled={isGenerating}
+                          />
+                        </FormControl>
+
+                        {/* Dream shimmer overlay */}
+                        {isGenerating && (
+                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
+                            ✨ Dreaming up your description...
+                          </div>
+                        )}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -81,9 +110,22 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                   <Button
                     type="button"
                     variant="outline"
-                    className="text-sm text-indigo-600 border-indigo-500 hover:bg-indigo-50"
+                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
+                      isGenerating
+                        ? "text-gray-400 animate-pulse cursor-not-allowed"
+                        : "text-indigo-600"
+                    }`}
+                    disabled={isGenerating}
+                    onClick={handelAiGenration}
                   >
-                    Generate using AI
+                    {isGenerating ? (
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                        Generating...
+                      </div>
+                    ) : (
+                      "Generate using AI"
+                    )}
                   </Button>
                 </div>
 

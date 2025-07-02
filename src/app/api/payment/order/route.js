@@ -46,10 +46,11 @@ const handler = async (req) => {
     ResumeType,
   } = reqData;
   const session = await getServerSession(authOptions);
-  if (!session && !session.user) {
+  if (!session && !session?.user) {
     throw new apiError(401, "unauthorizes access");
   }
   const userId = session.user._id;
+  console.log(session);
   const resume = await Resume.create({
     status: "draft",
     ResumeType: ResumeType,
@@ -70,6 +71,7 @@ const handler = async (req) => {
   if (!resume) {
     throw new apiError(500, "something wrong went while saving resume");
   }
+  console.log(userId);
 
   const addResumeIdToUserModel = await User.findByIdAndUpdate(
     userId,
@@ -80,6 +82,7 @@ const handler = async (req) => {
     },
     { new: true }
   );
+  console.log("erroor indfdf ", addResumeIdToUserModel);
   if (!addResumeIdToUserModel) {
     throw new apiError(
       500,
