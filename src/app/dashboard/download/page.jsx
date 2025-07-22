@@ -4,13 +4,13 @@ import { templates } from "@/utils/template";
 import { pdf } from "@react-pdf/renderer";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { toast } from "sonner";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
-const DownloadPage = () => {
+function DownloadPageContent() {
   const [resumeData, setResumeData] = useState(null);
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
@@ -115,6 +115,12 @@ const DownloadPage = () => {
       </Card>
     </div>
   );
-};
+}
 
-export default DownloadPage;
+export default function DownloadPage() {
+  return (
+    <Suspense>
+      <DownloadPageContent />
+    </Suspense>
+  );
+}
