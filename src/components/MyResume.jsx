@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -15,6 +15,9 @@ import {
   Plus,
   Filter,
   X,
+  IndianRupee,
+  BadgePercent,
+  Edit2,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -23,105 +26,45 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { Document } from "react-pdf";
+import { Document, Page, pdfjs } from "react-pdf";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { Input } from "./ui/input";
+import { pdfGenerator } from "@/lib/pdfGenerator";
+import { ScrollArea } from "./ui/scroll-area";
+import { toast } from "sonner";
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("");
+  const [numPages, setNumPages] = useState(null);
+  const [paymentModal, setPaymentModal] = useState(false);
+  const [resumeData, setResumeData] = useState(null);
+  const [applied, setApplied] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
 
+  const [discount, setDiscount] = useState(0);
+
+  const route = useRouter();
   // Mock data - replace with actual API call
-  useEffect(() => {
-    // Simulate API call
-    const mockResumes = [
-      {
-        _id: "1",
-        name: "Alex Johnson",
-        ResumeType: "modernTemplate",
-        status: "paid",
-        createdAt: "2025-06-12T00:00:00Z",
-        updatedAt: "2025-06-12T00:00:00Z",
-        email: "alex@example.com",
-        phone_no: "+1234567890",
-        summary:
-          "Experienced software developer with 5+ years in full-stack development...",
-        skills: ["React", "Node.js", "Python", "AWS"],
-        experience: [
-          {
-            jobTitle: "Senior Developer",
-            company: "Tech Corp",
-            startDate: "2023-01-01",
-            endDate: "2025-06-01",
-            description: "Led development of multiple web applications",
-          },
-        ],
-      },
-      {
-        _id: "2",
-        name: "Sarah Smith",
-        ResumeType: "classicTemplate",
-        status: "paid",
-        createdAt: "2025-06-10T00:00:00Z",
-        updatedAt: "2025-06-25T00:00:00Z",
-        email: "sarah@example.com",
-        phone_no: "+1234567891",
-        summary:
-          "Marketing professional with expertise in digital campaigns...",
-        skills: ["Digital Marketing", "SEO", "Analytics", "Content Strategy"],
-        experience: [
-          {
-            jobTitle: "Marketing Manager",
-            company: "Marketing Inc",
-            startDate: "2022-03-01",
-            endDate: "2025-06-01",
-            description: "Managed multi-channel marketing campaigns",
-          },
-        ],
-      },
-      {
-        _id: "3",
-        name: "John Doe",
-        ResumeType: "MinimalistTemplate",
-        status: "draft",
-        createdAt: "2025-06-08T00:00:00Z",
-        updatedAt: "2025-06-20T00:00:00Z",
-        email: "john@example.com",
-        phone_no: "+1234567892",
-        summary:
-          "Recent graduate seeking entry-level position in data science...",
-        skills: ["Python", "Machine Learning", "SQL", "Tableau"],
-        experience: [],
-      },
-      {
-        _id: "4",
-        name: "Emily Davis",
-        ResumeType: "MordenBluesidebar",
-        status: "draft",
-        createdAt: "2025-06-05T00:00:00Z",
-        updatedAt: "2025-06-18T00:00:00Z",
-        email: "emily@example.com",
-        phone_no: "+1234567893",
-        summary:
-          "UI/UX Designer with passion for creating intuitive user experiences...",
-        skills: ["Figma", "Adobe XD", "User Research", "Prototyping"],
-        experience: [
-          {
-            jobTitle: "Junior Designer",
-            company: "Design Studio",
-            startDate: "2024-01-01",
-            endDate: "2024-12-01",
-            description: "Created user interfaces for mobile applications",
-          },
-        ],
-      },
-    ];
+  const buttonRef = useRef();
 
-    setTimeout(() => {
-      setResumes(mockResumes);
-      setLoading(false);
-    }, 1000);
+  const fetchResume = async () => {
+    setLoading(true);
+    const res = await axios.get("/api/resume/getAllResume");
+    setResumes(res.data.data);
+    setLoading(false);
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    fetchResume();
   }, []);
 
+  const paidResumes = resumes.paid;
+  const draftResumes = resumes.draft;
   const getTemplateDisplayName = (templateKey) => {
     const templateNames = {
       modernTemplate: "Modern",
@@ -146,20 +89,75 @@ const MyResume = () => {
     return `Edited ${Math.ceil(diffDays / 365)} years ago`;
   };
 
-  const handleDownload = (resumeId) => {
-    console.log("Download resume:", resumeId);
+  const handleDownload = async (resume) => {
+    console.log("Download resume:", resume);
+
+    if (resume.status === "paid") {
+      const pdfGen = new pdfGenerator(resume);
+      await pdfGen.downloadPdf();
+    } else {
+      setPaymentModal(true);
+      setResumeData(resume);
+    }
   };
 
-  const handleDelete = (resumeId) => {
-    console.log("Delete resume:", resumeId);
-    // Delete resume logic
-    setResumes(resumes.filter((resume) => resume._id !== resumeId));
+  const handleDelete = async (resumeId) => {
+    try {
+      const res = await axios.delete(`/api/resume/deleteById?id=${resumeId}`);
+      if (res.data.success) {
+        setResumes((prev) => ({
+          ...prev,
+          paid: prev.paid?.filter(
+            (resume) => resume.resumedata._id !== resumeId
+          ),
+          draft: prev.draft?.filter(
+            (resume) => resume.resumedata._id !== resumeId
+          ),
+        }));
+      }
+    } catch (error) {
+      toast.error(
+        error.message || "something went wrong while deleting resume"
+      );
+    }
   };
 
-  const handleViewResume = (resumeId) => {
-    console.log("View versions:", resumeId);
-    setIsModelOpen(true);
-    console.log(isModelOpen);
+  const handleEdit = (resumeId) => {
+    console.log(resumeId);
+    route.push(`/dashboard/resume/${resumeId}`);
+  };
+
+  const handleViewResume = async (resumeData) => {
+    const pdfGen = new pdfGenerator(resumeData);
+    const url = await pdfGen.createPdf();
+    setPdfUrl(url);
+    setIsModelOpen(true); // <-- Move here!
+  };
+
+  const handleClick = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = rect.x;
+      const y = rect.y;
+      setConfettiOrigin({ x, y });
+
+      setTimeout(() => setConfettiOrigin(null), 2000);
+    }
+  };
+  const handelPayment = async ({ formData }) => {
+    const amount = Math.floor(100 - discount) * 100;
+    console.log(amount);
+
+    const res = await axios.post("/api/payment/order", {
+      amount,
+      ...formData,
+      ResumeType: selectedTemplate,
+    });
+    if (res.data.success) {
+      const { data } = res.data;
+      const paymentUrl = data?.redirectUrl;
+      window.location.href = paymentUrl;
+    }
   };
 
   const ResumeCard = ({ resume }) => (
@@ -178,7 +176,7 @@ const MyResume = () => {
               {resume.status}
             </Badge>
             <span className="text-xs text-gray-400">
-              {formatDate(resume.updatedAt)}
+              {formatDate(resume?.updatedAt)}
             </span>
           </div>
           <DropdownMenu>
@@ -188,9 +186,13 @@ const MyResume = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem onClick={() => handleDownload(resume._id)}>
+              <DropdownMenuItem onClick={() => handleDownload(resume)}>
                 <Download className="mr-2 h-4 w-4" />
                 Download
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleEdit(resume?._id)}>
+                <Edit2 className="mr-2 h-4 w-4" />
+                Edit
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -206,7 +208,7 @@ const MyResume = () => {
         <div className="flex items-center gap-3 mb-2">
           <div
             className="flex-shrink-0 bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center"
-            onClick={() => handleViewResume(resume._id)}
+            onClick={() => handleViewResume(resume)}
           >
             <Eye className="h-5 w-5 text-gray-400" />
           </div>
@@ -228,31 +230,10 @@ const MyResume = () => {
             year: "numeric",
           })}
         </div>
-        {/* <div className="flex gap-2 mt-2">
-          <Button
-            size="sm"
-            variant="outline"
-            className="flex-1"
-            onClick={() => handleEdit(resume._id)}
-          >
-            <Edit className="h-4 w-4 mr-1" />
-            Edit
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="flex-1"
-            onClick={() => handleDownload(resume._id)}
-          >
-            <Download className="h-4 w-4 mr-1" />
-            Download
-          </Button>
-        </div> */}
+        <div className="flex gap-2 mt-2"></div>
       </CardContent>
     </Card>
   );
-  const paidResumes = resumes.filter((resume) => resume.status === "paid");
-  const draftResumes = resumes.filter((resume) => resume.status === "draft");
 
   if (loading) {
     return (
@@ -283,33 +264,130 @@ const MyResume = () => {
       </div>
       {isModelOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 bg-opacity-50">
-          <Card className="relative w-full max-w-2xl mx-auto">
+          <ScrollArea className="h-full p-4 max-w-6xl">
+            <Card className="relative w-full min-w-3xl mx-auto">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2"
+                onClick={() => {
+                  setPdfUrl(""); // Clear PDF URL
+                  setNumPages(null); // Reset page count
+                  setIsModelOpen(false);
+                }}
+                aria-label="Close"
+              >
+                <X />
+              </Button>
+              <CardContent className={"flex justify-center items-center"}>
+                <div className="text-center py-12 text-lg text-gray-700">
+                  {pdfUrl ? (
+                    <Document
+                      file={pdfUrl}
+                      onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                      loading={<div className="p-8">Loading PDF...</div>}
+                    >
+                      {Array.from(new Array(numPages), (el, idx) => (
+                        <div key={idx}>
+                          <Page pageNumber={idx + 1} width={400} />
+                          {/* Insert divider after each page except the last */}
+                          {idx < (numPages || 1) - 1 && (
+                            <div
+                              style={{
+                                margin: "24px 0",
+                                borderTop: "2px dashed #bbb",
+                              }}
+                            />
+                          )}
+                        </div>
+                      ))}
+                    </Document>
+                  ) : (
+                    <div className="p-8">No PDF to display</div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </ScrollArea>
+        </div>
+      )}
+      {paymentModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => {
+            setPaymentModal(false);
+            setResumeData(null);
+          }}
+          tabIndex={-1}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") {
+              setPaymentModal(false);
+              setResumeData(null);
+            }
+          }}
+          style={{ overflow: "auto" }}
+        >
+          <Card
+            className="relative w-full max-w-3xl h-8/12 mx-auto rounded-2xl shadow-2xl bg-white p-0"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+          >
             <Button
               variant="ghost"
               size="icon"
-              className="absolute top-2 right-2"
-              onClick={() => setIsModelOpen(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-900"
+              onClick={() => {
+                setPaymentModal(false);
+                setResumeData(null);
+              }}
               aria-label="Close"
             >
-              <X />
+              <X className="w-6 h-6" />
             </Button>
-            <CardContent>
-              {/* Replace this with your PDF viewer or resume preview */}
-              <div className="text-center py-12 text-lg text-gray-700">
-                Resume PDF Preview
-              </div>
-            </CardContent>
+            <div className="p-8">
+              <Card>
+                <CardHeader className="flex flex-row items-center gap-2">
+                  <BadgePercent className="text-indigo-600" />
+                  <CardTitle>Apply Coupon or Pay</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex gap-2 items-center">
+                    <Input
+                      value={couponCode}
+                      onChange={(e) => setCouponCode(e.target.value)}
+                      placeholder="Enter coupon code"
+                      className="flex-1"
+                    />
+                    <Button ref={buttonRef} onClick={handleClick}>
+                      Apply
+                    </Button>
+                  </div>
+                  {applied && (
+                    <p className="text-green-600">
+                      Coupon applied successfully!
+                    </p>
+                  )}
+                  <Button
+                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                    onClick={() => handelPayment(resumeData)}
+                  >
+                    <IndianRupee className="mr-2 h-4 w-4" />
+                    Proceed to Payment
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </Card>
         </div>
       )}
+
       <Tabs defaultValue="My-Resume" className="w-full">
         <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
           <TabsList className="grid w-fit grid-cols-2">
             <TabsTrigger value="My-Resume" className="px-6">
-              My Resume ({paidResumes.length})
+              My Resume ({paidResumes?.length})
             </TabsTrigger>
             <TabsTrigger value="Draft-Resume" className="px-6">
-              Draft Resume ({draftResumes.length})
+              Draft Resume ({draftResumes?.length})
             </TabsTrigger>
           </TabsList>
 
@@ -326,7 +404,7 @@ const MyResume = () => {
         </div>
 
         <TabsContent value="My-Resume" className="mt-0">
-          {paidResumes.length === 0 ? (
+          {paidResumes?.length === 0 ? (
             <Card className="text-center py-12">
               <CardContent>
                 <div className="text-gray-400 mb-4">
@@ -346,15 +424,18 @@ const MyResume = () => {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {paidResumes.map((resume) => (
-                <ResumeCard key={resume._id} resume={resume} />
+              {paidResumes?.map((resume) => (
+                <ResumeCard
+                  key={resume?.resumedata._id}
+                  resume={resume?.resumedata}
+                />
               ))}
             </div>
           )}
         </TabsContent>
 
         <TabsContent value="Draft-Resume" className="mt-0">
-          {draftResumes.length === 0 ? (
+          {draftResumes?.length === 0 ? (
             <Card className="text-center py-12">
               <CardContent>
                 <div className="text-gray-400 mb-4">
@@ -374,8 +455,11 @@ const MyResume = () => {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {draftResumes.map((resume) => (
-                <ResumeCard key={resume._id} resume={resume} />
+              {draftResumes?.map((resume) => (
+                <ResumeCard
+                  key={resume?.resumedata._id}
+                  resume={resume?.resumedata}
+                />
               ))}
             </div>
           )}

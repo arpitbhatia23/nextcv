@@ -11,6 +11,7 @@ import {
   Svg,
   Path,
 } from "@react-pdf/renderer";
+import { formatDate } from "@/utils/datefromater";
 
 // Icon SVGs
 const LocationIcon = () => (
@@ -228,7 +229,56 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     textDecoration: "underline",
   },
+  bulletList: {
+    marginLeft: 12,
+    fontSize: 10,
+    color: "#444",
+    marginTop: 2,
+    marginBottom: 2,
+  },
+  bulletItem: {
+    flexDirection: "row",
+    marginBottom: 2,
+  },
+  bulletSymbol: {
+    width: 10,
+    fontWeight: "bold",
+  },
+  projBlock: {
+    marginBottom: 8,
+  },
+  projTitle: {
+    fontWeight: "bold",
+    fontSize: 11,
+    color: "#263238",
+  },
+  projMeta: {
+    fontSize: 9,
+    color: "#1976d2",
+    marginBottom: 1,
+  },
+  projTech: {
+    fontSize: 9,
+    color: "#1976d2",
+    marginBottom: 1,
+    fontStyle: "italic",
+  },
+  projDesc: {
+    fontSize: 9,
+    color: "#444",
+  },
 });
+
+const splitToBullets = (desc) => {
+  if (Array.isArray(desc)) return desc;
+  if (typeof desc === "string") {
+    return desc
+      .split(/[\.\n;]/)
+      .map((b) => b && b.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
 
 const ClassicMinimalistPDFResume = ({
   data,
@@ -250,10 +300,10 @@ const ClassicMinimalistPDFResume = ({
               <Text>{data.address}</Text>
             </View>
           )}
-          {data.phone && (
+          {data.phone_no && (
             <View style={styles.infoItem}>
               <PhoneIcon />
-              <Text>{data.phone}</Text>
+              <Text>{data.phone_no}</Text>
             </View>
           )}
           {data.email && (
@@ -340,7 +390,7 @@ const ClassicMinimalistPDFResume = ({
                     {exp.position} {exp.companyName && `at ${exp.companyName}`}
                   </Text>
                   <Text style={styles.historyDate}>
-                    {exp.startDate} — {exp.endDate}
+                    {formatDate(exp.startDate)} — {formatDate(exp.endDate)}
                   </Text>
                   {exp.bullets?.length > 0 && (
                     <View style={styles.bulletList}>
@@ -370,7 +420,7 @@ const ClassicMinimalistPDFResume = ({
                   <Text style={styles.eduDegree}>{edu.degree}</Text>
                   <Text style={styles.eduSchool}>{edu.institution}</Text>
                   <Text style={styles.eduDate}>
-                    {edu.startYear} — {edu.endYear}
+                    {formatDate(edu.startYear)} — {formatDate(edu.endYear)}
                   </Text>
                   <Text style={styles.eduDiscription}>{edu.description}</Text>
                 </View>
@@ -378,14 +428,33 @@ const ClassicMinimalistPDFResume = ({
             </View>
           )}
 
-          {/* References */}
-          {data.references?.length > 0 && (
+          {data.projects?.length > 0 && (
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>References</Text>
-              {data.references.map((ref, i) => (
-                <Text key={i} style={styles.refItem}>
-                  {ref}
-                </Text>
+              <Text style={styles.sectionTitle}>Projects</Text>
+              {data.projects.map((proj, i) => (
+                <View key={i} style={styles.projBlock}>
+                  <Text style={styles.projTitle}>{proj.title}</Text>
+                  <Text style={styles.projMeta}>
+                    {proj.roleOrType}
+                    {proj.organization && ` @ ${proj.organization}`}
+                    {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
+                  </Text>
+                  {proj.technologiesOrTopics && (
+                    <Text style={styles.projTech}>
+                      Tech: {proj.technologiesOrTopics}
+                    </Text>
+                  )}
+                  {proj.description && (
+                    <View style={styles.bulletList}>
+                      {splitToBullets(proj.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.bulletItem}>
+                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text>{bullet}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                </View>
               ))}
             </View>
           )}

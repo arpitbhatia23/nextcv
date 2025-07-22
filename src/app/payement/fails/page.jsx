@@ -1,9 +1,9 @@
 "use client";
 import { XCircle } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 
-const page = () => {
+function PaymentFailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
@@ -12,20 +12,16 @@ const page = () => {
     if (status !== "fail") {
       router.push("/dashboard");
     }
-
     const timerId = setTimeout(() => {
       router.push("/dashboard");
     }, 9000);
-
     return () => clearTimeout(timerId);
   }, [status, router]);
 
   if (status !== "fail") return null;
-};
 
-const Page = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br  px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md text-center">
         <div className="flex justify-center mb-4 text-red-500">
           <XCircle className="w-16 h-16 text-red-500" />
@@ -39,11 +35,17 @@ const Page = () => {
         <p className="text-gray-700 text-sm mb-6">
           If money has been debited from your account, it will be automatically
           refunded to your bank via <strong>PhonePe</strong> within{" "}
-          <strong>5&ndash;7 business days</strong>.
+          <strong>5–7 business days</strong>.
         </p>
       </div>
     </div>
   );
-};
+}
 
-export default page;
+export default function Page() {
+  return (
+    <Suspense>
+      <PaymentFailContent />
+    </Suspense>
+  );
+}

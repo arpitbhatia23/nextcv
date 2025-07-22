@@ -62,7 +62,6 @@ const authOptions = {
     async jwt({ token, user, trigger }) {
       await dbConnect();
       const finduser = await User.findOne({ email: user?.email });
-      console.log(finduser);
       if (finduser) {
         token.user = finduser;
       }

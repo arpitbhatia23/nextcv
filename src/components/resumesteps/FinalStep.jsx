@@ -12,7 +12,6 @@ import {
 import { BadgePercent, IndianRupee, Save } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { pdf } from "@react-pdf/renderer";
-
 import ConfettiBurst from "../animated/confittebrust";
 import PDFResumeTemplate from "../../../templates/resume-pdf/morden";
 import ClassicTemplate from "../../../templates/resume-pdf/classic";
@@ -31,10 +30,11 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { templates } from "@/utils/template";
+import { pdfGenerator } from "@/lib/pdfGenerator";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
-const FinalStep = ({ formData }) => {
+const FinalStep = ({ formData, isdraft = false }) => {
   const [couponCode, setCouponCode] = useState("");
   const [applied, setApplied] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("classicTemplate");
@@ -44,40 +44,6 @@ const FinalStep = ({ formData }) => {
   const [confettiOrigin, setConfettiOrigin] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [discount, setDiscount] = useState(0);
-  const router = useRouter();
-  // const templates = [
-  //   {
-  //     key: "modernTemplate",
-  //     label: "Modern",
-  //     component: ModernPDFResumeTemplate,
-  //   },
-  //   {
-  //     key: "classicTemplate",
-  //     label: "Classic",
-  //     component: ClassicTemplate,
-  //   },
-  //   {
-  //     key: "MinimalistTemplate",
-  //     label: "Minimalist",
-  //     component: ClassicMinimalistPDFResume,
-  //   },
-  //   {
-  //     key: "MordenBluesidebar",
-  //     label: "Morden blue sidebar",
-  //     component: ModernBlueSidebarPDFResume,
-  //   },
-  //   {
-  //     key: "ModernFullStack",
-  //     label: "MordenFullStack",
-  //     component: ModernPDFResumeTemplate,
-  //   },
-  //   {
-  //     key: "Businessanlayist",
-  //     label: "BusinessAnalyst",
-  //     component: CleanBusinessAnalystPDFResume,
-  //   },
-  // ];
-
   const handleClick = () => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
@@ -97,24 +63,21 @@ const FinalStep = ({ formData }) => {
     console.log(res);
     if (res.data.success) {
       toast("saved draft sucessfully");
+    } else {
+      toast.error(res.data.message || "Failed to save draft");
     }
   };
 
   useEffect(() => {
-    let currentUrl = null;
-    const generatePdf = async () => {
-      const selected = templates.find((t) => t.key === selectedTemplate);
-      const TemplateComponent = selected?.component || PDFResumeTemplate;
-      const blob = await pdf(<TemplateComponent data={formData} />).toBlob();
-      const url = URL.createObjectURL(blob);
-      setPdfUrl(url);
-      currentUrl = url;
-    };
-    generatePdf();
+    const pdfGen = new pdfGenerator(formData, selectedTemplate);
+    let isMounted = true;
+    pdfGen.createPdf().then((url) => {
+      if (isMounted) setPdfUrl(url);
+    });
     return () => {
-      if (currentUrl) URL.revokeObjectURL(currentUrl);
+      isMounted = false;
+      pdfGen.cleanUp();
     };
-    // eslint-disable-next-line
   }, [formData, selectedTemplate]);
 
   const handelPayment = async () => {
@@ -128,13 +91,14 @@ const FinalStep = ({ formData }) => {
     });
     if (res.data.success) {
       const { data } = res.data;
+      console.log(data);
       const paymentUrl = data?.redirectUrl;
       window.location.href = paymentUrl;
     }
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center py-4 px-2 md:p-6">
+    <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
       {confettiOrigin && (
         <div className="absolute inset-0 z-20 pointer-events-none">
           <ConfettiBurst origin={confettiOrigin} />
@@ -149,29 +113,31 @@ const FinalStep = ({ formData }) => {
       {/* Mobile Layout */}
       <div className="w-full  flex flex-col gap-4 md:hidden">
         {/* Template Picker */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Choose a Template</CardTitle>
-          </CardHeader>
-          <CardContent className="flex gap-2 flex-wrap sm:flex-nowrap">
-            <Select>
-              <SelectTrigger className={"w-full"}>
-                <SelectValue placeholder="Choose a Template" />
-              </SelectTrigger>
-              <SelectContent>
-                {templates.map((template) => (
-                  <SelectItem
-                    key={template.key}
-                    onClick={() => setSelectedTemplate(template.key)}
-                    value={template.key}
-                  >
-                    {template.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </CardContent>
-        </Card>
+        {!isdraft && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Choose a Template</CardTitle>
+            </CardHeader>
+            <CardContent className="flex gap-2 flex-wrap sm:flex-nowrap">
+              <Select>
+                <SelectTrigger className={"w-full"}>
+                  <SelectValue placeholder="Choose a Template" />
+                </SelectTrigger>
+                <SelectContent>
+                  {templates.map((template) => (
+                    <SelectItem
+                      key={template.key}
+                      onClick={() => setSelectedTemplate(template.key)}
+                      value={template.key}
+                    >
+                      {template.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </CardContent>
+          </Card>
+        )}
 
         {/* PDF Preview */}
         <Card>
@@ -266,49 +232,51 @@ const FinalStep = ({ formData }) => {
           className="rounded-lg border bg-white shadow-md w-full"
         >
           {/* Left: Template List */}
-          <ResizablePanel
-            defaultSize={25}
-            minSize={20}
-            maxSize={40}
-            className="bg-white"
-          >
-            <ScrollArea className="h-full p-4">
-              <Card className="mb-4">
-                <CardHeader>
-                  <CardTitle>Choose a Template</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {templates.map((template) => (
-                    <Button
-                      key={template.key}
-                      variant={
-                        selectedTemplate === template.key
-                          ? "default"
-                          : "outline"
-                      }
-                      className={`w-full ${
-                        selectedTemplate === template.key
-                          ? "ring-2 ring-indigo-500"
-                          : ""
-                      }`}
-                      onClick={() => setSelectedTemplate(template.key)}
-                    >
-                      {template.label}
-                    </Button>
-                  ))}
-                </CardContent>
-              </Card>
-              <Button
-                variant="outline"
-                className="w-full mt-4 flex items-center justify-center gap-2"
-                onClick={handleSaveDraft}
-                type="button"
-              >
-                <Save className="h-4 w-4" />
-                Save as Draft
-              </Button>
-            </ScrollArea>
-          </ResizablePanel>
+          {!isdraft && (
+            <ResizablePanel
+              defaultSize={25}
+              minSize={20}
+              maxSize={40}
+              className="bg-white"
+            >
+              <ScrollArea className="h-full p-4">
+                <Card className="mb-4">
+                  <CardHeader>
+                    <CardTitle>Choose a Template</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    {templates.map((template) => (
+                      <Button
+                        key={template.key}
+                        variant={
+                          selectedTemplate === template.key
+                            ? "default"
+                            : "outline"
+                        }
+                        className={`w-full ${
+                          selectedTemplate === template.key
+                            ? "ring-2 ring-indigo-500"
+                            : ""
+                        }`}
+                        onClick={() => setSelectedTemplate(template.key)}
+                      >
+                        {template.label}
+                      </Button>
+                    ))}
+                  </CardContent>
+                </Card>
+                <Button
+                  variant="outline"
+                  className="w-full mt-4 flex items-center justify-center gap-2"
+                  onClick={handleSaveDraft}
+                  type="button"
+                >
+                  <Save className="h-4 w-4" />
+                  Save as Draft
+                </Button>
+              </ScrollArea>
+            </ResizablePanel>
+          )}
 
           <ResizableHandle />
 

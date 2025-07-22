@@ -10,6 +10,7 @@ import {
   Svg,
   Path,
 } from "@react-pdf/renderer";
+import { formatDate } from "@/utils/datefromater";
 
 // Color palette
 const GREEN = "#36b37e";
@@ -406,7 +407,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                 <Text style={styles.expOrg}>{exp.companyName}</Text>
                 <View style={styles.expPeriodLoc}>
                   <Text>
-                    {exp.startDate} - {exp.endDate}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
                   </Text>
                   {exp.location && (
                     <>

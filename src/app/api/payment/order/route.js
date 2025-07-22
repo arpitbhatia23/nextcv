@@ -100,6 +100,7 @@ const handler = async (req) => {
     .build();
 
   const res = await client.pay(request);
+  console.log(res);
   return NextResponse.json(new apiResponse(200, "order initate", res));
 };
 

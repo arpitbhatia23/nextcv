@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Link,
 } from "@react-pdf/renderer";
+import { formatDate } from "@/utils/datefromater";
 
 // Classic, clean, professional resume template styles
 const styles = StyleSheet.create({
@@ -164,7 +165,7 @@ const ClassicTemplate = ({ data }) => (
       <View style={styles.header}>
         <Text style={styles.name}>{data.name || "Your Name"}</Text>
         <Text style={styles.contact}>
-          {data.email} | {data.phone} | {data.address}
+          {data.email} | {data.phone_no} | {data.address}
         </Text>
         <View style={styles.links}>
           {data.linkedin && (
@@ -215,7 +216,8 @@ const ClassicTemplate = ({ data }) => (
             <View key={i} style={styles.eduBlock}>
               <Text style={styles.eduTitle}>{edu.institution}</Text>
               <Text style={styles.eduSubtitle}>
-                {edu.degree} &nbsp;|&nbsp; {edu.startYear} - {edu.endYear}
+                {edu.degree} &nbsp;|&nbsp; {formatDate(edu.startYear)} -{" "}
+                {formatDate(edu.endYear)}
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
@@ -235,7 +237,7 @@ const ClassicTemplate = ({ data }) => (
                 {exp.position} @ {exp.companyName}
               </Text>
               <Text style={styles.expMeta}>
-                {exp.startDate} - {exp.endDate}
+                {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
               </Text>
               {exp.description && (
                 <View style={styles.bulletList}>
@@ -261,7 +263,7 @@ const ClassicTemplate = ({ data }) => (
               <Text style={styles.projMeta}>
                 {proj.roleOrType}
                 {proj.organization && ` @ ${proj.organization}`}
-                {proj.date && ` | ${proj.date}`}
+                {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
               </Text>
               {proj.technologiesOrTopics && (
                 <Text style={styles.projTech}>
