@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,8 +23,20 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "@/utils/datefromater";
+import { toast } from "sonner";
 
-const ResumeEditPage = ({ params }) => {
+function getChangedFields(original, edited) {
+  const changed = {};
+  for (const key in edited) {
+    if (JSON.stringify(edited[key]) !== JSON.stringify(original[key])) {
+      changed[key] = edited[key];
+    }
+  }
+  return changed;
+}
+
+const page = ({ params }) => {
+  const { id } = React.use(params);
   const [editdata, setEditdata] = useState({
     name: "",
     email: "",
@@ -35,12 +47,12 @@ const ResumeEditPage = ({ params }) => {
     github: "",
     linkedin: "",
     portfolio: "",
-    skills: [], // [{ name: "", level: "" }]
-    experience: [], // [{ position: "", companyName: "", startDate: "", endDate: "", description: "" }]
-    education: [], // [{ degree: "", institution: "", startYear: "", endYear: "", grade: "", description: "" }]
-    projects: [], // [{ title: "", roleOrType: "", organization: "", date: "", technologiesOrTopics: "", description: "" }]
+    skills: [],
+    experience: [],
+    education: [],
+    projects: [],
   });
-  const { id } = use(params);
+  const [originalData, setOriginalData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -48,11 +60,13 @@ const ResumeEditPage = ({ params }) => {
     setLoading(true);
     const res = await axios.get(`/api/resume/getResumeById/${id}`);
     setEditdata(res.data.data);
+    setOriginalData(res.data.data);
     setLoading(false);
   };
 
   useEffect(() => {
     if (id) fetchResumeById();
+    // eslint-disable-next-line
   }, [id]);
 
   const handleInputChange = (field, value) => {
@@ -86,41 +100,51 @@ const ResumeEditPage = ({ params }) => {
   };
 
   const handleSave = async () => {
+    if (!originalData) return;
     setSaving(true);
     try {
-      await axios.post(`/api/resume/update/${id}`, editdata);
-      alert("Resume saved successfully!");
+      const changedFields = getChangedFields(originalData, editdata);
+      if (Object.keys(changedFields).length === 0) {
+        toast.info("No changes to save.");
+        setSaving(false);
+        return;
+      }
+      await axios.patch(`/api/resume/update/${id}`, changedFields);
+      toast.success("Resume saved successfully!");
+      setOriginalData(editdata); // update originalData to new state
     } catch (error) {
-      console.error("Error saving resume:", error);
-      alert("Error saving resume. Please try again.");
+      toast.error("Error saving resume. Please try again.");
+      console.log(error);
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-2">
+      <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-2">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Edit Resume</h1>
-            <p className="text-gray-600 mt-1">
+            <h1 className="text-4xl font-extrabold text-blue-900 tracking-tight drop-shadow">
+              Edit Resume
+            </h1>
+            <p className="text-gray-600 mt-1 text-lg">
               Update your professional information
             </p>
           </div>
         </div>
 
         {/* Personal Information */}
-        <Card>
+        <Card className="shadow-xl border-2 border-blue-100 bg-white/80">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-blue-700">
               <User className="w-5 h-5" />
               Personal Information
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="name">Full Name</Label>
                 <Input
@@ -140,7 +164,7 @@ const ResumeEditPage = ({ params }) => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="email" className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
@@ -182,7 +206,7 @@ const ResumeEditPage = ({ params }) => {
                 rows={2}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <Label htmlFor="github" className="flex items-center gap-2">
                   <Github className="w-4 h-4" />
@@ -238,9 +262,9 @@ const ResumeEditPage = ({ params }) => {
         </Card>
 
         {/* Skills */}
-        <Card>
+        <Card className="shadow-lg border-blue-100 bg-white/80">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-purple-700">
               <Code className="w-5 h-5" />
               Skills
             </CardTitle>
@@ -278,18 +302,19 @@ const ResumeEditPage = ({ params }) => {
                     />
                   </div>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
+                    className="hover:bg-red-100"
                     onClick={() => removeArrayItem("skills", index)}
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-4 h-4 text-red-500" />
                   </Button>
                 </div>
               ))}
               <Button
                 variant="outline"
                 onClick={() => addArrayItem("skills", { name: "", level: "" })}
-                className="w-full"
+                className="w-full bg-gradient-to-r from-purple-100 to-blue-100"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Skill
@@ -299,9 +324,9 @@ const ResumeEditPage = ({ params }) => {
         </Card>
 
         {/* Experience */}
-        <Card>
+        <Card className="shadow-lg border-blue-100 bg-white/80">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-blue-700">
               <Briefcase className="w-5 h-5" />
               Experience
             </CardTitle>
@@ -309,15 +334,21 @@ const ResumeEditPage = ({ params }) => {
           <CardContent>
             <div className="space-y-6">
               {editdata.experience.map((exp, index) => (
-                <div key={index} className="border rounded-lg p-4 space-y-4">
+                <div
+                  key={index}
+                  className="border rounded-lg p-4 space-y-4 bg-blue-50/50"
+                >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold">Experience {index + 1}</h4>
+                    <h4 className="font-semibold text-blue-800">
+                      Experience {index + 1}
+                    </h4>
                     <Button
-                      variant="outline"
+                      variant="ghost"
                       size="sm"
+                      className="hover:bg-red-100"
                       onClick={() => removeArrayItem("experience", index)}
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-4 h-4 text-red-500" />
                     </Button>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -413,7 +444,7 @@ const ResumeEditPage = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full"
+                className="w-full bg-gradient-to-r from-blue-100 to-purple-100"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Experience
@@ -423,9 +454,9 @@ const ResumeEditPage = ({ params }) => {
         </Card>
 
         {/* Education */}
-        <Card>
+        <Card className="shadow-lg border-blue-100 bg-white/80">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-purple-700">
               <GraduationCap className="w-5 h-5" />
               Education
             </CardTitle>
@@ -433,15 +464,21 @@ const ResumeEditPage = ({ params }) => {
           <CardContent>
             <div className="space-y-6">
               {editdata.education.map((edu, index) => (
-                <div key={index} className="border rounded-lg p-4 space-y-4">
+                <div
+                  key={index}
+                  className="border rounded-lg p-4 space-y-4 bg-purple-50/50"
+                >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold">Education {index + 1}</h4>
+                    <h4 className="font-semibold text-purple-800">
+                      Education {index + 1}
+                    </h4>
                     <Button
-                      variant="outline"
+                      variant="ghost"
                       size="sm"
+                      className="hover:bg-red-100"
                       onClick={() => removeArrayItem("education", index)}
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-4 h-4 text-red-500" />
                     </Button>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -553,7 +590,7 @@ const ResumeEditPage = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full"
+                className="w-full bg-gradient-to-r from-purple-100 to-blue-100"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Education
@@ -563,9 +600,9 @@ const ResumeEditPage = ({ params }) => {
         </Card>
 
         {/* Projects */}
-        <Card>
+        <Card className="shadow-lg border-blue-100 bg-white/80">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-pink-700">
               <FolderOpen className="w-5 h-5" />
               Projects
             </CardTitle>
@@ -573,15 +610,21 @@ const ResumeEditPage = ({ params }) => {
           <CardContent>
             <div className="space-y-6">
               {editdata.projects.map((project, index) => (
-                <div key={index} className="border rounded-lg p-4 space-y-4">
+                <div
+                  key={index}
+                  className="border rounded-lg p-4 space-y-4 bg-pink-50/50"
+                >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold">Project {index + 1}</h4>
+                    <h4 className="font-semibold text-pink-800">
+                      Project {index + 1}
+                    </h4>
                     <Button
-                      variant="outline"
+                      variant="ghost"
                       size="sm"
+                      className="hover:bg-red-100"
                       onClick={() => removeArrayItem("projects", index)}
                     >
-                      <Minus className="w-4 h-4" />
+                      <Minus className="w-4 h-4 text-red-500" />
                     </Button>
                   </div>
                   <div>
@@ -689,7 +732,7 @@ const ResumeEditPage = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full"
+                className="w-full bg-gradient-to-r from-pink-100 to-purple-100"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Project
@@ -704,7 +747,7 @@ const ResumeEditPage = ({ params }) => {
             onClick={handleSave}
             disabled={saving}
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg px-8 py-3 rounded-xl"
           >
             <Save className="w-4 h-4 mr-2" />
             {saving ? "Saving..." : "Save Resume"}
@@ -715,4 +758,4 @@ const ResumeEditPage = ({ params }) => {
   );
 };
 
-export default ResumeEditPage;
+export default page;
