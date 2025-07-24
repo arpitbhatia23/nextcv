@@ -16,7 +16,7 @@ import User from "@/models/user.model";
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = Env.SANDBOX;
+const env = Env.PRODUCTION;
 const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,
@@ -39,59 +39,73 @@ const handler = async (req) => {
     portfolio,
     jobRole,
     summary,
-    experience,
-    skills,
-    education,
-    projects,
+    experience = [],
+    skills = [],
+    education = [],
+    projects = [],
     ResumeType,
+    isDraft = false,
+    draftId,
   } = reqData;
   const session = await getServerSession(authOptions);
   if (!session && !session?.user) {
     throw new apiError(401, "unauthorizes access");
   }
   const userId = session.user._id;
-  console.log(session);
-  const resume = await Resume.create({
-    status: "draft",
-    ResumeType: ResumeType,
-    phone_no: phone,
-    name: name,
-    email: email,
-    address: address,
-    linkedin: linkedin || "",
-    github: github || "",
-    portfolio: portfolio || "",
-    summary: summary,
-    skills: skills || "",
-    education: education || "",
-    experience: experience || "",
-    projects: projects || "",
-    jobRole: jobRole,
-  });
-  if (!resume) {
-    throw new apiError(500, "something wrong went while saving resume");
-  }
-  console.log(userId);
+  let resumeId = null;
 
-  const addResumeIdToUserModel = await User.findByIdAndUpdate(
-    userId,
-    {
-      $push: {
-        resume: resume._id,
+  if (isDraft) {
+    if (!draftId) {
+      throw new apiError(400, "Draft id is required");
+    }
+    const resume = await Resume.findById(draftId);
+    if (!resume) {
+      throw new apiError(404, "Draft not found");
+    }
+    resumeId = resume._id;
+  } else {
+    const resume = await Resume.create({
+      status: "draft",
+      ResumeType: ResumeType,
+      phone_no: phone,
+      name: name,
+      email: email,
+      address: address,
+      linkedin: linkedin || "",
+      github: github || "",
+      portfolio: portfolio || "",
+      summary: summary,
+      skills: skills || "",
+      education: education || "",
+      experience: experience || "",
+      projects: projects || "",
+      jobRole: jobRole,
+    });
+
+    if (!resume) {
+      throw new apiError(500, "something wrong went while saving resume");
+    }
+
+    resumeId = resume._id;
+    const addResumeIdToUserModel = await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: {
+          resume: resume._id,
+        },
       },
-    },
-    { new: true }
-  );
-  console.log("erroor indfdf ", addResumeIdToUserModel);
-  if (!addResumeIdToUserModel) {
-    throw new apiError(
-      500,
-      "something went wrong while add resuem id to user model"
+      { new: true }
     );
+    if (!addResumeIdToUserModel) {
+      throw new apiError(
+        500,
+        "something went wrong while add resuem id to user model"
+      );
+    }
   }
 
   const merchantOrderId = randomUUID();
-  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}&userId=${userId}&resumeId=${resume._id}`;
+  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}&userId=${userId}&resumeId=${resumeId}`;
 
   const request = StandardCheckoutPayRequest.builder()
     .merchantOrderId(merchantOrderId)
@@ -101,6 +115,7 @@ const handler = async (req) => {
 
   const res = await client.pay(request);
   console.log(res);
+  resumeId = null;
   return NextResponse.json(new apiResponse(200, "order initate", res));
 };
 

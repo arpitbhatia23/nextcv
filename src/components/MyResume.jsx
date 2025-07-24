@@ -144,14 +144,14 @@ const MyResume = () => {
       setTimeout(() => setConfettiOrigin(null), 2000);
     }
   };
-  const handelPayment = async ({ formData }) => {
-    const amount = Math.floor(100 - discount) * 100;
+  const handelPayment = async (draftId) => {
+    const amount = Math.floor(1 - discount) * 100;
     console.log(amount);
 
     const res = await axios.post("/api/payment/order", {
       amount,
-      ...formData,
-      ResumeType: selectedTemplate,
+      draftId,
+      isDraft: true,
     });
     if (res.data.success) {
       const { data } = res.data;
@@ -368,7 +368,7 @@ const MyResume = () => {
                   )}
                   <Button
                     className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                    onClick={() => handelPayment(resumeData)}
+                    onClick={() => handelPayment(resumeData._id)}
                   >
                     <IndianRupee className="mr-2 h-4 w-4" />
                     Proceed to Payment
