@@ -31,6 +31,10 @@ const userSchema = new Schema(
         ref: "payments",
       },
     ],
+    lastActive: {
+      type: Date,
+      default: Date.now,
+    },
   },
 
   {

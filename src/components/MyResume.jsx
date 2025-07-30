@@ -44,11 +44,12 @@ const MyResume = () => {
   const [resumeData, setResumeData] = useState(null);
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-
-  const [discount, setDiscount] = useState(0);
+  const [amount, setAmount] = useState(100);
+  const [originalAmount] = useState(100); // Store original amount
+  const [discount, setDiscount] = useState(null);
+  const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
 
   const route = useRouter();
-  // Mock data - replace with actual API call
   const buttonRef = useRef();
 
   const fetchResume = async () => {
@@ -65,6 +66,7 @@ const MyResume = () => {
 
   const paidResumes = resumes.paid;
   const draftResumes = resumes.draft;
+
   const getTemplateDisplayName = (templateKey) => {
     const templateNames = {
       modernTemplate: "Modern",
@@ -98,7 +100,67 @@ const MyResume = () => {
     } else {
       setPaymentModal(true);
       setResumeData(resume);
+      // Reset payment modal state when opening
+      setAmount(originalAmount);
+      setDiscount(null);
+      setApplied(false);
+      setCouponCode("");
+      setAppliedCoupon(null);
     }
+  };
+
+  const handleCoupon = async (coupon) => {
+    // Prevent applying the same coupon multiple times
+    if (appliedCoupon === coupon) {
+      toast.info("This coupon is already applied");
+      return;
+    }
+
+    try {
+      const res = await axios.post(`/api/coupons/getByCouponCode`, {
+        couponCode: coupon,
+      });
+
+      const couponData = res.data.data;
+
+      // Store discount info
+      const discountInfo = {
+        type: couponData.type,
+        value: couponData.discount,
+      };
+      setDiscount(discountInfo);
+
+      // Calculate final amount from original amount
+      let finalAmount = originalAmount;
+
+      if (discountInfo.type === "percentage") {
+        finalAmount = originalAmount * (1 - discountInfo.value / 100);
+      } else if (discountInfo.type === "amount") {
+        finalAmount = originalAmount - discountInfo.value;
+      }
+
+      // Ensure minimum price is not negative
+      finalAmount = Math.max(finalAmount, 0);
+      setAmount(finalAmount);
+
+      setApplied(true);
+      setAppliedCoupon(coupon);
+      toast.success("Coupon applied successfully");
+    } catch (error) {
+      console.error("Coupon apply error:", error);
+      toast.error(
+        error?.response?.data || "Something went wrong while applying coupon"
+      );
+    }
+  };
+
+  const removeCoupon = () => {
+    setAmount(originalAmount);
+    setDiscount(null);
+    setApplied(false);
+    setCouponCode("");
+    setAppliedCoupon(null);
+    toast.info("Coupon removed");
   };
 
   const handleDelete = async (resumeId) => {
@@ -131,7 +193,7 @@ const MyResume = () => {
     const pdfGen = new pdfGenerator(resumeData);
     const url = await pdfGen.createPdf();
     setPdfUrl(url);
-    setIsModelOpen(true); // <-- Move here!
+    setIsModelOpen(true);
   };
 
   const handleClick = () => {
@@ -144,18 +206,16 @@ const MyResume = () => {
       setTimeout(() => setConfettiOrigin(null), 2000);
     }
   };
-  const handelPayment = async (draftId) => {
-    const amount = Math.floor(1 - discount) * 100;
-    console.log(amount);
 
+  const handelPayment = async (draftId) => {
     const res = await axios.post("/api/payment/order", {
-      amount,
+      amount: Math.floor(amount * 100), // Convert ₹ to paise
       draftId,
       isDraft: true,
     });
+
     if (res.data.success) {
-      const { data } = res.data;
-      const paymentUrl = data?.redirectUrl;
+      const paymentUrl = res.data.data?.redirectUrl;
       window.location.href = paymentUrl;
     }
   };
@@ -207,7 +267,7 @@ const MyResume = () => {
         </div>
         <div className="flex items-center gap-3 mb-2">
           <div
-            className="flex-shrink-0 bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center"
+            className="flex-shrink-0 bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center cursor-pointer"
             onClick={() => handleViewResume(resume)}
           >
             <Eye className="h-5 w-5 text-gray-400" />
@@ -230,7 +290,6 @@ const MyResume = () => {
             year: "numeric",
           })}
         </div>
-        <div className="flex gap-2 mt-2"></div>
       </CardContent>
     </Card>
   );
@@ -255,13 +314,15 @@ const MyResume = () => {
   }
 
   return (
-    <div className=" mx-auto p-6 bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <div className="mx-auto p-6 bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">My Resumes</h1>
         <p className="text-gray-600">
           Manage and organize all your resumes in one place
         </p>
       </div>
+
+      {/* PDF Modal */}
       {isModelOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 bg-opacity-50">
           <ScrollArea className="h-full p-4 max-w-6xl">
@@ -271,15 +332,15 @@ const MyResume = () => {
                 size="icon"
                 className="absolute top-2 right-2"
                 onClick={() => {
-                  setPdfUrl(""); // Clear PDF URL
-                  setNumPages(null); // Reset page count
+                  setPdfUrl("");
+                  setNumPages(null);
                   setIsModelOpen(false);
                 }}
                 aria-label="Close"
               >
                 <X />
               </Button>
-              <CardContent className={"flex justify-center items-center"}>
+              <CardContent className="flex justify-center items-center">
                 <div className="text-center py-12 text-lg text-gray-700">
                   {pdfUrl ? (
                     <Document
@@ -290,7 +351,6 @@ const MyResume = () => {
                       {Array.from(new Array(numPages), (el, idx) => (
                         <div key={idx}>
                           <Page pageNumber={idx + 1} width={400} />
-                          {/* Insert divider after each page except the last */}
                           {idx < (numPages || 1) - 1 && (
                             <div
                               style={{
@@ -311,6 +371,8 @@ const MyResume = () => {
           </ScrollArea>
         </div>
       )}
+
+      {/* Payment Modal */}
       {paymentModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
@@ -329,7 +391,7 @@ const MyResume = () => {
         >
           <Card
             className="relative w-full max-w-3xl h-8/12 mx-auto rounded-2xl shadow-2xl bg-white p-0"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the modal
+            onClick={(e) => e.stopPropagation()}
           >
             <Button
               variant="ghost"
@@ -356,22 +418,49 @@ const MyResume = () => {
                       onChange={(e) => setCouponCode(e.target.value)}
                       placeholder="Enter coupon code"
                       className="flex-1"
+                      disabled={applied}
                     />
-                    <Button ref={buttonRef} onClick={handleClick}>
-                      Apply
-                    </Button>
+                    {!applied ? (
+                      <Button
+                        onClick={() => handleCoupon(couponCode)}
+                        disabled={!couponCode.trim()}
+                      >
+                        Apply
+                      </Button>
+                    ) : (
+                      <Button variant="outline" onClick={removeCoupon}>
+                        Remove
+                      </Button>
+                    )}
                   </div>
-                  {applied && (
-                    <p className="text-green-600">
-                      Coupon applied successfully!
-                    </p>
+
+                  {applied && discount && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                      <p className="text-green-600 font-medium">
+                        Coupon applied successfully!
+                      </p>
+                      <p className="text-sm text-green-700">
+                        {discount.type === "percentage"
+                          ? `${discount.value}% discount applied`
+                          : `₹${discount.value} discount applied`}
+                      </p>
+                      <div className="mt-2 text-sm">
+                        <span className="text-gray-500 line-through">
+                          ₹{originalAmount}
+                        </span>
+                        <span className="text-green-600 font-bold ml-2">
+                          ₹{amount}
+                        </span>
+                      </div>
+                    </div>
                   )}
+
                   <Button
                     className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
                     onClick={() => handelPayment(resumeData._id)}
                   >
                     <IndianRupee className="mr-2 h-4 w-4" />
-                    Proceed to Payment
+                    Proceed to Pay ₹{amount}
                   </Button>
                 </CardContent>
               </Card>
@@ -384,10 +473,10 @@ const MyResume = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
           <TabsList className="grid w-fit grid-cols-2">
             <TabsTrigger value="My-Resume" className="px-6">
-              My Resume ({paidResumes?.length})
+              My Resume ({paidResumes?.length || 0})
             </TabsTrigger>
             <TabsTrigger value="Draft-Resume" className="px-6">
-              Draft Resume ({draftResumes?.length})
+              Draft Resume ({draftResumes?.length || 0})
             </TabsTrigger>
           </TabsList>
 
@@ -404,7 +493,7 @@ const MyResume = () => {
         </div>
 
         <TabsContent value="My-Resume" className="mt-0">
-          {paidResumes?.length === 0 ? (
+          {!paidResumes || paidResumes.length === 0 ? (
             <Card className="text-center py-12">
               <CardContent>
                 <div className="text-gray-400 mb-4">
@@ -424,7 +513,7 @@ const MyResume = () => {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {paidResumes?.map((resume) => (
+              {paidResumes.map((resume) => (
                 <ResumeCard
                   key={resume?.resumedata._id}
                   resume={resume?.resumedata}
@@ -435,7 +524,7 @@ const MyResume = () => {
         </TabsContent>
 
         <TabsContent value="Draft-Resume" className="mt-0">
-          {draftResumes?.length === 0 ? (
+          {!draftResumes || draftResumes.length === 0 ? (
             <Card className="text-center py-12">
               <CardContent>
                 <div className="text-gray-400 mb-4">
@@ -455,7 +544,7 @@ const MyResume = () => {
             </Card>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {draftResumes?.map((resume) => (
+              {draftResumes.map((resume) => (
                 <ResumeCard
                   key={resume?.resumedata._id}
                   resume={resume?.resumedata}

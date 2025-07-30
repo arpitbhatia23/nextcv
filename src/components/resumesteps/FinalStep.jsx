@@ -11,14 +11,8 @@ import {
 } from "@/components/ui/resizable";
 import { BadgePercent, IndianRupee, Save } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
-import { pdf } from "@react-pdf/renderer";
 import ConfettiBurst from "../animated/confittebrust";
-import PDFResumeTemplate from "../../../templates/resume-pdf/morden";
-import ClassicTemplate from "../../../templates/resume-pdf/classic";
-import ModernPDFResumeTemplate from "../../../templates/resume-pdf/morden";
-import ClassicMinimalistPDFResume from "../../../templates/resume-pdf/Minimalist";
-import ModernBlueSidebarPDFResume from "../../../templates/resume-pdf/ModernBlueSideBar";
-import CleanBusinessAnalystPDFResume from "../../../templates/resume-pdf/businessAnalistTemplate";
+
 import {
   Select,
   SelectContent,
@@ -28,7 +22,6 @@ import {
 } from "../ui/select";
 import axios from "axios";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 
@@ -39,21 +32,9 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [applied, setApplied] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("classicTemplate");
   const [pdfUrl, setPdfUrl] = useState("");
-  const [showSparkle, setShowSparkle] = useState(false);
   const buttonRef = useRef();
-  const [confettiOrigin, setConfettiOrigin] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [discount, setDiscount] = useState(0);
-  const handleClick = () => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = rect.x;
-      const y = rect.y;
-      setConfettiOrigin({ x, y });
-
-      setTimeout(() => setConfettiOrigin(null), 2000);
-    }
-  };
 
   const handleSaveDraft = () => {
     const res = axios.post("/api/resume/savedraft", {
@@ -96,20 +77,17 @@ const FinalStep = ({ formData, isdraft = false }) => {
       window.location.href = paymentUrl;
     }
   };
+  const handleCoupon = async (coupon) => {
+    try {
+      const res = await axios.get(`/api/coupons/getByCouponCode/${coupon}`);
+      console.log(res.data);
+    } catch (error) {
+      toast.error(error.response.data || "something went wrong");
+    }
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
-      {confettiOrigin && (
-        <div className="absolute inset-0 z-20 pointer-events-none">
-          <ConfettiBurst origin={confettiOrigin} />
-        </div>
-      )}
-      {showSparkle && (
-        <div className="absolute top-4 right-4 z-30">
-          <ConfettiBurst origin={{ x: window.innerWidth - 60, y: 60 }} />
-        </div>
-      )}
-
       {/* Mobile Layout */}
       <div className="w-full  flex flex-col gap-4 md:hidden">
         {/* Template Picker */}
@@ -187,9 +165,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 placeholder="Enter coupon code"
                 className="flex-1"
               />
-              <Button ref={buttonRef} onClick={handleClick}>
-                Apply
-              </Button>
+              <Button onClick={handleCoupon(couponCode)}>Apply</Button>
             </div>
             {applied && (
               <p className="text-green-600">Coupon applied successfully!</p>
@@ -329,9 +305,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                       placeholder="Enter coupon code"
                       className="flex-1"
                     />
-                    <Button ref={buttonRef} onClick={handleClick}>
-                      Apply
-                    </Button>
+                    <Button onClick={handleCoupon(couponCode)}>Apply</Button>
                   </div>
                   {applied && (
                     <p className="text-green-600">

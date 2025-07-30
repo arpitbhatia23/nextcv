@@ -55,6 +55,10 @@ const authOptions = {
         });
 
         user = newUser;
+      } else {
+        // Update lastLogin on every login
+        finduser.lastLogin = new Date();
+        await finduser.save();
       }
       return true;
     },

@@ -1,14 +1,6 @@
 "use client";
 
 import AdminiDashboard from "@/components/AdminiDashboard";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import UserDashboard from "@/components/UserDashboard";
 import { useSession } from "next-auth/react";
 

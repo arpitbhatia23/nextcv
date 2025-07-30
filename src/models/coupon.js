@@ -1,15 +1,23 @@
 import mongoose, { Schema } from "mongoose";
 const couponSchema = new Schema(
   {
-    coupounCode: {
+    couponCode: {
       type: String,
-      reqrired: true,
+      required: true,
     },
     discount: {
       type: Number,
       required: true,
     },
-    expriy: {
+    type: {
+      type: String,
+      required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
+    expiry: {
       type: Date,
       required: true,
     },
@@ -17,7 +25,5 @@ const couponSchema = new Schema(
   { timestamps: true }
 );
 
-const Coupon =
-  mongoose.models.coupons || mongoose.model("coupons", couponSchema);
-
+const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);
 export default Coupon;

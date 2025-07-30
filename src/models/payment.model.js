@@ -15,10 +15,14 @@ const paymentSchema = new Schema(
       type: Number,
       required: String,
     },
+    status: {
+      type: String,
+      default: "complete",
+    },
   },
   { timestamps: true }
 );
 
 const Payment =
-  mongoose.models.Payments || mongoose.model("payments", paymentSchema);
+  mongoose.models.payments || mongoose.model("payments", paymentSchema);
 export default Payment;

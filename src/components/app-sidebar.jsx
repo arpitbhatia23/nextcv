@@ -47,7 +47,7 @@ const userData = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     // {
@@ -57,7 +57,7 @@ const userData = {
     // },
     {
       title: "My Resume",
-      url: "#",
+      url: "/dashboard/my-resume",
       icon: IconReport,
     },
     // {
@@ -72,22 +72,22 @@ const adminData = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
       title: "Analaytics",
-      url: "#",
+      url: "/dashboard/analytics",
       icon: ChartSpline,
     },
     {
-      title: "coupouns",
-      url: "#",
+      title: "coupons",
+      url: "/dashboard/coupons",
       icon: TicketPercent,
     },
     {
       title: "Payments",
-      url: "#",
+      url: "/dashboard/payment",
       icon: IndianRupee,
     },
   ],

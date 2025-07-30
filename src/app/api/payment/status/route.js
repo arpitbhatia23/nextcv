@@ -1,3 +1,4 @@
+import Payment from "@/models/payment.model";
 import Resume from "@/models/resume.model";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
@@ -8,7 +9,7 @@ import { Env, StandardCheckoutClient } from "pg-sdk-node";
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = Env.PRODUCTION;
+const env = Env.SANDBOX;
 const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,
@@ -20,16 +21,24 @@ const handler = async (req) => {
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
   const resumeID = searchParams.get("resumeId");
-  console.log(merchantOrderId);
   const response = await client.getTransactionStatus(merchantOrderId);
-  console.log("response", response);
+  // console.log("response", response);
 
   if (response.state === "COMPLETED") {
+    const payment = await Payment.create({
+      transcationId: response?.paymentDetails[0]?.transactionId,
+      paymentMode: response?.paymentDetails[0]?.paymentMode,
+      amount: response?.amount / 100,
+    });
+
     const updateResume = await Resume.findByIdAndUpdate(
       resumeID,
       {
         $set: {
           status: "paid",
+        },
+        $push: {
+          payments: payment._id,
         },
       },
       { new: true }

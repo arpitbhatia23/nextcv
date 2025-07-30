@@ -52,10 +52,10 @@ export function NavUser({ user }) {
                 </span>
               </div>
 
-              {isAdmin && <IconDotsVertical className="ml-auto size-4" />}
+              {/* {isAdmin && <IconDotsVertical className="ml-auto size-4" />} */}
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          {isAdmin && (
+          {/* {isAdmin && (
             <DropdownMenuContent
               className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
               side={isMobile ? "bottom" : "right"}
@@ -93,7 +93,7 @@ export function NavUser({ user }) {
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
             </DropdownMenuContent>
-          )}
+          )} */}
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
