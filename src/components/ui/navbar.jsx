@@ -69,6 +69,7 @@ export default function Nav() {
                     <Link href={"/"}> {item}</Link>
                   ) : (
                     <a
+                      href={`#${item.replace(/\s+/g, "-").toLowerCase()}`}
                       onClick={(e) => {
                         e.preventDefault();
                         scrollTo(item);

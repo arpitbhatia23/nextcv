@@ -23,7 +23,7 @@ export const Footer = () => {
       <div className="flex flex-col md:flex-row justify-around gap-8">
         <div className="space-y-4 max-w-md">
           <Logo2 className="text-white " color="white" size={100} />
-          <p className="text-gray-400">
+          <p className="text-gray-200">
             Build professional, ATS-optimized resumes with AI in minutes. Join
             thousands of successful job seekers who landed their dream jobs with
             Next CV.
@@ -38,8 +38,8 @@ export const Footer = () => {
 
         <div className="flex flex-wrap md:flex-nowrap gap-28 text-sm pr-20">
           <div>
-            <h4 className="font-semibold mb-3">Quick Links</h4>
-            <ul className="space-y-2 text-gray-400">
+            <h1 className="font-semibold mb-3">Quick Links</h1>
+            <ul className="space-y-2 text-gray-200">
               <li>
                 <a href="#">About</a>
               </li>
@@ -55,8 +55,8 @@ export const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3">Support</h4>
-            <ul className="space-y-2 text-gray-400">
+            <h2 className="font-semibold mb-3">Support</h2>
+            <ul className="space-y-2 text-gray-200">
               <li>
                 <a href="#">Help Center</a>
               </li>
@@ -110,14 +110,14 @@ export const Footer = () => {
               <h3 className={"text-2xl font-bold " + item.color}>
                 {item.value}
               </h3>
-              <p className="text-gray-400 mt-2">{item.label}</p>
+              <p className="text-gray-200 mt-2">{item.label}</p>
             </div>
           );
         })}
       </div>
 
       {/* Footer Bottom */}
-      <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500 border-t border-gray-800 pt-6 gap-4 sm:gap-0">
+      <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-200 border-t border-gray-800 pt-6 gap-4 sm:gap-0">
         <p>© 2024 Next CV. All rights reserved.</p>
         <div className="flex items-center gap-2">
           <span>Made with</span> <span className="text-red-500">❤️</span>{" "}

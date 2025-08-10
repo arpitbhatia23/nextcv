@@ -217,7 +217,7 @@ const ClassicTemplate = ({ data }) => (
               <Text style={styles.eduTitle}>{edu.institution}</Text>
               <Text style={styles.eduSubtitle}>
                 {edu.degree} &nbsp;|&nbsp; {formatDate(edu.startYear)} -{" "}
-                {formatDate(edu.endYear)}
+                {formatDate(edu.endYear) || "Present"}
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
@@ -237,7 +237,8 @@ const ClassicTemplate = ({ data }) => (
                 {exp.position} @ {exp.companyName}
               </Text>
               <Text style={styles.expMeta}>
-                {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                {formatDate(exp.startDate)} -{" "}
+                {formatDate(exp.endDate) || "Present"}
               </Text>
               {exp.description && (
                 <View style={styles.bulletList}>

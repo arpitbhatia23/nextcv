@@ -1,11 +1,24 @@
 "use client";
-import Herosection from "@/components/herosection/Herosection";
-import HowitWork from "@/components/herosection/HowitWork";
-import PageContent from "@/components/pageContent/PageContent";
-import ProcessWorks from "@/components/processWorks/ProcessWorks";
-import Templates from "@/components/templateslanding/Templates";
-import TestimonialCarousel from "@/components/testimonial/Testimonial";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { Element } from "react-scroll";
+
+const Herosection = dynamic(() =>
+  import("@/components/herosection/Herosection")
+);
+const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
+const PageContent = dynamic(() =>
+  import("@/components/pageContent/PageContent")
+);
+const ProcessWorks = dynamic(() =>
+  import("@/components/processWorks/ProcessWorks")
+);
+const Templates = dynamic(() =>
+  import("@/components/templateslanding/Templates")
+);
+const TestimonialCarousel = dynamic(() =>
+  import("@/components/testimonial/Testimonial")
+);
 
 export default function Home() {
   return (

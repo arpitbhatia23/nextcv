@@ -34,7 +34,7 @@ const handler = async (req) => {
   }
 
   const session = await getServerSession(authOptions);
-  if (session && session.user) {
+  if (!session || !session.user) {
     throw new apiError("unauthorize request");
   }
   const userId = session.user._id;

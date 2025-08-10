@@ -30,12 +30,12 @@ function Herosection() {
   return (
     <section
       name="Home"
-      className="bg-blue-500 text-white py-32 px-4 dark:bg-gray-950 sm:px-8 md:px-10 w-full"
+      className="bg-blue-700 text-white py-32 px-4 dark:bg-gray-950 sm:px-8 md:px-10 w-full"
     >
-      <Card className="mx-auto grid grid-cols-1 sm:grid-cols-2 items-center justify-items-center gap-4 dark:bg-gray-800 ">
+      <Card className="mx-auto grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-4 dark:bg-gray-800 ">
         {/* Left Text Content */}
         <div className="space-y-6 max-w-2xl p-4 ">
-          <h1 className="text-4xl sm:text-5xl font-bold">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             Build Your Perfect Resume with AI – In Minutes
           </h1>
           <h2 className="text-xl sm:text-2xl">
@@ -66,7 +66,7 @@ function Herosection() {
         {/* Right Image */}
         <div className="w-full px-7">
           <Image
-            src="https://images.unsplash.com/photo-1549923746-9507eec27243?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2MzQ2fDB8MXxzZWFyY2h8MXx8cmVzdW1lJTI1MjB3b3Jrc3BhY2UlMjUyMG1vZGVybiUyNTIwYnJpZ2h0JTI1MjBpbGx1c3RyYXRpb258ZW58MXwwfHx8MTc0OTM5NTIwM3ww&ixlib=rb-4.1.0&q=80&w=1080"
+            src={"/heroimage.png"}
             alt="Resume workspace"
             className="rounded-2xl w-full h-auto object-cover shadow-lg"
             height={500}

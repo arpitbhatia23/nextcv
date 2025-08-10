@@ -3,7 +3,12 @@ export const ResumeGenerator = {
     const bullets = [];
 
     if (degree && institution) {
-      let sentence = `Completed ${degree} from ${institution} `;
+      let sentence;
+      if (startYear && endYear) {
+        sentence = `Completed ${degree} from ${institution}  `;
+      } else if (startYear && !endYear) {
+        sentence = `Currently pursuing ${degree} from ${institution} since ${startYear}`;
+      }
       if (startYear && endYear) sentence += `(${startYear} – ${endYear})`;
       if (grade) sentence += ` with a score of ${grade}`;
       sentence += ".";

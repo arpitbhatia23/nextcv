@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/resizable";
 import { BadgePercent, IndianRupee, Save } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
-import ConfettiBurst from "../animated/confittebrust";
-
 import {
   Select,
   SelectContent,
@@ -28,13 +26,15 @@ import { pdfGenerator } from "@/lib/pdfGenerator";
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStep = ({ formData, isdraft = false }) => {
-  const [couponCode, setCouponCode] = useState("");
-  const [applied, setApplied] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState("classicTemplate");
   const [pdfUrl, setPdfUrl] = useState("");
-  const buttonRef = useRef();
   const [numPages, setNumPages] = useState(null);
-  const [discount, setDiscount] = useState(0);
+  const [applied, setApplied] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [amount, setAmount] = useState(100);
+  const [originalAmount] = useState(100); // Store original amount
+  const [discount, setDiscount] = useState(null);
+  const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
 
   const handleSaveDraft = () => {
     const res = axios.post("/api/resume/savedraft", {
@@ -48,7 +48,14 @@ const FinalStep = ({ formData, isdraft = false }) => {
       toast.error(res.data.message || "Failed to save draft");
     }
   };
-
+  const removeCoupon = () => {
+    setAmount(originalAmount);
+    setDiscount(null);
+    setApplied(false);
+    setCouponCode("");
+    setAppliedCoupon(null);
+    toast.info("Coupon removed");
+  };
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
     let isMounted = true;
@@ -62,7 +69,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
   }, [formData, selectedTemplate]);
 
   const handelPayment = async () => {
-    const amount = Math.floor(100 - discount) * 100;
+    const amount = Math.floor(100 - discount?.value) * 100;
+    console.log(discount);
     console.log(amount);
 
     const res = await axios.post("/api/payment/order", {
@@ -78,11 +86,47 @@ const FinalStep = ({ formData, isdraft = false }) => {
     }
   };
   const handleCoupon = async (coupon) => {
+    // Prevent applying the same coupon multiple times
+    if (appliedCoupon === coupon) {
+      toast.info("This coupon is already applied");
+      return;
+    }
+
     try {
-      const res = await axios.get(`/api/coupons/getByCouponCode/${coupon}`);
-      console.log(res.data);
+      const res = await axios.post(`/api/coupons/getByCouponCode`, {
+        couponCode: coupon,
+      });
+
+      const couponData = res.data.data;
+
+      // Store discount info
+      const discountInfo = {
+        type: couponData.type,
+        value: couponData.discount,
+      };
+      setDiscount(discountInfo);
+
+      // Calculate final amount from original amount
+      let finalAmount = originalAmount;
+
+      if (discountInfo.type === "percentage") {
+        finalAmount = originalAmount * (1 - discountInfo.value / 100);
+      } else if (discountInfo.type === "amount") {
+        finalAmount = originalAmount - discountInfo.value;
+      }
+
+      // Ensure minimum price is not negative
+      finalAmount = Math.max(finalAmount, 0);
+      setAmount(finalAmount);
+
+      setApplied(true);
+      setAppliedCoupon(coupon);
+      toast.success("Coupon applied successfully");
     } catch (error) {
-      toast.error(error.response.data || "something went wrong");
+      console.error("Coupon apply error:", error);
+      toast.error(
+        error?.response?.data || "Something went wrong while applying coupon"
+      );
     }
   };
 
@@ -152,51 +196,67 @@ const FinalStep = ({ formData, isdraft = false }) => {
         </Card>
 
         {/* Coupon + Payment Section */}
+        {/* Coupon + Payment Section */}
         <Card>
-          <CardHeader className="flex flex-row items-center gap-2">
-            <BadgePercent className="text-indigo-600" />
-            <CardTitle>Apply Coupon or Pay</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex gap-2 items-center">
-              <Input
-                value={couponCode}
-                onChange={(e) => setCouponCode(e.target.value)}
-                placeholder="Enter coupon code"
-                className="flex-1"
-              />
-              <Button onClick={handleCoupon(couponCode)}>Apply</Button>
-            </div>
-            {applied && (
-              <p className="text-green-600">Coupon applied successfully!</p>
-            )}
-            <Button
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-              onClick={handelPayment}
-            >
-              <IndianRupee className="mr-2 h-4 w-4" />
-              Proceed to Payment
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full flex items-center justify-center gap-2"
-              onClick={handleSaveDraft}
-              type="button"
-            >
-              <Save className="h-4 w-4" />
-              Save as Draft
-            </Button>
-            {/* {pdfUrl && (
-              <div className="mt-3 flex justify-center">
-                <a
-                  href={pdfUrl}
-                  download="resume.pdf"
-                  className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition"
+          <CardContent className="space-y-4">
+            <div className="p-8">
+              <CardHeader className="flex flex-row items-center gap-2">
+                <BadgePercent className="text-indigo-600" />
+                <CardTitle>Apply Coupon or Pay</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex gap-2 items-center">
+                  <Input
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    placeholder="Enter coupon code"
+                    className="flex-1"
+                    disabled={applied}
+                  />
+                  {!applied ? (
+                    <Button
+                      onClick={() => handleCoupon(couponCode)}
+                      disabled={!couponCode.trim()}
+                    >
+                      Apply
+                    </Button>
+                  ) : (
+                    <Button variant="outline" onClick={removeCoupon}>
+                      Remove
+                    </Button>
+                  )}
+                </div>
+
+                {applied && discount && (
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <p className="text-green-600 font-medium">
+                      Coupon applied successfully!
+                    </p>
+                    <p className="text-sm text-green-700">
+                      {discount.type === "percentage"
+                        ? `${discount.value}% discount applied`
+                        : `₹${discount.value} discount applied`}
+                    </p>
+                    <div className="mt-2 text-sm">
+                      <span className="text-gray-500 line-through">
+                        ₹{originalAmount}
+                      </span>
+                      <span className="text-green-600 font-bold ml-2">
+                        ₹{amount}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <Button
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                  onClick={() => handelPayment()}
                 >
-                  Download PDF
-                </a>
-              </div>
-            )} */}
+                  <IndianRupee className="mr-2 h-4 w-4" />
+                  Proceed to Pay ₹{amount}
+                </Button>
+              </CardContent>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -293,43 +353,65 @@ const FinalStep = ({ formData, isdraft = false }) => {
               </Card>
               {/* Coupon + Payment Section */}
               <Card>
-                <CardHeader className="flex flex-row items-center gap-2">
-                  <BadgePercent className="text-indigo-600" />
-                  <CardTitle>Apply Coupon or Pay</CardTitle>
-                </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex gap-2 items-center">
-                    <Input
-                      value={couponCode}
-                      onChange={(e) => setCouponCode(e.target.value)}
-                      placeholder="Enter coupon code"
-                      className="flex-1"
-                    />
-                    <Button onClick={handleCoupon(couponCode)}>Apply</Button>
-                  </div>
-                  {applied && (
-                    <p className="text-green-600">
-                      Coupon applied successfully!
-                    </p>
-                  )}
-                  <Button
-                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                    onClick={handelPayment}
-                  >
-                    <IndianRupee className="mr-2 h-4 w-4" />
-                    Proceed to Payment
-                  </Button>
-                  {/* {pdfUrl && (
-                    <div className="mt-4 flex justify-center">
-                      <a
-                        href={pdfUrl}
-                        download="resume.pdf"
-                        className="px-4 py-2 rounded bg-indigo-600 text-white hover:bg-indigo-700 transition"
+                  <div className="p-8">
+                    <CardHeader className="flex flex-row items-center gap-2">
+                      <BadgePercent className="text-indigo-600" />
+                      <CardTitle>Apply Coupon or Pay</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex gap-2 items-center">
+                        <Input
+                          value={couponCode}
+                          onChange={(e) => setCouponCode(e.target.value)}
+                          placeholder="Enter coupon code"
+                          className="flex-1"
+                          disabled={applied}
+                        />
+                        {!applied ? (
+                          <Button
+                            onClick={() => handleCoupon(couponCode)}
+                            disabled={!couponCode.trim()}
+                          >
+                            Apply
+                          </Button>
+                        ) : (
+                          <Button variant="outline" onClick={removeCoupon}>
+                            Remove
+                          </Button>
+                        )}
+                      </div>
+
+                      {applied && discount && (
+                        <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                          <p className="text-green-600 font-medium">
+                            Coupon applied successfully!
+                          </p>
+                          <p className="text-sm text-green-700">
+                            {discount.type === "percentage"
+                              ? `${discount.value}% discount applied`
+                              : `₹${discount.value} discount applied`}
+                          </p>
+                          <div className="mt-2 text-sm">
+                            <span className="text-gray-500 line-through">
+                              ₹{originalAmount}
+                            </span>
+                            <span className="text-green-600 font-bold ml-2">
+                              ₹{amount}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+
+                      <Button
+                        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                        onClick={() => handelPayment()}
                       >
-                        Download PDF
-                      </a>
-                    </div>
-                  )} */}
+                        <IndianRupee className="mr-2 h-4 w-4" />
+                        Proceed to Pay ₹{amount}
+                      </Button>
+                    </CardContent>
+                  </div>
                 </CardContent>
               </Card>
             </ScrollArea>

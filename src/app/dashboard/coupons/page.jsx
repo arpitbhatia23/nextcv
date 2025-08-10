@@ -41,7 +41,7 @@ const couponSchema = z.object({
   expiryDate: z.string().min(1),
 });
 
-const CouponManager = () => {
+const page = () => {
   const [coupons, setCoupons] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCoupon, setEditingCoupon] = useState(null);
@@ -318,4 +318,4 @@ const CouponManager = () => {
   );
 };
 
-export default CouponManager;
+export default page;

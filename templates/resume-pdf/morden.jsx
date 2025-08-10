@@ -10,6 +10,7 @@ import {
   Svg,
   Path,
 } from "@react-pdf/renderer";
+import { formatDate } from "@/utils/datefromater";
 
 // SVG Icons for LinkedIn, GitHub, Portfolio
 const LinkedInIcon = () => (
@@ -269,7 +270,8 @@ const morden = ({ data }) => (
             <View key={i} style={styles.eduBlock}>
               <Text style={styles.eduTitle}>{edu.institution}</Text>
               <Text style={styles.eduSubtitle}>
-                {edu.degree} &nbsp;|&nbsp; {edu.startYear} - {edu.endYear}
+                {edu.degree} &nbsp;|&nbsp; {formatDate(edu.startYear)} -{" "}
+                {formatDate(edu.endYear) || "Present"}
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
@@ -290,7 +292,8 @@ const morden = ({ data }) => (
                 {exp.position} @ {exp.companyName}
               </Text>
               <Text style={styles.expMeta}>
-                {exp.startDate} - {exp.endDate}
+                {formatDate(exp.startDate)} -{" "}
+                {formatDate(exp.endDate) || "Present"}
               </Text>
               <View style={styles.bulletList}>
                 {Array.isArray(exp.description)

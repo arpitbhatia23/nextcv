@@ -196,17 +196,6 @@ const MyResume = () => {
     setIsModelOpen(true);
   };
 
-  const handleClick = () => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = rect.x;
-      const y = rect.y;
-      setConfettiOrigin({ x, y });
-
-      setTimeout(() => setConfettiOrigin(null), 2000);
-    }
-  };
-
   const handelPayment = async (draftId) => {
     const res = await axios.post("/api/payment/order", {
       amount: Math.floor(amount * 100), // Convert ₹ to paise

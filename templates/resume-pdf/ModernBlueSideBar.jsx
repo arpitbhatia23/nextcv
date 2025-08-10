@@ -10,6 +10,7 @@ import {
   Svg,
   Path,
 } from "@react-pdf/renderer";
+import { formatDate } from "@/utils/datefromater";
 
 // Blue color theme
 const BLUE = "#2072c9";
@@ -323,7 +324,8 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                   <Text style={styles.eduSchool}>{edu.institution}</Text>
                   <View style={styles.eduMeta}>
                     <Text>
-                      {edu.startYear} - {edu.endYear}
+                      {formatDate(edu.startYear)} -{" "}
+                      {formatDate(edu.endYear) || "Present"}
                     </Text>
                     {edu.location && (
                       <>
@@ -398,7 +400,8 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                   <Text style={styles.expOrg}>{exp.companyName}</Text>
                   <View style={styles.expPeriodLoc}>
                     <Text>
-                      {exp.startDate} - {exp.endDate}
+                      {formatDate(exp.startDate)} -{" "}
+                      {formatDate(exp.endDate) || "Present"}
                     </Text>
                     {exp.location && (
                       <>

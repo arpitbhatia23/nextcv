@@ -407,7 +407,8 @@ const ModernFullStackPDFResume = ({ data }) => (
                 <Text style={styles.expOrg}>{exp.companyName}</Text>
                 <View style={styles.expPeriodLoc}>
                   <Text>
-                    {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+                    {formatDate(exp.startDate)} -{" "}
+                    {formatDate(exp.endDate) || "Present"}
                   </Text>
                   {exp.location && (
                     <>
@@ -444,7 +445,8 @@ const ModernFullStackPDFResume = ({ data }) => (
                 <Text style={styles.eduSchool}>{edu.institution}</Text>
                 <View style={styles.eduMeta}>
                   <Text>
-                    {edu.startYear} - {edu.endYear}
+                    {formatDate(edu.startYear)} -{" "}
+                    {formatDate(edu.endYear) || "Present"}
                   </Text>
                   {edu.location && (
                     <>

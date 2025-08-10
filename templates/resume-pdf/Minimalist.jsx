@@ -390,7 +390,8 @@ const ClassicMinimalistPDFResume = ({
                     {exp.position} {exp.companyName && `at ${exp.companyName}`}
                   </Text>
                   <Text style={styles.historyDate}>
-                    {formatDate(exp.startDate)} — {formatDate(exp.endDate)}
+                    {formatDate(exp.startDate)} —{" "}
+                    {formatDate(exp.endDate) || "Present"}
                   </Text>
                   {exp.bullets?.length > 0 && (
                     <View style={styles.bulletList}>
@@ -420,7 +421,8 @@ const ClassicMinimalistPDFResume = ({
                   <Text style={styles.eduDegree}>{edu.degree}</Text>
                   <Text style={styles.eduSchool}>{edu.institution}</Text>
                   <Text style={styles.eduDate}>
-                    {formatDate(edu.startYear)} — {formatDate(edu.endYear)}
+                    {formatDate(edu.startYear)} —{" "}
+                    {formatDate(edu.endYear) || "Presnet"}
                   </Text>
                   <Text style={styles.eduDiscription}>{edu.description}</Text>
                 </View>

@@ -43,7 +43,6 @@ const resumeSchema = new Schema(
         },
         level: {
           type: String,
-          required: true,
         },
       },
     ],
@@ -63,7 +62,7 @@ const resumeSchema = new Schema(
         },
         endYear: {
           type: Date,
-          required: true,
+          default: null,
         },
         grade: {
           type: String,
@@ -77,23 +76,18 @@ const resumeSchema = new Schema(
       {
         position: {
           type: String,
-          required: true,
         },
         companyName: {
           type: String,
-          required: true,
         },
         startDate: {
           type: Date,
-          required: true,
         },
         endDate: {
           type: Date,
-          required: true,
         },
         description: {
           type: String,
-          required: true,
         },
       },
     ],
@@ -101,30 +95,25 @@ const resumeSchema = new Schema(
       {
         title: {
           type: String,
-          required: true,
         },
         roleOrType: {
           type: String,
-          required: true,
         },
         description: {
           type: String,
-          required: true,
         },
         link: {
           type: String,
         },
         date: {
           type: String,
-          required: String,
+          required: true,
         },
         technologiesOrTopics: {
           type: String,
-          required: true,
         },
         organization: {
           type: String,
-          required: true,
         },
       },
     ],

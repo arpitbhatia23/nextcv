@@ -117,7 +117,7 @@ function DownloadPageContent() {
   );
 }
 
-export default function DownloadPage() {
+export default function page() {
   return (
     <Suspense>
       <DownloadPageContent />
