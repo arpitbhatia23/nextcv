@@ -224,13 +224,18 @@ const MyResume = () => {
             >
               {resume.status}
             </Badge>
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-black">
               {formatDate(resume?.updatedAt)}
             </span>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8 p-0">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 p-0"
+                aria-label="More options"
+              >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -262,15 +267,15 @@ const MyResume = () => {
             <Eye className="h-5 w-5 text-gray-400" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 leading-tight">
+            <h2 className="font-semibold text-lg text-gray-900 leading-tight">
               {resume.name}
-            </h3>
+            </h2>
             <div className="text-xs text-gray-500">
               Template: {getTemplateDisplayName(resume.ResumeType)}
             </div>
           </div>
         </div>
-        <div className="flex items-center text-xs text-gray-500 mb-1">
+        <div className="flex items-center text-xs text-black mb-1">
           <Calendar className="h-3 w-3 mr-1" />
           Created on{" "}
           {new Date(resume.createdAt).toLocaleDateString("en-US", {

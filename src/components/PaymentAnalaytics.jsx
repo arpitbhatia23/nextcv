@@ -273,7 +273,7 @@ const AdminPaymentDashboard = () => {
               </button>
               <button
                 onClick={exportToCSV}
-                className="flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
+                className="flex items-center gap-2 bg-green-800 text-white px-6 py-2 rounded-lg hover:bg-green-900 transition-colors font-medium"
               >
                 <Download size={20} />
                 Export CSV
@@ -304,11 +304,11 @@ const AdminPaymentDashboard = () => {
                 <p className="text-sm font-medium text-gray-600">
                   Total Transactions
                 </p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-3xl font-bold text-green-800">
                   {accountingTotals.count}
                 </p>
               </div>
-              <FileText className="text-green-600" size={32} />
+              <FileText className="text-green-800" size={32} />
             </div>
           </div>
 
@@ -345,7 +345,7 @@ const AdminPaymentDashboard = () => {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center gap-2 mb-4">
             <Filter size={20} className="text-gray-600" />
-            <h3 className="text-lg font-semibold">Filters & Search</h3>
+            <h2 className="text-lg font-semibold">Filters & Search</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -366,6 +366,7 @@ const AdminPaymentDashboard = () => {
                 setDateFilter({ ...dateFilter, period: e.target.value })
               }
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              aria-label="time range"
             >
               <option value="all">All Time</option>
               <option value="today">Today</option>
@@ -452,7 +453,7 @@ const AdminPaymentDashboard = () => {
                         }
                       )}
                     </TableCell>
-                    <TableCell className="text-green-600 font-bold">
+                    <TableCell className="text-green-800 font-bold">
                       {formatCurrency(payment?.amount)}
                     </TableCell>
                     <TableCell>
@@ -561,10 +562,10 @@ const AdminPaymentDashboard = () => {
         {/* Analytics Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
               <DollarSign size={20} className="text-blue-600" />
               Payment Mode Breakdown
-            </h3>
+            </h4>
             <div className="space-y-3">
               {Object.entries(accountingTotals.byPaymentMode).map(
                 ([mode, amount]) => (
@@ -591,10 +592,10 @@ const AdminPaymentDashboard = () => {
           </div>
 
           <div className="bg-white rounded-lg shadow-sm p-6">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <FileText size={20} className="text-green-600" />
+            <h5 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <FileText size={20} className="text-green-800" />
               Transaction Status Overview
-            </h3>
+            </h5>
             <div className="space-y-3">
               {Object.entries(accountingTotals.byStatus).map(
                 ([status, count]) => (
@@ -611,7 +612,7 @@ const AdminPaymentDashboard = () => {
                         {status.charAt(0).toUpperCase() + status.slice(1)}
                       </span>
                     </div>
-                    <span className="font-bold text-green-600">
+                    <span className="font-bold text-green-800">
                       {count} transactions
                     </span>
                   </div>
@@ -623,10 +624,10 @@ const AdminPaymentDashboard = () => {
 
         {/* Monthly Breakdown */}
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+          <h6 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Calendar size={20} className="text-purple-600" />
             Monthly Revenue Breakdown
-          </h3>
+          </h6>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(accountingTotals.byMonth)
               .sort(([a], [b]) => new Date(a).getTime() - new Date(b).getTime())

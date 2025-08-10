@@ -1,26 +1,8 @@
 "use client";
 import * as React from "react";
-import {
-  IconCamera,
-  IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconDashboard, IconReport } from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -31,16 +13,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import Logo from "./logo";
 import Logo2 from "./Logo2";
-import {
-  ChartSpline,
-  GalleryVertical,
-  GalleryVerticalEnd,
-  IndianRupee,
-  PenSquare,
-  TicketPercent,
-} from "lucide-react";
+import { ChartSpline, IndianRupee, TicketPercent } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { useSession } from "next-auth/react";
 const userData = {

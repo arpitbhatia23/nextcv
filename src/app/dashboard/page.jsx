@@ -1,12 +1,22 @@
-"use client";
+import { getServerSession } from "next-auth";
+import authOptions from "../api/auth/options";
+import dynamic from "next/dynamic";
 
-import AdminiDashboard from "@/components/AdminiDashboard";
-import UserDashboard from "@/components/UserDashboard";
-import { useSession } from "next-auth/react";
+const AdminiDashboard = dynamic(() => import("@/components/AdminiDashboard"));
+const UserDashboard = dynamic(() => import("@/components/UserDashboard"));
 
-export default function page() {
-  const { data: session } = useSession();
-  console.log(session);
+export async function generateMetadata() {
+  const session = await getServerSession(authOptions);
   const isAdmin = session?.user?.role === "admin";
-  return <>{isAdmin ? <AdminiDashboard /> : <UserDashboard />}</>;
+  return {
+    title: isAdmin ? "Admin Dashboard" : "User Dashboard",
+    description: "Dashboard for managing your account and viewing activity.",
+  };
+}
+
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+  const isAdmin = session?.user?.role === "admin";
+
+  return isAdmin ? <AdminiDashboard /> : <UserDashboard />;
 }

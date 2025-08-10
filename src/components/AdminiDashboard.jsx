@@ -1,8 +1,10 @@
 import React from "react";
-import { SectionCards } from "./section-cards";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { DataTable } from "@/components/data-table";
-import data from "./data.json";
+import dynamic from "next/dynamic";
+
+const SectionCards = dynamic(() => import("@/components/section-cards.jsx"));
+const ChartAreaInteractive = dynamic(() =>
+  import("@/components/chart-area-interactive.jsx")
+);
 
 const AdminiDashboard = () => {
   return (

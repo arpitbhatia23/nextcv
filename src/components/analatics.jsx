@@ -516,7 +516,6 @@ function AnalyticsDashboard({ timeRange = "all" }) {
 // Main Page Component with Filters
 export default function AnalyticsPage() {
   const [timeRange, SettimeRage] = useState("all");
-  console.log(timeRange);
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -537,7 +536,10 @@ export default function AnalyticsPage() {
               defaultValue={timeRange}
               onValueChange={(value) => SettimeRage(value)}
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger
+                className="w-[180px]"
+                aria-label="Select time range"
+              >
                 <SelectValue placeholder="Select time range" />
               </SelectTrigger>
               <SelectContent>

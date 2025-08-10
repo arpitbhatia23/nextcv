@@ -40,7 +40,7 @@ const chartConfig = {
   },
 };
 
-export function ChartAreaInteractive() {
+function ChartAreaInteractive() {
   const isMobile = useIsMobile();
   const [timeRange, setTimeRange] = React.useState("90d");
   const [data, setdata] = React.useState([]);
@@ -180,3 +180,5 @@ export function ChartAreaInteractive() {
     </Card>
   );
 }
+
+export default ChartAreaInteractive;
