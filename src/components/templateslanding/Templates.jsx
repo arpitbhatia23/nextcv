@@ -59,7 +59,7 @@ const Templates = () => {
             {cards.map(({ img, title, description }, index) => (
               <Card key={index} className="p-4">
                 <CardHeader>
-                  {<Image src={img} height={500} width={500} className="w-72 h-80"/> }
+                  {<Image src={img} height={500} width={500} className="w-72 h-80" alt="resume images"/> }
                 </CardHeader>
                 <CardTitle className="font-bold">{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>
