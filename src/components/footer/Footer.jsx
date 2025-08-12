@@ -98,7 +98,7 @@ export const Footer = () => {
             key={item.label}
             className="bg-gray-800 p-6 rounded-lg text-center"
           >
-            <h3 className={`text-2xl font-bold ${item.color}`}>{item.value}</h3>
+            <p className={`text-2xl font-bold ${item.color}`}>{item.value}</p>
             <p className="text-gray-200 mt-2">{item.label}</p>
           </div>
         ))}

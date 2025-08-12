@@ -257,7 +257,42 @@ const styles = StyleSheet.create({
     backgroundColor: BLUE,
     border: `1 solid ${BLUE}`,
   },
+    projBlock: {
+    marginBottom: 8,
+  },
+  projTitle: {
+    fontWeight: "bold",
+    fontSize: 11,
+    color: "#263238",
+  },
+  projMeta: {
+    fontSize: 9,
+    color: "#1976d2",
+    marginBottom: 1,
+  },
+  projTech: {
+    fontSize: 9,
+    color: "#1976d2",
+    marginBottom: 1,
+    fontStyle: "italic",
+  },
+  projDesc: {
+    fontSize: 9,
+    color: "#444",
+  },
 });
+
+
+const splitToBullets = (desc) => {
+  if (Array.isArray(desc)) return desc;
+  if (typeof desc === "string") {
+    return desc
+      .split(/[\.\n;]/)
+      .map((b) => b && b.trim())
+      .filter(Boolean);
+  }
+  return [];
+};
 
 function renderLangBar(level, max = 5) {
   return (
@@ -422,6 +457,37 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                           </Text>
                         ) : null
                       )}
+                    </View>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
+
+          {data.projects?.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Projects</Text>
+              {data.projects.map((proj, i) => (
+                <View key={i} style={styles.projBlock}>
+                  <Text style={styles.projTitle}>{proj.title}</Text>
+                  <Text style={styles.projMeta}>
+                    {proj.roleOrType}
+                    {proj.organization && ` @ ${proj.organization}`}
+                    {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
+                  </Text>
+                  {proj.technologiesOrTopics && (
+                    <Text style={styles.projTech}>
+                      Tech: {proj.technologiesOrTopics}
+                    </Text>
+                  )}
+                  {proj.description && (
+                    <View style={styles.bulletList}>
+                      {splitToBullets(proj.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.bulletItem}>
+                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text>{bullet}</Text>
+                        </View>
+                      ))}
                     </View>
                   )}
                 </View>
