@@ -3,30 +3,27 @@ import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import HowitWork from "../herosection/HowitWork";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 const Templates = () => {
   const cards = [
     {
-      img: "",
-      title: "Executive Pro",
+      img: "/classic.png",
+      title: "Classic",
       description: "Perfect for senior professionals",
     },
     {
-      img: "",
-      title: "Creative Edge",
+      img: "/minalmalist.png",
+      title: "Minalmalist",
       description: "Ideal for creative professionals",
     },
     {
-      img: "",
-      title: "Tech Modern",
+      img: "/modern.png",
+      title: "Modern",
       description: "Great for tech professionals",
     },
-    { img: "", title: "Clean Minimal", description: "Simple and professional" },
-    {
-      img: "",
-      title: "Student Fresh",
-      description: "Perfect for new graduates",
-    },
+    { img: "/ModernSideBar.png", title: "Mordern sidebar", description: "Simple and professional" },
+    
   ];
 
   const templates_includ = [
@@ -51,18 +48,18 @@ const Templates = () => {
     <>
       {/* Templates Section */}
       <section name="Templates" className="px-4 py-12">
-        <Card className="max-w-screen-lg mx-auto border-none shadow-none space-y-6">
+        <Card className="max-w-screen-2xl mx-auto border-none shadow-none space-y-6">
           <h1 className="text-4xl font-bold text-center">Templates</h1>
           <h2 className="text-gray-600 text-lg text-center">
             Choose from our collection of professionally designed, ATS-optimized
             resume templates.
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
             {cards.map(({ img, title, description }, index) => (
               <Card key={index} className="p-4">
                 <CardHeader>
-                  {img || <div className="h-32 bg-gray-200 rounded" />}
+                  {<Image src={img} height={500} width={500} className="w-72 h-80"/> }
                 </CardHeader>
                 <CardTitle className="font-bold">{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>

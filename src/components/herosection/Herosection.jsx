@@ -81,7 +81,7 @@ function AnimatedHeroSection() {
           height={500}
           width={600}
           alt="resume template"
-          className="rounded-lg"
+          className="rounded-lg h-96 "
         />
         <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-2xl blur-sm opacity-50 pointer-events-none" />
       </div>
