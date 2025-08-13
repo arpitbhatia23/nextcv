@@ -55,7 +55,7 @@ const handler = async (req) => {
     );
   } else {
     return NextResponse.redirect(
-      `${process.env.BASE_URL}/payment/fails?status=fail`
+      `${process.env.BASE_URL}/payement/fails?status=fail`
     );
   }
 };
