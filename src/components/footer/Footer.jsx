@@ -76,7 +76,7 @@ export const Footer = () => {
 
         <div className="flex flex-wrap md:flex-nowrap gap-28 text-sm pr-20">
           <div>
-            <h1 className="font-semibold mb-3">Quick Links</h1>
+            <h2 className="font-semibold mb-3">Quick Links</h2>
             <ul className="space-y-2 text-gray-200">
               {footerLinks.map((item) => (
                 <li key={item.label}>{renderFooterLink(item)}</li>

@@ -56,12 +56,12 @@ function HowitWork() {
 
           {/* Average Time Card */}
           <section className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-amber-100 dark: px-6 py-4 rounded-2xl shadow-inner w-full sm:w-max mx-auto">
-            <h1 className="text-4xl">⏱️</h1>
+            <h2 className="text-4xl">⏱️</h2>
             <div className="text-center sm:text-left">
-              <h2 className="font-bold text-lg dark:text-black">
+              <h3 className="font-bold text-lg dark:text-black">
                 Average Time: 5 Minutes
-              </h2>
-              <h3 className="text-gray-600 text-sm">From start to download</h3>
+              </h3>
+              <h4 className="text-gray-600 text-sm">From start to download</h4>
             </div>
           </section>
         </Card>
