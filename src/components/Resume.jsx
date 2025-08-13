@@ -83,7 +83,7 @@ const Resume = () => {
 
   const [formdata, setFormdata] = useState({
     name: "",
-    phone: "",
+    phone_no: "",
     email: "",
     address: "",
     linkedin: "",

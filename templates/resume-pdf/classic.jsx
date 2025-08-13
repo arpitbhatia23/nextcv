@@ -165,7 +165,7 @@ const ClassicTemplate = ({ data }) => (
       <View style={styles.header}>
         <Text style={styles.name}>{data.name || "Your Name"}</Text>
         <Text style={styles.contact}>
-          {data.email} | {data.phone_no} | {data.address}
+          {data.email} | {data?.phone_no} | {data.address}
         </Text>
         <View style={styles.links}>
           {data.linkedin && (
