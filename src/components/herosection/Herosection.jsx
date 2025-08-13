@@ -21,23 +21,31 @@ function AnimatedHeroSection() {
     {
       name: "Modern",
       color: "from-blue-500 to-purple-600",
+      width: 446,
+      height: 587,
       textColor: "text-white",
       img: "/modern.png",
     },
     {
       name: "Minimalist",
       color: "from-emerald-500 to-teal-600",
+      width: 351,
+      height: 451,
       textColor: "text-white",
       img: "/minalmalist.png",
     },
     {
       name: "Classic",
       color: "from-slate-700 to-slate-900",
+      width: 446,
+      height: 587,
       textColor: "text-white",
       img: "/classic.png",
     },
     {
       name: "Tech Specialist",
+      width: 351,
+      height: 451,
       color: "from-orange-500 to-red-600",
       textColor: "text-white",
       img: "/ModernSideBar.png",
@@ -45,10 +53,26 @@ function AnimatedHeroSection() {
   ];
 
   const stats = [
-    { number: "10K+", title: "Resumes Created", icon: <Users className="w-6 h-6" /> },
-    { number: "98%", title: "Success Rate", icon: <Award className="w-6 h-6" /> },
-    { number: "2 Min", title: "Average Time", icon: <Clock className="w-6 h-6" /> },
-    { number: "₹100", title: "Fixed Price", icon: <DollarSign className="w-6 h-6" /> },
+    {
+      number: "10K+",
+      title: "Resumes Created",
+      icon: <Users className="w-6 h-6" />,
+    },
+    {
+      number: "98%",
+      title: "Success Rate",
+      icon: <Award className="w-6 h-6" />,
+    },
+    {
+      number: "2 Min",
+      title: "Average Time",
+      icon: <Clock className="w-6 h-6" />,
+    },
+    {
+      number: "₹100",
+      title: "Fixed Price",
+      icon: <DollarSign className="w-6 h-6" />,
+    },
   ];
 
   useEffect(() => {
@@ -58,19 +82,20 @@ function AnimatedHeroSection() {
     return () => clearInterval(timer);
   }, []);
 
-
   const scrollTo = (section) => {
-      scroller.scrollTo(section, {
-        duration: 800,
-        delay: 0,
-        smooth: "easeInOutQuart",
-      });
-    };
+    scroller.scrollTo(section, {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  };
 
   const ResumeMockup = ({ mockup, isActive }) => (
-    <div
+    <section
       className={`relative transform transition-all duration-1000 ${
-        isActive ? "scale-100 opacity-100 rotate-0" : "scale-95 opacity-60 rotate-3"
+        isActive
+          ? "scale-100 opacity-100 rotate-0"
+          : "scale-95 opacity-60 rotate-3"
       }`}
     >
       <div
@@ -78,17 +103,17 @@ function AnimatedHeroSection() {
       >
         <Image
           src={mockup?.img}
-          height={500}
-          width={600}
+          height={mockup.height}
+          width={mockup.width}
           alt="resume template"
-          className="rounded-lg h-96 "
+          className="rounded-lg object-cover"
         />
         <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-2xl blur-sm opacity-50 pointer-events-none" />
       </div>
       <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 bg-white px-3 py-1 rounded-full text-sm font-medium text-gray-700 shadow-lg">
         {mockup.name}
       </div>
-    </div>
+    </section>
   );
 
   return (
@@ -107,7 +132,7 @@ function AnimatedHeroSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[80vh]">
           {/* Left Content */}
           <div className="space-y-8 lg:pr-8 z-10">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-sm font-medium animate-bounce">
@@ -118,7 +143,8 @@ function AnimatedHeroSection() {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
               Build Your
               <span className="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
-                {" "}Perfect Resume
+                {" "}
+                Perfect Resume
               </span>
               <br />
               with AI – In Minutes
@@ -126,7 +152,11 @@ function AnimatedHeroSection() {
 
             <p className="text-xl lg:text-2xl text-blue-100 leading-relaxed">
               AI-powered resume creation that gets you hired.
-              <span className="text-yellow-300 font-semibold"> Pay only ₹100 per resume.</span> No subscriptions.
+              <span className="text-yellow-300 font-semibold">
+                {" "}
+                Pay only ₹100 per resume.
+              </span>{" "}
+              No subscriptions.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -138,7 +168,10 @@ function AnimatedHeroSection() {
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
 
-              <button className="group bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold py-4 px-8 rounded-2xl text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105 z-10 relative" onClick={()=>scrollTo("Templates")}>
+              <button
+                className="group bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold py-4 px-8 rounded-2xl text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105 z-10 relative"
+                onClick={() => scrollTo("Templates")}
+              >
                 View Templates
               </button>
             </div>
@@ -161,7 +194,7 @@ function AnimatedHeroSection() {
           </div>
 
           {/* Right Content */}
-          <div className="relative flex justify-center lg:justify-end -z-10">
+          <div className="relative flex justify-center lg:justify-center -z-10">
             <div className="relative">
               <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl animate-pulse pointer-events-none z-0" />
               <div className="relative -z-10 flex items-center justify-center min-h-[500px]">
@@ -184,7 +217,10 @@ function AnimatedHeroSection() {
                           : "translateX(60px) scale(0.8) rotateY(30deg)",
                     }}
                   >
-                    <ResumeMockup mockup={mockup} isActive={index === currentMockup} />
+                    <ResumeMockup
+                      mockup={mockup}
+                      isActive={index === currentMockup}
+                    />
                   </div>
                 ))}
               </div>
@@ -193,7 +229,7 @@ function AnimatedHeroSection() {
                   <button
                     key={index}
                     onClick={() => setCurrentMockup(index)}
-                    className={`w-4 h-4 p-3 rounded-full transition-all duration-300 ${
+                    className={`w-4 lg:w-3 h-4 lg:h-2 p-3 rounded-full transition-all duration-300 ${
                       index === currentMockup
                         ? "bg-yellow-400 scale-125"
                         : "bg-white/30 hover:bg-white/50"

@@ -161,7 +161,7 @@ export default function TestimonialCarousel() {
         </div>
 
         <Card className="bg-amber-700 rounded-3xl mx-auto px-6 py-4 text-white font-bold text-center w-full max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-lg">
-          <h1>🔥 Limited Time: Get started for just ₹100 - No hidden fees!</h1>
+          <h2>🔥 Limited Time: Get started for just ₹100 - No hidden fees!</h2>
         </Card>
       </Card>
     </section>

@@ -36,11 +36,11 @@ function HowitWork() {
         <Card className="max-w-screen-lg mx-auto border-none shadow-none space-y-8">
           {/* Heading */}
           <div className="text-center space-y-4">
-            <h1 className="text-3xl sm:text-4xl font-bold">How It Works</h1>
-            <h2 className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold">How It Works</h2>
+            <h3 className="text-lg sm:text-xl text-gray-700 max-w-2xl mx-auto">
               Create your professional resume in just 4 simple steps. Our
               AI-powered platform makes it fast and easy.
-            </h2>
+            </h3>
           </div>
 
           {/* Step Cards */}
@@ -55,7 +55,7 @@ function HowitWork() {
           </div>
 
           {/* Average Time Card */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-amber-100 dark: px-6 py-4 rounded-2xl shadow-inner w-full sm:w-max mx-auto">
+          <section className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-amber-100 dark: px-6 py-4 rounded-2xl shadow-inner w-full sm:w-max mx-auto">
             <h1 className="text-4xl">⏱️</h1>
             <div className="text-center sm:text-left">
               <h2 className="font-bold text-lg dark:text-black">
@@ -63,7 +63,7 @@ function HowitWork() {
               </h2>
               <h3 className="text-gray-600 text-sm">From start to download</h3>
             </div>
-          </div>
+          </section>
         </Card>
 
         {/* Additional Component */}

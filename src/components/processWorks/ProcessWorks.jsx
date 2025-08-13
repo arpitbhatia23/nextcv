@@ -34,9 +34,9 @@ const ProcessWorks = () => {
       <section className="px-4 py-12">
         {/* Why Our Process Works */}
         <Card className="max-w-6xl mx-auto p-6 sm:p-10 space-y-8 border-none shadow-none">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center">
             Why Our Process Works
-          </h1>
+          </h2>
 
           {/* Features */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">

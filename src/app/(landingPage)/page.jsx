@@ -1,6 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import { Element } from "react-scroll";
 
 const Herosection = dynamic(() =>

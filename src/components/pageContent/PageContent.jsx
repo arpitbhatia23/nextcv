@@ -70,7 +70,7 @@ const PageContent = () => {
     <section className="px-4 py-12 max-w-7xl mx-auto">
       {/* Heading */}
       <Card className="items-center text-center border-none shadow-none mb-10">
-        <h1 className="text-4xl font-bold">{count}%</h1>
+        <h2 className="text-4xl font-bold">{count}%</h2>
         <p className="text-xl text-gray-800 mt-2">
           Experience the future of resume building with our AI-powered platform
           designed for modern job seekers.
@@ -93,11 +93,11 @@ const PageContent = () => {
       </div>
 
       {/* Lower Section */}
-      <div className="flex flex-col lg:flex-row gap-8">
+      <section className="flex flex-col lg:flex-row gap-8">
         {/* Left Text Section */}
         <Card className="flex-1 border-none shadow-none">
           <CardContent className="space-y-4">
-            <h1 className="text-3xl font-bold mb-2">Built for Success</h1>
+            <h2 className="text-3xl font-bold mb-2">Built for Success</h2>
             {cardSecond.map(({ icon, title, description }, index) => (
               <div key={index} className="space-y-1">
                 <CardTitle className="text-lg font-bold">
@@ -123,7 +123,7 @@ const PageContent = () => {
             </CardContent>
           </Card>
         </Card>
-      </div>
+      </section>
     </section>
   );
 };

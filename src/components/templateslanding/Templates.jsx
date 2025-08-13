@@ -9,22 +9,30 @@ const Templates = () => {
   const cards = [
     {
       img: "/classic.png",
+      width: 446,
+      height: 587,
       title: "Classic",
       description: "Perfect for senior professionals",
     },
     {
       img: "/minalmalist.png",
-      title: "Minalmalist",
+      width: 351,
+      height: 451,
+      title: "Minimalist",
       description: "Ideal for creative professionals",
     },
     {
       img: "/modern.png",
+      width: 446,
+      height: 587,
       title: "Modern",
       description: "Great for tech professionals",
     },
     {
       img: "/ModernSideBar.png",
-      title: "Mordern sidebar",
+      width: 351,
+      height: 451,
+      title: "Modern Sidebar",
       description: "Simple and professional",
     },
   ];
@@ -52,21 +60,21 @@ const Templates = () => {
       {/* Templates Section */}
       <section name="Templates" className="px-4 py-12">
         <Card className="max-w-screen-2xl mx-auto border-none shadow-none space-y-6">
-          <h1 className="text-4xl font-bold text-center">Templates</h1>
-          <h2 className="text-gray-600 text-lg text-center">
+          <h2 className="text-4xl font-bold text-center">Templates</h2>
+          <h3 className="text-gray-600 text-lg text-center">
             Choose from our collection of professionally designed, ATS-optimized
             resume templates.
-          </h2>
+          </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-            {cards.map(({ img, title, description }, index) => (
+            {cards.map(({ img, width, height, title, description }, index) => (
               <Card key={index} className="p-4">
                 <CardHeader>
                   <Image
                     src={img}
-                    width={288} // w-72 = 288px
-                    height={320} // h-80 = 320px
-                    className="rounded-lg"
+                    height={width}
+                    width={height}
+                    className="rounded-lg ob"
                     alt="resume images"
                   />{" "}
                 </CardHeader>
@@ -81,9 +89,9 @@ const Templates = () => {
       {/* All Templates Include Section */}
       <section className="px-4 py-12 ">
         <Card className="max-w-screen-lg mx-auto border-none shadow-none space-y-6">
-          <h1 className="text-2xl font-bold text-center">
+          <h2 className="text-2xl font-bold text-center">
             All Templates Include
-          </h1>
+          </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 bg-blue-100 dark:bg-black p-6 rounded-lg">
             {templates_includ.map(({ icon, title, description }, index) => (
@@ -100,7 +108,7 @@ const Templates = () => {
             ))}
           </div>
 
-          <div className="flex flex-col items-center space-y-4">
+          <section className="flex flex-col items-center space-y-4">
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-6 py-3 w-full sm:w-auto"
               onClick={() => {
@@ -109,10 +117,10 @@ const Templates = () => {
             >
               Create your Resume
             </Button>
-            <h1 className="text-center text-gray-600">
+            <h2 className="text-center text-gray-600">
               Start building your professional resume today
-            </h1>
-          </div>
+            </h2>
+          </section>
         </Card>
       </section>
     </>
