@@ -21,56 +21,62 @@ export default async function Image() {
           alignItems: "center",
           justifyContent: "center",
           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-          color: "white",
-          fontFamily: '"Inter", "Helvetica Neue", sans-serif',
+          fontFamily: "system-ui, sans-serif",
           position: "relative",
-          overflow: "hidden",
         }}
       >
-        {/* Background Pattern */}
+        {/* Background decorative circles */}
         <div
           style={{
             position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundImage: `
-              radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
-              radial-gradient(circle at 75% 75%, rgba(255,255,255,0.08) 0%, transparent 50%)
-            `,
+            top: "40px",
+            right: "60px",
+            width: "120px",
+            height: "120px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.1)",
+            display: "flex",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "60px",
+            left: "80px",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            background: "rgba(255,255,255,0.08)",
             display: "flex",
           }}
         />
 
-        {/* Main Content Container */}
+        {/* Main content */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            zIndex: 2,
             textAlign: "center",
-            padding: "60px",
+            color: "white",
+            zIndex: 2,
           }}
         >
-          {/* Logo with Icon */}
+          {/* Logo */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "16px",
-              marginBottom: "24px",
+              gap: "20px",
+              marginBottom: "30px",
             }}
           >
-            {/* CV Icon */}
             <div
               style={{
-                width: "64px",
-                height: "64px",
+                width: "60px",
+                height: "60px",
                 background: "rgba(255,255,255,0.2)",
-                borderRadius: "16px",
+                borderRadius: "12px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -79,56 +85,20 @@ export default async function Image() {
             >
               <div
                 style={{
-                  width: "32px",
-                  height: "40px",
-                  background: "white",
-                  borderRadius: "4px",
+                  fontSize: "28px",
+                  fontWeight: "bold",
+                  color: "white",
                   display: "flex",
-                  flexDirection: "column",
-                  padding: "4px",
-                  gap: "2px",
                 }}
               >
-                <div
-                  style={{
-                    height: "4px",
-                    background: "#667eea",
-                    borderRadius: "2px",
-                    width: "80%",
-                  }}
-                />
-                <div
-                  style={{
-                    height: "2px",
-                    background: "#667eea",
-                    borderRadius: "1px",
-                    width: "60%",
-                  }}
-                />
-                <div
-                  style={{
-                    height: "2px",
-                    background: "#667eea",
-                    borderRadius: "1px",
-                    width: "90%",
-                  }}
-                />
-                <div
-                  style={{
-                    height: "2px",
-                    background: "#667eea",
-                    borderRadius: "1px",
-                    width: "70%",
-                  }}
-                />
+                CV
               </div>
             </div>
-
             <div
               style={{
-                fontSize: "56px",
-                fontWeight: "800",
-                letterSpacing: "-2px",
+                fontSize: "48px",
+                fontWeight: "bold",
+                letterSpacing: "-1px",
                 display: "flex",
               }}
             >
@@ -136,17 +106,14 @@ export default async function Image() {
             </div>
           </div>
 
-          {/* Main Title */}
+          {/* Main title */}
           <div
             style={{
-              fontSize: "84px",
-              fontWeight: "900",
+              fontSize: "72px",
+              fontWeight: "bold",
               textAlign: "center",
               lineHeight: "1.1",
-              marginBottom: "16px",
-              background: "linear-gradient(45deg, #ffffff, #f0f8ff)",
-              backgroundClip: "text",
-              color: "transparent",
+              marginBottom: "20px",
               display: "flex",
             }}
           >
@@ -156,169 +123,120 @@ export default async function Image() {
           {/* Subtitle */}
           <div
             style={{
-              fontSize: "32px",
-              fontWeight: "400",
+              fontSize: "28px",
               textAlign: "center",
               opacity: 0.9,
-              marginBottom: "48px",
+              marginBottom: "50px",
               display: "flex",
             }}
           >
             Build professional resumes in minutes with AI
           </div>
 
-          {/* Feature Pills */}
+          {/* Feature badges */}
           <div
             style={{
               display: "flex",
-              gap: "16px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              marginBottom: "48px",
+              gap: "20px",
+              marginBottom: "40px",
             }}
           >
-            {["AI-Powered", "ATS-Friendly", "Multiple Templates"].map(
-              (feature, index) => (
-                <div
-                  key={index}
-                  style={{
-                    background: "rgba(255,255,255,0.2)",
-                    border: "1px solid rgba(255,255,255,0.3)",
-                    borderRadius: "32px",
-                    padding: "12px 24px",
-                    fontSize: "18px",
-                    fontWeight: "500",
-                    display: "flex",
-                    backdropFilter: "blur(10px)",
-                  }}
-                >
-                  {feature}
-                </div>
-              )
-            )}
+            <div
+              style={{
+                background: "rgba(255,255,255,0.2)",
+                borderRadius: "25px",
+                padding: "12px 24px",
+                fontSize: "16px",
+                fontWeight: "500",
+                display: "flex",
+                border: "1px solid rgba(255,255,255,0.3)",
+              }}
+            >
+              ✨ AI-Powered
+            </div>
+            <div
+              style={{
+                background: "rgba(255,255,255,0.2)",
+                borderRadius: "25px",
+                padding: "12px 24px",
+                fontSize: "16px",
+                fontWeight: "500",
+                display: "flex",
+                border: "1px solid rgba(255,255,255,0.3)",
+              }}
+            >
+              📄 ATS-Friendly
+            </div>
+            <div
+              style={{
+                background: "rgba(255,255,255,0.2)",
+                borderRadius: "25px",
+                padding: "12px 24px",
+                fontSize: "16px",
+                fontWeight: "500",
+                display: "flex",
+                border: "1px solid rgba(255,255,255,0.3)",
+              }}
+            >
+              🎨 Templates
+            </div>
           </div>
 
-          {/* Resume Preview Card */}
+          {/* Resume preview */}
           <div
             style={{
               background: "white",
-              width: "640px",
-              height: "240px",
-              borderRadius: "20px",
-              padding: "32px",
+              width: "600px",
+              height: "200px",
+              borderRadius: "16px",
+              padding: "30px",
               color: "#1f2937",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "space-between",
-              boxShadow:
-                "0 20px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.1)",
-              transform: "perspective(1000px) rotateX(5deg)",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
             }}
           >
-            {/* Header */}
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div
-                style={{
-                  fontSize: "32px",
-                  fontWeight: "700",
-                  color: "#1f2937",
-                  marginBottom: "4px",
-                  display: "flex",
-                }}
-              >
-                Sarah Johnson
-              </div>
-              <div
-                style={{
-                  fontSize: "20px",
-                  color: "#6b7280",
-                  marginBottom: "20px",
-                  display: "flex",
-                }}
-              >
-                Senior Software Engineer
-              </div>
-            </div>
-
-            {/* Content */}
             <div
               style={{
+                fontSize: "24px",
+                fontWeight: "bold",
+                marginBottom: "8px",
+                display: "flex",
+              }}
+            >
+              Sarah Johnson
+            </div>
+            <div
+              style={{
+                fontSize: "18px",
+                color: "#6b7280",
+                marginBottom: "20px",
+                display: "flex",
+              }}
+            >
+              Senior Software Engineer
+            </div>
+            <div
+              style={{
+                fontSize: "14px",
+                color: "#4b5563",
                 display: "flex",
                 flexDirection: "column",
                 gap: "8px",
-                fontSize: "16px",
-                color: "#4b5563",
-                lineHeight: "1.4",
               }}
             >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <div
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    background: "#667eea",
-                    borderRadius: "50%",
-                  }}
-                />
-                <span>8+ years building scalable web applications</span>
+              <div style={{ display: "flex" }}>
+                • 8+ years building scalable web applications
               </div>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <div
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    background: "#667eea",
-                    borderRadius: "50%",
-                  }}
-                />
-                <span>Expert in React, TypeScript, Node.js, and AWS</span>
+              <div style={{ display: "flex" }}>
+                • Expert in React, TypeScript, Node.js, and AWS
               </div>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <div
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    background: "#667eea",
-                    borderRadius: "50%",
-                  }}
-                />
-                <span>Led teams of 5+ developers on enterprise projects</span>
+              <div style={{ display: "flex" }}>
+                • Led teams of 5+ developers on enterprise projects
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Elements */}
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.1)",
-            display: "flex",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "20px",
-            width: "60px",
-            height: "60px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.08)",
-            display: "flex",
-          }}
-        />
       </div>
     ),
     size
