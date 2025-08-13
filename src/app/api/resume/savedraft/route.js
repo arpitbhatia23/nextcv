@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import authOptions from "../../auth/options";
 import User from "@/models/user.model";
+import { apiResponse } from "@/utils/apiResponse";
 const handler = async (req) => {
   const data = await req.json();
 
@@ -24,13 +25,12 @@ const handler = async (req) => {
     projects,
     ResumeType,
   } = data;
-
   if (
     [name, email, phone, address, jobRole, summary].some(
       (fileds) => fileds.trim() == ""
     )
   ) {
-    throw new apiError(401, "all field are required");
+    throw new apiError(400, "all field are required");
   }
 
   const session = await getServerSession(authOptions);
@@ -56,7 +56,7 @@ const handler = async (req) => {
     education,
     projects,
   });
-  if (draft) {
+  if (!draft) {
     throw new apiError(500, "something went wrong while creating");
   }
   const user = await User.findByIdAndUpdate(userId, {
@@ -69,8 +69,7 @@ const handler = async (req) => {
     throw new apiError(404, "user not found");
   }
 
-  console.log(draft);
-  return NextResponse(201, "draft gen sucessfully");
+  return NextResponse.json(new apiResponse(201, "draft gen sucessfully"));
 };
 
 export const POST = asyncHandler(handler);

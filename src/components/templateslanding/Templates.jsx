@@ -22,8 +22,11 @@ const Templates = () => {
       title: "Modern",
       description: "Great for tech professionals",
     },
-    { img: "/ModernSideBar.png", title: "Mordern sidebar", description: "Simple and professional" },
-    
+    {
+      img: "/ModernSideBar.png",
+      title: "Mordern sidebar",
+      description: "Simple and professional",
+    },
   ];
 
   const templates_includ = [
@@ -59,7 +62,13 @@ const Templates = () => {
             {cards.map(({ img, title, description }, index) => (
               <Card key={index} className="p-4">
                 <CardHeader>
-                  {<Image src={img} height={500} width={500} className="w-72 h-80" alt="resume images"/> }
+                  <Image
+                    src={img}
+                    width={288} // w-72 = 288px
+                    height={320} // h-80 = 320px
+                    className="rounded-lg"
+                    alt="resume images"
+                  />{" "}
                 </CardHeader>
                 <CardTitle className="font-bold">{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>

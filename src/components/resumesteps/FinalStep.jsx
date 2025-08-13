@@ -36,12 +36,14 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [discount, setDiscount] = useState(null);
   const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
 
-  const handleSaveDraft = () => {
-    const res = axios.post("/api/resume/savedraft", {
-      resumeType: selectedTemplate,
+  const handleSaveDraft = async () => {
+    const res = await axios.post("/api/resume/savedraft", {
+      ResumeType: selectedTemplate,
       ...formData,
     });
-    console.log(res);
+
+    console.log("result", res);
+
     if (res.data.success) {
       toast("saved draft sucessfully");
     } else {
