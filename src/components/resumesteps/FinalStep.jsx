@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,6 +22,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
+import { useDebouncedCallback } from "use-debounce";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -32,24 +33,45 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(100);
-  const [originalAmount] = useState(100); // Store original amount
+  const [originalAmount] = useState(100);
   const [discount, setDiscount] = useState(null);
-  const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  // Debounced handlers
+  const debouncePayment = useDebouncedCallback(() => {
+    handelPayment();
+  }, 1000);
+
+  const debounceDraft = useDebouncedCallback(() => {
+    handleSaveDraft();
+  }, 1000);
+
+  const debounceCoupon = useDebouncedCallback((coupon) => {
+    handleCoupon(coupon);
+  }, 1000);
 
   const handleSaveDraft = async () => {
-    const res = await axios.post("/api/resume/savedraft", {
-      ResumeType: selectedTemplate,
-      ...formData,
-    });
+    try {
+      setIsSubmit(true);
+      const res = await axios.post("/api/resume/savedraft", {
+        ResumeType: selectedTemplate,
+        ...formData,
+      });
 
-    console.log("result", res);
-
-    if (res.data.success) {
-      toast("saved draft sucessfully");
-    } else {
-      toast.error(res.data.message || "Failed to save draft");
+      if (res.data.success) {
+        toast("Saved draft successfully");
+      } else {
+        toast.error(res.data.message || "Failed to save draft");
+      }
+      setIsSubmit(false);
+    } catch (error) {
+      setIsSubmit(false);
+      console.log(error);
+      toast.error("Error saving draft");
     }
   };
+
   const removeCoupon = () => {
     setAmount(originalAmount);
     setDiscount(null);
@@ -58,12 +80,14 @@ const FinalStep = ({ formData, isdraft = false }) => {
     setAppliedCoupon(null);
     toast.info("Coupon removed");
   };
+
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
     let isMounted = true;
     pdfGen.createPdf().then((url) => {
       if (isMounted) setPdfUrl(url);
     });
+
     return () => {
       isMounted = false;
       pdfGen.cleanUp();
@@ -71,60 +95,66 @@ const FinalStep = ({ formData, isdraft = false }) => {
   }, [formData, selectedTemplate]);
 
   const handelPayment = async () => {
-    const amount = Math.floor(100 - discount?.value) * 100;
-    console.log(discount);
-    console.log(amount);
+    try {
+      setIsSubmit(true);
+      const payAmount =
+        discount?.type === "percentage"
+          ? Math.floor(originalAmount * (1 - discount.value / 100))
+          : discount?.type === "amount"
+          ? Math.max(originalAmount - discount.value, 0)
+          : originalAmount;
 
-    const res = await axios.post("/api/payment/order", {
-      amount,
-      ...formData,
-      ResumeType: selectedTemplate,
-    });
-    if (res.data.success) {
-      const { data } = res.data;
-      console.log(data);
-      const paymentUrl = data?.redirectUrl;
-      window.location.href = paymentUrl;
+      const res = await axios.post("/api/payment/order", {
+        amount: payAmount * 100, // assuming amount in paise
+        ...formData,
+        ResumeType: selectedTemplate,
+      });
+      if (res.data.success) {
+        const { data } = res.data;
+        const paymentUrl = data?.redirectUrl;
+        window.location.href = paymentUrl;
+      }
+      setIsSubmit(false);
+    } catch (error) {
+      setIsSubmit(false);
+      console.log(error);
+      toast.error("Payment error");
     }
   };
+
   const handleCoupon = async (coupon) => {
-    // Prevent applying the same coupon multiple times
     if (appliedCoupon === coupon) {
       toast.info("This coupon is already applied");
       return;
     }
-
+    setIsSubmit(true);
     try {
       const res = await axios.post(`/api/coupons/getByCouponCode`, {
         couponCode: coupon,
       });
 
       const couponData = res.data.data;
-
-      // Store discount info
       const discountInfo = {
         type: couponData.type,
         value: couponData.discount,
       };
       setDiscount(discountInfo);
 
-      // Calculate final amount from original amount
       let finalAmount = originalAmount;
-
       if (discountInfo.type === "percentage") {
         finalAmount = originalAmount * (1 - discountInfo.value / 100);
       } else if (discountInfo.type === "amount") {
         finalAmount = originalAmount - discountInfo.value;
       }
-
-      // Ensure minimum price is not negative
       finalAmount = Math.max(finalAmount, 0);
       setAmount(finalAmount);
 
       setApplied(true);
       setAppliedCoupon(coupon);
       toast.success("Coupon applied successfully");
+      setIsSubmit(false);
     } catch (error) {
+      setIsSubmit(false);
       console.error("Coupon apply error:", error);
       toast.error(
         error?.response?.data || "Something went wrong while applying coupon"
@@ -135,7 +165,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   return (
     <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
       {/* Mobile Layout */}
-      <div className="w-full  flex flex-col gap-4 md:hidden">
+      <div className="w-full flex flex-col gap-4 md:hidden">
         {/* Template Picker */}
         {!isdraft && (
           <Card>
@@ -178,7 +208,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
                   {Array.from({ length: numPages || 0 }).map((_, idx) => (
                     <div key={idx}>
                       <Page pageNumber={idx + 1} width={400} />
-                      {/* Insert divider after each page except the last */}
                       {idx < (numPages || 1) - 1 && (
                         <div
                           style={{
@@ -198,7 +227,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
         </Card>
 
         {/* Coupon + Payment Section */}
-        {/* Coupon + Payment Section */}
         <Card>
           <CardContent className="space-y-4">
             <div className="p-8">
@@ -217,13 +245,17 @@ const FinalStep = ({ formData, isdraft = false }) => {
                   />
                   {!applied ? (
                     <Button
-                      onClick={() => handleCoupon(couponCode)}
-                      disabled={!couponCode.trim()}
+                      onClick={() => debounceCoupon(couponCode)}
+                      disabled={!couponCode.trim() || isSubmit}
                     >
                       Apply
                     </Button>
                   ) : (
-                    <Button variant="outline" onClick={removeCoupon}>
+                    <Button
+                      variant="outline"
+                      onClick={removeCoupon}
+                      disabled={isSubmit}
+                    >
                       Remove
                     </Button>
                   )}
@@ -252,10 +284,20 @@ const FinalStep = ({ formData, isdraft = false }) => {
 
                 <Button
                   className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                  onClick={() => handelPayment()}
+                  onClick={debouncePayment}
+                  disabled={isSubmit}
                 >
                   <IndianRupee className="mr-2 h-4 w-4" />
                   Proceed to Pay ₹{amount}
+                </Button>
+                <Button
+                  className="w-full mt-2 bg-white text-indigo-600 border border-indigo-200"
+                  onClick={debounceDraft}
+                  disabled={isSubmit}
+                  type="button"
+                >
+                  <Save className="mr-2 h-4 w-4" />
+                  Save as Draft
                 </Button>
               </CardContent>
             </div>
@@ -264,7 +306,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:flex w-full  ">
+      <div className="hidden md:flex w-full">
         <ResizablePanelGroup
           direction="horizontal"
           className="rounded-lg border bg-white shadow-md w-full"
@@ -297,6 +339,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                             : ""
                         }`}
                         onClick={() => setSelectedTemplate(template.key)}
+                        disabled={isSubmit}
                       >
                         {template.label}
                       </Button>
@@ -305,8 +348,11 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 </Card>
                 <Button
                   variant="outline"
-                  className="w-full mt-4 flex items-center justify-center gap-2"
-                  onClick={handleSaveDraft}
+                  className={
+                    "bg-white w-full mt-4 flex items-center justify-center gap-2"
+                  }
+                  disabled={isSubmit}
+                  onClick={debounceDraft}
                   type="button"
                 >
                   <Save className="h-4 w-4" />
@@ -326,7 +372,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                   <CardTitle className="text-lg">Resume Preview</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex justify-center   overflow-x-auto">
+                  <div className="flex justify-center overflow-x-auto">
                     {pdfUrl ? (
                       <Document
                         file={pdfUrl}
@@ -335,7 +381,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
                         {Array.from({ length: numPages || 0 }).map((_, idx) => (
                           <div key={idx}>
                             <Page pageNumber={idx + 1} width={400} />
-                            {/* Insert divider after each page except the last */}
                             {idx < (numPages || 1) - 1 && (
                               <div
                                 style={{
@@ -372,13 +417,17 @@ const FinalStep = ({ formData, isdraft = false }) => {
                         />
                         {!applied ? (
                           <Button
-                            onClick={() => handleCoupon(couponCode)}
-                            disabled={!couponCode.trim()}
+                            onClick={() => debounceCoupon(couponCode)}
+                            disabled={!couponCode.trim() || isSubmit}
                           >
                             Apply
                           </Button>
                         ) : (
-                          <Button variant="outline" onClick={removeCoupon}>
+                          <Button
+                            variant="outline"
+                            onClick={removeCoupon}
+                            disabled={isSubmit}
+                          >
                             Remove
                           </Button>
                         )}
@@ -407,7 +456,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
 
                       <Button
                         className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-                        onClick={() => handelPayment()}
+                        onClick={debouncePayment}
+                        disabled={isSubmit}
                       >
                         <IndianRupee className="mr-2 h-4 w-4" />
                         Proceed to Pay ₹{amount}
