@@ -109,7 +109,7 @@ const handler = async (req) => {
 
   const request = StandardCheckoutPayRequest.builder()
     .merchantOrderId(merchantOrderId)
-    .amount(amount)
+    .amount(Math.round(amount))
     .redirectUrl(redirectUrl)
     .build();
 
@@ -119,4 +119,5 @@ const handler = async (req) => {
 };
 
 export const POST = asyncHandler(handler);
+
 
