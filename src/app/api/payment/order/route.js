@@ -16,7 +16,7 @@ import User from "@/models/user.model";
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = Env.PRODUCTION
+const env = Env.PRODUCTION;
 const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,
@@ -53,7 +53,7 @@ const handler = async (req) => {
   }
   const userId = session.user._id;
   let resumeId = null;
-
+  console.log(Math.round(amount));
   if (isDraft) {
     if (!draftId) {
       throw new apiError(400, "Draft id is required");
@@ -119,5 +119,3 @@ const handler = async (req) => {
 };
 
 export const POST = asyncHandler(handler);
-
-

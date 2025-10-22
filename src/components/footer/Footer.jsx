@@ -1,3 +1,4 @@
+// ...existing code...
 "use client";
 import React from "react";
 import Logo2 from "../Logo2";
@@ -83,6 +84,31 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Contact Details */}
+          <div>
+            <h2 className="font-semibold mb-3">Contact</h2>
+            <ul className="space-y-2 text-gray-200">
+              <li>
+                <a
+                  href="mailto:aurpitaurpit@gmail.com"
+                  className="hover:underline"
+                  aria-label="Email aurpitaurpit@gmail.com"
+                >
+                  aurpitaurpit@gmail.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+918628047655"
+                  className="hover:underline"
+                  aria-label="Call 8628047655"
+                >
+                  +91 86280 47655
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -109,7 +135,7 @@ export const Footer = () => {
         <p>© 2024 Next CV. All rights reserved.</p>
         <div className="flex items-center gap-2">
           <span>Made with</span> <span className="text-red-500">❤️</span>
-          <span>by Aurpit & Tamanna</span>
+          <span>by ARPIT SO SH RAJESH KUMAR & Tamanna</span>
         </div>
         <div className="flex space-x-4">
           {renderFooterLink({
@@ -122,3 +148,4 @@ export const Footer = () => {
     </footer>
   );
 };
+// ...existing code...
