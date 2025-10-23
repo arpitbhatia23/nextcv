@@ -1,4 +1,3 @@
-// ...existing code...
 "use client";
 import React from "react";
 import Logo2 from "../Logo2";
@@ -148,4 +147,3 @@ export const Footer = () => {
     </footer>
   );
 };
-// ...existing code...

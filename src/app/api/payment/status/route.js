@@ -22,9 +22,10 @@ const handler = async (req) => {
   const merchantOrderId = searchParams.get("merchantId");
   const resumeID = searchParams.get("resumeId");
   const response = await client.getTransactionStatus(merchantOrderId);
-  // console.log("response", response);
+  console.log("response", response);
 
   if (response.state === "COMPLETED") {
+    console.log("payment insitate");
     const payment = await Payment.create({
       transcationId: response?.paymentDetails[0]?.transactionId,
       paymentMode: response?.paymentDetails[0]?.paymentMode,
@@ -62,4 +63,3 @@ const handler = async (req) => {
 
 export const GET = asyncHandler(handler);
 export const POST = asyncHandler(handler);
-
