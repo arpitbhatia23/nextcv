@@ -21,7 +21,7 @@ const handler = async (req) => {
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
   const resumeID = searchParams.get("resumeId");
-  const response = await client.getTransactionStatus(merchantOrderId);
+  const response = await client.getOrderStatus(merchantOrderId);
   console.log("response", response);
 
   if (response.state === "COMPLETED") {
