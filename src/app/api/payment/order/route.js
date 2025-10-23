@@ -53,7 +53,6 @@ const handler = async (req) => {
   }
   const userId = session.user._id;
   let resumeId = null;
-  console.log(Math.round(amount));
   if (isDraft) {
     if (!draftId) {
       throw new apiError(400, "Draft id is required");
