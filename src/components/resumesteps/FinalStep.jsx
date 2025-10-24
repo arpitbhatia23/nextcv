@@ -140,14 +140,15 @@ const FinalStep = ({ formData, isdraft = false }) => {
       };
       setDiscount(discountInfo);
 
-      let finalAmount = originalAmount;
+      let finalAmount = Math.round(originalAmount);
+      console.log(finalAmount);
       if (discountInfo.type === "percentage") {
         finalAmount = originalAmount * (1 - discountInfo.value / 100);
       } else if (discountInfo.type === "amount") {
         finalAmount = originalAmount - discountInfo.value;
       }
       finalAmount = Math.max(finalAmount, 0);
-      setAmount(finalAmount);
+      setAmount(Math.round(finalAmount));
 
       setApplied(true);
       setAppliedCoupon(coupon);

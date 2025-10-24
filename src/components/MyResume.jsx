@@ -74,7 +74,6 @@ const MyResume = () => {
       MinimalistTemplate: "Minimalist",
       MordenBluesidebar: "Modern Blue Sidebar",
       ModernFullStack: "Modern Full Stack",
-      Businessanlayist: "Business Analyst",
     };
     return templateNames[templateKey] || templateKey;
   };
@@ -131,7 +130,7 @@ const MyResume = () => {
       setDiscount(discountInfo);
 
       // Calculate final amount from original amount
-      let finalAmount = originalAmount;
+      let finalAmount = Math.round(originalAmount);
 
       if (discountInfo.type === "percentage") {
         finalAmount = originalAmount * (1 - discountInfo.value / 100);
@@ -141,7 +140,7 @@ const MyResume = () => {
 
       // Ensure minimum price is not negative
       finalAmount = Math.max(finalAmount, 0);
-      setAmount(finalAmount);
+      setAmount(Math.round(finalAmount));
 
       setApplied(true);
       setAppliedCoupon(coupon);

@@ -30,9 +30,4 @@ export const templates = [
     label: "MordenFullStack",
     component: ModernPDFResumeTemplate,
   },
-  {
-    key: "Businessanlayist",
-    label: "BusinessAnalyst",
-    component: CleanBusinessAnalystPDFResume,
-  },
 ];
