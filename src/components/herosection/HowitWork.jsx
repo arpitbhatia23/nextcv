@@ -32,7 +32,7 @@ function HowitWork() {
 
   return (
     <>
-      <section name="HowItWork" className="px-4 py-12">
+      <section name="How It Works" className="px-4 py-12">
         <Card className="max-w-screen-lg mx-auto border-none shadow-none space-y-8">
           {/* Heading */}
           <div className="text-center space-y-4">
