@@ -134,7 +134,7 @@ export const Footer = () => {
         <p>© 2024 Next CV. All rights reserved.</p>
         <div className="flex items-center gap-2">
           <span>Made with</span> <span className="text-red-500">❤️</span>
-          <span>by ARPIT SO SH RAJESH KUMAR & Tamanna</span>
+          <span>by Aurpit & Tamanna</span>
         </div>
         <div className="flex space-x-4">
           {renderFooterLink({
