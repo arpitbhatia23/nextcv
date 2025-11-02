@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.nextcv.in/sitemap.xml
-lear
