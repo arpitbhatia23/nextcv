@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://nextcv-two.vercel.app/sitemap.xml
+Sitemap: https://www.nextcv.in/sitemap.xml
+lear
