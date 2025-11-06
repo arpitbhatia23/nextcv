@@ -8,28 +8,28 @@ import Image from "next/image";
 const Templates = () => {
   const cards = [
     {
-      img: "/classic.png",
+      img: "/classic.webp",
       width: 446,
       height: 587,
       title: "Classic",
       description: "Perfect for senior professionals",
     },
     {
-      img: "/minalmalist.png",
+      img: "/minalmalist.webp",
       width: 351,
       height: 451,
       title: "Minimalist",
       description: "Ideal for creative professionals",
     },
     {
-      img: "/modern.png",
+      img: "/modern.webp",
       width: 446,
       height: 587,
       title: "Modern",
       description: "Great for tech professionals",
     },
     {
-      img: "/ModernSideBar.png",
+      img: "/ModernSideBar.webp",
       width: 351,
       height: 451,
       title: "Modern Sidebar",
@@ -76,6 +76,7 @@ const Templates = () => {
                     width={height}
                     className="rounded-lg ob"
                     alt="resume images"
+                    loading="lazy"
                   />{" "}
                 </CardHeader>
                 <CardTitle className="font-bold">{title}</CardTitle>

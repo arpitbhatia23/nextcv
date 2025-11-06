@@ -24,7 +24,7 @@ function AnimatedHeroSection() {
       width: 446,
       height: 587,
       textColor: "text-white",
-      img: "/modern.png",
+      img: "/modern.webp",
     },
     {
       name: "Minimalist",
@@ -32,7 +32,7 @@ function AnimatedHeroSection() {
       width: 351,
       height: 451,
       textColor: "text-white",
-      img: "/minalmalist.png",
+      img: "/minalmalist.webp",
     },
     {
       name: "Classic",
@@ -40,7 +40,7 @@ function AnimatedHeroSection() {
       width: 446,
       height: 587,
       textColor: "text-white",
-      img: "/classic.png",
+      img: "/classic.webp",
     },
     {
       name: "Tech Specialist",
@@ -48,7 +48,7 @@ function AnimatedHeroSection() {
       height: 451,
       color: "from-orange-500 to-red-600",
       textColor: "text-white",
-      img: "/ModernSideBar.png",
+      img: "/ModernSideBar.webp",
     },
   ];
 
@@ -102,7 +102,7 @@ function AnimatedHeroSection() {
         className={`w-72 h-96 rounded-2xl bg-gradient-to-br ${mockup.color} p-2 shadow-2xl relative overflow-hidden`}
       >
         <Image
-          src={mockup?.img}
+          src={mockup.img}
           height={mockup.height}
           width={mockup.width}
           alt="resume template"
