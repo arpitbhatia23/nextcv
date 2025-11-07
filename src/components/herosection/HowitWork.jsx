@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import ProcessWorks from "../processWorks/ProcessWorks";
 
 function HowitWork() {
   const works = [

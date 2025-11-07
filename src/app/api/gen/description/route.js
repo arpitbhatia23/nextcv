@@ -2,8 +2,6 @@ import apiError from "@/utils/apiError";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
 import { ResumeGenerator } from "@/utils/resumeDescriptionGenereation";
-import { createVertex } from "@ai-sdk/google-vertex";
-import { streamText } from "ai";
 import { NextResponse } from "next/server";
 
 export const maxDuration = 30;

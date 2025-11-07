@@ -1,5 +1,3 @@
-"use client";
-
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useEffect, useId, useRef, useState } from "react";
 import { Card } from "../ui/card";

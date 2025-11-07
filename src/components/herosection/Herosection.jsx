@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect } from "react";
 import {
   ChevronRight,
@@ -107,6 +106,7 @@ function AnimatedHeroSection() {
           width={mockup.width}
           alt="resume template"
           className="rounded-lg object-cover"
+          priority
         />
         <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-2xl blur-sm opacity-50 pointer-events-none" />
       </div>
