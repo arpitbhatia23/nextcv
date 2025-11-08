@@ -77,7 +77,7 @@ function AnimatedHeroSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentMockup((prev) => (prev + 1) % resumeMockups.length);
-    }, 3000);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
@@ -91,7 +91,7 @@ function AnimatedHeroSection() {
 
   const ResumeMockup = ({ mockup, isActive }) => (
     <section
-      className={`relative transform transition-all duration-1000 ${
+      className={`hidden sm:block relative transform transition-all duration-1000 ${
         isActive
           ? "scale-100 opacity-100 rotate-0"
           : "scale-95 opacity-60 rotate-3"
@@ -106,7 +106,8 @@ function AnimatedHeroSection() {
           width={mockup.width}
           alt="resume template"
           className="rounded-lg object-cover"
-          priority
+          sizes="(max-width: 640px) 160px, (max-width: 1024px) 280px, 446px"
+          priority={false}
         />
         <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-transparent rounded-2xl blur-sm opacity-50 pointer-events-none" />
       </div>
@@ -194,7 +195,7 @@ function AnimatedHeroSection() {
           </div>
 
           {/* Right Content */}
-          <div className="relative flex justify-center lg:justify-center -z-10">
+          <div className="hidden  relative sm:flex justify-center lg:justify-center -z-10">
             <div className="relative">
               <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl animate-pulse pointer-events-none z-0" />
               <div className="relative -z-10 flex items-center justify-center min-h-[500px]">
