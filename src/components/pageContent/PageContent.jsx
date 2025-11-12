@@ -1,6 +1,5 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
+// import Counter from "./counter";
 import {
   Card,
   CardContent,
@@ -10,17 +9,6 @@ import {
 } from "../ui/card";
 
 const PageContent = () => {
-  const [count, setCount] = useState(1);
-
-  useEffect(() => {
-    if (count < 95) {
-      const timer = setTimeout(() => {
-        setCount((prev) => prev + 1);
-      }, 30);
-      return () => clearTimeout(timer);
-    }
-  }, [count]);
-
   const card_detail = [
     {
       icon: "⚡",
@@ -70,13 +58,11 @@ const PageContent = () => {
     <section className="px-4 py-12 max-w-7xl mx-auto">
       {/* Heading */}
       <Card className="items-center text-center border-none shadow-none mb-10">
-        <h2 className="text-4xl font-bold">{count}%</h2>
         <p className="text-xl text-gray-800 mt-2">
           Experience the future of resume building with our AI-powered platform
           designed for modern job seekers.
         </p>
       </Card>
-
       {/* Features Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         {card_detail.map(({ icon, title, description }, index) => (

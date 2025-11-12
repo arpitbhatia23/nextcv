@@ -34,7 +34,7 @@ export default function Nav() {
   };
 
   return (
-    <nav className="w-full bg-white dark:bg-black px-4 py-1 shadow-md fixed z-10">
+    <nav className="w-full bg-white dark:bg-black px-4 py-1 shadow-md fixed z-50">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* Logo */}
         <div className="text-2xl font-bold text-pink-purple-gradient">
@@ -42,8 +42,8 @@ export default function Nav() {
         </div>
 
         {/* Hamburger (Mobile) */}
-        <div className="flex md:hidden">
-          <button onClick={() => setMenuOpen(!menuOpen)}>
+        <div className="flex md:hidden" aria-label="hambuger">
+          <button onClick={() => setMenuOpen(!menuOpen)} aria-label="hambuger">
             {menuOpen ? (
               <X className="w-6 h-6" />
             ) : (
