@@ -8,11 +8,11 @@ const withBundle = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
 
-  experimental: {
-    optimizeCss: true, // ✅ merge CSS chunks → faster LCP
-    esmExternals: true, // ✅ prevents legacy JavaScript polyfills
-    serverActions: { allowedOrigins: ["*"] },
-  },
+  // experimental: {
+  //   optimizeCss: true, // ✅ merge CSS chunks → faster LCP
+  //   esmExternals: true, // ✅ prevents legacy JavaScript polyfills
+  //   serverActions: { allowedOrigins: ["*"] },
+  // },
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

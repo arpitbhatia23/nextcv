@@ -90,11 +90,11 @@ export const Footer = () => {
             <ul className="space-y-2 text-gray-200">
               <li>
                 <a
-                  href="mailto:aurpitaurpit@gmail.com"
+                  href="mailto:help@nextcv.in"
                   className="hover:underline"
-                  aria-label="Email aurpitaurpit@gmail.com"
+                  aria-label="Email help@nextcv.in"
                 >
-                  aurpitaurpit@gmail.com
+                  help@nextcv.in
                 </a>
               </li>
               <li>

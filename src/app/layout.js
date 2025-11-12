@@ -3,6 +3,8 @@ import "./globals.css";
 import AuthProvider from "@/context/authprovider";
 import { Toaster } from "@/components/ui/sonner";
 import GoogleAnalytics from "./anlatyics";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,26 +20,49 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
+export const metadata = {
+  title: "NextCV - AI Resume Builder",
+  description:
+    "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+  keywords: [
+    "resume builder",
+    "CV maker",
+    "AI resume",
+    "job application",
+    "professional resume",
+  ],
+  authors: [{ name: "NextCV" }],
+  robots: "index, follow",
+
+  // ⚡ Fix for Open Graph / Twitter images
+  metadataBase: new URL("https://nextcv.in"), // replace with your production URL
+  openGraph: {
+    title: "NextCV - AI Resume Builder",
+    description:
+      "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+    url: "/", // optional, relative to metadataBase
+    type: "website",
+    images: ["/opengraph-image.png"], // relative path will resolve correctly
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NextCV - AI Resume Builder",
+    description:
+      "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+    images: ["/opengraph-image.png"], // relative path
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        {" "}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
           <Toaster />
-          <GoogleAnalytics strategy="lazyOnload" />
+          <GoogleAnalytics />
         </AuthProvider>
       </body>
     </html>
