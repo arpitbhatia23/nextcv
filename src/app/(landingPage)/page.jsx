@@ -5,9 +5,8 @@ import dynamic from "next/dynamic";
 import { Element } from "react-scroll";
 
 // Dynamic imports (ssr: false for client-only rendering)
-const Herosection = dynamic(
-  () => import("@/components/herosection/Herosection"),
-  { ssr: false }
+const Herosection = dynamic(() =>
+  import("@/components/herosection/Herosection")
 );
 const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
 const Templates = dynamic(() =>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BasicInfoStep from "./resumesteps/BasicInfoStep";
 import SummaryStep from "./resumesteps/SummaryStep";
 import EducationStep from "./resumesteps/EducationStep";
@@ -13,7 +13,6 @@ import { Progress } from "./ui/progress";
 import {
   Briefcase,
   CheckCircle,
-  ClockFading,
   Code,
   FileText,
   GraduationCap,
@@ -21,8 +20,6 @@ import {
   User,
 } from "lucide-react";
 import Logo2 from "./Logo2";
-import { useSearchParams } from "next/navigation";
-import axios from "axios";
 
 const Resume = () => {
   const [step, setStep] = useState(0);
