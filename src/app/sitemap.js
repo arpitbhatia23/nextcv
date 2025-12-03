@@ -8,16 +8,14 @@ export default async function sitemap() {
     { url: `${baseUrl}/`, priority: 1.0 },
     { url: `${baseUrl}/privacyPolicy`, priority: 1.0 },
     { url: `${baseUrl}/terms`, priority: 1.0 },
-    { url: `${baseUrl}/dashboard`, priority: 0.9 },
-    { url: `${baseUrl}/dashboard/my-resume`, priority: 0.7 },
-    { url: `${baseUrl}/dashboard/resumeform`, priority: 0.7 },
+    { url: `${baseUrl}/blogs`, priority: 0.9 },
   ];
 
   // Return in Next.js sitemap format
   return pages.map((page) => ({
     url: page.url,
     lastModified: new Date(),
-    changeFrequency: "monthly",
+    changeFrequency: "daily",
     priority: page.priority,
   }));
 }

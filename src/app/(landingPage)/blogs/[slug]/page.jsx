@@ -41,11 +41,11 @@ export async function generateMetadata({ params }) {
     title: data.title,
     description: description,
     keywords: [
-      "logistics",
-      "supply chain",
-      "freight",
-      "shipping",
-      "transportation",
+      "resume builder",
+      "CV maker",
+      "AI resume",
+      "job application",
+      "professional resume",
     ],
     openGraph: {
       title: data.title,
