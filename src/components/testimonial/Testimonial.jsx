@@ -104,18 +104,13 @@ export default function TestimonialCarousel() {
       name="Testimonial"
       className="bg-white py-12 overflow-hidden w-full dark:bg-black"
     >
-      {/* Header */}
-      <div className="text-center">
-        <AnimatedCounter
-          to={1000}
-          className="text-4xl font-bold text-gray-800 dark:text-white"
-          format={(val) =>
-            val >= 1000 ? `${Math.round(val / 100) / 10}K` : val
-          }
-        />{" "}
-        <p className="text-lg text-gray-600 mt-2 dark:text-gray-300">
-          Join thousands of satisfied users who landed their dream jobs with
-          Next CV.
+      {/* Header with Keyword */}
+      <div className="text-center mb-10 px-4 max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+          Stop Guessing. Start Getting Interviews.
+        </h1>
+        <p className="text-xl text-indigo-600 dark:text-indigo-400 font-semibold">
+          Create an ATS friendly resume in minutes with our AI-powered builder.
         </p>
       </div>
 
@@ -149,7 +144,7 @@ export default function TestimonialCarousel() {
       </div>
 
       {/* Stats Section */}
-      <Card className="bg-gray-50 rounded-xl p-8 mt-10">
+      <Card className="bg-gray-50 rounded-xl p-8 mt-10  max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto">
         <div className="flex justify-center gap-16 flex-wrap">
           {stats.map(({ number, title, color }) => (
             <div key={title} className="text-center">
@@ -159,7 +154,7 @@ export default function TestimonialCarousel() {
           ))}
         </div>
 
-        <Card className="bg-amber-700 rounded-3xl mx-auto px-6 py-4 text-white font-bold text-center w-full max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-lg">
+        <Card className="bg-amber-700 rounded-3xl mx-auto px-6 py-4 text-white font-bold text-center w-full max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-lg mt-8">
           <h2>🔥 Limited Time: Get started for just ₹100 - No hidden fees!</h2>
         </Card>
       </Card>

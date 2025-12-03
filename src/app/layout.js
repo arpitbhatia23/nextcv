@@ -37,18 +37,18 @@ export const metadata = {
   // ⚡ Fix for Open Graph / Twitter images
   metadataBase: new URL("https://nextcv.in"), // replace with your production URL
   openGraph: {
-    title: "NextCV - AI Resume Builder",
+    title: "NextCV -Build the Perfect ATS Friendly Resume with AI in Minutes",
     description:
-      "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+      "Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.",
     url: "/", // optional, relative to metadataBase
     type: "website",
     images: ["/opengraph-image.png"], // relative path will resolve correctly
   },
   twitter: {
     card: "summary_large_image",
-    title: "NextCV - AI Resume Builder",
+    title: "NextCV - Build the Perfect ATS Friendly Resume with AI in Minutes",
     description:
-      "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+      "Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.",
     images: ["/opengraph-image.png"], // relative path
   },
 };

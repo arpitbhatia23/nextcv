@@ -5,9 +5,9 @@ import { Suspense } from "react";
 import Loading from "../loading";
 
 export const metadata = {
-  title: "NextCV - AI Resume Builder",
+  title: "NextCV -Build the Perfect ATS Friendly Resume with AI in Minutes",
   description:
-    "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+    "Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.",
 };
 
 export default function RootLayout({ children }) {

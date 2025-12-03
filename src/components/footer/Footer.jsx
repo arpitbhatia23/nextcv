@@ -35,19 +35,33 @@ export const Footer = () => {
     });
   };
 
+  // UPDATED footerLinks with Home and Blogs
   const footerLinks = [
+    {
+      label: "Home",
+      // This handles smooth scrolling only on the landing page,
+      // or a navigation if the user is elsewhere.
+      action: () => (isLandingPage ? scrollTo("Hero") : null),
+      route: "/",
+    },
+    { label: "Blogs", route: "/blogs" }, // Added Blogs link
     { label: "Privacy Policy", route: "/privacyPolicy" },
     { label: "Terms of Service", route: "/terms" },
   ];
 
   const renderFooterLink = (item) => {
-    if (item.id) {
+    // If the link has an action (like Home/scroll to top), handle it
+    if (item.action && isLandingPage) {
       return (
-        <Link href={`/${item.id}`} className="hover:underline">
+        <button
+          onClick={item.action}
+          className="hover:underline text-left w-full"
+        >
           {item.label}
-        </Link>
+        </button>
       );
     }
+    // Standard Link
     return (
       <Link href={item.route} className="hover:underline">
         {item.label}
@@ -61,8 +75,9 @@ export const Footer = () => {
       <div className="flex flex-col md:flex-row justify-around gap-8">
         <div className="space-y-4 max-w-md">
           <Logo2 className="text-white" color="white" size={100} />
+          {/* Keyword Addition */}
           <p className="text-gray-200">
-            Build professional, ATS-optimized resumes with AI in minutes. Join
+            Build professional, ATS friendly resume with AI in minutes. Join
             thousands of successful job seekers who landed their dream jobs with
             Next CV.
           </p>
