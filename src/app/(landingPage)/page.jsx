@@ -5,21 +5,21 @@ import dynamic from "next/dynamic";
 import { Element } from "react-scroll";
 
 // Dynamic imports (ssr: false for client-only rendering)
-const Herosection = dynamic(() =>
-  import("@/components/herosection/Herosection")
+const Herosection = dynamic(
+  () => import("@/components/herosection/Herosection")
 );
 const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
-const Templates = dynamic(() =>
-  import("@/components/templateslanding/Templates")
+const Templates = dynamic(
+  () => import("@/components/templateslanding/Templates")
 );
-const ProcessWorks = dynamic(() =>
-  import("@/components/processWorks/ProcessWorks")
+const ProcessWorks = dynamic(
+  () => import("@/components/processWorks/ProcessWorks")
 );
-const Testimonial = dynamic(() =>
-  import("@/components/testimonial/Testimonial")
+const Testimonial = dynamic(
+  () => import("@/components/testimonial/Testimonial")
 );
-const PageContent = dynamic(() =>
-  import("@/components/pageContent/PageContent")
+const PageContent = dynamic(
+  () => import("@/components/pageContent/PageContent")
 );
 
 export default function Home() {

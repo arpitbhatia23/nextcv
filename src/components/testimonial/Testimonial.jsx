@@ -106,9 +106,9 @@ export default function TestimonialCarousel() {
     >
       {/* Header with Keyword */}
       <div className="text-center mb-10 px-4 max-w-4xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
           Stop Guessing. Start Getting Interviews.
-        </h1>
+        </h2>
         <p className="text-xl text-indigo-600 dark:text-indigo-400 font-semibold">
           Create an ATS friendly resume in minutes with our AI-powered builder.
         </p>

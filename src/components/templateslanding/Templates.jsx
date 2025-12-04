@@ -153,7 +153,7 @@ const Templates = () => {
                 }
               >
                 <div className="text-4xl mb-2">{icon}</div>
-                <h4 className="text-xl font-extrabold mb-1">{title}</h4>
+                <p className="text-xl font-extrabold mb-1">{title}</p>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
                   {description}
                 </p>
