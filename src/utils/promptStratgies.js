@@ -1,41 +1,113 @@
+import { date } from "zod";
+
 const PromptStrategies = {
   education: ({
     degree = "",
-    institute = "",
-    duration = "",
-    subjects = [],
-    achievements = "",
-  }) => {
-    `
-    Write 2-3 professional bullet points for the following education:
-    Degree: ${degree}
-    Institute: ${institute}
-    Duration: ${duration}
-    Key Subjects: ${subjects.join(", ")}
-    Achievements: ${achievements}
-    Output should be in array format like ["...", "..."]`;
-  },
+    institution = "",
+    startYear = "",
+    endYear = "",
+    grade = "",
+  }) => `
+Generate 2–3 resume bullet points ONLY.
 
-  project: ({ title = "", techStack = [], features = [], role = "" }) => `
-Write 2-3 bullet points for the following project for resume use:
+STRICT RULES:
+- Output ONLY bullet points
+- NO introduction sentence
+- NO headings or labels
+- NO explanations
+- NO markdown
+- NO JSON or arrays
+- Each line MUST start with "•"
+- If anything else is added, the response is INVALID
+
+Education details:
+Degree: ${degree}
+Institution: ${institution}
+Duration: ${startYear} – ${endYear}
+Grade: ${grade}
+
+Example format:
+• Completed coursework in ...
+• Achieved ...
+`,
+
+  project: ({
+    title = "",
+    technologiesOrTopics = [],
+    features = [],
+    role = "",
+  }) => `
+Generate 2–3 resume bullet points ONLY.
+
+STRICT RULES:
+- Output ONLY bullet points
+- NO introduction sentence
+- NO headings or labels
+- NO explanations
+- NO markdown
+- NO JSON or arrays
+- Each line MUST start with "•"
+- If anything else is added, the response is INVALID
+
+Project details:
 Title: ${title}
-Tech Stack: ${techStack.join(", ")}
-Features: ${features.join(", ")}
+Tech Stack: ${technologiesOrTopics}
+Key Features: ${features}
 Role: ${role}
-Output should be in array format like ["...", "..."]`,
+
+Example format:
+• Built ...
+• Implemented ...
+`,
 
   experience: ({
-    role = "",
-    company = "",
-    duration = "",
+    position = "",
+    companyName = "",
+    startDate = "",
+    endDate,
     work = [],
     tools = [],
   }) => `
-Write 2-3 resume bullet points for the following job experience:
-Role: ${role}
-Company: ${company}
-Duration: ${duration}
-Work: ${work.join(", ")}
-Tools: ${tools.join(", ")}
-Output should be in array format like ["...", "..."]`,
+Generate 2–3 resume bullet points ONLY.
+
+STRICT RULES:
+- Output ONLY bullet points
+- NO introduction sentence
+- NO headings or labels
+- NO explanations
+- NO markdown
+- NO JSON or arrays
+- Each line MUST start with "•"
+- If anything else is added, the response is INVALID
+
+Experience details:
+Role: ${position}
+Company: ${companyName}
+Duration: ${(startDate, "-", endDate)}
+Responsibilities: ${work}
+Tools & Technologies: ${tools}
+
+Example format:
+• Led ...
+• Improved ...
+`,
+
+  summary: ({ role = "", education = "", experience = "" }) => `
+Generate a professional resume summary in PLAIN TEXT.
+
+STRICT RULES:
+- Output ONLY 2–3 concise lines
+- NO bullet symbols
+- NO introduction sentence
+- NO headings or labels
+- NO markdown
+- NO JSON
+- NO quotes
+
+Professional Title: ${role}
+Experience: ${experience}
+education: ${education}
+`,
 };
+
+export { PromptStrategies };

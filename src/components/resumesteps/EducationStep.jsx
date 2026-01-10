@@ -117,11 +117,11 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
+    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Form Section */}
         <Card className="bg-white rounded-lg shadow-md p-0 ">
-          <CardHeader className="flex items-center justify-between bg-gradient-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
+          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
             <CardTitle className="text-2xl font-bold text-gray-800 ">
               {isEditing ? "Edit Education" : "Add Education"}
             </CardTitle>
@@ -276,13 +276,13 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                 <div className=" flex justify-end gap-2 items-center ">
                   <Button
                     type="submit"
-                    className="bg-gradient-to-b from-indigo-600 to-purple-600"
+                    className="bg-linear-to-b from-indigo-600 to-purple-600"
                   >
                     <Plus className=" h-4 mr-2" />
                     {isEditing ? "Update Education" : "Add Education"}
                   </Button>
                   <Button
-                    className={"bg-gradient-to-b from-indigo-600 to-purple-600"}
+                    className={"bg-linear-to-b from-indigo-600 to-purple-600"}
                     onClick={next}
                   >
                     Next
@@ -307,7 +307,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
 
         {/* Preview Section */}
         <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-gradient-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
+          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
             <GraduationCap className="w-6 h-6 text-blue-600 mr-2" />
             <CardTitle className="text-2xl font-bold text-gray-800">
               Education Review

@@ -110,7 +110,7 @@ const Resume = () => {
         <CardHeader>
           <CardTitle className={"flex justify-between items-center"}>
             <Logo2 size={60} />
-            <span className="text-sm font-medium text-white bg-gradient-to-b from-indigo-600 to-purple-600   px-3 py-1 rounded-full">
+            <span className="text-sm font-medium text-white bg-linear-to-b from-indigo-600 to-purple-600   px-3 py-1 rounded-full">
               {Math.round(progress)}% Complete
             </span>
           </CardTitle>
@@ -141,8 +141,8 @@ const Resume = () => {
                         isActive
                           ? "bg-blue-600 text-white shadow-lg"
                           : isCompleted
-                          ? "bg-green-500 text-white"
-                          : "bg-gray-200 text-gray-500"
+                            ? "bg-green-500 text-white"
+                            : "bg-gray-200 text-gray-500"
                       }`}
                     >
                       {isCompleted ? (
@@ -157,8 +157,8 @@ const Resume = () => {
                           isActive
                             ? "text-blue-600"
                             : isCompleted
-                            ? "text-green-600"
-                            : "text-gray-500"
+                              ? "text-green-600"
+                              : "text-gray-500"
                         }`}
                       >
                         {stepInfo.title}

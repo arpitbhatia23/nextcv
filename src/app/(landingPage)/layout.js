@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <section className={`antialiased`}>
       <Nav />
-      <VisitorStatsCounter />
+      {/* <VisitorStatsCounter /> */}
       <Suspense fallback={<Loading />}>{children}</Suspense>
       <Footer />
     </section>

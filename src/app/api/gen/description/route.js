@@ -11,7 +11,7 @@ export async function handler(req) {
 
   const description = ResumeGenerator[type];
 
-  const bullets = description(data);
+  const bullets = await description(data);
   if (bullets.length <= 0) {
     throw new apiError(500, "something went wrong while gerating bulets");
   }
