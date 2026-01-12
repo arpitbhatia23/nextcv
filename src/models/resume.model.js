@@ -117,7 +117,14 @@ const resumeSchema = new Schema(
         },
       },
     ],
-
+    certificates: [
+      {
+        title: String,
+        organization: String,
+        year: Date,
+        credentialUrl: { type: String, default: null },
+      },
+    ],
     jobRole: {
       type: String,
     },

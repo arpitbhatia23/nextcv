@@ -360,6 +360,27 @@ const CleanBusinessAnalystPDFResume = ({ data }) => (
           <Text style={styles.certDesc}>{data.certification.description}</Text>
         </View>
       )}
+
+      {/* Certificates (list) */}
+      {data.certificates?.length > 0 && (
+        <View style={styles.certSection}>
+          <Text style={styles.sectionTitle}>Certificates</Text>
+          {data.certificates.map((cert, i) => (
+            <View key={i} style={{ marginBottom: 6 }}>
+              <Text style={styles.certText}>{cert.title}</Text>
+              <Text style={styles.certDesc}>
+                {cert.organization}
+                {cert.year ? ` | ${cert.year}` : ""}
+              </Text>
+              {cert.credentialUrl && (
+                <Link src={cert.credentialUrl} style={styles.link}>
+                  View Certificate
+                </Link>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
     </Page>
   </Document>
 );

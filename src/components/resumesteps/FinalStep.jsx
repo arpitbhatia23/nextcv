@@ -23,6 +23,8 @@ import { toast } from "sonner";
 import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
+import useResumeStore from "@/hooks/useResumeStore";
+import { useRouter } from "next/router";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -38,6 +40,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const clearDraft = useResumeStore((s) => s.clearStorage);
   // Debounced handlers
   const debouncePayment = useDebouncedCallback(() => {
     handelPayment();
@@ -61,6 +64,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
 
       if (res.data.success) {
         toast("Saved draft successfully");
+        clearDraft();
       } else {
         toast.error(res.data.message || "Failed to save draft");
       }
@@ -101,8 +105,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
         discount?.type === "percentage"
           ? Math.floor(originalAmount * (1 - discount.value / 100))
           : discount?.type === "amount"
-          ? Math.max(originalAmount - discount.value, 0)
-          : originalAmount;
+            ? Math.max(originalAmount - discount.value, 0)
+            : originalAmount;
 
       const res = await axios.post("/api/payment/order", {
         amount: payAmount * 100, // assuming amount in paise
@@ -113,6 +117,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
         const { data } = res.data;
         const paymentUrl = data?.redirectUrl;
         window.location.href = paymentUrl;
+        clearDraft();
       }
       setIsSubmit(false);
     } catch (error) {
@@ -164,7 +169,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
+    <div className="relative bg-linear-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
       {/* Mobile Layout */}
       <div className="w-full flex flex-col gap-4 md:hidden">
         {/* Template Picker */}
@@ -284,7 +289,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 )}
 
                 <Button
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                  className="w-full bg-linear-to-r from-indigo-600 to-purple-600 text-white"
                   onClick={debouncePayment}
                   disabled={isSubmit}
                 >
@@ -456,7 +461,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                       )}
 
                       <Button
-                        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                        className="w-full bg-linear-to-r from-indigo-600 to-purple-600 text-white"
                         onClick={debouncePayment}
                         disabled={isSubmit}
                       >

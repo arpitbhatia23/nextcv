@@ -459,6 +459,26 @@ const ModernFullStackPDFResume = ({ data }) => (
             ))}
           </View>
         )}
+        {/* Certificates */}
+        {data.certificates?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.mainLabel}>Certificates</Text>
+            {data.certificates.map((cert, i) => (
+              <View key={i} style={{ marginBottom: 8 }}>
+                <Text style={styles.expTitle}>{cert.title}</Text>
+                <Text style={styles.expOrg}>
+                  {cert.organization}
+                  {cert.year ? ` | ${formatDate(cert.year)}` : ""}
+                </Text>
+                {cert.credentialUrl && (
+                  <Link src={cert.credentialUrl} style={styles.link}>
+                    View Certificate
+                  </Link>
+                )}
+              </View>
+            ))}
+          </View>
+        )}
         {/* OPEN SOURCE WORK */}
         {data.openSourceWork?.length > 0 && (
           <View style={styles.section}>

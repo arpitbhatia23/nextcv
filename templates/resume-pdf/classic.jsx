@@ -285,6 +285,26 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
+      {/* Certificates */}
+      {data.certificates?.length > 0 && (
+        <View style={styles.section}>
+          <Text style={styles.sectionHeading}>Certificates</Text>
+          {data.certificates.map((cert, i) => (
+            <View key={i} style={{ marginBottom: 6 }}>
+              <Text style={styles.projTitle}>{cert.title}</Text>
+              <Text style={styles.projMeta}>
+                {cert.organization}
+                {cert.year ? ` | ${formatDate(cert.year)}` : ""}
+              </Text>
+              {cert.credentialUrl && (
+                <Text>
+                  <Link src={cert.credentialUrl}>Certificate Link</Link>
+                </Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
     </Page>
   </Document>
 );

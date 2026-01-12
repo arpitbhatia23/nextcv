@@ -460,6 +460,27 @@ const ClassicMinimalistPDFResume = ({
               ))}
             </View>
           )}
+
+          {/* Certificates */}
+          {data.certificates?.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Certificates</Text>
+              {data.certificates.map((cert, i) => (
+                <View key={i} style={{ marginBottom: 6 }}>
+                  <Text style={styles.projTitle}>{cert.title}</Text>
+                  <Text style={styles.projMeta}>
+                    {cert.organization}
+                    {cert.year ? ` | ${formatDate(cert.year)}` : ""}
+                  </Text>
+                  {cert.credentialUrl && (
+                    <Link src={cert.credentialUrl} style={styles.linkText}>
+                      View Certificate
+                    </Link>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
         </View>
       </View>
     </Page>

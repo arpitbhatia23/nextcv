@@ -38,16 +38,31 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: formData?.name || "",
-      phone: formData?.phone || "",
-      email: formData?.email || "",
-      linkedin: formData?.linkedin || "",
-      github: formData?.github || "",
-      portfolio: formData?.portfolio || "",
-      address: formData?.address || "",
-      jobRole: formData?.jobRole || "",
+      name: formData?.name ?? "",
+      phone: formData?.phone ?? "",
+      email: formData?.email ?? "",
+      linkedin: formData?.linkedin ?? "",
+      github: formData?.github ?? "",
+      portfolio: formData?.portfolio ?? "",
+      address: formData?.address ?? "",
+      jobRole: formData?.jobRole ?? "",
     },
   });
+
+  useEffect(() => {
+    if (formData) {
+      form.reset({
+        name: formData.name ?? "",
+        phone: formData.phone ?? "",
+        email: formData.email ?? "",
+        linkedin: formData.linkedin ?? "",
+        github: formData.github ?? "",
+        portfolio: formData.portfolio ?? "",
+        address: formData.address ?? "",
+        jobRole: formData.jobRole ?? "",
+      });
+    }
+  }, [formData, form]);
 
   const watchedValues = form.watch();
 
@@ -57,7 +72,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   };
   console.log("render");
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-7xl mx-auto">
         {/* <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-2">
@@ -72,7 +87,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
           {/* Form Section */}
           <div className="space-y-6">
             <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm p-0">
-              <CardHeader className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg p-3">
+              <CardHeader className="bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-t-lg p-3">
                 <CardTitle className="flex items-center gap-2">
                   <User className="w-5 h-5" />
                   Basic Information
@@ -257,7 +272,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                     <div className="flex justify-end items-center">
                       <Button
                         className={
-                          "bg-gradient-to-b from-indigo-600 to-purple-600 text-white relative "
+                          "bg-linear-to-b from-indigo-600 to-purple-600 text-white relative "
                         }
                         type="submit"
                       >
@@ -273,7 +288,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
           {/* Resume Preview Section */}
           <div className=" space-y-6 p-4">
             <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm p-0">
-              <CardHeader className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg p-3">
+              <CardHeader className="bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-t-lg p-3">
                 <CardTitle
                   className={
                     "flex items-center justify-center gap-2 text-black"
@@ -284,7 +299,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-6">
-                <div className="bg-white border rounded-lg p-6 min-h-[150px] shadow-inner">
+                <div className="bg-white border rounded-lg p-6 min-h-37.5 shadow-inner">
                   {/* Resume Template */}
                   <div className="space-y-4">
                     {/* Header */}

@@ -1,16 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BasicInfoStep from "./resumesteps/BasicInfoStep";
 import SummaryStep from "./resumesteps/SummaryStep";
 import EducationStep from "./resumesteps/EducationStep";
 import SkillStep from "./resumesteps/SkillStep";
 import ExpricenceStep from "./resumesteps/ExpricenceStep";
 import FinalStep from "./resumesteps/FinalStep";
+import CertificateStep from "./resumesteps/Certificate";
 import ProjectsStep from "./resumesteps/ProjectsStep";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Progress } from "./ui/progress";
 
 import {
+  Award,
   Briefcase,
   CheckCircle,
   Code,
@@ -20,9 +22,15 @@ import {
   User,
 } from "lucide-react";
 import Logo2 from "./Logo2";
+import useResumeStore from "@/hooks/useResumeStore";
 
 const Resume = () => {
   const [step, setStep] = useState(0);
+  const formData = useResumeStore((s) => s.formData);
+  const updateForm = useResumeStore((s) => s.updateForm);
+
+  const clearDraft = useResumeStore((s) => s.clearStorage);
+
   const resumeSteps = [
     {
       component: BasicInfoStep,
@@ -56,6 +64,12 @@ const Resume = () => {
       description: "Portfolio projects",
     },
     {
+      component: CertificateStep,
+      title: "Certifications",
+      icon: Award,
+      description: "Professional certifications",
+    },
+    {
       component: SummaryStep,
       title: "Summary",
       icon: FileText,
@@ -78,31 +92,7 @@ const Resume = () => {
     setStep(stepIndex);
   };
 
-  const [formdata, setFormdata] = useState({
-    name: "",
-    phone_no: "",
-    email: "",
-    address: "",
-    linkedin: "",
-    github: "",
-    portfolio: "",
-    jobRole: "",
-    summary: "",
-    experience: [],
-    skills: [],
-    education: [],
-    projects: [],
-  });
-
-  const updateForm = (data) => {
-    setFormdata((prev) => ({
-      ...prev,
-      ...data,
-    }));
-  };
-  console.log(formdata);
   const progress = ((step + 1) / resumeSteps.length) * 100;
-
   const StepComponents = resumeSteps[step]?.component;
   return (
     <div>
@@ -177,7 +167,7 @@ const Resume = () => {
       <StepComponents
         next={next}
         previous={previous}
-        formData={formdata}
+        formData={formData}
         updateForm={updateForm}
       />
     </div>

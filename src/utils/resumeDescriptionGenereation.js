@@ -22,8 +22,8 @@ export const ResumeGenerator = {
       PromptStrategies.summary({
         role: data.jobRole,
         skills: data.skills,
-        education: data.education[0].description,
-        experience: data.experience[0].description,
+        education: data.education[0]?.description,
+        experience: data.experience[0]?.description,
       })
     ),
 };

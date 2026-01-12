@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     backgroundColor: BLUE,
     border: `1 solid ${BLUE}`,
   },
-    projBlock: {
+  projBlock: {
     marginBottom: 8,
   },
   projTitle: {
@@ -281,7 +281,6 @@ const styles = StyleSheet.create({
     color: "#444",
   },
 });
-
 
 const splitToBullets = (desc) => {
   if (Array.isArray(desc)) return desc;
@@ -396,6 +395,27 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                 <View key={i}>
                   <Text style={styles.strengthTitle}>{str.title}</Text>
                   <Text style={styles.strengthText}>{str.text}</Text>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {/* Certificates */}
+          {data.certificates?.length > 0 && (
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Certificates</Text>
+              {data.certificates.map((cert, i) => (
+                <View key={i} style={{ marginBottom: 6 }}>
+                  <Text style={styles.eduDegree}>{cert.title}</Text>
+                  <Text style={styles.eduMeta}>
+                    {cert.organization}
+                    {cert.year ? ` · ${formatDate(cert.year)}` : ""}
+                  </Text>
+                  {cert.credentialUrl && (
+                    <Link src={cert.credentialUrl} style={styles.link}>
+                      View Certificate
+                    </Link>
+                  )}
                 </View>
               ))}
             </View>
