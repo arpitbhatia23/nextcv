@@ -1,21 +1,31 @@
 // app/sitemap.js
-
+import { client } from "@/sanity";
 export default async function sitemap() {
   const baseUrl = "https://www.nextcv.in";
 
-  // Static URLs for now (you can later add dynamic ones)
+  // Fetch all blogs from Sanity
+  const blogs = await client.fetch(`
+    *[_type == "post"]{
+      "slug": slug.current,
+      _updatedAt
+    }
+  `);
+
+  // Static pages
   const pages = [
     { url: `${baseUrl}/`, priority: 1.0 },
     { url: `${baseUrl}/privacyPolicy`, priority: 1.0 },
     { url: `${baseUrl}/terms`, priority: 1.0 },
-    { url: `${baseUrl}/blogs`, priority: 0.9 },
   ];
 
-  // Return in Next.js sitemap format
-  return pages.map((page) => ({
-    url: page.url,
-    lastModified: new Date(),
+  // Dynamic blog pages
+  const blogPages = blogs.map((blog) => ({
+    url: `${baseUrl}/blogs/${blog.slug}`,
+    lastModified: new Date(blog._updatedAt),
     changeFrequency: "daily",
-    priority: page.priority,
+    priority: 0.9,
   }));
+
+  // Return all sitemap entries
+  return [...pages, ...blogPages];
 }

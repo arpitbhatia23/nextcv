@@ -121,14 +121,14 @@ mainImage
     // Filter by Category
     if (category !== "All") {
       updated = updated.filter((post) =>
-        post.categories?.some((catObj) => catObj.title === category)
+        post.categories?.some((catObj) => catObj.title === category),
       );
     }
 
     // Filter by Search Term
     if (searchTerm.trim()) {
       updated = updated.filter((post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -338,7 +338,7 @@ mainImage
                         </p>
                         <p className="text-xs text-gray-900 font-roboto ">
                           {Math.ceil(
-                            featuredPost.excerpt.split(" ").length / 200
+                            featuredPost.excerpt.split(" ").length / 200,
                           )}{" "}
                           min read
                         </p>
@@ -358,7 +358,7 @@ mainImage
           {remainingPosts.map((post) => (
             <div
               key={post._id}
-              className=" rounded-xl overflow-hidden shadow transition-all duration-300 hover:shadow-lg hover:translate-y-[-5px]"
+              className=" rounded-xl overflow-hidden shadow transition-all duration-300 hover:shadow-lg hover:-translate-y-1.5"
             >
               <Link
                 href={`/blogs/${post.slug.current}`}
