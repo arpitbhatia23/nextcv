@@ -420,7 +420,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                 {exp.description && (
                   <Text style={styles.summary}>{exp.description}</Text>
                 )}
-                {exp.bullets?.length > 0 && (
+                {/* {exp.bullets?.length > 0 && (
                   <View style={styles.expBullets}>
                     {exp.bullets.map((b, j) =>
                       b ? (
@@ -430,7 +430,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                       ) : null
                     )}
                   </View>
-                )}
+                )} */}
               </View>
             ))}
           </View>

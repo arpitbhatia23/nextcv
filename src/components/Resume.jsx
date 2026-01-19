@@ -22,7 +22,7 @@ import {
   User,
 } from "lucide-react";
 import Logo2 from "./Logo2";
-import useResumeStore from "@/hooks/useResumeStore";
+import useResumeStore from "@/store/useResumeStore";
 
 const Resume = () => {
   const [step, setStep] = useState(0);

@@ -1,366 +1,285 @@
 "use client";
-import { useState } from "react";
-import { Send, Sparkles, CheckCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Send, RefreshCw } from "lucide-react";
+// Resume flow configuration
+import { flow } from "@/utils/resumeFlow";
+import { useAutoScroll } from "@/hooks/useAutoscroll";
+import { ChatMessage } from "@/components/Chat";
 import axios from "axios";
+import { useResumeStoreChat } from "@/store/chatStore";
+import useResumeStore from "@/store/useResumeStore";
+import { useRouter } from "next/navigation";
+// Constants
+const RESPONSE_DELAY = 300;
 
+// Main Component
 export default function ResumeChat() {
-  const [messages, setMessages] = useState([
-    {
-      sender: "bot",
-      text: "👋 Welcome! I'm your AI Resume Assistant. Let's create an amazing resume together!What is your full name?",
-    },
-  ]);
+  // State Management
+  const store = useResumeStoreChat();
+  const updateFrom = useResumeStore((state) => state.updateForm);
+  const From = useResumeStore((state) => state.formData);
+  const resetForm = useResumeStore((state) => state.resetForm);
+  const clearDraft = useResumeStore((state) => state.clearStorage);
+
   const [input, setInput] = useState("");
-  const [answers, setAnswers] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    address: "",
-    jobRole: "",
-    contact: "",
-    skills: "",
-    certifications: "",
-    experiences: [],
-    projects: [],
-    education: [],
-  });
+  const [showYesNo, setShowYesNo] = useState(false);
+  const [showSkip, setShowSkip] = useState(false);
 
-  const [step, setStep] = useState(0);
-  const [experienceIndex, setExperienceIndex] = useState(0);
-  const [projectIndex, setProjectIndex] = useState(0);
-  const [educationIndex, setEducationIndex] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
+  const currentStep = flow[store.step];
+  const [isGenerating, setIsGenerating] = useState(false);
+  const bottomRef = useAutoScroll(store.messages.length);
 
-  const flow = [
-    { key: "fullName", question: "What is your full name?" },
-    {
-      key: "email",
-      question: "What's your email?",
-    },
-    {
-      key: "phone",
-      question: "What's your phone number?",
-    },
-    {
-      key: "address",
-      question: "What's your address?",
-    },
-    { key: "jobRole", question: "What job role are you targeting?" },
+  const router = useRouter();
+  // Helper Functions
+  const isOptionalField = (fieldQuestion) => {
+    return fieldQuestion?.toLowerCase().includes("optional");
+  };
 
-    // Experience Section
-    {
-      key: "hasExperience",
-      question: "Do you have work experience? (Yes/No)",
-      type: "boolean",
-    },
-    { key: "companyName", question: "Company name" },
-    { key: "position", question: "Your position/title" },
-    {
-      key: "experienceDuration",
-      question: "Duration (e.g., Jan 2020 - Dec 2022)",
-    },
-    {
-      key: "responsibilities",
-      question:
-        "Key responsibilities and achievements (separate with semicolons)",
-    },
-    {
-      key: "anotherExperience",
-      question: "Add another work experience? (Yes/No)",
-      type: "boolean",
-      loop: "experience",
-    },
+  const addBotMessage = (text, delay = RESPONSE_DELAY) => {
+    setTimeout(() => {
+      store.addMessage({ sender: "bot", text });
+    }, delay);
+  };
 
-    // Projects Section
-    {
-      key: "hasProjects",
-      question: "Do you have any projects to showcase? (Yes/No)",
-      type: "boolean",
-    },
-    { key: "projectName", question: "Project name" },
-    { key: "projectDescription", question: "Project description" },
-    { key: "projectTech", question: "Technologies used" },
-    {
-      key: "projectGithub",
-      question: "GitHub link (optional, type 'skip' if none)",
-    },
-    {
-      key: "projectLive",
-      question: "Live demo link (optional, type 'skip' if none)",
-    },
-    {
-      key: "anotherProject",
-      question: "Add another project? (Yes/No)",
-      type: "boolean",
-      loop: "project",
-    },
+  const addUserMessage = (text) => {
+    store.addMessage({ sender: "user", text });
+  };
 
-    // Education Section
-    {
-      key: "hasEducation",
-      question: "Add education details? (Yes/No)",
-      type: "boolean",
-    },
-    { key: "degree", question: "Degree" },
-    { key: "institution", question: "Institution" },
-    { key: "graduationYear", question: "Year of completion" },
-    {
-      key: "anotherEducation",
-      question: "Add another education? (Yes/No)",
-      type: "boolean",
-      loop: "education",
-    },
+  const saveAnswer = (text) => {
+    const answerValue = text.toLowerCase() === "skip" ? "" : text;
 
-    { key: "skills", question: "List your key skills (comma separated)" },
-  ];
+    if (currentStep.type === "repeatable") {
+      const section = currentStep.key;
+      const fieldKey = currentStep.fields[store.fieldStep].key;
+      const index = store.repeatIndex[section] || 0;
+
+      store.updateAnswer(fieldKey, answerValue, section, index);
+    } else {
+      store.updateAnswer(currentStep.key, answerValue);
+    }
+  };
+
+  const moveToNextStep = () => {
+    const nextStep = store.step + 1;
+    if (nextStep < flow.length) {
+      store.setStep(nextStep);
+      const nextQuestion = flow[nextStep].q;
+      addBotMessage(nextQuestion);
+      setShowYesNo(flow[nextStep]?.type === "repeatable");
+      setShowSkip(isOptionalField(nextQuestion));
+    } else {
+      finishResume();
+    }
+  };
+
+  const moveToNextField = () => {
+    const nextField = store.fieldStep + 1;
+    if (nextField < currentStep.fields.length) {
+      store.setFieldStep(nextField);
+      const nextFieldData = currentStep.fields[nextField];
+      addBotMessage(nextFieldData.q);
+      setShowSkip(isOptionalField(nextFieldData.q));
+    } else {
+      store.setFieldStep(0);
+      setShowYesNo(true);
+      addBotMessage(`Add another ${currentStep.key}?`);
+    }
+  };
+
+  const handleRepeatableSection = (answer) => {
+    const isFirstField = store.fieldStep === 0;
+    const answerLower = answer.toLowerCase();
+
+    if (isFirstField && currentStep.type === "repeatable") {
+      if (answerLower === "no") {
+        resetUIState();
+        moveToNextStep();
+        return true;
+      }
+      if (answerLower === "yes") {
+        addBotMessage(currentStep.fields[0].q);
+        setShowSkip(isOptionalField(currentStep.fields[0].q));
+        return true;
+      }
+    }
+
+    // "Add another?" question
+    if (isFirstField && answerLower === "yes") {
+      store.updateRepeatIndex(currentStep.key);
+      addBotMessage(currentStep.fields[0].q);
+      setShowSkip(isOptionalField(currentStep.fields[0].q));
+      return true;
+    }
+
+    if (isFirstField && answerLower === "no") {
+      resetUIState();
+      moveToNextStep();
+      return true;
+    }
+
+    return false;
+  };
+
+  const resetUIState = () => {
+    setShowYesNo(false);
+    setShowSkip(false);
+  };
+
+  // Main Input Handler
   const handleInput = (text) => {
-    // Keep a local snapshot of answers so we can reliably submit the very
-    // last input even though setState is async.
-    const answersSnapshot = {
-      ...answers,
-      experiences: JSON.parse(JSON.stringify(answers.experiences || [])),
-      projects: JSON.parse(JSON.stringify(answers.projects || [])),
-      education: JSON.parse(JSON.stringify(answers.education || [])),
-    };
-    setMessages((prev) => [...prev, { sender: "user", text }]);
-    let currentStep = flow[step];
+    addUserMessage(text);
+    resetUIState();
 
-    // Handle boolean navigation
-    if (currentStep.type === "boolean") {
-      if (text.toLowerCase() === "no") {
-        let nextStepIndex = -1;
-
-        if (currentStep.key === "hasExperience") {
-          nextStepIndex = flow.findIndex((f) => f.key === "hasProjects");
-        } else if (currentStep.key === "hasProjects") {
-          nextStepIndex = flow.findIndex((f) => f.key === "hasEducation");
-        } else if (currentStep.key === "hasEducation") {
-          nextStepIndex = flow.findIndex((f) => f.key === "skills");
-        } else if (currentStep.key === "anotherExperience") {
-          nextStepIndex = flow.findIndex((f) => f.key === "hasProjects");
-        } else if (currentStep.key === "anotherProject") {
-          nextStepIndex = flow.findIndex((f) => f.key === "hasEducation");
-        } else if (currentStep.key === "anotherEducation") {
-          nextStepIndex = flow.findIndex((f) => f.key === "skills");
-        }
-
-        if (nextStepIndex !== -1) {
-          setStep(nextStepIndex);
-          setMessages((prev) => [
-            ...prev,
-            { sender: "bot", text: flow[nextStepIndex].question },
-          ]);
-          return setInput("");
-        }
-      }
+    // Check if it's a repeatable section flow
+    if (handleRepeatableSection(text)) {
+      return;
     }
 
-    // Save answers based on category
-    if (
-      [
-        "companyName",
-        "position",
-        "experienceDuration",
-        "responsibilities",
-      ].includes(currentStep.key)
-    ) {
-      const updatedExperiences = [...answers.experiences];
-      if (!updatedExperiences[experienceIndex])
-        updatedExperiences[experienceIndex] = {};
-      updatedExperiences[experienceIndex][currentStep.key] = text;
-      answersSnapshot.experiences = updatedExperiences;
-      setAnswers((prev) => ({ ...prev, experiences: updatedExperiences }));
-    } else if (
-      [
-        "projectName",
-        "projectDescription",
-        "projectTech",
-        "projectGithub",
-        "projectLive",
-      ].includes(currentStep.key)
-    ) {
-      const updatedProjects = [...answers.projects];
-      if (!updatedProjects[projectIndex]) updatedProjects[projectIndex] = {};
-      updatedProjects[projectIndex][currentStep.key] =
-        text.toLowerCase() === "skip" ? "" : text;
-      answersSnapshot.projects = updatedProjects;
-      setAnswers((prev) => ({ ...prev, projects: updatedProjects }));
-    } else if (
-      ["degree", "institution", "graduationYear"].includes(currentStep.key)
-    ) {
-      const updatedEducation = [...answers.education];
-      if (!updatedEducation[educationIndex])
-        updatedEducation[educationIndex] = {};
-      updatedEducation[educationIndex][currentStep.key] = text;
-      answersSnapshot.education = updatedEducation;
-      setAnswers((prev) => ({ ...prev, education: updatedEducation }));
+    // Save answer and move to next
+    saveAnswer(text);
+
+    if (currentStep.type === "repeatable") {
+      moveToNextField();
     } else {
-      answersSnapshot[currentStep.key] = text;
-      setAnswers((prev) => ({ ...prev, [currentStep.key]: text }));
+      moveToNextStep();
     }
+  };
 
-    // Handle loop logic
-    if (currentStep.loop && text.toLowerCase() === "yes") {
-      let nextKey = "";
-
-      if (currentStep.loop === "experience") {
-        setExperienceIndex((prev) => prev + 1);
-        nextKey = "companyName";
-      } else if (currentStep.loop === "project") {
-        setProjectIndex((prev) => prev + 1);
-        nextKey = "projectName";
-      } else if (currentStep.loop === "education") {
-        setEducationIndex((prev) => prev + 1);
-        nextKey = "degree";
-      }
-
-      const nextIndex = flow.findIndex((f) => f.key === nextKey);
-      setStep(nextIndex);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: flow[nextIndex].question },
-      ]);
-      return setInput("");
-    }
-
-    // Move to next step
-    if (step + 1 >= flow.length) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: "bot",
-          text: "✨ Perfect! Your resume is ready. Generating preview...",
-        },
-      ]);
-      setIsComplete(true);
-      submitAllData(answersSnapshot);
-    } else {
-      setStep((prev) => prev + 1);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: flow[step + 1].question },
-      ]);
-    }
-
+  const handleButtonClick = (answer) => {
+    if (input.trim()) return; // Prevent double submission
+    handleInput(answer);
     setInput("");
   };
 
-  const submitAllData = async (data) => {
-    // Simulate API call; accept a snapshot `data` to ensure last input is included
-    const payload = data || answers;
-
-    try {
-      // localStorage.setItem("polishedResume", JSON.stringify(payload));
-
-      const res = await axios.post("/api/gen/aiResume", {
-        resumeData: payload,
-      });
-
-      console.log(res.data);
-    } catch (e) {
-      // ignore localStorage errors in restricted environments
+  const handleSendMessage = () => {
+    if (input.trim()) {
+      handleInput(input.trim());
+      setInput("");
     }
-    setMessages((prev) => [
-      ...prev,
-      {
-        sender: "bot",
-        text: "🎉 Resume generated successfully! You can now preview and download it.",
-      },
-    ]);
   };
 
-  const sendMessage = () => {
-    if (input.trim()) handleInput(input.trim());
+  const finishResume = async () => {
+    store.setIsComplete(true);
+    store.setApiError(null);
+    resetUIState();
+    setIsGenerating(true);
+
+    addBotMessage("✨ Resume complete! Generating preview...");
+
+    try {
+      // Simulated API call - replace with your actual endpoint
+      const response = await axios.post("/api/gen/aiResume", {
+        resumeData: store.answers,
+      });
+
+      const data = response.data;
+      console.log(data);
+      store.setGeneratedResumeUrl(data.url || null);
+      store.addMessage({
+        sender: "bot",
+        text: "🎉 Resume generated successfully! You can now download your resume.",
+      });
+      resetForm();
+      clearDraft();
+      updateFrom(data?.data);
+      console.log(From);
+      router.push("/dashboard/full-ai-resume/preview");
+    } catch (error) {
+      console.error("Resume generation error:", error);
+      store.setApiError(error.message);
+      store.addMessage({
+        sender: "bot",
+        text: "❌ Oops! Something went wrong while generating your resume. Please try again.",
+      });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const handleRetry = () => {
+    store.setApiError(null);
+    finishResume();
+  };
+
+  const handleStartOver = () => {
+    if (
+      confirm("Are you sure you want to start over? All progress will be lost.")
+    ) {
+      store.resetStore();
+      setInput("");
+      resetUIState();
+    }
   };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 p-4">
       <div className="max-w-6xl mx-auto mt-8">
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-100">
-          <div className="flex items-center gap-4">
-            <div className="bg-linear-to-br from-blue-500 to-purple-600 p-3 rounded-xl">
-              <Sparkles className="text-white" size={32} />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">
-                AI Resume Assistant
-              </h1>
-              <p className="text-gray-500 text-sm">
-                Let's build your professional resume together
-              </p>
-            </div>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="flex justify-between text-xs text-gray-600 mb-2">
-              <span>Progress</span>
-              <span>{Math.round((step / flow.length) * 100)}%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-linear-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(step / flow.length) * 100}%` }}
-              ></div>
-            </div>
-          </div>
+        <div className="mb-4 flex justify-between items-center">
+          <h1 className="text-3xl font-bold text-gray-800">Resume Builder</h1>
+          <button
+            onClick={handleStartOver}
+            className="text-sm text-gray-600 hover:text-gray-800 underline"
+          >
+            Start Over
+          </button>
         </div>
 
         {/* Chat Container */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-          <div className="h-125 overflow-y-auto p-6 space-y-4 bg-linear-to-b from-gray-50 to-white">
-            {messages.map((m, i) => (
-              <div
-                key={i}
-                className={`flex ${m.sender === "bot" ? "justify-start" : "justify-end"} animate-fade-in`}
-              >
-                <div
-                  className={`flex items-start gap-2 max-w-[80%] ${m.sender === "user" ? "flex-row-reverse" : ""}`}
-                >
-                  <div
-                    className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                      m.sender === "bot"
-                        ? "bg-linear-to-br from-blue-500 to-purple-600"
-                        : "bg-linear-to-br from-green-500 to-emerald-600"
-                    }`}
-                  >
-                    {m.sender === "bot" ? (
-                      <Sparkles className="text-white" size={16} />
-                    ) : (
-                      <CheckCircle className="text-white" size={16} />
-                    )}
-                  </div>
-                  <div
-                    className={`px-4 py-3 rounded-2xl shadow-sm ${
-                      m.sender === "bot"
-                        ? "bg-white border border-gray-200 text-gray-800"
-                        : "bg-linear-to-r from-blue-500 to-purple-600 text-white"
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed">{m.text}</p>
-                  </div>
-                </div>
-              </div>
+          <div className="h-96 overflow-y-auto p-6 space-y-4 bg-linear-to-b from-gray-50 to-white">
+            {store.messages.map((msg, idx) => (
+              <ChatMessage
+                key={idx}
+                message={msg}
+                isLatest={idx === store.messages.length - 1}
+                showYesNo={showYesNo && !store.isComplete}
+                showSkip={showSkip && !store.isComplete}
+                showRetry={
+                  !!store.apiError && idx === store.messages.length - 1
+                }
+                onRetry={handleRetry}
+                onButtonClick={handleButtonClick}
+              />
             ))}
+            <div ref={bottomRef} />
           </div>
 
           {/* Input Area */}
           <div className="p-4 bg-gray-50 border-t border-gray-200">
+            {store.apiError && (
+              <div className="mb-3 bg-red-50 border border-red-200 rounded-lg p-3 flex items-center justify-between">
+                <span className="text-red-800 text-sm">
+                  Failed to generate resume
+                </span>
+                <button
+                  onClick={handleRetry}
+                  disabled={isGenerating}
+                  className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+                >
+                  <RefreshCw
+                    size={16}
+                    className={isGenerating ? "animate-spin" : ""}
+                  />
+                  Try Again
+                </button>
+              </div>
+            )}
+
             <div className="flex gap-3">
               <input
                 className="flex-1 border-2 border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 placeholder={
-                  isComplete ? "Resume completed!" : "Type your answer..."
+                  store.isComplete ? "Resume completed!" : "Type your answer..."
                 }
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                disabled={isComplete}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+                disabled={store.isComplete}
               />
               <button
-                onClick={sendMessage}
-                disabled={isComplete || !input.trim()}
+                onClick={handleSendMessage}
+                disabled={store.isComplete || !input.trim()}
                 className="bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 <Send size={18} />
@@ -374,9 +293,11 @@ export default function ResumeChat() {
         <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
           <h3 className="font-semibold text-blue-900 mb-2">💡 Quick Tips:</h3>
           <ul className="text-sm text-blue-800 space-y-1">
+            <li>• Your progress is automatically saved</li>
             <li>• Be specific with your achievements and responsibilities</li>
             <li>• Use semicolons (;) to separate multiple items in lists</li>
-            <li>• Type 'skip' for optional fields you want to leave blank</li>
+            <li>• Click 'Skip' button or type 'skip' for optional fields</li>
+            <li>• Use the Yes/No buttons for quick responses</li>
             <li>
               • You can add multiple experiences, projects, and education
               entries

@@ -99,11 +99,11 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
+    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Form Section */}
         <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center justify-between bg-gradient-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
+          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
             <CardTitle className="text-2xl font-bold text-white">
               {isEditing ? "Edit Project" : "Add Project"}
             </CardTitle>
@@ -286,14 +286,14 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                 <div className="flex justify-end gap-2 items-center">
                   <Button
                     type="submit"
-                    className="bg-gradient-to-b from-indigo-600 to-purple-600 text-white"
+                    className="bg-linear-to-b from-indigo-600 to-purple-600 text-white"
                   >
                     <Plus className="h-4 mr-2" />
                     {isEditing ? "Update Project" : "Add Project"}
                   </Button>
                   <Button
                     type="button"
-                    className="bg-gradient-to-b from-indigo-600 to-purple-600 text-white"
+                    className="bg-linear-to-b from-indigo-600 to-purple-600 text-white"
                     onClick={next}
                   >
                     Next
@@ -306,7 +306,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
 
         {/* Preview Section */}
         <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-gradient-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
+          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
             <FolderKanban className="w-6 h-6 text-white mr-2" />
             <CardTitle className="text-2xl font-bold text-white">
               Project Review
@@ -327,7 +327,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                 {projectList.map((project) => (
                   <div
                     key={project.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow px-4"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex-1">
@@ -372,42 +372,53 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                       </div>
                     </div>
 
-                    {project.description.split(".").map((section, idx) => {
-                      const trimmed = section.trim();
-                      if (!trimmed) return null;
+                    {project.description
+                      .split("\n") // split by newlines
+                      .map((line, idx) => {
+                        const trimmed = line.trim();
+                        if (!trimmed) return null;
 
-                      // Check for "Key responsibilities include:" or "Tools and technologies used:"
-                      const [heading, rest] = trimmed.split(/:(.+)/);
+                        // If line starts with bullet symbol, just render as list item
+                        if (trimmed.startsWith("•")) {
+                          return (
+                            <li key={idx} className="text-gray-700">
+                              {trimmed.replace(/^•\s*/, "")}
+                            </li>
+                          );
+                        }
 
-                      if (!rest) {
-                        // Just a simple sentence or intro
+                        // If line contains heading (like "Key responsibilities include:")
+                        const headingMatch = trimmed.match(/^(.+?):\s*(.+)$/);
+                        if (headingMatch) {
+                          const [, heading, rest] = headingMatch;
+                          // Split rest by semicolon for sub-bullets
+                          const points = rest
+                            .split(";")
+                            .map((p) => p.trim())
+                            .filter(Boolean);
+                          return (
+                            <li key={idx}>
+                              <span className="font-medium text-gray-800">
+                                {heading}:
+                              </span>
+                              <ul className="list-disc ml-5 mt-1 space-y-2">
+                                {points.map((point, i) => (
+                                  <li key={i} className="text-gray-600">
+                                    {point}
+                                  </li>
+                                ))}
+                              </ul>
+                            </li>
+                          );
+                        }
+
+                        // Otherwise, render normal sentence
                         return (
                           <li key={idx} className="text-gray-700">
-                            {heading}
+                            {trimmed}
                           </li>
                         );
-                      }
-
-                      // Render heading as bold, rest as sub-bullets
-                      return (
-                        <li key={idx}>
-                          <span className="font-medium text-gray-800">
-                            {heading}:
-                          </span>
-                          <ul className="list-disc ml-5 mt-1 space-y-1">
-                            {rest.split(",").map((point, i) => {
-                              const item = point.trim();
-                              if (!item) return null;
-                              return (
-                                <li key={i} className="text-gray-600">
-                                  {item}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </li>
-                      );
-                    })}
+                      })}
                   </div>
                 ))}
               </div>

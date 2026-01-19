@@ -23,7 +23,7 @@ import { toast } from "sonner";
 import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
-import useResumeStore from "@/hooks/useResumeStore";
+import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/router";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
@@ -169,7 +169,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   };
 
   return (
-    <div className="relative bg-linear-to-br from-blue-50 to-indigo-100 max-h-screen flex flex-col items-center py-4 px-2 md:p-6">
+    <div className="relative bg-linear-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col items-center py-4 px-2 md:p-6">
       {/* Mobile Layout */}
       <div className="w-full flex flex-col gap-4 md:hidden">
         {/* Template Picker */}

@@ -10,7 +10,6 @@ import {
 } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
-// Classic, clean, professional resume template styles
 const styles = StyleSheet.create({
   page: {
     padding: 40,
@@ -33,11 +32,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     color: "#1a237e",
   },
-  contact: {
-    fontSize: 10,
-    color: "#444",
-    marginBottom: 2,
-  },
+  contact: { fontSize: 10, color: "#444", marginBottom: 2 },
   links: {
     flexDirection: "row",
     justifyContent: "center",
@@ -45,9 +40,7 @@ const styles = StyleSheet.create({
     color: "#1565c0",
     marginBottom: 2,
   },
-  section: {
-    marginBottom: 18,
-  },
+  section: { marginBottom: 18 },
   sectionHeading: {
     fontSize: 13,
     fontWeight: "bold",
@@ -57,105 +50,63 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     textTransform: "uppercase",
   },
-  summaryText: {
-    fontSize: 10,
-    lineHeight: 1.5,
-    color: "#333",
-    marginTop: 3,
-  },
-  skillList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: 3,
-  },
+  summaryText: { fontSize: 10, lineHeight: 1.5, color: "#333", marginTop: 3 },
+  skillList: { flexDirection: "row", flexWrap: "wrap", marginTop: 3 },
   skill: {
     backgroundColor: "#e3f2fd",
-    color: "#1976d2",
+    color: "#263238",
     borderRadius: 3,
     padding: "2 6",
-    fontSize: 9,
+    fontSize: 11,
     marginRight: 6,
     marginBottom: 4,
-  },
-  eduBlock: {
-    marginBottom: 6,
-  },
-  eduTitle: {
     fontWeight: "bold",
-    fontSize: 11,
-    color: "#263238",
   },
-  eduSubtitle: {
-    fontSize: 10,
-    color: "#455a64",
-  },
-  expBlock: {
-    marginBottom: 8,
-  },
-  expTitle: {
-    fontWeight: "bold",
-    fontSize: 11,
-    color: "#263238",
-  },
-  expMeta: {
-    fontSize: 9,
-    color: "#1976d2",
-    marginBottom: 1,
-  },
-  expDesc: {
-    fontSize: 9,
-    color: "#444",
-    marginBottom: 1,
-  },
-  projBlock: {
-    marginBottom: 8,
-  },
-  projTitle: {
-    fontWeight: "bold",
-    fontSize: 11,
-    color: "#263238",
-  },
-  projMeta: {
-    fontSize: 9,
-    color: "#1976d2",
-    marginBottom: 1,
-  },
+  eduBlock: { marginBottom: 6 },
+  eduTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
+  eduSubtitle: { fontSize: 10, color: "#455a64" },
+  expBlock: { marginBottom: 8 },
+  expTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
+  expMeta: { fontSize: 9, color: "#1976d2", marginBottom: 1 },
+  bulletList: { marginLeft: 12, marginTop: 2, marginBottom: 2 },
+  bulletItem: { flexDirection: "row", marginBottom: 2 },
+  bulletSymbol: { width: 10, fontWeight: "bold" },
+  projBlock: { marginBottom: 8 },
+  projTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
+  projMeta: { fontSize: 9, color: "#1976d2", marginBottom: 1 },
   projTech: {
     fontSize: 9,
     color: "#1976d2",
     marginBottom: 1,
     fontStyle: "italic",
   },
-  projDesc: {
-    fontSize: 9,
-    color: "#444",
-  },
-  bulletList: {
-    marginLeft: 12,
-    fontSize: 10,
-    color: "#444",
-    marginTop: 2,
-    marginBottom: 2,
-  },
-  bulletItem: {
-    flexDirection: "row",
-    marginBottom: 2,
-  },
-  bulletSymbol: {
-    width: 10,
-    fontWeight: "bold",
-  },
+  projDesc: { fontSize: 9, color: "#444" },
 });
 
+// Improved splitToBullets function
 const splitToBullets = (desc) => {
   if (Array.isArray(desc)) return desc;
-  if (typeof desc === "string") {
-    return desc
-      .split(/[\.\n;]/)
-      .map((b) => b && b.trim())
-      .filter(Boolean);
-  }
-  return [];
+  if (typeof desc !== "string") return [];
+
+  return desc
+    .split("\n")
+    .flatMap((line) => {
+      const trimmed = line.trim();
+      if (!trimmed) return [];
+
+      // Keep AI bullet points intact
+      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
+
+      // Split semicolon separated items
+      if (trimmed.includes(";"))
+        return trimmed
+          .split(";")
+          .map((b) => b.trim())
+          .filter(Boolean);
+
+      return [trimmed]; // keep full sentence
+    })
+    .filter(Boolean);
 };
 
 const ClassicTemplate = ({ data }) => (
@@ -170,14 +121,12 @@ const ClassicTemplate = ({ data }) => (
         <View style={styles.links}>
           {data.linkedin && (
             <Text>
-              <Link src={data.linkedin}>LinkedIn</Link>
-              {"   "}
+              <Link src={data.linkedin}>LinkedIn</Link> {"   "}
             </Text>
           )}
           {data.github && (
             <Text>
-              <Link src={data.github}>GitHub</Link>
-              {"   "}
+              <Link src={data.github}>GitHub</Link> {"   "}
             </Text>
           )}
           {data.portfolio && (
@@ -187,6 +136,7 @@ const ClassicTemplate = ({ data }) => (
           )}
         </View>
       </View>
+
       {/* Summary */}
       {data.summary && (
         <View style={styles.section}>
@@ -194,6 +144,7 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.summaryText}>{data.summary}</Text>
         </View>
       )}
+
       {/* Skills */}
       {data.skills?.length > 0 && (
         <View style={styles.section}>
@@ -201,13 +152,14 @@ const ClassicTemplate = ({ data }) => (
           <View style={styles.skillList}>
             {data.skills.map((skill, i) => (
               <Text key={i} style={styles.skill}>
-                {skill.name}
+                {skill.name ?? skill}
                 {skill.level ? ` (${skill.level})` : ""}
               </Text>
             ))}
           </View>
         </View>
       )}
+
       {/* Education */}
       {data.education?.length > 0 && (
         <View style={styles.section}>
@@ -216,7 +168,7 @@ const ClassicTemplate = ({ data }) => (
             <View key={i} style={styles.eduBlock}>
               <Text style={styles.eduTitle}>{edu.institution}</Text>
               <Text style={styles.eduSubtitle}>
-                {edu.degree} &nbsp;|&nbsp; {formatDate(edu.startYear)} -{" "}
+                {edu.degree} | {formatDate(edu.startYear)} -{" "}
                 {formatDate(edu.endYear) || "Present"}
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
@@ -227,6 +179,7 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
+
       {/* Experience */}
       {data.experience?.length > 0 && (
         <View style={styles.section}>
@@ -254,6 +207,7 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
+
       {/* Projects */}
       {data.projects?.length > 0 && (
         <View style={styles.section}>
@@ -264,7 +218,7 @@ const ClassicTemplate = ({ data }) => (
               <Text style={styles.projMeta}>
                 {proj.roleOrType}
                 {proj.organization && ` @ ${proj.organization}`}
-                {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
+                {proj.date && ` | ${formatDate(proj.date)}`}
               </Text>
               {proj.technologiesOrTopics && (
                 <Text style={styles.projTech}>
@@ -285,6 +239,7 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
+
       {/* Certificates */}
       {data.certificates?.length > 0 && (
         <View style={styles.section}>
