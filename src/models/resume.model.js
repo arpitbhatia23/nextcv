@@ -129,7 +129,7 @@ const resumeSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Resume =

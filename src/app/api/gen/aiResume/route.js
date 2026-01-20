@@ -8,30 +8,34 @@ import { NextResponse } from "next/server";
 const handler = async (req, res) => {
   const { resumeData } = await req.json();
 
-  console.log(resumeData);
-  // Build prompt for AI to return structured JSON
   const prompt = `
 You are an expert ATS resume parser and resume enhancer.
 
-Your task:
+Your responsibilities:
 1. Extract structured resume data from the provided resume content.
-2. Improve clarity, grammar, and ATS compatibility.
-3. Enhance job responsibilities and project descriptions using strong action verbs, measurable impact, and relevant technologies.
-4. Generate an ATS-friendly professional summary ONLY if the summary is missing or empty.
-5. DO NOT invent or assume any information. If data is missing, return empty strings "" or empty arrays [].
-6. Add minimum 3 to 4 bullets points in descriptions
-7. Add some soft skills according to the profile
-Strict rules:
+2. Correct spelling, grammar, and formatting issues.
+3. Enhance job responsibilities and project descriptions using:
+   - Strong action verbs
+   - Measurable impact (numbers, scale, performance when available)
+   - Relevant tools, technologies, and methodologies
+4. Generate an ATS-friendly professional summary ONLY if the summary field is missing or empty.
+5. DO NOT invent, guess, or assume any information.
+   - If a field is missing, return an empty string "" or an empty array [].
+6. Each experience and project description MUST contain **3–4 concise bullet points**.
+7. Add relevant **soft skills** aligned with the candidate’s profile (communication, teamwork, problem-solving, etc.) along with technical skills.
+
+Strict rules (must follow):
 - Use ISO date format ONLY: "2024-06-01T00:00:00.000+00:00"
-- Fix all spelling and grammatical mistakes.
 - Keep content concise, professional, and ATS-optimized.
-- Return ONLY valid JSON (no explanations, no markdown).
-- JSON keys and structure MUST match the schema below exactly.
+- Fix ALL spelling and grammatical errors.
+- Do NOT add explanations, comments, or markdown.
+- Return ONLY valid JSON.
+- JSON keys, structure, and order MUST match the schema below EXACTLY.
 
 Resume content:
 ${JSON.stringify(resumeData)}
 
-Return the output in the following JSON format exactly:
+Return the output strictly in the following JSON format:
 
 {
   "_id": "",
@@ -39,7 +43,7 @@ Return the output in the following JSON format exactly:
   "ResumeType": "classicTemplate",
 
   "name": "",
-  "phone_no": "",
+  "phone": "",
   "email": "",
   "address": "",
   "linkedin": "",
@@ -50,7 +54,12 @@ Return the output in the following JSON format exactly:
 
   "summary": "",
 
-  "skills": [],
+  "skills": [
+      {
+        name:"react"
+        level:"begnner"
+      },
+    ],
 
   "education": [
     {
@@ -75,15 +84,17 @@ Return the output in the following JSON format exactly:
 
   "projects": [
     {
-      "name": "",
+      "title": "",
+      "roleOrType": "",
       "description": "",
       "link": "",
-      "date": "2024-06-01T00:00:00.000+00:00"
+      "date": "2024-06-01T00:00:00.000+00:00",
+      "technologiesOrTopics": "",
+      "organization": ""
     }
   ],
 
-  "certificates": [],
-
+  "certificates": []
 }
 `;
 
@@ -100,8 +111,6 @@ Return the output in the following JSON format exactly:
       },
     ],
   });
-
-  console.log(response.text);
 
   // Decode AI output if needed (depends on your AI setup)
   let result = response.text
