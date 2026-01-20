@@ -25,7 +25,7 @@ import axios from "axios";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(
-    formData.experience || []
+    formData.experience || [],
   );
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -51,8 +51,8 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
     if (isEditing) {
       setExperienceList((prev) =>
         prev.map((exp) =>
-          exp.id === editingId ? { ...values, id: editingId } : exp
-        )
+          exp.id === editingId ? { ...values, id: editingId } : exp,
+        ),
       );
       setIsEditing(false);
       setEditingId(null);
@@ -203,7 +203,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                             field.onChange(
                               e.target.value
                                 ? e.target.value.split(",").map((s) => s.trim())
-                                : []
+                                : [],
                             )
                           }
                         />
@@ -233,7 +233,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                             field.onChange(
                               e.target.value
                                 ? e.target.value.split(",").map((s) => s.trim())
-                                : []
+                                : [],
                             )
                           }
                         />
@@ -386,53 +386,55 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     </div>
 
                     <ul className="list-disc ml-5 text-sm text-gray-600 space-y-2">
-                      {exp.description
-                        .split("\n") // split by newlines
-                        .map((line, idx) => {
-                          const trimmed = line.trim();
-                          if (!trimmed) return null;
+                      {exp?.description ??
+                        exp?.description
+                          ?.split("\n") // split by newlines
+                          ?.map((line, idx) => {
+                            const trimmed = line.trim();
+                            if (!trimmed) return null;
 
-                          // If line starts with bullet symbol, just render as list item
-                          if (trimmed.startsWith("•")) {
+                            // If line starts with bullet symbol, just render as list item
+                            if (trimmed.startsWith("•")) {
+                              return (
+                                <li key={idx} className="text-gray-700">
+                                  {trimmed.replace(/^•\s*/, "")}
+                                </li>
+                              );
+                            }
+
+                            // If line contains heading (like "Key responsibilities include:")
+                            const headingMatch =
+                              trimmed.match(/^(.+?):\s*(.+)$/);
+                            if (headingMatch) {
+                              const [, heading, rest] = headingMatch;
+                              // Split rest by semicolon for sub-bullets
+                              const points = rest
+                                .split(";")
+                                .map((p) => p.trim())
+                                .filter(Boolean);
+                              return (
+                                <li key={idx}>
+                                  <span className="font-medium text-gray-800">
+                                    {heading}:
+                                  </span>
+                                  <ul className="list-disc ml-5 mt-1 space-y-1">
+                                    {points.map((point, i) => (
+                                      <li key={i} className="text-gray-600">
+                                        {point}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </li>
+                              );
+                            }
+
+                            // Otherwise, render normal sentence
                             return (
                               <li key={idx} className="text-gray-700">
-                                {trimmed.replace(/^•\s*/, "")}
+                                {trimmed}
                               </li>
                             );
-                          }
-
-                          // If line contains heading (like "Key responsibilities include:")
-                          const headingMatch = trimmed.match(/^(.+?):\s*(.+)$/);
-                          if (headingMatch) {
-                            const [, heading, rest] = headingMatch;
-                            // Split rest by semicolon for sub-bullets
-                            const points = rest
-                              .split(";")
-                              .map((p) => p.trim())
-                              .filter(Boolean);
-                            return (
-                              <li key={idx}>
-                                <span className="font-medium text-gray-800">
-                                  {heading}:
-                                </span>
-                                <ul className="list-disc ml-5 mt-1 space-y-1">
-                                  {points.map((point, i) => (
-                                    <li key={i} className="text-gray-600">
-                                      {point}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </li>
-                            );
-                          }
-
-                          // Otherwise, render normal sentence
-                          return (
-                            <li key={idx} className="text-gray-700">
-                              {trimmed}
-                            </li>
-                          );
-                        })}
+                          })}
                     </ul>
                   </div>
                 ))}

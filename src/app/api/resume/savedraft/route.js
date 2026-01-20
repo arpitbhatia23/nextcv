@@ -8,7 +8,7 @@ import User from "@/models/user.model";
 import { apiResponse } from "@/utils/apiResponse";
 const handler = async (req) => {
   const data = await req.json();
-
+  console.log(data);
   const {
     name,
     email,
@@ -27,7 +27,7 @@ const handler = async (req) => {
   } = data;
   if (
     [name, email, phone, address, jobRole, summary].some(
-      (fileds) => fileds.trim() == ""
+      (fileds) => fileds.trim() == "",
     )
   ) {
     throw new apiError(400, "all field are required");

@@ -24,7 +24,6 @@ import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";
-import { useRouter } from "next/router";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -84,6 +83,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
     setAppliedCoupon(null);
     toast.info("Coupon removed");
   };
+
+  console.log(formData);
 
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
@@ -163,7 +164,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
       setIsSubmit(false);
       console.error("Coupon apply error:", error);
       toast.error(
-        error?.response?.data || "Something went wrong while applying coupon"
+        error?.response?.data || "Something went wrong while applying coupon",
       );
     }
   };

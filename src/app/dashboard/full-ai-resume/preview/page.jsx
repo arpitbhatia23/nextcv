@@ -5,6 +5,7 @@ import React from "react";
 
 const page = () => {
   const data = useResumeStore((state) => state.formData);
+  console.log(data);
   return (
     <div className="max-h-full">
       <FinalStep formData={data}></FinalStep>

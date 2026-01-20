@@ -37,8 +37,8 @@ const useResumeStore = create(
     {
       name: "resume-draft",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );
 
 export default useResumeStore;

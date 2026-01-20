@@ -43,8 +43,8 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
     if (isEditing) {
       setProjectList((prev) =>
         prev.map((proj) =>
-          proj.id === editingId ? { ...values, id: editingId } : proj
-        )
+          proj.id === editingId ? { ...values, id: editingId } : proj,
+        ),
       );
       setIsEditing(false);
       setEditingId(null);
@@ -324,9 +324,9 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
               </div>
             ) : (
               <div className="space-y-4 p-4">
-                {projectList.map((project) => (
+                {projectList.map((project, idx) => (
                   <div
-                    key={project.id}
+                    key={idx}
                     className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow px-4"
                   >
                     <div className="flex justify-between items-start mb-3">
@@ -372,53 +372,50 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                       </div>
                     </div>
 
-                    {project.description
-                      .split("\n") // split by newlines
-                      .map((line, idx) => {
-                        const trimmed = line.trim();
-                        if (!trimmed) return null;
+                    {project.description ??
+                      project.description
+                        ?.split("\n") // split by newlines
+                        .map((line, idx) => {
+                          const trimmed = line.trim();
+                          if (!trimmed) return null;
 
-                        // If line starts with bullet symbol, just render as list item
-                        if (trimmed.startsWith("•")) {
-                          return (
-                            <li key={idx} className="text-gray-700">
-                              {trimmed.replace(/^•\s*/, "")}
-                            </li>
-                          );
-                        }
+                          // If line starts with bullet symbol, just render as list item
+                          if (trimmed.startsWith("•")) {
+                            return (
+                              <li key={idx} className="text-gray-700">
+                                {trimmed.replace(/^•\s*/, "")}
+                              </li>
+                            );
+                          }
 
-                        // If line contains heading (like "Key responsibilities include:")
-                        const headingMatch = trimmed.match(/^(.+?):\s*(.+)$/);
-                        if (headingMatch) {
-                          const [, heading, rest] = headingMatch;
-                          // Split rest by semicolon for sub-bullets
-                          const points = rest
-                            .split(";")
-                            .map((p) => p.trim())
-                            .filter(Boolean);
-                          return (
-                            <li key={idx}>
-                              <span className="font-medium text-gray-800">
-                                {heading}:
-                              </span>
-                              <ul className="list-disc ml-5 mt-1 space-y-2">
-                                {points.map((point, i) => (
-                                  <li key={i} className="text-gray-600">
-                                    {point}
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          );
-                        }
+                          // If line contains heading (like "Key responsibilities include:")
+                          const headingMatch = trimmed.match(/^(.+?):\s*(.+)$/);
+                          if (headingMatch) {
+                            const [, heading, rest] = headingMatch;
+                            // Split rest by semicolon for sub-bullets
+                            const points = rest
+                              .split(";")
+                              .map((p) => p.trim())
+                              .filter(Boolean);
+                            return (
+                              <li key={idx}>
+                                <span className="font-medium text-gray-800">
+                                  {heading}:
+                                </span>
+                                <ul className="list-disc ml-5 mt-1 space-y-2">
+                                  {points.map((point, i) => (
+                                    <li key={i} className="text-gray-600">
+                                      {point}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            );
+                          }
 
-                        // Otherwise, render normal sentence
-                        return (
-                          <li key={idx} className="text-gray-700">
-                            {trimmed}
-                          </li>
-                        );
-                      })}
+                          // Otherwise, render normal sentence
+                          return <li className="text-gray-700">{trimmed}</li>;
+                        })}
                   </div>
                 ))}
               </div>

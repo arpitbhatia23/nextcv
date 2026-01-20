@@ -68,7 +68,8 @@ const resumeSchema = new Schema(
           type: String,
         },
         description: {
-          type: String,
+          type: [String],
+          default: [],
         },
       },
     ],
@@ -87,7 +88,8 @@ const resumeSchema = new Schema(
           type: Date,
         },
         description: {
-          type: String,
+          type: [String],
+          default: [],
         },
       },
     ],
@@ -100,7 +102,8 @@ const resumeSchema = new Schema(
           type: String,
         },
         description: {
-          type: String,
+          type: [String],
+          default: [],
         },
         link: {
           type: String,

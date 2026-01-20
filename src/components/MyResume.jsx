@@ -148,7 +148,7 @@ const MyResume = () => {
     } catch (error) {
       console.error("Coupon apply error:", error);
       toast.error(
-        error?.response?.data || "Something went wrong while applying coupon"
+        error?.response?.data || "Something went wrong while applying coupon",
       );
     }
   };
@@ -169,16 +169,16 @@ const MyResume = () => {
         setResumes((prev) => ({
           ...prev,
           paid: prev.paid?.filter(
-            (resume) => resume.resumedata._id !== resumeId
+            (resume) => resume.resumedata._id !== resumeId,
           ),
           draft: prev.draft?.filter(
-            (resume) => resume.resumedata._id !== resumeId
+            (resume) => resume.resumedata._id !== resumeId,
           ),
         }));
       }
     } catch (error) {
       toast.error(
-        error.message || "something went wrong while deleting resume"
+        error.message || "something went wrong while deleting resume",
       );
     }
   };
@@ -260,7 +260,7 @@ const MyResume = () => {
         </div>
         <div className="flex items-center gap-3 mb-2">
           <div
-            className="flex-shrink-0 bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center cursor-pointer"
+            className="shrink-0 bg-gray-100 rounded-full h-10 w-10 flex items-center justify-center cursor-pointer"
             onClick={() => handleViewResume(resume)}
           >
             <Eye className="h-5 w-5 text-gray-400" />
@@ -293,7 +293,7 @@ const MyResume = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {[...Array(8)].map((_, i) => (
             <Card key={i} className="animate-pulse">
-              <div className="aspect-[3/4] bg-gray-200 rounded-t-lg"></div>
+              <div className="aspect-3/4 bg-gray-200 rounded-t-lg"></div>
               <CardContent className="p-4">
                 <div className="h-4 bg-gray-200 rounded mb-2"></div>
                 <div className="h-3 bg-gray-200 rounded w-2/3 mb-4"></div>
@@ -307,7 +307,7 @@ const MyResume = () => {
   }
 
   return (
-    <div className="mx-auto p-6 bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+    <div className="mx-auto p-6 bg-linear-to-br from-purple-50 to-blue-50 min-h-screen">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">My Resumes</h1>
         <p className="text-gray-600">
@@ -449,7 +449,7 @@ const MyResume = () => {
                   )}
 
                   <Button
-                    className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+                    className="w-full bg-linear-to-r from-indigo-600 to-purple-600 text-white"
                     onClick={() => handelPayment(resumeData._id)}
                   >
                     <IndianRupee className="mr-2 h-4 w-4" />
