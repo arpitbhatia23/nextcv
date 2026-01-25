@@ -26,6 +26,7 @@ export default async function sitemap() {
     priority: 0.9,
   }));
 
+  console.log(blogPages?.length);
   // Return all sitemap entries
   return [...pages, ...blogPages];
 }

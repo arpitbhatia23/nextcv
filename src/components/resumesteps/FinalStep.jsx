@@ -84,8 +84,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
     toast.info("Coupon removed");
   };
 
-  console.log(formData);
-
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
     let isMounted = true;
