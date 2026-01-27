@@ -33,7 +33,15 @@ export default function ContactForm() {
         type: "success",
         text: "Thanks — we will get back to you soon.",
       });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+
+      setStatus({
+        type: "failed",
+        text: "something went wrong",
+      });
+    }
   };
 
   return (

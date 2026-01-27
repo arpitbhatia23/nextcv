@@ -44,7 +44,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Email Submission Error:", error);
     return NextResponse.json(
-      { error: "Failed to send email" },
+      { error: error?.message || "something went wrong" },
       { status: 500 },
     );
   }
