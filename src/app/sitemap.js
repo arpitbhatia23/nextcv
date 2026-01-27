@@ -14,6 +14,7 @@ export default async function sitemap() {
   // Static pages
   const pages = [
     { url: `${baseUrl}/`, priority: 1.0 },
+    { url: `${baseUrl}/blogs`, priority: 0.8 },
     { url: `${baseUrl}/privacyPolicy`, priority: 1.0 },
     { url: `${baseUrl}/terms`, priority: 1.0 },
   ];

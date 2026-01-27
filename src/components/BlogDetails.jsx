@@ -162,19 +162,19 @@ const BlogDetails = ({ slug }) => {
     switch (platform) {
       case "twitter":
         shareUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}&text=${encodeURIComponent(title)}&hashtags=${encodeURIComponent(
-          hashtags
+          hashtags,
         )}`;
         break;
       case "linkedin":
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}`;
         break;
       case "facebook":
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}`;
         break;
       case "copy":
@@ -212,14 +212,8 @@ const BlogDetails = ({ slug }) => {
 
   return (
     <div className="bg-white min-h-screen">
-      {/* SEO Meta Tags (Next.js handles these best via the metadata API in the app directory, 
-          but they are included here as a fallback/reminder) */}
-      <title>{blog.title}</title>
-      <meta
-        name="description"
-        content={`${blog.title} - Explore this in-depth logistics article, covering insights, strategies, and tips from industry experts.`}
-      />
-      {/* ... other meta tags ... */}
+      {/* Metadata should be set via the app router metadata API or server-side head.
+          Removed inline <title>/<meta> tags to avoid meta-in-body issues. */}
 
       {/* Blog Details */}
       <section className="text-gray-800 py-10 px-3 md:px-5 relative">
