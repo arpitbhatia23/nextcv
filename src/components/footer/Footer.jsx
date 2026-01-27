@@ -45,7 +45,10 @@ export const Footer = () => {
       route: "/",
     },
     { label: "Blogs", route: "/blogs" }, // Added Blogs link
-    { label: "Privacy Policy", route: "/privacyPolicy" },
+    { label: "About us", route: "/about-us" }, // Added Blogs link
+    { label: "Contact", route: "/contact" }, // Added Blogs link
+
+    { label: "Privacy Policy", route: "/privacy-policy" },
     { label: "Terms of Service", route: "/terms" },
   ];
 

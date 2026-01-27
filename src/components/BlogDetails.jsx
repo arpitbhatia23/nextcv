@@ -162,19 +162,19 @@ const BlogDetails = ({ slug }) => {
     switch (platform) {
       case "twitter":
         shareUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}&text=${encodeURIComponent(title)}&hashtags=${encodeURIComponent(
-          hashtags
+          hashtags,
         )}`;
         break;
       case "linkedin":
         shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}`;
         break;
       case "facebook":
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          currentUrl
+          currentUrl,
         )}`;
         break;
       case "copy":

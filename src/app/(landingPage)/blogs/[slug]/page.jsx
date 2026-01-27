@@ -14,6 +14,8 @@ export async function generateMetadata({ params }) {
       // Fetch body for description extraction
       body, 
       mainImage { asset->{url} },
+      publishedAt,
+      author->{name},
     }`;
 
   const data = await client.fetch(query, { slug });
@@ -68,8 +70,60 @@ export default async function BlogDetailsPage({ params }) {
   const { slug } = await params;
   console.log(slug);
 
+  // Fetch blog data for JSON-LD
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+      title,
+      body,
+      mainImage { asset->{url} },
+      publishedAt,
+      _createdAt,
+      _updatedAt,
+      author->{name, image},
+    }`;
+
+  const blogData = await client.fetch(query, { slug });
+
+  // Generate JSON-LD structured data
+  const jsonLdSchema = blogData
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: blogData.title,
+        image:
+          blogData.mainImage?.asset?.url ||
+          "https://nextcv.in/opengraph-image.png",
+        datePublished: blogData.publishedAt || blogData._createdAt,
+        dateModified:
+          blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
+        author: {
+          "@type": "Person",
+          name: blogData.author?.name || "NextCV Team",
+          image: blogData.author?.image?.asset?.url || "",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "NextCV",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://nextcv.in/opengraph-image.png",
+          },
+        },
+        description: blogData.body?.[0]?.children?.[0]?.text || blogData.title,
+      }
+    : null;
+
   return (
-    // The Client Component (BlogDetails) handles data fetching, loading, and interactive rendering
-    <BlogDetails slug={slug} />
+    <>
+      {jsonLdSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdSchema),
+          }}
+        />
+      )}
+      {/* The Client Component (BlogDetails) handles data fetching, loading, and interactive rendering */}
+      <BlogDetails slug={slug} />
+    </>
   );
 }

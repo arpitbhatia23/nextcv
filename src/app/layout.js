@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
                 "Create professional ATS-optimized resumes in minutes. Built for the Indian job market with a simple ₹100 one-time pricing.",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://nextcv.in/?q={search_term_string}",
+                target: "https://nextcv.in/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),
@@ -93,22 +93,56 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               name: "NextCV",
               url: "https://nextcv.in",
-              logo: "https://nextcv.in/logo.png",
+              logo: "https://nextcv.in/opengraph-image.png",
+              description:
+                "AI-powered resume builder optimized for the Indian job market",
+              sameAs: [
+                "https://www.facebook.com/nextcv",
+                "https://www.twitter.com/nextcv",
+                "https://www.linkedin.com/company/nextcv",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "Customer Support",
+                email: "support@nextcv.in",
+              },
             }),
           }}
         />
 
-        {/* JSON-LD for WebPage */}
+        {/* JSON-LD for BreadcrumbList */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebPage",
-              name: "NextCV - Build the Perfect ATS Friendly Resume",
-              url: "https://nextcv.in/",
-              description:
-                "Create ATS-ready professional resumes tailored for the Indian job market. Try the free demo and download your resume for ₹100.",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://nextcv.in",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Dashboard",
+                  item: "https://nextcv.in/dashboard",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: "Blogs",
+                  item: "https://nextcv.in/blogs",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 4,
+                  name: "About",
+                  item: "https://nextcv.in/about-us",
+                },
+              ],
             }),
           }}
         />
