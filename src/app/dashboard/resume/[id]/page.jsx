@@ -20,10 +20,13 @@ import {
   Github,
   Linkedin,
   Globe,
+  Loader2,
+  ArrowLeft
 } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "@/utils/datefromater";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 function getChangedFields(original, edited) {
   const changed = {};
@@ -37,6 +40,7 @@ function getChangedFields(original, edited) {
 
 const page = ({ params }) => {
   const { id } = React.use(params);
+  const router = useRouter();
   const [editdata, setEditdata] = useState({
     name: "",
     email: "",
@@ -58,10 +62,15 @@ const page = ({ params }) => {
 
   const fetchResumeById = async () => {
     setLoading(true);
-    const res = await axios.get(`/api/resume/getResumeById/${id}`);
-    setEditdata(res.data.data);
-    setOriginalData(res.data.data);
-    setLoading(false);
+    try {
+      const res = await axios.get(`/api/resume/getResumeById/${id}`);
+      setEditdata(res.data.data);
+      setOriginalData(res.data.data);
+    } catch (error) {
+      console.error("Failed to fetch resume");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -120,54 +129,79 @@ const page = ({ params }) => {
     }
   };
 
+  if (loading) {
+     return <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+     </div>
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-8 px-2">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-4xl font-extrabold text-blue-900 tracking-tight drop-shadow">
+            <button 
+                onClick={() => router.back()} 
+                className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-2 text-sm font-medium"
+            >
+                <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+            </button>
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
               Edit Resume
             </h1>
-            <p className="text-gray-600 mt-1 text-lg">
-              Update your professional information
+            <p className="text-slate-500 mt-1">
+              Update your professional details to keep your resume fresh.
             </p>
           </div>
+          <Button
+            onClick={handleSave}
+            disabled={saving}
+            size="lg"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm px-8"
+          >
+            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
+            {saving ? "Saving..." : "Save Changes"}
+          </Button>
         </div>
 
         {/* Personal Information */}
-        <Card className="shadow-xl border-2 border-blue-100 bg-white/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-700">
-              <User className="w-5 h-5" />
+        <Card className="shadow-sm border border-slate-200 bg-white">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
+              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                 <User className="w-4 h-4 text-indigo-600" />
+              </div>
               Personal Information
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="name">Full Name</Label>
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-slate-600">Full Name</Label>
                 <Input
                   id="name"
                   value={editdata.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
-              <div>
-                <Label htmlFor="jobRole">Job Role</Label>
+              <div className="space-y-2">
+                <Label htmlFor="jobRole" className="text-slate-600">Job Role</Label>
                 <Input
                   id="jobRole"
                   value={editdata.jobRole}
                   onChange={(e) => handleInputChange("jobRole", e.target.value)}
                   placeholder="e.g., Full Stack Developer"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="email" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
+              <div className="space-y-2">
+                <Label htmlFor="email" className="flex items-center gap-2 text-slate-600">
+                  <Mail className="w-3.5 h-3.5" />
                   Email
                 </Label>
                 <Input
@@ -176,11 +210,12 @@ const page = ({ params }) => {
                   value={editdata.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder="your.email@example.com"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
-              <div>
-                <Label htmlFor="phone" className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
+              <div className="space-y-2">
+                <Label htmlFor="phone" className="flex items-center gap-2 text-slate-600">
+                  <Phone className="w-3.5 h-3.5" />
                   Phone Number
                 </Label>
                 <Input
@@ -190,12 +225,13 @@ const page = ({ params }) => {
                     handleInputChange("phone_no", e.target.value)
                   }
                   placeholder="Your phone number"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
             </div>
-            <div>
-              <Label htmlFor="address" className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
+            <div className="space-y-2">
+              <Label htmlFor="address" className="flex items-center gap-2 text-slate-600">
+                <MapPin className="w-3.5 h-3.5" />
                 Address
               </Label>
               <Textarea
@@ -204,12 +240,13 @@ const page = ({ params }) => {
                 onChange={(e) => handleInputChange("address", e.target.value)}
                 placeholder="Your full address"
                 rows={2}
+                className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <Label htmlFor="github" className="flex items-center gap-2">
-                  <Github className="w-4 h-4" />
+              <div className="space-y-2">
+                <Label htmlFor="github" className="flex items-center gap-2 text-slate-600">
+                  <Github className="w-3.5 h-3.5" />
                   GitHub
                 </Label>
                 <Input
@@ -217,11 +254,12 @@ const page = ({ params }) => {
                   value={editdata.github}
                   onChange={(e) => handleInputChange("github", e.target.value)}
                   placeholder="GitHub profile URL"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
-              <div>
-                <Label htmlFor="linkedin" className="flex items-center gap-2">
-                  <Linkedin className="w-4 h-4" />
+              <div className="space-y-2"> 
+                <Label htmlFor="linkedin" className="flex items-center gap-2 text-slate-600">
+                  <Linkedin className="w-3.5 h-3.5" />
                   LinkedIn
                 </Label>
                 <Input
@@ -231,11 +269,12 @@ const page = ({ params }) => {
                     handleInputChange("linkedin", e.target.value)
                   }
                   placeholder="LinkedIn profile URL"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
-              <div>
-                <Label htmlFor="portfolio" className="flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
+              <div className="space-y-2">
+                <Label htmlFor="portfolio" className="flex items-center gap-2 text-slate-600">
+                  <Globe className="w-3.5 h-3.5" />
                   Portfolio
                 </Label>
                 <Input
@@ -245,34 +284,38 @@ const page = ({ params }) => {
                     handleInputChange("portfolio", e.target.value)
                   }
                   placeholder="Portfolio website URL"
+                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
             </div>
-            <div>
-              <Label htmlFor="summary">Professional Summary</Label>
+            <div className="space-y-2">
+              <Label htmlFor="summary" className="text-slate-600">Professional Summary</Label>
               <Textarea
                 id="summary"
                 value={editdata.summary}
                 onChange={(e) => handleInputChange("summary", e.target.value)}
                 placeholder="Brief description of your professional background and goals"
                 rows={4}
+                className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Skills */}
-        <Card className="shadow-lg border-blue-100 bg-white/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-700">
-              <Code className="w-5 h-5" />
+        <Card className="shadow-sm border border-slate-200 bg-white">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
+              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                 <Code className="w-4 h-4 text-indigo-600" />
+              </div>
               Skills
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-4">
               {editdata.skills.map((skill, index) => (
-                <div key={index} className="flex items-center gap-4">
+                <div key={index} className="flex items-center gap-4 bg-slate-50 p-2 rounded-lg border border-slate-100">
                   <div className="flex-1">
                     <Input
                       value={skill.name}
@@ -285,6 +328,7 @@ const page = ({ params }) => {
                         )
                       }
                       placeholder="Skill name"
+                      className="bg-white border-slate-200"
                     />
                   </div>
                   <div className="w-32">
@@ -299,22 +343,23 @@ const page = ({ params }) => {
                         )
                       }
                       placeholder="Level"
+                      className="bg-white border-slate-200"
                     />
                   </div>
                   <Button
                     variant="ghost"
-                    size="sm"
-                    className="hover:bg-red-100"
+                    size="icon"
+                    className="hover:bg-red-50 hover:text-red-600 shrink-0"
                     onClick={() => removeArrayItem("skills", index)}
                   >
-                    <Minus className="w-4 h-4 text-red-500" />
+                    <Minus className="w-4 h-4" />
                   </Button>
                 </div>
               ))}
               <Button
                 variant="outline"
                 onClick={() => addArrayItem("skills", { name: "", level: "" })}
-                className="w-full bg-gradient-to-r from-purple-100 to-blue-100"
+                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Skill
@@ -324,36 +369,38 @@ const page = ({ params }) => {
         </Card>
 
         {/* Experience */}
-        <Card className="shadow-lg border-blue-100 bg-white/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-700">
-              <Briefcase className="w-5 h-5" />
+        <Card className="shadow-sm border border-slate-200 bg-white">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
+              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                 <Briefcase className="w-4 h-4 text-indigo-600" />
+              </div>
               Experience
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-6">
               {editdata.experience.map((exp, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 space-y-4 bg-blue-50/50"
+                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white relative group"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-blue-800">
+                    <h4 className="font-semibold text-slate-700">
                       Experience {index + 1}
                     </h4>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="hover:bg-red-100"
+                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
                       onClick={() => removeArrayItem("experience", index)}
                     >
-                      <Minus className="w-4 h-4 text-red-500" />
+                      <Minus className="w-4 h-4" />
                     </Button>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label>Job Title</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Job Title</Label>
                       <Input
                         value={exp.position}
                         onChange={(e) =>
@@ -365,10 +412,11 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Job title"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
-                    <div>
-                      <Label>Company</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Company</Label>
                       <Input
                         value={exp.companyName}
                         onChange={(e) =>
@@ -380,12 +428,13 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Company name"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label>Start Date</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Start Date</Label>
                       <Input
                         value={formatDate(exp.startDate)}
                         onChange={(e) =>
@@ -397,10 +446,11 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Start date"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
-                    <div>
-                      <Label>End Date</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">End Date</Label>
                       <Input
                         value={formatDate(exp.endDate)}
                         onChange={(e) =>
@@ -412,11 +462,12 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="End date"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
                   </div>
-                  <div>
-                    <Label>Description</Label>
+                  <div className="space-y-2">
+                    <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={exp.description}
                       onChange={(e) =>
@@ -429,6 +480,7 @@ const page = ({ params }) => {
                       }
                       placeholder="Describe your role and achievements"
                       rows={3}
+                      className="bg-slate-50 border-slate-200"
                     />
                   </div>
                 </div>
@@ -444,7 +496,7 @@ const page = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full bg-gradient-to-r from-blue-100 to-purple-100"
+                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Experience
@@ -454,36 +506,38 @@ const page = ({ params }) => {
         </Card>
 
         {/* Education */}
-        <Card className="shadow-lg border-blue-100 bg-white/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-purple-700">
-              <GraduationCap className="w-5 h-5" />
+        <Card className="shadow-sm border border-slate-200 bg-white">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
+              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                 <GraduationCap className="w-4 h-4 text-indigo-600" />
+              </div>
               Education
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-6">
               {editdata.education.map((edu, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 space-y-4 bg-purple-50/50"
+                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-purple-800">
+                    <h4 className="font-semibold text-slate-700">
                       Education {index + 1}
                     </h4>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="hover:bg-red-100"
+                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
                       onClick={() => removeArrayItem("education", index)}
                     >
-                      <Minus className="w-4 h-4 text-red-500" />
+                      <Minus className="w-4 h-4" />
                     </Button>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label>Degree</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Degree</Label>
                       <Input
                         value={edu.degree}
                         onChange={(e) =>
@@ -495,10 +549,11 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Degree name"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
-                    <div>
-                      <Label>Institution</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Institution</Label>
                       <Input
                         value={edu.institution}
                         onChange={(e) =>
@@ -510,12 +565,13 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Institution name"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label>Start Year</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Start Year</Label>
                       <Input
                         value={formatDate(edu.startYear)}
                         onChange={(e) =>
@@ -527,10 +583,11 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="Start year"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
-                    <div>
-                      <Label>End Year</Label>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">End Year</Label>
                       <Input
                         value={formatDate(edu.endYear)}
                         onChange={(e) =>
@@ -542,11 +599,12 @@ const page = ({ params }) => {
                           )
                         }
                         placeholder="End year"
+                        className="bg-slate-50 border-slate-200"
                       />
                     </div>
                   </div>
-                  <div>
-                    <Label>Grade/Score</Label>
+                  <div className="space-y-2">
+                    <Label className="text-slate-600">Grade/Score</Label>
                     <Input
                       value={edu.grade}
                       onChange={(e) =>
@@ -558,10 +616,11 @@ const page = ({ params }) => {
                         )
                       }
                       placeholder="CGPA/Percentage"
+                      className="bg-slate-50 border-slate-200"
                     />
                   </div>
-                  <div>
-                    <Label>Description</Label>
+                  <div className="space-y-2">
+                    <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={edu.description}
                       onChange={(e) =>
@@ -574,6 +633,7 @@ const page = ({ params }) => {
                       }
                       placeholder="Describe your education"
                       rows={2}
+                      className="bg-slate-50 border-slate-200"
                     />
                   </div>
                 </div>
@@ -590,7 +650,7 @@ const page = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full bg-gradient-to-r from-purple-100 to-blue-100"
+                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Education
@@ -600,95 +660,105 @@ const page = ({ params }) => {
         </Card>
 
         {/* Projects */}
-        <Card className="shadow-lg border-blue-100 bg-white/80">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-pink-700">
-              <FolderOpen className="w-5 h-5" />
+        <Card className="shadow-sm border border-slate-200 bg-white">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
+              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+                 <FolderOpen className="w-4 h-4 text-indigo-600" />
+              </div>
               Projects
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-6">
               {editdata.projects.map((project, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg p-4 space-y-4 bg-pink-50/50"
+                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-pink-800">
+                    <h4 className="font-semibold text-slate-700">
                       Project {index + 1}
                     </h4>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="hover:bg-red-100"
+                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
                       onClick={() => removeArrayItem("projects", index)}
                     >
-                      <Minus className="w-4 h-4 text-red-500" />
+                      <Minus className="w-4 h-4" />
                     </Button>
                   </div>
-                  <div>
-                    <Label>Title</Label>
-                    <Input
-                      value={project.title}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "projects",
-                          index,
-                          "title",
-                          e.target.value
-                        )
-                      }
-                      placeholder="Project title"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                        <Label className="text-slate-600">Title</Label>
+                        <Input
+                          value={project.title}
+                          onChange={(e) =>
+                            handleArrayItemChange(
+                              "projects",
+                              index,
+                              "title",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Project title"
+                          className="bg-slate-50 border-slate-200"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-600">Role/Type</Label>
+                        <Input
+                          value={project.roleOrType}
+                          onChange={(e) =>
+                            handleArrayItemChange(
+                              "projects",
+                              index,
+                              "roleOrType",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Role or type"
+                          className="bg-slate-50 border-slate-200"
+                        />
+                      </div>
                   </div>
-                  <div>
-                    <Label>Role/Type</Label>
-                    <Input
-                      value={project.roleOrType}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "projects",
-                          index,
-                          "roleOrType",
-                          e.target.value
-                        )
-                      }
-                      placeholder="Role or type"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                     <div className="space-y-2">
+                        <Label className="text-slate-600">Organization</Label>
+                        <Input
+                          value={project.organization}
+                          onChange={(e) =>
+                            handleArrayItemChange(
+                              "projects",
+                              index,
+                              "organization",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Organization"
+                          className="bg-slate-50 border-slate-200"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label className="text-slate-600">Date</Label>
+                        <Input
+                          value={project.date}
+                          onChange={(e) =>
+                            handleArrayItemChange(
+                              "projects",
+                              index,
+                              "date",
+                              e.target.value
+                            )
+                          }
+                          placeholder="Date"
+                          className="bg-slate-50 border-slate-200"
+                        />
+                      </div>
                   </div>
-                  <div>
-                    <Label>Organization</Label>
-                    <Input
-                      value={project.organization}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "projects",
-                          index,
-                          "organization",
-                          e.target.value
-                        )
-                      }
-                      placeholder="Organization"
-                    />
-                  </div>
-                  <div>
-                    <Label>Date</Label>
-                    <Input
-                      value={project.date}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "projects",
-                          index,
-                          "date",
-                          e.target.value
-                        )
-                      }
-                      placeholder="Date"
-                    />
-                  </div>
-                  <div>
-                    <Label>Technologies/Topics</Label>
+                  <div className="space-y-2">
+                    <Label className="text-slate-600">Technologies/Topics</Label>
                     <Input
                       value={project.technologiesOrTopics}
                       onChange={(e) =>
@@ -700,10 +770,11 @@ const page = ({ params }) => {
                         )
                       }
                       placeholder="Technologies or topics"
+                      className="bg-slate-50 border-slate-200"
                     />
                   </div>
-                  <div>
-                    <Label>Description</Label>
+                  <div className="space-y-2">
+                    <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={project.description}
                       onChange={(e) =>
@@ -716,6 +787,7 @@ const page = ({ params }) => {
                       }
                       placeholder="Project description"
                       rows={3}
+                      className="bg-slate-50 border-slate-200"
                     />
                   </div>
                 </div>
@@ -732,7 +804,7 @@ const page = ({ params }) => {
                     description: "",
                   })
                 }
-                className="w-full bg-gradient-to-r from-pink-100 to-purple-100"
+                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Project
@@ -742,16 +814,23 @@ const page = ({ params }) => {
         </Card>
 
         {/* Footer */}
-        <div className="flex justify-end">
-          <Button
-            onClick={handleSave}
-            disabled={saving}
-            size="lg"
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold shadow-lg px-8 py-3 rounded-xl"
-          >
-            <Save className="w-4 h-4 mr-2" />
-            {saving ? "Saving..." : "Save Resume"}
-          </Button>
+        <div className="flex justify-end gap-4">
+            <Button
+                variant="outline"
+                onClick={() => router.back()}
+                className="border-slate-300 text-slate-700 hover:bg-slate-50"
+            >
+                Cancel
+            </Button>
+            <Button
+                onClick={handleSave}
+                disabled={saving}
+                size="lg"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-200 px-8"
+            >
+                {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
+                {saving ? "Saving..." : "Save Resume"}
+            </Button>
         </div>
       </div>
     </div>

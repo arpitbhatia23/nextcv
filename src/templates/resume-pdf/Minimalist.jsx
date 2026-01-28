@@ -314,10 +314,10 @@ const ClassicMinimalistPDFResume = ({
               <Text>{data.address}</Text>
             </View>
           )}
-          {data.phone_no && (
+          {data.phone && (
             <View style={styles.infoItem}>
               <PhoneIcon />
-              <Text>{data.phone_no}</Text>
+              <Text>{data.phone}</Text>
             </View>
           )}
           {data.email && (
@@ -414,7 +414,7 @@ const ClassicMinimalistPDFResume = ({
                           <Text key={j} style={styles.bullet}>
                             • {bullet}
                           </Text>
-                        ) : null
+                        ) : null,
                       )}
                     </View>
                   )}

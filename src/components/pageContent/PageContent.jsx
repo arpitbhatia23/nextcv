@@ -1,12 +1,4 @@
 import React from "react";
-import { Button } from "../ui/button"; // Assuming you have a Button component
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import {
   Zap,
   Brain,
@@ -15,154 +7,157 @@ import {
   Clock,
   Package,
   Headset,
-} from "lucide-react"; // Using lucide-react for better icons
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 
 const PageContent = () => {
   const card_detail = [
     {
-      icon: <Zap className="w-8 h-8 text-orange-500" />,
+      icon: <Zap className="w-6 h-6 text-yellow-400" />,
       title: "Smart AI Resume Generator",
       description:
-        "Our advanced AI analyzes your information to create an ATS-friendly resume that's perfectly tailored to your target industry. Try the resume builder AI free today!",
-      isEmphasis: true, // Mark for visual emphasis
+        "Our advanced AI analyzes your information to create an ATS-friendly resume that's perfectly tailored to your target industry.",
+      className: "bg-slate-900 border-slate-800",
     },
     {
-      icon: <Brain className="w-8 h-8 text-pink-500" />,
+      icon: <Brain className="w-6 h-6 text-teal-400" />,
       title: "ATS-Optimized Templates",
       description:
-        "Use our ATS-friendly resume templates and ATS-friendly CV designs. We guarantee our ATS-friendly resumes and ATS free resume structures beat applicant tracking systems, giving you a clear edge. Learn the ATS friendly resume meaning and how we help you master it.",
-      isEmphasis: true, // Mark for visual emphasis
+        "Guaranteed to beat applicant tracking systems. We give you a clear edge with formats designed to pass automated screening.",
+      className: "bg-slate-900 border-slate-800",
     },
     {
-      icon: <DollarSign className="w-8 h-8 text-green-500" />,
+      icon: <DollarSign className="w-6 h-6 text-green-400" />,
       title: "Just ₹100 per Resume",
       description:
-        "Build your ATS free resume with affordable pricing that won't break the bank. Get professional results at a fraction of the cost, starting with our resume builder features!",
-      isEmphasis: false,
+        "Professional results at a fraction of the cost. No subscriptions, just transparent flat pricing.",
+      className: "bg-slate-900 border-slate-800",
     },
     {
-      icon: <GraduationCap className="w-8 h-8 text-purple-600" />,
-      title: "Made for Students & Job Seekers",
+      icon: <GraduationCap className="w-6 h-6 text-indigo-400" />,
+      title: "For Students & Pros",
       description:
-        "Whether you’re a fresh graduate needing an Indian sample resume or an experienced professional, we provide the best Indian resume format templates for everyone. Resume building simplified.",
-      isEmphasis: false,
+        "Whether you're a fresh graduate or an experienced professional, we provide the best Indian resume format templates.",
+      className: "bg-slate-900 border-slate-800",
     },
   ];
 
   const cardSecond = [
     {
-      icon: <Clock className="w-5 h-5 text-blue-600" />,
+      icon: <Clock className="w-5 h-5 text-indigo-400" />,
       title: "Instant Generation",
       description:
-        "Use our AI resume generator for fast resume building. Create professional resumes in under 5 minutes.",
+        "Create professional resumes in under 5 minutes.",
     },
     {
-      icon: <Package className="w-5 h-5 text-blue-600" />,
+      icon: <Package className="w-5 h-5 text-indigo-400" />,
       title: "Multiple Formats",
       description:
-        "Download your resume in the best Indian resume format in Word, PDF, or plain text, ensuring compatibility.",
+        "Download in PDF or Word. formatting preserved.",
     },
     {
-      icon: <Headset className="w-5 h-5 text-blue-600" />,
+      icon: <Headset className="w-5 h-5 text-indigo-400" />,
       title: "24/7 Support",
       description:
-        "Get help with your professional resume format whenever you need it from our support team.",
+        "Get help whenever you need it from our team.",
     },
   ];
 
-  // Component for the Success Rate Card
-  const SuccessRateCard = () => (
-    <Card className="bg-blue-600 text-white w-full rounded-xl mb-12">
-      <CardContent className="text-center p-6 space-y-2">
-        <CardHeader className="text-4xl sm:text-5xl font-extrabold p-0">
-          95%
-        </CardHeader>
-        <CardTitle className="text-2xl">Success Rate</CardTitle>
-        <CardDescription className="text-blue-200 text-sm max-w-2xl mx-auto">
-          Users who got interviews within 30 days, thanks to our ATS friendly
-          resume designs. (ATS friendly resume meaning: a format designed to
-          pass automated screening.)
-        </CardDescription>
-      </CardContent>
-    </Card>
-  );
-
   return (
-    <section className="px-4 py-12 max-w-7xl mx-auto">
-      {/* 1. Heading and Primary CTA */}
-      <Card className="items-center text-center border-none shadow-none mb-4">
-        <p className="text-xl sm:text-3xl text-gray-900 font-semibold mt-2 max-w-4xl mx-auto">
-          Unlock interviews with the best AI resume generator. Experience our
-          ATS-friendly templates and professional resume building platform for
-          modern job seekers.
-        </p>
-        {/* New: Primary CTA */}
-        <Button
-          className="mt-6 bg-orange-500 hover:bg-orange-600 text-white text-lg font-bold py-7 px-5 rounded-lg shadow-lg transition duration-300"
-          size="lg"
-        >
-          Start Building Your ATS Resume Now
-        </Button>
-      </Card>
+    <section className="py-24 bg-black text-slate-200">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Intro Section */}
+        <div className="mb-20 text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
+            Unlock interviews with the <span className="text-indigo-400">best AI resume generator</span>
+          </h2>
+          <p className="text-lg text-slate-400 leading-relaxed">
+            Experience our ATS-friendly templates and professional resume building platform designed for modern job seekers.
+          </p>
+        </div>
 
-      {/* 2. Elevated Trust Signal */}
-      <div className="mb-10">
-        <SuccessRateCard />
-      </div>
-
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        {card_detail.map(({ icon, title, description, isEmphasis }, index) => (
-          <Card
-            key={index}
-            className={`h-full transition duration-300 ${
-              isEmphasis
-                ? "border-4 border-blue-500 shadow-xl"
-                : "border-gray-200 shadow-md"
-            }`} // 3. Visual Emphasis
-          >
-            <CardContent className="flex flex-col items-center text-center px-4 py-6">
-              <CardHeader className="text-4xl p-0 mb-4">{icon}</CardHeader>
-              <CardTitle className="text-xl font-bold">{title}</CardTitle>
-              <CardDescription className="text-md text-gray-600 mt-2">
-                {description}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Lower Section (Built for Success) */}
-      <section className="flex flex-col lg:flex-row gap-8 items-start">
-        {/* Left Text Section */}
-        <Card className="flex-1 border-none shadow-none">
-          <CardContent className="space-y-6 p-0">
-            <h2 className="text-3xl font-bold mb-4">
-              Built for Success: The Best Indian Resume Format
-            </h2>
-            {cardSecond.map(({ icon, title, description }, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <div className="flex-shrink-0 mt-1">{icon}</div>{" "}
-                {/* 4. New Icons */}
-                <div className="space-y-1">
-                  <CardTitle className="text-lg font-bold">{title}</CardTitle>
-                  <CardDescription className="text-gray-700">
-                    {description}
-                  </CardDescription>
+        {/* Success Rate Feature */}
+        <div className="mb-24 relative group">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-500"></div>
+          <div className="relative bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 overflow-hidden">
+             
+             <div className="flex flex-col md:flex-row items-center gap-10">
+                <div className="flex-1 space-y-4 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-2">
+                    <CheckCircle2 className="w-4 h-4" />
+                    Proven Results
+                  </div>
+                  <h3 className="text-3xl font-bold text-white">Boost Your Interview Chances</h3>
+                  <p className="text-slate-400 text-lg">
+                    Users who got interviews within 30 days thanks to our ATS-friendly resume designs.
+                  </p>
                 </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+                <div className="flex-shrink-0 text-center">
+                    <span className="block text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 tracking-tighter">
+                      95%
+                    </span>
+                    <span className="text-blue-200 font-medium tracking-widest uppercase text-sm">Success Rate</span>
+                </div>
+             </div>
 
-        {/* Right Space Filler (Placeholder for another CTA or Trust Signal if needed) */}
-        <Card className="flex-1 border-none shadow-none flex items-center justify-center lg:pt-10">
-          {/* Secondary CTA suggestion */}
-          <Button className="w-full lg:w-3/4 bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold py-6 rounded-lg shadow-lg transition duration-300">
-            Start Your Journey Now
-          </Button>
-        </Card>
-      </section>
+          </div>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+          {card_detail.map((item, index) => (
+            <div
+              key={index}
+              className={`group p-8 rounded-2xl border transition-all duration-300 hover:-translate-y-1 ${item.className} border-white/5 hover:border-white/10 hover:shadow-2xl hover:shadow-indigo-500/10`}
+            >
+              <div className="mb-6 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-white/10 transition-colors">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm">
+                {item.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Section */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center border-t border-white/5 pt-20">
+          <div className="space-y-8">
+            <h2 className="text-3xl font-bold text-white">
+              Built for Success: <br/>The Best Indian Resume Format
+            </h2>
+            <div className="space-y-6">
+              {cardSecond.map((item, index) => (
+                <div key={index} className="flex gap-4">
+                  <div className="mt-1 bg-indigo-500/10 p-2 rounded-lg h-fit">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-white mb-1">{item.title}</h4>
+                    <p className="text-slate-400 text-sm">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative">
+             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
+             <div className="relative bg-slate-900 border border-white/10 rounded-3xl p-8 sm:p-12 text-center space-y-6">
+                <h3 className="text-2xl font-bold text-white">Ready to get hired?</h3>
+                <p className="text-slate-400">Join thousands of professionals who have accelerated their careers with NextCV.</p>
+                <button className="w-full py-4 bg-white text-slate-950 font-bold rounded-xl text-lg hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 group">
+                  Start Building Now
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
+                </button>
+             </div>
+          </div>
+        </div>
+      
+      </div>
     </section>
   );
 };

@@ -1,37 +1,25 @@
 "use client";
-// This directive is required because this component uses state, effects,
-// and browser-specific APIs (window, navigator).
-
 import React, { useEffect, useState, useMemo, Suspense } from "react";
-// Import hooks from Next.js navigation (assuming App Router)
 import { useRouter } from "next/navigation";
-// Import Image component for optimization
 import Image from "next/image";
-
 import {
-  AiOutlineArrowLeft,
-  AiOutlineClockCircle,
-  AiOutlineCalendar,
-  AiFillLinkedin,
-  AiFillFacebook,
-  AiOutlineLink,
-  AiOutlineArrowUp,
-} from "react-icons/ai";
-import { FaSquareXTwitter } from "react-icons/fa6";
+  ArrowLeft,
+  Clock,
+  Calendar,
+  Linkedin,
+  Facebook,
+  Link as LinkIcon,
+  Twitter,
+  ArrowUp,
+  User,
+  Check,
+} from "lucide-react";
 
-// Assuming LoadingAnimation component is accessible
-// Imports client and urlFor from the sanity.js Canvas document
 import { client, urlFor } from "../sanity";
 import { PortableText } from "next-sanity";
 import Loading from "@/app/loading";
 
 // --- Helper Functions ---
-
-/**
- * Estimate reading time based on content length of Portable Text array.
- * @param {Array} text - The PortableText body array from Sanity.
- * @returns {number} Estimated reading time in minutes (minimum 1).
- */
 const estimateReadingTime = (text) => {
   const wordsPerMinute = 200;
   let wordCount = 0;
@@ -46,24 +34,20 @@ const estimateReadingTime = (text) => {
       }
     });
   }
-  // Return a number
   return Math.max(1, Math.round(wordCount / wordsPerMinute));
 };
 
-/**
- * Renders a standard error message display.
- */
 const ErrorDisplay = () => (
-  <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-    <h2 className="text-2xl font-bold text-red-600 mb-4">
+  <div className="flex flex-col items-center justify-center py-20 px-4 text-center min-h-[50vh]">
+    <h2 className="text-2xl font-bold text-slate-800 mb-2">
       Unable to load article
     </h2>
-    <p className="mb-6">
+    <p className="mb-6 text-slate-500">
       We're having trouble retrieving this content. Please try again later.
     </p>
     <button
       onClick={() => window.location.reload()}
-      className="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm shadow-indigo-200"
     >
       Retry
     </button>
@@ -71,35 +55,26 @@ const ErrorDisplay = () => (
 );
 
 // --- Main Component ---
+const BlogDetails = ({ slug, initialData }) => {
+  const router = useRouter();
 
-const BlogDetails = ({ slug }) => {
-  // Access the slug from the URL parameters (App Router)
-
-  console.log("this my slug", slug);
-
-  const router = useRouter(); // Initialize Next.js router for navigation
-
-  const [blog, setBlog] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blog, setBlog] = useState(initialData || null);
+  const [isLoading, setIsLoading] = useState(!initialData);
   const [error, setError] = useState(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
   useEffect(() => {
-    console.log("oage mounted");
-    if (!slug) return; // Ensure slug exists before fetching
+    if (!slug || initialData) return;
 
     setIsLoading(true);
     setError(null);
 
-    console.log(slug);
-    // Sanity query updated to use $slug and fetch necessary fields
     const query = `*[_type == "post" && slug.current == $slug][0]{
       title,
       body,
       _createdAt,
       author->{name, image, bio},
       mainImage { asset->{url} },
-      // Simplified read time calculation in GROQ for demonstration
       "estimatedReadTime": round(length(pt::text(body)) / 5 / 180)
     }`;
 
@@ -117,7 +92,6 @@ const BlogDetails = ({ slug }) => {
       });
   }, [slug]);
 
-  // Reset copy success message after 2 seconds
   useEffect(() => {
     if (copySuccess) {
       const timer = setTimeout(() => {
@@ -127,7 +101,6 @@ const BlogDetails = ({ slug }) => {
     }
   }, [copySuccess]);
 
-  // Memoize formatted date to prevent recalculations
   const formattedDate = useMemo(() => {
     if (!blog?._createdAt) return "";
     return new Date(blog._createdAt).toLocaleDateString("en-US", {
@@ -137,21 +110,17 @@ const BlogDetails = ({ slug }) => {
     });
   }, [blog?._createdAt]);
 
-  // Calculate reading time
   const readingTime = useMemo(() => {
     if (!blog) return "0";
-    // Use the Sanity estimatedReadTime if available and valid
     if (
       typeof blog.estimatedReadTime === "number" &&
       blog.estimatedReadTime > 0
     ) {
       return Math.max(1, Math.round(blog.estimatedReadTime));
     }
-    // Fallback to client-side calculation (note: GROQ calculation is preferred)
     return Math.max(1, Math.round(estimateReadingTime(blog.body)));
   }, [blog]);
 
-  // Share functionality
   const handleShare = (platform) => {
     const currentUrl = window.location.href;
     const title = blog?.title || "Great logistics article";
@@ -161,49 +130,23 @@ const BlogDetails = ({ slug }) => {
 
     switch (platform) {
       case "twitter":
-        shareUrl = `https://x.com/intent/tweet?url=${encodeURIComponent(
-          currentUrl,
-        )}&text=${encodeURIComponent(title)}&hashtags=${encodeURIComponent(
-          hashtags,
-        )}`;
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}&hashtags=${encodeURIComponent(hashtags)}`;
         break;
       case "linkedin":
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-          currentUrl,
-        )}`;
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
         break;
       case "facebook":
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          currentUrl,
-        )}`;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
         break;
       case "copy":
-        // Fallback implementation for navigator.clipboard due to iFrame restrictions
-        const textArea = document.createElement("textarea");
-        textArea.value = currentUrl;
-        textArea.style.position = "fixed"; // Prevents scrolling to bottom of page
-        textArea.style.opacity = 0;
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-          document.execCommand("copy");
-          setCopySuccess(true);
-        } catch (err) {
-          console.error("Fallback: Failed to copy URL: ", err);
-        }
-        document.body.removeChild(textArea);
-
-        // Original modern clipboard API (kept for context, but fallback above is safer in iframes)
-        // navigator.clipboard
-        //   .writeText(currentUrl)
-        //   .then(() => setCopySuccess(true))
-        //   .catch((err) => console.error("Failed to copy URL: ", err));
-        return; // Exit early for copy
+        navigator.clipboard
+          .writeText(currentUrl)
+          .then(() => setCopySuccess(true))
+          .catch((err) => console.error("Failed to copy URL: ", err));
+        return;
       default:
         return;
     }
-
     window.open(shareUrl, "_blank", "width=600,height=450");
   };
 
@@ -211,189 +154,132 @@ const BlogDetails = ({ slug }) => {
   if (error || !blog) return <ErrorDisplay />;
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* Metadata should be set via the app router metadata API or server-side head.
-          Removed inline <title>/<meta> tags to avoid meta-in-body issues. */}
-
-      {/* Blog Details */}
-      <section className="text-gray-800 py-10 px-3 md:px-5 relative">
-        {/* Back Button - Uses router.back() for Next.js */}
+    <div className="bg-slate-50 min-h-screen pb-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative">
+        {/* Back Button */}
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-2 text-gray-700 hover:text-blue-700 absolute left-3 top-20 md:left-5 transition-colors duration-200 
-                     bg-white/80 backdrop-blur-sm py-2 px-3 rounded-full shadow-sm z-10 mt-9"
-          aria-label="Go back"
+          className="fixed top-24 left-4 xl:left-[max(1rem,calc(50%-48rem))] z-20 flex items-center gap-2 text-slate-500 hover:text-indigo-600 bg-white/80 backdrop-blur-sm py-2 px-4 rounded-full shadow-sm border border-slate-200 transition-all hover:pr-5 group"
         >
-          <AiOutlineArrowLeft className="w-5 h-5" />
-          <span className="hidden md:inline font-medium">Back</span>
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="hidden md:inline font-medium text-sm">Back</span>
         </button>
 
-        <div className="max-w-5xl mx-auto space-y-6 pt-12 sm:pt-16 transition-all">
-          {/* Category Tag */}
-
-          {/* Title */}
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center leading-tight px-2">
-            {blog.title}
-          </h1>
-
-          {/* Reading Time & Date */}
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-            <div className="flex items-center gap-1">
-              <AiOutlineCalendar className="w-4 h-4" />
-              <span>{formattedDate}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <AiOutlineClockCircle className="w-4 h-4" />
-              <span>{readingTime} min read</span>
-            </div>
-          </div>
-
-          {/* Author Info */}
-          <div className="flex items-center justify-center gap-3 text-sm">
-            {blog.author?.image && (
-              <Image
-                src={urlFor(blog.author.image).width(48).height(48).url()}
-                alt={blog.author.name}
-                className="w-10 h-10 rounded-full object-cover shadow-md border-2 border-white"
-                width={40}
-                height={40}
-                // Note: Image component requires absolute path/URL, which urlFor provides.
-              />
-            )}
-            <p>
-              By{" "}
-              <span className="font-semibold text-blue-800">
-                {blog.author?.name || "Unknown"}
-              </span>
-            </p>
-          </div>
-
-          {/* Main Image */}
-          <div className="overflow-hidden rounded-lg shadow-lg">
+        {/* Article Container */}
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 mt-10 overflow-hidden">
+          {/* Hero Image */}
+          <div className="relative aspect-21/9 w-full bg-slate-100">
             {blog.mainImage && (
               <Image
-                // Added explicit dimensions to urlFor for better image optimization
                 src={urlFor(blog.mainImage).width(1200).height(600).url()}
                 alt={blog.title}
-                className="w-full object-cover"
-                width={1200} // Set appropriate dimensions for Next/Image
-                height={600} // Use layout='responsive' or specific aspect ratio
+                fill
+                className="object-cover"
                 priority
               />
             )}
+            <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
           </div>
 
-          {/* Quick Share Buttons - Floating */}
-          <div className="hidden md:flex flex-col fixed left-2 top-1/3 gap-3 bg-white/90 backdrop-blur-sm p-2 rounded-full shadow-md">
-            <button
-              onClick={() => handleShare("twitter")}
-              className="p-2 text-gray-700 hover:text-blue-500 transition-colors rounded-full hover:bg-gray-100"
-              aria-label="Share on Twitter"
-            >
-              <FaSquareXTwitter className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => handleShare("linkedin")}
-              className="p-2 text-gray-700 hover:text-blue-700 transition-colors rounded-full hover:bg-gray-100"
-              aria-label="Share on LinkedIn"
-            >
-              <AiFillLinkedin className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => handleShare("facebook")}
-              className="p-2 text-gray-700 hover:text-blue-900 transition-colors rounded-full hover:bg-gray-100"
-              aria-label="Share on Facebook"
-            >
-              <AiFillFacebook className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => handleShare("copy")}
-              className="p-2 text-gray-700 hover:text-green-600 transition-colors rounded-full hover:bg-gray-100 relative"
-              aria-label="Copy link"
-            >
-              <AiOutlineLink className="w-6 h-6" />
-              {copySuccess && (
-                <span className="absolute -right-16 bg-green-100 text-green-800 text-xs py-1 px-2 rounded whitespace-nowrap animate-fadeInOut">
-                  Copied!
-                </span>
-              )}
-            </button>
-          </div>
+          <div className="px-6 md:px-12 py-10">
+            {/* Header Info */}
+            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mb-6">
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4" /> {formattedDate}
+              </span>
+              <span className="w-1 h-1 bg-slate-300 rounded-full" />
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4" /> {readingTime} min read
+              </span>
+            </div>
 
-          {/* Blog Body */}
-          <article
-            className="prose prose-lg max-w-none font-roboto prose-headings:font-bold prose-headings:text-gray-900 
-                         prose-p:text-gray-700 prose-a:text-blue-700 prose-a:no-underline hover:prose-a:underline
-                         prose-img:rounded-lg prose-img:shadow-md prose-blockquote:border-blue-500 
-                         prose-blockquote:bg-blue-50 prose-blockquote:py-1 prose-blockquote:px-4"
-          >
-            <Suspense
-              fallback={
-                <div className="animate-pulse bg-gray-200 h-40 w-full rounded"></div>
-              }
-            >
-              <PortableText value={blog.body} />
-            </Suspense>
-          </article>
+            <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+              {blog.title}
+            </h1>
 
-          {/* Article Footer */}
-          <div className="border-t border-gray-200 pt-6 mt-8">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              {/* Mobile Share Buttons */}
-              <div className="md:hidden">
-                <h3 className="text-lg font-semibold mb-2">
-                  Share this article
-                </h3>
-                <div className="flex gap-3">
-                  <button
-                    onClick={() => handleShare("twitter")}
-                    className="p-2 bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-500 rounded-full transition-colors"
-                    aria-label="Share on Twitter"
-                  >
-                    <FaSquareXTwitter className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={() => handleShare("linkedin")}
-                    className="p-2 bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-700 rounded-full transition-colors"
-                    aria-label="Share on LinkedIn"
-                  >
-                    <AiFillLinkedin className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={() => handleShare("facebook")}
-                    className="p-2 bg-gray-100 hover:bg-blue-100 text-gray-700 hover:text-blue-900 rounded-full transition-colors"
-                    aria-label="Share on Facebook"
-                  >
-                    <AiFillFacebook className="w-6 h-6" />
-                  </button>
-                  <button
-                    onClick={() => handleShare("copy")}
-                    className="p-2 bg-gray-100 hover:bg-green-100 text-gray-700 hover:text-green-600 rounded-full transition-colors relative"
-                    aria-label="Copy link"
-                  >
-                    <AiOutlineLink className="w-6 h-6" />
-                    {copySuccess && (
-                      <span className="absolute -right-16 bg-green-100 text-green-800 text-xs py-1 px-2 rounded whitespace-nowrap">
-                        Copied!
-                      </span>
-                    )}
-                  </button>
-                </div>
+            {/* Author */}
+            <div className="flex items-center gap-4 py-6 border-y border-slate-100 mb-10">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden bg-slate-100 ring-2 ring-white shadow-sm">
+                {blog.author?.image ? (
+                  <Image
+                    src={urlFor(blog.author.image).width(100).url()}
+                    alt={blog.author.name}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <User className="w-6 h-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-400" />
+                )}
+              </div>
+              <div>
+                <p className="text-base font-semibold text-slate-900">
+                  {blog.author?.name || "NextCV Team"}
+                </p>
+                <p className="text-sm text-slate-500">Author</p>
               </div>
 
-              {/* Back to Top Button */}
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="flex items-center gap-2 text-sm font-medium text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 py-2 px-4 rounded-md transition-colors self-end"
-                aria-label="Back to top"
-              >
-                <AiOutlineArrowUp className="w-4 h-4" />
-                Back to top
-              </button>
+              {/* Share Buttons (Inline for mobile/Desktop) */}
+              <div className="ml-auto flex gap-2">
+                <button
+                  onClick={() => handleShare("twitter")}
+                  className="p-2 text-slate-400 hover:text-sky-500 hover:bg-sky-50 rounded-full transition-colors"
+                >
+                  <Twitter className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => handleShare("linkedin")}
+                  className="p-2 text-slate-400 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => handleShare("copy")}
+                  className="p-2 text-slate-400 hover:text-green-600 hover:bg-green-50 rounded-full transition-colors relative"
+                >
+                  {copySuccess ? (
+                    <Check className="w-5 h-5" />
+                  ) : (
+                    <LinkIcon className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
             </div>
+
+            {/* Content */}
+            <article
+              className="prose prose-lg prose-slate max-w-none 
+                    prose-headings:font-bold prose-headings:text-slate-900 
+                    prose-p:text-slate-600 prose-p:leading-relaxed
+                    prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:underline
+                    prose-img:rounded-xl prose-img:shadow-md 
+                    prose-blockquote:border-indigo-500 prose-blockquote:bg-indigo-50/50 prose-blockquote:py-2 prose-blockquote:px-6 prose-blockquote:not-italic prose-blockquote:rounded-r-lg
+                    prose-li:text-slate-600"
+            >
+              <Suspense
+                fallback={
+                  <div className="space-y-4 animate-pulse">
+                    <div className="h-4 bg-slate-200 rounded w-3/4"></div>
+                    <div className="h-4 bg-slate-200 rounded"></div>
+                    <div className="h-4 bg-slate-200 rounded w-5/6"></div>
+                  </div>
+                }
+              >
+                <PortableText value={blog.body} />
+              </Suspense>
+            </article>
+          </div>
+
+          {/* Footer */}
+          <div className="bg-slate-50 border-t border-slate-200 p-8 flex justify-center">
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-700 transition-colors"
+            >
+              <ArrowUp className="w-4 h-4" /> Back to Top
+            </button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

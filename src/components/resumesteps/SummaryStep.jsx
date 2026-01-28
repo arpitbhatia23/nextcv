@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { BrainCircuit } from "lucide-react";
+import { BrainCircuit, Sparkles, ArrowRight, ArrowLeft, AlignLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -13,32 +13,36 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { toast } from "sonner";
 
 const SummaryStep = ({ next, previous, formData, updateForm }) => {
   const [summary, setSummary] = useState(formData.summary || "");
   const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
-    summary: z.string().min(20, { message: "summary is reuired" }),
+    summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
   });
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      summary: "",
+      summary: summary,
     },
   });
 
+  // Watch for changes to update local state for preview
+  const watchedSummary = form.watch("summary");
+
   useEffect(() => {
-    updateForm({ summary });
-  }, [summary]);
+    updateForm({ summary: watchedSummary });
+  }, [watchedSummary]);
 
   const onSubmit = (values) => {
-    setSummary(values.summary);
-    form.reset();
+    console.log(values);
+    next();
   };
 
   const handelAiGenration = async () => {
@@ -52,24 +56,30 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
 
       if (res.data?.data) {
         form.setValue("summary", String(res.data.data));
+        toast.success("AI Summary generated!");
       }
     } catch (err) {
       console.error("AI generation failed:", err);
+      toast.error("Failed to generate summary");
     } finally {
       setIsGenerating(false);
     }
   };
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="py-8">
+       <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900">Professional Summary</h2>
+          <p className="text-slate-500">Write a short professional summary to introduce yourself</p>
+       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center justify-between bg-gradient-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
-            <CardTitle className="text-2xl font-bold text-white">
-              Add Professional Summary
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl">
+            <CardTitle className="text-lg font-bold text-slate-800">
+               Your Summary
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -80,24 +90,38 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                   name="summary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>sumarry</FormLabel>
+                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
+                         Summary
+                         <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                            disabled={isGenerating}
+                            onClick={handelAiGenration}
+                          >
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            {isGenerating ? "Magic..." : "Generate with AI"}
+                          </Button>
+                      </FormLabel>
                       <div className="relative">
                         <FormControl>
                           <Textarea
-                            placeholder="Brief achievements or coursework"
-                            rows={3}
+                            placeholder="Experienced software engineer with a focus on..."
+                            rows={8}
                             {...field}
-                            className={
-                              isGenerating ? "text-gray-400 bg-gray-100" : ""
-                            }
+                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-base leading-relaxed ${
+                                isGenerating ? "opacity-50" : ""
+                            }`}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
-                        {/* Dream shimmer overlay */}
                         {isGenerating && (
-                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
-                            ✨ Dreaming up your description...
+                           <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                             <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
+                                <Sparkles className="w-4 h-4" /> Writing...
+                             </div>
                           </div>
                         )}
                       </div>
@@ -106,72 +130,61 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
-                <div className="flex justify-start">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
-                      isGenerating
-                        ? "text-gray-400 animate-pulse cursor-not-allowed"
-                        : "text-indigo-600"
-                    }`}
-                    disabled={isGenerating}
-                    onClick={handelAiGenration}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                        Generating...
-                      </div>
-                    ) : (
-                      "Generate using AI"
-                    )}
-                  </Button>
-                </div>
-
-                <div className="flex justify-end gap-2 items-center">
-                  <Button
-                    type="submit"
-                    className="bg-gradient-to-b from-indigo-600 to-purple-600 text-white"
-                  >
-                    Save Summary
-                  </Button>
-                  <Button
-                    type="button"
-                    className="bg-gradient-to-b from-indigo-600 to-purple-600 text-white"
-                    onClick={next}
-                  >
-                    Next
-                  </Button>
+                <div className="pt-2">
+                   {/* We handle next in the outer button row, but form submit is useful for validation */}
                 </div>
               </form>
             </Form>
           </CardContent>
+           <CardFooter className="p-0">
+            <div className="bg-blue-50 p-4 w-full rounded-b-xl">
+              <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
+                 <AlignLeft className="w-4 h-4 text-blue-600" /> Tips
+              </h3>
+              <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
+                 <li>Keep it concise (2-4 sentences).</li>
+                 <li>Highlight your years of experience and key achievements.</li>
+                 <li>Use keywords relevant to the job you are applying for.</li>
+              </ul>
+            </div>
+          </CardFooter>
         </Card>
 
         {/* Preview Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-gradient-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
-            <BrainCircuit className="w-6 h-6 text-white mr-2" />
-            <CardTitle className="text-2xl font-bold text-white">
-              Summary Preview
-            </CardTitle>
-          </CardHeader>
+        <div className="space-y-6">
+            <Card className="bg-white rounded-xl shadow-sm border border-slate-200 h-full">
+              <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl">
+                 <div className="flex items-center gap-2">
+                    <BrainCircuit className="w-5 h-5 text-indigo-600" />
+                    <CardTitle className="text-lg font-bold text-slate-800">
+                      Preview
+                    </CardTitle>
+                 </div>
+              </CardHeader>
 
-          <CardContent>
-            {summary ? (
-              <div className="border border-gray-200 rounded-lg p-4 text-gray-800 text-sm">
-                {summary}
-              </div>
-            ) : (
-              <div className="text-center py-8 text-gray-500">
-                <BrainCircuit className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p>No summary added yet.</p>
-                <p className="text-sm">Add your professional summary above.</p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+              <CardContent className="p-6">
+                {watchedSummary ? (
+                  <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm">
+                    {watchedSummary}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-slate-400">
+                    <AlignLeft className="w-12 h-12 mx-auto mb-3 text-slate-200" />
+                    <p>Start writing to see the preview here.</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+           <div className="flex justify-between items-center pt-4">
+              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button onClick={() => form.handleSubmit(onSubmit)()} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+                 Save & Next <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+           </div>
+        </div>
       </div>
     </div>
   );

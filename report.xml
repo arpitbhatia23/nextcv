@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <audit version="0.0.22">
-<site url="https://www.nextcv.in" crawled="16" date="2026-01-27T14:55:39.369Z"/>
-<score overall="54" grade="F">
- <cat name="Structured Data" score="52"/>
+<site url="https://www.nextcv.in" crawled="19" date="2026-01-27T16:24:49.110Z"/>
+<score overall="53" grade="F">
+ <cat name="Structured Data" score="61"/>
  <cat name="Core SEO" score="71"/>
- <cat name="Content" score="53"/>
- <cat name="Performance" score="95"/>
+ <cat name="Content" score="55"/>
+ <cat name="Performance" score="91"/>
+ <cat name="Accessibility" score="74"/>
+ <cat name="Links" score="77"/>
  <cat name="Crawlability" score="88"/>
- <cat name="Accessibility" score="98"/>
  <cat name="Social Media" score="89"/>
- <cat name="URL Structure" score="97"/>
- <cat name="E-E-A-T" score="56"/>
- <cat name="Security" score="73"/>
- <cat name="Links" score="94"/>
+ <cat name="Security" score="70"/>
+ <cat name="URL Structure" score="98"/>
+ <cat name="E-E-A-T" score="82"/>
  <cat name="Images" score="100"/>
  <cat name="Internationalization" score="100"/>
  <cat name="Legal Compliance" score="100"/>
  <cat name="Local SEO" score="100"/>
  <cat name="Mobile" score="100"/>
 </score>
-<summary passed="944" warnings="98" failed="45"/>
+<summary passed="1095" warnings="110" failed="53"/>
 <issues>
- <category name="Content" errors="12" warnings="34">
+ <category name="Content" errors="12" warnings="38">
   <rule id="content/meta-in-body" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/content/meta-in-body">
    Found 15 meta tags in &lt;body&gt;
    Pages (12): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats
@@ -43,74 +43,83 @@
     - twitter:image (twitter:image=&quot;https://nextcv.in/opengraph-image.png&quot;) [content: https://nextcv.in/opengraph-image.png]
   </rule>
   <rule id="content/duplicate-title" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/duplicate-title">
-   1 duplicate title(s) found across 4 pages
+   1 duplicate title(s) found across 3 pages
    Items (1):
-    - nextcv – professional ats resume builder for india (&quot;nextcv – professional ats resume builder...&quot; (4 pages)) [pageCount: 4] (from: /, /privacyPolicy, /terms, /blogs)
+    - nextcv – professional ats resume builder for india (&quot;nextcv – professional ats resume builder...&quot; (3 pages)) [pageCount: 3] (from: /, /contact, /about-us)
   </rule>
   <rule id="content/duplicate-description" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/duplicate-description">
-   2 duplicate description(s) found across 10 pages
+   2 duplicate description(s) found across 9 pages
    Items (2):
-    - create a professional, ats-optimized resume in minutes. buil (&quot;create a professional, ats-optimized res...&quot; (4 pages)) [pageCount: 4] (from: /, /privacyPolicy, /terms, /blogs)
+    - create a professional, ats-optimized resume in minutes. buil (&quot;create a professional, ats-optimized res...&quot; (3 pages)) [pageCount: 3] (from: /, /contact, /about-us)
     - introduction (&quot;introduction...&quot; (6 pages)) [pageCount: 6] (from: /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats)
   </rule>
   <rule id="content/keyword-stuffing" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/keyword-stuffing">
    2 word(s) may be overused
-   Pages (3): /, /privacyPolicy, /terms
-   Items (6):
-    - resume (&quot;resume&quot; (5.7%)) [count: 40, density: 5.681818181818182]
-    - ats (&quot;ats&quot; (4.3%)) [count: 30, density: 4.261363636363636]
-    - your (&quot;your&quot; (3.6%)) [count: 13, density: 3.6414565826330536]
-    - data (&quot;data&quot; (3.4%)) [count: 12, density: 3.361344537815126]
-    - platform (&quot;platform&quot; (4.0%)) [count: 13, density: 4.024767801857585]
-    - terms (&quot;terms&quot; (3.1%)) [count: 10, density: 3.0959752321981426]
+   Pages (4): /, /privacy-policy, /terms, /about-us
+   Items (7):
+    - resume (&quot;resume&quot; (5.7%)) [count: 40, density: 5.673758865248227]
+    - ats (&quot;ats&quot; (4.3%)) [count: 30, density: 4.25531914893617]
+    - your (&quot;your&quot; (3.6%)) [count: 13, density: 3.6312849162011176]
+    - data (&quot;data&quot; (3.4%)) [count: 12, density: 3.35195530726257]
+    - platform (&quot;platform&quot; (4.0%)) [count: 13, density: 4.012345679012346]
+    - terms (&quot;terms&quot; (3.1%)) [count: 10, density: 3.0864197530864197]
+    - students (&quot;students&quot; (3.2%)) [count: 10, density: 3.1847133757961785]
   </rule>
   <rule id="content/article-links" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/article-links">
    short article has 0 external links (min 1)
-   Pages (16): /, /privacyPolicy, /terms, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs       
+   Pages (18): /, /contact, /privacy-policy, /terms, /about-us, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
   </rule>
   <rule id="content/word-count" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/content/word-count">
-   Thin content: 62 words (min 300); Thin content: 60 words (min 300); Thin content: 59 words (min 300); Thin content: 65 words (min 300); Thin content: 57 words (min 300); Thin content: 54 words (min 300); Thin content: 61 words (min 300); Thin content: 58 words (min 300); Thin content: 64 words (min 300); Thin content: 50 words (min 300)
-   Pages (13): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs
+   Thin content: 103 words (min 300); Thin content: 63 words (min 300); Thin content: 61 words (min 300); Thin content: 60 words (min 300); Thin content: 66 words (min 300); Thin content: 58 words (min 300); Thin content: 55 words (min 300); Thin content: 62 words (min 300); Thin content: 59 words (min 300); Thin content: 65 words (min 300); Thin content: 51 words (min 300)
+   Pages (14): /contact, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs
   </rule>
  </category>
- <category name="Core SEO" errors="13" warnings="20">
+ <category name="Core SEO" errors="13" warnings="25">
   <rule id="core/meta-title" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/core/meta-title">
-   Title too long (79 chars, max 60); Title too long (68 chars, max 60); Title too long (64 chars, max 60); Title too long (89 chars, max 60); Title too short (26 chars, min 30); Title too long (85 chars, max 60); Title too long (92 chars, max 60)
-   Pages (7): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in
+   Title too short (23 chars, min 30); Title too short (27 chars, min 30); Title too long (79 chars, max 60); Title too long (68 chars, max 60); Title too long (64 chars, max 60); Title too long (89 chars, max 60); Title too short (26 chars, min 30); Title too long (85 chars, max 60); Title too long (92 chars, max 60)
+   Pages (9): /privacy-policy, /terms, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in 
   </rule>
   <rule id="core/h1" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/core/h1">
    No H1 tag found
    Pages (13): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
   </rule>
   <rule id="core/meta-description" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/core/meta-description">
-   Description too long (195 chars, max 160); Description too short (34 chars, min 120); Description too short (12 chars, min 120); Description too short (98 chars, min 120); Description too long (313 chars, max 160); Description too long (228 chars, max 160); Description too long (16662 chars, max 160)
-   Pages (12): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in
+   Description too short (94 chars, min 120); Description too short (75 chars, min 120); Description too long (195 chars, max 160); Description too short (34 chars, min 120); Description too short (12 chars, min 120); Description too short (98 chars, min 120); Description too long (313 chars, max 160); Description too long (228 chars, max 160); Description too long (16662 chars, max 160); Description too short (111 chars, min 120)
+   Pages (15): /privacy-policy, /terms, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs
   </rule>
   <rule id="core/title-unique" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/core/title-unique">
-   1 duplicate title(s) affecting 4 pages
+   1 duplicate title(s) affecting 3 pages
    Items (1):
-    - nextcv – professional ats resume builder for india (&quot;nextcv – professional ats resume builder...&quot; (4 pages)) [pageCount: 4] (from: /, /privacyPolicy, /terms, /blogs)
+    - nextcv – professional ats resume builder for india (&quot;nextcv – professional ats resume builder...&quot; (3 pages)) [pageCount: 3] (from: /, /contact, /about-us)
   </rule>
  </category>
- <category name="Structured Data" errors="16" warnings="0">
+ <category name="Structured Data" errors="18" warnings="0">
   <rule id="schema/json-ld-valid" severity="warning" status="fail" docs="https://docs.squirrelscan.com/rules/schema/json-ld-valid">
    Schema.org validation errors detected
-   Pages (16): /, /privacyPolicy, /terms, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs       
+   Pages (18): /, /contact, /privacy-policy, /terms, /about-us, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
   </rule>
  </category>
- <category name="Accessibility" errors="0" warnings="14">
+ <category name="Accessibility" errors="1" warnings="16">
+  <rule id="a11y/form-labels" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/a11y/form-labels">
+   3 form input(s) without labels
+   Pages (1): /contact
+   Items (3):
+    - input
+    - input
+    - textarea
+  </rule>
+  <rule id="a11y/heading-order" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/heading-order">
+   1 heading level skip(s) detected
+   Pages (1): /contact
+   Items (1):
+    - H3 after H1
+  </rule>
   <rule id="a11y/landmark-regions" severity="info" status="warn" docs="https://docs.squirrelscan.com/rules/a11y/landmark-regions">
    No &lt;main&gt; landmark found
-   Pages (14): /, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
+   Pages (15): /, /about-us, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
   </rule>
  </category>
- <category name="Social Media" errors="0" warnings="12">
-  <rule id="social/og-image-size" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/social/og-image-size">
-   og:image may be too small
-   Pages (12): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats
-  </rule>
- </category>
- <category name="Performance" errors="3" warnings="4">
+ <category name="Performance" errors="7" warnings="7">
   <rule id="perf/lcp-hints" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/perf/lcp-hints">
    3 potential LCP image(s) without preload
    Pages (1): /
@@ -120,8 +129,8 @@
     - /logos/WIT.svg
   </rule>
   <rule id="perf/ttfb" severity="warning" status="fail" docs="https://docs.squirrelscan.com/rules/perf/ttfb">
-   Slow server response (636ms); Slow server response (701ms); Very slow server response (1753ms); Very slow server response (1818ms); Slow server response (667ms)
-   Pages (5): /privacyPolicy, /terms, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs
+   Very slow server response (1565ms); Very slow server response (1511ms); Very slow server response (1336ms); Slow server response (821ms); Very slow server response (1834ms); Slow server response (884ms); Slow server response (954ms); Very slow server response (2512ms); Slow server response (824ms); Slow server response (602ms); Slow server response (919ms); Very slow server response (1494ms)
+   Pages (12): /contact, /privacy-policy, /terms, /about-us, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs
   </rule>
   <rule id="perf/cls-hints" severity="warning" status="fail" docs="https://docs.squirrelscan.com/rules/perf/cls-hints">
    7 image(s) without width/height (CLS risk)
@@ -136,68 +145,58 @@
     - /logos/google_BIG.svg
   </rule>
  </category>
- <category name="URL Structure" errors="0" warnings="5">
-  <rule id="url/lowercase" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/url/lowercase">
-   URL contains uppercase characters
-   Pages (1): /privacyPolicy
-  </rule>
-  <rule id="url/length" severity="info" status="warn" docs="https://docs.squirrelscan.com/rules/url/length">
-   URL is 106 characters (over 100); URL is 116 characters (over 100); URL is 110 characters (over 100); URL is 119 characters (over 100)
-   Pages (4): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in
+ <category name="Social Media" errors="0" warnings="12">
+  <rule id="social/og-image-size" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/social/og-image-size">
+   og:image may be too small
+   Pages (12): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats
   </rule>
  </category>
- <category name="E-E-A-T" errors="0" warnings="4">
-  <rule id="eeat/about-page" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/about-page">
-   No About page found
-  </rule>
-  <rule id="eeat/author-byline" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/author-byline">
-   Only 0% of content pages have author attribution
-  </rule>
-  <rule id="eeat/contact-page" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/contact-page">
-   No Contact page found
-  </rule>
-  <rule id="eeat/privacy-policy" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/privacy-policy">
-   No Privacy Policy page found
-  </rule>
- </category>
- <category name="Security" errors="0" warnings="3">
+ <category name="Security" errors="0" warnings="4">
   <rule id="security/leaked-secrets" severity="error" status="warn" docs="https://docs.squirrelscan.com/rules/security/leaked-secrets">
    24 potential secret(s) detected (verify manually)
    Items (24):
-    - Segment Write Key: extrac********************rmat (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: extrac********************tate (Found in external-script (https://www.nextcv.in/_next/static/chunks/b2c3f0a46ede7d91.js))   
-    - Segment Write Key: conver********************port (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: create********************allb (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: prepar********************eque (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: setCac********************thHa (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: cloneP********************chPa (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: fetchS********************ynam (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: conver********************erSt (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: canNew********************reCo (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: readOr********************entE (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: overwr********************Cach (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
-    - Segment Write Key: reques********************ntry (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))   
+    - Segment Write Key: extrac********************rmat (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: extrac********************tate (Found in external-script (https://www.nextcv.in/_next/static/chunks/b2c3f0a46ede7d91.js))
+    - Segment Write Key: conver********************port (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: create********************allb (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: prepar********************eque (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: setCac********************thHa (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: cloneP********************chPa (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: fetchS********************ynam (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: conver********************erSt (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: canNew********************reCo (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: readOr********************entE (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: overwr********************Cach (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
+    - Segment Write Key: reques********************ntry (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
     - LinkedIn Client Secret: facebo******rnal (Found in external-script (https://www.nextcv.in/_next/static/chunks/393752ef7748ec37.js))
-    - Segment Write Key: create********************rati (Found in external-script (https://www.nextcv.in/_next/static/chunks/b2c3f0a46ede7d91.js))   
-    - Segment Write Key: disabl********************teTr (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))   
-    - Segment Write Key: dynami********************tanc (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))   
-    - Segment Write Key: create********************ntSe (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))   
-    - Segment Write Key: create********************egme (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))   
-    - Segment Write Key: create********************Clie (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))   
+    - Segment Write Key: create********************rati (Found in external-script (https://www.nextcv.in/_next/static/chunks/b2c3f0a46ede7d91.js))
+    - Segment Write Key: disabl********************teTr (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))
+    - Segment Write Key: dynami********************tanc (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))
+    - Segment Write Key: create********************ntSe (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))
+    - Segment Write Key: create********************egme (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))
+    - Segment Write Key: create********************Clie (Found in external-script (https://www.nextcv.in/_next/static/chunks/9e80aaa07d4729bb.js))
     - AWS Secret Access Key: =&quot;ABCD********************klmn (Found in external-script (https://www.nextcv.in/_next/static/chunks/faefe46737177087.js))
     - LinkedIn Client Secret: estima******dTim (Found in external-script (https://www.nextcv.in/_next/static/chunks/4a98a659b3e20a58.js))
     - LinkedIn Client Secret: encode******pone (Found in external-script (https://www.nextcv.in/_next/static/chunks/4a98a659b3e20a58.js))
-    - Sanity Token: skipCr********************tion (Found in external-script (https://www.nextcv.in/_next/static/chunks/583487f482f250a9.js))        
+    - Sanity Token: skipCr********************tion (Found in external-script (https://www.nextcv.in/_next/static/chunks/583487f482f250a9.js))
   </rule>
   <rule id="security/x-frame-options" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/x-frame-options">
    No clickjacking protection
   </rule>
+  <rule id="security/form-captcha" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/form-captcha">
+   1 public form(s) without CAPTCHA
+   Pages (1): /contact
+   Items (1):
+    - form[0]
+  </rule>
   <rule id="security/http-to-https" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/security/http-to-https">
-   16 HTTP URL(s) redirect to HTTPS
-   Items (16):
+   18 HTTP URL(s) redirect to HTTPS
+   Items (18):
     - http://www.nextcv.in/ (http://www.nextcv.in/ → https://www.nextcv.in/ (308)) [statusCode: 308, chain: [object Object]]
-    - http://www.nextcv.in/privacyPolicy (http://www.nextcv.in/privacyPolicy → https://www.nextcv.in/privacyPolicy (308)) [statusCode: 308, chain: [object Object]]
+    - http://www.nextcv.in/contact (http://www.nextcv.in/contact → https://www.nextcv.in/contact (308)) [statusCode: 308, chain: [object Object]]
+    - http://www.nextcv.in/privacy-policy (http://www.nextcv.in/privacy-policy → https://www.nextcv.in/privacy-policy (308)) [statusCode: 308, chain: [object Object]]
     - http://www.nextcv.in/terms (http://www.nextcv.in/terms → https://www.nextcv.in/terms (308)) [statusCode: 308, chain: [object Object]]
+    - http://www.nextcv.in/about-us (http://www.nextcv.in/about-us → https://www.nextcv.in/about-us (308)) [statusCode: 308, chain: [object Object]]
     - http://www.nextcv.in/blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job (http://www.nextcv.in/blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job → https://www.nextcv.in/blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job (308)) [statusCode: 308, chain: [object Object]]
     - http://www.nextcv.in/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription (http://www.nextcv.in/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription → https://www.nextcv.in/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription (308)) [statusCode: 308, chain: [object Object]]
     - http://www.nextcv.in/blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide (http://www.nextcv.in/blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide → https://www.nextcv.in/blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide (308)) [statusCode: 308, chain: [object Object]]
@@ -213,18 +212,26 @@
     - http://www.nextcv.in/blogs (http://www.nextcv.in/blogs → https://www.nextcv.in/blogs (308)) [statusCode: 308, chain: [object Object]]
   </rule>
  </category>
- <category name="Crawlability" errors="1" warnings="0">
-  <rule id="crawl/schema-noindex-conflict" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/crawl/schema-noindex-conflict">  
-   Rule error: undefined is not an object (evaluating &apos;o.types&apos;)
+ <category name="URL Structure" errors="0" warnings="4">
+  <rule id="url/length" severity="info" status="warn" docs="https://docs.squirrelscan.com/rules/url/length">
+   URL is 106 characters (over 100); URL is 116 characters (over 100); URL is 110 characters (over 100); URL is 119 characters (over 100)
+   Pages (4): /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in
   </rule>
  </category>
- <category name="Images" errors="0" warnings="1">
-  <rule id="images/dimensions" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/images/dimensions">
-   7 image(s) missing width/height (causes CLS)
-   Pages (1): /
+ <category name="E-E-A-T" errors="0" warnings="2">
+  <rule id="eeat/author-byline" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/author-byline">
+   Only 0% of content pages have author attribution
+  </rule>
+  <rule id="eeat/content-dates" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/eeat/content-dates">
+   Only 0% of content has datePublished
   </rule>
  </category>
- <category name="Links" errors="0" warnings="1">
+ <category name="Links" errors="1" warnings="1">
+  <rule id="links/broken-links" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/links/broken-links">
+   1 broken internal link(s) (4xx/5xx)
+   Items (1):
+    - /privacyPolicy (https://www.nextcv.in/privacyPolicy (404)) [statusCode: 404, linkedFrom: 18] (from: /, /contact, /privacy-policy, /terms, /about-us, /blogs/the-ultimate-guide-to-resume-creation-best-practices-for-landing-your-next-job, /blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription, /blogs/how-to-build-an-ats-friendly-resume-in-2026-step-by-step-guide, /blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026, /blogs/best-resume-format-for-freshers-in-india-2026, /blogs/how-recruiters-scan-resumes-in-just-7-seconds, /blogs/ats-resume-vs-traditional-resume-what-actually-works, /blogs/resume-for-fresher-in-2026, /blogs/beyond-the-paper-elevating-your-resume-with-portfolios-personal-branding-and-video, /blogs/how-to-write-a-powerful-resume-summary-using-ai, /blogs/land-your-dream-job-the-ultimate-guide-to-creating-a-winning-fresher-resume-using-nextcv-in, /blogs/top-resume-mistakes-that-get-you-rejected-by-ats, /blogs)
+  </rule>
   <rule id="links/orphan-pages" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/links/orphan-pages">
    12 orphan page(s) with &lt;2 incoming links
    Items (12):
@@ -242,8 +249,16 @@
     - /blogs/top-resume-mistakes-that-get-you-rejected-by-ats
   </rule>
  </category>
+ <category name="Crawlability" errors="1" warnings="0">
+  <rule id="crawl/schema-noindex-conflict" severity="error" status="fail" docs="https://docs.squirrelscan.com/rules/crawl/schema-noindex-conflict">
+   Rule error: undefined is not an object (evaluating &apos;o.types&apos;)
+  </rule>
+ </category>
+ <category name="Images" errors="0" warnings="1">
+  <rule id="images/dimensions" severity="warning" status="warn" docs="https://docs.squirrelscan.com/rules/images/dimensions">
+   7 image(s) missing width/height (causes CLS)
+   Pages (1): /
+  </rule>
+ </category>
 </issues>
 </audit>
-────────────────────────────────────────────────────────────
-File issues: https://github.com/squirrelscan/squirrelscan/issues  •  Send feedback: squirrel feedback
-PS F:\nextcv> 

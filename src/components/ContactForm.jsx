@@ -47,40 +47,43 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 max-w-lg">
       <div>
-        <label className="text-sm text-slate-300">Full name</label>
+        <label className="text-sm font-medium text-slate-700">Full name</label>
         <input
-          className="w-full mt-1 rounded-lg bg-white/3 border border-white/6 p-3 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-violet-400"
+          className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium"
           placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          aria-label="Full name"
         />
       </div>
 
       <div>
-        <label className="text-sm text-slate-300">Email</label>
+        <label className="text-sm font-medium text-slate-700">Email</label>
         <input
-          className="w-full mt-1 rounded-lg bg-white/3 border border-white/6 p-3 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-violet-400"
+          className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium"
           placeholder="you@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          aria-label="Email"
         />
       </div>
 
       <div>
-        <label className="text-sm text-slate-300">Message</label>
+        <label className="text-sm font-medium text-slate-700">Message</label>
         <textarea
           rows={5}
-          className="w-full mt-1 rounded-lg bg-white/3 border border-white/6 p-3 text-white placeholder:text-white/40 outline-none focus:ring-2 focus:ring-violet-400"
+          className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium resize-none"
           placeholder="Tell us about your use-case or question"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          aria-label="Message"
         />
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 pt-2">
         <button
           type="submit"
-          className="px-5 py-2 rounded-lg bg-linear-to-r from-violet-600 to-indigo-600 font-semibold shadow-md disabled:opacity-50"
+          className="px-6 py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg shadow-indigo-500/20 disabled:opacity-50 transition-all duration-200"
           disabled={loading}
         >
           {loading ? "Sending…" : "Send message"}
@@ -88,7 +91,7 @@ export default function ContactForm() {
 
         {status && (
           <p
-            className={`text-sm ${status.type === "error" ? "text-red-400" : "text-green-300"}`}
+            className={`text-sm font-medium ${status.type === "error" ? "text-red-500" : "text-emerald-600"}`}
           >
             {status.text}
           </p>

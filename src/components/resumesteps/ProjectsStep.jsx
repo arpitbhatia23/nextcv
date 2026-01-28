@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Plus, Edit2, Trash2, FolderKanban } from "lucide-react";
+import { Plus, Edit2, Trash2, FolderKanban, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
+import { toast } from "sonner";
 
 const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);
@@ -99,21 +100,27 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="py-8">
+       <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900">Projects</h2>
+          <p className="text-slate-500">Highlight your best work</p>
+       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
-            <CardTitle className="text-2xl font-bold text-white">
-              {isEditing ? "Edit Project" : "Add Project"}
-            </CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+             <div>
+                <CardTitle className="text-lg font-bold text-slate-800">
+                   {isEditing ? "Edit Project" : "Add Project"}
+                </CardTitle>
+             </div>
             {isEditing && (
-              <Button variant="outline" onClick={cancelEdit}>
+              <Button variant="ghost" size="sm" onClick={cancelEdit} className="text-slate-500 hover:text-slate-700">
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent className={"p-4"}>
+          <CardContent className={"p-6"}>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -124,9 +131,9 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Title *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Project Title</FormLabel>
                       <FormControl>
-                        <Input placeholder="Title of project" {...field} />
+                        <Input placeholder="e.g. AI Resume Builder" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -138,9 +145,9 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="roleOrType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Role *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Your Role</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your role in project" {...field} />
+                        <Input placeholder="e.g. Fullstack Developer" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -152,11 +159,12 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="organization"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Organization</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Organization / Client</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Your organization or institution"
+                          placeholder="Organization name (optional)"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -169,12 +177,13 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Date</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Date</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="MM/YYYY or YYYY"
                           type={"month"}
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -187,25 +196,13 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="technologiesOrTopics"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Technologies or Topics</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Tech Stack</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="E.g., React, AI in Healthcare"
+                          placeholder="e.g. Next.js, OpenAI API"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="features"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Features</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Features of project" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -217,11 +214,12 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="link"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Link</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Project Link</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Project or publication link"
+                          placeholder="https://..."
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -234,24 +232,38 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
+                         Description
+                         <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                            disabled={isGenerating}
+                            onClick={handelAiGenration}
+                          >
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            {isGenerating ? "Magic..." : "Generate with AI"}
+                          </Button>
+                      </FormLabel>
                       <div className="relative">
                         <FormControl>
                           <Textarea
-                            placeholder="Brief achievements or coursework"
+                            placeholder="Brief achievements or features..."
                             rows={3}
                             {...field}
-                            className={
-                              isGenerating ? "text-gray-400 bg-gray-100" : ""
-                            }
+                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none ${
+                                isGenerating ? "opacity-50" : ""
+                            }`}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
-                        {/* Dream shimmer overlay */}
                         {isGenerating && (
-                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
-                            ✨ Dreaming up your description...
+                           <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                             <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
+                                <Sparkles className="w-4 h-4" /> Generating...
+                             </div>
                           </div>
                         )}
                       </div>
@@ -260,43 +272,12 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
-                <div className="flex justify-start">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
-                      isGenerating
-                        ? "text-gray-400 animate-pulse cursor-not-allowed"
-                        : "text-indigo-600"
-                    }`}
-                    disabled={isGenerating}
-                    onClick={handelAiGenration}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                        Generating...
-                      </div>
-                    ) : (
-                      "Generate using AI"
-                    )}
-                  </Button>
-                </div>
-
-                <div className="flex justify-end gap-2 items-center">
+                <div className="pt-2">
                   <Button
                     type="submit"
-                    className="bg-linear-to-b from-indigo-600 to-purple-600 text-white"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold h-11 rounded-lg"
                   >
-                    <Plus className="h-4 mr-2" />
-                    {isEditing ? "Update Project" : "Add Project"}
-                  </Button>
-                  <Button
-                    type="button"
-                    className="bg-linear-to-b from-indigo-600 to-purple-600 text-white"
-                    onClick={next}
-                  >
-                    Next
+                     {isEditing ? "Update Project" : "Add Project"}
                   </Button>
                 </div>
               </form>
@@ -304,124 +285,58 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
           </CardContent>
         </Card>
 
-        {/* Preview Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
-            <FolderKanban className="w-6 h-6 text-white mr-2" />
-            <CardTitle className="text-2xl font-bold text-white">
-              Project Review
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
+        {/* List Section */}
+        <div className="space-y-6">
+           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                 <FolderKanban className="w-5 h-5 text-indigo-500" /> Added Projects
+              </h3>
+            
             {projectList.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <FolderKanban className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p>No projects added yet.</p>
-                <p className="text-sm">
-                  Start by adding a project using the form.
-                </p>
-              </div>
+                 <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                    <p className="text-slate-400 text-sm">No projects added yet.</p>
+                 </div>
             ) : (
-              <div className="space-y-4 p-4">
+              <div className="space-y-3">
                 {projectList.map((project, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow px-4"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg text-gray-800">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-600">
-                          <span className="font-medium">
-                            {project.roleOrType}
-                          </span>{" "}
-                          at {project.organization} ({project.date})
-                        </p>
-                        <p className="text-sm text-blue-600">
+                   <div key={idx} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors">
+                      <div className="flex justify-between items-start">
+                         <div>
+                             <h4 className="font-bold text-slate-800">{project.title}</h4>
+                             <div className="text-sm text-indigo-600 font-medium">{project.roleOrType}</div>
+                         </div>
+                         <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(project)}>
+                                <Edit2 className="w-3.5 h-3.5" />
+                             </Button>
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDelete(project.id)}>
+                                <Trash2 className="w-3.5 h-3.5" />
+                             </Button>
+                          </div>
+                      </div>
+                      
+                      <div className="text-xs text-slate-500 font-medium bg-slate-100 self-start px-2 py-1 rounded">
                           {project.technologiesOrTopics}
-                        </p>
-                        {project.link && (
-                          <a
-                            href={project.link}
-                            className="text-sm text-blue-500 underline"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Visit Project
-                          </a>
-                        )}
                       </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleEdit(project)}
-                          size="icon"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleDelete(project.id)}
-                          size="icon"
-                        >
-                          <Trash2 className="w-4 h-4 text-red-500" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    {project.description ??
-                      project.description
-                        ?.split("\n") // split by newlines
-                        .map((line, idx) => {
-                          const trimmed = line.trim();
-                          if (!trimmed) return null;
-
-                          // If line starts with bullet symbol, just render as list item
-                          if (trimmed.startsWith("•")) {
-                            return (
-                              <li key={idx} className="text-gray-700">
-                                {trimmed.replace(/^•\s*/, "")}
-                              </li>
-                            );
-                          }
-
-                          // If line contains heading (like "Key responsibilities include:")
-                          const headingMatch = trimmed.match(/^(.+?):\s*(.+)$/);
-                          if (headingMatch) {
-                            const [, heading, rest] = headingMatch;
-                            // Split rest by semicolon for sub-bullets
-                            const points = rest
-                              .split(";")
-                              .map((p) => p.trim())
-                              .filter(Boolean);
-                            return (
-                              <li key={idx}>
-                                <span className="font-medium text-gray-800">
-                                  {heading}:
-                                </span>
-                                <ul className="list-disc ml-5 mt-1 space-y-2">
-                                  {points.map((point, i) => (
-                                    <li key={i} className="text-gray-600">
-                                      {point}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </li>
-                            );
-                          }
-
-                          // Otherwise, render normal sentence
-                          return <li className="text-gray-700">{trimmed}</li>;
-                        })}
+                      
+                      {project.description && (
+                         <p className="text-xs text-slate-600 line-clamp-2 mt-1">{project.description}</p>
+                      )}
                   </div>
                 ))}
               </div>
             )}
-          </CardContent>
-        </Card>
+           </div>
+
+           <div className="flex justify-between items-center pt-4">
+              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+           </div>
+        </div>
       </div>
     </div>
   );

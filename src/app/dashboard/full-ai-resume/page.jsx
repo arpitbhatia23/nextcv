@@ -1,43 +1,48 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { Send, RefreshCw } from "lucide-react";
-// Resume flow configuration
-import { flow } from "@/utils/resumeFlow";
-import { useAutoScroll } from "@/hooks/useAutoscroll";
-import { ChatMessage } from "@/components/Chat";
-import axios from "axios";
-import { useResumeStoreChat } from "@/store/chatStore";
-import useResumeStore from "@/store/useResumeStore";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-// Constants
-const RESPONSE_DELAY = 300;
+import { useResumeStoreChat } from "@/store/chatStore";
+import { ChatMessage } from "@/components/Chat";
+import {
+  Send,
+  Sparkles,
+  Lightbulb,
+  RotateCcw,
+  Loader2,
+  Award,
+} from "lucide-react";
+import { useAutoScroll } from "@/hooks/useAutoscroll";
+import confetti from "canvas-confetti";
+import { flow } from "@/utils/resumeFlow";
+import useResumeStore from "@/store/useResumeStore";
+import axios from "axios";
+const RESPONSE_DELAY = 1000;
 
-// Main Component
 export default function ResumeChat() {
-  // State Management
+  // --- State & Stores ---
   const store = useResumeStoreChat();
-  const updateFrom = useResumeStore((state) => state.updateForm);
-  const From = useResumeStore((state) => state.formData);
+  const updateForm = useResumeStore((state) => state.updateForm);
   const resetForm = useResumeStore((state) => state.resetForm);
   const clearDraft = useResumeStore((state) => state.clearStorage);
 
   const [input, setInput] = useState("");
-  const [showYesNo, setShowYesNo] = useState(false);
-  const [showSkip, setShowSkip] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState(false);
+  const chatEndRef = useRef(null);
 
   const currentStep = flow[store.step];
-  const [isGenerating, setIsGenerating] = useState(false);
+
+  // Initialize auto-scroll mechanism
   const bottomRef = useAutoScroll(store.messages.length);
 
   const router = useRouter();
-  // Helper Functions
-  const isOptionalField = (fieldQuestion) => {
-    return fieldQuestion?.toLowerCase().includes("optional");
-  };
 
+  // --- Logic ---
   const addBotMessage = (text, delay = RESPONSE_DELAY) => {
+    store.setIsTyping(true);
     setTimeout(() => {
       store.addMessage({ sender: "bot", text });
+      store.setIsTyping(false);
     }, delay);
   };
 
@@ -52,10 +57,18 @@ export default function ResumeChat() {
       const section = currentStep.key;
       const fieldKey = currentStep.fields[store.fieldStep].key;
       const index = store.repeatIndex[section] || 0;
-
       store.updateAnswer(fieldKey, answerValue, section, index);
+
+      // Sync to main resume store
+      updateForm({
+        [section]: store.answers[section],
+      });
     } else {
       store.updateAnswer(currentStep.key, answerValue);
+      // Sync to main resume store
+      updateForm({
+        [currentStep.key]: answerValue,
+      });
     }
   };
 
@@ -65,8 +78,6 @@ export default function ResumeChat() {
       store.setStep(nextStep);
       const nextQuestion = flow[nextStep].q;
       addBotMessage(nextQuestion);
-      setShowYesNo(flow[nextStep]?.type === "repeatable");
-      setShowSkip(isOptionalField(nextQuestion));
     } else {
       finishResume();
     }
@@ -78,11 +89,11 @@ export default function ResumeChat() {
       store.setFieldStep(nextField);
       const nextFieldData = currentStep.fields[nextField];
       addBotMessage(nextFieldData.q);
-      setShowSkip(isOptionalField(nextFieldData.q));
     } else {
       store.setFieldStep(0);
-      setShowYesNo(true);
-      addBotMessage(`Add another ${currentStep.key}?`);
+      addBotMessage(
+        `Would you like to add another ${currentStep.key}? (Yes/No)`,
+      );
     }
   };
 
@@ -90,52 +101,46 @@ export default function ResumeChat() {
     const isFirstField = store.fieldStep === 0;
     const answerLower = answer.toLowerCase();
 
-    if (isFirstField && currentStep.type === "repeatable") {
+    // Logic for "Yes/No" to start/continue repeatable section
+    const lastBotMsg = store.messages[store.messages.length - 1];
+    const isAskingToRepeat =
+      lastBotMsg?.text?.includes("add another") ||
+      lastBotMsg?.text?.includes("Add another");
+
+    if (
+      isAskingToRepeat ||
+      (isFirstField &&
+        currentStep.type === "repeatable" &&
+        (answerLower === "yes" || answerLower === "no"))
+    ) {
       if (answerLower === "no") {
-        resetUIState();
         moveToNextStep();
         return true;
       }
       if (answerLower === "yes") {
+        if (isAskingToRepeat) {
+          store.updateRepeatIndex(currentStep.key);
+        }
         addBotMessage(currentStep.fields[0].q);
-        setShowSkip(isOptionalField(currentStep.fields[0].q));
         return true;
       }
-    }
-
-    // "Add another?" question
-    if (isFirstField && answerLower === "yes") {
-      store.updateRepeatIndex(currentStep.key);
-      addBotMessage(currentStep.fields[0].q);
-      setShowSkip(isOptionalField(currentStep.fields[0].q));
-      return true;
-    }
-
-    if (isFirstField && answerLower === "no") {
-      resetUIState();
-      moveToNextStep();
-      return true;
     }
 
     return false;
   };
 
-  const resetUIState = () => {
-    setShowYesNo(false);
-    setShowSkip(false);
-  };
-
-  // Main Input Handler
   const handleInput = (text) => {
-    addUserMessage(text);
-    resetUIState();
+    if (!text.trim()) return;
 
-    // Check if it's a repeatable section flow
+    addUserMessage(text); // Optimistic UI update
+
+    // Check repeatable logic
     if (handleRepeatableSection(text)) {
+      setInput("");
       return;
     }
 
-    // Save answer and move to next
+    // Save & Move
     saveAnswer(text);
 
     if (currentStep.type === "repeatable") {
@@ -143,166 +148,206 @@ export default function ResumeChat() {
     } else {
       moveToNextStep();
     }
-  };
 
-  const handleButtonClick = (answer) => {
-    if (input.trim()) return; // Prevent double submission
-    handleInput(answer);
     setInput("");
   };
 
-  const handleSendMessage = () => {
-    if (input.trim()) {
-      handleInput(input.trim());
-      setInput("");
-    }
-  };
-
   const finishResume = async () => {
-    store.setIsComplete(true);
-    store.setApiError(null);
-    resetUIState();
+    addBotMessage(
+      "🎉 Awesome! I'm compiling your resume now using our AI engine... This might take a few seconds.",
+    );
     setIsGenerating(true);
-
-    addBotMessage("✨ Resume complete! Generating preview...");
-
+    setError(false);
     try {
-      // Simulated API call - replace with your actual endpoint
-      const response = await axios.post("/api/gen/aiResume", {
+      const res = await axios.post("/api/gen/aiResume", {
         resumeData: store.answers,
       });
+      const data = res?.data;
 
-      const data = response.data;
-      console.log(data);
-      store.setGeneratedResumeUrl(data.url || null);
-      store.addMessage({
-        sender: "bot",
-        text: "🎉 Resume generated successfully! You can now download your resume.",
-      });
       resetForm();
       clearDraft();
-      updateFrom(data?.data);
-      console.log(From);
+      updateForm(data?.data);
+
       router.push("/dashboard/full-ai-resume/preview");
-    } catch (error) {
-      console.error("Resume generation error:", error);
-      store.setApiError(error.message);
-      store.addMessage({
-        sender: "bot",
-        text: "❌ Oops! Something went wrong while generating your resume. Please try again.",
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
       });
-    } finally {
+    } catch (error) {
+      console.log(error);
       setIsGenerating(false);
+      setError(true);
+      addBotMessage("Review generation failed. Please try again.");
     }
   };
 
-  const handleRetry = () => {
-    store.setApiError(null);
-    finishResume();
-  };
-
-  const handleStartOver = () => {
-    if (
-      confirm("Are you sure you want to start over? All progress will be lost.")
-    ) {
-      store.resetStore();
-      setInput("");
-      resetUIState();
+  // Initial Message
+  useEffect(() => {
+    if (store.messages.length === 0) {
+      addBotMessage(
+        "Hi there! I'm your AI Resume Assistant. I'll help you build a professional resume in minutes. Let's start with your *Full Name*.",
+      );
     }
+  }, []);
+
+  // Scroll to bottom
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [store.messages, store.isTyping]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleInput(input);
   };
 
+  const handleQuickReply = (val) => {
+    handleInput(val);
+  };
+
+  // --- Render ---
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 p-4">
-      <div className="max-w-6xl mx-auto mt-8">
-        {/* Header */}
-        <div className="mb-4 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-800">Resume Builder</h1>
-          <button
-            onClick={handleStartOver}
-            className="text-sm text-gray-600 hover:text-gray-800 underline"
-          >
-            Start Over
-          </button>
+    <div className="flex h-[calc(100vh-64px)] bg-slate-50 overflow-hidden">
+      {/* Left Sidebar - Context & Tips (Hidden on Mobile) */}
+      <div className="hidden lg:flex w-80 flex-col border-r border-slate-200 bg-white h-full p-6">
+        <div className="bg-linear-to-br from-indigo-600 to-violet-600 text-white p-6 rounded-2xl shadow-lg mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h2 className="font-bold text-lg">AI Assistant</h2>
+          </div>
+          <p className="text-indigo-100 text-sm leading-relaxed">
+            I'm here to guide you through building a ATS-friendly resume. I'll
+            ask you questions one by one.
+          </p>
+          <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-medium text-indigo-50">
+            <span>
+              Step {store.step + 1} of {flow.length}
+            </span>
+            <span className="bg-white/20 px-2 py-0.5 rounded text-white">
+              {Math.round(((store.step + 1) / flow.length) * 100)}%
+            </span>
+          </div>
         </div>
 
-        {/* Chat Container */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-          <div className="h-96 overflow-y-auto p-6 space-y-4 bg-linear-to-b from-gray-50 to-white">
-            {store.messages.map((msg, idx) => (
-              <ChatMessage
-                key={idx}
-                message={msg}
-                isLatest={idx === store.messages.length - 1}
-                showYesNo={showYesNo && !store.isComplete}
-                showSkip={showSkip && !store.isComplete}
-                showRetry={
-                  !!store.apiError && idx === store.messages.length - 1
-                }
-                onRetry={handleRetry}
-                onButtonClick={handleButtonClick}
-              />
-            ))}
-            <div ref={bottomRef} />
-          </div>
-
-          {/* Input Area */}
-          <div className="p-4 bg-gray-50 border-t border-gray-200">
-            {store.apiError && (
-              <div className="mb-3 bg-red-50 border border-red-200 rounded-lg p-3 flex items-center justify-between">
-                <span className="text-red-800 text-sm">
-                  Failed to generate resume
-                </span>
-                <button
-                  onClick={handleRetry}
-                  disabled={isGenerating}
-                  className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
-                >
-                  <RefreshCw
-                    size={16}
-                    className={isGenerating ? "animate-spin" : ""}
-                  />
-                  Try Again
-                </button>
-              </div>
-            )}
-
-            <div className="flex gap-3">
-              <input
-                className="flex-1 border-2 border-gray-300 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder={
-                  store.isComplete ? "Resume completed!" : "Type your answer..."
-                }
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-                disabled={store.isComplete}
-              />
-              <button
-                onClick={handleSendMessage}
-                disabled={store.isComplete || !input.trim()}
-                className="bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                <Send size={18} />
-                Send
-              </button>
+        <div className="flex-1 overflow-y-auto">
+          <h3 className="font-semibold text-slate-900 flex items-center gap-2 mb-4">
+            <Lightbulb className="w-4 h-4 text-amber-500" />
+            Quick Tips
+          </h3>
+          <div className="space-y-3">
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-600">
+              <p>
+                Keep your answers concise and professional. Use action verbs
+                like "Managed", "Created", "Led".
+              </p>
+            </div>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-sm text-slate-600">
+              <p>
+                If you don't have information for a section, you can type
+                "Skip".
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Quick Tips */}
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
-          <h3 className="font-semibold text-blue-900 mb-2">💡 Quick Tips:</h3>
-          <ul className="text-sm text-blue-800 space-y-1">
-            <li>• Your progress is automatically saved</li>
-            <li>• Be specific with your achievements and responsibilities</li>
-            <li>• Use semicolons (;) to separate multiple items in lists</li>
-            <li>• Click 'Skip' button or type 'skip' for optional fields</li>
-            <li>• Use the Yes/No buttons for quick responses</li>
-            <li>
-              • You can add multiple experiences, projects, and education
-              entries
-            </li>
-          </ul>
+        <button
+          onClick={() => {
+            store.resetStore();
+            resetForm();
+            clearDraft();
+            window.location.reload();
+          }}
+          className="mt-4 flex items-center justify-center gap-2 text-slate-500 hover:text-red-600 text-sm font-medium transition-colors p-2"
+        >
+          <RotateCcw className="w-4 h-4" /> Reset Chat
+        </button>
+      </div>
+
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col h-full relative">
+        {/* Messages */}
+        <div
+          className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth"
+          id="chat-container"
+        >
+          <div className="max-w-3xl mx-auto min-h-full flex flex-col justify-end pb-4">
+            {store.messages.map((msg, i) => (
+              <ChatMessage
+                key={i}
+                message={msg}
+                onQuickReply={handleQuickReply}
+              />
+            ))}
+            {store.isTyping && (
+              <div className="flex items-center gap-2 text-slate-400 text-sm p-4 animate-pulse">
+                <div
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "0ms" }}
+                />
+                <div
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "150ms" }}
+                />
+                <div
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "300ms" }}
+                />
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+        </div>
+
+        {/* Input Area */}
+        <div className="p-4 md:p-6 bg-white border-t border-slate-200">
+          <div className="max-w-3xl mx-auto">
+            {error ? (
+              <button
+                onClick={finishResume}
+                className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+              >
+                <RotateCcw className="w-5 h-5" />
+                Retry Generation
+              </button>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="relative flex items-center gap-2"
+              >
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type your answer..."
+                  className="flex-1 bg-slate-50 border border-slate-200 text-slate-900 rounded-full py-4 pl-6 pr-14 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white shadow-sm transition-all"
+                  disabled={isGenerating || store.isTyping}
+                  autoFocus
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isGenerating}
+                  className={`absolute right-2 p-2 rounded-full transition-all duration-200 ${
+                    input.trim()
+                      ? "bg-indigo-600 text-white shadow-md hover:scale-105"
+                      : "bg-slate-200 text-slate-400 cursor-not-allowed"
+                  }`}
+                >
+                  {isGenerating ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5" />
+                  )}
+                </button>
+              </form>
+            )}
+            <div className="mt-3 flex justify-center gap-4 text-xs text-slate-400">
+              <span>Press Enter to send</span>
+              <span>•</span>
+              <span>Type "Skip" to pass</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

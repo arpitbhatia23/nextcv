@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 function IconButton({ label, icon }) {
   return (
     <button
-      className="w-9 h-9 bg-gray-700 flex items-center justify-center rounded-full hover:bg-gray-600 transition-colors"
+      className="w-10 h-10 bg-slate-800 text-slate-400 flex items-center justify-center rounded-full hover:bg-indigo-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-indigo-500/30"
       aria-label={label}
     >
       {icon}
@@ -31,135 +31,126 @@ export const Footer = () => {
       duration: 800,
       delay: 0,
       smooth: "easeInOutQuart",
-      offset: -70, // adjust for navbar
+      offset: -70,
     });
   };
 
-  // UPDATED footerLinks with Home and Blogs
   const footerLinks = [
     {
       label: "Home",
-      // This handles smooth scrolling only on the landing page,
-      // or a navigation if the user is elsewhere.
       action: () => (isLandingPage ? scrollTo("Hero") : null),
       route: "/",
     },
-    { label: "Blogs", route: "/blogs" }, // Added Blogs link
-    { label: "About us", route: "/about-us" }, // Added Blogs link
-    { label: "Contact", route: "/contact" }, // Added Blogs link
+    { label: "Blogs", route: "/blogs" },
+    { label: "About us", route: "/about-us" },
+    { label: "Contact", route: "/contact" },
+  ];
 
+  const legalLinks = [
     { label: "Privacy Policy", route: "/privacy-policy" },
     { label: "Terms of Service", route: "/terms" },
   ];
 
   const renderFooterLink = (item) => {
-    // If the link has an action (like Home/scroll to top), handle it
     if (item.action && isLandingPage) {
       return (
         <button
           onClick={item.action}
-          className="hover:underline text-left w-full"
+          className="hover:text-indigo-400 transition-colors text-left w-full text-sm"
         >
           {item.label}
         </button>
       );
     }
-    // Standard Link
     return (
-      <Link href={item.route} className="hover:underline">
+      <Link href={item.route} className="hover:text-indigo-400 transition-colors text-sm">
         {item.label}
       </Link>
     );
   };
 
   return (
-    <footer className="bg-gray-900 text-white px-6 py-12 space-y-12">
-      {/* Top Section */}
-      <div className="flex flex-col md:flex-row justify-around gap-8">
-        <div className="space-y-4 max-w-md">
-          <Logo2 className="text-white" color="white" size={100} />
-          {/* Keyword Addition */}
-          <p className="text-gray-200">
-            Build professional, ATS friendly resume with AI in minutes. Join
-            thousands of successful job seekers who landed their dream jobs with
-            Next CV.
-          </p>
-          <div className="flex space-x-4 mt-4">
-            <IconButton icon={<FaFacebookF />} label="Facebook" />
-            <IconButton icon={<FaTwitter />} label="Twitter" />
-            <IconButton icon={<FaLinkedinIn />} label="LinkedIn" />
-            <IconButton icon={<FaInstagram />} label="Instagram" />
+    <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-1 space-y-6">
+            <Logo2 className="text-white" color="white" size={90} />
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+               NextCV is the student-built AI resume builder making career tools accessible and affordable for everyone in India.
+            </p>
+            <div className="flex space-x-3 pt-2">
+              <IconButton icon={<FaFacebookF />} label="Facebook" />
+              <IconButton icon={<FaTwitter />} label="Twitter" />
+              <IconButton icon={<FaLinkedinIn />} label="LinkedIn" />
+              <IconButton icon={<FaInstagram />} label="Instagram" />
+            </div>
           </div>
-        </div>
 
-        <div className="flex flex-wrap md:flex-nowrap gap-28 text-sm pr-20">
+          {/* Links Column */}
           <div>
-            <h2 className="font-semibold mb-3">Quick Links</h2>
-            <ul className="space-y-2 text-gray-200">
+            <h3 className="text-white font-bold mb-6">Platform</h3>
+            <ul className="space-y-4">
               {footerLinks.map((item) => (
                 <li key={item.label}>{renderFooterLink(item)}</li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Details */}
+          {/* Legal Column */}
           <div>
-            <h2 className="font-semibold mb-3">Contact</h2>
-            <ul className="space-y-2 text-gray-200">
-              <li>
-                <a
-                  href="mailto:help@nextcv.in"
-                  className="hover:underline"
-                  aria-label="Email help@nextcv.in"
-                >
-                  help@nextcv.in
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+918628047655"
-                  className="hover:underline"
-                  aria-label="Call 8628047655"
-                >
-                  +91 86280 47655
-                </a>
-              </li>
+            <h3 className="text-white font-bold mb-6">Legal</h3>
+            <ul className="space-y-4">
+              {legalLinks.map((item) => (
+                <li key={item.label}>{renderFooterLink(item)}</li>
+              ))}
             </ul>
           </div>
-        </div>
-      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {[
-          { label: "Resumes Created", value: "1 K+", color: "text-indigo-400" },
-          { label: "Success Rate", value: "95%", color: "text-green-400" },
-          { label: "Average Time", value: "2 min", color: "text-purple-400" },
-          { label: "Fixed Price", value: "100", color: "text-cyan-400" },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="bg-gray-800 p-6 rounded-lg text-center"
-          >
-            <p className={`text-2xl font-bold ${item.color}`}>{item.value}</p>
-            <p className="text-gray-200 mt-2">{item.label}</p>
+          {/* Contact Column */}
+          <div>
+             <h3 className="text-white font-bold mb-6">Contact</h3>
+             <ul className="space-y-4 text-sm text-slate-400">
+                <li>
+                   <a href="mailto:help@nextcv.in" className="hover:text-indigo-400 transition-colors block">
+                      help@nextcv.in
+                   </a>
+                </li>
+                <li>
+                   <span>+91 86280 47655</span>
+                </li>
+                <li>
+                   <span>India · Remote</span>
+                </li>
+             </ul>
           </div>
-        ))}
-      </div>
 
-      {/* Footer Bottom */}
-      <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-200 border-t border-gray-800 pt-6 gap-4 sm:gap-0">
-        <p>© 2024 Next CV. All rights reserved.</p>
-        <div className="flex items-center gap-2">
-          <span>Made with</span> <span className="text-red-500">❤️</span>
-          <span>by Aurpit & Tamanna</span>
         </div>
-        <div className="flex space-x-4">
-          {renderFooterLink({
-            label: "Privacy Policy",
-            route: "/privacyPolicy",
-          })}
-          {renderFooterLink({ label: "Terms of Service", route: "/terms" })}
+
+        {/* Stats Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-slate-900 mb-8">
+             {[
+               { label: "Resumes Created", value: "10K+", color: "text-indigo-500" },
+               { label: "Success Rate", value: "95%", color: "text-emerald-500" },
+               { label: "Build Time", value: "< 5m", color: "text-amber-500" },
+               { label: "Fixed Cost", value: "₹100", color: "text-blue-500" },
+             ].map((stat, i) => (
+                <div key={i} className="text-center">
+                   <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+                   <div className="text-xs text-slate-500 uppercase tracking-wide mt-1">{stat.label}</div>
+                </div>
+             ))}
+        </div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+          <p>© {new Date().getFullYear()} Next CV. All rights reserved.</p>
+          <div className="flex items-center gap-1.5">
+            <span>Made with</span> <span className="text-red-500 animate-pulse">❤️</span> <span>by Aurpit & Tamanna</span>
+          </div>
         </div>
       </div>
     </footer>
