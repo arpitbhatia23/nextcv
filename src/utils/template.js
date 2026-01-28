@@ -9,25 +9,30 @@ export const templates = [
     key: "modernTemplate",
     label: "Modern",
     component: ModernPDFResumeTemplate,
+    image: "/modern.webp",
   },
   {
     key: "classicTemplate",
     label: "Classic",
     component: ClassicTemplate,
+    image: "/classic.webp",
   },
   {
     key: "MinimalistTemplate",
     label: "Minimalist",
     component: ClassicMinimalistPDFResume,
+    image: "/classic.webp", // Fallback to classic if no specific image found
   },
   {
     key: "MordenBluesidebar",
-    label: "Morden blue sidebar",
+    label: "Modern Blue Sidebar",
     component: ModernBlueSidebarPDFResume,
+    image: "/ModernSideBar.webp",
   },
   {
     key: "ModernFullStack",
-    label: "MordenFullStack",
+    label: "Modern FullStack",
     component: ModernPDFResumeTemplate,
+    image: "/modern.webp",
   },
 ];

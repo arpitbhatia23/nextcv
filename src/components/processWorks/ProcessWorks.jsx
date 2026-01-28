@@ -7,116 +7,97 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
-// import TestimonialCarousel from "../testimonial/Testimonial"; // Keeping this commented out as it's not used in the return
 import { signIn } from "next-auth/react";
+import { Zap, Eye, Wallet } from "lucide-react";
 
 const ProcessWorks = () => {
   const works = [
     {
-      icon: "⚡",
+      icon: <Zap className="w-8 h-8 text-indigo-500" />,
       title: "Lightning Fast",
       description:
-        "No more spending hours formatting. Get professional results in minutes.",
+        "No more spending hours formatting. Get professional results in minutes with our intelligent builder.",
       isHighlighted: false,
     },
     {
-      icon: "🎯",
-      title: "Maximum Visibility: ATS-Friendly", // Updated Title
+      icon: <Eye className="w-8 h-8 text-white" />,
+      title: "Maximum Visibility",
       description:
-        "Our templates are designed to be read perfectly by Applicant Tracking Systems (ATS), ensuring your **ATS-Friendly resume** gets seen by a recruiter.", // Updated Description
-      isHighlighted: true, // Mark for highlighting
-      highlightClass:
-        "bg-blue-50 border-blue-200 shadow-lg ring-2 ring-blue-500", // Tailwind classes for highlighting
+        "Our templates are designed to be read perfectly by Applicant Tracking Systems (ATS), ensuring your resume gets seen.",
+      isHighlighted: true, 
     },
     {
-      icon: "💰",
-      title: "Wallet-Friendly", // Updated Title
+      icon: <Wallet className="w-8 h-8 text-indigo-500" />,
+      title: "Wallet-Friendly",
       description:
-        "Get professional, interview-ready results at a fraction of traditional costs.",
+        "Get professional, interview-ready results for just ₹100. A fraction of the cost of other services.",
       isHighlighted: false,
     },
   ];
 
-  // Helper to handle the click event for the CTA
   const handleStartResume = () => {
-    // Replace with your actual sign-in logic if necessary, or just navigate
     signIn("google");
   };
 
   return (
-    <>
-      <section className="px-4 py-16 bg-white">
-        {/* Updated Headline */}
-        <div className="max-w-6xl mx-auto space-y-12">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-center text-gray-900">
-            Land Your Dream Job: The Next CV Advantage
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Headline */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+            Land Your Dream Job with the <br/><span className="text-indigo-600">NextCV Advantage</span>
           </h2>
+          <p className="text-lg text-slate-600">
+            Why thousands of Indian job seekers choose us over generic resume builders.
+          </p>
+        </div>
 
-          {/* Features */}
-          <div className="flex flex-col sm:flex-row justify-center items-stretch gap-8">
-            {works.map(
-              (
-                { icon, title, description, isHighlighted, highlightClass },
-                index
-              ) => (
-                <Card
-                  key={index}
-                  className={`text-center space-y-2 max-w-sm flex-1 transition-all duration-300 hover:scale-[1.03] ${
-                    isHighlighted ? highlightClass : "border-gray-200"
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <div className="flex justify-center mb-4">
-                      {/* Larger, more prominent icon */}
-                      <div
-                        className={`text-5xl p-2 rounded-full ${
-                          isHighlighted ? "bg-blue-100" : "bg-gray-100"
-                        }`}
-                      >
-                        {icon}
-                      </div>
-                    </div>
-
-                    <CardTitle className="text-xl font-bold mb-2">
-                      {title}
-                    </CardTitle>
-
-                    {/* Use dangerouslySetInnerHTML to render the bolded keyword in the description */}
-                    <CardDescription
-                      className="text-gray-600 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: description }}
-                    />
-                  </CardContent>
-                </Card>
-              )
-            )}
-          </div>
-
-          {/* CTA and Social Proof */}
-          <div className="text-center pt-8 space-y-4">
-            <Button
-              className="bg-blue-700 px-8 py-5 text-lg sm:text-lg font-bold rounded-lg shadow-xl hover:bg-blue-800 transition duration-200"
-              onClick={handleStartResume}
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 items-start">
+          {works.map((item, index) => (
+            <div
+              key={index}
+              className={`relative p-8 rounded-3xl transition-all duration-300 ${
+                item.isHighlighted
+                  ? "bg-indigo-600 text-white shadow-2xl shadow-indigo-200 scale-105 z-10"
+                  : "bg-slate-50 text-slate-900 hover:bg-white hover:shadow-xl hover:shadow-slate-100 border border-slate-100"
+              }`}
             >
-              Start Your ATS-Friendly Resume
-            </Button>
-            <p className="text-gray-700 text-lg">
-              Join thousands of successful job seekers
-            </p>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                  item.isHighlighted ? "bg-white/20 text-white" : "bg-white text-indigo-600 shadow-sm"
+              }`}>
+                {item.icon}
+              </div>
 
-            {/* 1K Statistic Added */}
-            <div className="pt-4">
-              <p className="text-5xl font-extrabold text-blue-700">1K+</p>
-              <p className="text-gray-500 font-semibold uppercase tracking-wider">
-                Successful Users
+              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+              <p className={`leading-relaxed text-sm ${item.isHighlighted ? "text-indigo-100" : "text-slate-600"}`}>
+                {item.description}
               </p>
             </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center">
+          <div className="inline-block relative group">
+             <div className="absolute inset-0 bg-indigo-600 blur-[20px] opacity-20 group-hover:opacity-40 transition-opacity rounded-full"></div>
+             <Button
+              className="relative bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-6 text-lg font-bold rounded-xl shadow-xl transition-all duration-300 hover:scale-[1.02]"
+              onClick={handleStartResume}
+            >
+              Start Your Resume Now
+            </Button>
+          </div>
+          
+          <div className="mt-8 flex flex-col items-center">
+             <p className="text-4xl font-black text-slate-900">10k+</p>
+             <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mt-1">Successful Resumes Created</p>
           </div>
         </div>
-      </section>
 
-      {/* Testimonials */}
-    </>
+      </div>
+    </section>
   );
 };
 

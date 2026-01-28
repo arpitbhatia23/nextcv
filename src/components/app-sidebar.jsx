@@ -14,9 +14,10 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Logo2 from "./Logo2";
-import { ChartSpline, IndianRupee, TicketPercent } from "lucide-react";
+import { ChartSpline, IndianRupee, TicketPercent, FileText } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { useSession } from "next-auth/react";
+
 const userData = {
   navMain: [
     {
@@ -24,21 +25,11 @@ const userData = {
       url: "/dashboard",
       icon: IconDashboard,
     },
-    // {
-    //   title: "Resume Builder",
-    //   url: "#",
-    //   icon: PenSquare,
-    // },
     {
-      title: "My Resume",
+      title: "My Resumes",
       url: "/dashboard/my-resume",
-      icon: IconReport,
+      icon: FileText,
     },
-    // {
-    //   title: "Template selection",
-    //   url: "#",
-    //   icon: GalleryVerticalEnd,
-    // },
   ],
 };
 
@@ -50,12 +41,12 @@ const adminData = {
       icon: IconDashboard,
     },
     {
-      title: "Analaytics",
+      title: "Analytics",
       url: "/dashboard/analytics",
       icon: ChartSpline,
     },
     {
-      title: "coupons",
+      title: "Coupons",
       url: "/dashboard/coupons",
       icon: TicketPercent,
     },
@@ -73,27 +64,31 @@ export function AppSidebar({ ...props }) {
   const data = session?.user?.role === "admin" ? adminData : userData;
 
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
+    <Sidebar collapsible="offcanvas" className="bg-white border-r border-slate-200" {...props}>
+      <SidebarHeader className="bg-white">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-7.5 flex justify-between items-center"
+              className="py-6 hover:bg-slate-50 transition-colors"
             >
-              <a href="#">
-                <Logo2 />
+              <a href="#" className="flex justify-start pl-2">
+                <Logo2 size={32} color="#0f172a" />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <Separator />
-      <SidebarContent>
+      
+      <Separator className="bg-slate-100" />
+      
+      <SidebarContent className="bg-white px-2 py-4">
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <Separator />
-      <SidebarFooter>
+      
+      <Separator className="bg-slate-100" />
+      
+      <SidebarFooter className="bg-white p-4">
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>

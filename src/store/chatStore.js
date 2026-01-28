@@ -13,7 +13,9 @@ export const useResumeStoreChat = create(
       isComplete: false,
       apiError: null,
       generatedResumeUrl: null,
+      isTyping: false,
 
+      setIsTyping: (isTyping) => set({ isTyping }),
       setMessages: (messages) => set({ messages }),
       addMessage: (message) =>
         set((state) => ({
@@ -55,6 +57,7 @@ export const useResumeStoreChat = create(
           isComplete: false,
           apiError: null,
           generatedResumeUrl: null,
+          isTyping: false,
         }),
     }),
     {

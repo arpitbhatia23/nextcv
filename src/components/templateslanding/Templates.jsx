@@ -1,181 +1,177 @@
 import React from "react";
-import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-
-// Utility function to handle template selection/sign-in
-const handleTemplateSelection = () => {
-  // In a real application, you might pass the template ID here
-  // and navigate to the builder, checking authentication first.
-  signIn("google");
-};
+import { CheckCircle2, Smartphone, Palette, ArrowRight, ShieldCheck } from "lucide-react";
 
 const Templates = () => {
+  const handleTemplateSelection = () => {
+    signIn("google");
+  };
+
   const cards = [
     {
       img: "/classic.webp",
       width: 446,
       height: 587,
-      title: "Classic",
-      // Refined description
-      description: "Simple, chronological, and highly scannable by all ATS.",
+      title: "Classic Professional",
+      description: "Timeless elegance. Perfect for corporate and traditional industries.",
       isATS: true,
     },
     {
       img: "/minalmalist.webp",
       width: 351,
       height: 451,
-      title: "Minimalist",
-      // Refined description
-      description:
-        "Clean design, prioritizes content readability. Best for creatives.",
+      title: "Clean Minimalist",
+      description: "Focus purely on content. Ideal for creative and tech roles.",
       isATS: true,
     },
     {
       img: "/modern.webp",
       width: 446,
       height: 587,
-      title: "Modern",
-      // Refined description
-      description:
-        "Balanced layout with subtle design elements. Great for tech roles.",
+      title: "Modern Edge",
+      description: "Contemporary layout with subtle accents to stand out.",
       isATS: true,
     },
     {
       img: "/ModernSideBar.webp",
       width: 351,
       height: 451,
-      title: "Modern Sidebar",
-      // Refined description
-      description:
-        "Uses a two-column structure for maximum information density.",
+      title: "Sidebar Executive",
+      description: "High information density with a structured sidebar layout.",
       isATS: true,
     },
   ];
 
-  const templates_includ = [
+  const features = [
     {
-      icon: "🎯",
-      title: "ATS-Optimized",
-      description: "Designed to pass applicant tracking systems",
+      icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
+      title: "ATS Optimized",
+      description: "Guaranteed to pass formatting checks.",
     },
     {
-      icon: "📱",
-      title: "Mobile Friendly",
-      description: "Looks great on all devices and screen sizes",
+      icon: <Smartphone className="w-6 h-6 text-indigo-600" />,
+      title: "Mobile Ready",
+      description: "Looks perfect on any device.",
     },
     {
-      icon: "✏️",
-      title: "Fully Customizable",
-      description: "Edit colors, fonts, and layout to match your style",
+      icon: <Palette className="w-6 h-6 text-purple-600" />,
+      title: "Customizable",
+      description: "Change colors and fonts easily.",
     },
   ];
 
   return (
-    <>
-      {/* Templates Section */}
-      <section name="Templates" className="px-4 py-12">
-        <div className="max-w-screen-2xl mx-auto space-y-8">
-          <h2 className="text-4xl font-bold text-center">Templates</h2>
-          <h3 className="text-gray-600 text-lg text-center">
-            Choose from our collection of professionally designed, ATS-optimized
-            resume templates.
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {cards.map(
-              ({ img, width, height, title, description, isATS }, index) => (
-                <Card
-                  key={index}
-                  className="p-4 flex flex-col hover:shadow-lg transition-shadow duration-300"
-                >
-                  <CardHeader className="p-0 mb-4 relative">
-                    <Image
-                      src={img}
-                      height={width}
-                      width={height}
-                      // Adjusted Tailwind classes for better image fit/style
-                      className="rounded-lg w-full h-auto object-cover border border-gray-100"
-                      alt={`${title} resume template preview`}
-                      loading="lazy"
-                    />
-                    {/* ATS Badge/Tag Implementation */}
-                    {isATS && (
-                      <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded-full shadow-md">
-                        ✅ ATS Friendly
-                      </span>
-                    )}
-                  </CardHeader>
-                  <div className="flex-grow">
-                    {" "}
-                    {/* Container for title/desc to push button to bottom */}
-                    <CardTitle className="font-extrabold text-xl mb-1">
-                      {title}
-                    </CardTitle>
-                    <CardDescription className="text-sm text-gray-500 mb-4">
-                      {description}
-                    </CardDescription>
-                  </div>
-                  {/* Secondary CTA Implementation */}
-                  <Button
-                    className="bg-blue-600 hover:bg-blue-700 text-white w-full mt-auto"
-                    onClick={handleTemplateSelection}
-                  >
-                    Choose Template
-                  </Button>
-                </Card>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* All Templates Include Section */}
-      <section className="px-4 py-12 ">
-        <div className="max-w-screen-lg mx-auto space-y-6">
-          <h2 className="text-2xl font-bold text-center">
-            All Templates Include
+    <section name="Templates" className="py-24 bg-slate-50 border-t border-slate-200">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            Professional Templates for <span className="text-indigo-600">Every Career Path</span>
           </h2>
+          <p className="text-lg text-slate-600">
+            Choose from our collection of ATS-optimized designs. proven to get results.
+          </p>
+        </div>
 
-          {/* Added visual distinction for ATS feature */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 bg-blue-50 dark:bg-gray-800 p-8 rounded-xl shadow-inner">
-            {templates_includ.map(({ icon, title, description }, index) => (
-              <div
-                key={index}
-                className={
-                  `flex flex-col items-center text-center p-4 rounded-lg 
-                  ${
-                    title === "ATS-Optimized"
-                      ? "bg-white shadow-xl scale-105"
-                      : "bg-transparent"
-                  }` // Highlight ATS feature
-                }
-              >
-                <div className="text-4xl mb-2">{icon}</div>
-                <p className="text-xl font-extrabold mb-1">{title}</p>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+        {/* Templates Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          {cards.map(({ img, width, height, title, description, isATS }, index) => (
+            <div
+              key={index}
+              className="group relative flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all duration-300 border border-slate-100 hover:border-indigo-100 hover:-translate-y-1"
+            >
+              {/* Browser Window Frame */}
+              <div className="relative overflow-hidden bg-slate-50 rounded-t-xl border-b border-slate-200">
+                  <div className="flex items-center gap-1.5 px-4 py-3">
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                  </div>
+              </div>
+
+              {/* Image Container with Inner Shadow */}
+              <div className="relative aspect-[3/4] overflow-hidden bg-slate-100 group-hover:bg-slate-50 transition-colors">
+                <Image
+                  src={img}
+                  width={width}
+                  height={height}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:shadow-lg"
+                  alt={`${title} resume template`}
+                  loading="lazy"
+                />
+                
+                {/* Subtle Gradient Overlay */}
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/90 to-transparent pointer-events-none" />
+
+                {/* Badge */}
+                {isATS && (
+                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-slate-800 text-[10px] uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm border border-slate-100 flex items-center gap-1.5 z-10 transition-transform group-hover:scale-105">
+                    <ShieldCheck className="w-3 h-3 text-emerald-500" />
+                    ATS Verified
+                  </div>
+                )}
+                
+                {/* Hover Action Overlay */}
+                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/5 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div className="bg-white text-slate-900 font-bold px-6 py-3 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        Preview Template
+                    </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
+                <p className="text-sm text-slate-500 mb-6 flex-grow leading-relaxed">
                   {description}
                 </p>
+                
+                <Button
+                  className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-medium rounded-lg transition-colors group-hover:shadow-lg group-hover:shadow-indigo-500/20"
+                  onClick={handleTemplateSelection}
+              >
+                  Use Template
+                </Button>
               </div>
-            ))}
-          </div>
-
-          <section className="flex flex-col items-center space-y-6 pt-8">
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white text-xl font-semibold px-10 py-7 rounded-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-              onClick={handleTemplateSelection}
-            >
-              Start Building Your Resume Now
-            </Button>
-            <p className="text-center text-gray-600 dark:text-gray-400">
-              Start building your professional resume today — it only takes a
-              few minutes!
-            </p>
-          </section>
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+
+        {/* Features Strip */}
+        <div className="bg-white rounded-2xl border border-slate-100 p-8 sm:p-12 shadow-sm">
+           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="text-center md:text-left">
+                  <h3 className="text-xl font-bold text-slate-900 mb-1">Why choose our templates?</h3>
+                  <p className="text-slate-500 text-sm">Built by recruiters, optimized by AI.</p>
+              </div>
+
+              <div className="flex flex-wrap justify-center gap-6 sm:gap-12">
+                 {features.map((feature, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                       <div className="p-2 bg-slate-50 rounded-lg">{feature.icon}</div>
+                       <div className="text-left">
+                          <p className="font-bold text-slate-900 text-sm">{feature.title}</p>
+                          <p className="text-xs text-slate-500 hidden sm:block">{feature.description}</p>
+                       </div>
+                    </div>
+                 ))}
+              </div>
+
+              <Button 
+                onClick={handleTemplateSelection}
+                variant="outline"
+                className=" whitespace-nowrap border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800"
+              >
+                View All
+              </Button>
+           </div>
+        </div>
+
+      </div>
+    </section>
   );
 };
 

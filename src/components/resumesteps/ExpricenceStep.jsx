@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Briefcase, Plus, Edit2, Trash2 } from "lucide-react";
+import { Briefcase, Plus, Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -22,6 +22,7 @@ import {
 import { z } from "zod";
 import { Textarea } from "../ui/textarea";
 import axios from "axios";
+import { toast } from "sonner";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(
@@ -108,21 +109,27 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="py-8">
+       <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900">Work Experience</h2>
+          <p className="text-slate-500">Add your professional experience</p>
+       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
-            <CardTitle className="text-2xl font-bold text-gray-800">
-              {isEditing ? "Edit Experience" : "Add Experience"}
-            </CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+             <div>
+                <CardTitle className="text-lg font-bold text-slate-800">
+                  {isEditing ? "Edit Experience" : "Add Experience"}
+                </CardTitle>
+             </div>
             {isEditing && (
-              <Button variant="outline" onClick={cancelEdit}>
+              <Button variant="ghost" size="sm" onClick={cancelEdit} className="text-slate-500 hover:text-slate-700">
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -133,9 +140,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company Name *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Company Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Google, Amazon" {...field} />
+                        <Input placeholder="e.g. Google, Amazon" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -146,11 +153,12 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Position *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Position/Role</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., Frontend Developer"
+                          placeholder="e.g. Frontend Developer"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -163,9 +171,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="startDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Start Date *</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">Start Date</FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} />
+                          <Input type="month" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -176,9 +184,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="endDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>End Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">End Date</FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} />
+                          <Input type="month" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -190,10 +198,11 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="work"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Work Responsibilities</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Key Responsibilities (Comma separated)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., UI development, API integration"
+                          placeholder="e.g. UI development, API integration"
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           value={
                             Array.isArray(field.value)
                               ? field.value.join(", ")
@@ -209,9 +218,6 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                         />
                       </FormControl>
                       <FormMessage />
-                      <p className="text-xs text-gray-500">
-                        Separate multiple items with commas.
-                      </p>
                     </FormItem>
                   )}
                 />
@@ -220,10 +226,11 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="tools"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Tools & Technologies Used</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Tools & Tech (Comma separated)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., React, Tailwind CSS"
+                          placeholder="e.g. React, Tailwind CSS"
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           value={
                             Array.isArray(field.value)
                               ? field.value.join(", ")
@@ -239,9 +246,6 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                         />
                       </FormControl>
                       <FormMessage />
-                      <p className="text-xs text-gray-500">
-                        Separate multiple items with commas.
-                      </p>
                     </FormItem>
                   )}
                 />
@@ -250,24 +254,38 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
+                         Description
+                         <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                            disabled={isGenerating}
+                            onClick={handelAiGenration}
+                          >
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            {isGenerating ? "Magic..." : "Generate with AI"}
+                          </Button>
+                      </FormLabel>
                       <div className="relative">
                         <FormControl>
                           <Textarea
-                            placeholder="Brief achievements or coursework"
+                            placeholder="Brief achievements or coursework..."
                             rows={3}
                             {...field}
-                            className={
-                              isGenerating ? "text-gray-400 bg-gray-100" : ""
-                            }
+                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none ${
+                              isGenerating ? "opacity-50" : ""
+                            }`}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
-                        {/* Dream shimmer overlay */}
                         {isGenerating && (
-                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
-                            ✨ Dreaming up your description...
+                           <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                             <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
+                                <Sparkles className="w-4 h-4" /> Generating...
+                             </div>
                           </div>
                         )}
                       </div>
@@ -276,172 +294,71 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
-                <div className="flex justify-start">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
-                      isGenerating
-                        ? "text-gray-400 animate-pulse cursor-not-allowed"
-                        : "text-indigo-600"
-                    }`}
-                    disabled={isGenerating}
-                    onClick={handelAiGenration}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                        Generating...
-                      </div>
-                    ) : (
-                      "Generate using AI"
-                    )}
-                  </Button>
-                </div>
-
-                <div className="flex justify-end gap-2 items-center">
+                <div className="pt-2">
                   <Button
                     type="submit"
-                    className="bg-linear-to-b from-indigo-600 to-purple-600"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold h-11 rounded-lg"
                   >
-                    <Plus className="h-4 mr-2" />
                     {isEditing ? "Update Experience" : "Add Experience"}
-                  </Button>
-                  <Button
-                    className="bg-linear-to-b from-indigo-600 to-purple-600"
-                    onClick={next}
-                  >
-                    Next
                   </Button>
                 </div>
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="p-0">
-            <div className="bg-blue-50 p-4 w-full">
-              <h3 className="font-medium text-blue-900 mb-2">
-                Tips for adding work experience:
-              </h3>
-              <ul className="text-sm text-blue-800 space-y-1">
-                <li>• List relevant work experiences</li>
-                <li>• Focus on positions related to your goal role</li>
-                <li>• Use the most recent job first</li>
-              </ul>
-            </div>
-          </CardFooter>
         </Card>
 
-        {/* Preview Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
-            <Briefcase className="w-6 h-6 text-blue-600 mr-2" />
-            <CardTitle className="text-2xl font-bold text-gray-800">
-              Experience Preview
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {experienceList.length === 0 ||
-            experienceList[0].position === "" ? (
-              <div className="text-center py-8 text-gray-500">
-                <Briefcase className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p>No experience added yet.</p>
-                <p className="text-sm">
-                  Add your first work experience using the form.
-                </p>
-              </div>
+        {/* List Section */}
+        <div className="space-y-6">
+           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                 <Briefcase className="w-5 h-5 text-indigo-500" /> Professional Experience
+              </h3>
+
+            {experienceList.length === 0 ? (
+                <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                   <p className="text-slate-400 text-sm">No work experience added.</p>
+                </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {experienceList.map((exp, index) => (
-                  <div
-                    key={index}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <h3 className="font-semibold text-lg text-gray-800">
-                          {exp.position}
-                        </h3>
-                        <p className="text-blue-600">{exp.companyName}</p>
+                   <div key={index} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors">
+                      <div className="flex justify-between items-start">
+                         <div>
+                             <h4 className="font-bold text-slate-800">{exp.position}</h4>
+                             <div className="text-sm text-indigo-600 font-medium">{exp.companyName}</div>
+                         </div>
+                         <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(exp)}>
+                                <Edit2 className="w-3.5 h-3.5" />
+                             </Button>
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDelete(exp.id)}>
+                                <Trash2 className="w-3.5 h-3.5" />
+                             </Button>
+                          </div>
                       </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleEdit(exp)}
-                          size="icon"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleDelete(exp.id)}
-                          size="icon"
-                        >
-                          <Trash2 className="w-4 h-4 text-red-500" />
-                        </Button>
+                      
+                      <div className="text-xs text-slate-500 font-medium bg-slate-100 self-start px-2 py-1 rounded">
+                          {exp.startDate} - {exp.endDate || "Present"}
                       </div>
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      <span className="font-medium">Duration:</span>{" "}
-                      {exp.startDate} - {exp.endDate || "Present"}
-                    </div>
-
-                    <ul className="list-disc ml-5 text-sm text-gray-600 space-y-2">
-                      {exp?.description ??
-                        exp?.description
-                          ?.split("\n") // split by newlines
-                          ?.map((line, idx) => {
-                            const trimmed = line.trim();
-                            if (!trimmed) return null;
-
-                            // If line starts with bullet symbol, just render as list item
-                            if (trimmed.startsWith("•")) {
-                              return (
-                                <li key={idx} className="text-gray-700">
-                                  {trimmed.replace(/^•\s*/, "")}
-                                </li>
-                              );
-                            }
-
-                            // If line contains heading (like "Key responsibilities include:")
-                            const headingMatch =
-                              trimmed.match(/^(.+?):\s*(.+)$/);
-                            if (headingMatch) {
-                              const [, heading, rest] = headingMatch;
-                              // Split rest by semicolon for sub-bullets
-                              const points = rest
-                                .split(";")
-                                .map((p) => p.trim())
-                                .filter(Boolean);
-                              return (
-                                <li key={idx}>
-                                  <span className="font-medium text-gray-800">
-                                    {heading}:
-                                  </span>
-                                  <ul className="list-disc ml-5 mt-1 space-y-1">
-                                    {points.map((point, i) => (
-                                      <li key={i} className="text-gray-600">
-                                        {point}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </li>
-                              );
-                            }
-
-                            // Otherwise, render normal sentence
-                            return (
-                              <li key={idx} className="text-gray-700">
-                                {trimmed}
-                              </li>
-                            );
-                          })}
-                    </ul>
+                      
+                      {exp.description && (
+                         <p className="text-xs text-slate-600 line-clamp-2 mt-1">{exp.description}</p>
+                      )}
                   </div>
                 ))}
               </div>
             )}
-          </CardContent>
-        </Card>
+           </div>
+           
+           <div className="flex justify-between items-center pt-4">
+              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+           </div>
+        </div>
       </div>
     </div>
   );

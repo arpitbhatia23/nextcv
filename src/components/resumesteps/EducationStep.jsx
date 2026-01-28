@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Plus, Edit2, Trash2, GraduationCap } from "lucide-react";
+import { Plus, Edit2, Trash2, GraduationCap, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -117,21 +117,27 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="py-8">
+       <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900">Education</h2>
+          <p className="text-slate-500">Add your academic background</p>
+       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0 ">
-          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
-            <CardTitle className="text-2xl font-bold text-gray-800 ">
-              {isEditing ? "Edit Education" : "Add Education"}
-            </CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+             <div>
+                <CardTitle className="text-lg font-bold text-slate-800">
+                  {isEditing ? "Edit Education" : "Add Education"}
+                </CardTitle>
+             </div>
             {isEditing && (
-              <Button variant="outline" onClick={cancelEdit}>
+              <Button variant="ghost" size="sm" onClick={cancelEdit} className="text-slate-500 hover:text-slate-700">
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -142,11 +148,12 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   name="degree"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Degree/Qualification *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Degree/Qualification</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., Bachelor of Science"
+                          placeholder="e.g. Bachelor of Science"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -159,9 +166,9 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   name="institution"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Institution/School *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Institution/School</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., MIT, Harvard" {...field} />
+                        <Input placeholder="e.g. MIT" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -174,12 +181,12 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                     name="startYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Start Year</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">Start Date</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g., 2018"
                             type={"month"}
                             {...field}
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           />
                         </FormControl>
                         <FormMessage />
@@ -191,12 +198,12 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                     name="endYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>End Year</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">End Date</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g., 2022"
                             type={"month"}
                             {...field}
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           />
                         </FormControl>
                         <FormMessage />
@@ -210,9 +217,9 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   name="grade"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Grade/GPA</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Grade/GPA</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., 3.8 GPA" {...field} />
+                        <Input placeholder="e.g. 3.8 GPA" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -224,24 +231,38 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Description</FormLabel>
+                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
+                         Description
+                         <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                            disabled={isGenerating}
+                            onClick={handelAiGenration}
+                          >
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            {isGenerating ? "Magic..." : "Generate with AI"}
+                          </Button>
+                      </FormLabel>
                       <div className="relative">
                         <FormControl>
                           <Textarea
-                            placeholder="Brief achievements or coursework"
+                            placeholder="Brief achievements or coursework..."
                             rows={3}
                             {...field}
-                            className={
-                              isGenerating ? "text-gray-400 bg-gray-100" : ""
-                            }
+                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none ${
+                              isGenerating ? "opacity-50" : ""
+                            }`}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
-                        {/* Dream shimmer overlay */}
                         {isGenerating && (
-                          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center text-indigo-700 font-semibold rounded-md z-10 animate-pulse">
-                            ✨ Dreaming up your description...
+                          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                             <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
+                                <Sparkles className="w-4 h-4" /> Generating...
+                             </div>
                           </div>
                         )}
                       </div>
@@ -250,137 +271,62 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
-                <div className="flex justify-start">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className={`text-sm border-indigo-500 hover:bg-indigo-50 transition-all duration-300 ${
-                      isGenerating
-                        ? "text-gray-400 animate-pulse cursor-not-allowed"
-                        : "text-indigo-600"
-                    }`}
-                    disabled={isGenerating}
-                    onClick={handelAiGenration}
-                  >
-                    {isGenerating ? (
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-                        Generating...
-                      </div>
-                    ) : (
-                      "Generate using AI"
-                    )}
-                  </Button>
-                </div>
-
-                <div className=" flex justify-end gap-2 items-center ">
+                <div className="pt-2">
                   <Button
                     type="submit"
-                    className="bg-linear-to-b from-indigo-600 to-purple-600"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold h-11 rounded-lg"
                   >
-                    <Plus className=" h-4 mr-2" />
-                    {isEditing ? "Update Education" : "Add Education"}
-                  </Button>
-                  <Button
-                    className={"bg-linear-to-b from-indigo-600 to-purple-600"}
-                    onClick={next}
-                  >
-                    Next
+                    {isEditing ? "Update Qualification" : "Add Qualification"}
                   </Button>
                 </div>
               </form>
             </Form>
           </CardContent>
-          <CardFooter className={"p-0"}>
-            <div className=" bg-blue-50 p-4 w-full">
-              <h3 className="font-medium text-blue-900 mb-2">
-                Tips for adding education:
+        </Card>
+
+        {/* List Section */}
+        <div className="space-y-6">
+           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                 <GraduationCap className="w-5 h-5 text-indigo-500" /> Added Education
               </h3>
-              <ul className="text-sm text-blue-800 space-y-1">
-                <li>• Include all relevant degrees, certifications</li>
-                <li>• Add your most recent qualification first</li>
-                <li>• Mention online courses if relevant</li>
-              </ul>
-            </div>
-          </CardFooter>
-        </Card>
+              
+              {educationList.length === 0 ? (
+                 <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                    <p className="text-slate-400 text-sm">No education added yet.</p>
+                 </div>
+              ) : (
+                 <div className="space-y-3">
+                    {educationList.map((edu, index) => (
+                       <div key={index} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex justify-between group hover:border-indigo-300 transition-colors">
+                          <div>
+                             <h4 className="font-bold text-slate-800">{edu.degree}</h4>
+                             <div className="text-sm text-slate-600 font-medium">{edu.institution}</div>
+                             <div className="text-xs text-slate-400 mt-1">{edu.startYear} - {edu.endYear || 'Present'}</div>
+                          </div>
+                          <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(edu)}>
+                                <Edit2 className="w-3.5 h-3.5" />
+                             </Button>
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDelete(edu.id)}>
+                                <Trash2 className="w-3.5 h-3.5" />
+                             </Button>
+                          </div>
+                       </div>
+                    ))}
+                 </div>
+              )}
+           </div>
 
-        {/* Preview Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
-            <GraduationCap className="w-6 h-6 text-blue-600 mr-2" />
-            <CardTitle className="text-2xl font-bold text-gray-800">
-              Education Review
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {educationList.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <GraduationCap className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p>No education qualifications added yet.</p>
-                <p className="text-sm">
-                  Add your first qualification using the form.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-4 p-4">
-                {educationList.map((education, index) => (
-                  <div
-                    key={index}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg text-gray-800">
-                          {education.degree}
-                        </h3>
-                        <p className="text-blue-600 font-medium">
-                          {education.institution}
-                        </p>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleEdit(education)}
-                          size="icon"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          onClick={() => handleDelete(education.id)}
-                          size="icon"
-                        >
-                          <Trash2 className="w-4 h-4 text-red-500" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-3">
-                      <div>
-                        <span className="font-medium">Duration:</span>{" "}
-                        {education.startYear} - {education.endYear || "Present"}
-                      </div>
-                      {education.grade && (
-                        <div>
-                          <span className="font-medium">Grade:</span>{" "}
-                          {education.grade}
-                        </div>
-                      )}
-                    </div>
-
-                    {education.description && (
-                      <p className="text-gray-700 text-sm">
-                        {education.description}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+           <div className="flex justify-between items-center pt-4">
+              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+           </div>
+        </div>
       </div>
     </div>
   );

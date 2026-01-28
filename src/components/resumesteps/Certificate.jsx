@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Plus, Edit2, Trash2, Sparkles } from "lucide-react";
+import { Plus, Edit2, Trash2, Sparkles, FolderYi, ArrowRight, ArrowLeft, Award } from "lucide-react";
 import {
   Form,
   FormField,
@@ -82,22 +82,28 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="bg-linear-to-br from-blue-50 to-indigo-100 mx-auto p-6 min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="py-8">
+       <div className="mb-6">
+          <h2 className="text-2xl font-bold text-slate-900">Certifications</h2>
+          <p className="text-slate-500">Add your credentials and awards</p>
+       </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center justify-between bg-linear-to-b from-indigo-600 to-purple-600 rounded-t-lg p-3">
-            <CardTitle className="text-2xl font-bold text-gray-800">
-              {isEditing ? "Edit Certificate" : "Add Certificate"}
-            </CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+             <div>
+                <CardTitle className="text-lg font-bold text-slate-800">
+                  {isEditing ? "Edit Certificate" : "Add Certificate"}
+                </CardTitle>
+             </div>
             {isEditing && (
-              <Button variant="outline" onClick={cancelEdit}>
+              <Button variant="ghost" size="sm" onClick={cancelEdit} className="text-slate-500 hover:text-slate-700">
                 Cancel
               </Button>
             )}
           </CardHeader>
 
-          <CardContent>
+          <CardContent className="p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -108,11 +114,12 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Certificate Name *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Certificate Name</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., Google Data Analytics"
+                          placeholder="e.g. Google Data Analytics"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -125,11 +132,12 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                   name="organization"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Issuing Organization *</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Issuing Organization</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g., Google, IBM, Coursera"
+                          placeholder="e.g. Google, Coursera"
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -142,9 +150,9 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                   name="year"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Year</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Year (Optional)</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., 2024" {...field} />
+                        <Input placeholder="e.g. 2024" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
                       </FormControl>
                     </FormItem>
                   )}
@@ -155,11 +163,12 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                   name="credentialUrl"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Credential URL (optional)</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Credential URL (Optional)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="https://certificate-link"
+                          placeholder="https://..."
                           {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                         />
                       </FormControl>
                       <FormMessage />
@@ -167,107 +176,83 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                   )}
                 />
 
-                <div className="flex justify-end gap-2">
+                <div className="pt-2">
                   <Button
                     type="submit"
-                    className="bg-linear-to-b from-indigo-600 to-purple-600"
+                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold h-11 rounded-lg"
                   >
-                    <Plus className="h-4 mr-2" />
-                    {isEditing ? "Update Certificate" : "Add Certificate"}
-                  </Button>
-                  <Button
-                    className="bg-linear-to-b from-indigo-600 to-purple-600"
-                    onClick={next}
-                  >
-                    Next
+                     {isEditing ? "Update Certificate" : "Add Certificate"}
                   </Button>
                 </div>
               </form>
             </Form>
           </CardContent>
 
-          <CardFooter>
-            <div className="bg-blue-50 p-4 w-full">
-              <h3 className="font-medium text-blue-900 mb-2">
-                Tips for certificates:
+          <CardFooter className="p-0">
+            <div className="bg-blue-50 p-4 w-full rounded-b-xl">
+              <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
+                 <Award className="w-4 h-4 text-blue-600" /> Tips
               </h3>
-              <ul className="text-sm text-blue-800 space-y-1">
-                <li>• Add only relevant certifications</li>
-                <li>• Prefer industry-recognized platforms</li>
-                <li>• Avoid fake or outdated certificates</li>
+              <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
+                 <li>Add valid certifications that are relevant to your career.</li>
+                 <li>Include the link to verify your credential if available.</li>
               </ul>
             </div>
           </CardFooter>
         </Card>
 
-        {/* Preview Section */}
-        <Card className="bg-white rounded-lg shadow-md p-0">
-          <CardHeader className="flex items-center mb-6 bg-linear-to-b from-indigo-600 to-purple-600 p-3 rounded-t-lg">
-            <Sparkles className="w-6 h-6 text-blue-600 mr-2" />
-            <CardTitle className="text-2xl font-bold text-gray-800">
-              Certificates Preview
-            </CardTitle>
-          </CardHeader>
+        {/* List Section */}
+        <div className="space-y-6">
+           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                 <Award className="w-5 h-5 text-indigo-500" /> Added Certificates
+              </h3>
 
-          <CardContent>
             {certList.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <Sparkles className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-                <p>No certificates added yet.</p>
-                <p className="text-sm">
-                  Add certifications to strengthen your resume.
-                </p>
-              </div>
+                <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                   <p className="text-slate-400 text-sm">No certifications added yet.</p>
+                </div>
             ) : (
-              <div className="space-y-4 p-4">
+              <div className="space-y-3">
                 {certList.map((cert) => (
-                  <div
-                    key={cert.id}
-                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-semibold text-lg text-gray-800">
-                          {cert.title}
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          {cert.organization}
-                          {cert.year && ` • ${cert.year}`}
-                        </p>
-                        {cert.credentialUrl && (
-                          <a
-                            href={cert.credentialUrl}
-                            target="_blank"
-                            className="text-sm text-blue-600 underline"
-                          >
-                            View Credential
-                          </a>
-                        )}
+                   <div key={cert.id} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors">
+                      <div className="flex justify-between items-start">
+                         <div>
+                             <h4 className="font-bold text-slate-800">{cert.title}</h4>
+                             <div className="text-sm text-indigo-600 font-medium">
+                                {cert.organization}
+                                {cert.year && <span className="text-slate-400 ml-1">({cert.year})</span>}
+                             </div>
+                             {cert.credentialUrl && (
+                                <a href={cert.credentialUrl} target="_blank" rel="noreferrer" className="text-xs text-blue-500 hover:underline mt-1 block">
+                                   View Credential
+                                </a>
+                             )}
+                         </div>
+                         <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(cert)}>
+                                <Edit2 className="w-3.5 h-3.5" />
+                             </Button>
+                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDelete(cert.id)}>
+                                <Trash2 className="w-3.5 h-3.5" />
+                             </Button>
+                          </div>
                       </div>
-
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleEdit(cert)}
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => handleDelete(cert.id)}
-                        >
-                          <Trash2 className="w-4 h-4 text-red-500" />
-                        </Button>
-                      </div>
-                    </div>
                   </div>
                 ))}
               </div>
             )}
-          </CardContent>
-        </Card>
+           </div>
+
+           <div className="flex justify-between items-center pt-4">
+              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
+                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
+              </Button>
+              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+           </div>
+        </div>
       </div>
     </div>
   );

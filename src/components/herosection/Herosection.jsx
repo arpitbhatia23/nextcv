@@ -1,19 +1,11 @@
 "use client";
 import React from "react";
-import {
-  ChevronRight,
-  Zap,
-  Target,
-  DollarSign,
-  Users,
-  Clock,
-  Award,
-} from "lucide-react";
-// Removed Next.js Image import
+import { ChevronRight, Star, ArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { scroller } from "react-scroll";
+import { motion } from "framer-motion";
 
-function AnimatedHeroSection() {
+function Herosection() {
   const scrollTo = (section) => {
     scroller.scrollTo(section, {
       duration: 800,
@@ -23,118 +15,114 @@ function AnimatedHeroSection() {
   };
 
   const mncLogos = [
-    { src: "/logos/TCS.NS_BIG.svg", alt: "TCS Logo" },
-    { src: "/logos/INFY_BIG.svg", alt: "Infosys Logo" },
-    { src: "/logos/WIT.svg", alt: "Wipro Logo" },
-    { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech Logo" },
-    { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree Logo" },
-    { src: "/logos/TECHM.NS_BIG.svg", alt: "Tech Mahindra Logo" },
-    { src: "/logos/google_BIG.svg", alt: "google Logo" },
+    { src: "/logos/TCS.NS_BIG.svg", alt: "TCS" },
+    { src: "/logos/INFY_BIG.svg", alt: "Infosys" },
+    { src: "/logos/WIT.svg", alt: "Wipro" },
+    { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech" },
+    { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree" },
+    { src: "/logos/TECHM.NS_BIG.svg", alt: "Tech Mahindra" },
+    { src: "/logos/google_BIG.svg", alt: "Google" },
   ];
 
   return (
-    // Centering the content vertically and horizontally
-    <section className="relative min-h-screen  backdrop-blur-4xl bg-gradient-to-br from-gray-900 via-indigo-900 to-black text-white py-20 px-4 overflow-hidden z-0 flex flex-col justify-end">
-      {" "}
-      <div className="relative z-10 max-w-6xl mx-auto  text-center">
-        <div className="space-y-10 mt-10 lg:mt-20">
-          {/* Main Content Area */}
-          <div className="flex flex-col items-center justify-items-end h-full">
-            {/* H1: Increased size dramatically for impact */}
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tighter leading-tight drop-shadow-2xl drop-shadow-black">
-              Build the{" "}
-              <span className="bg-gradient-to-r from-teal-300 via-sky-400 to-indigo-500 bg-clip-text text-transparent max-w-6xl">
-                Perfect ATS Friendly Resume{" "}
-              </span>
-              <br />
-              with AI in Minutes
-            </h1>
+    <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden bg-white">
+      {/* Background Decor */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-indigo-50/80 rounded-full blur-3xl opacity-70" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-50/80 rounded-full blur-3xl opacity-60" />
+      </div>
 
-            <p className="tezt-sm sm:text-lg lg:text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto font-light sm:font-medium mt-1">
-              Our AI-powered platform is optimized specifically for the{" "}
-              <span className="text-yellow-300 font-extrabold">
-                Indian job market.
-              </span>{" "}
-              <br />
-              Try the{" "}
-              <span className="text-yellow-300 font-extrabold">
-                free demo
-              </span>{" "}
-              today and get your professional, ATS-optimized resume for just
-              ₹100. No subscriptions.
-            </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        {/* Top Badge */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-sm font-medium mb-8 hover:bg-indigo-100 transition-colors cursor-default"
+        >
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          New: AI Resume Analysis Feature
+        </motion.div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <button
-                className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 font-bold py-3 px-4 rounded-2xl text-lg shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-500/25 flex items-center justify-center gap-2 z-10 relative"
-                onClick={() => signIn("google")}
-              >
-                Create Your Resume Now
-                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-              </button>
+        {/* Headline */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
+        >
+          Build a Job-Winning <br/>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
+            ATS-Friendly Resume
+          </span>
+        </motion.h1>
 
-              <button
-                className="group bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold py-3 px-4 rounded-2xl text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105 z-10 relative"
-                onClick={() => scrollTo("Templates")}
-              >
-                View Templates
-              </button>
-            </div>
+        {/* Subhead */}
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed"
+        >
+          Designed specifically for the <span className="font-semibold text-slate-900">Indian job market</span>. 
+          Use our AI to create a professional, compliant resume that passes automated screening in minutes.
+          <br/>
+          <span className="text-sm font-medium text-emerald-600 mt-2 block">
+             ✨ Just ₹100 • No subscriptions • Instant Download
+          </span>
+        </motion.p>
 
-            <div className="flex flex-wrap  gap-2 sm:gap-6 pt-8 justify-center">
-              {[
-                { icon: <Zap className="w-5 h-5" />, text: "AI-Powered" },
-                { icon: <Target className="w-5 h-5" />, text: "ATS-Optimized" },
-                { icon: <DollarSign className="w-5 h-5" />, text: "Just ₹100" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 text-md bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20 hover:scale-105 transition duration-300"
-                >
-                  {/* MODIFIED: Added rounded background, padding, and gradient for visual distinction */}
-                  <span className="text-white p-1 rounded-full bg-gradient-to-r from-yellow-500 to-orange-400 flex items-center justify-center">
-                    {React.cloneElement(item.icon, {
-                      className: "w-4 h-4 text-gray-900",
-                    })}
-                  </span>
-                  {/* MODIFIED: Increased text size for balance */}
-                  <span className="text-base font-medium pr-1">
-                    {item.text}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {/* Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <button
+            onClick={() => signIn("google")}
+            className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl text-lg hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-slate-300 flex items-center justify-center gap-2 group"
+          >
+            Create Your Resume
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+          
+          <button
+            onClick={() => scrollTo("Templates")}
+            className="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-700 font-semibold rounded-xl text-lg hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            View Templates
+          </button>
+        </motion.div>
+
+        {/* Trust/Social Proof */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-20 pt-10 border-t border-slate-100"
+        >
+          <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-8">
+            Trusted by professionals at top companies
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+             {mncLogos.map((logo, index) => (
+              <img
+                key={index}
+                src={logo.src}
+                alt={logo.alt}
+                className="h-6 sm:h-8 object-contain"
+              />
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="relative z-10 max-w-6xl mx-auto w-full text-center">
-          <div className="space-y-10">
-            <div className="flex flex-col items-center">
-              <div className="pt-16 pb-8 max-w-5xl mx-auto w-full">
-                <p className="text-sm font-semibold text-blue-200 uppercase tracking-wider mb-8">
-                  TRUSTED BY PROFESSIONALS WORKING AT TOP INDIAN MNCS:
-                </p>
-
-                {/* Logo Container */}
-                <div className="flex flex-wrap items-center justify-center  gap-x-2 sm:gap-x-6 gap-y-6 drop-shadow-2xl drop-shadow-black ">
-                  {mncLogos.map((logo, index) => (
-                    <img
-                      key={index}
-                      src={logo.src}
-                      alt={logo.alt}
-                      // Centralized and clean styling
-                      className="h-3 sm:h-8 hover:opacity-100 transition-all duration-300"
-                    />
-                    /* NOTE: If you decide to re-import Next.js Image component, replace <img> with <Image> here */
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
 }
 
-export default AnimatedHeroSection;
+export default Herosection;

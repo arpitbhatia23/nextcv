@@ -1,120 +1,102 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, IndianRupee, Plus, Timer, Zap, Cpu } from "lucide-react";
+import { FileText, IndianRupee, Plus, Timer, Zap, Cpu, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const UserDashboard = () => {
   return (
-    <div className="min-h-screen p-4 sm:p-6 md:p-8 font-(family-name:--font-geist-sans) bg-linear-to-br from-purple-50 to-blue-50">
+    <div className="min-h-screen p-6 md:p-10 font-[family-name:var(--font-geist-sans)] bg-slate-50">
       {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-          AI Resume Maker
+      <div className="max-w-6xl mx-auto mb-10">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
+          Dashboard
         </h1>
-        <p className="text-gray-600 text-lg">
-          Welcome back! Create your professional resume with AI
+        <p className="text-slate-500 text-lg">
+          What would you like to create today?
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto">
-        {/* Main Options Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Option 1: Manual + AI Summary */}
-          <Card className="border-2 border-purple-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-200">
-            <CardContent className="p-8 text-center">
-              <Link href="/dashboard/resumeform">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4 mx-auto">
-                  <Plus size={32} className="text-purple-600" />
+      <div className="max-w-6xl mx-auto space-y-12">
+        {/* Main Creation Options */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          {/* Option 1: Manual Builder */}
+          <Link href="/dashboard/resumeform" className="group">
+             <Card className="h-full border-2 border-slate-200 bg-white hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+                <CardContent className="p-8 md:p-10 relative">
+                   <div className="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center mb-6 text-indigo-600 group-hover:scale-110 transition-transform duration-300">
+                      <Plus size={28} strokeWidth={2.5} />
+                   </div>
+                   <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">Create Resume</h2>
+                   <p className="text-slate-500 mb-8 leading-relaxed">
+                      Build your resume step-by-step with our guided builder. Perfect for customization and control.
+                   </p>
+                   <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform">
+                      Start Building <ArrowRight className="ml-2 w-5 h-5" />
+                   </div>
+                </CardContent>
+             </Card>
+          </Link>
+
+          {/* Option 2: Full AI Generator */}
+          <Link href="/dashboard/full-ai-resume" className="group">
+            <Card className="h-full border-2 border-slate-200 bg-white hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
+                <CardContent className="p-8 md:p-10 relative">
+                   <div className="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform duration-300">
+                      <Zap size={28} strokeWidth={2.5} />
+                   </div>
+                   <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">AI Auto-Resume</h2>
+                   <p className="text-slate-500 mb-8 leading-relaxed">
+                      Generate a complete, ATS-friendly resume from scratch in seconds using advanced AI.
+                   </p>
+                   <div className="flex items-center text-purple-600 font-bold group-hover:translate-x-2 transition-transform">
+                      Generate with AI <ArrowRight className="ml-2 w-5 h-5" />
+                   </div>
+                </CardContent>
+             </Card>
+          </Link>
+        </div>
+
+        {/* Value Props Grid */}
+        <div>
+           <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 px-1">Why NextCV?</div>
+           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+             <Card className="border border-slate-200 bg-white shadow-sm p-6 rounded-xl hover:border-slate-300 transition-colors">
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="p-2 bg-blue-50 text-blue-600 rounded-lg"><Cpu size={20} /></div>
+                   <h3 className="font-bold text-slate-900">AI Powered</h3>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Custom Resume
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  Fill in your own details and craft a professional resume your
-                  way.
-                </p>
-                <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
-                  Start Manual Resume
-                </button>
-              </Link>
-            </CardContent>
-          </Card>
-
-          {/* Option 2: Full AI Resume Maker */}
-          <Card className="border-2 border-purple-200 shadow-lg bg-white hover:shadow-xl transition-shadow duration-200">
-            <CardContent className="p-8 text-center">
-              <Link href="/dashboard/full-ai-resume">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 mx-auto">
-                  <Cpu size={32} className="text-blue-600" />
+                <p className="text-slate-500 text-sm">Create tailored content for your industry automatically.</p>
+             </Card>
+             
+             <Card className="border border-slate-200 bg-white shadow-sm p-6 rounded-xl hover:border-slate-300 transition-colors">
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg"><Timer size={20} /></div>
+                   <h3 className="font-bold text-slate-900">Quick & Easy</h3>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Full AI Resume Maker
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  Let AI create your complete professional resume automatically
-                  in seconds.
-                </p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg">
-                  Generate Full Resume
-                </button>
-              </Link>
-            </CardContent>
-          </Card>
+                <p className="text-slate-500 text-sm">Professional resume ready in under 5 minutes.</p>
+             </Card>
+
+             <Card className="border border-slate-200 bg-white shadow-sm p-6 rounded-xl hover:border-slate-300 transition-colors">
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="p-2 bg-orange-50 text-orange-600 rounded-lg"><FileText size={20} /></div>
+                   <h3 className="font-bold text-slate-900">ATS Friendly</h3>
+                </div>
+                <p className="text-slate-500 text-sm">Formats designed to pass screening software.</p>
+             </Card>
+
+             <Card className="border_2 border-indigo-100 bg-indigo-50/50 shadow-sm p-6 rounded-xl">
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg"><IndianRupee size={20} /></div>
+                   <h3 className="font-bold text-indigo-900">Just ₹100</h3>
+                </div>
+                <p className="text-indigo-700 text-sm">Pay only when you download. No subscriptions.</p>
+             </Card>
+           </div>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="border-2 border-purple-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 bg-white text-center p-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3 mx-auto">
-              <Zap size={24} className="text-blue-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">AI-Powered</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Advanced AI creates tailored content for your industry
-            </p>
-          </Card>
-
-          <Card className="border-2 border-purple-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 bg-white text-center p-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-3 mx-auto">
-              <Timer size={24} className="text-green-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Quick & Easy</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Professional resume ready in minutes, not hours
-            </p>
-          </Card>
-
-          <Card className="border-2 border-purple-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 bg-white text-center p-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full mb-3 mx-auto">
-              <FileText size={24} className="text-orange-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Professional</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              ATS-friendly formats that get you noticed
-            </p>
-          </Card>
-
-          <Card className="border-2 border-purple-200 hover:border-purple-300 hover:shadow-md transition-all duration-200 bg-linear-to-br from-purple-50 to-purple-100 text-center p-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-200 rounded-full mb-3 mx-auto">
-              <IndianRupee size={24} className="text-purple-700" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-1">₹100</h3>
-            <p className="text-sm font-medium text-purple-700 mb-1">
-              per resume
-            </p>
-            <p className="text-xs text-gray-600 leading-relaxed">
-              No monthly fees • Pay only when you create
-            </p>
-          </Card>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
-            Join thousands of professionals who've created winning resumes with
-            our AI technology
-          </p>
-        </div>
       </div>
     </div>
   );

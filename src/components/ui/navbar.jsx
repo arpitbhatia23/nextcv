@@ -6,30 +6,46 @@ import {
 } from "@/components/ui/navigation-menu";
 
 import Logo2 from "../Logo2";
-
 import { Button } from "./button";
 import { signIn } from "next-auth/react";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    // FIX: Changed background to dark, semi-transparent, added better padding/shadow, and set text to white
-    <nav className="w-full bg-gray-900/50 backdrop-blur-md px-4 py-3 shadow-xl fixed z-50 text-white border-b border-white/10">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
+    <nav
+      className={`w-full fixed z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/50 py-3"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="flex items-center justify-between max-w-7xl mx-auto px-6 lg:px-8">
         {/* Logo */}
-        <div className="text-2xl font-bold">
-          {/* FIX: Changed logo color to white for visibility on dark background */}
-          <Logo2 color="white" size={80} />
+        <div className="text-2xl font-bold flex items-center">
+           {/* Color changed to slate-900 (dark) for light bg */}
+          <Logo2 color="#0f172a" size={80} /> 
         </div>
 
         {/* Desktop Menu */}
-        <NavigationMenu className=" md:flex">
-          <NavigationMenuList className="flex items-center space-x-6">
+        <NavigationMenu className="hidden md:flex">
+          <NavigationMenuList className="flex items-center space-x-8">
+             {/* Add future nav links here if needed */}
+             
             <NavigationMenuItem>
               <Button
-                // FIX: Inverted button styling to be a light ghost button on a dark background
-                className="px-6 py-2 text-sm font-semibold rounded-lg transition-all duration-300 shadow-xl 
-                  bg-transparent text-white border border-white/50 
-                  hover:bg-white hover:text-gray-900 hover:shadow-white/40"
+                className="px-6 py-2.5 text-sm font-semibold rounded-lg shadow-lg shadow-indigo-500/20 
+                  bg-indigo-600 text-white 
+                  hover:bg-indigo-700 hover:shadow-indigo-500/30 transition-all duration-300"
                 onClick={() => signIn("google")}
               >
                 Get Started

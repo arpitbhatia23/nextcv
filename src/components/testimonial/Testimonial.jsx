@@ -1,52 +1,47 @@
 "use client";
+import React from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
-import { useEffect, useId, useRef, useState } from "react";
-import { Card } from "../ui/card";
-import Footer from "../footer/Footer";
+import { useEffect, useState, useRef, useId } from "react";
 
-// Testimonial data
+// Testimonial data - Expanded for infinite scroll
 const testimonials = [
   {
     name: "Priya Sharma",
     title: "Software Engineer",
     text: "Best ₹100 I've ever spent! Got my dream job at a tech startup within 2 weeks of using Next CV.",
-    color: "from-purple-100 to-blue-100",
+    initials: "PS",
+    color: "bg-indigo-100 text-indigo-700",
   },
   {
     name: "Rahul Patel",
     title: "Marketing Manager",
     text: "Super easy, my resume was ready in 5 minutes. The AI suggestions were spot-on for my industry.",
-    color: "from-green-100 to-green-200",
+    initials: "RP",
+    color: "bg-emerald-100 text-emerald-700",
   },
   {
     name: "Anita Singh",
     title: "Fresh Graduate",
     text: "As a fresh graduate, I was struggling with resume format. Next CV made it so professional!",
-    color: "from-pink-100 to-purple-100",
+    initials: "AS",
+    color: "bg-purple-100 text-purple-700",
+  },
+  {
+    name: "Vikram Malhotra",
+    title: "Project Manager",
+    text: "The ATS scoring feature is a game changer. I realized why my old resume wasn't getting picked.",
+    initials: "VM",
+    color: "bg-blue-100 text-blue-700",
   },
 ];
 
-// Stats data
 const stats = [
-  {
-    number: 1200,
-    title: "Happy Users",
-    color: "text-blue-600",
-  },
-  {
-    number: 97,
-    title: "Success Rate",
-    color: "text-green-600",
-  },
-  {
-    number: 4.9,
-    title: "Average Rating",
-    color: "text-purple-600",
-  },
+  { number: 1200, title: "Happy Users", color: "text-indigo-600" },
+  { number: 97, title: "Success Rate (%)", color: "text-emerald-600" },
+  { number: 4.9, title: "Average Rating", color: "text-amber-500" },
 ];
 
-// 🔢 Animated Counter Component
-function AnimatedCounter({ to, className, format }) {
+function AnimatedCounter({ to, className }) {
   const count = useMotionValue(0);
   const [display, setDisplay] = useState(0);
 
@@ -60,11 +55,7 @@ function AnimatedCounter({ to, className, format }) {
     return controls.stop;
   }, [to]);
 
-  return (
-    <motion.div className={`text-3xl font-bold ${className}`}>
-      {format ? format(display) : display}
-    </motion.div>
-  );
+  return <span className={`text-4xl sm:text-5xl font-bold ${className}`}>{display}</span>;
 }
 
 export default function TestimonialCarousel() {
@@ -73,21 +64,17 @@ export default function TestimonialCarousel() {
   const [width, setWidth] = useState(0);
   const x = useMotionValue(0);
 
-  // Calculate width of all testimonials (once mounted)
   useEffect(() => {
     if (containerRef.current) {
-      setWidth(containerRef.current.scrollWidth / 2); // since we duplicate twice
+      setWidth(containerRef.current.scrollWidth / 3); // Divided by duplication factor
     }
   }, []);
 
-  // Animate x for infinite scroll
   useEffect(() => {
     let frame;
-    const speed = 0.5; // px per frame, adjust for speed
-
+    const speed = 0.5;
     function animateScroll() {
       let current = x.get();
-      // When scrolled past half, reset to 0
       if (Math.abs(current) >= width) {
         x.set(0);
       } else {
@@ -100,64 +87,72 @@ export default function TestimonialCarousel() {
   }, [width, x]);
 
   return (
-    <section
-      name="Testimonial"
-      className="bg-white py-12 overflow-hidden w-full dark:bg-black"
-    >
-      {/* Header with Keyword */}
-      <div className="text-center mb-10 px-4 max-w-4xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-          Stop Guessing. Start Getting Interviews.
-        </h2>
-        <p className="text-xl text-indigo-600 dark:text-indigo-400 font-semibold">
-          Create an ATS friendly resume in minutes with our AI-powered builder.
-        </p>
-      </div>
+    <section name="Testimonial" className="py-24 bg-slate-50 border-t border-slate-200">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            Stop Guessing. <span className="text-indigo-600">Start Getting Interviews.</span>
+          </h2>
+          <p className="text-lg text-slate-600">
+            Join thousands of professionals who improved their career with Next CV.
+          </p>
+        </div>
 
-      <div className="mt-10 overflow-hidden relative">
-        <motion.div
-          ref={containerRef}
-          className="flex w-max gap-6"
-          style={{ x }}
-        >
-          {[...testimonials, ...testimonials, ...testimonials].map(
-            (item, idx) => (
+        {/* Carousel */}
+        <div className="overflow-hidden relative -mx-6 lg:-mx-8">
+           {/* Fade Edges */}
+           <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+           <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+
+          <motion.div ref={containerRef} className="flex w-max gap-8 px-8 py-4" style={{ x }}>
+            {[...testimonials, ...testimonials, ...testimonials].map((item, idx) => (
               <div
-                key={`${id}-${item.name}-${idx}`}
-                className={`min-w-[300px] max-w-[300px] bg-gradient-to-r ${item.color} p-6 rounded-xl shadow-md`}
+                key={`${id}-${idx}`}
+                className="w-[350px] bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between"
               >
-                <div className="flex items-center space-x-4 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center font-bold text-lg">
-                    {item.name.charAt(0)}
+                <div>
+                   <div className="flex items-center gap-1 mb-4 text-amber-400 text-lg">
+                      ★★★★★
+                   </div>
+                   <p className="text-slate-700 leading-relaxed mb-6">"{item.text}"</p>
+                </div>
+                
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${item.color}`}>
+                    {item.initials}
                   </div>
                   <div>
-                    <h2 className="font-semibold">{item.name}</h2>
-                    <p className="text-sm text-gray-600">{item.title}</p>
+                    <h4 className="font-bold text-slate-900 text-sm">{item.name}</h4>
+                    <p className="text-slate-500 text-xs">{item.title}</p>
                   </div>
                 </div>
-                <div className="text-yellow-500 text-xl mb-2">★★★★★</div>
-                <p className="text-sm text-gray-700">"{item.text}"</p>
               </div>
-            )
-          )}
-        </motion.div>
-      </div>
+            ))}
+          </motion.div>
+        </div>
 
-      {/* Stats Section */}
-      <Card className="bg-gray-50 rounded-xl p-8 mt-10  max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-8xl mx-auto">
-        <div className="flex justify-center gap-16 flex-wrap">
-          {stats.map(({ number, title, color }) => (
-            <div key={title} className="text-center">
-              <AnimatedCounter to={number} className={color} />
-              <p className="text-gray-600 mt-2">{title}</p>
-            </div>
+        {/* Stats Grid */}
+        <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+          {stats.map((stat, idx) => (
+             <div key={idx} className="text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                <AnimatedCounter to={stat.number} className={stat.color} />
+                <p className="text-slate-500 font-medium mt-2 uppercase tracking-wide text-sm">{stat.title}</p>
+             </div>
           ))}
         </div>
 
-        <Card className="bg-amber-700 rounded-3xl mx-auto px-6 py-4 text-white font-bold text-center w-full max-w-[90%] sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-lg mt-8">
-          <h2>🔥 Limited Time: Get started for just ₹100 - No hidden fees!</h2>
-        </Card>
-      </Card>
+         {/* Final Urgency CTA */}
+         <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full" />
+            <div className="relative z-10">
+               <h3 className="text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
+               <p className="text-slate-300 mb-0">Get your professional ATS resume today for just <span className="text-white font-bold text-lg">₹100</span>. No hidden fees.</p>
+            </div>
+         </div>
+
+      </div>
     </section>
   );
 }
