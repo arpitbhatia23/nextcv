@@ -317,7 +317,7 @@ const ClassicMinimalistPDFResume = ({
           {data.phone && (
             <View style={styles.infoItem}>
               <PhoneIcon />
-              <Text>{data.phone}</Text>
+              <Text>{data.phone || data.phone_no}</Text>
             </View>
           )}
           {data.email && (

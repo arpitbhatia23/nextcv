@@ -172,7 +172,7 @@ const TechDark = ({ data }) => (
           <View style={styles.contact}>
             <Text>{data.email}</Text>
             <Text>|</Text>
-            <Text>{data.phone}</Text>
+            <Text>{data.phone || data.phone_no}</Text>
             {data.address && <Text>| {data.address}</Text>}
           </View>
         </View>

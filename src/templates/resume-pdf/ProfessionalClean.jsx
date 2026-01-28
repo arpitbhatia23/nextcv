@@ -150,7 +150,7 @@ const ProfessionalClean = ({ data }) => (
             {data.jobRole || "Professional Title"}
           </Text>
           <Text style={styles.contact}>
-            {data.email} | {data.phone} | {data.address}
+            {data.email} | {data.phone || data.phone_no} | {data.address}
           </Text>
           <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
             {data.linkedin && (

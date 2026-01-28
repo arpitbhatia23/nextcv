@@ -232,7 +232,7 @@ const morden = ({ data }) => (
             <Text style={styles.headline}>{data.headline}</Text>
           )}
           <Text style={styles.contact}>
-            {data.email} | {data.phone} | {data.address}
+            {data.email} | {data.phone || data.phone_no} | {data.address}
           </Text>
           <View style={styles.links}>
             {data.linkedin && (

@@ -168,7 +168,7 @@ const SidebarLeft = ({ data }) => (
         {/* Contact */}
         <View style={styles.sidebarSection}>
           <Text style={styles.sidebarTitle}>Contact</Text>
-          <Text style={styles.contactItem}>{data.phone}</Text>
+          <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
           <Text style={styles.contactItem}>{data.email}</Text>
           <Text style={styles.contactItem}>{data.address}</Text>
         </View>

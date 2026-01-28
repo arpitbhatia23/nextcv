@@ -310,7 +310,7 @@ const ModernFullStackPDFResume = ({ data }) => (
           {data.phone && (
             <View style={styles.contact}>
               <PhoneIcon />
-              <Text>{data.phone}</Text>
+              <Text>{data.phone || data.phone_no}</Text>
             </View>
           )}
           {data.email && (
@@ -502,7 +502,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                         <Text key={j} style={styles.expBullet}>
                           • {b}
                         </Text>
-                      ) : null
+                      ) : null,
                     )}
                   </View>
                 )}

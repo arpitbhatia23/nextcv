@@ -127,7 +127,7 @@ const CompactModern = ({ data }) => (
         </View>
         <View style={styles.contactColumn}>
           <Text>{data.email}</Text>
-          <Text>{data.phone}</Text>
+          <Text>{data.phone || data.phone_no}</Text>
           <Text>{data.address}</Text>
           <View
             style={{

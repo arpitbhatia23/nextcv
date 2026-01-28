@@ -333,7 +333,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
             {data.phone && (
               <View style={styles.contact}>
                 <PhoneIcon />
-                <Text>{data.phone}</Text>
+                <Text>{data.phone || data.phone_no}</Text>
               </View>
             )}
             {data.email && (
@@ -489,7 +489,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                           <Text key={j} style={styles.expBullet}>
                             • {b}
                           </Text>
-                        ) : null
+                        ) : null,
                       )}
                     </View>
                   )}

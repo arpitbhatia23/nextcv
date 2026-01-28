@@ -188,7 +188,9 @@ const InfographicLite = ({ data }) => (
           <Text style={styles.role}>{data.jobRole || "Professional"}</Text>
           <View style={styles.contactRow}>
             <Text style={styles.contactItem}>{data.email}</Text>
-            <Text style={styles.contactItem}>{data.phone}</Text>
+            <Text style={styles.contactItem}>
+              {data.phone || data.phone_no}
+            </Text>
             {data.address && (
               <Text style={styles.contactItem}>{data.address}</Text>
             )}
