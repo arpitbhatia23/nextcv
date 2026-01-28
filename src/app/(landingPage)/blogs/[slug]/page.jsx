@@ -123,7 +123,7 @@ export default async function BlogDetailsPage({ params }) {
         />
       )}
       {/* The Client Component (BlogDetails) handles data fetching, loading, and interactive rendering */}
-      <BlogDetails slug={slug} />
+      <BlogDetails slug={slug} initialData={blogData} />
     </>
   );
 }

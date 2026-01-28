@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { ChevronRight, Star, ArrowRight } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { scroller } from "react-scroll";
@@ -110,11 +111,13 @@ function Herosection() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
              {mncLogos.map((logo, index) => (
-              <img
+              <Image
                 key={index}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-6 sm:h-8 object-contain"
+                width={120}
+                height={40}
+                className="h-6 sm:h-8 w-auto object-contain"
               />
             ))}
           </div>

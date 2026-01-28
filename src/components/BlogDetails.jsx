@@ -55,16 +55,16 @@ const ErrorDisplay = () => (
 );
 
 // --- Main Component ---
-const BlogDetails = ({ slug }) => {
+const BlogDetails = ({ slug, initialData }) => {
   const router = useRouter(); 
 
-  const [blog, setBlog] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [blog, setBlog] = useState(initialData || null);
+  const [isLoading, setIsLoading] = useState(!initialData);
   const [error, setError] = useState(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
   useEffect(() => {
-    if (!slug) return; 
+    if (!slug || initialData) return; 
 
     setIsLoading(true);
     setError(null);

@@ -14,8 +14,14 @@ export default async function sitemap() {
   // Static pages
   const pages = [
     { url: `${baseUrl}/`, priority: 1.0 },
-    { url: `${baseUrl}/privacyPolicy`, priority: 1.0 },
+    { url: `${baseUrl}/privacy-policy`, priority: 1.0 },
     { url: `${baseUrl}/terms`, priority: 1.0 },
+    { url: `${baseUrl}/blogs`, priority: 1.0 },
+    { url: `${baseUrl}/about-us`, priority: 1.0 },
+    { url: `${baseUrl}/contact`, priority: 1.0 },
+
+
+
   ];
 
   // Dynamic blog pages
