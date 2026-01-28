@@ -1,6 +1,5 @@
 import Nav from "@/components/ui/navbar";
 import { Footer } from "@/components/footer/Footer";
-import VisitorStatsCounter from "@/components/VistorCount";
 import { Suspense } from "react";
 import Loading from "../loading";
 
@@ -78,7 +77,6 @@ export default function RootLayout({ children }) {
         }}
       />
       <Nav />
-      {/* <VisitorStatsCounter /> */}
       <Suspense fallback={<Loading />}>{children}</Suspense>
       <Footer />
     </section>

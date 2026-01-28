@@ -1,5 +1,3 @@
-import React from "react";
-
 export const metadata = {
   title: "Terms & Conditions - NextCV",
   description:
@@ -43,7 +41,7 @@ const page = () => {
             This document is an electronic record in terms of the Information
             Technology Act, 2000 and is published in accordance with Rule 3(1)
             of the IT (Intermediaries Guidelines) Rules, 2011. It governs the
-            use of the Ghost Option platform.
+            use of the NEXTCV platform.
           </p>
 
           <p>

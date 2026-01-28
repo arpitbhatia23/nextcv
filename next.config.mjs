@@ -8,7 +8,11 @@ const withBundle = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
 
-  reactCompiler: true,
+  // Keep disabled unless you explicitly need it
+  // reactCompiler: true,
+
+  compress: true,
+  productionBrowserSourceMaps: false,
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -21,6 +25,15 @@ const nextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+    ],
+  },
+
+  experimental: {
+    optimizePackageImports: [
+      "lodash",
+      "lucide-react",
+      "@heroicons/react",
+      "date-fns",
     ],
   },
 };

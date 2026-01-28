@@ -55,7 +55,11 @@ function AnimatedCounter({ to, className }) {
     return controls.stop;
   }, [to]);
 
-  return <span className={`text-4xl sm:text-5xl font-bold ${className}`}>{display}</span>;
+  return (
+    <span className={`text-4xl sm:text-5xl font-bold ${className}`}>
+      {display}
+    </span>
+  );
 }
 
 export default function TestimonialCarousel() {
@@ -87,71 +91,95 @@ export default function TestimonialCarousel() {
   }, [width, x]);
 
   return (
-    <section name="Testimonial" className="py-24 bg-slate-50 border-t border-slate-200">
+    <section
+      name="Testimonial"
+      className="py-24 bg-slate-50 border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Stop Guessing. <span className="text-indigo-600">Start Getting Interviews.</span>
+            Stop Guessing.{" "}
+            <span className="text-indigo-600">Start Getting Interviews.</span>
           </h2>
           <p className="text-lg text-slate-600">
-            Join thousands of professionals who improved their career with Next CV.
+            Join thousands of professionals who improved their career with Next
+            CV.
           </p>
         </div>
 
         {/* Carousel */}
         <div className="overflow-hidden relative -mx-6 lg:-mx-8">
-           {/* Fade Edges */}
-           <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-           <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+          {/* Fade Edges */}
+          <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
-          <motion.div ref={containerRef} className="flex w-max gap-8 px-8 py-4" style={{ x }}>
-            {[...testimonials, ...testimonials, ...testimonials].map((item, idx) => (
-              <div
-                key={`${id}-${idx}`}
-                className="w-[350px] bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between"
-              >
-                <div>
-                   <div className="flex items-center gap-1 mb-4 text-amber-400 text-lg">
-                      ★★★★★
-                   </div>
-                   <p className="text-slate-700 leading-relaxed mb-6">"{item.text}"</p>
-                </div>
-                
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${item.color}`}>
-                    {item.initials}
-                  </div>
+          <motion.div
+            ref={containerRef}
+            className="flex w-max gap-8 px-8 py-4"
+            style={{ x }}
+          >
+            {[...testimonials, ...testimonials, ...testimonials].map(
+              (item, idx) => (
+                <div
+                  key={`${id}-${idx}`}
+                  className="w-[350px] bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between"
+                >
                   <div>
-                    <h4 className="font-bold text-slate-900 text-sm">{item.name}</h4>
-                    <p className="text-slate-500 text-xs">{item.title}</p>
+                    <div className="flex items-center gap-1 mb-4 text-amber-400 text-lg">
+                      ★★★★★
+                    </div>
+                    <p className="text-slate-700 leading-relaxed mb-6">
+                      "{item.text}"
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-4 mt-auto">
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${item.color}`}
+                    >
+                      {item.initials}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-sm">
+                        {item.name}
+                      </h4>
+                      <p className="text-slate-500 text-xs">{item.title}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </motion.div>
         </div>
 
         {/* Stats Grid */}
         <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, idx) => (
-             <div key={idx} className="text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                <AnimatedCounter to={stat.number} className={stat.color} />
-                <p className="text-slate-500 font-medium mt-2 uppercase tracking-wide text-sm">{stat.title}</p>
-             </div>
+            <div
+              key={idx}
+              className="text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm"
+            >
+              <AnimatedCounter to={stat.number} className={stat.color} />
+              <p className="text-slate-500 font-medium mt-2 uppercase tracking-wide text-sm">
+                {stat.title}
+              </p>
+            </div>
           ))}
         </div>
 
-         {/* Final Urgency CTA */}
-         <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full" />
-            <div className="relative z-10">
-               <h3 className="text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
-               <p className="text-slate-300 mb-0">Get your professional ATS resume today for just <span className="text-white font-bold text-lg">₹100</span>. No hidden fees.</p>
-            </div>
-         </div>
-
+        {/* Final Urgency CTA */}
+        <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full" />
+          <div className="relative z-10">
+            <h3 className="text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
+            <p className="text-slate-300 mb-0">
+              Get your professional ATS resume today for just{" "}
+              <span className="text-white font-bold text-lg">₹100</span>. No
+              hidden fees.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

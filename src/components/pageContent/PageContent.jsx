@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Zap,
   Brain,
@@ -47,61 +46,62 @@ const PageContent = () => {
     {
       icon: <Clock className="w-5 h-5 text-indigo-400" />,
       title: "Instant Generation",
-      description:
-        "Create professional resumes in under 5 minutes.",
+      description: "Create professional resumes in under 5 minutes.",
     },
     {
       icon: <Package className="w-5 h-5 text-indigo-400" />,
       title: "Multiple Formats",
-      description:
-        "Download in PDF or Word. formatting preserved.",
+      description: "Download in PDF or Word. formatting preserved.",
     },
     {
       icon: <Headset className="w-5 h-5 text-indigo-400" />,
       title: "24/7 Support",
-      description:
-        "Get help whenever you need it from our team.",
+      description: "Get help whenever you need it from our team.",
     },
   ];
 
   return (
     <section className="py-24 bg-black text-slate-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
         {/* Intro Section */}
         <div className="mb-20 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
-            Unlock interviews with the <span className="text-indigo-400">best AI resume generator</span>
+            Unlock interviews with the{" "}
+            <span className="text-indigo-400">best AI resume generator</span>
           </h2>
           <p className="text-lg text-slate-400 leading-relaxed">
-            Experience our ATS-friendly templates and professional resume building platform designed for modern job seekers.
+            Experience our ATS-friendly templates and professional resume
+            building platform designed for modern job seekers.
           </p>
         </div>
 
         {/* Success Rate Feature */}
         <div className="mb-24 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 bg-linear-to-r from-indigo-600 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition-opacity duration-500"></div>
           <div className="relative bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-12 overflow-hidden">
-             
-             <div className="flex flex-col md:flex-row items-center gap-10">
-                <div className="flex-1 space-y-4 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-2">
-                    <CheckCircle2 className="w-4 h-4" />
-                    Proven Results
-                  </div>
-                  <h3 className="text-3xl font-bold text-white">Boost Your Interview Chances</h3>
-                  <p className="text-slate-400 text-lg">
-                    Users who got interviews within 30 days thanks to our ATS-friendly resume designs.
-                  </p>
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              <div className="flex-1 space-y-4 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-2">
+                  <CheckCircle2 className="w-4 h-4" />
+                  Proven Results
                 </div>
-                <div className="flex-shrink-0 text-center">
-                    <span className="block text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-500 tracking-tighter">
-                      95%
-                    </span>
-                    <span className="text-blue-200 font-medium tracking-widest uppercase text-sm">Success Rate</span>
-                </div>
-             </div>
-
+                <h3 className="text-3xl font-bold text-white">
+                  Boost Your Interview Chances
+                </h3>
+                <p className="text-slate-400 text-lg">
+                  Users who got interviews within 30 days thanks to our
+                  ATS-friendly resume designs.
+                </p>
+              </div>
+              <div className="shrink-0 text-center">
+                <span className="block text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-linear-to-b from-white to-slate-500 tracking-tighter">
+                  95%
+                </span>
+                <span className="text-blue-200 font-medium tracking-widest uppercase text-sm">
+                  Success Rate
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -115,7 +115,9 @@ const PageContent = () => {
               <div className="mb-6 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-white/10 transition-colors">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+              <h3 className="text-xl font-bold text-white mb-3">
+                {item.title}
+              </h3>
               <p className="text-slate-400 leading-relaxed text-sm">
                 {item.description}
               </p>
@@ -127,7 +129,8 @@ const PageContent = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center border-t border-white/5 pt-20">
           <div className="space-y-8">
             <h2 className="text-3xl font-bold text-white">
-              Built for Success: <br/>The Best Indian Resume Format
+              Built for Success: <br />
+              The Best Indian Resume Format
             </h2>
             <div className="space-y-6">
               {cardSecond.map((item, index) => (
@@ -136,7 +139,9 @@ const PageContent = () => {
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white mb-1">{item.title}</h4>
+                    <h4 className="text-lg font-semibold text-white mb-1">
+                      {item.title}
+                    </h4>
                     <p className="text-slate-400 text-sm">{item.description}</p>
                   </div>
                 </div>
@@ -145,18 +150,22 @@ const PageContent = () => {
           </div>
 
           <div className="relative">
-             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
-             <div className="relative bg-slate-900 border border-white/10 rounded-3xl p-8 sm:p-12 text-center space-y-6">
-                <h3 className="text-2xl font-bold text-white">Ready to get hired?</h3>
-                <p className="text-slate-400">Join thousands of professionals who have accelerated their careers with NextCV.</p>
-                <button className="w-full py-4 bg-white text-slate-950 font-bold rounded-xl text-lg hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 group">
-                  Start Building Now
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform"/>
-                </button>
-             </div>
+            <div className="absolute inset-0 bg-linear-to-br from-indigo-500 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
+            <div className="relative bg-slate-900 border border-white/10 rounded-3xl p-8 sm:p-12 text-center space-y-6">
+              <h3 className="text-2xl font-bold text-white">
+                Ready to get hired?
+              </h3>
+              <p className="text-slate-400">
+                Join thousands of professionals who have accelerated their
+                careers with NextCV.
+              </p>
+              {/* <button className="w-full py-4 bg-white text-slate-950 font-bold rounded-xl text-lg hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 group">
+                Start Building Now
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button> */}
+            </div>
           </div>
         </div>
-      
       </div>
     </section>
   );

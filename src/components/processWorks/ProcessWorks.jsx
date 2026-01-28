@@ -1,11 +1,5 @@
+"use client";
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import { Zap, Eye, Wallet } from "lucide-react";
@@ -24,7 +18,7 @@ const ProcessWorks = () => {
       title: "Maximum Visibility",
       description:
         "Our templates are designed to be read perfectly by Applicant Tracking Systems (ATS), ensuring your resume gets seen.",
-      isHighlighted: true, 
+      isHighlighted: true,
     },
     {
       icon: <Wallet className="w-8 h-8 text-indigo-500" />,
@@ -42,14 +36,15 @@ const ProcessWorks = () => {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
         {/* Headline */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight">
-            Land Your Dream Job with the <br/><span className="text-indigo-600">NextCV Advantage</span>
+            Land Your Dream Job with the <br />
+            <span className="text-indigo-600">NextCV Advantage</span>
           </h2>
           <p className="text-lg text-slate-600">
-            Why thousands of Indian job seekers choose us over generic resume builders.
+            Why thousands of Indian job seekers choose us over generic resume
+            builders.
           </p>
         </div>
 
@@ -64,14 +59,20 @@ const ProcessWorks = () => {
                   : "bg-slate-50 text-slate-900 hover:bg-white hover:shadow-xl hover:shadow-slate-100 border border-slate-100"
               }`}
             >
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
-                  item.isHighlighted ? "bg-white/20 text-white" : "bg-white text-indigo-600 shadow-sm"
-              }`}>
+              <div
+                className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                  item.isHighlighted
+                    ? "bg-white/20 text-white"
+                    : "bg-white text-indigo-600 shadow-sm"
+                }`}
+              >
                 {item.icon}
               </div>
 
               <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className={`leading-relaxed text-sm ${item.isHighlighted ? "text-indigo-100" : "text-slate-600"}`}>
+              <p
+                className={`leading-relaxed text-sm ${item.isHighlighted ? "text-indigo-100" : "text-slate-600"}`}
+              >
                 {item.description}
               </p>
             </div>
@@ -81,21 +82,22 @@ const ProcessWorks = () => {
         {/* Bottom CTA */}
         <div className="text-center">
           <div className="inline-block relative group">
-             <div className="absolute inset-0 bg-indigo-600 blur-[20px] opacity-20 group-hover:opacity-40 transition-opacity rounded-full"></div>
-             <Button
+            <div className="absolute inset-0 bg-indigo-600 blur-[20px] opacity-20 group-hover:opacity-40 transition-opacity rounded-full"></div>
+            <Button
               className="relative bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-6 text-lg font-bold rounded-xl shadow-xl transition-all duration-300 hover:scale-[1.02]"
               onClick={handleStartResume}
             >
               Start Your Resume Now
             </Button>
           </div>
-          
+
           <div className="mt-8 flex flex-col items-center">
-             <p className="text-4xl font-black text-slate-900">10k+</p>
-             <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mt-1">Successful Resumes Created</p>
+            <p className="text-4xl font-black text-slate-900">10k+</p>
+            <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mt-1">
+              Successful Resumes Created
+            </p>
           </div>
         </div>
-
       </div>
     </section>
   );

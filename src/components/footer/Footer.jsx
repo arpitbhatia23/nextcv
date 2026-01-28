@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Logo2 from "../Logo2";
 import {
@@ -7,9 +6,7 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
-import { scroller } from "react-scroll";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 function IconButton({ label, icon }) {
   return (
@@ -23,24 +20,8 @@ function IconButton({ label, icon }) {
 }
 
 export const Footer = () => {
-  const pathname = usePathname();
-  const isLandingPage = pathname === "/";
-
-  const scrollTo = (section) => {
-    scroller.scrollTo(section, {
-      duration: 800,
-      delay: 0,
-      smooth: "easeInOutQuart",
-      offset: -70,
-    });
-  };
-
   const footerLinks = [
-    {
-      label: "Home",
-      action: () => (isLandingPage ? scrollTo("Hero") : null),
-      route: "/",
-    },
+    { label: "Home", route: "/" },
     { label: "Blogs", route: "/blogs" },
     { label: "About us", route: "/about-us" },
     { label: "Contact", route: "/contact" },
@@ -52,18 +33,11 @@ export const Footer = () => {
   ];
 
   const renderFooterLink = (item) => {
-    if (item.action && isLandingPage) {
-      return (
-        <button
-          onClick={item.action}
-          className="hover:text-indigo-400 transition-colors text-left w-full text-sm"
-        >
-          {item.label}
-        </button>
-      );
-    }
     return (
-      <Link href={item.route} className="hover:text-indigo-400 transition-colors text-sm">
+      <Link
+        href={item.route}
+        className="hover:text-indigo-400 transition-colors text-sm"
+      >
         {item.label}
       </Link>
     );
@@ -72,15 +46,14 @@ export const Footer = () => {
   return (
     <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
           {/* Brand Column */}
           <div className="lg:col-span-1 space-y-6">
             <Logo2 className="text-white" color="white" size={90} />
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-               NextCV is the student-built AI resume builder making career tools accessible and affordable for everyone in India.
+              NextCV is the student-built AI resume builder making career tools
+              accessible and affordable for everyone in India.
             </p>
             <div className="flex space-x-3 pt-2">
               <IconButton icon={<FaFacebookF />} label="Facebook" />
@@ -112,44 +85,56 @@ export const Footer = () => {
 
           {/* Contact Column */}
           <div>
-             <h3 className="text-white font-bold mb-6">Contact</h3>
-             <ul className="space-y-4 text-sm text-slate-400">
-                <li>
-                   <a href="mailto:help@nextcv.in" className="hover:text-indigo-400 transition-colors block">
-                      help@nextcv.in
-                   </a>
-                </li>
-                <li>
-                   <span>+91 86280 47655</span>
-                </li>
-                <li>
-                   <span>India · Remote</span>
-                </li>
-             </ul>
+            <h3 className="text-white font-bold mb-6">Contact</h3>
+            <ul className="space-y-4 text-sm text-slate-400">
+              <li>
+                <a
+                  href="mailto:help@nextcv.in"
+                  className="hover:text-indigo-400 transition-colors block"
+                >
+                  help@nextcv.in
+                </a>
+              </li>
+              <li>
+                <span>+91 86280 47655</span>
+              </li>
+              <li>
+                <span>India · Remote</span>
+              </li>
+            </ul>
           </div>
-
         </div>
 
         {/* Stats Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8 border-y border-slate-900 mb-8">
-             {[
-               { label: "Resumes Created", value: "10K+", color: "text-indigo-500" },
-               { label: "Success Rate", value: "95%", color: "text-emerald-500" },
-               { label: "Build Time", value: "< 5m", color: "text-amber-500" },
-               { label: "Fixed Cost", value: "₹100", color: "text-blue-500" },
-             ].map((stat, i) => (
-                <div key={i} className="text-center">
-                   <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
-                   <div className="text-xs text-slate-500 uppercase tracking-wide mt-1">{stat.label}</div>
-                </div>
-             ))}
+          {[
+            {
+              label: "Resumes Created",
+              value: "10K+",
+              color: "text-indigo-500",
+            },
+            { label: "Success Rate", value: "95%", color: "text-emerald-500" },
+            { label: "Build Time", value: "< 5m", color: "text-amber-500" },
+            { label: "Fixed Cost", value: "₹100", color: "text-blue-500" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className={`text-2xl font-bold ${stat.color}`}>
+                {stat.value}
+              </div>
+              <div className="text-xs text-slate-500 uppercase tracking-wide mt-1">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} Next CV. All rights reserved.</p>
           <div className="flex items-center gap-1.5">
-            <span>Made with</span> <span className="text-red-500 animate-pulse">❤️</span> <span>by Aurpit & Tamanna</span>
+            <span>Made with</span>{" "}
+            <span className="text-red-500 animate-pulse">❤️</span>{" "}
+            <span>by Aurpit & Tamanna</span>
           </div>
         </div>
       </div>

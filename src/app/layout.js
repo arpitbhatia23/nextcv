@@ -75,11 +75,6 @@ export default function RootLayout({ children }) {
               url: "https://nextcv.in",
               description:
                 "Create professional ATS-optimized resumes in minutes. Built for the Indian job market with a simple ₹100 one-time pricing.",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://nextcv.in/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
             }),
           }}
         />
