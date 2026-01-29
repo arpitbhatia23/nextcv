@@ -24,6 +24,7 @@ const handler = async (req) => {
     education,
     projects,
     ResumeType,
+    certificates,
   } = data;
   if (
     [name, email, phone, address, jobRole, summary].some(
@@ -55,6 +56,7 @@ const handler = async (req) => {
     skills,
     education,
     projects,
+    certificates,
   });
   if (!draft) {
     throw new apiError(500, "something went wrong while creating");

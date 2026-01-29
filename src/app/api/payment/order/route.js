@@ -21,7 +21,7 @@ const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,
   clientVersion,
-  env
+  env,
 );
 
 const handler = async (req) => {
@@ -46,6 +46,7 @@ const handler = async (req) => {
     ResumeType,
     isDraft = false,
     draftId,
+    certificates,
   } = reqData;
   const session = await getServerSession(authOptions);
   if (!session && !session?.user) {
@@ -79,6 +80,7 @@ const handler = async (req) => {
       experience: experience || "",
       projects: projects || "",
       jobRole: jobRole,
+      certificates: certificates,
     });
 
     if (!resume) {
@@ -93,12 +95,12 @@ const handler = async (req) => {
           resume: resume._id,
         },
       },
-      { new: true }
+      { new: true },
     );
     if (!addResumeIdToUserModel) {
       throw new apiError(
         500,
-        "something went wrong while add resuem id to user model"
+        "something went wrong while add resuem id to user model",
       );
     }
   }
