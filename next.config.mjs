@@ -10,7 +10,7 @@ const nextConfig = {
 
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,
-
+  reactStrictMode: true,
   compress: true,
   productionBrowserSourceMaps: false,
 

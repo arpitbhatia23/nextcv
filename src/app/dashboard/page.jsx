@@ -15,8 +15,34 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
+  const jsonLdSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Dashboard",
+    url: "https://www.nextcv.in/dashboard",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "NextCV",
+      url: "https://www.nextcv.in",
+    },
+    mainEntity: {
+      "@type": "Organization",
+      name: "NextCV",
+      url: "https://www.nextcv.in",
+    },
+  };
   const session = await getServerSession(authOptions);
   const isAdmin = session?.user?.role === "admin";
 
-  return isAdmin ? <AdminiDashboard /> : <UserDashboard />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdSchema),
+        }}
+      />
+      {isAdmin ? <AdminiDashboard /> : <UserDashboard />}
+    </>
+  );
 }

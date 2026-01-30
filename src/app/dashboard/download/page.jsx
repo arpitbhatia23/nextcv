@@ -67,7 +67,7 @@ function DownloadPageContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex flex-col items-center justify-center px-2 py-8">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 to-blue-50 flex flex-col items-center justify-center px-2 py-8">
       <Card className="w-full max-w-3xl rounded-xl shadow-lg bg-white/30">
         <CardTitle className="text-center text-2xl font-bold mt-4 mb-2 text-blue-700">
           Resume Preview & Download
@@ -103,7 +103,7 @@ function DownloadPageContent() {
             <button
               onClick={handleDownload}
               disabled={!pdfUrl}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold py-3 px-6 rounded-lg shadow hover:from-blue-600 hover:to-purple-600 transition disabled:opacity-50"
+              className="w-full bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold py-3 px-6 rounded-lg shadow hover:from-blue-600 hover:to-purple-600 transition disabled:opacity-50"
             >
               Download PDF
             </button>

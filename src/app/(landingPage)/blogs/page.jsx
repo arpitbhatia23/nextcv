@@ -24,7 +24,7 @@ const Blogspage = () => {
             "@context": "https://schema.org",
             "@type": "Blog",
             name: "NextCV Blog",
-            url: "https://nextcv.in/blogs",
+            url: "https://www.nextcv.in/blogs",
             description:
               "Expert tips on resume building, ATS optimization, and career growth",
             publisher: {
@@ -32,7 +32,7 @@ const Blogspage = () => {
               name: "NextCV",
               logo: {
                 "@type": "ImageObject",
-                url: "https://nextcv.in/opengraph-image.png",
+                url: "https://www.nextcv.in/opengraph-image.webp",
               },
             },
           }),

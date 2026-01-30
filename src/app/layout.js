@@ -39,24 +39,24 @@ export const metadata = {
   robots: "index, follow",
 
   // ⚡ Fix for Open Graph / Twitter images
-  metadataBase: new URL("https://nextcv.in"), // replace with your production URL
+  metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
   openGraph: {
     title: "NextCV – Professional ATS Resume Builder for India",
     description:
       "Create a professional, ATS-optimized resume in minutes. Built for the Indian job market. Try the free demo and get your AI resume for just ₹100—no subscription.",
     url: "/", // optional, relative to metadataBase
     type: "website",
-    images: ["/opengraph-image.png"], // relative path will resolve correctly
+    images: ["/opengraph-image.webp"], // relative path will resolve correctly
   },
   twitter: {
     card: "summary_large_image",
     title: "NextCV - Build the Perfect ATS Friendly Resume with AI in Minutes",
     description:
       "Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.",
-    images: ["/opengraph-image.png"], // relative path
+    images: ["/opengraph-image.webp"], // relative path
   },
   alternates: {
-    canonical: "https://nextcv.in/", // Sets the canonical URL
+    canonical: "https://www.nextcv.in", // Sets the canonical URL
   },
 };
 
@@ -117,25 +117,25 @@ export default function RootLayout({ children }) {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://nextcv.in",
+                  item: "https://www.nextcv.in",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Dashboard",
-                  item: "https://nextcv.in/dashboard",
+                  item: "https://www.nextcv.in/dashboard",
                 },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: "Blogs",
-                  item: "https://nextcv.in/blogs",
+                  item: "https://www.nextcv.in/blogs",
                 },
                 {
                   "@type": "ListItem",
                   position: 4,
                   name: "About",
-                  item: "https://nextcv.in/about-us",
+                  item: "https://www.nextcv.in/about-us",
                 },
               ],
             }),

@@ -10,16 +10,16 @@ const page = () => {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: "Terms & Conditions",
-    url: "https://nextcv.in/terms",
+    url: "https://www.nextcv.in/terms",
     isPartOf: {
       "@type": "WebSite",
       name: "NextCV",
-      url: "https://nextcv.in",
+      url: "https://www.nextcv.in",
     },
     mainEntity: {
       "@type": "Organization",
       name: "NextCV",
-      url: "https://nextcv.in",
+      url: "https://www.nextcv.in",
     },
   };
 

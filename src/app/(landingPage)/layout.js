@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
             description:
               "Create professional ATS-optimized resumes tailored for the Indian job market",
             applicationCategory: "Productivity",
-            url: "https://nextcv.in",
-            screenshot: "https://nextcv.in/opengraph-image.png",
+            url: "https://www.nextcv.in",
+            screenshot: "https://www.nextcv.in/opengraph-image.webp",
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.8",

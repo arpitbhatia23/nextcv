@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "analyze": "cross-env ANALYZE=true next build",
+    "analyze": " next build --webpack",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
