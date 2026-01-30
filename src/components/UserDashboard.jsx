@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   FileText,
   IndianRupee,
@@ -58,7 +59,7 @@ const UserDashboard = () => {
                   <Zap size={28} strokeWidth={2.5} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">
-                  AI Auto-Resume
+                  AI Auto-Resume <Badge variant="secondary" className="ml-2 bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-200">Experimental</Badge>
                 </h2>
                 <p className="text-slate-500 mb-8 leading-relaxed">
                   Generate a complete, ATS-friendly resume from scratch in
