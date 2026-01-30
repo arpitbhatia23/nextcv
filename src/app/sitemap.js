@@ -18,7 +18,10 @@ export default async function sitemap() {
     { url: `${baseUrl}/privacy-policy`, priority: 1.0 },
     { url: `${baseUrl}/terms`, priority: 1.0 },
     { url: `${baseUrl}/about-us`, priority: 1.0 },
-    { url: `${baseUrl}/contact`, priority: 1.0 },
+    { url: `${baseUrl}/ai-writer`, priority: 1.0 },
+    { url: `${baseUrl}/examples`, priority: 1.0 },
+    { url: `${baseUrl}/pricing`, priority: 1.0 },
+    { url: `${baseUrl}/templates`, priority: 1.0 },
   ];
 
   // Dynamic blog pages

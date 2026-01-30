@@ -34,6 +34,7 @@ const nextConfig = {
       "lucide-react",
       "@heroicons/react",
       "date-fns",
+      "react-pdf",
     ],
   },
 };

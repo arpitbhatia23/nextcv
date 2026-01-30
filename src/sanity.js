@@ -18,16 +18,6 @@ export const client = createClient({
   useCdn: true, // Use CDN for fast public delivery
 });
 
-// --- 2. Private Client (For server-side/draft fetching) ---
-// Use this client ONLY in Next.js Server Components or API Routes.
-export const privateClient = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false, // Set to false to ensure you get the freshest data (including drafts)
-  token: token, // The SECRET token is only included here
-});
-
 // --- Image URL Builder Setup ---
 const builder = createImageUrlBuilder(client);
 
