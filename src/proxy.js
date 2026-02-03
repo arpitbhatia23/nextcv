@@ -8,10 +8,18 @@ export async function proxy(req) {
     return NextResponse.next();
   }
 
+  if (req.nextUrl.pathname === "/privacyPolicy") {
+    return new NextResponse(null, { status: 410 });
+  }
+
   // Redirect signed-in users away from sign-in/sign-up
   if (
     token &&
-    (url.pathname.startsWith("/adminlogin") || url.pathname === "/" ||url.pathname === "/about-us"||url.pathname === "/contact"||url.pathname === "/blogs")
+    (url.pathname.startsWith("/adminlogin") ||
+      url.pathname === "/" ||
+      url.pathname === "/about-us" ||
+      url.pathname === "/contact" ||
+      url.pathname === "/blogs")
   ) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
