@@ -1,15 +1,20 @@
 import { asyncHandler } from "@/utils/asyncHandler";
-
-const { apiResponse } = require("@/utils/apiResponse");
-const { default: mongoose } = require("mongoose");
-const { NextResponse } = require("next/server");
+import { apiResponse } from "@/utils/apiResponse";
+import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 
 const handler = async () => {
-  const dbConnect = mongoose.connect(`${process.env.MONGODB_URI}/nextcv`);
+  // Connect only if not already connected
+  if (mongoose.connection.readyState === 0) {
+    await mongoose.connect(`${process.env.MONGODB_URI}/nextcv`);
+  }
 
-  await dbConnect.connection.db.admin.ping();
+  // Ping database
+  await mongoose.connection.db.admin().ping();
 
-  return NextResponse.json(new apiResponse(), { status: 200 });
+  return NextResponse.json(new apiResponse(true, "Database connected"), {
+    status: 200,
+  });
 };
 
 export const GET = asyncHandler(handler);
