@@ -1,77 +1,66 @@
 import Resume from "@/models/resume.model";
+import User from "@/models/user.model";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import authOptions from "../../auth/options";
-import User from "@/models/user.model";
 import { apiResponse } from "@/utils/apiResponse";
+import dbConnect from "@/utils/dbConnect";
+
 const handler = async (req) => {
+  // ✅ Connect DB once
+  await dbConnect();
+
   const data = await req.json();
-  console.log(data);
-  const {
-    name,
-    email,
-    phone,
-    address,
-    linkedin,
-    github,
-    portfolio,
-    jobRole,
-    summary,
-    experience,
-    skills,
-    education,
-    projects,
-    ResumeType,
-    certificates,
-  } = data;
-  if (
-    [name, email, phone, address, jobRole, summary].some(
-      (fileds) => fileds.trim() == "",
-    )
-  ) {
-    throw new apiError(400, "all field are required");
+
+  const requiredFields = [
+    data.name,
+    data.email,
+    data.phone,
+    data.address,
+    data.jobRole,
+    data.summary,
+  ];
+
+  if (requiredFields.some((f) => !f || f.trim() === "")) {
+    throw new apiError(400, "All required fields must be filled");
   }
 
+  // ✅ Session check
   const session = await getServerSession(authOptions);
-  if (!session || !session.user) {
-    throw new apiError("unauthorize request");
+  if (!session?.user?._id) {
+    throw new apiError(401, "Unauthorized request");
   }
+
   const userId = session.user._id;
+
+  // ✅ Create resume
   const draft = await Resume.create({
     status: "draft",
-    ResumeType: ResumeType,
-    name,
-    email,
-    phone_no: phone,
-    linkedin,
-    github,
-    skills,
-    address,
-    jobRole,
-    summary,
-    experience,
-    portfolio,
-    skills,
-    education,
-    projects,
-    certificates,
-  });
-  if (!draft) {
-    throw new apiError(500, "something went wrong while creating");
-  }
-  const user = await User.findByIdAndUpdate(userId, {
-    $push: {
-      resume: draft._id,
-    },
+    ResumeType: data.ResumeType,
+    name: data.name,
+    email: data.email,
+    phone_no: data.phone,
+    address: data.address,
+    linkedin: data.linkedin,
+    github: data.github,
+    portfolio: data.portfolio,
+    jobRole: data.jobRole,
+    summary: data.summary,
+    experience: data.experience,
+    skills: data.skills,
+    education: data.education,
+    projects: data.projects,
+    certificates: data.certificates,
   });
 
-  if (!user) {
-    throw new apiError(404, "user not found");
-  }
+  // ✅ Atomic update (fast)
+  await User.updateOne({ _id: userId }, { $push: { resume: draft._id } });
 
-  return NextResponse.json(new apiResponse(201, "draft gen sucessfully"));
+  return NextResponse.json(
+    new apiResponse(201, "Draft generated successfully"),
+  );
 };
 
 export const POST = asyncHandler(handler);

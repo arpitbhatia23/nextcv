@@ -1,119 +1,71 @@
 config:
   target: "https://www.nextcv.in"
+
   phases:
     - duration: 120
-      arrivalRate: 1
+      arrivalRate: 2
       rampTo: 10
-      name: "Ramp Up (2 mins)"
+      name: "Ramp Up"
     - duration: 300
       arrivalRate: 10
-      name: "Sustain Peak (5 mins)" # Note: arrivalRate 50/sec * 60 = 3000 users/min. Adjust based on "virtual users" definition.
-      # If "200 virtual users" means 200 concurrent users, Artillery's arrivalRate is users/second.
-      # To simulate 200 concurrent users who persist for a while, we rely on flow duration.
-      # Here we aim for arrival rate that effectively loads the server.
+      name: "Sustain Peak"
     - duration: 120
       arrivalRate: 10
-      rampTo: 10
-      name: "Ramp Down (2 mins)"
+      rampTo: 2
+      name: "Ramp Down"
 
-  processor: "./processor.js"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+      Cookie: >
+        next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..dp7xVKGN8Td0jmKl.VgS4LmsZfvbstIV5JGYvCdf82New02ClPHLP6_UGnyIzPyLXYQsS5AtXI8a-rVn5edOp5bnOA623ZSy2CpspVaQe8-Sb9yix7oBwP7dr3MfzTBxcAmqL2JLh06nCTi4LqHD4uzh6gXZQCELwrytaxOVw2_yyZyQvgfn9FRNIz8KjLGT98F_ztumBvMnLlTN6Y0F540i9kiRKoXufuOZ9gViRPYRTXICcnKCghF7yTNVKfDgL58tCkCoYBMQEFHhLTmaHBoBA1k83SSNoVjcMcte2eUz8yLmhYFVjXf7sRDYCOksCfxsGKMlZGpVN5tbYhGtDXIrDMWqt2fHDWvP1djSTeGdZVSABmsI9U6nimm6_ow4_R98cW1vJ6nQ_PFd-6BbI5U_petn1NikLIl-0dhtAZ0iWLwaIgHKx-xB1OA9jY_BolQj5wbMwLRn7RGLLchr-N-fGei8UBdSARLkrrYUzgWX-kPLm4cm7ieZEs-0xD2DPYns7UnITfexa-gUjk5YLoO2S9rI-7xNpn4VKdK9QUY5bg1mZvfYzsH1W9D9UIF6SwfeaLhHU3Tn7QoD12gR20YobWDtA8xTxf4Va-cMuxeaq5cB_Bs1Uq4s61bx8GIXZ4CuwDyyLfRWShd7YXGreq_H9D0Bldv7p2jR6rGn688Qw0u0bKG9hFb6DFBpvKWtIhWcoyAypxFpZDsFDROPnnKBpzIIPNGUb61y55Jj6HsElMKAggjC6JTcgkHFEfoirwz3SBYwvdhVStippMxVZij1NYGd62HPUgXnIfqD7TnZNq2A7A2c2AoER5pyWu_yplPeq0T1ildpuvRk-UdsIy27ZwTAJy_cUeiljkQKywjSOrGKuUxh87n49ysmTqhraJPaFiK_aeZV_Tlbs9OLwQLtgV9EX8pgNljWkoyIvZomuPjgliMZlf9BMF5PQ1InM7bYgMs6V5B2Nmruyt-ajxwcUOEpx5tVD3cox42035Qx6uP-X14AdQDymVc8m-R2x0aDPAOig0IckK7RXHpxaRdOut3qDWhyp_HLgT2bHucHRr7i5VSNTmxJ3gUaLZE2XvmNifEU049v_vfQEVojVhZPFLrqs_a3C0vHtQw7eu_41DXgqeI0EGSyD4jJN2nyvy6K3Ekq0XSBAgZXDCQsNSfAUJQPYzbFb-LNIM-sHULRn4EA83IZb4d_pBppKl85cxbMe01l_-GfXco9tzZA_sxjc7oKNbbzsb8_IwvKgY7VP83DRSzO8SPpa7GXg53vLCj3PKEh9a4tAqumJ-3XrvpC5V4TjeL8sQF2RQ6jyOSDgvEORavS5ELQzzIK_Tl6KGsU5JNqOM8TLYFUeXTMV63Tagx2GFaacJGjN5gyJNXQGSA-5cu5R5VQsICx93Z_e7AsNPW-J3xo93sA.2ngpcZUoygaamn8_Juw9JQ
 
   plugins:
     expect: {}
     metrics-by-endpoint: {}
 
-  defaults:
-    headers:
-      Content-Type: "application/json"
-
 scenarios:
-  - name: "User Journey: Register -> Create Resume -> AI Generate -> Update"
+  - name: "Authenticated User Journey (Google Login)"
     weight: 70
     flow:
-      - log: "Starting User Journey"
-
-      # 1. Register User
-      - function: "generateUserData"
-      - post:
-          url: "/api/auth/register"
-          json:
-            name: "{{ name }}"
-            email: "{{ email }}"
-            password: "{{ password }}"
-            role: "{{ role }}"
-          expect:
-            - statusCode: 201
-            - contentType: json
-
-      # 2. Login (NextAuth Credentials)
-      # NextAuth typically requires a CSRF token for the signin callback.
-      # First, get the CSRF token.
-      - get:
-          url: "/api/auth/csrf"
-          capture:
-            - json: "$.csrfToken"
-              as: "csrfToken"
-
-      - post:
-          url: "/api/auth/callback/credentials"
-          # NextAuth expects form-data or x-www-form-urlencoded typically, but allows JSON if configured.
-          # Standard NextAuth callback mimics a form submission.
-          headers:
-            Content-Type: "application/x-www-form-urlencoded"
-          form:
-            csrfToken: "{{ csrfToken }}"
-            email: "{{ email }}"
-            password: "{{ password }}"
-            json: "true"
-          expect:
-            - statusCode: 200
-            # NextAuth returns cookies including next-auth.session-token
-
-      # 3. Create Resume Draft
       - function: "generateResumeData"
+
       - post:
           url: "/api/resume/savedraft"
           json: "{{ resumeData }}"
           expect:
             - statusCode: 201
 
-      # 4. Get All Resumes (Verify creation)
       - get:
           url: "/api/resume/getAllResume"
           expect:
             - statusCode: 200
           capture:
-            - json: "$.data.resumedata[0]._id" # Assuming response structure based on route analysis
+            - json: "$.data.resumedata[0]._id"
               as: "resumeId"
 
-      # 5. AI Generation (Heavy Payload)
       - post:
           url: "/api/gen/aiResume"
           json:
             resumeData: "{{ resumeData }}"
           expect:
             - statusCode: 200
-          # Give it some think time for AI processing
           think: 2
 
-      # 6. Update Resume (if resumeId captured)
-      - think: 1
       - post:
-          # Note: Route is /api/resume/update/[id]
           url: "/api/resume/update/{{ resumeId }}"
+          ifTrue: "resumeId"
           json: "{{ resumeData }}"
-          ifTrue: "resumeId" # Only run if we captured an ID
           expect:
             - statusCode: 200
 
-      # 7. Get Resume By ID
       - get:
           url: "/api/resume/getResumeById/{{ resumeId }}"
           ifTrue: "resumeId"
           expect:
             - statusCode: 200
 
-  - name: "Anonymous Traffic: Helper Endpoints"
+  - name: "Anonymous Traffic"
     weight: 30
     flow:
       - get:
