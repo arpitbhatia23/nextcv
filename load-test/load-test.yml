@@ -1,0 +1,122 @@
+config:
+  target: "https://www.nextcv.in"
+  phases:
+    - duration: 120
+      arrivalRate: 1
+      rampTo: 10
+      name: "Ramp Up (2 mins)"
+    - duration: 300
+      arrivalRate: 10
+      name: "Sustain Peak (5 mins)" # Note: arrivalRate 50/sec * 60 = 3000 users/min. Adjust based on "virtual users" definition.
+      # If "200 virtual users" means 200 concurrent users, Artillery's arrivalRate is users/second.
+      # To simulate 200 concurrent users who persist for a while, we rely on flow duration.
+      # Here we aim for arrival rate that effectively loads the server.
+    - duration: 120
+      arrivalRate: 10
+      rampTo: 10
+      name: "Ramp Down (2 mins)"
+
+  processor: "./processor.js"
+
+  plugins:
+    expect: {}
+    metrics-by-endpoint: {}
+
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "User Journey: Register -> Create Resume -> AI Generate -> Update"
+    weight: 70
+    flow:
+      - log: "Starting User Journey"
+
+      # 1. Register User
+      - function: "generateUserData"
+      - post:
+          url: "/api/auth/register"
+          json:
+            name: "{{ name }}"
+            email: "{{ email }}"
+            password: "{{ password }}"
+            role: "{{ role }}"
+          expect:
+            - statusCode: 201
+            - contentType: json
+
+      # 2. Login (NextAuth Credentials)
+      # NextAuth typically requires a CSRF token for the signin callback.
+      # First, get the CSRF token.
+      - get:
+          url: "/api/auth/csrf"
+          capture:
+            - json: "$.csrfToken"
+              as: "csrfToken"
+
+      - post:
+          url: "/api/auth/callback/credentials"
+          # NextAuth expects form-data or x-www-form-urlencoded typically, but allows JSON if configured.
+          # Standard NextAuth callback mimics a form submission.
+          headers:
+            Content-Type: "application/x-www-form-urlencoded"
+          form:
+            csrfToken: "{{ csrfToken }}"
+            email: "{{ email }}"
+            password: "{{ password }}"
+            json: "true"
+          expect:
+            - statusCode: 200
+            # NextAuth returns cookies including next-auth.session-token
+
+      # 3. Create Resume Draft
+      - function: "generateResumeData"
+      - post:
+          url: "/api/resume/savedraft"
+          json: "{{ resumeData }}"
+          expect:
+            - statusCode: 201
+
+      # 4. Get All Resumes (Verify creation)
+      - get:
+          url: "/api/resume/getAllResume"
+          expect:
+            - statusCode: 200
+          capture:
+            - json: "$.data.resumedata[0]._id" # Assuming response structure based on route analysis
+              as: "resumeId"
+
+      # 5. AI Generation (Heavy Payload)
+      - post:
+          url: "/api/gen/aiResume"
+          json:
+            resumeData: "{{ resumeData }}"
+          expect:
+            - statusCode: 200
+          # Give it some think time for AI processing
+          think: 2
+
+      # 6. Update Resume (if resumeId captured)
+      - think: 1
+      - post:
+          # Note: Route is /api/resume/update/[id]
+          url: "/api/resume/update/{{ resumeId }}"
+          json: "{{ resumeData }}"
+          ifTrue: "resumeId" # Only run if we captured an ID
+          expect:
+            - statusCode: 200
+
+      # 7. Get Resume By ID
+      - get:
+          url: "/api/resume/getResumeById/{{ resumeId }}"
+          ifTrue: "resumeId"
+          expect:
+            - statusCode: 200
+
+  - name: "Anonymous Traffic: Helper Endpoints"
+    weight: 30
+    flow:
+      - get:
+          url: "/api/healthcheck"
+          expect:
+            - statusCode: 200

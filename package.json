@@ -71,6 +71,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^10.2.0",
     "@next/bundle-analyzer": "16.0.2",
     "@playwright/test": "^1.54.1",
     "@tailwindcss/postcss": "^4",
