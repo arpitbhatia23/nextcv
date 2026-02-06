@@ -32,15 +32,15 @@ export default function Nav() {
       <div className="flex items-center justify-between max-w-7xl mx-auto px-6 lg:px-8">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center">
-           {/* Color changed to slate-900 (dark) for light bg */}
-          <Logo2 color="#0f172a" size={80} /> 
+          {/* Color changed to slate-900 (dark) for light bg */}
+          <Logo2 color="#0f172a" size={80} />
         </div>
 
         {/* Desktop Menu */}
-        <NavigationMenu className="hidden md:flex">
+        <NavigationMenu className="flex">
           <NavigationMenuList className="flex items-center space-x-8">
-             {/* Add future nav links here if needed */}
-             
+            {/* Add future nav links here if needed */}
+
             <NavigationMenuItem>
               <Button
                 className="px-6 py-2.5 text-sm font-semibold rounded-lg shadow-lg shadow-indigo-500/20 

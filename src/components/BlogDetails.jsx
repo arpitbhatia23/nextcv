@@ -154,19 +154,19 @@ const BlogDetails = ({ slug, initialData }) => {
   if (error || !blog) return <ErrorDisplay />;
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative">
+    <div className="bg-slate-50 min-h-screen ">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 relativep pb-40">
         {/* Back Button */}
         <button
           onClick={() => router.back()}
-          className="fixed top-24 left-4 xl:left-[max(1rem,calc(50%-48rem))] z-20 flex items-center gap-2 text-slate-500 hover:text-indigo-600 bg-white/80 backdrop-blur-sm py-2 px-4 rounded-full shadow-sm border border-slate-200 transition-all hover:pr-5 group"
+          className="fixed top-28 left-4 xl:left-[max(1rem,calc(50%-48rem))] z-20 flex items-center gap-2 text-slate-500 hover:text-indigo-600 bg-white/80 backdrop-blur-sm py-2 px-4 rounded-full shadow-sm border border-slate-200 transition-all hover:pr-5 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span className="hidden md:inline font-medium text-sm">Back</span>
         </button>
 
         {/* Article Container */}
-        <div className="bg-white rounded-3xl shadow-sm border border-slate-200 mt-10 overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-sm border border-slate-200  overflow-hidden">
           {/* Hero Image */}
           <div className="relative aspect-21/9 w-full bg-slate-100">
             {blog.mainImage && (

@@ -21,19 +21,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "NextCV - AI Resume Builder",
+  title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
   description:
-    "Create your resume with AI in minutes. Just ₹100 per resume, no subscriptions.",
+    "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
   keywords: [
-    "resume builder",
-    "CV maker",
-    "AI resume",
-    "job application",
-    "professional resume",
-    "friendly",
-    "minutes",
-    "templates",
-    "format",
+    "ats friendly resume builder india",
+    "ai resume builder india",
+    "resume builder india free",
+    "cv maker india online",
+    "best resume format 2026 india",
+    "resume for freshers india",
+    "ats friendly resume format 2026",
+    "professional resume india",
+    "job application resume india",
+    "online resume builder india",
+    "resume templates india",
+    "latest resume format india",
   ],
   authors: [{ name: "NextCV" }],
   robots: "index, follow",
@@ -41,18 +44,18 @@ export const metadata = {
   // ⚡ Fix for Open Graph / Twitter images
   metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
   openGraph: {
-    title: "NextCV – Professional ATS Resume Builder for India",
+    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
     description:
-      "Create a professional, ATS-optimized resume in minutes. Built for the Indian job market. Try the free demo and get your AI resume for just ₹100—no subscription.",
+      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
     url: "/", // optional, relative to metadataBase
     type: "website",
     images: ["/opengraph-image.webp"], // relative path will resolve correctly
   },
   twitter: {
     card: "summary_large_image",
-    title: "NextCV - Build the Perfect ATS Friendly Resume with AI in Minutes",
+    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
     description:
-      "Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.",
+      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
     images: ["/opengraph-image.webp"], // relative path
   },
   alternates: {
@@ -71,10 +74,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "NextCV",
+              name: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
               url: "https://nextcv.in",
               description:
-                "Create professional ATS-optimized resumes in minutes. Built for the Indian job market with a simple ₹100 one-time pricing.",
+                "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
             }),
           }}
         />
@@ -86,11 +89,11 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "NextCV",
+              name: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
               url: "https://nextcv.in",
               logo: "https://nextcv.in/opengraph-image.png",
               description:
-                "AI-powered resume builder optimized for the Indian job market",
+                "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
               sameAs: [
                 "https://www.facebook.com/nextcv",
                 "https://www.twitter.com/nextcv",

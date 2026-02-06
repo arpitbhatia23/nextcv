@@ -2,13 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Logo2 from "../Logo2";
 import { SaasHuntBadge } from "../Saashunt";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-  FaGithub,
-} from "react-icons/fa";
+import { FaTwitter, FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 
 // Social Links Data
 const socialLinks = [
@@ -31,6 +25,7 @@ const footerLinks = [
   {
     title: "Company",
     links: [
+      { label: "Home", href: "/" },
       { label: "About Us", href: "/about-us" },
       { label: "Blog", href: "/blogs" },
       { label: "Contact", href: "/contact" },
