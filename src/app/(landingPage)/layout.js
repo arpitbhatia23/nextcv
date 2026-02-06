@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
             name: "NextCV - AI Resume Builder",
+            operatingSystem: "Web",
             description:
               "Create professional ATS-optimized resumes tailored for the Indian job market",
             applicationCategory: "Productivity",
