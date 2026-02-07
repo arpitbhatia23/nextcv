@@ -91,7 +91,7 @@ export default async function BlogDetailsPage({ params }) {
         headline: blogData.title,
         image:
           blogData.mainImage?.asset?.url ||
-          "https://www.nextcv.in/opengraph-image.webp",
+          "https://www.nextcv.in/opengraph-image.png",
         datePublished: blogData.publishedAt || blogData._createdAt,
         dateModified:
           blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
@@ -105,7 +105,7 @@ export default async function BlogDetailsPage({ params }) {
           name: "NextCV",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.nextcv.in/opengraph-image.webp",
+            url: "https://www.nextcv.in/opengraph-image.png",
           },
         },
         description: blogData.body?.[0]?.children?.[0]?.text || blogData.title,

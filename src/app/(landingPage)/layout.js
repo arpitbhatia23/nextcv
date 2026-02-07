@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
               "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
             applicationCategory: "Productivity",
             url: "https://www.nextcv.in",
-            screenshot: "https://www.nextcv.in/opengraph-image.webp",
+            screenshot: "https://www.nextcv.in/opengraph-image.png",
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.8",
