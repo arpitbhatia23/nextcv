@@ -32,7 +32,7 @@ const Blogspage = () => {
               name: "NextCV",
               logo: {
                 "@type": "ImageObject",
-                url: "https://www.nextcv.in/opengraph-image.webp",
+                url: "https://www.nextcv.in/opengraph-image.png",
               },
             },
           }),

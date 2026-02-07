@@ -49,14 +49,14 @@ export const metadata = {
       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
     url: "/", // optional, relative to metadataBase
     type: "website",
-    images: ["/opengraph-image.webp"], // relative path will resolve correctly
+    images: ["/opengraph-image.png"], // relative path will resolve correctly
   },
   twitter: {
     card: "summary_large_image",
     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
     description:
       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-    images: ["/opengraph-image.webp"], // relative path
+    images: ["/opengraph-image.png"], // relative path
   },
   alternates: {
     canonical: "https://www.nextcv.in", // Sets the canonical URL
