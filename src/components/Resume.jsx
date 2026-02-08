@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BasicInfoStep from "./resumesteps/BasicInfoStep";
 import SummaryStep from "./resumesteps/SummaryStep";
 import EducationStep from "./resumesteps/EducationStep";
@@ -8,8 +8,6 @@ import ExpricenceStep from "./resumesteps/ExpricenceStep";
 import FinalStep from "./resumesteps/FinalStep";
 import CertificateStep from "./resumesteps/Certificate";
 import ProjectsStep from "./resumesteps/ProjectsStep";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Progress } from "./ui/progress";
 
 import {
   Award,
@@ -58,70 +56,89 @@ const Resume = () => {
     <div className="min-h-screen bg-slate-50 pb-20">
       {/* Sticky Header */}
       <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="h-16 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <Logo2 size={40} color="#0f172a" />
-                  <div className="hidden md:block h-6 w-px bg-slate-200" />
-                  <h1 className="hidden md:block text-sm font-semibold text-slate-900">Resume Builder</h1>
-                </div>
-                <div className="flex items-center gap-4">
-                   <div className="text-xs font-medium text-slate-500">
-                      Step {step + 1} of {resumeSteps.length}
-                   </div>
-                   <div className="w-32 md:w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-indigo-600 transition-all duration-300 ease-out" style={{ width: `${progress}%` }} />
-                   </div>
-                </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="h-16 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Logo2 size={40} color="#0f172a" />
+              <div className="hidden md:block h-6 w-px bg-slate-200" />
+              <h1 className="hidden md:block text-sm font-semibold text-slate-900">
+                Resume Builder
+              </h1>
             </div>
-         </div>
+            <div className="flex items-center gap-4">
+              <div className="text-xs font-medium text-slate-500">
+                Step {step + 1} of {resumeSteps.length}
+              </div>
+              <div className="w-32 md:w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-indigo-600 transition-all duration-300 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
+
       {/* Steps Navigation - Horizontal */}
       <div className="bg-white border-b border-slate-100 mb-8 overflow-x-auto">
-         <div className="max-w-7xl mx-auto px-4 min-w-max">
-            <div className="flex items-center py-4 gap-8">
-               {resumeSteps.map((stepInfo, index) => {
-                  const Icon = stepInfo.icon;
-                  const isActive = index === step;
-                  const isCompleted = index < step;
-                  const isAccessible = index <= step;
+        <div className="max-w-7xl mx-auto px-4 min-w-max">
+          <div className="flex items-center py-4 gap-8">
+            {resumeSteps.map((stepInfo, index) => {
+              const Icon = stepInfo.icon;
+              const isActive = index === step;
+              const isCompleted = index < step;
+              const isAccessible = index <= step;
 
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => isAccessible && goToStep(index)}
-                      className={`flex items-center gap-2 group outline-none transition-colors ${
-                        isActive ? "text-indigo-600" : isCompleted ? "text-emerald-600" : "text-slate-400"
-                      } ${!isAccessible && "opacity-50 cursor-not-allowed"}`}
-                      disabled={!isAccessible}
-                    >
-                       <div className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
-                          isActive 
-                             ? "bg-indigo-50 border-indigo-200 text-indigo-600 shadow-sm"
-                             : isCompleted
-                             ? "bg-emerald-50 border-emerald-200 text-emerald-600"
-                             : "bg-white border-slate-200 text-slate-400 group-hover:border-slate-300"
-                       }`}>
-                          {isCompleted ? <CheckCircle className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
-                       </div>
-                       <span className={`text-sm font-medium ${isActive ? "text-indigo-900" : ""}`}>
-                          {stepInfo.title}
-                       </span>
-                    </button>
-                  );
-               })}
-            </div>
-         </div>
+              return (
+                <button
+                  key={index}
+                  onClick={() => isAccessible && goToStep(index)}
+                  className={`flex items-center gap-2 group outline-none transition-colors ${
+                    isActive
+                      ? "text-indigo-600"
+                      : isCompleted
+                        ? "text-emerald-600"
+                        : "text-slate-400"
+                  } ${!isAccessible && "opacity-50 cursor-not-allowed"}`}
+                  disabled={!isAccessible}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+                      isActive
+                        ? "bg-indigo-50 border-indigo-200 text-indigo-600 shadow-sm"
+                        : isCompleted
+                          ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                          : "bg-white border-slate-200 text-slate-400 group-hover:border-slate-300"
+                    }`}
+                  >
+                    {isCompleted ? (
+                      <CheckCircle className="w-4 h-4" />
+                    ) : (
+                      <Icon className="w-4 h-4" />
+                    )}
+                  </div>
+                  <span
+                    className={`text-sm font-medium ${isActive ? "text-indigo-900" : ""}`}
+                  >
+                    {stepInfo.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
-      <div className={`mx-auto px-4 md:px-6 ${step === resumeSteps.length - 1 ? "max-w-[1600px]" : "max-w-4xl"}`}>
-         <StepComponents
-           next={next}
-           previous={previous}
-           formData={formData}
-           updateForm={updateForm}
-         />
+      <div
+        className={`mx-auto px-4 md:px-6 ${step === resumeSteps.length - 1 ? "max-w-400" : "max-w-4xl"}`}
+      >
+        <StepComponents
+          next={next}
+          previous={previous}
+          formData={formData}
+          updateForm={updateForm}
+        />
       </div>
     </div>
   );

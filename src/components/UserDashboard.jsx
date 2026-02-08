@@ -37,15 +37,17 @@ const UserDashboard = () => {
                   <Plus size={28} strokeWidth={2.5} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
-                  Create Resume
+                  Create Resume 
+                  <span className="block text-sm font-medium text-slate-400 mt-1">(Standard Form)</span>
                 </h2>
                 <p className="text-slate-500 mb-8 leading-relaxed">
-                  Build your resume step-by-step with our guided builder.
-                  Perfect for customization and control.
+                  Build your resume step-by-step with our classic form builder.
+                  Best for precise control and customization.
                 </p>
                 <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform">
-                  Start Building <ArrowRight className="ml-2 w-5 h-5" />
+                  Start Form Builder <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
+
               </CardContent>
             </Card>
           </Link>
@@ -59,15 +61,18 @@ const UserDashboard = () => {
                   <Zap size={28} strokeWidth={2.5} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">
-                  AI Auto-Resume <Badge variant="secondary" className="ml-2 bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-200">Experimental</Badge>
+                  Full AI Resume <Badge variant="secondary" className="ml-2 bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-200">Experimental</Badge>
+                  <span className="block text-sm font-medium text-slate-400 mt-1">(Chat Assistant)</span>
                 </h2>
                 <p className="text-slate-500 mb-8 leading-relaxed">
                   Generate a complete, ATS-friendly resume from scratch in
-                  seconds using advanced AI.
+                  seconds using our advanced AI assistant.
                 </p>
                 <div className="flex items-center text-purple-600 font-bold group-hover:translate-x-2 transition-transform">
                   Generate with AI <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
+
+
               </CardContent>
             </Card>
           </Link>
