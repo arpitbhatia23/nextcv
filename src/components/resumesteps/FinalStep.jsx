@@ -9,9 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  BadgePercent,
   IndianRupee,
   Save,
   Download,
@@ -21,19 +19,14 @@ import {
   FileText,
 } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
 import axios from "axios";
 import { toast } from "sonner";
 import { templates } from "@/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";
+import FeedbackModal from "@/components/FeedbackModal";
 
 const WatermarkLayer = () => (
   <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center opacity-[0.06] select-none">
@@ -63,6 +56,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [discount, setDiscount] = useState(null);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [savedResumeId, setSavedResumeId] = useState(null);
 
   const clearDraft = useResumeStore((s) => s.clearStorage);
   // Debounced handlers
@@ -89,6 +84,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
       if (res.data.success) {
         toast.success("Draft saved successfully");
         clearDraft();
+        setSavedResumeId(res.data.data?._id);
+        setIsFeedbackOpen(true);
       } else {
         toast.error(res.data.message || "Failed to save draft");
       }
@@ -136,6 +133,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
         amount: payAmount * 100, // assuming amount in paise
         ...formData,
         ResumeType: selectedTemplate,
+        couponCode: couponCode,
+        discountAmount: (originalAmount * discount.value) / 100,
       });
       if (res.data.success) {
         const { data } = res.data;
@@ -599,6 +598,11 @@ const FinalStep = ({ formData, isdraft = false }) => {
           </div>
         </div>
       </div>
+      <FeedbackModal
+        isOpen={isFeedbackOpen}
+        onClose={() => setIsFeedbackOpen(false)}
+        resumeId={savedResumeId}
+      />
     </div>
   );
 };

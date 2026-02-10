@@ -50,6 +50,8 @@ const handler = async (req) => {
     isDraft = false,
     draftId,
     certificates,
+    couponCode,
+    discountAmount,
   } = reqData;
   const session = await getServerSession(authOptions);
   if (!session && !session?.user) {
@@ -109,7 +111,7 @@ const handler = async (req) => {
   }
 
   const merchantOrderId = randomUUID();
-  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}&userId=${userId}&resumeId=${resumeId}`;
+  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}&userId=${userId}&resumeId=${resumeId}&couponCode=${couponCode || ""}&discountAmount=${discountAmount || 0}`;
 
   const request = StandardCheckoutPayRequest.builder()
     .merchantOrderId(merchantOrderId)

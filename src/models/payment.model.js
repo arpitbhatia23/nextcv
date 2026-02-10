@@ -21,6 +21,14 @@ const paymentSchema = new Schema(
       type: Number,
       required: String,
     },
+    couponCode: {
+      type: String,
+      required: false,
+    },
+    discountAmount: {
+      type: Number,
+      required: false,
+    },
     status: {
       type: String,
       default: "complete",

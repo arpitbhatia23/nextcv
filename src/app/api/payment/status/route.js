@@ -31,6 +31,9 @@ const handler = async (req) => {
     throw new apiError(401, "unauthorizes access");
   }
   const userId = session.user._id;
+  const couponCode = searchParams.get("couponCode");
+  const discountAmount = searchParams.get("discountAmount");
+  console.log(couponCode);
   if (response.state === "COMPLETED") {
     console.log("payment insitate");
     const payment = await Payment.create({
@@ -38,6 +41,8 @@ const handler = async (req) => {
       paymentMode: response?.paymentDetails[0]?.paymentMode,
       amount: response?.amount / 100,
       userId: userId,
+      couponCode: couponCode || null,
+      discountAmount: discountAmount ? parseFloat(discountAmount) : 0,
     });
 
     const updateResume = await Resume.findByIdAndUpdate(
