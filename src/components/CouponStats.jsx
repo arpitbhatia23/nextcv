@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tag, TrendingUp, IndianRupee } from "lucide-react";
+import { Tag } from "lucide-react";
 import {
   BarChart,
   Bar,

@@ -6,13 +6,14 @@ import dbConnect from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 const handler = async (req) => {
   let { couponCode } = await req.json();
-  console.log(couponCode);
   dbConnect();
   if (!couponCode) {
     throw new apiError(400, "coupon code is required");
   }
 
-  const coupon = await Coupon.findOne({ couponCode: couponCode });
+  const coupon = await Coupon.findOne({
+    couponCode: couponCode?.toLowerCase(),
+  });
 
   if (!coupon) {
     throw new apiError(404, "coupon not found");
@@ -29,7 +30,7 @@ const handler = async (req) => {
   }
   return NextResponse.json(
     new apiResponse(200, "coupon fetch sucessfully ", coupon),
-    { status: 200 }
+    { status: 200 },
   );
 };
 

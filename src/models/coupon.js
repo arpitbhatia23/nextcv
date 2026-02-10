@@ -4,6 +4,9 @@ const couponSchema = new Schema(
     couponCode: {
       type: String,
       required: true,
+      lowercase: true,
+      trim: true,
+      unique: true,
     },
     discount: {
       type: Number,
@@ -22,7 +25,7 @@ const couponSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);

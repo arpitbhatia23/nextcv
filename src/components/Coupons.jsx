@@ -10,7 +10,7 @@ import {
   Tag,
 } from "lucide-react";
 import axios from "axios";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   Form,
   FormField,
@@ -103,7 +103,7 @@ const page = () => {
       });
       console.log(updated.data);
       setCoupons((prev) =>
-        prev.map((c) => (c._id === id ? updated.data.data : c))
+        prev.map((c) => (c._id === id ? updated.data.data : c)),
       );
     } catch (error) {
       toast.error(error.response.data);

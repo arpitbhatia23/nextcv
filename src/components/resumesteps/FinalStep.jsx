@@ -58,6 +58,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [savedResumeId, setSavedResumeId] = useState(null);
+  const [isCouponValid, setIsCouponValid] = useState(true);
 
   const clearDraft = useResumeStore((s) => s.clearStorage);
   // Debounced handlers
@@ -120,8 +121,14 @@ const FinalStep = ({ formData, isdraft = false }) => {
   }, [formData, selectedTemplate]);
 
   const handelPayment = async () => {
+    if (couponCode && !applied) {
+      toast.error("Please apply a valid coupon before payment");
+      return;
+    }
+
     try {
       setIsSubmit(true);
+
       const payAmount =
         discount?.type === "percentage"
           ? Math.floor(originalAmount * (1 - discount.value / 100))
@@ -129,24 +136,29 @@ const FinalStep = ({ formData, isdraft = false }) => {
             ? Math.max(originalAmount - discount.value, 0)
             : originalAmount;
 
+      const discountAmount =
+        discount?.type === "percentage"
+          ? Math.round(originalAmount * (discount.value / 100))
+          : discount?.type === "amount"
+            ? discount.value
+            : 0;
+
       const res = await axios.post("/api/payment/order", {
-        amount: payAmount * 100, // assuming amount in paise
-        ...formData,
+        amount: payAmount * 100,
         ResumeType: selectedTemplate,
-        couponCode: couponCode,
-        discountAmount: (originalAmount * discount.value) / 100,
+        couponCode: applied ? couponCode : null,
+        discountAmount,
+        ...formData,
       });
+
       if (res.data.success) {
-        const { data } = res.data;
-        const paymentUrl = data?.redirectUrl;
-        window.location.href = paymentUrl;
+        window.location.href = res.data.data.redirectUrl;
         clearDraft();
       }
-      setIsSubmit(false);
     } catch (error) {
-      setIsSubmit(false);
-      console.log(error);
       toast.error("Payment initialization failed");
+    } finally {
+      setIsSubmit(false);
     }
   };
 
@@ -155,37 +167,49 @@ const FinalStep = ({ formData, isdraft = false }) => {
       toast.info("This coupon is already applied");
       return;
     }
+
     setIsSubmit(true);
+
     try {
-      const res = await axios.post(`/api/coupons/getByCouponCode`, {
+      const res = await axios.post("/api/coupons/getByCouponCode", {
         couponCode: coupon,
       });
 
       const couponData = res.data.data;
+
       const discountInfo = {
         type: couponData.type,
         value: couponData.discount,
       };
-      setDiscount(discountInfo);
 
-      let finalAmount = Math.round(originalAmount);
-      console.log(finalAmount);
+      setDiscount(discountInfo);
+      setApplied(true);
+      setAppliedCoupon(coupon);
+      setIsCouponValid(true);
+
+      let finalAmount = originalAmount;
+
       if (discountInfo.type === "percentage") {
         finalAmount = originalAmount * (1 - discountInfo.value / 100);
       } else if (discountInfo.type === "amount") {
         finalAmount = originalAmount - discountInfo.value;
       }
-      finalAmount = Math.max(finalAmount, 0);
-      setAmount(Math.round(finalAmount));
 
-      setApplied(true);
-      setAppliedCoupon(coupon);
+      finalAmount = Math.max(Math.round(finalAmount), 0);
+      setAmount(finalAmount);
+
       toast.success("Coupon applied successfully");
-      setIsSubmit(false);
     } catch (error) {
+      setDiscount(null);
+      setApplied(false);
+      setAppliedCoupon(null);
+      setIsCouponValid(false);
+      setAmount(originalAmount);
+      setCouponCode("");
+
+      toast.error(error?.response?.data?.message || "Invalid coupon code");
+    } finally {
       setIsSubmit(false);
-      console.error("Coupon apply error:", error);
-      toast.error(error?.response?.data || "Invalid coupon code");
     }
   };
 
@@ -348,7 +372,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <Button
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-12 text-base"
                 onClick={debouncePayment}
-                disabled={isSubmit}
+                disabled={isSubmit || (couponCode && !applied)}
               >
                 Unlock Download
               </Button>
@@ -587,7 +611,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
             <Button
               className="w-full bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-lg shadow-indigo-500/20 py-6 text-base font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
               onClick={debouncePayment}
-              disabled={isSubmit}
+              disabled={isSubmit || (couponCode && !applied)}
             >
               <Download className="mr-2 h-5 w-5" />
               Unlock Download
