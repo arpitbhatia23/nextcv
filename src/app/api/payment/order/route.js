@@ -16,7 +16,10 @@ import User from "@/models/user.model";
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = Env.PRODUCTION;
+
+const env =
+  process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
+
 const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,

@@ -1,9 +1,15 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 const paymentSchema = new Schema(
   {
     transcationId: {
       type: String,
+      required: true,
+    },
+
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
       required: true,
     },
 
@@ -20,7 +26,7 @@ const paymentSchema = new Schema(
       default: "complete",
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Payment =

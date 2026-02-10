@@ -1,20 +1,24 @@
 import Payment from "@/models/payment.model";
 import Resume from "@/models/resume.model";
+import User from "@/models/user.model";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { Env, StandardCheckoutClient } from "pg-sdk-node";
+import authOptions from "../../auth/options";
 
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = Env.PRODUCTION;
+const env =
+  process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
 const client = StandardCheckoutClient.getInstance(
   clientId,
   clinetSecret,
   clientVersion,
-  env
+  env,
 );
 const handler = async (req) => {
   const searchParams = req.nextUrl.searchParams;
@@ -22,13 +26,18 @@ const handler = async (req) => {
   const merchantOrderId = searchParams.get("merchantId");
   const resumeID = searchParams.get("resumeId");
   const response = await client.getOrderStatus(merchantOrderId);
-
+  const session = await getServerSession(authOptions);
+  if (!session && !session?.user) {
+    throw new apiError(401, "unauthorizes access");
+  }
+  const userId = session.user._id;
   if (response.state === "COMPLETED") {
     console.log("payment insitate");
     const payment = await Payment.create({
       transcationId: response?.paymentDetails[0]?.transactionId,
       paymentMode: response?.paymentDetails[0]?.paymentMode,
       amount: response?.amount / 100,
+      userId: userId,
     });
 
     const updateResume = await Resume.findByIdAndUpdate(
@@ -37,25 +46,27 @@ const handler = async (req) => {
         $set: {
           status: "paid",
         },
-        $push: {
-          payments: payment._id,
-        },
       },
-      { new: true }
+      { new: true },
     );
+    await User.findByIdAndUpdate(userId, {
+      $push: {
+        payments: payment._id,
+      },
+    });
     if (!updateResume) {
       throw new apiError(
         500,
-        "something went wrong while updateins resume status"
+        "something went wrong while updateins resume status",
       );
     }
 
     return NextResponse.redirect(
-      `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
+      `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`,
     );
   } else {
     return NextResponse.redirect(
-      `${process.env.BASE_URL}/payement/fails?status=fail`
+      `${process.env.BASE_URL}/payement/fails?status=fail`,
     );
   }
 };
