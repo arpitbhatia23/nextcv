@@ -1,6 +1,26 @@
-# NextCV -Build the Perfect ATS Friendly Resume with AI in Minutes
+# NextCV - Professional AI Resume Builder
 
-> Our AI-powered platform is optimized specifically for the Indian job market. Try the free demo today and get your professional, ATS-optimized resume for just ₹100. No subscriptions.
+NextCV is a specialized, ATS-optimized AI resume builder tailored for the Indian job market. It focuses on providing high-quality, professional resumes for a one-time affordable fee (₹100) without recurring subscriptions.
 
-Key topics: resume builder, CV maker, AI resume, job application, professional resume Visit nextcv.in for more information.
+- Website: https://www.nextcv.in
+- Pricing: ₹100 per AI resume (One-time payment)
+- Key Features: ATS-friendly templates, AI-powered content generation, Freshers-focused designs.
 
+## Core Services
+
+- **ATS-Optimized Resumes:** Every template is tested against Applicant Tracking Systems to ensure high readability for recruiters.
+- **AI Content Generation:** Users can generate professional summaries and bullet points using integrated AI.
+- **Indian Market Focus:** Specifically designed with Indian industry standards and formatting in mind.
+- **Free Demo:** Users can preview their resume with a live editor before making a payment.
+
+## Technical Specifications
+
+- **Output Format:** High-quality, white-labeled PDFs.
+- **Pricing Model:** Pay-per-resume (No hidden subscriptions).
+- **Target Audience:** Job seekers in India, fresh graduates, and experienced professionals looking for ATS-verified templates.
+
+## Important Links
+
+- [Resume Templates](https://www.nextcv.in/templates)
+- [Pricing & Payment](https://www.nextcv.in/pricing)
+- [Contact Support](https://www.nextcv.in/contact)
