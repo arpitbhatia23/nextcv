@@ -6,6 +6,7 @@ import Resume from "@/models/resume.model";
 import { NextResponse } from "next/server";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
+import User from "@/models/user.model";
 const handler = async (req) => {
   await dbConnect();
   const searchParams = req.nextUrl.searchParams;
@@ -18,8 +19,17 @@ const handler = async (req) => {
   if (!session && !session.user) {
     throw new apiError(403, "Unauthorized");
   }
+  const resume = await Resume.findOne({
+    _id: id,
+    userId: userId,
+  });
 
-  await Resume.findByIdAndDelete(id);
+  if (!resume) {
+    throw new apiError(404, "Resume not found");
+  }
+  const userId = session.user._id;
+  await Resume.deleteOne({ _id: id });
+  await User.findByIdAndUpdate(userId, { $pull: { resume: id } });
 
   return NextResponse.json(new apiResponse(200, "Resume deleted successfully"));
 };

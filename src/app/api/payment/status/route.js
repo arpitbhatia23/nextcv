@@ -36,6 +36,14 @@ const handler = async (req) => {
   console.log(couponCode);
   if (response.state === "COMPLETED") {
     console.log("payment insitate");
+    const isPaymentAllreadyDone = await Payment.findOne({
+      transcationId: response?.paymentDetails[0]?.transactionId,
+    });
+    if (isPaymentAllreadyDone) {
+      return NextResponse.redirect(
+        `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`,
+      );
+    }
     const payment = await Payment.create({
       transcationId: response?.paymentDetails[0]?.transactionId,
       paymentMode: response?.paymentDetails[0]?.paymentMode,
