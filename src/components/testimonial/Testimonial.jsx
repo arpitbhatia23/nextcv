@@ -38,7 +38,7 @@ const testimonials = [
 const stats = [
   { number: 1200, title: "Happy Users", color: "text-indigo-600" },
   { number: 97, title: "Success Rate (%)", color: "text-emerald-600" },
-  { number: 4.9, title: "Average Rating", color: "text-amber-500" },
+  { number: 4.9, title: "Average Rating", color: "text-red-500" },
 ];
 
 function AnimatedCounter({ to, className }) {
@@ -111,8 +111,8 @@ export default function TestimonialCarousel() {
         {/* Carousel */}
         <div className="overflow-hidden relative -mx-6 lg:-mx-8">
           {/* Fade Edges */}
-          <div className="absolute top-0 left-0 w-24 h-full bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-24 h-full bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
           <motion.div
             ref={containerRef}
@@ -123,7 +123,7 @@ export default function TestimonialCarousel() {
               (item, idx) => (
                 <div
                   key={`${id}-${idx}`}
-                  className="w-[350px] bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between"
+                  className="w-87.5 bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center gap-1 mb-4 text-amber-400 text-lg">
@@ -141,9 +141,9 @@ export default function TestimonialCarousel() {
                       {item.initials}
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">
+                      <span className="font-bold text-slate-900 text-sm">
                         {item.name}
-                      </h4>
+                      </span>
                       <p className="text-slate-500 text-xs">{item.title}</p>
                     </div>
                   </div>

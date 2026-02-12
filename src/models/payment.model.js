@@ -19,7 +19,7 @@ const paymentSchema = new Schema(
     },
     amount: {
       type: Number,
-      required: String,
+      required: true,
     },
     couponCode: {
       type: String,
@@ -36,7 +36,7 @@ const paymentSchema = new Schema(
   },
   { timestamps: true },
 );
-
+paymentSchema.index({ couponCode: 1, userId: 1 });
 const Payment =
   mongoose.models.payments || mongoose.model("payments", paymentSchema);
 export default Payment;

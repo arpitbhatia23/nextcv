@@ -64,7 +64,7 @@ function Herosection() {
           . Use our AI to create a professional, compliant resume that passes
           automated screening in minutes.
           <br />
-          <span className="text-sm font-medium text-emerald-600 mt-2 block">
+          <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
           </span>
         </motion.p>

@@ -6,8 +6,6 @@ import BlogDetails from "../../../../components/BlogDetails"; // Adjust path as 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
-  console.log(slug);
-
   // Query optimized to fetch only the essential SEO data
   const query = `*[_type == "post" && slug.current == $slug][0]{
       title,
@@ -68,7 +66,6 @@ export async function generateMetadata({ params }) {
 // 🛑 2. Server Component Page
 export default async function BlogDetailsPage({ params }) {
   const { slug } = await params;
-  console.log(slug);
 
   // Fetch blog data for JSON-LD
   const query = `*[_type == "post" && slug.current == $slug][0]{

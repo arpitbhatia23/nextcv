@@ -26,8 +26,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <section className={`antialiased`}>
-      {/* JSON-LD for LocalBusiness/SoftwareApplication */}
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -92,9 +91,13 @@ export default function RootLayout({ children }) {
           }),
         }}
       />
-      <Nav />
-      <Suspense fallback={<Loading />}>{children}</Suspense>
-      <Footer />
-    </section>
+      <section className={`antialiased`}>
+        {/* JSON-LD for LocalBusiness/SoftwareApplication */}
+
+        <Nav />
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Footer />
+      </section>
+    </>
   );
 }

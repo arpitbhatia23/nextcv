@@ -2,13 +2,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import {
-  CheckCircle2,
-  Smartphone,
-  Palette,
-  ArrowRight,
-  ShieldCheck,
-} from "lucide-react";
+import { Smartphone, Palette, ShieldCheck } from "lucide-react";
 
 const Templates = () => {
   const handleTemplateSelection = () => {

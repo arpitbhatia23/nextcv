@@ -14,30 +14,35 @@ export const metadata = {
 };
 
 const Blogspage = () => {
+  const jsonld = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.nextcv.in",
+      },
+
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.nextcv.in/blog",
+      },
+    ],
+  };
   return (
     <>
       {/* JSON-LD for Blog */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "NextCV Blog",
-            url: "https://www.nextcv.in/blogs",
-            description:
-              "Expert tips on resume building, ATS optimization, and career growth",
-            publisher: {
-              "@type": "Organization",
-              name: "NextCV",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://www.nextcv.in/opengraph-image.png",
-              },
-            },
-          }),
+          __html: JSON.stringify(jsonld),
         }}
       />
+
       <Blog />
     </>
   );
