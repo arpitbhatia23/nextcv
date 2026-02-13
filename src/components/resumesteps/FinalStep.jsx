@@ -206,8 +206,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
       setIsCouponValid(false);
       setAmount(originalAmount);
       setCouponCode("");
-
-      toast.error(error?.response?.data?.message || "Invalid coupon code");
+      console.log(error?.response?.data);
+      toast.error(error?.response?.data || "Invalid coupon code");
     } finally {
       setIsSubmit(false);
     }

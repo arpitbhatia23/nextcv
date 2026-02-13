@@ -27,13 +27,11 @@ const handler = async (req) => {
   if (!coupon) {
     throw new apiError(404, "coupon not found");
   }
-
   if (normalizeCode === "first20") {
     const isAlreadyUsed = await Payment.findOne({
       userId: userId,
-      couponCode: couponCode,
+      couponCode: normalizeCode,
     });
-
     if (isAlreadyUsed) {
       throw new apiError(401, "You have already used this coupon");
     }

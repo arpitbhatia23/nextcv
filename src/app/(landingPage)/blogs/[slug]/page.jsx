@@ -80,6 +80,32 @@ export default async function BlogDetailsPage({ params }) {
 
   const blogData = await client.fetch(query, { slug });
 
+  const BreadcrumbListjson = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.nextcv.in",
+      },
+
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.nextcv.in/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: blogData?.title,
+        item: `https://www.nextcv.in/blog/${blogData?.slug}`,
+      },
+    ],
+  };
+
   // Generate JSON-LD structured data
   const jsonLdSchema = blogData
     ? {
@@ -116,6 +142,14 @@ export default async function BlogDetailsPage({ params }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLdSchema),
+          }}
+        />
+      )}
+      {BreadcrumbListjson && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(BreadcrumbListjson),
           }}
         />
       )}
