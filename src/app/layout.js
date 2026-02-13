@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        <script
+        {/* <script
           id="gtm-script"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -120,7 +120,7 @@ export default function RootLayout({ children }) {
               })(window,document,'script','dataLayer','GTM-PLHNLZS9');
             `,
           }}
-        />
+        /> */}
       </head>
 
       <body
@@ -131,7 +131,7 @@ export default function RootLayout({ children }) {
             src="https://www.googletagmanager.com/ns.html?id=GTM-PLHNLZS9"
             height="0"
             width="0"
-            style="display:none;visibility:hidden"
+            style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
         <AuthProvider>
