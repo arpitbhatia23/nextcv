@@ -6,8 +6,6 @@ import BlogDetails from "../../../../components/BlogDetails"; // Adjust path as 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
 
-  console.log(slug);
-
   // Query optimized to fetch only the essential SEO data
   const query = `*[_type == "post" && slug.current == $slug][0]{
       title,
@@ -68,7 +66,6 @@ export async function generateMetadata({ params }) {
 // 🛑 2. Server Component Page
 export default async function BlogDetailsPage({ params }) {
   const { slug } = await params;
-  console.log(slug);
 
   // Fetch blog data for JSON-LD
   const query = `*[_type == "post" && slug.current == $slug][0]{
@@ -82,6 +79,32 @@ export default async function BlogDetailsPage({ params }) {
     }`;
 
   const blogData = await client.fetch(query, { slug });
+
+  const BreadcrumbListjson = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.nextcv.in",
+      },
+
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://www.nextcv.in/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: blogData?.title,
+        item: `https://www.nextcv.in/blog/${blogData?.slug}`,
+      },
+    ],
+  };
 
   // Generate JSON-LD structured data
   const jsonLdSchema = blogData
@@ -119,6 +142,14 @@ export default async function BlogDetailsPage({ params }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLdSchema),
+          }}
+        />
+      )}
+      {BreadcrumbListjson && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(BreadcrumbListjson),
           }}
         />
       )}

@@ -3,20 +3,38 @@ import apiError from "@/utils/apiError";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import authOptions from "../../auth/options";
+import Payment from "@/models/payment.model";
 const handler = async (req) => {
   let { couponCode } = await req.json();
-  dbConnect();
+  await dbConnect();
   if (!couponCode) {
     throw new apiError(400, "coupon code is required");
   }
+  const session = await getServerSession(authOptions);
 
+  const normalizeCode = couponCode?.toLowerCase();
+  if (!session) {
+    throw new apiError(401, "unauthorized");
+  }
+  const userId = session?.user?._id;
   const coupon = await Coupon.findOne({
-    couponCode: couponCode?.toLowerCase(),
+    couponCode: normalizeCode,
   });
 
   if (!coupon) {
     throw new apiError(404, "coupon not found");
+  }
+  if (normalizeCode === "first20") {
+    const isAlreadyUsed = await Payment.findOne({
+      userId: userId,
+      couponCode: normalizeCode,
+    });
+    if (isAlreadyUsed) {
+      throw new apiError(401, "You have already used this coupon");
+    }
   }
 
   const now = Date.now();

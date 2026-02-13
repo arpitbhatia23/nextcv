@@ -493,7 +493,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           <MetricCard
             title="Daily Average"
             value={Math.round(
-              data?.visitorStats?.totalVisitors / 30
+              data?.visitorStats?.totalVisitors / 30,
             ).toLocaleString()}
             icon={TrendingUp}
             color="blue"
@@ -536,10 +536,7 @@ export default function AnalyticsPage() {
               defaultValue={timeRange}
               onValueChange={(value) => SettimeRage(value)}
             >
-              <SelectTrigger
-                className="w-[180px]"
-                aria-label="Select time range"
-              >
+              <SelectTrigger className="w-45" aria-label="Select time range">
                 <SelectValue placeholder="Select time range" />
               </SelectTrigger>
               <SelectContent>

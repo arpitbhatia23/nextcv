@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Ticket } from "lucide-react";
 import SigninButton from "../SigninButton";
 
 function Herosection() {
@@ -64,10 +65,26 @@ function Herosection() {
           . Use our AI to create a professional, compliant resume that passes
           automated screening in minutes.
           <br />
-          <span className="text-sm font-medium text-emerald-600 mt-2 block">
+          <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
           </span>
         </motion.p>
+
+        {/* Coupon Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-8 flex justify-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 shadow-sm hover:shadow-md transition-all duration-300">
+            <Ticket className="w-5 h-5 fill-green-700/20" />
+            <span className="font-medium text-sm sm:text-base">
+              Use code <span className="font-bold">FIRST20</span> for{" "}
+              <span className="font-bold">20% off</span>
+            </span>
+          </div>
+        </motion.div>
 
         {/* Buttons */}
         <SigninButton />

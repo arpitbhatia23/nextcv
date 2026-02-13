@@ -21,7 +21,7 @@ function PaymentFailContent() {
   if (status !== "fail") return null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br px-4">
       <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md text-center">
         <div className="flex justify-center mb-4 text-red-500">
           <XCircle className="w-16 h-16 text-red-500" />

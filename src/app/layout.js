@@ -20,52 +20,52 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
-export const metadata = {
-  title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-  description:
-    "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-  keywords: [
-    "ats friendly resume builder india",
-    "ai resume builder india",
-    "resume builder india free",
-    "cv maker india online",
-    "best resume format 2026 india",
-    "resume for freshers india",
-    "ats friendly resume format 2026",
-    "professional resume india",
-    "job application resume india",
-    "online resume builder india",
-    "resume templates india",
-    "latest resume format india",
-  ],
-  authors: [{ name: "NextCV" }],
-  robots: "index, follow",
+// export const metadata = {
+//   title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+//   description:
+//     "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+//   keywords: [
+//     "ats friendly resume builder india",
+//     "ai resume builder india",
+//     "resume builder india free",
+//     "cv maker india online",
+//     "best resume format 2026 india",
+//     "resume for freshers india",
+//     "ats friendly resume format 2026",
+//     "professional resume india",
+//     "job application resume india",
+//     "online resume builder india",
+//     "resume templates india",
+//     "latest resume format india",
+//   ],
+//   authors: [{ name: "NextCV" }],
+//   robots: "index, follow",
 
-  // ⚡ Fix for Open Graph / Twitter images
-  metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
-  openGraph: {
-    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-    description:
-      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-    url: "/", // optional, relative to metadataBase
-    type: "website",
-    images: ["/opengraph-image.png"], // relative path will resolve correctly
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-    description:
-      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-    images: ["/opengraph-image.png"], // relative path
-  },
-  alternates: {
-    canonical: "https://www.nextcv.in", // Sets the canonical URL
-  },
-};
+//   // ⚡ Fix for Open Graph / Twitter images
+//   metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
+//   openGraph: {
+//     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+//     description:
+//       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+//     url: "/", // optional, relative to metadataBase
+//     type: "website",
+//     images: ["/opengraph-image.png"], // relative path will resolve correctly
+//   },
+//   twitter: {
+//     card: "summary_large_image",
+//     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+//     description:
+//       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+//     images: ["/opengraph-image.png"], // relative path
+//   },
+//   alternates: {
+//     canonical: "https://www.nextcv.in", // Sets the canonical URL
+//   },
+// };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning="true" data-qb-installed="true">
       <head>
         {/* JSON-LD for Website */}
         <script
@@ -90,57 +90,20 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-              url: "https://nextcv.in",
-              logo: "https://nextcv.in/opengraph-image.png",
+              url: "https://www.nextcv.in",
+              logo: "https://www.nextcv.in/opengraph-image.png",
               description:
                 "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
               sameAs: [
                 "https://www.facebook.com/nextcv",
                 "https://www.twitter.com/nextcv",
-                "https://www.linkedin.com/company/nextcv",
+                "https://www.linkedin.com/company/next-cv",
               ],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Customer Support",
-                email: "support@nextcv.in",
+                email: "help@nextcv.in",
               },
-            }),
-          }}
-        />
-
-        {/* JSON-LD for BreadcrumbList */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://www.nextcv.in",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Dashboard",
-                  item: "https://www.nextcv.in/dashboard",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: "Blogs",
-                  item: "https://www.nextcv.in/blogs",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 4,
-                  name: "About",
-                  item: "https://www.nextcv.in/about-us",
-                },
-              ],
             }),
           }}
         />
@@ -150,9 +113,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-          <Toaster />
-          <GoogleAnalytics />
+          <main>
+            <Suspense fallback={<Loading />}>
+              {children}
+              <GoogleAnalytics />
+            </Suspense>
+            <Toaster />
+          </main>
         </AuthProvider>
       </body>
     </html>

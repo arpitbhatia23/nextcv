@@ -49,7 +49,7 @@ const stats = [
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#020617] text-slate-400 border-t border-slate-900 font-sans">
+    <footer className="bg-[#020617] text-white border-t border-slate-900 font-sans">
       {/* Stats Strip - Refined */}
       <div className="border-b border-slate-900 bg-[#0B0F1A]/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
@@ -63,7 +63,7 @@ export const Footer = () => {
                 <span className="text-2xl md:text-3xl font-bold text-white mb-1.5">
                   {stat.value}
                 </span>
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-100">
                   {stat.label}
                 </span>
               </div>
@@ -83,7 +83,7 @@ export const Footer = () => {
             >
               <Logo2 size={60} color="white" ClassName="text-white" />
             </Link>
-            <p className="text-slate-400 leading-relaxed max-w-sm text-sm">
+            <p className="text-white leading-relaxed max-w-sm text-sm">
               NextCV is the advanced AI-powered resume builder designed to help
               students and professionals create ATS-friendly resumes in minutes.
             </p>
@@ -92,7 +92,7 @@ export const Footer = () => {
                 <a
                   key={idx}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-indigo-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm hover:shadow-indigo-500/20"
+                  className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white hover:bg-indigo-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm hover:shadow-indigo-500/20"
                   aria-label={social.label}
                 >
                   {social.icon}
@@ -127,7 +127,7 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 text-sm text-slate-500 order-2 md:order-1">
+          <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
             <span>
               &copy; {new Date().getFullYear()} NextCV. All rights reserved.
             </span>
@@ -137,7 +137,7 @@ export const Footer = () => {
             <SaasHuntBadge />
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-slate-500 order-3 md:order-3">
+          <div className="flex items-center gap-2 text-sm text-slate-100 order-3 md:order-3">
             <span>
               Made with <span className="text-red-500 animate-pulse">❤️</span>{" "}
               by Aurpit & Tamanna
