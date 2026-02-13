@@ -5,7 +5,7 @@ import Loading from "../loading";
 
 export const metadata = {
   title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-  metadataBase: new URL("https:www.nextcv.in"),
+  metadataBase: new URL("https://www.nextcv.in"),
   description:
     "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
   keywords: [
@@ -76,7 +76,7 @@ export const metadata = {
   robots: "index, follow",
 
   // ⚡ Fix for Open Graph / Twitter images
-  metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
+
   openGraph: {
     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
     description:

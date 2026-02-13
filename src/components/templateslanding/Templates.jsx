@@ -234,9 +234,9 @@ const Templates = () => {
                     {feature.icon}
                   </div>
                   <div className="text-left">
-                    <p className="font-bold text-slate-900 text-sm">
+                    <h4 className="font-bold text-slate-900 text-sm">
                       {feature.title}
-                    </p>
+                    </h4>
                     <p className="text-xs text-slate-500 hidden sm:block">
                       {feature.description}
                     </p>

@@ -139,9 +139,9 @@ const PageContent = () => {
                     {item.icon}
                   </div>
                   <div>
-                    <span className="text-lg font-semibold text-white mb-1">
+                    <h3 className="text-lg font-semibold text-white mb-1">
                       {item.title}
-                    </span>
+                    </h3>
                     <p className="text-slate-400 text-sm">{item.description}</p>
                   </div>
                 </div>
