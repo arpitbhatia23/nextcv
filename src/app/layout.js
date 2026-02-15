@@ -20,48 +20,48 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
-// export const metadata = {
-//   title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-//   description:
-//     "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-//   keywords: [
-//     "ats friendly resume builder india",
-//     "ai resume builder india",
-//     "resume builder india free",
-//     "cv maker india online",
-//     "best resume format 2026 india",
-//     "resume for freshers india",
-//     "ats friendly resume format 2026",
-//     "professional resume india",
-//     "job application resume india",
-//     "online resume builder india",
-//     "resume templates india",
-//     "latest resume format india",
-//   ],
-//   authors: [{ name: "NextCV" }],
-//   robots: "index, follow",
+export const metadata = {
+  title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+  description:
+    "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+  keywords: [
+    "ats friendly resume builder india",
+    "ai resume builder india",
+    "resume builder india free",
+    "cv maker india online",
+    "best resume format 2026 india",
+    "resume for freshers india",
+    "ats friendly resume format 2026",
+    "professional resume india",
+    "job application resume india",
+    "online resume builder india",
+    "resume templates india",
+    "latest resume format india",
+  ],
+  authors: [{ name: "NextCV" }],
+  robots: "index, follow",
 
-//   // ⚡ Fix for Open Graph / Twitter images
-//   metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
-//   openGraph: {
-//     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-//     description:
-//       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-//     url: "/", // optional, relative to metadataBase
-//     type: "website",
-//     images: ["/opengraph-image.png"], // relative path will resolve correctly
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-//     description:
-//       "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
-//     images: ["/opengraph-image.png"], // relative path
-//   },
-//   alternates: {
-//     canonical: "https://www.nextcv.in", // Sets the canonical URL
-//   },
-// };
+  // ⚡ Fix for Open Graph / Twitter images
+  metadataBase: new URL("https://www.nextcv.in"), // replace with your production URL
+  openGraph: {
+    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+    description:
+      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+    url: "/", // optional, relative to metadataBase
+    type: "website",
+    images: ["/opengraph-image.png"], // relative path will resolve correctly
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
+    description:
+      "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
+    images: ["/opengraph-image.png"], // relative path
+  },
+  alternates: {
+    canonical: "https://www.nextcv.in", // Sets the canonical URL
+  },
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "NextCV | AI Resume Builder for ATS-Friendly CVs in India",
-              url: "https://nextcv.in",
+              url: "https://www.nextcv.in",
               description:
                 "NextCV is an AI resume builder that creates ATS-friendly resumes recruiters scan in seconds, optimized for the Indian job market and 2026 jobs.",
             }),
@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
             }),
           }}
         />
-        {/* <script
+        <script
           id="gtm-script"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -120,7 +120,7 @@ export default function RootLayout({ children }) {
               })(window,document,'script','dataLayer','GTM-PLHNLZS9');
             `,
           }}
-        /> */}
+        />
       </head>
 
       <body
