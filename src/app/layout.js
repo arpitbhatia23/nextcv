@@ -65,7 +65,7 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning="true" data-qb-installed="true">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* JSON-LD for Website */}
         <script

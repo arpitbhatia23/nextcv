@@ -19,7 +19,9 @@ export async function proxy(req) {
       url.pathname === "/" ||
       url.pathname === "/about-us" ||
       url.pathname === "/contact" ||
-      url.pathname === "/blogs")
+      url.pathname === "/blogs"||
+      url.pathname === "/ats-resume-checker"
+    )
   ) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }

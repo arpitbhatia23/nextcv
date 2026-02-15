@@ -21,11 +21,16 @@ const Testimonial = dynamic(
 const PageContent = dynamic(
   () => import("@/components/pageContent/PageContent"),
 );
+const ATSFeatureSection = dynamic(
+  () => import("@/components/herosection/ATSFeatureSection"),
+);
+const FAQ = dynamic(() => import("@/components/herosection/FAQ"));
 
 export default function Home() {
   return (
     <>
       <Herosection />
+      <ATSFeatureSection />
 
       <PageContent />
       <Element name="Templates">
@@ -35,6 +40,8 @@ export default function Home() {
       <HowitWork />
 
       <ProcessWorks />
+
+      <FAQ />
 
       <Testimonial />
     </>
