@@ -11,6 +11,7 @@ const handler = async (req) => {
   await dbConnect();
   const searchParams = req.nextUrl.searchParams;
   const id = searchParams.get("id");
+  console.log(id);
   if (!id) {
     throw new apiError(400, "Resume ID is required");
   }
@@ -19,15 +20,15 @@ const handler = async (req) => {
   if (!session && !session.user) {
     throw new apiError(403, "Unauthorized");
   }
+  const userId = session.user._id;
+
   const resume = await Resume.findOne({
     _id: id,
-    userId: userId,
   });
 
   if (!resume) {
     throw new apiError(404, "Resume not found");
   }
-  const userId = session.user._id;
   await Resume.deleteOne({ _id: id });
   await User.findByIdAndUpdate(userId, { $pull: { resume: id } });
 

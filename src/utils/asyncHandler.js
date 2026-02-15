@@ -5,7 +5,10 @@ export const asyncHandler = (handler) => {
     try {
       return await handler(req, ctx);
     } catch (error) {
-      if (error.status === 500) sentry.captureException(error);
+      const status = error?.status || 500;
+      if (status === 500) {
+        sentry.captureException(error);
+      }
       return NextResponse.json(error.message || " Internal Server Error", {
         status: error.status || 500,
       });
