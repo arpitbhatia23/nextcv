@@ -20,6 +20,7 @@ const footerLinks = [
       { label: "Examples", href: "/examples" },
       { label: "Pricing", href: "/pricing" },
       { label: "AI Writer", href: "/ai-writer" },
+      { label: "ATS Resume Checker", href: "/ats-resume-checker" },
     ],
   },
   {
