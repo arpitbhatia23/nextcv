@@ -2,11 +2,10 @@ import Image from "next/image";
 
 export function SaasHuntBadge() {
   const src = "https://saashunt.best/images/badges/top1-light.svg";
-  //   ("https://saashunt.com/badges/top1-dark.svg");
 
   return (
     <a
-      href="https://saashunt.com"
+      href="https://saashunt.best/projects/next-cv"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="SaaSHunt Top 1 Daily Winner"
@@ -17,6 +16,7 @@ export function SaasHuntBadge() {
         alt="SaaSHunt Top 1 Daily Winner"
         width={180}
         height={54}
+        loading="lazy"
       />
     </a>
   );

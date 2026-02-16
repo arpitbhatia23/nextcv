@@ -7,7 +7,6 @@ import {
   Package,
   Headset,
   CheckCircle2,
-  ArrowRight,
 } from "lucide-react";
 
 const PageContent = () => {

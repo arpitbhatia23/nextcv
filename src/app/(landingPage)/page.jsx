@@ -1,12 +1,8 @@
-
-
-import React from "react";
 import dynamic from "next/dynamic";
 
-import Herosection from "@/components/herosection/Herosection";
-
-// Dynamic imports (ssr: false for client-only rendering)
-// Dynamic imports (ssr: false for client-only rendering)
+const Herosection = dynamic(
+  () => import("@/components/herosection/Herosection"),
+);
 const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
 const Templates = dynamic(
   () => import("@/components/templateslanding/Templates"),

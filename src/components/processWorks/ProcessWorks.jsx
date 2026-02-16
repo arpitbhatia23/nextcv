@@ -1,8 +1,6 @@
-"use client";
-import React from "react";
-import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import { Zap, Eye, Wallet } from "lucide-react";
+import SigninButton from "../SigninButton";
 
 const ProcessWorks = () => {
   const works = [
@@ -82,13 +80,7 @@ const ProcessWorks = () => {
         {/* Bottom CTA */}
         <div className="text-center">
           <div className="inline-block relative group">
-            <div className="absolute inset-0 bg-indigo-600 blur-[20px] opacity-20 group-hover:opacity-40 transition-opacity rounded-full"></div>
-            <Button
-              className="relative bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-6 text-lg font-bold rounded-xl shadow-xl transition-all duration-300 hover:scale-[1.02]"
-              onClick={handleStartResume}
-            >
-              Start Your Resume Now
-            </Button>
+            <SigninButton />
           </div>
 
           <div className="mt-8 flex flex-col items-center">

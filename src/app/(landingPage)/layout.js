@@ -166,9 +166,11 @@ export default function RootLayout({ children }) {
       <section className={`antialiased`}>
         {/* JSON-LD for LocalBusiness/SoftwareApplication */}
 
-        <Nav />
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-        <Footer />
+        <Suspense fallback={<Loading />}>
+          <Nav />
+          {children}
+          <Footer />
+        </Suspense>
       </section>
     </>
   );

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Ticket } from "lucide-react";
 import SigninButton from "../SigninButton";
 
@@ -27,7 +27,7 @@ function Herosection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         {/* Top Badge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -38,10 +38,10 @@ function Herosection() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
           </span>
           New: AI Resume Analysis Feature
-        </motion.div>
+        </m.div>
 
         {/* Headline */}
-        <motion.h1
+        <m.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -51,10 +51,10 @@ function Herosection() {
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
             ATS-Friendly Resume for the Indian Job Market
           </span>
-        </motion.h1>
+        </m.h1>
 
         {/* Subhead */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -70,10 +70,10 @@ function Herosection() {
           <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
           </span>
-        </motion.p>
+        </m.p>
 
         {/* Coupon Badge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -86,13 +86,13 @@ function Herosection() {
               <span className="font-bold">20% off</span>
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Buttons */}
         <SigninButton />
 
         {/* Trust/Social Proof */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -113,7 +113,7 @@ function Herosection() {
               />
             ))}
           </div>
-        </motion.div>
+        </m.div>
         <p className="sr-only">
           NextCV is an AI resume builder designed for freshers and job seekers
           in India. Create ATS-friendly resume formats for IT jobs, campus

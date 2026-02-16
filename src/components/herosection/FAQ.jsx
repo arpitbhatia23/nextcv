@@ -1,30 +1,35 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Plus, Minus, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
     question: "Is NextCV really free?",
-    answer: "Yes, you can check your ATS score for free. Our resume builder also has a free tier to get you started, and premium features are available for a small one-time fee (no subscriptions!)."
+    answer:
+      "Yes, you can check your ATS score for free. Our resume builder also has a free tier to get you started, and premium features are available for a small one-time fee (no subscriptions!).",
   },
   {
     question: "What is an ATS-friendly resume?",
-    answer: "An ATS-friendly resume is formatted in a way that Applicant Tracking Systems can easily parse. This means using standard headings, simple layouts, and avoiding graphics or tables that confuse the software."
+    answer:
+      "An ATS-friendly resume is formatted in a way that Applicant Tracking Systems can easily parse. This means using standard headings, simple layouts, and avoiding graphics or tables that confuse the software.",
   },
   {
     question: "Why was my resume rejected?",
-    answer: "Resumes are often rejected because they lack specific keywords from the job description or are formatted in a way the ATS cannot read. Our tool helps you identify these issues before you apply."
+    answer:
+      "Resumes are often rejected because they lack specific keywords from the job description or are formatted in a way the ATS cannot read. Our tool helps you identify these issues before you apply.",
   },
   {
     question: "Can I download my resume in Word format?",
-    answer: "Currently, NextCV generates high-quality PDF resumes which are the industry standard for maintaining formatting across all devices and systems."
+    answer:
+      "Currently, NextCV generates high-quality PDF resumes which are the industry standard for maintaining formatting across all devices and systems.",
   },
   {
     question: "How do I increase my ATS score?",
-    answer: "To increase your score: 1) Use relevant keywords from the job post. 2) Use standard section headers (Experience, Education). 3) Avoid columns and graphics. 4) Use a simple, readable font."
-  }
+    answer:
+      "To increase your score: 1) Use relevant keywords from the job post. 2) Use standard section headers (Experience, Education). 3) Avoid columns and graphics. 4) Use a simple, readable font.",
+  },
 ];
 
 const FAQ = () => {
@@ -46,13 +51,14 @@ const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-slate-600 text-lg">
-            Everything you need to know about ATS scores and building a job-winning resume.
+            Everything you need to know about ATS scores and building a
+            job-winning resume.
           </p>
         </div>
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <motion.div
+            <m.div
               key={index}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -68,10 +74,14 @@ const FAQ = () => {
                 onClick={() => toggleAccordion(index)}
                 className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
               >
-                <span className={`text-lg font-semibold ${activeIndex === index ? "text-indigo-900" : "text-slate-800"}`}>
+                <span
+                  className={`text-lg font-semibold ${activeIndex === index ? "text-indigo-900" : "text-slate-800"}`}
+                >
                   {faq.question}
                 </span>
-                <div className={`p-1 rounded-full transition-colors ${activeIndex === index ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"}`}>
+                <div
+                  className={`p-1 rounded-full transition-colors ${activeIndex === index ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"}`}
+                >
                   {activeIndex === index ? (
                     <Minus className="w-5 h-5" />
                   ) : (
@@ -81,7 +91,7 @@ const FAQ = () => {
               </button>
               <AnimatePresence>
                 {activeIndex === index && (
-                  <motion.div
+                  <m.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
@@ -90,10 +100,10 @@ const FAQ = () => {
                     <div className="px-6 pb-6 text-slate-600 leading-relaxed">
                       {faq.answer}
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -1,47 +1,36 @@
-import ClassicTemplate from "../templates/resume-pdf/classic";
-import ModernPDFResumeTemplate from "../templates/resume-pdf/morden";
-import ClassicMinimalistPDFResume from "../templates/resume-pdf/Minimalist";
-import ModernBlueSidebarPDFResume from "../templates/resume-pdf/ModernBlueSideBar";
-
-// New Templates
-import ProfessionalClean from "../templates/resume-pdf/ProfessionalClean";
-import CreativeTeal from "../templates/resume-pdf/CreativeTeal";
-import ExecutiveGray from "../templates/resume-pdf/ExecutiveGray";
-import TechDark from "../templates/resume-pdf/TechDark";
-import CompactModern from "../templates/resume-pdf/CompactModern";
-import BoldHeader from "../templates/resume-pdf/BoldHeader";
-import SidebarLeft from "../templates/resume-pdf/SidebarLeft";
-import InfographicLite from "../templates/resume-pdf/InfographicLite";
+import dynamic from "next/dynamic";
 
 export const templates = [
   {
     key: "modernTemplate",
     label: "Modern",
-    component: ModernPDFResumeTemplate,
+    component: dynamic(() => import("../templates/resume-pdf/morden")),
     image: "/modern.webp",
   },
   {
     key: "classicTemplate",
     label: "Classic",
-    component: ClassicTemplate,
+    component: dynamic(() => import("../templates/resume-pdf/classic")),
     image: "/classic.webp",
   },
   {
     key: "MinimalistTemplate",
     label: "Minimalist",
-    component: ClassicMinimalistPDFResume,
+    component: dynamic(() => import("../templates/resume-pdf/Minimalist")),
     image: "/minalmalist.webp",
   },
   {
     key: "MordenBluesidebar",
     label: "Modern Blue Sidebar",
-    component: ModernBlueSidebarPDFResume,
+    component: dynamic(
+      () => import("../templates/resume-pdf/ModernBlueSideBar"),
+    ),
     image: "/ModernSideBar.webp",
   },
   {
     key: "ModernFullStack",
     label: "Modern FullStack",
-    component: ModernPDFResumeTemplate,
+    component: dynamic(() => import("../templates/resume-pdf/morden")),
     image: "/modern.webp",
   },
 
@@ -49,49 +38,51 @@ export const templates = [
   {
     key: "ProfessionalClean",
     label: "Professional Clean",
-    component: ProfessionalClean,
+    component: dynamic(
+      () => import("../templates/resume-pdf/ProfessionalClean"),
+    ),
     image: "/professional-clean.webp", // Placeholder
   },
   {
     key: "CreativeTeal",
     label: "Creative Teal",
-    component: CreativeTeal,
+    component: dynamic(() => import("../templates/resume-pdf/CreativeTeal")),
     image: "/creative-teal.webp", // Placeholder
   },
   {
     key: "ExecutiveGray",
     label: "Executive Gray",
-    component: ExecutiveGray,
+    component: dynamic(() => import("../templates/resume-pdf/ExecutiveGray")),
     image: "/executive-gray.webp", // Placeholder
   },
   {
     key: "TechDark",
     label: "Tech Dark",
-    component: TechDark,
+    component: dynamic(() => import("../templates/resume-pdf/TechDark")),
     image: "/tech-dark.webp", // Placeholder
   },
   {
     key: "CompactModern",
     label: "Compact Modern",
-    component: CompactModern,
+    component: dynamic(() => import("../templates/resume-pdf/CompactModern")),
     image: "/compact-modern.webp", // Placeholder
   },
   {
     key: "BoldHeader",
     label: "Bold Header",
-    component: BoldHeader,
+    component: dynamic(() => import("../templates/resume-pdf/BoldHeader")),
     image: "/bold-header.webp", // Placeholder
   },
   {
     key: "SidebarLeft",
     label: "Sidebar Left",
-    component: SidebarLeft,
+    component: dynamic(() => import("../templates/resume-pdf/SidebarLeft")),
     image: "/sidebar-left.webp", // Placeholder
   },
   {
     key: "InfographicLite",
     label: "Infographic Lite",
-    component: InfographicLite,
+    component: dynamic(() => import("../templates/resume-pdf/InfographicLite")),
     image: "/infographich-lite.webp", // Placeholder
   },
 ];

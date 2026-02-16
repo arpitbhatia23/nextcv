@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { m, useMotionValue, animate } from "framer-motion";
 import { useEffect, useState, useRef, useId } from "react";
 
 // Testimonial data - Expanded for infinite scroll
@@ -114,7 +114,7 @@ export default function TestimonialCarousel() {
           <div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
           <div className="absolute top-0 right-0 w-24 h-full bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
-          <motion.div
+          <m.div
             ref={containerRef}
             className="flex w-max gap-8 px-8 py-4"
             style={{ x }}
@@ -150,7 +150,7 @@ export default function TestimonialCarousel() {
                 </div>
               ),
             )}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Stats Grid */}
