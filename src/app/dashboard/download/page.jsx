@@ -8,6 +8,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, Suspense } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { toast } from "sonner";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 

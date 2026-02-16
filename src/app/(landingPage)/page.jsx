@@ -1,13 +1,12 @@
-"use client";
+
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { Element } from "react-scroll";
+
+import Herosection from "@/components/herosection/Herosection";
 
 // Dynamic imports (ssr: false for client-only rendering)
-const Herosection = dynamic(
-  () => import("@/components/herosection/Herosection"),
-);
+// Dynamic imports (ssr: false for client-only rendering)
 const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
 const Templates = dynamic(
   () => import("@/components/templateslanding/Templates"),
@@ -33,9 +32,9 @@ export default function Home() {
       <ATSFeatureSection />
 
       <PageContent />
-      <Element name="Templates">
+      <section id="Templates">
         <Templates />
-      </Element>
+      </section>
 
       <HowitWork />
 

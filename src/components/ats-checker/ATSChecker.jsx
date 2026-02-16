@@ -8,7 +8,6 @@ import { UploadCloud, FileText, X, Loader2, AlertCircle } from "lucide-react";
 import ScoreDisplay from "./ScoreDisplay";
 import { motion, AnimatePresence } from "framer-motion";
 
-
 // Set worker source for pdfjs-dist
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
@@ -27,7 +26,7 @@ const ATSChecker = () => {
         setError("File size exceeds 5MB limit.");
         return;
       }
-      console.log(uploadedFile)
+      console.log(uploadedFile);
       setFile(uploadedFile);
       setError(null);
       setResult(null);
@@ -39,9 +38,8 @@ const ATSChecker = () => {
     onDrop,
     accept: {
       "application/pdf": [".pdf"],
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
-        ".docx",
-      ],
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        [".docx"],
     },
     multiple: false,
   });
@@ -60,7 +58,9 @@ const ATSChecker = () => {
       }
 
       if (!text || text.trim().length === 0) {
-        throw new Error("Could not extract text from file. Please ensure it is not an image-based resume.");
+        throw new Error(
+          "Could not extract text from file. Please ensure it is not an image-based resume.",
+        );
       }
 
       const analysis = calculateATSScore(text);
@@ -82,83 +82,131 @@ const ATSChecker = () => {
     let fullText = "";
 
     for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        const pageText = textContent.items.map((item) => item.str).join(" ");
-        fullText += pageText + "\n";
+      const page = await pdf.getPage(i);
+      const textContent = await page.getTextContent();
+      const pageText = textContent.items.map((item) => item.str).join(" ");
+      fullText += pageText + "\n";
     }
     return fullText;
   };
 
   const extractTextFromDOCX = async (file) => {
-      const arrayBuffer = await file.arrayBuffer();
-      const result = await mammoth.extractRawText({ arrayBuffer });
-      return result.value;
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    return result.value;
   };
 
   const calculateATSScore = (text) => {
     let score = 0;
     const recommendations = [];
-    const missingKeywords = [];
+    // const missingKeywords = [];
     const lowerText = text.toLowerCase();
 
     // 1. Content Length Check (10 points)
     const wordCount = text.split(/\s+/).length;
     if (wordCount >= 200 && wordCount <= 1000) {
-        score += 10;
-        recommendations.push({ type: "success", title: "Word Count", message: "Optimal word count (200-1000 words)." });
+      score += 10;
+      recommendations.push({
+        type: "success",
+        title: "Word Count",
+        message: "Optimal word count (200-1000 words).",
+      });
     } else if (wordCount < 200) {
-        recommendations.push({ type: "error", title: "Word Count", message: "Resume is too short. Add more detail." });
+      recommendations.push({
+        type: "error",
+        title: "Word Count",
+        message: "Resume is too short. Add more detail.",
+      });
     } else {
-        recommendations.push({ type: "warning", title: "Word Count", message: "Resume might be too long." });
+      recommendations.push({
+        type: "warning",
+        title: "Word Count",
+        message: "Resume might be too long.",
+      });
     }
 
     // 2. Section Headers Check (30 points)
-    const essentialSections = ["experience", "education", "skills", "projects", "summary", "contact"];
+    const essentialSections = [
+      "experience",
+      "education",
+      "skills",
+      "projects",
+      "summary",
+      "contact",
+    ];
     let foundSections = 0;
-    essentialSections.forEach(section => {
-        if (lowerText.includes(section)) {
-            foundSections++;
-        }
+    essentialSections.forEach((section) => {
+      if (lowerText.includes(section)) {
+        foundSections++;
+      }
     });
 
     const sectionScore = (foundSections / essentialSections.length) * 30;
     score += sectionScore;
 
     if (foundSections === essentialSections.length) {
-         recommendations.push({ type: "success", title: "Sections", message: "All essential sections found." });
+      recommendations.push({
+        type: "success",
+        title: "Sections",
+        message: "All essential sections found.",
+      });
     } else {
-        recommendations.push({ type: "warning", title: "Sections", message: `Found ${foundSections}/${essentialSections.length} essential sections. Ensure you have clear headers.` });
+      recommendations.push({
+        type: "warning",
+        title: "Sections",
+        message: `Found ${foundSections}/${essentialSections.length} essential sections. Ensure you have clear headers.`,
+      });
     }
 
     // 3. Contact Info Check (15 points)
     const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
     const phoneRegex = /(\+\d{1,3}[- ]?)?\d{10}/;
-    
+
     if (emailRegex.test(text)) score += 10;
     if (phoneRegex.test(text)) score += 5;
 
     if (!emailRegex.test(text) || !phoneRegex.test(text)) {
-        recommendations.push({ type: "error", title: "Contact Info", message: "Missing email or phone number." });
+      recommendations.push({
+        type: "error",
+        title: "Contact Info",
+        message: "Missing email or phone number.",
+      });
     } else {
-        recommendations.push({ type: "success", title: "Contact Info", message: "Contact information detected." });
+      recommendations.push({
+        type: "success",
+        title: "Contact Info",
+        message: "Contact information detected.",
+      });
     }
 
     // 4. Keyword Analysis (45 points)
     // Common tech and soft skills keywords
     const commonKeywords = [
-        "javascript", "python", "java", "react", "node", "sql", "communication", 
-        "teamwork", "leadership", "problem solving", "agile", "project management",
-        "html", "css", "git", "analysis", "development", "design"
+      "javascript",
+      "python",
+      "java",
+      "react",
+      "node",
+      "sql",
+      "communication",
+      "teamwork",
+      "leadership",
+      "problem solving",
+      "agile",
+      "project management",
+      "html",
+      "css",
+      "git",
+      "analysis",
+      "development",
+      "design",
     ];
 
     let keywordCount = 0;
-    commonKeywords.forEach(keyword => {
-        if (lowerText.includes(keyword)) {
-            keywordCount++;
-        } else {
-            missingKeywords.push(keyword);
-        }
+    commonKeywords.forEach((keyword) => {
+      if (lowerText.includes(keyword)) {
+        keywordCount++;
+      }
     });
 
     // Cap keyword score contribution
@@ -166,16 +214,24 @@ const ATSChecker = () => {
     score += keywordScore;
 
     if (keywordCount < 5) {
-         recommendations.push({ type: "warning", title: "Keywords", message: "Low keyword density. Add more relevant skills." });
+      recommendations.push({
+        type: "warning",
+        title: "Keywords",
+        message: "Low keyword density. Add more relevant skills.",
+      });
     } else {
-         recommendations.push({ type: "success", title: "Keywords", message: "Good usage of action keywords." });
+      recommendations.push({
+        type: "success",
+        title: "Keywords",
+        message: "Good usage of action keywords.",
+      });
     }
-    
+
     // Normalize score to integer
     return {
-        score: Math.round(score),
-        missingKeywords: missingKeywords.slice(0, 8), // Show top 8 missing
-        recommendations
+      score: Math.round(score),
+      // missingKeywords: missingKeywords.slice(0, 8), // Show top 8 missing
+      recommendations,
     };
   };
 
@@ -224,7 +280,7 @@ const ATSChecker = () => {
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <p className="font-semibold text-indigo-900 truncate max-w-[200px] sm:max-w-xs">
+                <p className="font-semibold text-indigo-900 truncate max-w-50 sm:max-w-xs">
                   {file.name}
                 </p>
                 <p className="text-xs text-indigo-600">
@@ -271,7 +327,7 @@ const ATSChecker = () => {
             >
               <ScoreDisplay
                 score={result.score}
-                missingKeywords={result.missingKeywords}
+                // missingKeywords={result.missingKeywords}
                 recommendations={result.recommendations}
               />
             </motion.div>

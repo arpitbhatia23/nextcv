@@ -6,16 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   Edit,
-  Copy,
   Download,
   Trash2,
   Calendar,
-  Eye,
   MoreVertical,
   Plus,
-  Filter,
   X,
-  IndianRupee,
   BadgePercent,
   Edit2,
   FileText,
@@ -27,12 +23,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
 import { pdfGenerator } from "@/lib/pdfGenerator";
-import { ScrollArea } from "./ui/scroll-area";
 import { toast } from "sonner";
 
 const MyResume = () => {

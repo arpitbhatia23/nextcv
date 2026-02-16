@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -6,13 +8,13 @@ import SigninButton from "../SigninButton";
 
 function Herosection() {
   const mncLogos = [
-    { src: "/logos/TCS.NS_BIG.svg", alt: "TCS" },
-    { src: "/logos/INFY_BIG.svg", alt: "Infosys" },
-    { src: "/logos/WIT.svg", alt: "Wipro" },
-    { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech" },
-    { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree" },
-    { src: "/logos/TECHM.NS_BIG.svg", alt: "Tech Mahindra" },
-    { src: "/logos/google_BIG.svg", alt: "Google" },
+    { src: "/logos/TCS.NS_BIG.svg", alt: "TCS company logo" },
+    { src: "/logos/INFY_BIG.svg", alt: "Infosys company logo" },
+    { src: "/logos/WIT.svg", alt: "Wipro company logo" },
+    { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech company logo" },
+    { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree company logo" },
+    { src: "/logos/TECHM.NS_BIG.svg", alt: "Tech Mahindra company logo" },
+    { src: "/logos/google_BIG.svg", alt: "Google company logo" },
   ];
 
   return (
@@ -43,11 +45,11 @@ function Herosection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
+          className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
           Build a Job-Winning <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
-            ATS-Friendly Resume
+            ATS-Friendly Resume for the Indian Job Market
           </span>
         </motion.h1>
 
@@ -60,7 +62,7 @@ function Herosection() {
         >
           Designed specifically for the{" "}
           <span className="font-semibold text-slate-900">
-            Indian job market
+            freshers and professionals in the Indian job market
           </span>
           . Use our AI to create a professional, compliant resume that passes
           automated screening in minutes.
@@ -112,6 +114,11 @@ function Herosection() {
             ))}
           </div>
         </motion.div>
+        <p className="sr-only">
+          NextCV is an AI resume builder designed for freshers and job seekers
+          in India. Create ATS-friendly resume formats for IT jobs, campus
+          placements, and MNC companies.
+        </p>
       </div>
     </section>
   );

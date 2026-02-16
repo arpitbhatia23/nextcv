@@ -11,7 +11,6 @@ const nextConfig = {
 
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,
-  reactStrictMode: true,
   compress: true,
   productionBrowserSourceMaps: false,
 
@@ -30,6 +29,7 @@ const nextConfig = {
   },
 
   experimental: {
+    optimizeCss: true,
     optimizePackageImports: [
       "lodash",
       "lucide-react",
@@ -40,7 +40,7 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(withBundle(nextConfig), {
+const build = withSentryConfig(withBundle(nextConfig), {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
@@ -77,3 +77,5 @@ export default withSentryConfig(withBundle(nextConfig), {
     },
   },
 });
+
+export default build;

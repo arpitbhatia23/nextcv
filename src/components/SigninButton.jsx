@@ -23,6 +23,7 @@ function SigninButton() {
       >
         <button
           onClick={() => signIn("google")}
+          aria-label="Create Your Resume"
           className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl text-lg hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-slate-300 flex items-center justify-center gap-2 group"
         >
           Create Your Resume
@@ -30,6 +31,7 @@ function SigninButton() {
         </button>
 
         <button
+          aria-label="View Templates"
           onClick={() => scrollTo("Templates")}
           className="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-700 font-semibold rounded-xl text-lg hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
