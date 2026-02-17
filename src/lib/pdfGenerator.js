@@ -16,9 +16,8 @@ export class pdfGenerator {
     if (!selectedTemplate) {
       throw new Error("Template not found");
     }
-    const module = await selectedTemplate.component();
 
-    const TemplateComponent = module.default;
+    const TemplateComponent = selectedTemplate.component;
     const blob = await pdf(
       <TemplateComponent data={this.resumeData} />,
     ).toBlob();
