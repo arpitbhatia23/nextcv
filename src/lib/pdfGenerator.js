@@ -11,14 +11,16 @@ export class pdfGenerator {
   }
   async createPdf() {
     const selectedTemplate = templates.find(
-      (t) => t.key == (this.selectedTemplate || this.resumeData.ResumeType)
+      (t) => t.key == (this.selectedTemplate || this.resumeData.ResumeType),
     );
     if (!selectedTemplate) {
       throw new Error("Template not found");
     }
-    const TemplateComponent = selectedTemplate.component;
+    const module = await selectedTemplate.component();
+
+    const TemplateComponent = module.default;
     const blob = await pdf(
-      <TemplateComponent data={this.resumeData} />
+      <TemplateComponent data={this.resumeData} />,
     ).toBlob();
     const url = URL.createObjectURL(blob);
     this.url = url;
