@@ -1,13 +1,22 @@
 "use client";
 import React, { useState } from "react";
-import BasicInfoStep from "./resumesteps/BasicInfoStep";
-import SummaryStep from "./resumesteps/SummaryStep";
-import EducationStep from "./resumesteps/EducationStep";
-import SkillStep from "./resumesteps/SkillStep";
-import ExpricenceStep from "./resumesteps/ExpricenceStep";
-import FinalStep from "./resumesteps/FinalStep";
-import CertificateStep from "./resumesteps/Certificate";
-import ProjectsStep from "./resumesteps/ProjectsStep";
+import dynamic from "next/dynamic";
+const BasicInfoStep = dynamic(() => import("./resumesteps/BasicInfoStep"));
+const SummaryStep = dynamic(() => import("./resumesteps/SummaryStep"));
+const EducationStep = dynamic(() => import("./resumesteps/EducationStep"));
+const SkillStep = dynamic(() => import("./resumesteps/SkillStep"));
+const ExpricenceStep = dynamic(() => import("./resumesteps/ExpricenceStep"));
+const FinalStep = dynamic(() => import("./resumesteps/FinalStep"));
+const CertificateStep = dynamic(() => import("./resumesteps/Certificate"));
+const ProjectsStep = dynamic(() => import("./resumesteps/ProjectsStep"));
+// import BasicInfoStep from "./resumesteps/BasicInfoStep";
+// import SummaryStep from "./resumesteps/SummaryStep";
+// import EducationStep from "./resumesteps/EducationStep";
+// import SkillStep from "./resumesteps/SkillStep";
+// import ExpricenceStep from "./resumesteps/ExpricenceStep";
+// import FinalStep from "./resumesteps/FinalStep";
+// import CertificateStep from "./resumesteps/Certificate";
+// import ProjectsStep from "./resumesteps/ProjectsStep";
 
 import {
   Award,
