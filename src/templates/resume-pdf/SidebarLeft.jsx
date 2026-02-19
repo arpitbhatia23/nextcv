@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     width: "32%",
     backgroundColor: "#f1f5f9", // Slate-100
     padding: 20,
-    height: "100%",
+    padding: 20,
+    flexGrow: 1,
   },
   rightContent: {
     width: "68%",

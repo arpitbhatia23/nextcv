@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     padding: 14,
     paddingTop: 24,
     paddingBottom: 20,
-    minHeight: 700,
+    paddingBottom: 20,
+    flexGrow: 1,
   },
   rightCol: {
     width: "63%",

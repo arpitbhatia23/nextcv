@@ -90,16 +90,15 @@ const styles = StyleSheet.create({
   },
   timelineItem: {
     marginBottom: 12,
-    position: "relative",
+    flexDirection: "row",
   },
   timelineDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
     backgroundColor: "#2563eb",
-    position: "absolute",
-    left: -20, // (15 padding + 2 border + 3 center)
-    top: 4,
+    marginRight: 10,
+    marginTop: 6,
   },
   itemHeader: {
     marginBottom: 2,

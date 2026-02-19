@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* JSON-LD for Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
