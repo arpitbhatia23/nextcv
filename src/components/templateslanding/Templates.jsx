@@ -22,7 +22,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/minalmalist.webp",
+      img: "/milimalist.webp",
       width: 351,
       height: 451,
       title: "Clean Minimalist",
@@ -48,7 +48,7 @@ const Templates = () => {
     },
 
     {
-      img: "/professional-clean.webp",
+      img: "/professionalclean.webp",
       width: 446,
       height: 587,
       title: "Professional Clean",
@@ -56,7 +56,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/creative-teal.webp",
+      img: "/creativeteal.webp",
       width: 446,
       height: 587,
       title: "Creative Teal",
@@ -64,7 +64,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/executive-gray.webp",
+      img: "/executivegray.webp",
       width: 446,
       height: 587,
       title: "Executive Gray",
@@ -72,7 +72,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/tech-dark.webp",
+      img: "/techdark.webp",
       width: 446,
       height: 587,
       title: "Tech Dark",
@@ -80,7 +80,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/compact-modern.webp",
+      img: "/compactmodern.webp",
       width: 446,
       height: 587,
       title: "Compact Modern",
@@ -88,7 +88,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/bold-header.webp",
+      img: "/boldheader.webp",
       width: 446,
       height: 587,
       title: "Bold Header",
@@ -96,7 +96,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/sidebar-left.webp",
+      img: "/sidebarleft.webp",
       width: 446,
       height: 587,
       title: "Sidebar Left",
@@ -104,7 +104,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/infographich-lite.webp",
+      img: "/infografhic.webp",
       width: 446,
       height: 587,
       title: "Infographic Lite",
@@ -114,7 +114,7 @@ const Templates = () => {
 
     // Batch 1: Tech Giants
     {
-      img: "/modern.webp",
+      img: "/googletech.webp",
       width: 446,
       height: 587,
       title: "Google Tech",
@@ -122,7 +122,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/microsoft.webp",
       width: 446,
       height: 587,
       title: "Microsoft Corp",
@@ -130,7 +130,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/minalmalist.webp",
+      img: "/amazon.webp",
       width: 446,
       height: 587,
       title: "Amazon Ops",
@@ -138,7 +138,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/minalmalist.webp",
+      img: "/applecreative.webp",
       width: 446,
       height: 587,
       title: "Apple Creative",
@@ -146,7 +146,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/metasocial.webp",
       width: 446,
       height: 587,
       title: "Meta Social",
@@ -156,7 +156,7 @@ const Templates = () => {
 
     // Batch 2: Indian MNCs
     {
-      img: "/classic.webp",
+      img: "/tcs.webp",
       width: 446,
       height: 587,
       title: "TCS Digital",
@@ -164,7 +164,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/infosys.webp",
       width: 446,
       height: 587,
       title: "Infosys System",
@@ -172,7 +172,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/wipro.webp",
       width: 446,
       height: 587,
       title: "Wipro Modern",
@@ -180,7 +180,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/hcl.webp",
       width: 446,
       height: 587,
       title: "HCL Tech",
@@ -188,7 +188,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/mahindra.webp",
       width: 446,
       height: 587,
       title: "Mahindra Rise",
@@ -198,7 +198,7 @@ const Templates = () => {
 
     // Batch 3: Global Corporate
     {
-      img: "/classic.webp",
+      img: "/ibm.webp",
       width: 446,
       height: 587,
       title: "IBM Classic",
@@ -206,7 +206,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/accenture.webp",
       width: 446,
       height: 587,
       title: "Accenture Consult",
@@ -214,7 +214,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/deloitte.webp",
       width: 446,
       height: 587,
       title: "Deloitte Audit",
@@ -222,7 +222,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/capgenine.webp",
       width: 446,
       height: 587,
       title: "Capgemini Flow",
@@ -230,7 +230,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/cisco.webp",
       width: 446,
       height: 587,
       title: "Cisco Net",
@@ -240,7 +240,7 @@ const Templates = () => {
 
     // Batch 4: Finance & Enterprise
     {
-      img: "/classic.webp",
+      img: "/oracle.webp",
       width: 446,
       height: 587,
       title: "Oracle DB",
@@ -248,7 +248,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/sap.webp",
       width: 446,
       height: 587,
       title: "SAP Enterprise",
@@ -256,7 +256,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/goldman.webp",
       width: 446,
       height: 587,
       title: "Goldman Finance",
@@ -264,7 +264,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/jpmorgan.webp",
       width: 446,
       height: 587,
       title: "JPMorgan Chase",
@@ -272,7 +272,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/netflix.webp",
       width: 446,
       height: 587,
       title: "Netflix Culture",
@@ -282,7 +282,7 @@ const Templates = () => {
 
     // Batch 5: Role-Specific
     {
-      img: "/classic.webp",
+      img: "/medical.webp",
       width: 446,
       height: 587,
       title: "Medical / Nurse",
@@ -290,7 +290,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/teacher.webp",
       width: 446,
       height: 587,
       title: "Academic / Teacher",
@@ -298,7 +298,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/modern.webp",
+      img: "/sales.webp",
       width: 446,
       height: 587,
       title: "Sales / Business",
@@ -306,7 +306,7 @@ const Templates = () => {
       isATS: true,
     },
     {
-      img: "/classic.webp",
+      img: "/legal.webp",
       width: 446,
       height: 587,
       title: "Legal / Attorney",

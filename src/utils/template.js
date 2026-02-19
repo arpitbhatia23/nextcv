@@ -134,7 +134,7 @@ export const templates = [
     key: "SidebarLeft",
     label: "Sidebar Left",
     component: SidebarLeft,
-    image: "/sidebar-left.webp",
+    image: "/sidebarleft.webp",
   },
   {
     key: "InfographicLite",
