@@ -2,10 +2,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/context/authprovider";
 import { Toaster } from "@/components/ui/sonner";
-import GoogleAnalytics from "./anlatyics";
 import { Suspense } from "react";
 import Loading from "./loading";
 import { domAnimation, LazyMotion } from "framer-motion";
+import CookieBanner from "@/components/cookies";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -72,8 +72,10 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <main>
             <Suspense fallback={<Loading />}>
-              <LazyMotion features={domAnimation}>{children}</LazyMotion>
-              <GoogleAnalytics />
+              <LazyMotion features={domAnimation}>
+                {children}
+                <CookieBanner />
+              </LazyMotion>
             </Suspense>
             <Toaster />
           </main>
