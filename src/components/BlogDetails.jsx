@@ -49,7 +49,8 @@ const ErrorDisplay = () => (
       Unable to load article
     </h2>
     <p className="mb-8 text-slate-500 max-w-md">
-      We're having trouble retrieving this content. The article might have been moved or deleted.
+      We're having trouble retrieving this content. The article might have been
+      moved or deleted.
     </p>
     <div className="flex gap-4">
       <button
@@ -91,17 +92,23 @@ const ptComponents = {
   },
   block: {
     h2: ({ children }) => {
-      const id = children[0]?.toLowerCase().replace(/\s+/g, '-');
+      const id = children[0]?.toLowerCase().replace(/\s+/g, "-");
       return (
-        <h2 id={id} className="text-3xl font-bold text-slate-900 mt-16 mb-6 scroll-mt-24">
+        <h2
+          id={id}
+          className="text-3xl font-bold text-slate-900 mt-16 mb-6 scroll-mt-24"
+        >
           {children}
         </h2>
       );
     },
     h3: ({ children }) => {
-      const id = children[0]?.toLowerCase().replace(/\s+/g, '-');
+      const id = children[0]?.toLowerCase().replace(/\s+/g, "-");
       return (
-        <h3 id={id} className="text-2xl font-bold text-slate-800 mt-12 mb-4 scroll-mt-24">
+        <h3
+          id={id}
+          className="text-2xl font-bold text-slate-800 mt-12 mb-4 scroll-mt-24"
+        >
           {children}
         </h3>
       );
@@ -119,9 +126,7 @@ const ptComponents = {
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="space-y-4 mb-8 list-none">
-        {children}
-      </ul>
+      <ul className="space-y-4 mb-8 list-none">{children}</ul>
     ),
     number: ({ children }) => (
       <ol className="space-y-4 mb-8 list-decimal list-inside text-lg text-slate-600">
@@ -137,7 +142,9 @@ const ptComponents = {
   ),
   marks: {
     link: ({ children, value }) => {
-      const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
+      const rel = !value.href.startsWith("/")
+        ? "noreferrer noopener"
+        : undefined;
       return (
         <a
           href={value.href}
@@ -165,7 +172,8 @@ const BlogDetails = ({ slug, initialData }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
     };
@@ -180,7 +188,7 @@ const BlogDetails = ({ slug, initialData }) => {
     if (!initialData) {
       setIsLoading(true);
       setError(null);
-      
+
       const query = `*[_type == "post" && slug.current == $slug][0]{
         title,
         body,
@@ -219,10 +227,14 @@ const BlogDetails = ({ slug, initialData }) => {
   useEffect(() => {
     if (blog?.body) {
       const headings = blog.body
-        .filter((block) => block._type === "block" && (block.style === "h2" || block.style === "h3"))
+        .filter(
+          (block) =>
+            block._type === "block" &&
+            (block.style === "h2" || block.style === "h3"),
+        )
         .map((block) => ({
           text: block.children[0]?.text,
-          id: block.children[0]?.text?.toLowerCase().replace(/\s+/g, '-'),
+          id: block.children[0]?.text?.toLowerCase().replace(/\s+/g, "-"),
           level: block.style === "h2" ? 2 : 3,
         }));
       setToc(headings);
@@ -249,7 +261,10 @@ const BlogDetails = ({ slug, initialData }) => {
 
   const readingTime = useMemo(() => {
     if (!blog) return "0";
-    if (typeof blog.estimatedReadTime === "number" && blog.estimatedReadTime > 0) {
+    if (
+      typeof blog.estimatedReadTime === "number" &&
+      blog.estimatedReadTime > 0
+    ) {
       return Math.max(1, Math.round(blog.estimatedReadTime));
     }
     return Math.max(1, Math.round(estimateReadingTime(blog.body)));
@@ -272,7 +287,9 @@ const BlogDetails = ({ slug, initialData }) => {
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
         break;
       case "copy":
-        navigator.clipboard.writeText(currentUrl).then(() => setCopySuccess(true));
+        navigator.clipboard
+          .writeText(currentUrl)
+          .then(() => setCopySuccess(true));
         return;
       default:
         return;
@@ -287,7 +304,7 @@ const BlogDetails = ({ slug, initialData }) => {
     <div className="bg-white min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1.5 z-50 overflow-hidden bg-slate-50">
-        <div 
+        <div
           className="h-full bg-indigo-600 transition-all duration-300 ease-out shadow-[0_0_10px_rgba(79,70,229,0.5)]"
           style={{ width: `${scrollProgress}%` }}
         />
@@ -328,7 +345,7 @@ const BlogDetails = ({ slug, initialData }) => {
             {blog.title}
           </h1>
 
-          <div className="relative w-full min-h-[400px] md:min-h-[500px] rounded-3xl overflow-hidden shadow-2xl shadow-indigo-100 mb-16 group">
+          <div className="relative w-full min-h-100 md:min-h-125 rounded-3xl overflow-hidden shadow-2xl shadow-indigo-100 mb-16 group">
             {blog.mainImage && (
               <Image
                 src={urlFor(blog.mainImage).width(1600).url()}
@@ -347,7 +364,14 @@ const BlogDetails = ({ slug, initialData }) => {
           {/* Main Content Column */}
           <main className="lg:col-span-8">
             <article className="prose prose-indigo prose-lg max-w-none">
-              <Suspense fallback={<div className="animate-pulse space-y-8"><div className="h-6 bg-slate-100 rounded w-3/4"></div><div className="h-40 bg-slate-100 rounded"></div></div>}>
+              <Suspense
+                fallback={
+                  <div className="animate-pulse space-y-8">
+                    <div className="h-6 bg-slate-100 rounded w-3/4"></div>
+                    <div className="h-40 bg-slate-100 rounded"></div>
+                  </div>
+                }
+              >
                 <PortableText value={blog.body} components={ptComponents} />
               </Suspense>
             </article>
@@ -356,22 +380,39 @@ const BlogDetails = ({ slug, initialData }) => {
             <div className="mt-20 pt-12 border-t border-slate-100">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
                 <div className="flex items-center gap-3">
-                  <span className="text-slate-500 font-medium">Share this article:</span>
+                  <span className="text-slate-500 font-medium">
+                    Share this article:
+                  </span>
                   <div className="flex gap-2">
-                    <button onClick={() => handleShare("twitter")} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-sky-500 transition-all">
+                    <button
+                      onClick={() => handleShare("twitter")}
+                      className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-sky-500 transition-all"
+                    >
                       <Twitter className="w-5 h-5" />
                     </button>
-                    <button onClick={() => handleShare("linkedin")} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-blue-700 transition-all">
+                    <button
+                      onClick={() => handleShare("linkedin")}
+                      className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-blue-700 transition-all"
+                    >
                       <Linkedin className="w-5 h-5" />
                     </button>
-                    <button onClick={() => handleShare("copy")} className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-green-600 transition-all relative">
-                      {copySuccess ? <Check className="w-5 h-5" /> : <LinkIcon className="w-5 h-5" />}
+                    <button
+                      onClick={() => handleShare("copy")}
+                      className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-green-600 transition-all relative"
+                    >
+                      {copySuccess ? (
+                        <Check className="w-5 h-5" />
+                      ) : (
+                        <LinkIcon className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
                 </div>
-                
+
                 <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                   className="flex items-center gap-2 px-6 py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl transition-all font-semibold"
                 >
                   <ArrowUp className="w-5 h-5" /> Back to Top
@@ -396,7 +437,9 @@ const BlogDetails = ({ slug, initialData }) => {
                         key={index}
                         href={`#${heading.id}`}
                         className={`block text-sm transition-all hover:text-indigo-600 ${
-                          heading.level === 3 ? "ml-4 text-slate-500" : "font-medium text-slate-700"
+                          heading.level === 3
+                            ? "ml-4 text-slate-500"
+                            : "font-medium text-slate-700"
                         }`}
                       >
                         {heading.text}
@@ -424,7 +467,9 @@ const BlogDetails = ({ slug, initialData }) => {
                     )}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold leading-tight">{blog.author?.name || "NextCV Team"}</h4>
+                    <h4 className="text-lg font-bold leading-tight">
+                      {blog.author?.name || "NextCV Team"}
+                    </h4>
                     <p className="text-indigo-200 text-sm">Author</p>
                   </div>
                 </div>
@@ -443,8 +488,13 @@ const BlogDetails = ({ slug, initialData }) => {
 
               {/* Newsletter or CTA (Optional) */}
               <div className="p-8 rounded-3xl border-2 border-dashed border-slate-200 text-center">
-                <h4 className="font-bold text-slate-900 mb-2">Build Your Expert Resume</h4>
-                <p className="text-sm text-slate-500 mb-6">Create a professional resume in minutes with our AI-powered builder.</p>
+                <h4 className="font-bold text-slate-900 mb-2">
+                  Build Your Expert Resume
+                </h4>
+                <p className="text-sm text-slate-500 mb-6">
+                  Create a professional resume in minutes with our AI-powered
+                  builder.
+                </p>
                 <Link
                   href="/dashboard"
                   className="block w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all"
@@ -461,18 +511,25 @@ const BlogDetails = ({ slug, initialData }) => {
           <section className="mt-32 pt-24 border-t border-slate-100">
             <div className="flex items-end justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">You might also like</h2>
-                <p className="text-slate-500">More insights and career tips from our experts.</p>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                  You might also like
+                </h2>
+                <p className="text-slate-500">
+                  More insights and career tips from our experts.
+                </p>
               </div>
-              <Link href="/blogs" className="hidden sm:flex items-center gap-2 text-indigo-600 font-bold hover:gap-3 transition-all">
+              <Link
+                href="/blogs"
+                className="hidden sm:flex items-center gap-2 text-indigo-600 font-bold hover:gap-3 transition-all"
+              >
                 Read all posts <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((post) => (
-                <Link 
-                  key={post.slug.current} 
+                <Link
+                  key={post.slug.current}
                   href={`/blogs/${post.slug.current}`}
                   className="group flex flex-col"
                 >
@@ -487,7 +544,12 @@ const BlogDetails = ({ slug, initialData }) => {
                     )}
                   </div>
                   <div className="flex items-center gap-3 text-xs text-slate-400 mb-3 font-semibold uppercase tracking-wider">
-                    <span>{new Date(post._createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                    <span>
+                      {new Date(post._createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
                     <span className="w-1 h-1 bg-slate-300 rounded-full" />
                     <span>{post.author?.name}</span>
                   </div>
