@@ -21,11 +21,11 @@ export default function GoogleAnalytics() {
       {/* Load GA script asynchronously, non-blocking */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-CT60KM1G5Z"
-        strategy="worker"
+        strategy="afterInteractive"
       />
 
       {/* Initialize GA after script loads */}
-      <Script id="ga-init" strategy="lazyOnload">
+      <Script id="ga-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
