@@ -16,6 +16,8 @@ import confetti from "canvas-confetti";
 import { flow } from "@/utils/resumeFlow";
 import useResumeStore from "@/store/useResumeStore";
 import axios from "axios";
+import dynamic from "next/dynamic";
+const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 const RESPONSE_DELAY = 1000;
 
 export default function ResumeChat() {
@@ -209,7 +211,7 @@ export default function ResumeChat() {
   return (
     <div className="flex h-[calc(100vh-64px)] bg-slate-50 overflow-hidden">
       {/* Left Sidebar - Context & Tips (Hidden on Mobile) */}
-      <div className="hidden lg:flex w-80 flex-col border-r border-slate-200 bg-white h-full p-6">
+      <div className="hidden lg:flex w-80 flex-col border-r border-slate-200 bg-white h-full p-6" id="tour-chat-sidebar">
         <div className="bg-linear-to-br from-indigo-600 to-violet-600 text-white p-6 rounded-2xl shadow-lg mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
@@ -260,6 +262,7 @@ export default function ResumeChat() {
             window.location.reload();
           }}
           className="mt-4 flex items-center justify-center gap-2 text-slate-500 hover:text-red-600 text-sm font-medium transition-colors p-2"
+          id="tour-reset-chat"
         >
           <RotateCcw className="w-4 h-4" /> Reset Chat
         </button>
@@ -270,7 +273,7 @@ export default function ResumeChat() {
         {/* Messages */}
         <div
           className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth"
-          id="chat-container"
+          id="tour-chat-container"
         >
           <div className="max-w-3xl mx-auto min-h-full flex flex-col justify-end pb-4">
             {store.messages.map((msg, i) => (
@@ -324,6 +327,7 @@ export default function ResumeChat() {
                   className="flex-1 bg-slate-50 border border-slate-200 text-slate-900 rounded-full py-4 pl-6 pr-14 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent focus:bg-white shadow-sm transition-all"
                   disabled={isGenerating || store.isTyping}
                   autoFocus
+                  id="tour-chat-input"
                 />
                 <button
                   type="submit"
@@ -350,6 +354,28 @@ export default function ResumeChat() {
           </div>
         </div>
       </div>
+      <Tour
+        steps={[
+          {
+            target: "#tour-chat-sidebar",
+            content: "This is your AI companion's dashboard, showing your current progress.",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-chat-container",
+            content: "This is where the conversation happens. Answer the bot's questions to build your resume.",
+          },
+          {
+            target: "#tour-chat-input",
+            content: "Type your answers here. You can also type 'Skip' if you don't have information for a section.",
+          },
+          {
+            target: "#tour-reset-chat",
+            content: "Need to start over? You can reset the entire conversation here.",
+          },
+        ]}
+        tourId="ai-chat-resume"
+      />
     </div>
   );
 }

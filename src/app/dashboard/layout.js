@@ -10,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-      = {/* JSON-LD for Dashboard/Tool Application */}
+       {/* JSON-LD for Dashboard/Tool Application */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

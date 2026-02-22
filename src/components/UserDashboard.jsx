@@ -11,12 +11,32 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
-
+import Tour from "./Tour";
 const UserDashboard = () => {
+  const tourSteps = [
+    {
+      target: "#tour-dashboard-header",
+      content: "Welcome to your dashboard! Here you can manage your resumes and create new ones.",
+      disableBeacon: true,
+    },
+    {
+      target: "#tour-standard-resume",
+      content: "Use our standard form builder for precise control over every detail of your resume.",
+    },
+    {
+      target: "#tour-ai-resume",
+      content: "Short on time? Use our AI assistant to generate a professional resume in seconds.",
+    },
+    {
+      target: "#tour-value-props",
+      content: "Discover why NextCV is the best choice for your career growth.",
+    },
+  ];
+
   return (
     <div className="min-h-screen p-6 md:p-10 font-[--font-geist-sans] bg-slate-50">
       {/* Header */}
-      <div className="max-w-6xl mx-auto mb-10">
+      <div className="max-w-6xl mx-auto mb-10" id="tour-dashboard-header">
         <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">
           Dashboard
         </h1>
@@ -29,7 +49,7 @@ const UserDashboard = () => {
         {/* Main Creation Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Option 1: Manual Builder */}
-          <Link href="/dashboard/resumeform" className="group">
+          <Link href="/dashboard/resumeform" className="group" id="tour-standard-resume">
             <Card className="h-full border-2 border-slate-200 bg-white hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
               <CardContent className="p-8 md:p-10 relative">
@@ -53,7 +73,7 @@ const UserDashboard = () => {
           </Link>
 
           {/* Option 2: Full AI Generator */}
-          <Link href="/dashboard/full-ai-resume" className="group">
+          <Link href="/dashboard/full-ai-resume" className="group" id="tour-ai-resume">
             <Card className="h-full border-2 border-slate-200 bg-white hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
               <CardContent className="p-8 md:p-10 relative">
@@ -79,7 +99,7 @@ const UserDashboard = () => {
         </div>
 
         {/* Value Props Grid */}
-        <div>
+        <div id="tour-value-props">
           <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6 px-1">
             Why NextCV?
           </div>
@@ -134,6 +154,7 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
+      <Tour steps={tourSteps} tourId="dashboard" />
     </div>
   );
 };

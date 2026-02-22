@@ -32,6 +32,8 @@ import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
+const Tour = dynamic(() => import("./Tour"), { ssr: false });
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -320,7 +322,7 @@ const MyResume = () => {
 
   return (
     <div className="mx-auto p-6 md:p-10 max-w-7xl min-h-screen bg-slate-50">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4" id="tour-my-resumes-header">
         <div>
           <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
             My Resumes
@@ -332,6 +334,7 @@ const MyResume = () => {
         <Button
           onClick={() => route.push("/dashboard/resumeform")}
           className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 rounded-xl px-6 h-11"
+          id="tour-create-new-button"
         >
           <Plus className="mr-2 h-4 w-4" /> Create New Resume
         </Button>
@@ -483,7 +486,7 @@ const MyResume = () => {
         </div>
       )}
 
-      <Tabs defaultValue="My-Resume" className="w-full">
+      <Tabs defaultValue="My-Resume" className="w-full" id="tour-resume-tabs">
         <div className="border-b border-slate-200 mb-8">
           <TabsList className="bg-transparent h-auto p-0 space-x-8">
             <TabsTrigger
@@ -524,7 +527,7 @@ const MyResume = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="tour-resume-list">
               {paidResumes.map((resume) => (
                 <ResumeCard
                   key={resume?.resumedata._id}
@@ -564,6 +567,28 @@ const MyResume = () => {
           )}
         </TabsContent>
       </Tabs>
+      <Tour
+        steps={[
+          {
+            target: "#tour-my-resumes-header",
+            content: "Manage all your created resumes here.",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-create-new-button",
+            content: "Ready to start a new one? Click here!",
+          },
+          {
+            target: "#tour-resume-tabs",
+            content: "Switch between your unlocked resumes and drafts.",
+          },
+          {
+            target: "#tour-resume-list",
+            content: "All your resumes will appear here. You can download, edit, or delete them.",
+          },
+        ]}
+        tourId="my-resumes"
+      />
     </div>
   );
 };

@@ -76,7 +76,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
     <div className="py-8">
       <div className="grid lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <div className="space-y-6">
+        <div className="space-y-6" id="tour-resume-form">
           <div className="mb-2">
             <h2 className="text-2xl font-bold text-slate-900">Basic Details</h2>
             <p className="text-slate-500">
@@ -200,7 +200,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                       <Globe className="w-4 h-4 text-indigo-500" /> Social Links
                       (Optional)
                     </h3>
-                    <div className="space-y-4">
+                    <div className="space-y-4" id="tour-social-links">
                       <FormField
                         name="linkedin"
                         control={form.control}
@@ -265,6 +265,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                     <Button
                       className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8 h-11 rounded-lg font-semibold"
                       type="submit"
+                      id="tour-next-button"
                     >
                       Next Step <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -276,7 +277,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
         </div>
 
         {/* Live Preview Section */}
-        <div className="sticky top-24">
+        <div className="sticky top-24" id="tour-resume-preview">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider">
               Live Preview

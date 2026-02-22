@@ -73,7 +73,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
        </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200" id="tour-summary-form">
           <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl">
             <CardTitle className="text-lg font-bold text-slate-800">
                Your Summary
@@ -99,6 +99,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                             className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                             disabled={isGenerating}
                             onClick={handelAiGenration}
+                            id="tour-ai-button"
                           >
                             <Sparkles className="w-3 h-3 mr-1" />
                             {isGenerating ? "Magic..." : "Generate with AI"}
@@ -180,7 +181,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
               <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
                  <ArrowLeft className="w-4 h-4 mr-2" /> Back
               </Button>
-              <Button onClick={() => form.handleSubmit(onSubmit)()} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+              <Button onClick={() => form.handleSubmit(onSubmit)()} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8" id="tour-next-button">
                  Save & Next <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
            </div>

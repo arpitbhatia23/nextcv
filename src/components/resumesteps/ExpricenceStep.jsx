@@ -116,7 +116,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
        </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-xl shadow-sm border border-slate-200">
+        <Card className="bg-white rounded-xl shadow-sm border border-slate-200" id="tour-experience-form">
           <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
              <div>
                 <CardTitle className="text-lg font-bold text-slate-800">
@@ -263,6 +263,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                             className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                             disabled={isGenerating}
                             onClick={handelAiGenration}
+                            id="tour-ai-button"
                           >
                             <Sparkles className="w-3 h-3 mr-1" />
                             {isGenerating ? "Magic..." : "Generate with AI"}
@@ -309,7 +310,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
 
         {/* List Section */}
         <div className="space-y-6">
-           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
+           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5" id="tour-experience-list">
               <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
                  <Briefcase className="w-5 h-5 text-indigo-500" /> Professional Experience
               </h3>
@@ -354,7 +355,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
               <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
                  <ArrowLeft className="w-4 h-4 mr-2" /> Back
               </Button>
-              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8">
+              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8" id="tour-next-button">
                  Next Step <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
            </div>

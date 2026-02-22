@@ -27,6 +27,8 @@ import axios from "axios";
 import { formatDate } from "@/utils/datefromater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 function getChangedFields(original, edited) {
   const changed = {};
@@ -147,7 +149,7 @@ const page = ({ params }) => {
             >
                 <ArrowLeft className="w-4 h-4" /> Back to Dashboard
             </button>
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight" id="tour-edit-header">
               Edit Resume
             </h1>
             <p className="text-slate-500 mt-1">
@@ -159,6 +161,7 @@ const page = ({ params }) => {
             disabled={saving}
             size="lg"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm px-8"
+            id="tour-save-button"
           >
             {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
             {saving ? "Saving..." : "Save Changes"}
@@ -167,7 +170,7 @@ const page = ({ params }) => {
 
         {/* Personal Information */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-personal-info">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
                  <User className="w-4 h-4 text-indigo-600" />
@@ -304,7 +307,7 @@ const page = ({ params }) => {
 
         {/* Skills */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-skills-card">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
                  <Code className="w-4 h-4 text-indigo-600" />
@@ -370,7 +373,7 @@ const page = ({ params }) => {
 
         {/* Experience */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-experience-card">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
                  <Briefcase className="w-4 h-4 text-indigo-600" />
@@ -833,6 +836,32 @@ const page = ({ params }) => {
             </Button>
         </div>
       </div>
+      <Tour
+        steps={[
+          {
+            target: "#tour-edit-header",
+            content: "Quickly update any section of your resume here.",
+            disableBeacon: true,
+          },
+          {
+            target: "#tour-personal-info",
+            content: "Update your contact details and professional summary.",
+          },
+          {
+            target: "#tour-skills-card",
+            content: "Manage your technical and soft skills.",
+          },
+          {
+            target: "#tour-experience-card",
+            content: "Update your work history and job descriptions.",
+          },
+          {
+            target: "#tour-save-button",
+            content: "Don't forget to save your changes when you're done!",
+          },
+        ]}
+        tourId="edit-resume-page"
+      />
     </div>
   );
 };
