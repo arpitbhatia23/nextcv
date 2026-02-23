@@ -10,7 +10,7 @@ const handler = async (req, { params }) => {
   const { id } = await params;
   const session = await getServerSession(authOptions);
 
-  if (!session && session?.user.role !== "admin") {
+  if (!session || session?.user.role !== "admin") {
     throw new apiError(401, "unauthorized acess");
   }
 

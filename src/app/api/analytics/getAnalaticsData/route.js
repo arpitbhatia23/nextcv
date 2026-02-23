@@ -33,8 +33,7 @@ const handler = async (req) => {
   const { timeRange = "all" } = await req.json();
   try {
     await dbConnect();
-    const session = await getServerSession(authOptions);
-    if (!session && session?.user.role !== "admin") {
+    if (!session || session?.user.role !== "admin") {
       throw new apiError(401, "unauthorized acess");
     }
     const { startDate } = getDateRange(timeRange);

@@ -18,7 +18,7 @@ const handler = async (req) => {
   await dbConnect();
 
   const session = await getServerSession(authOptions);
-  if (!session && session?.user.role !== "admin") {
+  if (!session || session?.user.role !== "admin") {
     throw new apiError(401, "unauthorized acess");
   }
   couponCode = couponCode.trim();
