@@ -5,7 +5,7 @@ export const asyncHandler = (handler) => {
     try {
       return await handler(req, ctx);
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
       const status = error?.status || 500;
       if (status === 500) {
         sentry.captureException(error);

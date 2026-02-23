@@ -109,8 +109,7 @@ const resumeSchema = new Schema(
           type: String,
         },
         date: {
-          type: String,
-          required: true,
+          type: Schema.Types.Mixed,
         },
         technologiesOrTopics: {
           type: String,
