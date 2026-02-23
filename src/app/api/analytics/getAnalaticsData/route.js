@@ -33,6 +33,7 @@ const handler = async (req) => {
   const { timeRange = "all" } = await req.json();
   try {
     await dbConnect();
+    const session = await getServerSession(authOptions);
     if (!session || session?.user.role !== "admin") {
       throw new apiError(401, "unauthorized acess");
     }
@@ -308,7 +309,7 @@ const handler = async (req) => {
           weeklyTrends,
         },
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error fetching analytics data:", error);
