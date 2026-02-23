@@ -2,6 +2,7 @@
 
 import GoogleAnalytics from "@/app/anlatyics";
 import { useEffect, useState } from "react";
+import Clearity from "./clearity";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
@@ -30,7 +31,12 @@ export default function CookieBanner() {
 
   return (
     <>
-      {consent === "accepted" && <GoogleAnalytics />}
+      {consent === "accepted" && (
+        <>
+          <GoogleAnalytics />
+          <Clearity />
+        </>
+      )}
 
       {show && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-3xl bg-white text-gray-800 p-6 rounded-2xl shadow-2xl border border-gray-200 z-50">
