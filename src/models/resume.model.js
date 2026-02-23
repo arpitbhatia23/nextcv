@@ -57,11 +57,11 @@ const resumeSchema = new Schema(
           required: true,
         },
         startYear: {
-          type: Date,
+          type: Schema.Types.Mixed,
           required: true,
         },
         endYear: {
-          type: Date,
+          type: Schema.Types.Mixed,
           default: null,
         },
         grade: {
@@ -82,10 +82,10 @@ const resumeSchema = new Schema(
           type: String,
         },
         startDate: {
-          type: Date,
+          type: Schema.Types.Mixed,
         },
         endDate: {
-          type: Date,
+          type: Schema.Types.Mixed,
         },
         description: {
           type: [String],
@@ -124,7 +124,7 @@ const resumeSchema = new Schema(
       {
         title: String,
         organization: String,
-        year: Date,
+        year: Schema.Types.Mixed,
         credentialUrl: { type: String, default: null },
       },
     ],

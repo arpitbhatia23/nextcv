@@ -9,14 +9,6 @@ const ExpricenceStep = dynamic(() => import("./resumesteps/ExpricenceStep"));
 const FinalStep = dynamic(() => import("./resumesteps/FinalStep"));
 const CertificateStep = dynamic(() => import("./resumesteps/Certificate"));
 const ProjectsStep = dynamic(() => import("./resumesteps/ProjectsStep"));
-// import BasicInfoStep from "./resumesteps/BasicInfoStep";
-// import SummaryStep from "./resumesteps/SummaryStep";
-// import EducationStep from "./resumesteps/EducationStep";
-// import SkillStep from "./resumesteps/SkillStep";
-// import ExpricenceStep from "./resumesteps/ExpricenceStep";
-// import FinalStep from "./resumesteps/FinalStep";
-// import CertificateStep from "./resumesteps/Certificate";
-// import ProjectsStep from "./resumesteps/ProjectsStep";
 
 import {
   Award,
@@ -63,57 +55,133 @@ const Resume = () => {
     const commonSteps = [
       {
         target: "#tour-resume-progress",
-        content: "Track your progress here. There are 8 total steps to complete your resume.",
+        content:
+          "Track your progress here. There are 8 total steps to complete your resume.",
         disableBeacon: true,
       },
       {
         target: "#tour-resume-nav",
-        content: "You can quickly jump between sections once you've completed them.",
+        content:
+          "You can quickly jump between sections once you've completed them.",
       },
     ];
 
     const stepSpecificSteps = {
       0: [
-        { target: "#tour-resume-form", content: "Fill in your personal details here." },
-        { target: "#tour-social-links", content: "Add your LinkedIn, GitHub, and Portfolio." },
-        { target: "#tour-resume-preview", content: "See your changes in real-time." },
+        {
+          target: "#tour-resume-form",
+          content: "Fill in your personal details here.",
+        },
+        {
+          target: "#tour-social-links",
+          content: "Add your LinkedIn, GitHub, and Portfolio.",
+        },
+        {
+          target: "#tour-resume-preview",
+          content: "See your changes in real-time.",
+        },
       ],
       1: [
-        { target: "#tour-education-form", content: "Add your educational background." },
-        { target: "#tour-ai-button", content: "Let AI help you write professional descriptions!" },
-        { target: "#tour-education-list", content: "Manage your added education entries." },
+        {
+          target: "#tour-education-form",
+          content: "Add your educational background.",
+        },
+        {
+          target: "#tour-ai-button",
+          content: "Let AI help you write professional descriptions!",
+        },
+        {
+          target: "#tour-education-list",
+          content: "Manage your added education entries.",
+        },
       ],
       2: [
-        { target: "#tour-skills-form", content: "Add your technical and soft skills." },
-        { target: "#tour-skills-list", content: "View and manage your skills list." },
+        {
+          target: "#tour-skills-form",
+          content: "Add your technical and soft skills.",
+        },
+        {
+          target: "#tour-skills-list",
+          content: "View and manage your skills list.",
+        },
       ],
       3: [
-        { target: "#tour-experience-form", content: "Detail your professional work history." },
-        { target: "#tour-ai-button", content: "AI can help polish your job responsibilities." },
-        { target: "#tour-experience-list", content: "Manage your work experience entries." },
+        {
+          target: "#tour-experience-form",
+          content: "Detail your professional work history.",
+        },
+        {
+          target: "#tour-ai-button",
+          content: "AI can help polish your job responsibilities.",
+        },
+        {
+          target: "#tour-experience-list",
+          content: "Manage your work experience entries.",
+        },
       ],
       4: [
-        { target: "#tour-projects-form", content: "Showcase your best projects." },
-        { target: "#tour-ai-button", content: "Use AI to describe your project achievements." },
-        { target: "#tour-projects-list", content: "Manage your project portfolio." },
+        {
+          target: "#tour-projects-form",
+          content: "Showcase your best projects.",
+        },
+        {
+          target: "#tour-ai-button",
+          content: "Use AI to describe your project achievements.",
+        },
+        {
+          target: "#tour-projects-list",
+          content: "Manage your project portfolio.",
+        },
       ],
       5: [
-        { target: "#tour-certificates-form", content: "Add your professional certifications." },
-        { target: "#tour-certificates-list", content: "Manage your credentials." },
+        {
+          target: "#tour-certificates-form",
+          content: "Add your professional certifications.",
+        },
+        {
+          target: "#tour-certificates-list",
+          content: "Manage your credentials.",
+        },
       ],
       6: [
-        { target: "#tour-summary-form", content: "Write a brief professional summary." },
-        { target: "#tour-ai-button", content: "Let AI draft a compelling summary for you." },
+        {
+          target: "#tour-summary-form",
+          content: "Write a brief professional summary.",
+        },
+        {
+          target: "#tour-ai-button",
+          content: "Let AI draft a compelling summary for you.",
+        },
       ],
       7: [
-        { target: "#tour-template-selection", content: "Pick a professional template for your resume." },
-        { target: "#tour-final-preview", content: "Check the final look of your resume." },
-        { target: "#tour-payment-section", content: "Unlock the high-quality PDF for download." },
-        { target: "#tour-coupon-section", content: "Have a discount code? Apply it here." },
+        {
+          target: "#tour-template-selection",
+          content: "Pick a professional template for your resume.",
+        },
+        {
+          target: "#tour-final-preview",
+          content: "Check the final look of your resume.",
+        },
+        {
+          target: "#tour-payment-section",
+          content: "Unlock the high-quality PDF for download.",
+        },
+        {
+          target: "#tour-coupon-section",
+          content: "Have a discount code? Apply it here.",
+        },
       ],
     };
 
-    const nextStepInfo = step < 7 ? [{ target: "#tour-next-button", content: "Click here to save and move to the next step." }] : [];
+    const nextStepInfo =
+      step < 7
+        ? [
+            {
+              target: "#tour-next-button",
+              content: "Click here to save and move to the next step.",
+            },
+          ]
+        : [];
 
     return [
       ...(step === 0 ? commonSteps : []),
@@ -156,7 +224,10 @@ const Resume = () => {
       </div>
 
       {/* Steps Navigation - Horizontal */}
-      <div className="bg-white border-b border-slate-100 mb-8 overflow-x-auto" id="tour-resume-nav">
+      <div
+        className="bg-white border-b border-slate-100 mb-8 overflow-x-auto"
+        id="tour-resume-nav"
+      >
         <div className="max-w-7xl mx-auto px-4 min-w-max">
           <div className="flex items-center py-4 gap-8">
             {resumeSteps.map((stepInfo, index) => {

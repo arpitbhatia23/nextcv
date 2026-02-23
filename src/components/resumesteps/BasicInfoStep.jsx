@@ -9,19 +9,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-  User,
   Phone,
   Mail,
   Linkedin,
   Github,
   Globe,
   MapPin,
-  Briefcase,
   ArrowRight,
 } from "lucide-react";
-import Logo2 from "../Logo2";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";

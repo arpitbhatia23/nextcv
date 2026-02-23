@@ -1,5 +1,6 @@
 import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
+import mongoose from "mongoose";
 
 const { default: authOptions } = require("@/app/api/auth/options");
 const { default: Resume } = require("@/models/resume.model");
@@ -15,6 +16,9 @@ const handler = async (req, { params }) => {
   if (!session && !session.user) {
     throw new apiError(401, "unauthorized user");
   }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    throw new apiError(400, "invalid resume id");
+  }
 
   const resumeData = await Resume.findById(id);
 
@@ -23,7 +27,7 @@ const handler = async (req, { params }) => {
   }
   return NextResponse.json(
     new apiResponse(200, "resume found sucessfull", resumeData),
-    { status: 200 }
+    { status: 200 },
   );
 };
 
