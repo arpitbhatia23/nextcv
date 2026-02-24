@@ -93,7 +93,7 @@ Example format:
 `,
 
   summary: ({ role = "", education = "", experience = "" }) => `
-Generate a professional resume summary in PLAIN TEXT.
+Generate a compelling and professionally written resume summary in PLAIN TEXT.
 
 STRICT RULES:
 - Output ONLY 2–3 concise lines
@@ -104,9 +104,16 @@ STRICT RULES:
 - NO JSON
 - NO quotes
 
+The summary must:
+- Clearly reflect the candidate’s professional identity
+- Highlight key strengths and relevant expertise
+- Align experience and education with the stated role
+- Use confident, results-oriented language
+- Maintain a formal, polished tone suitable for ATS systems
+
 Professional Title: ${role}
 Experience: ${experience}
-education: ${education}
+Education: ${education}
 `,
 };
 
