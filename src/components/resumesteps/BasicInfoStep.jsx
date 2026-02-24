@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
-
+"use client";
+import { useForm, useWatch } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -62,7 +62,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
     }
   }, [formData, form]);
 
-  const watchedValues = form.watch();
+  const watchedValues = useWatch({ control: form.control });
 
   const handlesave = () => {
     updateForm(watchedValues);

@@ -1,14 +1,38 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-const BasicInfoStep = dynamic(() => import("./resumesteps/BasicInfoStep"));
-const SummaryStep = dynamic(() => import("./resumesteps/SummaryStep"));
-const EducationStep = dynamic(() => import("./resumesteps/EducationStep"));
-const SkillStep = dynamic(() => import("./resumesteps/SkillStep"));
-const ExpricenceStep = dynamic(() => import("./resumesteps/ExpricenceStep"));
-const FinalStep = dynamic(() => import("./resumesteps/FinalStep"));
-const CertificateStep = dynamic(() => import("./resumesteps/Certificate"));
-const ProjectsStep = dynamic(() => import("./resumesteps/ProjectsStep"));
+const BasicInfoStep = dynamic(() => import("./resumesteps/BasicInfoStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const SummaryStep = dynamic(() => import("./resumesteps/SummaryStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const EducationStep = dynamic(() => import("./resumesteps/EducationStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const SkillStep = dynamic(() => import("./resumesteps/SkillStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const ExpricenceStep = dynamic(() => import("./resumesteps/ExpricenceStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const FinalStep = dynamic(() => import("./resumesteps/FinalStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const CertificateStep = dynamic(() => import("./resumesteps/Certificate"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const ProjectsStep = dynamic(() => import("./resumesteps/ProjectsStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
 
 import {
   Award,
@@ -22,6 +46,7 @@ import {
 } from "lucide-react";
 import Logo2 from "./Logo2";
 import useResumeStore from "@/store/useResumeStore";
+import Loading from "@/app/loading";
 const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 const Resume = () => {
