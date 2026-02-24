@@ -3,14 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useResumeStoreChat } from "@/store/chatStore";
 import { ChatMessage } from "@/components/Chat";
-import {
-  Send,
-  Sparkles,
-  Lightbulb,
-  RotateCcw,
-  Loader2,
-  Award,
-} from "lucide-react";
+import { Send, Sparkles, Lightbulb, RotateCcw, Loader2 } from "lucide-react";
 import { useAutoScroll } from "@/hooks/useAutoscroll";
 import confetti from "canvas-confetti";
 import { flow } from "@/utils/resumeFlow";
@@ -21,6 +14,31 @@ const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 const RESPONSE_DELAY = 1000;
 
 export default function ResumeChat() {
+  if (process.env.NEXT_PUBLIC_ENABLE_CHAT !== "true") {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-6">
+        <div className="bg-gray-100 px-3 py-1 rounded-full text-sm mb-4">
+          🚧 Feature Update
+        </div>
+
+        <h2 className="text-3xl font-bold mb-3">
+          Chat-Based AI Resume Builder
+        </h2>
+
+        <p className="text-gray-500 max-w-lg leading-relaxed">
+          We're upgrading this feature to deliver faster responses and more
+          accurate resume optimization. It will be available again very soon.
+        </p>
+
+        <button
+          onClick={() => (window.location.href = "/dashboard/resumeform")}
+          className="mt-6 px-5 py-2 bg-black text-white rounded-lg hover:opacity-90 transition"
+        >
+          Use Classic Resume Builder
+        </button>
+      </div>
+    );
+  }
   // --- State & Stores ---
   const store = useResumeStoreChat();
   const updateForm = useResumeStore((state) => state.updateForm);
@@ -211,7 +229,10 @@ export default function ResumeChat() {
   return (
     <div className="flex h-[calc(100vh-64px)] bg-slate-50 overflow-hidden">
       {/* Left Sidebar - Context & Tips (Hidden on Mobile) */}
-      <div className="hidden lg:flex w-80 flex-col border-r border-slate-200 bg-white h-full p-6" id="tour-chat-sidebar">
+      <div
+        className="hidden lg:flex w-80 flex-col border-r border-slate-200 bg-white h-full p-6"
+        id="tour-chat-sidebar"
+      >
         <div className="bg-linear-to-br from-indigo-600 to-violet-600 text-white p-6 rounded-2xl shadow-lg mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
@@ -358,20 +379,24 @@ export default function ResumeChat() {
         steps={[
           {
             target: "#tour-chat-sidebar",
-            content: "This is your AI companion's dashboard, showing your current progress.",
+            content:
+              "This is your AI companion's dashboard, showing your current progress.",
             disableBeacon: true,
           },
           {
             target: "#tour-chat-container",
-            content: "This is where the conversation happens. Answer the bot's questions to build your resume.",
+            content:
+              "This is where the conversation happens. Answer the bot's questions to build your resume.",
           },
           {
             target: "#tour-chat-input",
-            content: "Type your answers here. You can also type 'Skip' if you don't have information for a section.",
+            content:
+              "Type your answers here. You can also type 'Skip' if you don't have information for a section.",
           },
           {
             target: "#tour-reset-chat",
-            content: "Need to start over? You can reset the entire conversation here.",
+            content:
+              "Need to start over? You can reset the entire conversation here.",
           },
         ]}
         tourId="ai-chat-resume"
