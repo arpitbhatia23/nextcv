@@ -9,33 +9,73 @@ const handler = async (req, res) => {
   const { resumeData } = await req.json();
 
   const prompt = `
-You are an expert ATS resume parser and resume enhancer.
+You are a STRICT ATS resume parser and professional resume enhancer.
 
 Your responsibilities:
-1. Extract structured resume data from the provided resume content.
-2. Correct spelling, grammar, and formatting issues.
-3. Enhance job responsibilities and project descriptions using:
+1. Extract structured resume data EXACTLY from the provided resume content.
+2. Correct spelling, grammar, and formatting errors.
+3. Improve clarity and professionalism of existing content ONLY.
+4. Enhance job responsibilities and project descriptions using:
    - Strong action verbs
-   - Measurable impact (numbers, scale, performance when available)
-   - Relevant tools, technologies, and methodologies
-4. Generate an ATS-friendly professional summary ONLY if the summary field is missing or empty.
-5. DO NOT invent, guess, or assume any information.
-   - If a field is missing, return an empty string "" or an empty array [].
-6. Each experience and project description MUST contain **3–4 concise bullet points**.
-7. Add relevant **soft skills** aligned with the candidate’s profile (communication, teamwork, problem-solving, etc.) along with technical skills.
+   - Measurable impact ONLY if explicitly present in original content
+   - Relevant tools/technologies ONLY if explicitly mentioned
+5. Generate a professional summary ONLY if summary field is missing or empty.
+6. Add relevant soft skills ONLY if they logically align with explicitly mentioned experience.
+7. NEVER invent, assume, infer, or fabricate ANY information.
 
-Strict rules (must follow):
-- Use ISO date format ONLY: "2024-06-01T00:00:00.000+00:00"
-- Keep content concise, professional, and ATS-optimized.
-- Fix ALL spelling and grammatical errors.
-- Do NOT add explanations, comments, or markdown.
+STRICT NON-NEGOTIABLE RULES:
+
+— DO NOT create new experience entries.
+— DO NOT create new projects.
+— DO NOT add missing dates.
+— DO NOT assume a job is current.
+— DO NOT convert year into full ISO date unless full date is provided.
+— If a date is missing → return "".
+— If endDate is not provided → return "".
+— If startDate is not provided → return "".
+— If any field is missing → return "" or [].
+— DO NOT infer employment duration.
+— DO NOT assume technologies.
+— DO NOT assume achievements.
+— DO NOT change job titles.
+— DO NOT change company names.
+— DO NOT merge entries.
+— DO NOT split entries.
+
+DATE RULES (VERY STRICT):
+- Use ISO format ONLY if full valid date exists in input.
+- Format: "2024-06-01T00:00:00.000+00:00"
+- If only year is provided → return "".
+- If month/year but no day → return "".
+- If date is unclear → return "".
+- NEVER fabricate day/month values.
+
+DESCRIPTION RULES:
+- Each experience description MUST contain 3–4 concise bullet points.
+- Each project description MUST contain 3–4 concise bullet points.
+- Bullet points must be based ONLY on provided content.
+- If content is too short → rewrite professionally but do NOT add new facts.
+
+SKILLS RULES:
+- Keep original technical skills.
+- Correct spelling (e.g., "begnner" → "beginner").
+- Add soft skills only if strongly supported by resume content.
+- DO NOT add tools that are not explicitly mentioned.
+
+OUTPUT RULES:
+- Keep content concise.
+- ATS-optimized.
+- Professional tone.
+- No markdown.
+- No explanations.
+- No comments.
 - Return ONLY valid JSON.
-- JSON keys, structure, and order MUST match the schema below EXACTLY.
+- JSON structure and key order MUST match EXACTLY.
 
 Resume content:
 ${JSON.stringify(resumeData)}
 
-Return the output strictly in the following JSON format:
+Return output STRICTLY in this JSON format:
 
 {
   "_id": "",
@@ -55,18 +95,18 @@ Return the output strictly in the following JSON format:
   "summary": "",
 
   "skills": [
-      {
-        name:"react"
-        level:"begnner"
-      },
-    ],
+    {
+      "name": "",
+      "level": ""
+    }
+  ],
 
   "education": [
     {
       "degree": "",
       "institution": "",
-      "startYear": "2024-06-01T00:00:00.000+00:00",
-      "endYear": "2024-06-01T00:00:00.000+00:00",
+      "startYear": "",
+      "endYear": "",
       "grade": "",
       "description": ""
     }
@@ -76,8 +116,8 @@ Return the output strictly in the following JSON format:
     {
       "position": "",
       "companyName": "",
-      "startDate": "2024-06-01T00:00:00.000+00:00",
-      "endDate": "2024-06-01T00:00:00.000+00:00",
+      "startDate": "",
+      "endDate": "",
       "description": ""
     }
   ],
@@ -88,7 +128,7 @@ Return the output strictly in the following JSON format:
       "roleOrType": "",
       "description": "",
       "link": "",
-      "date": "2024-06-01T00:00:00.000+00:00",
+      "date": "",
       "technologiesOrTopics": "",
       "organization": ""
     }

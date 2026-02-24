@@ -114,7 +114,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
           <h2 className="text-2xl font-bold text-slate-900">Work Experience</h2>
           <p className="text-slate-500">Add your professional experience</p>
        </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <Card className="bg-white rounded-xl shadow-sm border border-slate-200" id="tour-experience-form">
           <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
@@ -328,7 +328,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                              <h4 className="font-bold text-slate-800">{exp.position}</h4>
                              <div className="text-sm text-indigo-600 font-medium">{exp.companyName}</div>
                          </div>
-                         <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                          <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                              <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(exp)}>
                                 <Edit2 className="w-3.5 h-3.5" />
                              </Button>

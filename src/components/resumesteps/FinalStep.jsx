@@ -395,7 +395,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
       <div className="hidden md:flex flex-1 overflow-hidden w-full gap-6 h-full min-h-0">
         {/* Left: Template List - Fixed Sidebar */}
         {!isdraft && (
-          <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0" id="tour-template-selection">
+          <div className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0" id="tour-template-selection">
             <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
               <h3 className="font-semibold text-slate-800 flex items-center gap-2">
                 <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select
@@ -511,10 +511,10 @@ const FinalStep = ({ formData, isdraft = false }) => {
                     <div key={idx} className="mb-4 last:mb-0">
                       <Page
                         pageNumber={idx + 1}
-                        width={600}
+                        width={numPages > 0 ? undefined : 600}
+                        className="bg-white max-w-full"
                         renderAnnotationLayer={false}
                         renderTextLayer={false}
-                        className="bg-white"
                       />
                     </div>
                   ))}
@@ -527,7 +527,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
         </div>
 
         {/* Right: Payment (Desktop) - Fixed Sidebar */}
-        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit sticky top-4" id="tour-payment-section">
+        <div className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit sticky top-4" id="tour-payment-section">
           <div className="p-5 border-b border-slate-100 bg-linear-to-r from-indigo-50 to-white">
             <h3 className="text-lg font-bold text-slate-900">
               Finalize Resume

@@ -113,7 +113,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
         <h2 className="text-2xl font-bold text-slate-900">Projects</h2>
         <p className="text-slate-500">Highlight your best work</p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <Card
           className="bg-white rounded-xl shadow-sm border border-slate-200"
@@ -373,7 +373,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                           {project.roleOrType}
                         </div>
                       </div>
-                      <div className="flex flex-col gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                         <Button
                           size="icon"
                           variant="ghost"

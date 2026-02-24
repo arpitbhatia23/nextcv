@@ -71,7 +71,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   console.log("render");
   return (
     <div className="py-8">
-      <div className="grid lg:grid-cols-2 gap-8 items-start">
+      <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <div className="space-y-6" id="tour-resume-form">
           <div className="mb-2">

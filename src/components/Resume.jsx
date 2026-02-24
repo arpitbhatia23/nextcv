@@ -212,7 +212,7 @@ const Resume = () => {
               <div className="text-xs font-medium text-slate-500">
                 Step {step + 1} of {resumeSteps.length}
               </div>
-              <div className="w-32 md:w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div className="w-24 md:w-32 lg:w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-indigo-600 transition-all duration-300 ease-out"
                   style={{ width: `${progress}%` }}
@@ -229,7 +229,7 @@ const Resume = () => {
         id="tour-resume-nav"
       >
         <div className="max-w-7xl mx-auto px-4 min-w-max">
-          <div className="flex items-center py-4 gap-8">
+          <div className="flex items-center py-4 gap-4 md:gap-8">
             {resumeSteps.map((stepInfo, index) => {
               const Icon = stepInfo.icon;
               const isActive = index === step;

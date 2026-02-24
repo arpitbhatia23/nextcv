@@ -5,7 +5,7 @@ import { persist } from "zustand/middleware";
 export const useResumeStoreChat = create(
   persist(
     (set) => ({
-      messages: [{ sender: "bot", text: "👋 Welcome! What's your full name?" }],
+      messages: [],
       answers: {},
       step: 0,
       fieldStep: 0,
@@ -47,9 +47,7 @@ export const useResumeStoreChat = create(
       setGeneratedResumeUrl: (url) => set({ generatedResumeUrl: url }),
       resetStore: () =>
         set({
-          messages: [
-            { sender: "bot", text: "👋 Welcome! What's your full name?" },
-          ],
+          messages: [],
           answers: {},
           step: 0,
           fieldStep: 0,

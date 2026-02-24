@@ -82,7 +82,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
           <h2 className="text-2xl font-bold text-slate-900">Skills</h2>
           <p className="text-slate-500">Showcase your technical proficiency</p>
        </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <Card className="bg-white rounded-xl shadow-sm border border-slate-200" id="tour-skills-form">
           <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
