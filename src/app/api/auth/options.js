@@ -27,7 +27,7 @@ const authOptions = {
         }
         const ispaswordVaild = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password,
         );
         if (!ispaswordVaild) {
           throw new Error("inavaild password");
@@ -85,7 +85,7 @@ const authOptions = {
   },
 
   pages: {
-    signIn: "/adminlogin",
+    signIn: "/",
   },
 
   secret: process.env.NEXTAUTH_SECRET,

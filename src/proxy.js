@@ -35,6 +35,17 @@ export async function proxy(req) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
+  // 5. A/B Testing for Resume Form
+  if (pathname === "/dashboard/resumeform" && token?.user?._id) {
+    const userId = token.user._id.toString();
+    const lastChar = userId.slice(-1);
+    const isEven = parseInt(lastChar, 16) % 2 === 0;
+
+    if (isEven) {
+      return NextResponse.redirect(new URL("/dashboard/resumeform-v2", req.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
