@@ -134,7 +134,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                   <Button variant="ghost" size="sm" onClick={cancelEdit} className="h-8 text-xs font-bold text-slate-400">Cancel</Button>
                 )}
              </div>
-             <CardContent className="p-8">
+             <CardContent className="p-8" id="tour-experience-form-v2">
                <Form {...form}>
                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
@@ -214,6 +214,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                               onClick={handleAiGeneration}
                               disabled={isGenerating}
                               className="text-xs font-black text-indigo-600 flex items-center gap-1.5 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
+                              id="tour-ai-button-v2"
                             >
                               <Sparkles className={`w-3 h-3 ${isGenerating ? 'animate-spin' : ''}`} />
                               {isGenerating ? "Elevating..." : "AI Polishing"}
@@ -249,7 +250,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
               <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{experienceList.length} Experiences</span>
            </div>
 
-           <div className="relative pl-8 space-y-8">
+           <div className="relative pl-8 space-y-8" id="tour-experience-list-v2">
               <div className="absolute left-[11px] top-4 bottom-4 w-0.5 bg-slate-100" />
 
               <AnimatePresence initial={false}>
@@ -318,7 +319,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
              <Button onClick={previous} variant="ghost" className="h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                <ArrowLeft className="mr-2 w-5 h-5" /> Back
              </Button>
-             <Button onClick={next} disabled={experienceList.length === 0} className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all">
+             <Button onClick={next} disabled={experienceList.length === 0} className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all" id="tour-next-button-v2">
                Project Showcase <ArrowRight className="ml-2 w-5 h-5" />
              </Button>
            </div>

@@ -79,7 +79,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
             <p className="text-slate-500 mt-2 text-lg">Validate your skills with official certifications.</p>
           </div>
 
-          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden">
+          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden" id="tour-certificates-form-v2">
              <div className="bg-indigo-600/5 px-6 py-4 border-b border-indigo-100/50 flex items-center justify-between">
                 <span className="text-sm font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4" /> {isEditing ? "Modify Credential" : "New Achievement"}
@@ -172,7 +172,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
               <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{certList.length} Verified</span>
            </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-4" id="tour-certificates-list-v2">
               <AnimatePresence initial={false}>
                 {certList.length === 0 ? (
                   <motion.div 

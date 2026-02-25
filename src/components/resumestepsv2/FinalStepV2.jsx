@@ -273,7 +273,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
             </h3>
           </div>
 
-          <div className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0">
+          <div className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0" id="tour-template-selection-v2">
             {templates.map((template) => (
               <motion.div
                 key={template.key}
@@ -318,7 +318,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         </div>
 
         {/* Global Preview Section */}
-        <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[3rem] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] lg:overflow-hidden overflow-visible min-h-0 order-1 lg:order-2">
+        <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[3rem] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] lg:overflow-hidden overflow-visible min-h-0 order-1 lg:order-2" id="tour-final-preview-v2">
           <div className="h-16 flex items-center justify-between px-8 border-b border-slate-50 bg-slate-50/30">
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
               <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />{" "}
@@ -406,6 +406,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                     placeholder="PROMO CODE"
                     disabled={applied}
                     className="h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-bold tracking-widest placeholder:normal-case placeholder:tracking-normal"
+                    id="tour-coupon-section-v2"
                   />
                   {applied ? (
                     <button
@@ -436,6 +437,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-2xl shadow-indigo-100 py-8 rounded-2xl font-black text-lg transition-all hover:-translate-y-1 active:scale-95 group"
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
+                id="tour-payment-section-v2"
               >
                 <Download className="mr-3 w-6 h-6 group-hover:translate-y-0.5 transition-transform" />
                 {isSubmit ? "Authenticating..." : "Unlock PDF"}

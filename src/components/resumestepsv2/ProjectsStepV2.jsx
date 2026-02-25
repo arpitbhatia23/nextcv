@@ -120,7 +120,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
             <p className="text-slate-500 mt-2 text-lg">Display your technical depth through real-world projects.</p>
           </div>
 
-          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden">
+          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden" id="tour-projects-form-v2">
              <div className="bg-indigo-600/5 px-6 py-4 border-b border-indigo-100/50 flex items-center justify-between">
                 <span className="text-sm font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2">
                   <Rocket className="w-4 h-4" /> {isEditing ? "Modify Project" : "Launch Project Entry"}
@@ -219,6 +219,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                               onClick={handleAiGeneration}
                               disabled={isGenerating}
                               className="text-xs font-black text-indigo-600 flex items-center gap-1.5 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
+                              id="tour-ai-button-v2"
                             >
                               <Sparkles className={`w-3 h-3 ${isGenerating ? 'animate-spin' : ''}`} />
                                {isGenerating ? "Processing..." : "AI Augment"}
@@ -254,7 +255,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
               <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{projectList.length} Units</span>
            </div>
 
-           <div className="grid grid-cols-1 gap-6">
+           <div className="grid grid-cols-1 gap-6" id="tour-projects-list-v2">
               <AnimatePresence initial={false}>
                 {projectList.length === 0 ? (
                   <motion.div 

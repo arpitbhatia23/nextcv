@@ -74,9 +74,10 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
   const handlesave = (values) => {
     updateForm(values);
     next();
-  };
+  }
 
   return (
+    
     <div className="py-2">
       <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10">
         {/* Form Section */}
@@ -90,7 +91,8 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
             </p>
           </div>
 
-          <Form {...form}>
+          <div id="tour-resume-form-v2">
+            <Form {...form}>
             <form
               onSubmit={form.handleSubmit(handlesave)}
               className="space-y-8"
@@ -208,7 +210,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                 <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6">
                   Digital Presence
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="tour-social-links-v2">
                   <FormField
                     name="linkedin"
                     control={form.control}
@@ -272,6 +274,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                 <Button
                   className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-100 px-10 h-14 rounded-2xl font-bold text-lg group"
                   type="submit"
+                  id="tour-next-button-v2"
                 >
                   Continue to Education{" "}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -292,7 +295,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
 
             <Card className="border-none shadow-[20px_40px_80px_rgba(0,0,0,0.05)] bg-white rounded-4xl overflow-hidden">
               <div className="h-3 bg-linear-to-r from-indigo-500 via-purple-500 to-indigo-600" />
-              <CardContent className="p-10">
+              <CardContent className="p-10" id="tour-resume-preview-v2">
                 <div className="space-y-8">
                   <div className="border-b border-slate-100 pb-8 text-center sm:text-left">
                     <motion.h1
@@ -378,7 +381,8 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
         </div>
       </div>
     </div>
+    </div>
   );
-};
 
+}
 export default React.memo(BasicInfoStepV2);

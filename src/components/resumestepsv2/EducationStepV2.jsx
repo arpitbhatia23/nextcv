@@ -141,7 +141,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                 </Button>
               )}
             </div>
-            <CardContent className="p-8">
+            <CardContent className="p-8" id="tour-education-form-v2">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 gap-6">
@@ -237,6 +237,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                             onClick={handleAiGeneration}
                             disabled={isGenerating}
                             className="text-xs font-black text-indigo-600 flex items-center gap-1.5 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
+                            id="tour-ai-button-v2"
                           >
                             <Sparkles className={`w-3 h-3 ${isGenerating ? 'animate-spin' : ''}`} />
                             {isGenerating ? "Synthesizing..." : "AI Magic"}
@@ -267,12 +268,12 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
 
         {/* Timeline Column */}
         <div className="lg:col-span-6 space-y-8">
-          <div className="flex items-center justify-between">
+           <div className="flex items-center justify-between">
              <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.35em]">Timeline Status</h3>
              <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">{educationList.length} Entries</span>
           </div>
 
-          <div className="relative pl-8 space-y-6">
+          <div className="relative pl-8 space-y-6" id="tour-education-list-v2">
             {/* Timeline Line */}
             <div className="absolute left-[11px] top-4 bottom-4 w-0.5 bg-slate-100" />
 
@@ -341,7 +342,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
              <Button onClick={previous} variant="ghost" className="h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all">
                <ArrowLeft className="mr-2 w-5 h-5" /> Back
              </Button>
-             <Button onClick={next} disabled={educationList.length === 0} className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2x rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all disabled:opacity-50">
+             <Button onClick={next} disabled={educationList.length === 0} className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2x rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all disabled:opacity-50" id="tour-next-button-v2">
                Skills Architecture <ArrowRight className="ml-2 w-5 h-5" />
              </Button>
           </div>
