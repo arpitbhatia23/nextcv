@@ -302,7 +302,7 @@ const Resume = () => {
       </div>
 
       <div
-        className={`mx-auto px-4 md:px-6 ${step === resumeSteps.length - 1 ? "max-w-400" : "max-w-4xl"}`}
+        className={`mx-auto px-4 md:px-6 ${step === resumeSteps.length - 1 ? "max-w-400" : "max-w-7xl"}`}
       >
         <StepComponents
           next={next}

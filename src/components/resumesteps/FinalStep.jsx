@@ -225,7 +225,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
       </div>
 
       {/* Mobile Layout */}
-      <div className="w-full flex flex-col gap-4 md:hidden pb-20">
+      <div className="w-full flex flex-col gap-4 lg:hidden pb-20">
         {!isdraft && (
           <div className="space-y-3">
             <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
@@ -392,10 +392,13 @@ const FinalStep = ({ formData, isdraft = false }) => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden md:flex flex-1 overflow-hidden w-full gap-6 h-full min-h-0">
+      <div className="hidden lg:flex flex-1 overflow-hidden w-full gap-6 h-full min-h-0">
         {/* Left: Template List - Fixed Sidebar */}
         {!isdraft && (
-          <div className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0" id="tour-template-selection">
+          <div
+            className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0"
+            id="tour-template-selection"
+          >
             <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
               <h3 className="font-semibold text-slate-800 flex items-center gap-2">
                 <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select
@@ -473,7 +476,10 @@ const FinalStep = ({ formData, isdraft = false }) => {
         )}
 
         {/* Center: Resume Preview */}
-        <div className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full" id="tour-final-preview">
+        <div
+          className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full"
+          id="tour-final-preview"
+        >
           <div className="p-3 border-b border-slate-200 bg-white flex justify-between items-center px-6">
             <span className="text-sm font-medium text-slate-500 flex items-center gap-2">
               Live Preview{" "}
@@ -527,7 +533,10 @@ const FinalStep = ({ formData, isdraft = false }) => {
         </div>
 
         {/* Right: Payment (Desktop) - Fixed Sidebar */}
-        <div className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit sticky top-4" id="tour-payment-section">
+        <div
+          className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit sticky top-4"
+          id="tour-payment-section"
+        >
           <div className="p-5 border-b border-slate-100 bg-linear-to-r from-indigo-50 to-white">
             <h3 className="text-lg font-bold text-slate-900">
               Finalize Resume

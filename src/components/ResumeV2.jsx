@@ -90,55 +90,129 @@ const ResumeV2 = () => {
     const commonSteps = [
       {
         target: "#tour-resume-progress-v2",
-        content: "Track your progress here. This is the optimized V2 experience.",
+        content:
+          "Track your progress here. This is the optimized V2 experience.",
         disableBeacon: true,
       },
     ];
 
     const stepSpecificSteps = {
       0: [
-        { target: "#tour-resume-form-v2", content: "Start by filling in your identity and branding." },
-        { target: "#tour-social-links-v2", content: "Add your digital presence to help recruiters find you." },
-        { target: "#tour-resume-preview-v2", content: "See your resume update in real-time as you type." },
+        {
+          target: "#tour-resume-form-v2",
+          content: "Start by filling in your identity and branding.",
+        },
+        {
+          target: "#tour-social-links-v2",
+          content: "Add your digital presence to help recruiters find you.",
+        },
+        {
+          target: "#tour-resume-preview-v2",
+          content: "See your resume update in real-time as you type.",
+        },
       ],
       1: [
-        { target: "#tour-education-form-v2", content: "Input your academic background here." },
-        { target: "#tour-ai-button-v2", content: "Use AI to polish your coursework and achievements." },
-        { target: "#tour-education-list-v2", content: "Your educational timeline will appear here." },
+        {
+          target: "#tour-education-form-v2",
+          content: "Input your academic background here.",
+        },
+        {
+          target: "#tour-ai-button-v2",
+          content: "Use AI to polish your coursework and achievements.",
+        },
+        {
+          target: "#tour-education-list-v2",
+          content: "Your educational timeline will appear here.",
+        },
       ],
       2: [
-        { target: "#tour-skills-form-v2", content: "Map your core competencies and technical depth." },
-        { target: "#tour-skills-list-v2", content: "Visualize your skill set as it grows." },
+        {
+          target: "#tour-skills-form-v2",
+          content: "Map your core competencies and technical depth.",
+        },
+        {
+          target: "#tour-skills-list-v2",
+          content: "Visualize your skill set as it grows.",
+        },
       ],
       3: [
-        { target: "#tour-experience-form-v2", content: "Chronicle your professional journey and career chapters." },
-        { target: "#tour-ai-button-v2", content: "Elevate your job descriptions with AI-powered suggestions." },
-        { target: "#tour-experience-list-v2", content: "Your career path is visualized here." },
+        {
+          target: "#tour-experience-form-v2",
+          content: "Chronicle your professional journey and career chapters.",
+        },
+        {
+          target: "#tour-ai-button-v2",
+          content: "Elevate your job descriptions with AI-powered suggestions.",
+        },
+        {
+          target: "#tour-experience-list-v2",
+          content: "Your career path is visualized here.",
+        },
       ],
       4: [
-        { target: "#tour-projects-form-v2", content: "Showcase your technical depth with real-world projects." },
-        { target: "#tour-ai-button-v2", content: "Augment your project descriptions for maximum impact." },
-        { target: "#tour-projects-list-v2", content: "Your innovation portfolio index." },
+        {
+          target: "#tour-projects-form-v2",
+          content: "Showcase your technical depth with real-world projects.",
+        },
+        {
+          target: "#tour-ai-button-v2",
+          content: "Augment your project descriptions for maximum impact.",
+        },
+        {
+          target: "#tour-projects-list-v2",
+          content: "Your innovation portfolio index.",
+        },
       ],
       5: [
-        { target: "#tour-certificates-form-v2", content: "Validate your skills with official credentials." },
-        { target: "#tour-certificates-list-v2", content: "Your verified achievement list." },
+        {
+          target: "#tour-certificates-form-v2",
+          content: "Validate your skills with official credentials.",
+        },
+        {
+          target: "#tour-certificates-list-v2",
+          content: "Your verified achievement list.",
+        },
       ],
       6: [
-        { target: "#tour-summary-form-v2", content: "Draft a powerful executive pitch for your career." },
-        { target: "#tour-ai-button-v2", content: "Synthesize a professional summary using AI." },
+        {
+          target: "#tour-summary-form-v2",
+          content: "Draft a powerful executive pitch for your career.",
+        },
+        {
+          target: "#tour-ai-button-v2",
+          content: "Synthesize a professional summary using AI.",
+        },
       ],
       7: [
-        { target: "#tour-template-selection-v2", content: "Choose from our high-resolution architectural templates." },
-        { target: "#tour-final-preview-v2", content: "The final blueprint of your professional career." },
-        { target: "#tour-coupon-section-v2", content: "Apply promo codes for exclusive discounts." },
-        { target: "#tour-payment-section-v2", content: "Unlock your high-resolution PDF and launch your career." },
+        {
+          target: "#tour-template-selection-v2",
+          content: "Choose from our high-resolution architectural templates.",
+        },
+        {
+          target: "#tour-final-preview-v2",
+          content: "The final blueprint of your professional career.",
+        },
+        {
+          target: "#tour-coupon-section-v2",
+          content: "Apply promo codes for exclusive discounts.",
+        },
+        {
+          target: "#tour-payment-section-v2",
+          content: "Unlock your high-resolution PDF and launch your career.",
+        },
       ],
     };
 
-    const nextStepInfo = step < 7 ? [
-      { target: "#tour-next-button-v2", content: "Solidify your progress and advance to the next strategy." }
-    ] : [];
+    const nextStepInfo =
+      step < 7
+        ? [
+            {
+              target: "#tour-next-button-v2",
+              content:
+                "Solidify your progress and advance to the next strategy.",
+            },
+          ]
+        : [];
 
     return [
       ...(step === 0 ? commonSteps : []),
@@ -176,10 +250,10 @@ const ResumeV2 = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="h-20 flex items-center justify-between">
             <div className="flex items-center gap-6">
-              <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-100">
+              <div className="bg-transparent p-4 rounded-2xl hidden md:flex ">
                 <Logo2 size={36} color="#4f46e5" />
               </div>
-              <div className="hidden md:block">
+              {/* <div className="hidden md:block">
                 <h1 className="text-lg font-bold bg-clip-text text-transparent bg-linear-to-r from-slate-900 via-indigo-900 to-indigo-600">
                   NextCV{" "}
                   <span className="text-indigo-600 font-medium">Pro</span>
@@ -187,7 +261,7 @@ const ResumeV2 = () => {
                 <p className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
                   Version 2.0 Enhanced
                 </p>
-              </div>
+              </div> */}
             </div>
 
             <div
@@ -237,7 +311,7 @@ const ResumeV2 = () => {
                   } ${!isAccessible ? "opacity-30 grayscale cursor-not-allowed" : "hover:-translate-y-1"}`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center border-2 transition-all duration-300 relative ${
+                    className={`w-6 md:w-12 h-6 md:h-12 rounded-2xl flex items-center justify-center border-2 transition-all duration-300 relative ${
                       isActive
                         ? "bg-indigo-600 border-indigo-600 text-white shadow-xl shadow-indigo-100"
                         : isCompleted
@@ -246,15 +320,15 @@ const ResumeV2 = () => {
                     }`}
                   >
                     {isCompleted ? (
-                      <CheckCircle className="w-6 h-6" />
+                      <CheckCircle className="w-3 md:w-6 h-3 md:h-6" />
                     ) : (
-                      <Icon className="w-6 h-6 stroke-[2.5]" />
+                      <Icon className="w-3 md:w-6 h-3 md:h-6 stroke-[2.5]" />
                     )}
 
                     {isActive && (
                       <motion.div
                         layoutId="activeStep"
-                        className="absolute -bottom-1 -right-1 w-4 h-4 bg-white border-2 border-indigo-600 rounded-full flex items-center justify-center"
+                        className="absolute -bottom-1 -right-1 w-2 md:w-4 h-2 md:h-4 bg-white border-2 border-indigo-600 rounded-full flex items-center justify-center"
                       >
                         <div className="w-1.5 h-1.5 bg-indigo-600 rounded-full" />
                       </motion.div>
@@ -301,7 +375,7 @@ const ResumeV2 = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Floating Navigation Controls (Mobile optimized) */}
+        {/* Floating Navigation Controls (Mobile optimized)
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 md:hidden">
           {step > 0 && (
             <button
@@ -319,7 +393,7 @@ const ResumeV2 = () => {
               Next Step <ChevronRight className="w-5 h-5" />
             </button>
           )}
-        </div>
+        </div> */}
       </div>
 
       <Tour steps={currentTourSteps} tourId={`resume-v2-step-${step}`} />
