@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import { domAnimation, LazyMotion } from "framer-motion";
 import CookieBanner from "@/components/cookies";
+import Clearity from "@/components/clearity";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,7 +75,9 @@ export default function RootLayout({ children }) {
             <Suspense fallback={<Loading />}>
               <LazyMotion features={domAnimation}>
                 {children}
+
                 <CookieBanner />
+                <Clearity />
               </LazyMotion>
             </Suspense>
             <Toaster />

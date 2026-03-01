@@ -34,7 +34,7 @@ export default function CookieBanner() {
       {consent === "accepted" && (
         <>
           <GoogleAnalytics />
-          <Clearity />
+          {/* <Clearity /> */}
         </>
       )}
 
