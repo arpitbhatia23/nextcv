@@ -37,16 +37,22 @@ export async function proxy(req) {
 
   // 5. A/B Testing for Resume Form
   if (pathname === "/dashboard/resumeform" && token?.user?._id) {
-    const userId = token?.user?._id.toString();
-    const versions = [
-      "/dashboard/resumeform-v1",
-      "/dashboard/resumeform-v2",
-      "/dashboard/resumeform-v3",
-    ];
-    const hash = parseInt(userId.slice(-2), 16);
-    const bucket = hash % versions.length;
+    const userId = token.user._id.toString();
 
-    return NextResponse.redirect(new URL(versions[bucket], req.url));
+    const hash = parseInt(userId.slice(-2), 16);
+    const bucket = hash % 100; // 0–99
+
+    let redirectPath = "/dashboard/resumeform-v1";
+
+    if (bucket < 30) {
+      redirectPath = "/dashboard/resumeform-v1";
+    } else if (bucket < 60) {
+      redirectPath = "/dashboard/resumeform-v2";
+    } else {
+      redirectPath = "/dashboard/resumeform-v3"; // 40%
+    }
+
+    return NextResponse.redirect(new URL(redirectPath, req.url));
   }
 
   return NextResponse.next();

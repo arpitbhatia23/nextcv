@@ -11,10 +11,6 @@ import {
   GraduationCap,
   Settings,
   User,
-  ChevronRight,
-  ChevronLeft,
-  icons,
-  File,
 } from "lucide-react";
 
 const BasicInfoStep = dynamic(() => import("./resumestepsv2/BasicInfoStepV2"), {
@@ -67,7 +63,11 @@ const ResumeV3 = () => {
   const updateForm = useResumeStore((s) => s.updateForm);
 
   const resumeSteps = [
-    { component: TemplateSelectorV3, title: "template select", icons: User },
+    {
+      component: TemplateSelectorV3,
+      title: "template select",
+      icon: FileText,
+    },
     { component: BasicInfoStep, title: "Basic Info", icon: User },
     { component: EducationStep, title: "Education", icon: GraduationCap },
     { component: SkillStep, title: "Skills", icon: Settings },

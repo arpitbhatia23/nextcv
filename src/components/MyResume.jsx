@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -79,17 +79,17 @@ const MyResume = () => {
     return templateNames[templateKey] || templateKey;
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffTime = Math.abs(now - date);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  // const formatDate = (dateString) => {
+  //   const date = new Date(dateString);
+  //   const now = new Date();
+  //   const diffTime = Math.abs(now - date);
+  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 1) return "Edited 1 day ago";
-    if (diffDays < 30) return `Edited ${diffDays} days ago`;
-    if (diffDays < 365) return `Edited ${Math.ceil(diffDays / 30)} months ago`;
-    return `Edited ${Math.ceil(diffDays / 365)} years ago`;
-  };
+  //   if (diffDays === 1) return "Edited 1 day ago";
+  //   if (diffDays < 30) return `Edited ${diffDays} days ago`;
+  //   if (diffDays < 365) return `Edited ${Math.ceil(diffDays / 30)} months ago`;
+  //   return `Edited ${Math.ceil(diffDays / 365)} years ago`;
+  // };
 
   const handleDownload = async (resume) => {
     console.log("Download resume:", resume);
@@ -322,7 +322,10 @@ const MyResume = () => {
 
   return (
     <div className="mx-auto p-6 md:p-10 max-w-7xl min-h-screen bg-slate-50">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4" id="tour-my-resumes-header">
+      <div
+        className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4"
+        id="tour-my-resumes-header"
+      >
         <div>
           <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
             My Resumes
@@ -527,7 +530,10 @@ const MyResume = () => {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="tour-resume-list">
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+              id="tour-resume-list"
+            >
               {paidResumes.map((resume) => (
                 <ResumeCard
                   key={resume?.resumedata._id}
@@ -584,7 +590,8 @@ const MyResume = () => {
           },
           {
             target: "#tour-resume-list",
-            content: "All your resumes will appear here. You can download, edit, or delete them.",
+            content:
+              "All your resumes will appear here. You can download, edit, or delete them.",
           },
         ]}
         tourId="my-resumes"
