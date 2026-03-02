@@ -42,10 +42,10 @@ export async function proxy(req) {
     const hash = parseInt(userId.slice(-2), 16);
     const bucket = hash % 100; // 0–99
 
-    let redirectPath = "/dashboard/resumeform-v1";
+    let redirectPath = "/dashboard/resumeform";
 
     if (bucket < 30) {
-      redirectPath = "/dashboard/resumeform-v1";
+      redirectPath = "/dashboard/resumeform";
     } else if (bucket < 60) {
       redirectPath = "/dashboard/resumeform-v2";
     } else {
