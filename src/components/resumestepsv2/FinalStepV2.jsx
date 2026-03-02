@@ -66,7 +66,8 @@ const WatermarkLayer = () => (
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
-  const [selectedTemplate, setSelectedTemplate] = useState("classicTemplate");
+  const selectedTemplate = useResumeStore((s) => s.selectedTemplate);
+  const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [applied, setApplied] = useState(false);

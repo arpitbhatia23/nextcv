@@ -21,6 +21,9 @@ const useResumeStore = create(
   persist(
     (set, get) => ({
       formData: initialFormData,
+      selectedTemplate: "",
+
+      setSelectedTemplate: (key) => set((state) => ({ selectedTemplate: key })),
 
       updateForm: (data) =>
         set((state) => ({

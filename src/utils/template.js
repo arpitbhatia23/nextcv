@@ -51,13 +51,6 @@ import ClinicalTrial from "../templates/resume-pdf/ClinicalTrial";
 
 export const templates = [
   {
-    key: "modernTemplate",
-    label: "Modern",
-    component: ModernPDFResumeTemplate,
-    image: "/modern.webp",
-  },
-
-  {
     key: "MarketingCreative",
     label: "Marketing / Creative",
     component: MarketingCreative,
@@ -71,12 +64,6 @@ export const templates = [
   },
 
   {
-    key: "classicTemplate",
-    label: "Classic",
-    component: ClassicTemplate,
-    image: "/classic.webp",
-  },
-  {
     key: "MinimalistTemplate",
     label: "Minimalist",
     component: ClassicMinimalistPDFResume,
@@ -88,12 +75,7 @@ export const templates = [
     component: ModernBlueSidebarPDFResume,
     image: "/ModernSideBar.webp",
   },
-  {
-    key: "ModernFullStack",
-    label: "Modern FullStack",
-    component: ModernPDFResumeTemplate,
-    image: "/modern.webp",
-  },
+
   {
     key: "ProfessionalClean",
     label: "Professional Clean",
@@ -295,5 +277,17 @@ export const templates = [
     label: "Legal / Attorney",
     component: LegalProfessional,
     image: "/legal.webp", // Placeholder
+  },
+  {
+    key: "modernTemplate",
+    label: "Modern",
+    component: ModernPDFResumeTemplate,
+    image: "/modern.webp",
+  },
+  {
+    key: "classicTemplate",
+    label: "Classic",
+    component: ClassicTemplate,
+    image: "/classic.webp",
   },
 ];
