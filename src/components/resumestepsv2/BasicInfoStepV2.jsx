@@ -77,15 +77,15 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
   };
 
   return (
-    <div className="py-2">
+    <div className="py-2 ">
       <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10">
         {/* Form Section */}
         <div className="lg:col-span-7 space-y-8">
           <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
               Personal Branding
             </h2>
-            <p className="text-slate-500 mt-2 text-lg">
+            <p className="text-slate-500 mt-2 text-sm md:text-lg">
               Let's start with how employers can reach you.
             </p>
           </div>
@@ -297,18 +297,21 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
 
               <Card className="border-none shadow-[20px_40px_80px_rgba(0,0,0,0.05)] bg-white rounded-4xl overflow-hidden">
                 <div className="h-3 bg-linear-to-r from-indigo-500 via-purple-500 to-indigo-600" />
-                <CardContent className="p-10" id="tour-resume-preview-v2">
+                <CardContent
+                  className="p-4 md:p-10"
+                  id="tour-resume-preview-v2"
+                >
                   <div className="space-y-8">
                     <div className="border-b border-slate-100 pb-8 text-center sm:text-left">
                       <motion.h1
                         layout
-                        className="text-4xl font-black text-slate-900 tracking-tight transition-all"
+                        className="text-lg md:text-4xl font-black text-slate-900 tracking-tight transition-all"
                       >
                         {watchedValues.name || "Your Name"}
                       </motion.h1>
                       <motion.p
                         layout
-                        className="text-xl text-indigo-600 font-bold mt-2"
+                        className="text-lg md:text-4xl text-indigo-600 font-bold mt-2"
                       >
                         {watchedValues.jobRole || "Target Job Title"}
                       </motion.p>
@@ -325,7 +328,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-4 text-slate-600 bg-slate-50 p-4 rounded-2xl">
+                        <div className="flex items-center gap-4 text-slate-600 bg-slate-50 p-4 md:rounded-2xl">
                           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
                             <Phone className="w-5 h-5 text-indigo-500" />
                           </div>

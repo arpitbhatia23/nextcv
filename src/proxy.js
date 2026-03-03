@@ -35,25 +35,25 @@ export async function proxy(req) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // 5. A/B Testing for Resume Form
-  if (pathname === "/dashboard/resumeform" && token?.user?._id) {
-    const userId = token.user._id.toString();
+  // // 5. A/B Testing for Resume Form
+  // if (pathname === "/dashboard/resumeform" && token?.user?._id) {
+  //   const userId = token.user._id.toString();
 
-    const hash = parseInt(userId.slice(-2), 16);
-    const bucket = hash % 100; // 0–99
+  //   const hash = parseInt(userId.slice(-2), 16);
+  //   const bucket = hash % 100; // 0–99
 
-    let redirectPath = "/dashboard/resumeform";
+  //   let redirectPath = "/dashboard/resumeform";
 
-    if (bucket < 30) {
-      redirectPath = "/dashboard/resumeform";
-    } else if (bucket < 60) {
-      redirectPath = "/dashboard/resumeform-v2";
-    } else {
-      redirectPath = "/dashboard/resumeform-v3"; // 40%
-    }
+  //   if (bucket < 30) {
+  //     redirectPath = "/dashboard/resumeform";
+  //   } else if (bucket < 60) {
+  //     redirectPath = "/dashboard/resumeform-v2";
+  //   } else {
+  //     redirectPath = "/dashboard/resumeform-v3"; // 40%
+  //   }
 
-    return NextResponse.redirect(new URL(redirectPath, req.url));
-  }
+  //   return NextResponse.redirect(new URL(redirectPath, req.url));
+  // }
 
   return NextResponse.next();
 }

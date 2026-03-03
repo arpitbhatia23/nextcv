@@ -364,7 +364,7 @@ const ResumeV2 = () => {
             }}
             className="w-full"
           >
-            <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-100 p-8 ">
+            <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-100 p-2 md:p-8 ">
               <StepComponents
                 next={next}
                 previous={previous}

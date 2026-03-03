@@ -66,7 +66,9 @@ const WatermarkLayer = () => (
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
-  const selectedTemplate = useResumeStore((s) => s.selectedTemplate);
+  const selectedTemplate = useResumeStore(
+    (s) => s.selectedTemplate || "InfographicLite",
+  );
   const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
@@ -274,7 +276,10 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
             </h3>
           </div>
 
-          <div className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0" id="tour-template-selection-v2">
+          <div
+            className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0"
+            id="tour-template-selection-v2"
+          >
             {templates.map((template) => (
               <motion.div
                 key={template.key}
@@ -319,7 +324,10 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         </div>
 
         {/* Global Preview Section */}
-        <div className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[3rem] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] lg:overflow-hidden overflow-visible min-h-0 order-1 lg:order-2" id="tour-final-preview-v2">
+        <div
+          className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[3rem] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] lg:overflow-hidden overflow-visible min-h-0 order-1 lg:order-2"
+          id="tour-final-preview-v2"
+        >
           <div className="h-16 flex items-center justify-between px-8 border-b border-slate-50 bg-slate-50/30">
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
               <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />{" "}

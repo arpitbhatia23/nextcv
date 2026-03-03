@@ -23,7 +23,8 @@ const useResumeStore = create(
       formData: initialFormData,
       selectedTemplate: "",
 
-      setSelectedTemplate: (key) => set((state) => ({ selectedTemplate: key })),
+      setSelectedTemplate: (key = "InfographicLite") =>
+        set((state) => ({ selectedTemplate: key })),
 
       updateForm: (data) =>
         set((state) => ({

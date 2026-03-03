@@ -48,6 +48,7 @@ import Logo2 from "./Logo2";
 import useResumeStore from "@/store/useResumeStore";
 import Loading from "@/app/loading";
 const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+import TemplateSelectorV3 from "./TemplateSelectorV3";
 
 const Resume = () => {
   const [step, setStep] = useState(0);
@@ -56,6 +57,11 @@ const Resume = () => {
   const clearDraft = useResumeStore((s) => s.clearStorage);
 
   const resumeSteps = [
+    {
+      component: TemplateSelectorV3,
+      title: "select template",
+      icon: FileText,
+    },
     { component: BasicInfoStep, title: "Basic Info", icon: User },
     { component: EducationStep, title: "Education", icon: GraduationCap },
     { component: SkillStep, title: "Skills", icon: Settings },
@@ -309,6 +315,7 @@ const Resume = () => {
           previous={previous}
           formData={formData}
           updateForm={updateForm}
+          onSelect={next}
         />
       </div>
       <Tour steps={currentTourSteps} tourId={`resume-step-${step}`} />

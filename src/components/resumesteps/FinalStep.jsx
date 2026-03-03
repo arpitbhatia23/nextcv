@@ -48,7 +48,9 @@ const WatermarkLayer = () => (
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStep = ({ formData, isdraft = false }) => {
-  const [selectedTemplate, setSelectedTemplate] = useState("InfographicLite");
+  const selectedTemplate = useResumeStore((s) => s.selectedTemplate);
+  const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
+  // const [selectedTemplate, setSelectedTemplate] = useState("InfographicLite");
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [applied, setApplied] = useState(false);

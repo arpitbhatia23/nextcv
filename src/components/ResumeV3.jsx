@@ -65,7 +65,7 @@ const ResumeV3 = () => {
   const resumeSteps = [
     {
       component: TemplateSelectorV3,
-      title: "template select",
+      title: "select template ",
       icon: FileText,
     },
     { component: BasicInfoStep, title: "Basic Info", icon: User },
