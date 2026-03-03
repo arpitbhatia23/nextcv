@@ -68,7 +68,6 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
     updateForm(watchedValues);
     next();
   };
-  console.log("render");
   return (
     <div className="py-8">
       <div className="grid md:grid-cols-2 gap-2 md:gap-8 items-start">
