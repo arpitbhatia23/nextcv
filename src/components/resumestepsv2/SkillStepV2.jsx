@@ -83,16 +83,19 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
         {/* Input Section */}
         <div className="lg:col-span-5 space-y-6">
           <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
               Core Expertise
             </h2>
-            <p className="text-slate-500 mt-2 text-lg">
+            <p className="text-slate-500 mt-2 text-sm md:text-lg">
               Define your professional toolkit and strengths.
             </p>
           </div>
 
-          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden" id="tour-skills-form-v2">
-            <div className="p-8">
+          <Card
+            className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden"
+            id="tour-skills-form-v2"
+          >
+            <div className="p-2 md:p-8">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -110,7 +113,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                           <Input
                             placeholder="e.g. TypeScript, UI Design"
                             {...field}
-                            className="h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all"
+                            className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                           />
                         </FormControl>
                         <FormMessage />
@@ -131,7 +134,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                             <Input
                               placeholder="e.g. Expert, Advanced"
                               {...field}
-                              className="h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all"
+                              className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                             />
                           </FormControl>
                           <FormMessage />
@@ -142,7 +145,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
 
                   <Button
                     type="submit"
-                    className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-black h-14 rounded-2xl transition-all group"
+                    className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-black h-10 md:h-14 rounded-xl md:rounded-2xl transition-all group"
                   >
                     {isEditing ? "Update Skill" : "Add to Toolkit"}
                     <Plus className="ml-2 w-5 h-5 group-hover:rotate-90 transition-transform" />
@@ -172,7 +175,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
             <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.35em]">
               Skill Map
             </h3>
-            <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md md:rounded-full">
               {skillList.length} Total
             </span>
           </div>
@@ -200,21 +203,21 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0.8, opacity: 0 }}
-                      className="group flex items-center gap-3 bg-white pl-5 pr-2 py-2.5 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all"
+                      className="group flex items-center gap-3 bg-white pl-5 pr-2 py-1 md:py-2.5 rounded-lg md:rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all"
                     >
                       <div className="flex flex-col">
-                        <span className="font-bold text-slate-900">
+                        <span className="font-semibold md:font-bold text-slate-900">
                           {skill.name}
                         </span>
-                        <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">
+                        <span className="text-[8px] md:text-[10px] font-black text-indigo-500 uppercase tracking-widest">
                           {skill.level}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1 border-l border-slate-100 pl-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center gap-1 border-l border-slate-100 pl-2 opacity-100 transition-opacity">
                         <button
                           onClick={() => handleEdit(skill)}
-                          className="p-1.5 text-slate-300 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
+                          className="p-1.5 text-slate-300 md:hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
                         >
                           <Edit2 className="w-3 h-3" />
                         </button>
@@ -232,18 +235,18 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
             )}
           </div>
 
-          <div className="pt-8 flex justify-between gap-4">
+          <div className="pt-8 flex justify-between gap-2 md:gap-4">
             <Button
               onClick={previous}
               variant="ghost"
-              className="h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+              className="h-12 md:h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
             >
               <ArrowLeft className="mr-2 w-5 h-5" /> Back
             </Button>
             <Button
               onClick={next}
               disabled={skillList.length === 0}
-              className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all disabled:opacity-50"
+              className="h-12 md:h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl md:rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all disabled:opacity-50"
               id="tour-next-button-v2"
             >
               Experience Strategy <ArrowRight className="ml-2 w-5 h-5" />

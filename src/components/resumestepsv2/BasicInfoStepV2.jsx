@@ -109,7 +109,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                           <Input
                             placeholder="e.g. Alex Rivera"
                             {...field}
-                            className="h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
                           />
                         </FormControl>
                         <FormMessage />
@@ -130,7 +130,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                           <Input
                             placeholder="e.g. Product Designer"
                             {...field}
-                            className="h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
                           />
                         </FormControl>
                         <FormMessage />
@@ -154,7 +154,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                             placeholder="alex@example.com"
                             type="email"
                             {...field}
-                            className="h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
                           />
                         </FormControl>
                         <FormMessage />
@@ -175,7 +175,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                           <Input
                             placeholder="+1 (555) 000-0000"
                             {...field}
-                            className="h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
                           />
                         </FormControl>
                         <FormMessage />
@@ -197,7 +197,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                         <Input
                           placeholder="San Francisco, CA"
                           {...field}
-                          className="h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-2xl transition-all text-base"
+                          className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
                         />
                       </FormControl>
                       <FormMessage />
@@ -224,7 +224,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                               <Input
                                 placeholder="LinkedIn"
                                 {...field}
-                                className="pl-12 h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all"
+                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                               />
                             </div>
                           </FormControl>
@@ -243,7 +243,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                               <Input
                                 placeholder="GitHub"
                                 {...field}
-                                className="pl-12 h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all"
+                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                               />
                             </div>
                           </FormControl>
@@ -262,7 +262,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                               <Input
                                 placeholder="Portfolio"
                                 {...field}
-                                className="pl-12 h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all"
+                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                               />
                             </div>
                           </FormControl>
@@ -272,9 +272,9 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                   </div>
                 </div>
 
-                <div className="flex justify-end pt-8">
+                <div className="flex justify-end pt-4 md:pt-8">
                   <Button
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-100 px-10 h-14 rounded-2xl font-bold text-lg group"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-100 px-5 md:px-10 h-10 md:h-14 rounded-xl md:rounded-2xl font-semibold md:font-bold text-sm md:text-lg group"
                     type="submit"
                     id="tour-next-button-v2"
                   >
@@ -287,7 +287,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
           </div>
 
           {/* Dynamic Preview Section */}
-          <div className="lg:col-span-5 relative">
+          {/* <div className="lg:col-span-5 relative">
             <div className="sticky top-32">
               <div className="mb-4">
                 <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
@@ -383,7 +383,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

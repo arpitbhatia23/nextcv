@@ -54,8 +54,7 @@ const handler = async (req) => {
     projects: data.projects,
     certificates: data.certificates,
   });
-  console.log(draft);
-  // ✅ Atomic update (fast)
+
   await User.updateOne({ _id: userId }, { $push: { resume: draft._id } });
 
   return NextResponse.json(

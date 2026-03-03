@@ -273,7 +273,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
         </div>
 
         {/* Live Preview Section */}
-        <div className="sticky top-24" id="tour-resume-preview">
+        {/* <div className="sticky top-24" id="tour-resume-preview">
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider">
               Live Preview
@@ -341,7 +341,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
               </div>
             </CardContent>
           </Card>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -79,10 +79,10 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
         {/* Editor Column */}
         <div className="lg:col-span-7 space-y-6">
           <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
               Executive Pitch
             </h2>
-            <p className="text-slate-500 mt-2 text-lg">
+            <p className="text-slate-500 mt-2 text-sm md:text-lg">
               In 2-3 sentences, capture the essence of your career.
             </p>
           </div>
@@ -129,7 +129,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
                               placeholder="Write your professional summary here..."
                               rows={10}
                               {...field}
-                              className="bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-4xl transition-all resize-none p-1 md:p-8 text-lg leading-relaxed shadow-inner"
+                              className="bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-4xl transition-all resize-none p-2 md:p-8 text-sm md:text-lg leading-relaxed shadow-inner"
                               id="tour-summary-form-v2"
                             />
                           </FormControl>
@@ -184,7 +184,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
         {/* Preview & Tips Column */}
         <div className="lg:col-span-5 space-y-8">
           <div className="sticky top-32 space-y-6">
-            <div className="bg-linear-to-br from-slate-900 to-indigo-950 rounded-4xl p-8 text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-linear-to-br from-slate-900 to-indigo-950 rounded-xl md:rounded-4xl p-2 md:p-8 text-white shadow-2xl relative overflow-hidden">
               <Quote className="absolute -top-4 -left-4 w-32 h-32 text-white/5 rotate-12" />
 
               <div className="relative z-10">
@@ -198,7 +198,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
                       layout
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="text-xl leading-relaxed font-medium italic opacity-90"
+                      className="text-sm md:text-xl leading-relaxed font-medium italic opacity-90"
                     >
                       "{watchedSummary}"
                     </motion.p>
@@ -243,13 +243,13 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
               <Button
                 onClick={previous}
                 variant="ghost"
-                className="h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
+                className="h-12 md:h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
               >
                 <ArrowLeft className="mr-2 w-5 h-5" /> Back
               </Button>
               <Button
                 onClick={() => form.handleSubmit(onSubmit)()}
-                className="h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all"
+                className="h-12 md:h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl md:rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all"
                 id="tour-next-button-v2"
               >
                 Final Review <ArrowRight className="ml-2 w-5 h-5" />

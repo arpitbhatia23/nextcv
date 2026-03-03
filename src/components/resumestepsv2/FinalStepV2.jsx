@@ -241,26 +241,26 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
     <div className="py-2 lg:h-[calc(100vh-120px)] flex flex-col h-auto">
       <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 px-2">
         <div>
-          <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
             Final Blueprint
           </h2>
-          <p className="text-slate-500 mt-2 text-lg">
+          <p className="text-slate-500 mt-2 text-sm md:text-lg">
             Select a template and finalize your career document.
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-1  md:gap-3">
           <Button
             variant="ghost"
             onClick={previous}
-            className="h-12 rounded-xl font-bold text-slate-500 hover:text-indigo-600"
+            className="h-10 md:h-12 rounded-lg md:rounded-xl font-bold text-slate-500 hover:text-indigo-600"
           >
             <ArrowLeft className="w-4 h-4 mr-2" /> Back
           </Button>
           <Button
             onClick={debounceDraft}
             variant="outline"
-            className="h-12 border-slate-200 rounded-xl font-bold text-slate-700 bg-white shadow-sm"
+            className="h-10 md:h-12 rounded-lg md:rounded-xl border-slate-200  font-bold text-slate-700 bg-white shadow-sm"
           >
             <Save className="w-4 h-4 mr-2" /> Archive Draft
           </Button>
@@ -376,9 +376,9 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         {/* Checkout & Actions Section */}
         <div className="lg:col-span-3 space-y-6 order-3">
           <Card className="border-none shadow-[20px_40px_80px_rgba(0,0,0,0.05)] bg-white rounded-4xl overflow-hidden">
-            <div className="p-8 space-y-8">
+            <div className="p-2 md:p-8 space-y-8">
               <div className="space-y-2">
-                <h3 className="text-xl font-black text-slate-900 tracking-tight">
+                <h3 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
                   Checkout
                 </h3>
                 <p className="text-xs text-slate-400 font-medium">
@@ -414,7 +414,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                     onChange={(e) => setCouponCode(e.target.value)}
                     placeholder="PROMO CODE"
                     disabled={applied}
-                    className="h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-bold tracking-widest placeholder:normal-case placeholder:tracking-normal"
+                    className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-bold tracking-widest placeholder:normal-case placeholder:tracking-normal"
                     id="tour-coupon-section-v2"
                   />
                   {applied ? (
@@ -443,7 +443,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
               </div>
 
               <Button
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-2xl shadow-indigo-100 py-8 rounded-2xl font-black text-lg transition-all hover:-translate-y-1 active:scale-95 group"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-2xl shadow-indigo-100 py-4 md:py-8 rounded-xl md:rounded-2xl font-semibold md:font-black text-lg transition-all hover:-translate-y-1 active:scale-95 group"
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
                 id="tour-payment-section-v2"
@@ -465,9 +465,9 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
             </div>
           </Card>
 
-          <div className="p-6 bg-linear-to-br from-indigo-50 to-white border border-indigo-100 rounded-3xl">
-            <div className="flex gap-4">
-              <div className="w-12 h-12 bg-indigo-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-indigo-100">
+          <div className="p-2 md:p-6 bg-linear-to-br from-indigo-50 to-white border border-indigo-100 rounded-3xl">
+            <div className="flex gap-1 md:gap-4">
+              <div className="w-12 h-12 bg-indigo-600 text-white rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-indigo-100">
                 <FileText className="w-6 h-6" />
               </div>
               <div className="space-y-1">
