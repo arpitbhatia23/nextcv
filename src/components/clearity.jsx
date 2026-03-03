@@ -1,13 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import Clarity from "@microsoft/clarity";
-const Clearity = () => {
+
+const ClarityComponent = () => {
   useEffect(() => {
-    Clarity.init("vkw299o6bb");
+    if (process.env.NODE_ENV !== "production") return;
+
+    const loadClarity = async () => {
+      const Clarity = (await import("@microsoft/clarity")).default;
+      Clarity.init("vkw299o6bb");
+    };
+
+    loadClarity();
   }, []);
 
   return null;
 };
 
-export default Clearity;
+export default ClarityComponent;
