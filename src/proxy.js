@@ -44,7 +44,7 @@ export async function proxy(req) {
 
     let redirectPath = "/dashboard/resumeform";
 
-    if (bucket < 30) {
+    if (bucket < 40) {
       redirectPath = "/dashboard/resumeform";
     } else if (bucket < 60) {
       redirectPath = "/dashboard/resumeform-v2";
