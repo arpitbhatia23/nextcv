@@ -1,8 +1,6 @@
 import dynamic from "next/dynamic";
-
-const Herosection = dynamic(
-  () => import("@/components/herosection/Herosection"),
-);
+import Herosection from "@/components/herosection/Herosection";
+import ATSFeatureSection from "@/components/herosection/ATSFeatureSection";
 const HowitWork = dynamic(() => import("@/components/herosection/HowitWork"));
 const Templates = dynamic(
   () => import("@/components/templateslanding/Templates"),
@@ -16,9 +14,7 @@ const Testimonial = dynamic(
 const PageContent = dynamic(
   () => import("@/components/pageContent/PageContent"),
 );
-const ATSFeatureSection = dynamic(
-  () => import("@/components/herosection/ATSFeatureSection"),
-);
+
 const FAQ = dynamic(() => import("@/components/herosection/FAQ"));
 
 export default function Home() {

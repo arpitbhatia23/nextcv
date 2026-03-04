@@ -1,7 +1,6 @@
 import Nav from "@/components/ui/navbar";
 import { Footer } from "@/components/footer/Footer";
-import { Suspense } from "react";
-import Loading from "../loading";
+import { domAnimation, LazyMotion } from "framer-motion";
 
 export const metadata = {
   title:
@@ -169,11 +168,13 @@ export default function RootLayout({ children }) {
       <section className={`antialiased`}>
         {/* JSON-LD for LocalBusiness/SoftwareApplication */}
 
-        <Suspense fallback={<Loading />}>
+        {/* <Suspense fallback={<Loading />}> */}
+        <LazyMotion features={domAnimation}>
           <Nav />
           {children}
           <Footer />
-        </Suspense>
+        </LazyMotion>
+        {/* </Suspense> */}
       </section>
     </>
   );

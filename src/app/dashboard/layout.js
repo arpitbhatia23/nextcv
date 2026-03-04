@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import AuthProvider from "@/context/authprovider";
 
 export const metadata = {
   title: "Dashboard - NextCV",
@@ -10,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <>
-       {/* JSON-LD for Dashboard/Tool Application */}
+      {/* JSON-LD for Dashboard/Tool Application */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -30,13 +31,15 @@ export default function RootLayout({ children }) {
         }}
       />
       <section className={` antialiased`}>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <SiteHeader />
-            {children}
-          </SidebarInset>
-        </SidebarProvider>
+        <AuthProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <SiteHeader />
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
+        </AuthProvider>
       </section>
     </>
   );

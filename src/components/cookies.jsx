@@ -1,8 +1,10 @@
 "use client";
-
-import GoogleAnalytics from "@/app/anlatyics";
 import { useEffect, useState } from "react";
-
+import dynamic from "next/dynamic";
+const ClarityComponent = dynamic(() => import("./clearity"), { ssr: false });
+const GoogleAnalytics = dynamic(() => import("@/app/anlatyics"), {
+  ssr: false,
+});
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
   const [consent, setConsent] = useState("");
@@ -33,10 +35,10 @@ export default function CookieBanner() {
       {consent === "accepted" && (
         <>
           <GoogleAnalytics />
-          {/* <Clearity /> */}
         </>
       )}
 
+      <ClarityComponent />
       {show && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[95%] max-w-3xl bg-white text-gray-800 p-6 rounded-2xl shadow-2xl border border-gray-200 z-50">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

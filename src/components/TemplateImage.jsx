@@ -11,9 +11,8 @@ export default function TemplateImage({ src, alt, className }) {
       src={imgSrc}
       alt={alt}
       className={className}
-      height={500}
-      width={500}
-      loading="lazy"
+      fill
+      sizes="(max-width: 768px) 100vw, 411px"
     />
   );
 }
