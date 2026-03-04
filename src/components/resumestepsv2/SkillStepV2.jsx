@@ -8,10 +8,7 @@ import {
   Sparkles,
   ArrowRight,
   ArrowLeft,
-  Wrench,
-  Zap,
   Target,
-  Brain,
 } from "lucide-react";
 import {
   Form,
@@ -23,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
@@ -35,35 +32,74 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
+  // ✅ Smart Suggestions
+  const suggestions = [
+    "React.js",
+    "Next.js",
+    "Node.js",
+    "MongoDB",
+    "TypeScript",
+    "Docker",
+    "AWS",
+    "Python",
+    "Leadership",
+    "Communication",
+    "Teamwork",
+    "Problem Solving",
+  ];
+
   const schema = z.object({
     name: z.string().min(2, { message: "Skill name is required" }),
-    level: z.string().min(1, { message: "Proficiency is required" }),
+    level: z.string().optional(),
   });
 
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      level: "",
-    },
+    defaultValues: { name: "", level: "" },
   });
 
   useEffect(() => {
     updateForm({ skills: skillList });
   }, [skillList]);
 
+  // ✅ Add / Edit Skill (multi support + duplicate prevention)
   const onSubmit = (values) => {
+    const names = values.name
+      .split(",")
+      .map((n) => n.trim())
+      .filter((n) => n.length > 0);
+
     if (isEditing) {
       setSkillList((prev) =>
         prev.map((skill) =>
-          skill.id === editingId ? { ...values, id: editingId } : skill,
+          skill.id === editingId
+            ? {
+                ...skill,
+                name: names[0],
+                level: values.level || "Intermediate",
+              }
+            : skill,
         ),
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setSkillList((prev) => [...prev, { ...values, id: Date.now() }]);
+      const newSkills = names
+        .filter(
+          (name) =>
+            !skillList.some(
+              (skill) => skill.name.toLowerCase() === name.toLowerCase(),
+            ),
+        )
+        .map((name) => ({
+          id: crypto.randomUUID(),
+          name,
+          level: values.level || "Intermediate",
+        }));
+
+      setSkillList((prev) => [...prev, ...newSkills]);
     }
+
     form.reset({ name: "", level: "" });
   };
 
@@ -75,6 +111,31 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
 
   const handleDelete = (id) => {
     setSkillList((prev) => prev.filter((skill) => skill.id !== id));
+  };
+
+  const addSuggestion = (skillName) => {
+    if (
+      !skillList.some(
+        (skill) => skill.name.toLowerCase() === skillName.toLowerCase(),
+      )
+    ) {
+      setSkillList((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          name: skillName,
+          level: "Intermediate",
+        },
+      ]);
+    }
+  };
+
+  const handleNext = () => {
+    if (skillList.length < 2) {
+      alert("Add at least 2 skills to continue.");
+      return;
+    }
+    next();
   };
 
   return (
@@ -91,11 +152,22 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
             </p>
           </div>
 
-          <Card
-            className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden"
-            id="tour-skills-form-v2"
-          >
+          <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden">
             <div className="p-2 md:p-8">
+              {/* ✅ Suggestions (UI preserved style) */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {suggestions.map((skill) => (
+                  <button
+                    key={skill}
+                    type="button"
+                    onClick={() => addSuggestion(skill)}
+                    className="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 hover:bg-indigo-100 hover:text-indigo-600 transition-all"
+                  >
+                    {skill}
+                  </button>
+                ))}
+              </div>
+
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -111,7 +183,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g. TypeScript, UI Design"
+                            placeholder="e.g. TypeScript, UI Design (comma separated supported)"
                             {...field}
                             className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
                           />
@@ -121,27 +193,24 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                     )}
                   />
 
-                  <div className="grid grid-cols-1 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="level"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-slate-900 font-bold">
-                            Proficiency Level
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="e.g. Expert, Advanced"
-                              {...field}
-                              className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="level"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-slate-900 font-bold">
+                          Proficiency Level
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g. Expert, Advanced"
+                            {...field}
+                            className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
 
                   <Button
                     type="submit"
@@ -158,11 +227,7 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
               <div className="flex gap-3">
                 <Sparkles className="w-5 h-5 text-amber-500 shrink-0" />
                 <p className="text-xs text-amber-700 leading-relaxed font-medium">
-                  <span className="font-black text-amber-900 uppercase tracking-tighter mr-1">
-                    Pro Tip:
-                  </span>
-                  Focus on high-demand technical skills first. ATS algorithms
-                  prioritize skills mentioned in job descriptions.
+                  Add at least 2–3 strong skills for better AI resume output.
                 </p>
               </div>
             </div>
@@ -180,18 +245,13 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-6" id="tour-skills-list-v2">
+          <div className="grid grid-cols-1 gap-6">
             {skillList.length === 0 ? (
               <div className="bg-white border-2 border-dashed border-slate-100 rounded-4xl p-16 text-center">
-                <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Target className="w-10 h-10 text-slate-200" />
-                </div>
+                <Target className="w-10 h-10 text-slate-200 mx-auto mb-4" />
                 <h4 className="text-slate-400 font-black text-xl">
                   Skill Matrix Empty
                 </h4>
-                <p className="text-slate-300 font-medium text-sm mt-1">
-                  Start adding your technical and soft skills.
-                </p>
               </div>
             ) : (
               <div className="flex flex-wrap gap-3">
@@ -203,29 +263,23 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
                       initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0.8, opacity: 0 }}
-                      className="group flex items-center gap-3 bg-white pl-5 pr-2 py-1 md:py-2.5 rounded-lg md:rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all"
+                      className="group flex items-center gap-3 bg-white pl-5 pr-2 py-2 rounded-lg md:rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 hover:shadow-md transition-all"
                     >
                       <div className="flex flex-col">
-                        <span className="font-semibold md:font-bold text-slate-900">
+                        <span className="font-bold text-slate-900">
                           {skill.name}
                         </span>
-                        <span className="text-[8px] md:text-[10px] font-black text-indigo-500 uppercase tracking-widest">
+                        <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest">
                           {skill.level}
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-1 border-l border-slate-100 pl-2 opacity-100 transition-opacity">
-                        <button
-                          onClick={() => handleEdit(skill)}
-                          className="p-1.5 text-slate-300 md:hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all"
-                        >
-                          <Edit2 className="w-3 h-3" />
+                      <div className="flex items-center gap-1 border-l border-slate-100 pl-2">
+                        <button onClick={() => handleEdit(skill)}>
+                          <Edit2 className="w-3 h-3 text-slate-400 hover:text-indigo-600" />
                         </button>
-                        <button
-                          onClick={() => handleDelete(skill.id)}
-                          className="p-1.5 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                        >
-                          <Trash2 className="w-3 h-3" />
+                        <button onClick={() => handleDelete(skill.id)}>
+                          <Trash2 className="w-3 h-3 text-slate-400 hover:text-red-500" />
                         </button>
                       </div>
                     </motion.div>
@@ -236,18 +290,13 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
           </div>
 
           <div className="pt-8 flex justify-between gap-2 md:gap-4">
-            <Button
-              onClick={previous}
-              variant="ghost"
-              className="h-12 md:h-14 px-8 rounded-2xl font-bold text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 transition-all"
-            >
+            <Button onClick={previous} variant="ghost">
               <ArrowLeft className="mr-2 w-5 h-5" /> Back
             </Button>
             <Button
-              onClick={next}
+              onClick={handleNext}
               disabled={skillList.length === 0}
-              className="h-12 md:h-14 px-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl md:rounded-2xl font-black shadow-xl shadow-indigo-100 transition-all disabled:opacity-50"
-              id="tour-next-button-v2"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white"
             >
               Experience Strategy <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
-  Plus,
   Edit2,
   Trash2,
   Sparkles,
@@ -27,7 +26,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -36,35 +34,74 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
+  // ✅ Suggestions
+  const suggestions = [
+    "React.js",
+    "Node.js",
+    "MongoDB",
+    "Docker",
+    "AWS",
+    "TypeScript",
+    "Python",
+    "Java",
+    "Leadership",
+    "Communication",
+    "Teamwork",
+    "Problem Solving",
+  ];
+
   const schema = z.object({
     name: z.string().min(2, { message: "Skill name is required" }),
-    level: z.string({ message: "Level is required" }),
+    level: z.string().optional(),
   });
+
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      level: "",
-    },
+    defaultValues: { name: "", level: "" },
   });
 
   useEffect(() => {
-    console.log(skillList);
     updateForm({ skills: skillList });
   }, [skillList]);
 
+  // ✅ Add skill (supports comma separated)
   const onSubmit = (values) => {
+    const names = values.name
+      .split(",")
+      .map((n) => n.trim())
+      .filter((n) => n.length > 0);
+
     if (isEditing) {
       setSkillList((prev) =>
         prev.map((skill) =>
-          skill.id === editingId ? { ...values, id: editingId } : skill,
+          skill.id === editingId
+            ? {
+                ...skill,
+                name: names[0],
+                level: values.level || "Intermediate",
+              }
+            : skill,
         ),
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setSkillList((prev) => [...prev, { ...values, id: Date.now() }]);
+      const newSkills = names
+        .filter(
+          (name) =>
+            !skillList.some(
+              (skill) => skill.name.toLowerCase() === name.toLowerCase(),
+            ),
+        )
+        .map((name) => ({
+          id: Date.now() + Math.random(),
+          name,
+          level: values.level || "Intermediate",
+        }));
+
+      setSkillList((prev) => [...prev, ...newSkills]);
     }
+
     form.reset();
   };
 
@@ -84,36 +121,71 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
     setEditingId(null);
   };
 
+  const addSuggestion = (skillName) => {
+    if (
+      !skillList.some(
+        (skill) => skill.name.toLowerCase() === skillName.toLowerCase(),
+      )
+    ) {
+      setSkillList((prev) => [
+        ...prev,
+        {
+          id: Date.now() + Math.random(),
+          name: skillName,
+          level: "Intermediate",
+        },
+      ]);
+    }
+  };
+
+  const handleNext = () => {
+    if (skillList.length < 2) {
+      alert("Please add at least 2 skills to continue.");
+      return;
+    }
+    next();
+  };
+
   return (
     <div className="py-8">
       <div className="mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-slate-900">Skills</h2>
-        <p className="text-slate-500">Showcase your technical proficiency</p>
+        <p className="text-slate-500">
+          Showcase your technical and soft skills
+        </p>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card
-          className="bg-white rounded-lg  md:rounded-xl shadow-sm border border-slate-200"
-          id="tour-skills-form"
-        >
-          <CardHeader className=" border-b p-4 rounded-t-xl flex flex-row justify-between items-center">
-            <div>
-              <CardTitle className="text-lg font-bold text-slate-800">
-                {isEditing ? "Edit Skill" : "Add Skill"}
-              </CardTitle>
-            </div>
+        <Card className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200">
+          <CardHeader className="border-b p-4 rounded-t-xl flex justify-between items-center">
+            <CardTitle className="text-lg font-bold text-slate-800">
+              {isEditing ? "Edit Skill" : "Add Skill"}
+            </CardTitle>
             {isEditing && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={cancelEdit}
-                className="text-slate-500 hover:text-slate-700"
-              >
+              <Button variant="ghost" size="sm" onClick={cancelEdit}>
                 Cancel
               </Button>
             )}
           </CardHeader>
+
           <CardContent className="p-2 md:p-6">
+            {/* Suggestions */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {suggestions.map((skill) => (
+                <Button
+                  key={skill}
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  className="rounded-full"
+                  onClick={() => addSuggestion(skill)}
+                >
+                  {skill}
+                </Button>
+              ))}
+            </div>
+
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -125,14 +197,11 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          Skill Name
-                        </FormLabel>
+                        <FormLabel>Skill Name</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g. React.js, Python"
+                            placeholder="e.g. React.js, Node.js (comma separated)"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           />
                         </FormControl>
                         <FormMessage />
@@ -145,41 +214,36 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                     name="level"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          Proficiency
-                        </FormLabel>
+                        <FormLabel>Proficiency</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g. Expert, Intermediate"
+                            placeholder="Beginner / Intermediate / Expert"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           />
                         </FormControl>
-                        <FormMessage />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <div className="pt-2">
-                  <Button
-                    type="submit"
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold h-11 rounded-lg"
-                  >
-                    {isEditing ? "Update Skill" : "Add Skill"}
-                  </Button>
-                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-slate-900 text-white"
+                >
+                  {isEditing ? "Update Skill" : "Add Skill"}
+                </Button>
               </form>
             </Form>
           </CardContent>
+
           <CardFooter className="p-0">
             <div className="bg-blue-50 p-4 w-full rounded-b-xl">
               <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-blue-600" /> Tips
               </h3>
               <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
-                <li>Include both hard skills (technical) and soft skills.</li>
-                <li>Rate your proficiency honestly to build trust.</li>
+                <li>You can add multiple skills separated by commas.</li>
+                <li>Include both technical and soft skills.</li>
               </ul>
             </div>
           </CardFooter>
@@ -187,10 +251,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
 
         {/* List Section */}
         <div className="space-y-6">
-          <div
-            className="bg-slate-50 rounded-xl border border-slate-200 p-5"
-            id="tour-skills-list"
-          >
+          <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
             <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
               <Wrench className="w-5 h-5 text-indigo-500" /> Added Skills
             </h3>
@@ -201,20 +262,18 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
               </div>
             ) : (
               <div className="flex flex-wrap gap-2">
-                {skillList.map((skill, index) => (
+                {skillList.map((skill) => (
                   <div
-                    key={index}
-                    className="bg-white pl-4 pr-2 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-3 group hover:border-indigo-300 transition-all"
+                    key={skill.id}
+                    className="bg-white pl-4 pr-2 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-3"
                   >
                     <div className="flex flex-col">
                       <span className="font-semibold text-slate-800 text-sm">
                         {skill.name}
                       </span>
-                      {skill.level && (
-                        <span className="text-[10px] text-slate-500 uppercase tracking-wider font-medium">
-                          {skill.level}
-                        </span>
-                      )}
+                      <span className="text-[10px] text-slate-500 uppercase font-medium">
+                        {skill.level}
+                      </span>
                     </div>
 
                     <div className="flex items-center border-l border-slate-100 pl-2 ml-1">
@@ -222,7 +281,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                         variant="ghost"
                         onClick={() => handleEdit(skill)}
                         size="icon"
-                        className="h-6 w-6 text-slate-400 hover:text-indigo-600 rounded-full"
+                        className="h-6 w-6"
                       >
                         <Edit2 className="w-3 h-3" />
                       </Button>
@@ -230,7 +289,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                         variant="ghost"
                         onClick={() => handleDelete(skill.id)}
                         size="icon"
-                        className="h-6 w-6 text-slate-400 hover:text-red-500 rounded-full"
+                        className="h-6 w-6"
                       >
                         <Trash2 className="w-3 h-3" />
                       </Button>
@@ -242,18 +301,10 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
           </div>
 
           <div className="flex justify-between items-center pt-4">
-            <Button
-              variant="outline"
-              onClick={previous}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50"
-            >
+            <Button variant="outline" onClick={previous}>
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
-            <Button
-              onClick={next}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
-              id="tour-next-button"
-            >
+            <Button onClick={handleNext} className="bg-indigo-600 text-white">
               Next Step <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>

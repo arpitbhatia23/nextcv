@@ -37,6 +37,7 @@ export async function proxy(req) {
 
   // // 5. A/B Testing for Resume Form
   if (pathname === "/dashboard/resumeform" && token?.user?._id) {
+    if (process.env.NODE_ENV !== "production") return;
     const userId = token.user._id.toString();
 
     const hash = parseInt(userId.slice(-2), 16);
