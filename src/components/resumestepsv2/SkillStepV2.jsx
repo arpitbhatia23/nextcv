@@ -24,6 +24,7 @@ import { Card } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(
@@ -131,10 +132,11 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
   };
 
   const handleNext = () => {
-    if (skillList.length < 2) {
-      alert("Add at least 2 skills to continue.");
+    if (skillList.length < 4) {
+      toast("Add at least 4 skills to continue.");
       return;
     }
+
     next();
   };
 
