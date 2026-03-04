@@ -10,8 +10,9 @@ const ClarityComponent = () => {
       const Clarity = (await import("@microsoft/clarity")).default;
       Clarity.init("vkw299o6bb");
     };
-
-    loadClarity();
+    setTimeout(() => {
+      loadClarity();
+    }, 3000);
   }, []);
 
   return null;

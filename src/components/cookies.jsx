@@ -2,7 +2,6 @@
 
 import GoogleAnalytics from "@/app/anlatyics";
 import { useEffect, useState } from "react";
-import Clearity from "./clearity";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
