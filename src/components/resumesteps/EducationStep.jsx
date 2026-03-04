@@ -120,7 +120,9 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-slate-900">Education</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+          Education
+        </h2>
         <p className="text-slate-500">Add your academic background</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -129,7 +131,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
           className="bg-white rounded-xl shadow-sm border border-slate-200"
           id="tour-education-form"
         >
-          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+          <CardHeader className="border-b  p-2 md:p-4 rounded-t-xl flex flex-row justify-between items-center">
             <div>
               <CardTitle className="text-lg font-bold text-slate-800">
                 {isEditing ? "Edit Education" : "Add Education"}
@@ -146,7 +148,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
               </Button>
             )}
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-2 md:p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}

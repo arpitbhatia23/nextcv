@@ -70,17 +70,19 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
   };
   return (
     <div className="py-8">
-      <div className="grid md:grid-cols-2 gap-2 md:gap-8 items-start">
+      <div className="grid  gap-2 md:gap-8 items-start">
         {/* Form Section */}
         <div className="space-y-6" id="tour-resume-form">
           <div className="mb-2">
-            <h2 className="text-2xl font-bold text-slate-900">Basic Details</h2>
-            <p className="text-slate-500">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
+              Basic Details
+            </h2>
+            <p className=" text-sm md: text-slate-500">
               Start with your contact information
             </p>
           </div>
-          <Card className="border border-slate-200 shadow-sm bg-white rounded-xl overflow-hidden">
-            <CardContent className="p-6">
+          <Card className="border border-slate-200 shadow-sm bg-white rounded-lg md:rounded-xl overflow-hidden">
+            <CardContent className="p-2 md:p-6">
               <Form {...form}>
                 <form
                   className="space-y-5"
@@ -99,7 +101,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                             <Input
                               placeholder="e.g. John Doe"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                             />
                           </FormControl>
                           <FormMessage />
@@ -119,7 +121,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                             <Input
                               placeholder="e.g. Software Engineer"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                             />
                           </FormControl>
                           <FormMessage />
@@ -142,7 +144,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                               placeholder="john@example.com"
                               type="email"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                             />
                           </FormControl>
                           <FormMessage />
@@ -162,7 +164,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                             <Input
                               placeholder="+91 98765 43210"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                             />
                           </FormControl>
                           <FormMessage />
@@ -183,7 +185,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                           <Input
                             placeholder="City, Country"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                           />
                         </FormControl>
                         <FormMessage />
@@ -208,7 +210,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                                 <Input
                                   placeholder="LinkedIn URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                                 />
                               </div>
                             </FormControl>
@@ -227,7 +229,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                                 <Input
                                   placeholder="GitHub URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                                 />
                               </div>
                             </FormControl>
@@ -246,7 +248,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                                 <Input
                                   placeholder="Portfolio URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-11"
+                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
                                 />
                               </div>
                             </FormControl>
@@ -259,7 +261,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
 
                   <div className="flex justify-end pt-4">
                     <Button
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8 h-11 rounded-lg font-semibold"
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-4 md:px-8 h-9 md:h-11 rounded-lg font-semibold"
                       type="submit"
                       id="tour-next-button"
                     >

@@ -15,9 +15,9 @@ const TemplateSelectorV3 = ({ onSelect }) => {
   };
 
   return (
-    <section className="p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm md:text-xl font-black text-slate-900">
+    <section className="p-2 md:p-6">
+      <div className="flex-col md:flex items-center justify-between mb-4">
+        <h3 className="text-sm md:text-xl font-semibold md:font-black text-slate-900">
           Choose a Template
         </h3>
         <p className="text-xs text-slate-500">

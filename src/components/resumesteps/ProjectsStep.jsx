@@ -116,10 +116,10 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="bg-white rounded-xl shadow-sm border border-slate-200"
+          className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200"
           id="tour-projects-form"
         >
-          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
+          <CardHeader className=" border-b p-4 rounded-t-xl flex flex-row justify-between items-center">
             <div>
               <CardTitle className="text-lg font-bold text-slate-800">
                 {isEditing ? "Edit Project" : "Add Project"}
@@ -136,7 +136,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
               </Button>
             )}
           </CardHeader>
-          <CardContent className={"p-6"}>
+          <CardContent className={"p-2 md:p-6"}>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}

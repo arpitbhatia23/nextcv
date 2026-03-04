@@ -1,7 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Briefcase, Plus, Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  Briefcase,
+  Plus,
+  Edit2,
+  Trash2,
+  Sparkles,
+  ArrowRight,
+  ArrowLeft,
+} from "lucide-react";
 import {
   Form,
   FormField,
@@ -110,26 +118,36 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
 
   return (
     <div className="py-8">
-       <div className="mb-6">
-          <h2 className="text-2xl font-bold text-slate-900">Work Experience</h2>
-          <p className="text-slate-500">Add your professional experience</p>
-       </div>
+      <div className="mb-6">
+        <h2 className="text-xl mdLtext-2xl font-bold text-slate-900">
+          Work Experience
+        </h2>
+        <p className="text-slate-500">Add your professional experience</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-xl shadow-sm border border-slate-200" id="tour-experience-form">
-          <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl flex flex-row justify-between items-center">
-             <div>
-                <CardTitle className="text-lg font-bold text-slate-800">
-                  {isEditing ? "Edit Experience" : "Add Experience"}
-                </CardTitle>
-             </div>
+        <Card
+          className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200"
+          id="tour-experience-form"
+        >
+          <CardHeader className=" border-b  p-4 rounded-t-xl flex flex-row justify-between items-center">
+            <div>
+              <CardTitle className="text-lg font-bold text-slate-800">
+                {isEditing ? "Edit Experience" : "Add Experience"}
+              </CardTitle>
+            </div>
             {isEditing && (
-              <Button variant="ghost" size="sm" onClick={cancelEdit} className="text-slate-500 hover:text-slate-700">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={cancelEdit}
+                className="text-slate-500 hover:text-slate-700"
+              >
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-2 md:p-6">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -140,9 +158,15 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">Company Name</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">
+                        Company Name
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g. Google, Amazon" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
+                        <Input
+                          placeholder="e.g. Google, Amazon"
+                          {...field}
+                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -153,7 +177,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">Position/Role</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">
+                        Position/Role
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Frontend Developer"
@@ -171,9 +197,15 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="startDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">Start Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">
+                          Start Date
+                        </FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
+                          <Input
+                            type="month"
+                            {...field}
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -184,9 +216,15 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="endDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">End Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">
+                          End Date
+                        </FormLabel>
                         <FormControl>
-                          <Input type="month" {...field} className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all" />
+                          <Input
+                            type="month"
+                            {...field}
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -198,7 +236,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="work"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">Key Responsibilities (Comma separated)</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">
+                        Key Responsibilities (Comma separated)
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. UI development, API integration"
@@ -226,7 +266,9 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="tools"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">Tools & Tech (Comma separated)</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">
+                        Tools & Tech (Comma separated)
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. React, Tailwind CSS"
@@ -255,19 +297,19 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
-                         Description
-                         <Button
-                            type="button"
-                            variant="ghost"
-                            size="sm"
-                            className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
-                            disabled={isGenerating}
-                            onClick={handelAiGenration}
-                            id="tour-ai-button"
-                          >
-                            <Sparkles className="w-3 h-3 mr-1" />
-                            {isGenerating ? "Magic..." : "Generate with AI"}
-                          </Button>
+                        Description
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                          disabled={isGenerating}
+                          onClick={handelAiGenration}
+                          id="tour-ai-button"
+                        >
+                          <Sparkles className="w-3 h-3 mr-1" />
+                          {isGenerating ? "Magic..." : "Generate with AI"}
+                        </Button>
                       </FormLabel>
                       <div className="relative">
                         <FormControl>
@@ -283,10 +325,10 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                         </FormControl>
 
                         {isGenerating && (
-                           <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-                             <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
-                                <Sparkles className="w-4 h-4" /> Generating...
-                             </div>
+                          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
+                            <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
+                              <Sparkles className="w-4 h-4" /> Generating...
+                            </div>
                           </div>
                         )}
                       </div>
@@ -310,55 +352,88 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
 
         {/* List Section */}
         <div className="space-y-6">
-           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5" id="tour-experience-list">
-              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-                 <Briefcase className="w-5 h-5 text-indigo-500" /> Professional Experience
-              </h3>
+          <div
+            className="bg-slate-50 rounded-xl border border-slate-200 p-5"
+            id="tour-experience-list"
+          >
+            <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-indigo-500" /> Professional
+              Experience
+            </h3>
 
             {experienceList.length === 0 ? (
-                <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                   <p className="text-slate-400 text-sm">No work experience added.</p>
-                </div>
+              <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                <p className="text-slate-400 text-sm">
+                  No work experience added.
+                </p>
+              </div>
             ) : (
               <div className="space-y-3">
                 {experienceList.map((exp, index) => (
-                   <div key={index} className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors">
-                      <div className="flex justify-between items-start">
-                         <div>
-                             <h4 className="font-bold text-slate-800">{exp.position}</h4>
-                             <div className="text-sm text-indigo-600 font-medium">{exp.companyName}</div>
-                         </div>
-                          <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50" onClick={() => handleEdit(exp)}>
-                                <Edit2 className="w-3.5 h-3.5" />
-                             </Button>
-                             <Button size="icon" variant="ghost" className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDelete(exp.id)}>
-                                <Trash2 className="w-3.5 h-3.5" />
-                             </Button>
-                          </div>
+                  <div
+                    key={index}
+                    className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-bold text-slate-800">
+                          {exp.position}
+                        </h4>
+                        <div className="text-sm text-indigo-600 font-medium">
+                          {exp.companyName}
+                        </div>
                       </div>
-                      
-                      <div className="text-xs text-slate-500 font-medium bg-slate-100 self-start px-2 py-1 rounded">
-                          {exp.startDate} - {exp.endDate || "Present"}
+                      <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-7 w-7 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
+                          onClick={() => handleEdit(exp)}
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-7 w-7 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                          onClick={() => handleDelete(exp.id)}
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </Button>
                       </div>
-                      
-                      {exp.description && (
-                         <p className="text-xs text-slate-600 line-clamp-2 mt-1">{exp.description}</p>
-                      )}
+                    </div>
+
+                    <div className="text-xs text-slate-500 font-medium bg-slate-100 self-start px-2 py-1 rounded">
+                      {exp.startDate} - {exp.endDate || "Present"}
+                    </div>
+
+                    {exp.description && (
+                      <p className="text-xs text-slate-600 line-clamp-2 mt-1">
+                        {exp.description}
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
             )}
-           </div>
-           
-           <div className="flex justify-between items-center pt-4">
-              <Button variant="outline" onClick={previous} className="border-slate-300 text-slate-600 hover:bg-slate-50">
-                 <ArrowLeft className="w-4 h-4 mr-2" /> Back
-              </Button>
-              <Button onClick={next} className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8" id="tour-next-button">
-                 Next Step <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-           </div>
+          </div>
+
+          <div className="flex justify-between items-center pt-4">
+            <Button
+              variant="outline"
+              onClick={previous}
+              className="border-slate-300 text-slate-600 hover:bg-slate-50"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" /> Back
+            </Button>
+            <Button
+              onClick={next}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
+              id="tour-next-button"
+            >
+              Next Step <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
