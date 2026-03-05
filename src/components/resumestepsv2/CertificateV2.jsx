@@ -33,10 +33,10 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
 
   const form = useForm({
     defaultValues: {
-      name: "",
-      issuer: "",
-      date: "",
-      link: "",
+      title: "",
+      organization: "",
+      year: "",
+      credentialUrl: "",
     },
   });
 
@@ -114,7 +114,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                 >
                   <FormField
                     control={form.control}
-                    name="name"
+                    name="title"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold">
@@ -134,7 +134,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
 
                   <FormField
                     control={form.control}
-                    name="issuer"
+                    name="organization"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
@@ -156,7 +156,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                   <div className="grid grid-cols-1 gap-6">
                     <FormField
                       control={form.control}
-                      name="date"
+                      name="year"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
@@ -177,7 +177,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
 
                     <FormField
                       control={form.control}
-                      name="link"
+                      name="credentialUrl"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
@@ -259,16 +259,16 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                               <Award className="w-5 h-5 text-indigo-600" />
                             </div>
                             <h4 className="font-black text-slate-900 leading-snug">
-                              {cert.name}
+                              {cert.title}
                             </h4>
                             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                              {cert.issuer}
+                              {cert.organization}
                             </p>
                           </div>
 
                           <div className="flex items-center justify-between pt-4 border-t border-slate-50 mt-2">
                             <span className="text-[10px] font-black text-slate-300">
-                              {cert.date}
+                              {cert.year}
                             </span>
                             <div className="flex gap-2">
                               <button

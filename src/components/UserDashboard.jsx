@@ -45,9 +45,9 @@ const UserDashboard = () => {
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-5xl mx-auto space-y-12">
         {/* Main Creation Options */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid gap-8">
           {/* Option 1: Manual Builder */}
           <Link
             href="/dashboard/resumeform"
@@ -77,7 +77,7 @@ const UserDashboard = () => {
             </Card>
           </Link>
 
-          {/* Option 2: Full AI Generator */}
+          {/* Option 2: Full AI Generator
           <Link
             href="/dashboard/full-ai-resume"
             className="group"
@@ -110,7 +110,7 @@ const UserDashboard = () => {
                 </div>
               </CardContent>
             </Card>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Value Props Grid */}

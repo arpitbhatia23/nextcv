@@ -89,6 +89,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
+    console.log(formData);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
