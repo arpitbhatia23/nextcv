@@ -6,7 +6,7 @@ export default function ClarityComponent() {
   if (process.env.NODE_ENV !== "production") return null;
 
   return (
-    <Script type="text/javascript">
+    <Script type="text/javascript" strategy="lazyOnload">
       {(function (c, l, a, r, i, t, y) {
         c[a] =
           c[a] ||
