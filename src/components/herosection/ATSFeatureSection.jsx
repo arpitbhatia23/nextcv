@@ -9,12 +9,8 @@ const ATSFeatureSection = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div
-          // initial={{ opacity: 0, x: -20 }}
-          // whileInView={{ opacity: 1, x: 0 }}
-          // viewport={{ once: true }}
-          // transition={{ duration: 0.6 }}
-          >
+          <div>
+            {" "}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
               <span>New Free Tool</span>
@@ -28,7 +24,6 @@ const ATSFeatureSection = () => {
               before a human ever sees them. Our free tool checks your resume
               against key ATS criteria.
             </p>
-
             <div className="space-y-4 mb-8">
               {[
                 "Instant score analysis",
@@ -42,7 +37,6 @@ const ATSFeatureSection = () => {
                 </div>
               ))}
             </div>
-
             <Link
               href="/ats-resume-checker"
               className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
