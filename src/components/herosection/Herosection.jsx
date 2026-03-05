@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { m } from "framer-motion";
+// import { m } from "framer-motion";
 import { Ticket } from "lucide-react";
 import SigninButton from "../SigninButton";
 
@@ -27,10 +27,10 @@ function Herosection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
         {/* Top Badge */}
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+        <div
+          // initial={{ opacity: 0, y: 20 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-sm font-medium mb-8 hover:bg-indigo-100 transition-colors cursor-default"
         >
           <span className="flex h-2 w-2 relative">
@@ -38,26 +38,26 @@ function Herosection() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
           </span>
           New: AI Resume Analysis Feature
-        </m.div>
+        </div>
 
         {/* Headline */}
-        <m.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        <h1
+          // initial={{ opacity: 0, y: 20 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
           Build a Job-Winning <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
             ATS-Friendly Resume for the Indian Job Market
           </span>
-        </m.h1>
+        </h1>
 
         {/* Subhead */}
-        <m.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <p
+          // initial={{ opacity: 0, y: 20 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
           Designed specifically for the{" "}
@@ -70,13 +70,13 @@ function Herosection() {
           <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
           </span>
-        </m.p>
+        </p>
 
         {/* Coupon Badge */}
-        <m.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        <div
+          // initial={{ opacity: 0, y: 10 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-8 flex justify-center"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 shadow-sm hover:shadow-md transition-all duration-300">
@@ -86,16 +86,16 @@ function Herosection() {
               <span className="font-bold">20% off</span>
             </span>
           </div>
-        </m.div>
+        </div>
 
         {/* Buttons */}
         <SigninButton />
 
         {/* Trust/Social Proof */}
-        <m.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+        <div
+          // initial={{ opacity: 0 }}
+          // animate={{ opacity: 1 }}
+          // transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-20 pt-10 border-t border-slate-100"
         >
           <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-8">
@@ -113,7 +113,7 @@ function Herosection() {
               />
             ))}
           </div>
-        </m.div>
+        </div>
         <p className="sr-only">
           NextCV is an AI resume builder designed for freshers and job seekers
           in India. Create ATS-friendly resume formats for IT jobs, campus
