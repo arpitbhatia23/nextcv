@@ -53,7 +53,7 @@ import Logo2 from "./Logo2";
 import useResumeStore from "@/store/useResumeStore";
 import Loading from "@/app/loading";
 import TemplateSelectorV3 from "./TemplateSelectorV3";
-const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 const ResumeV3 = () => {
   // start on the final template selection step so users see template 3 (final) first
@@ -91,61 +91,61 @@ const ResumeV3 = () => {
     setStep(stepIndex);
   };
 
-  const getTourSteps = () => {
-    const commonSteps = [
-      {
-        target: "#tour-resume-progress-v3",
-        content: "Track your progress here. This is the V3 experience.",
-        disableBeacon: true,
-      },
-    ];
+  // const getTourSteps = () => {
+  //   const commonSteps = [
+  //     {
+  //       target: "#tour-resume-progress-v3",
+  //       content: "Track your progress here. This is the V3 experience.",
+  //       disableBeacon: true,
+  //     },
+  //   ];
 
-    const stepSpecificSteps = {
-      0: [
-        {
-          target: "#tour-resume-form-v3",
-          content: "Start by filling in your identity and branding.",
-        },
-        {
-          target: "#tour-social-links-v3",
-          content: "Add your digital presence to help recruiters find you.",
-        },
-        {
-          target: "#tour-resume-preview-v3",
-          content: "See your resume update in real-time as you type.",
-        },
-      ],
-      7: [
-        {
-          target: "#tour-template-selection-v3",
-          content: "Choose a high-resolution template first.",
-        },
-        {
-          target: "#tour-final-preview-v3",
-          content: "Preview the chosen template immediately.",
-        },
-      ],
-    };
+  //   const stepSpecificSteps = {
+  //     0: [
+  //       {
+  //         target: "#tour-resume-form-v3",
+  //         content: "Start by filling in your identity and branding.",
+  //       },
+  //       {
+  //         target: "#tour-social-links-v3",
+  //         content: "Add your digital presence to help recruiters find you.",
+  //       },
+  //       {
+  //         target: "#tour-resume-preview-v3",
+  //         content: "See your resume update in real-time as you type.",
+  //       },
+  //     ],
+  //     7: [
+  //       {
+  //         target: "#tour-template-selection-v3",
+  //         content: "Choose a high-resolution template first.",
+  //       },
+  //       {
+  //         target: "#tour-final-preview-v3",
+  //         content: "Preview the chosen template immediately.",
+  //       },
+  //     ],
+  //   };
 
-    const nextStepInfo =
-      step < resumeSteps.length - 1
-        ? [
-            {
-              target: "#tour-next-button-v3",
-              content:
-                "Solidify your progress and advance to the next strategy.",
-            },
-          ]
-        : [];
+  //   const nextStepInfo =
+  //     step < resumeSteps.length - 1
+  //       ? [
+  //           {
+  //             target: "#tour-next-button-v3",
+  //             content:
+  //               "Solidify your progress and advance to the next strategy.",
+  //           },
+  //         ]
+  //       : [];
 
-    return [
-      ...(step === 7 ? commonSteps : []),
-      ...(stepSpecificSteps[step] || []),
-      ...nextStepInfo,
-    ];
-  };
+  //   return [
+  //     ...(step === 7 ? commonSteps : []),
+  //     ...(stepSpecificSteps[step] || []),
+  //     ...nextStepInfo,
+  //   ];
+  // };
 
-  const currentTourSteps = getTourSteps();
+  // const currentTourSteps = getTourSteps();
 
   const progress = ((step + 1) / resumeSteps.length) * 100;
   const StepComponents = resumeSteps[step]?.component;
@@ -317,7 +317,7 @@ const ResumeV3 = () => {
         </div> */}
       </div>
 
-      <Tour steps={currentTourSteps} tourId={`resume-v3-step-${step}`} />
+      {/* <Tour steps={currentTourSteps} tourId={`resume-v3-step-${step}`} /> */}
     </div>
   );
 };

@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 // import { m } from "framer-motion";
@@ -22,7 +20,7 @@ function Herosection() {
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-250 h-125 bg-indigo-50/80 rounded-full blur-3xl opacity-70" />
-        <div className="absolute top-0 right-0 w-250 h-125 bg-blue-50/80 rounded-full blur-3xl opacity-60" />
+        <div className="absolute top-0 right-0 w-250 h-125 bg-blue-50/80 rounded-full blur-none md:blur-3xl opacity-60" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
@@ -109,6 +107,7 @@ function Herosection() {
                 alt={logo.alt}
                 width={120}
                 height={40}
+                loading="lazy"
                 className="h-6 sm:h-8 w-auto object-contain"
               />
             ))}

@@ -1,21 +1,21 @@
-"use client";
+import Script from "next/script";
 
-import { useEffect } from "react";
+export default function ClarityComponent() {
+  if (process.env.NODE_ENV !== "production") return null;
 
-const ClarityComponent = () => {
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") return;
-
-    const loadClarity = async () => {
-      const Clarity = (await import("@microsoft/clarity")).default;
-      Clarity.init("vkw299o6bb");
-    };
-    setTimeout(() => {
-      loadClarity();
-    }, 3000);
-  }, []);
-
-  return null;
-};
-
-export default ClarityComponent;
+  return (
+    <Script
+      id="clarity"
+      strategy="lazyOnload"
+      dangerouslySetInnerHTML={{
+        __html: `
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "vkw299o6bb");
+        `,
+      }}
+    />
+  );
+}

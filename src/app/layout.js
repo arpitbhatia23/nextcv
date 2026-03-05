@@ -17,51 +17,17 @@ const geistMono = Geist_Mono({
   preload: true,
 });
 
+export const metadata = {
+  metadataBase: new URL("https://www.nextcv.in"),
+  title: "Free AI Resume Builder for India – ATS Friendly | NextCV",
+  description: "Create a professional ATS-friendly resume in under 1 minute.",
+  openGraph: {
+    images: ["/opengraph-image.png"],
+  },
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        {/* JSON-LD for Website */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
-              url: "https://www.nextcv.in",
-              description:
-                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
-            }),
-          }}
-        />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
-              url: "https://www.nextcv.in",
-              logo: "https://www.nextcv.in/opengraph-image.png",
-              description:
-                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
-              sameAs: [
-                "https://www.facebook.com/nextcv",
-                "https://www.twitter.com/nextcv",
-                "https://www.linkedin.com/company/next-cv",
-              ],
-              contactPoint: {
-                "@type": "ContactPoint",
-                contactType: "Customer Support",
-                email: "help@nextcv.in",
-              },
-            }),
-          }}
-        />
-      </head>
-
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

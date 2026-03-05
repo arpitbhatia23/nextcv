@@ -13,25 +13,25 @@ import {
 import Link from "next/link";
 import Tour from "./Tour";
 const UserDashboard = () => {
-  const tourSteps = [
-    {
-      target: "#tour-dashboard-header",
-      content: "Welcome to your dashboard! Here you can manage your resumes and create new ones.",
-      disableBeacon: true,
-    },
-    {
-      target: "#tour-standard-resume",
-      content: "Use our standard form builder for precise control over every detail of your resume.",
-    },
-    {
-      target: "#tour-ai-resume",
-      content: "Short on time? Use our AI assistant to generate a professional resume in seconds.",
-    },
-    {
-      target: "#tour-value-props",
-      content: "Discover why NextCV is the best choice for your career growth.",
-    },
-  ];
+  // const tourSteps = [
+  //   {
+  //     target: "#tour-dashboard-header",
+  //     content: "Welcome to your dashboard! Here you can manage your resumes and create new ones.",
+  //     disableBeacon: true,
+  //   },
+  //   {
+  //     target: "#tour-standard-resume",
+  //     content: "Use our standard form builder for precise control over every detail of your resume.",
+  //   },
+  //   {
+  //     target: "#tour-ai-resume",
+  //     content: "Short on time? Use our AI assistant to generate a professional resume in seconds.",
+  //   },
+  //   {
+  //     target: "#tour-value-props",
+  //     content: "Discover why NextCV is the best choice for your career growth.",
+  //   },
+  // ];
 
   return (
     <div className="min-h-screen p-6 md:p-10 font-[--font-geist-sans] bg-slate-50">
@@ -49,7 +49,11 @@ const UserDashboard = () => {
         {/* Main Creation Options */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Option 1: Manual Builder */}
-          <Link href="/dashboard/resumeform" className="group" id="tour-standard-resume">
+          <Link
+            href="/dashboard/resumeform"
+            className="group"
+            id="tour-standard-resume"
+          >
             <Card className="h-full border-2 border-slate-200 bg-white hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
               <CardContent className="p-8 md:p-10 relative">
@@ -57,8 +61,10 @@ const UserDashboard = () => {
                   <Plus size={28} strokeWidth={2.5} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
-                  Create Resume 
-                  <span className="block text-sm font-medium text-slate-400 mt-1">(Standard Form)</span>
+                  Create Resume
+                  <span className="block text-sm font-medium text-slate-400 mt-1">
+                    (Standard Form)
+                  </span>
                 </h2>
                 <p className="text-slate-500 mb-8 leading-relaxed">
                   Build your resume step-by-step with our classic form builder.
@@ -67,13 +73,16 @@ const UserDashboard = () => {
                 <div className="flex items-center text-indigo-600 font-bold group-hover:translate-x-2 transition-transform">
                   Start Form Builder <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
-
               </CardContent>
             </Card>
           </Link>
 
           {/* Option 2: Full AI Generator */}
-          <Link href="/dashboard/full-ai-resume" className="group" id="tour-ai-resume">
+          <Link
+            href="/dashboard/full-ai-resume"
+            className="group"
+            id="tour-ai-resume"
+          >
             <Card className="h-full border-2 border-slate-200 bg-white hover:border-purple-500 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 rounded-2xl overflow-hidden relative">
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110" />
               <CardContent className="p-8 md:p-10 relative">
@@ -81,8 +90,16 @@ const UserDashboard = () => {
                   <Zap size={28} strokeWidth={2.5} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">
-                  Full AI Resume <Badge variant="secondary" className="ml-2 bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-200">Experimental</Badge>
-                  <span className="block text-sm font-medium text-slate-400 mt-1">(Chat Assistant)</span>
+                  Full AI Resume{" "}
+                  <Badge
+                    variant="secondary"
+                    className="ml-2 bg-purple-100 text-purple-700 hover:bg-purple-200 border-purple-200"
+                  >
+                    Experimental
+                  </Badge>
+                  <span className="block text-sm font-medium text-slate-400 mt-1">
+                    (Chat Assistant)
+                  </span>
                 </h2>
                 <p className="text-slate-500 mb-8 leading-relaxed">
                   Generate a complete, ATS-friendly resume from scratch in
@@ -91,8 +108,6 @@ const UserDashboard = () => {
                 <div className="flex items-center text-purple-600 font-bold group-hover:translate-x-2 transition-transform">
                   Generate with AI <ArrowRight className="ml-2 w-5 h-5" />
                 </div>
-
-
               </CardContent>
             </Card>
           </Link>
@@ -154,7 +169,7 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-      <Tour steps={tourSteps} tourId="dashboard" />
+      {/* <Tour steps={tourSteps} tourId="dashboard" /> */}
     </div>
   );
 };

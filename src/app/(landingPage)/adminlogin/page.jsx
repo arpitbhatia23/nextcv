@@ -1,7 +1,11 @@
 import { LoginForm } from "@/components/login-form";
-
 export const metadata = {
-  title: "NEXTCV",
+  metadataBase: new URL("https://www.nextcv.in"),
+  title: "Free AI Resume Builder for India – ATS Friendly | NextCV",
+  description: "Create a professional ATS-friendly resume in under 1 minute.",
+  openGraph: {
+    images: ["/opengraph-image.png"],
+  },
 };
 export default function LoginPage() {
   return (

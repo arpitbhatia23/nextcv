@@ -33,7 +33,7 @@ import { Input } from "./ui/input";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
-const Tour = dynamic(() => import("./Tour"), { ssr: false });
+// const Tour = dynamic(() => import("./Tour"), { ssr: false });
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -573,7 +573,7 @@ const MyResume = () => {
           )}
         </TabsContent>
       </Tabs>
-      <Tour
+      {/* <Tour
         steps={[
           {
             target: "#tour-my-resumes-header",
@@ -595,7 +595,7 @@ const MyResume = () => {
           },
         ]}
         tourId="my-resumes"
-      />
+      /> */}
     </div>
   );
 };

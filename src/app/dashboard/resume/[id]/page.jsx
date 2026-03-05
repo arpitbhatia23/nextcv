@@ -21,14 +21,14 @@ import {
   Linkedin,
   Globe,
   Loader2,
-  ArrowLeft
+  ArrowLeft,
 } from "lucide-react";
 import axios from "axios";
 import { formatDate } from "@/utils/datefromater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 function getChangedFields(original, edited) {
   const changed = {};
@@ -91,7 +91,7 @@ const page = ({ params }) => {
     setEditdata((prev) => ({
       ...prev,
       [arrayName]: prev[arrayName].map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
+        i === index ? { ...item, [field]: value } : item,
       ),
     }));
   };
@@ -132,9 +132,11 @@ const page = ({ params }) => {
   };
 
   if (loading) {
-     return <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
-     </div>
+      </div>
+    );
   }
 
   return (
@@ -143,13 +145,16 @@ const page = ({ params }) => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <button 
-                onClick={() => router.back()} 
-                className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-2 text-sm font-medium"
+            <button
+              onClick={() => router.back()}
+              className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-2 text-sm font-medium"
             >
-                <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+              <ArrowLeft className="w-4 h-4" /> Back to Dashboard
             </button>
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight" id="tour-edit-header">
+            <h1
+              className="text-3xl font-bold text-slate-900 tracking-tight"
+              id="tour-edit-header"
+            >
               Edit Resume
             </h1>
             <p className="text-slate-500 mt-1">
@@ -163,17 +168,24 @@ const page = ({ params }) => {
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm px-8"
             id="tour-save-button"
           >
-            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
+            {saving ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <Save className="w-4 h-4 mr-2" />
+            )}
             {saving ? "Saving..." : "Save Changes"}
           </Button>
         </div>
 
         {/* Personal Information */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-personal-info">
+          <CardHeader
+            className="border-b border-slate-100 bg-slate-50/50"
+            id="tour-personal-info"
+          >
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                 <User className="w-4 h-4 text-indigo-600" />
+                <User className="w-4 h-4 text-indigo-600" />
               </div>
               Personal Information
             </CardTitle>
@@ -181,7 +193,9 @@ const page = ({ params }) => {
           <CardContent className="p-6 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-slate-600">Full Name</Label>
+                <Label htmlFor="name" className="text-slate-600">
+                  Full Name
+                </Label>
                 <Input
                   id="name"
                   value={editdata.name}
@@ -191,7 +205,9 @@ const page = ({ params }) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="jobRole" className="text-slate-600">Job Role</Label>
+                <Label htmlFor="jobRole" className="text-slate-600">
+                  Job Role
+                </Label>
                 <Input
                   id="jobRole"
                   value={editdata.jobRole}
@@ -203,7 +219,10 @@ const page = ({ params }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2 text-slate-600">
+                <Label
+                  htmlFor="email"
+                  className="flex items-center gap-2 text-slate-600"
+                >
                   <Mail className="w-3.5 h-3.5" />
                   Email
                 </Label>
@@ -217,7 +236,10 @@ const page = ({ params }) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone" className="flex items-center gap-2 text-slate-600">
+                <Label
+                  htmlFor="phone"
+                  className="flex items-center gap-2 text-slate-600"
+                >
                   <Phone className="w-3.5 h-3.5" />
                   Phone Number
                 </Label>
@@ -233,7 +255,10 @@ const page = ({ params }) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="address" className="flex items-center gap-2 text-slate-600">
+              <Label
+                htmlFor="address"
+                className="flex items-center gap-2 text-slate-600"
+              >
                 <MapPin className="w-3.5 h-3.5" />
                 Address
               </Label>
@@ -248,7 +273,10 @@ const page = ({ params }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="github" className="flex items-center gap-2 text-slate-600">
+                <Label
+                  htmlFor="github"
+                  className="flex items-center gap-2 text-slate-600"
+                >
                   <Github className="w-3.5 h-3.5" />
                   GitHub
                 </Label>
@@ -260,8 +288,11 @@ const page = ({ params }) => {
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
-              <div className="space-y-2"> 
-                <Label htmlFor="linkedin" className="flex items-center gap-2 text-slate-600">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="linkedin"
+                  className="flex items-center gap-2 text-slate-600"
+                >
                   <Linkedin className="w-3.5 h-3.5" />
                   LinkedIn
                 </Label>
@@ -276,7 +307,10 @@ const page = ({ params }) => {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="portfolio" className="flex items-center gap-2 text-slate-600">
+                <Label
+                  htmlFor="portfolio"
+                  className="flex items-center gap-2 text-slate-600"
+                >
                   <Globe className="w-3.5 h-3.5" />
                   Portfolio
                 </Label>
@@ -292,7 +326,9 @@ const page = ({ params }) => {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="summary" className="text-slate-600">Professional Summary</Label>
+              <Label htmlFor="summary" className="text-slate-600">
+                Professional Summary
+              </Label>
               <Textarea
                 id="summary"
                 value={editdata.summary}
@@ -307,10 +343,13 @@ const page = ({ params }) => {
 
         {/* Skills */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-skills-card">
+          <CardHeader
+            className="border-b border-slate-100 bg-slate-50/50"
+            id="tour-skills-card"
+          >
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                 <Code className="w-4 h-4 text-indigo-600" />
+                <Code className="w-4 h-4 text-indigo-600" />
               </div>
               Skills
             </CardTitle>
@@ -318,7 +357,10 @@ const page = ({ params }) => {
           <CardContent className="p-6">
             <div className="space-y-4">
               {editdata.skills.map((skill, index) => (
-                <div key={index} className="flex items-center gap-4 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                <div
+                  key={index}
+                  className="flex items-center gap-4 bg-slate-50 p-2 rounded-lg border border-slate-100"
+                >
                   <div className="flex-1">
                     <Input
                       value={skill.name}
@@ -327,7 +369,7 @@ const page = ({ params }) => {
                           "skills",
                           index,
                           "name",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Skill name"
@@ -342,7 +384,7 @@ const page = ({ params }) => {
                           "skills",
                           index,
                           "level",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Level"
@@ -373,10 +415,13 @@ const page = ({ params }) => {
 
         {/* Experience */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-experience-card">
+          <CardHeader
+            className="border-b border-slate-100 bg-slate-50/50"
+            id="tour-experience-card"
+          >
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                 <Briefcase className="w-4 h-4 text-indigo-600" />
+                <Briefcase className="w-4 h-4 text-indigo-600" />
               </div>
               Experience
             </CardTitle>
@@ -411,7 +456,7 @@ const page = ({ params }) => {
                             "experience",
                             index,
                             "position",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Job title"
@@ -427,7 +472,7 @@ const page = ({ params }) => {
                             "experience",
                             index,
                             "companyName",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Company name"
@@ -445,7 +490,7 @@ const page = ({ params }) => {
                             "experience",
                             index,
                             "startDate",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Start date"
@@ -461,7 +506,7 @@ const page = ({ params }) => {
                             "experience",
                             index,
                             "endDate",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="End date"
@@ -478,7 +523,7 @@ const page = ({ params }) => {
                           "experience",
                           index,
                           "description",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Describe your role and achievements"
@@ -513,7 +558,7 @@ const page = ({ params }) => {
           <CardHeader className="border-b border-slate-100 bg-slate-50/50">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                 <GraduationCap className="w-4 h-4 text-indigo-600" />
+                <GraduationCap className="w-4 h-4 text-indigo-600" />
               </div>
               Education
             </CardTitle>
@@ -548,7 +593,7 @@ const page = ({ params }) => {
                             "education",
                             index,
                             "degree",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Degree name"
@@ -564,7 +609,7 @@ const page = ({ params }) => {
                             "education",
                             index,
                             "institution",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Institution name"
@@ -582,7 +627,7 @@ const page = ({ params }) => {
                             "education",
                             index,
                             "startYear",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="Start year"
@@ -598,7 +643,7 @@ const page = ({ params }) => {
                             "education",
                             index,
                             "endYear",
-                            e.target.value
+                            e.target.value,
                           )
                         }
                         placeholder="End year"
@@ -615,7 +660,7 @@ const page = ({ params }) => {
                           "education",
                           index,
                           "grade",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="CGPA/Percentage"
@@ -631,7 +676,7 @@ const page = ({ params }) => {
                           "education",
                           index,
                           "description",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Describe your education"
@@ -667,7 +712,7 @@ const page = ({ params }) => {
           <CardHeader className="border-b border-slate-100 bg-slate-50/50">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                 <FolderOpen className="w-4 h-4 text-indigo-600" />
+                <FolderOpen className="w-4 h-4 text-indigo-600" />
               </div>
               Projects
             </CardTitle>
@@ -693,75 +738,77 @@ const page = ({ params }) => {
                     </Button>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div className="space-y-2">
-                        <Label className="text-slate-600">Title</Label>
-                        <Input
-                          value={project.title}
-                          onChange={(e) =>
-                            handleArrayItemChange(
-                              "projects",
-                              index,
-                              "title",
-                              e.target.value
-                            )
-                          }
-                          placeholder="Project title"
-                          className="bg-slate-50 border-slate-200"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label className="text-slate-600">Role/Type</Label>
-                        <Input
-                          value={project.roleOrType}
-                          onChange={(e) =>
-                            handleArrayItemChange(
-                              "projects",
-                              index,
-                              "roleOrType",
-                              e.target.value
-                            )
-                          }
-                          placeholder="Role or type"
-                          className="bg-slate-50 border-slate-200"
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Title</Label>
+                      <Input
+                        value={project.title}
+                        onChange={(e) =>
+                          handleArrayItemChange(
+                            "projects",
+                            index,
+                            "title",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Project title"
+                        className="bg-slate-50 border-slate-200"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Role/Type</Label>
+                      <Input
+                        value={project.roleOrType}
+                        onChange={(e) =>
+                          handleArrayItemChange(
+                            "projects",
+                            index,
+                            "roleOrType",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Role or type"
+                        className="bg-slate-50 border-slate-200"
+                      />
+                    </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                     <div className="space-y-2">
-                        <Label className="text-slate-600">Organization</Label>
-                        <Input
-                          value={project.organization}
-                          onChange={(e) =>
-                            handleArrayItemChange(
-                              "projects",
-                              index,
-                              "organization",
-                              e.target.value
-                            )
-                          }
-                          placeholder="Organization"
-                          className="bg-slate-50 border-slate-200"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label className="text-slate-600">Date</Label>
-                        <Input
-                          value={project.date}
-                          onChange={(e) =>
-                            handleArrayItemChange(
-                              "projects",
-                              index,
-                              "date",
-                              e.target.value
-                            )
-                          }
-                          placeholder="Date"
-                          className="bg-slate-50 border-slate-200"
-                        />
-                      </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Organization</Label>
+                      <Input
+                        value={project.organization}
+                        onChange={(e) =>
+                          handleArrayItemChange(
+                            "projects",
+                            index,
+                            "organization",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Organization"
+                        className="bg-slate-50 border-slate-200"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-slate-600">Date</Label>
+                      <Input
+                        value={project.date}
+                        onChange={(e) =>
+                          handleArrayItemChange(
+                            "projects",
+                            index,
+                            "date",
+                            e.target.value,
+                          )
+                        }
+                        placeholder="Date"
+                        className="bg-slate-50 border-slate-200"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-slate-600">Technologies/Topics</Label>
+                    <Label className="text-slate-600">
+                      Technologies/Topics
+                    </Label>
                     <Input
                       value={project.technologiesOrTopics}
                       onChange={(e) =>
@@ -769,7 +816,7 @@ const page = ({ params }) => {
                           "projects",
                           index,
                           "technologiesOrTopics",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Technologies or topics"
@@ -785,7 +832,7 @@ const page = ({ params }) => {
                           "projects",
                           index,
                           "description",
-                          e.target.value
+                          e.target.value,
                         )
                       }
                       placeholder="Project description"
@@ -818,25 +865,29 @@ const page = ({ params }) => {
 
         {/* Footer */}
         <div className="flex justify-end gap-4">
-            <Button
-                variant="outline"
-                onClick={() => router.back()}
-                className="border-slate-300 text-slate-700 hover:bg-slate-50"
-            >
-                Cancel
-            </Button>
-            <Button
-                onClick={handleSave}
-                disabled={saving}
-                size="lg"
-                className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-200 px-8"
-            >
-                {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin"/> : <Save className="w-4 h-4 mr-2" />}
-                {saving ? "Saving..." : "Save Resume"}
-            </Button>
+          <Button
+            variant="outline"
+            onClick={() => router.back()}
+            className="border-slate-300 text-slate-700 hover:bg-slate-50"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSave}
+            disabled={saving}
+            size="lg"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-200 px-8"
+          >
+            {saving ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <Save className="w-4 h-4 mr-2" />
+            )}
+            {saving ? "Saving..." : "Save Resume"}
+          </Button>
         </div>
       </div>
-      <Tour
+      {/* <Tour
         steps={[
           {
             target: "#tour-edit-header",
@@ -861,7 +912,7 @@ const page = ({ params }) => {
           },
         ]}
         tourId="edit-resume-page"
-      />
+      /> */}
     </div>
   );
 };

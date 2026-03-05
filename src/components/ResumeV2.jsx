@@ -11,8 +11,6 @@ import {
   GraduationCap,
   Settings,
   User,
-  ChevronRight,
-  ChevronLeft,
 } from "lucide-react";
 
 const BasicInfoStep = dynamic(() => import("./resumestepsv2/BasicInfoStepV2"), {
@@ -54,7 +52,7 @@ const ProjectsStep = dynamic(() => import("./resumestepsv2/ProjectsStepV2"), {
 import Logo2 from "./Logo2";
 import useResumeStore from "@/store/useResumeStore";
 import Loading from "@/app/loading";
-const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 const ResumeV2 = () => {
   const [step, setStep] = useState(0);
@@ -86,142 +84,142 @@ const ResumeV2 = () => {
     setStep(stepIndex);
   };
 
-  const getTourSteps = () => {
-    const commonSteps = [
-      {
-        target: "#tour-resume-progress-v2",
-        content:
-          "Track your progress here. This is the optimized V2 experience.",
-        disableBeacon: true,
-      },
-    ];
+  // const getTourSteps = () => {
+  //   const commonSteps = [
+  //     {
+  //       target: "#tour-resume-progress-v2",
+  //       content:
+  //         "Track your progress here. This is the optimized V2 experience.",
+  //       disableBeacon: true,
+  //     },
+  //   ];
 
-    const stepSpecificSteps = {
-      0: [
-        {
-          target: "#tour-resume-form-v2",
-          content: "Start by filling in your identity and branding.",
-        },
-        {
-          target: "#tour-social-links-v2",
-          content: "Add your digital presence to help recruiters find you.",
-        },
-        {
-          target: "#tour-resume-preview-v2",
-          content: "See your resume update in real-time as you type.",
-        },
-      ],
-      1: [
-        {
-          target: "#tour-education-form-v2",
-          content: "Input your academic background here.",
-        },
-        {
-          target: "#tour-ai-button-v2",
-          content: "Use AI to polish your coursework and achievements.",
-        },
-        {
-          target: "#tour-education-list-v2",
-          content: "Your educational timeline will appear here.",
-        },
-      ],
-      2: [
-        {
-          target: "#tour-skills-form-v2",
-          content: "Map your core competencies and technical depth.",
-        },
-        {
-          target: "#tour-skills-list-v2",
-          content: "Visualize your skill set as it grows.",
-        },
-      ],
-      3: [
-        {
-          target: "#tour-experience-form-v2",
-          content: "Chronicle your professional journey and career chapters.",
-        },
-        {
-          target: "#tour-ai-button-v2",
-          content: "Elevate your job descriptions with AI-powered suggestions.",
-        },
-        {
-          target: "#tour-experience-list-v2",
-          content: "Your career path is visualized here.",
-        },
-      ],
-      4: [
-        {
-          target: "#tour-projects-form-v2",
-          content: "Showcase your technical depth with real-world projects.",
-        },
-        {
-          target: "#tour-ai-button-v2",
-          content: "Augment your project descriptions for maximum impact.",
-        },
-        {
-          target: "#tour-projects-list-v2",
-          content: "Your innovation portfolio index.",
-        },
-      ],
-      5: [
-        {
-          target: "#tour-certificates-form-v2",
-          content: "Validate your skills with official credentials.",
-        },
-        {
-          target: "#tour-certificates-list-v2",
-          content: "Your verified achievement list.",
-        },
-      ],
-      6: [
-        {
-          target: "#tour-summary-form-v2",
-          content: "Draft a powerful executive pitch for your career.",
-        },
-        {
-          target: "#tour-ai-button-v2",
-          content: "Synthesize a professional summary using AI.",
-        },
-      ],
-      7: [
-        {
-          target: "#tour-template-selection-v2",
-          content: "Choose from our high-resolution architectural templates.",
-        },
-        {
-          target: "#tour-final-preview-v2",
-          content: "The final blueprint of your professional career.",
-        },
-        {
-          target: "#tour-coupon-section-v2",
-          content: "Apply promo codes for exclusive discounts.",
-        },
-        {
-          target: "#tour-payment-section-v2",
-          content: "Unlock your high-resolution PDF and launch your career.",
-        },
-      ],
-    };
+  //   const stepSpecificSteps = {
+  //     0: [
+  //       {
+  //         target: "#tour-resume-form-v2",
+  //         content: "Start by filling in your identity and branding.",
+  //       },
+  //       {
+  //         target: "#tour-social-links-v2",
+  //         content: "Add your digital presence to help recruiters find you.",
+  //       },
+  //       {
+  //         target: "#tour-resume-preview-v2",
+  //         content: "See your resume update in real-time as you type.",
+  //       },
+  //     ],
+  //     1: [
+  //       {
+  //         target: "#tour-education-form-v2",
+  //         content: "Input your academic background here.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button-v2",
+  //         content: "Use AI to polish your coursework and achievements.",
+  //       },
+  //       {
+  //         target: "#tour-education-list-v2",
+  //         content: "Your educational timeline will appear here.",
+  //       },
+  //     ],
+  //     2: [
+  //       {
+  //         target: "#tour-skills-form-v2",
+  //         content: "Map your core competencies and technical depth.",
+  //       },
+  //       {
+  //         target: "#tour-skills-list-v2",
+  //         content: "Visualize your skill set as it grows.",
+  //       },
+  //     ],
+  //     3: [
+  //       {
+  //         target: "#tour-experience-form-v2",
+  //         content: "Chronicle your professional journey and career chapters.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button-v2",
+  //         content: "Elevate your job descriptions with AI-powered suggestions.",
+  //       },
+  //       {
+  //         target: "#tour-experience-list-v2",
+  //         content: "Your career path is visualized here.",
+  //       },
+  //     ],
+  //     4: [
+  //       {
+  //         target: "#tour-projects-form-v2",
+  //         content: "Showcase your technical depth with real-world projects.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button-v2",
+  //         content: "Augment your project descriptions for maximum impact.",
+  //       },
+  //       {
+  //         target: "#tour-projects-list-v2",
+  //         content: "Your innovation portfolio index.",
+  //       },
+  //     ],
+  //     5: [
+  //       {
+  //         target: "#tour-certificates-form-v2",
+  //         content: "Validate your skills with official credentials.",
+  //       },
+  //       {
+  //         target: "#tour-certificates-list-v2",
+  //         content: "Your verified achievement list.",
+  //       },
+  //     ],
+  //     6: [
+  //       {
+  //         target: "#tour-summary-form-v2",
+  //         content: "Draft a powerful executive pitch for your career.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button-v2",
+  //         content: "Synthesize a professional summary using AI.",
+  //       },
+  //     ],
+  //     7: [
+  //       {
+  //         target: "#tour-template-selection-v2",
+  //         content: "Choose from our high-resolution architectural templates.",
+  //       },
+  //       {
+  //         target: "#tour-final-preview-v2",
+  //         content: "The final blueprint of your professional career.",
+  //       },
+  //       {
+  //         target: "#tour-coupon-section-v2",
+  //         content: "Apply promo codes for exclusive discounts.",
+  //       },
+  //       {
+  //         target: "#tour-payment-section-v2",
+  //         content: "Unlock your high-resolution PDF and launch your career.",
+  //       },
+  //     ],
+  //   };
 
-    const nextStepInfo =
-      step < 7
-        ? [
-            {
-              target: "#tour-next-button-v2",
-              content:
-                "Solidify your progress and advance to the next strategy.",
-            },
-          ]
-        : [];
+  //   const nextStepInfo =
+  //     step < 7
+  //       ? [
+  //           {
+  //             target: "#tour-next-button-v2",
+  //             content:
+  //               "Solidify your progress and advance to the next strategy.",
+  //           },
+  //         ]
+  //       : [];
 
-    return [
-      ...(step === 0 ? commonSteps : []),
-      ...(stepSpecificSteps[step] || []),
-      ...nextStepInfo,
-    ];
-  };
+  //   return [
+  //     ...(step === 0 ? commonSteps : []),
+  //     ...(stepSpecificSteps[step] || []),
+  //     ...nextStepInfo,
+  //   ];
+  // };
 
-  const currentTourSteps = getTourSteps();
+  // const currentTourSteps = getTourSteps();
 
   const progress = ((step + 1) / resumeSteps.length) * 100;
   const StepComponents = resumeSteps[step]?.component;
@@ -396,7 +394,7 @@ const ResumeV2 = () => {
         </div> */}
       </div>
 
-      <Tour steps={currentTourSteps} tourId={`resume-v2-step-${step}`} />
+      {/* <Tour steps={currentTourSteps} tourId={`resume-v2-step-${step}`} /> */}
     </div>
   );
 };

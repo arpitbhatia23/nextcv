@@ -20,7 +20,7 @@ import useResumeStore from "@/store/useResumeStore";
 import axios from "axios";
 import confetti from "canvas-confetti";
 import dynamic from "next/dynamic";
-const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 const RESPONSE_DELAY = 1000;
 
@@ -485,7 +485,7 @@ export default function ResumeChat() {
           />
         )}
 
-        <Tour
+        {/* <Tour
           steps={[
             {
               target: "#tour-chat-sidebar",
@@ -510,7 +510,7 @@ export default function ResumeChat() {
             },
           ]}
           tourId="ai-chat-resume"
-        />
+        /> */}
 
         <style jsx global>{`
           .custom-scrollbar::-webkit-scrollbar {

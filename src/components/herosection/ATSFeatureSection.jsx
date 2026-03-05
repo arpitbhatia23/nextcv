@@ -1,8 +1,5 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
-import { m } from "framer-motion";
+// import { m } from "framer-motion";
 import { FileSearch, CheckCircle2, Zap } from "lucide-react";
 
 const ATSFeatureSection = () => {
@@ -12,11 +9,11 @@ const ATSFeatureSection = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <m.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
+          // initial={{ opacity: 0, x: -20 }}
+          // whileInView={{ opacity: 1, x: 0 }}
+          // viewport={{ once: true }}
+          // transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
@@ -53,13 +50,13 @@ const ATSFeatureSection = () => {
               Check My Resume Score
               <FileSearch className="ml-2 w-5 h-5" />
             </Link>
-          </m.div>
+          </div>
 
-          <m.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <div
+            // initial={{ opacity: 0, scale: 0.95 }}
+            // whileInView={{ opacity: 1, scale: 1 }}
+            // viewport={{ once: true }}
+            // transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
             <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-2xl" />
@@ -120,7 +117,7 @@ const ATSFeatureSection = () => {
                 </div>
               </div>
             </div>
-          </m.div>
+          </div>
         </div>
       </div>
     </section>
