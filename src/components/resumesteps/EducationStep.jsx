@@ -333,9 +333,9 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
               </div>
             ) : (
               <div className="space-y-3">
-                {educationList.map((edu) => (
+                {educationList.map((edu, index) => (
                   <div
-                    key={edu?.id}
+                    key={edu?.id || index}
                     className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex justify-between group hover:border-indigo-300 transition-colors"
                   >
                     <div>

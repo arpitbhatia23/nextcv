@@ -26,7 +26,7 @@ const RESPONSE_DELAY = 1000;
 
 export default function ResumeChat() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  if (process.env.NEXT_PUBLIC_ENABLE_CHAT) {
+  if (process.env.NEXT_PUBLIC_ENABLE_CHAT==="true") {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-6">
         <div className="bg-gray-100 px-3 py-1 rounded-full text-sm mb-4">

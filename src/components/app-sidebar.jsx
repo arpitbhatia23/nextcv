@@ -14,7 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Logo2 from "./Logo2";
-import { ChartSpline, IndianRupee, TicketPercent, FileText } from "lucide-react";
+import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { useSession } from "next-auth/react";
 
@@ -29,6 +29,12 @@ const userData = {
       title: "My Resumes",
       url: "/dashboard/my-resume",
       icon: FileText,
+    },
+    {
+      title: "AI Chat Resume",
+      url: "/dashboard/full-ai-resume",
+      icon: Palette,
+      badge: "Experimental",
     },
   ],
 };
@@ -65,12 +71,12 @@ export function AppSidebar({ ...props }) {
 
   return (
     <Sidebar collapsible="offcanvas" className="bg-white border-r border-slate-200" {...props}>
-      <SidebarHeader className="bg-white">
+      <SidebarHeader className="bg-white p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="py-6 hover:bg-slate-50 transition-colors"
+              className="h-14 hover:bg-slate-50 transition-all rounded-xl"
             >
               <a href="#" className="flex justify-start pl-2">
                 <Logo2 size={32} color="#0f172a" />
@@ -82,13 +88,13 @@ export function AppSidebar({ ...props }) {
       
       <Separator className="bg-slate-100" />
       
-      <SidebarContent className="bg-white px-2 py-4">
+      <SidebarContent className="bg-white px-4 py-6">
         <NavMain items={data.navMain} />
       </SidebarContent>
       
       <Separator className="bg-slate-100" />
       
-      <SidebarFooter className="bg-white p-4">
+      <SidebarFooter className="bg-white p-6">
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>

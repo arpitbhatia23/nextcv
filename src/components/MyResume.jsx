@@ -520,14 +520,14 @@ const MyResume = () => {
                 Once you complete a payment for a resume draft, it will appear
                 here for unlimited downloads.
               </p>
-              <Button
+              {/* <Button
                 onClick={() =>
                   document.querySelector('[value="Draft-Resume"]').click()
                 }
                 variant="outline"
               >
                 View Drafts
-              </Button>
+              </Button> */}
             </div>
           ) : (
             <div

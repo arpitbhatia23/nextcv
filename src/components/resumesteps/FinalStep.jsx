@@ -61,8 +61,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [savedResumeId, setSavedResumeId] = useState(null);
   const [isCouponValid, setIsCouponValid] = useState(true);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const clearDraft = useResumeStore((s) => s.clearStorage);
   // Debounced handlers
@@ -146,7 +146,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
           : discount?.type === "amount"
             ? discount.value
             : 0;
-
       const res = await axios.post("/api/payment/order", {
         amount: payAmount * 100,
         ResumeType: selectedTemplate,
@@ -156,7 +155,10 @@ const FinalStep = ({ formData, isdraft = false }) => {
       });
 
       if (res.data.success) {
-        window.location.href = res.data.data.redirectUrl;
+        setIsRedirecting(true);
+        setTimeout(() => {
+          window.location.href = res.data.data.redirectUrl;
+        }, 2000);
         clearDraft();
       }
     } catch (error) {
@@ -638,8 +640,50 @@ const FinalStep = ({ formData, isdraft = false }) => {
       <FeedbackModal
         isOpen={isFeedbackOpen}
         onClose={() => setIsFeedbackOpen(false)}
-        resumeId={savedResumeId}
+        // resumeId={savedResumeId}
       />
+
+      {/* Redirection Overlay */}
+      {isRedirecting && (
+        <div className="fixed inset-0 z-100 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4">
+          <Card className="max-w-md w-full border-none shadow-2xl bg-white overflow-hidden">
+            <div className="p-8 text-center space-y-6">
+              <div className="relative mx-auto w-20 h-20">
+                <div className="absolute inset-0 border-4 border-indigo-100 rounded-full"></div>
+                <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
+                <div className="absolute inset-0 flex items-center justify-center text-indigo-600">
+                  <IndianRupee className="w-8 h-8" />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Redirecting to Paytm
+                </h3>
+                <p className="text-slate-500">
+                  Securely connecting to payment gateway. Please wait...
+                </p>
+              </div>
+
+              <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 flex gap-3 text-left">
+                <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div className="text-sm">
+                  <p className="font-semibold text-amber-900">Important</p>
+                  <p className="text-amber-800 leading-relaxed">
+                    Do not refresh or close this window. After successful
+                    payment, you will be automatically redirected to your
+                    download page.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium">
+                Safe & Secure 256-bit SSL Payment
+              </p>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

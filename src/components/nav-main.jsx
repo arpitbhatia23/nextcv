@@ -19,12 +19,17 @@ export function NavMain({ items }) {
               <Link href={item?.url}>
                 <SidebarMenuButton
                   tooltip={item.title}
-                  className={"flex  items-center justify-start gap-4 py-6  "}
+                  className={"flex items-center justify-start gap-3 py-6 px-4 hover:bg-slate-50 rounded-xl transition-all group"}
                 >
-                  <span className="text-xl  text-center">
-                    {item.icon && <item.icon />}
+                  <span className="text-xl text-center group-hover:scale-110 transition-transform">
+                    {item.icon && <item.icon size={22} />}
                   </span>{" "}
-                  <span className="text-lg">{item.title}</span>
+                  <span className="text-[15px] font-medium text-slate-700 group-hover:text-indigo-600 transition-colors">{item.title}</span>
+                  {item.badge && (
+                    <span className="ml-auto bg-indigo-100 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter border border-indigo-200">
+                      {item.badge}
+                    </span>
+                  )}
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>
