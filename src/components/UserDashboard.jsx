@@ -121,7 +121,9 @@ const UserDashboard = () => {
                       <Image
                         src="/infografhic.webp"
                         alt="Resume Showcase"
-                        fill
+                        height={500}
+                        width={500}
+                        priority
                         className="object-cover object-top opacity-95"
                       />
                     </div>
