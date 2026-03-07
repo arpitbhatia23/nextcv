@@ -253,15 +253,26 @@ const CompactModern = ({ data }) => (
         <View style={styles.section}>
           <Text style={styles.sectionHeader}>Education</Text>
           {data.education.map((edu, i) => (
-            <View key={i} style={styles.compactRow}>
-              <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-                <Text style={styles.title}>{edu.institution}, </Text>
-                <Text style={{ fontSize: 9 }}>{edu.degree}</Text>
+            <View key={i} style={{ marginBottom: 5 }}>
+              <View style={styles.compactRow}>
+                <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+                  <Text style={styles.title}>{edu.institution}, </Text>
+                  <Text style={{ fontSize: 9 }}>{edu.degree}</Text>
+                </View>
+                <Text style={styles.date}>
+                  {formatDate(edu.startYear)} -{" "}
+                  {formatDate(edu.endYear) || "Present"}
+                </Text>
               </View>
-              <Text style={styles.date}>
-                {formatDate(edu.startYear)} -{" "}
-                {formatDate(edu.endYear) || "Present"}
-              </Text>
+              {edu.description && (
+                <View style={{ marginTop: 2 }}>
+                  {splitToBullets(edu.description).map((line, idx) => (
+                    <Text key={idx} style={styles.descText}>
+                      • {line.replace(/^•\s*/, "")}
+                    </Text>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>

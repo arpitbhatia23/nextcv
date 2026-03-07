@@ -172,9 +172,14 @@ const LegalProfessional = ({ data }) => {
 
                  {/* Honors/Activities usually go here for law students/grads */}
                  {edu.description && (
-                     <Text style={{ fontSize: 10, marginTop: 2, marginLeft: 10 }}>
-                         Honors: {edu.description}
-                     </Text>
+                   <View style={{ marginTop: 2 }}>
+                     {splitToBullets(edu.description).map((bullet, idx) => (
+                       <View key={idx} style={styles.bullet}>
+                         <Text style={styles.bulletPoint}>•</Text>
+                         <Text style={styles.bulletText}>{bullet}</Text>
+                       </View>
+                     ))}
+                   </View>
                  )}
               </View>
             ))}

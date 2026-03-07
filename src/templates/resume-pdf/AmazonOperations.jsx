@@ -129,7 +129,7 @@ const AmazonOperations = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
+          <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>Email: {data.email}</Text>}
             {(data.phone || data.phone_no) && (
@@ -217,6 +217,18 @@ const AmazonOperations = ({ data }) => {
                 <Text style={styles.jobCompany}>
                   {edu.degree} {edu.grade ? `(GPA: ${edu.grade})` : ""}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

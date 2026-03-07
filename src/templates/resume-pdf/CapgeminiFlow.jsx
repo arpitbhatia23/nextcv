@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#0070ad",
     marginBottom: 0,
+    textTransform: "uppercase",
   },
   role: {
     marginTop: 12,
@@ -267,6 +268,18 @@ const CapgeminiFlow = ({ data }) => {
                 <Text style={{ fontSize: 10 }}>
                   {edu.institution}, {formatDate(edu.endYear)}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
             {data.certificates?.length > 0 && (
@@ -280,7 +293,7 @@ const CapgeminiFlow = ({ data }) => {
                     marginBottom: 4,
                   }}
                 >
-                  Certifications
+                  CERTIFICATIONS
                 </Text>
                 {data.certificates.map((cert, i) => (
                   <View key={i} style={{ marginBottom: 2 }}>

@@ -319,26 +319,26 @@ const TechDark = ({ data }) => (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, i) => (
-              <View
-                key={i}
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 4,
-                }}
-              >
-                <View>
-                  <Text style={{ fontWeight: "bold", fontSize: 10 }}>
-                    {edu.institution}
-                  </Text>
-                  <Text style={{ fontSize: 9, color: "#64748b" }}>
-                    {edu.degree}
+              <View key={i} style={styles.itemGroup}>
+                <View style={styles.itemHeader}>
+                  <Text style={styles.itemTitle}>{edu.institution}</Text>
+                  <Text style={styles.itemDate}>
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
                 </View>
-                <Text style={styles.itemDate}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
-                </Text>
+                <Text style={styles.itemSubtitle}>{edu.degree}</Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4, width: "100%" }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bulletRow}>
+                        <Text style={styles.bulletPoint}>›</Text>
+                        <Text style={styles.bulletText}>
+                          {bullet.replace(/^•\s*/, "")}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

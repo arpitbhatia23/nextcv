@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#222",
     marginBottom: 4,
+    textTransform: "uppercase",
   },
   role: {
     fontSize: 14,
@@ -189,6 +190,18 @@ const WiproModern = ({ data }) => {
                   <Text style={{ fontSize: 8, color: "#666" }}>
                     {formatDate(edu.endYear)}
                   </Text>
+                  {edu.description && (
+                    <View style={{ marginTop: 2 }}>
+                      {splitToBullets(edu.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.bullet}>
+                          <Text style={styles.bulletPoint}>•</Text>
+                          <Text style={[styles.description, styles.bulletText]}>
+                            {bullet}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
                 </View>
               ))}
             </View>

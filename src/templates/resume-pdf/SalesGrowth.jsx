@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#fff",
     marginBottom: 10,
+    textTransform: "uppercase",
   },
   role: {
     marginTop: 4,
@@ -250,6 +251,16 @@ const SalesGrowth = ({ data }) => {
                 <Text style={{ fontSize: 9 }}>
                   {edu.institution} | {formatDate(edu.endYear)}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>$</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
             {data.certificates?.length > 0 && (

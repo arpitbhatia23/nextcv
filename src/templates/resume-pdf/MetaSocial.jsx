@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#0668E1",
     marginBottom: 4,
+    textTransform: "uppercase",
   },
   contactCol: {
     alignItems: "flex-end",
@@ -284,6 +285,18 @@ const MetaSocial = ({ data }) => {
                 <Text style={{ fontSize: 10, color: "#65676b" }}>
                   {edu.degree} {edu.grade ? ` · ${edu.grade}` : ""}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
             {data.certificates?.map((cert, i) => (

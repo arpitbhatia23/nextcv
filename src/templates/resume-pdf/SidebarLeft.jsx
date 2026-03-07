@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#0f172a",
     marginBottom: 4,
+    textTransform: "uppercase",
   },
   sidebarRole: {
     fontSize: 11,
@@ -220,6 +221,18 @@ const SidebarLeft = ({ data }) => (
                   {formatDate(edu.startYear)} -{" "}
                   {formatDate(edu.endYear) || "Present"}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 2 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bulletPoint}>
+                        <Text style={styles.bullet}>•</Text>
+                        <Text style={styles.description}>
+                          {bullet.replace(/^•\s*/, "")}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     color: ACCENT,
     letterSpacing: 1,
     marginBottom: 2,
+    textTransform: "uppercase",
   },
   role: {
     color: GREEN,
@@ -455,6 +456,11 @@ const ModernFullStackPDFResume = ({ data }) => (
                     </>
                   )}
                 </View>
+                {edu.description && (
+                  <View style={styles.expBullets}>
+                    <Text style={styles.expBullet}>{edu.description}</Text>
+                  </View>
+                )}
               </View>
             ))}
           </View>

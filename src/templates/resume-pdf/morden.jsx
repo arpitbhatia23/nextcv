@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     color: "#22223b",
     marginBottom: 3,
     letterSpacing: 0.5,
+    textTransform: "uppercase",
   },
   headline: {
     fontSize: 12,
@@ -299,7 +300,14 @@ const morden = ({ data }) => (
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
-                <Text style={styles.summaryText}>{edu.description}</Text>
+                <View style={styles.bulletList}>
+                  {splitToBullets(edu.description).map((bullets, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletSymbol}>•</Text>
+                      <Text>{bullets}</Text>
+                    </View>
+                  ))}
+                </View>
               )}
             </View>
           ))}

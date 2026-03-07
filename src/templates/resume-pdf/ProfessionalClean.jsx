@@ -233,6 +233,18 @@ const ProfessionalClean = ({ data }) => (
               <Text style={styles.itemSubtitle}>
                 {edu.degree} {edu.grade ? `| Grade: ${edu.grade}` : ""}
               </Text>
+              {edu.description && (
+                <View style={{ marginTop: 4 }}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletPoint}>
+                      <Text style={styles.bullet}>•</Text>
+                      <Text style={styles.description}>
+                        {bullet.replace(/^•\s*/, "")}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>

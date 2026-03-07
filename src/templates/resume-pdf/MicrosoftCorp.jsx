@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#243a5e",
     marginBottom: 4,
+    textTransform: "uppercase",
   },
   headerRole: {
     fontSize: 14,
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ddd",
     paddingBottom: 4,
     marginTop: 10,
+    textTransform: "uppercase",
   },
   // Job Item
   jobBlock: {
@@ -185,8 +187,21 @@ const MicrosoftCorp = ({ data }) => {
                   <Text style={styles.eduDegree}>{edu.degree}</Text>
                   <Text style={styles.eduInst}>{edu.institution}</Text>
                   <Text style={styles.eduDate}>
-                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} -{" "}
+                    {formatDate(edu.endYear) || "Present"}
                   </Text>
+                  {edu.description && (
+                    <View style={{ marginTop: 2 }}>
+                      {splitToBullets(edu.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.bulletPoint}>
+                          <Text style={styles.bullet}>•</Text>
+                          <Text style={{ ...styles.description, flex: 1 }}>
+                            {bullet}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
                 </View>
               ))}
             </View>

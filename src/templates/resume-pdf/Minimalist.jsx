@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
     marginBottom: 2,
     textAlign: "center",
+    textTransform: "uppercase",
   },
   subline: {
     fontSize: 11,
@@ -438,7 +439,18 @@ const ClassicMinimalistPDFResume = ({
                     {formatDate(edu.startYear)} —{" "}
                     {formatDate(edu.endYear) || "Presnet"}
                   </Text>
-                  <Text style={styles.eduDiscription}>{edu.description}</Text>
+                  {edu.description && (
+                    <View style={styles.bulletList}>
+                      {splitToBullets(edu.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.bulletItem}>
+                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text style={{ fontSize: 9, color: "#666" }}>
+                            {bullet}
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
                 </View>
               ))}
             </View>

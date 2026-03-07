@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     letterSpacing: 0.5,
     color: "#1a237e",
+    textTransform: "uppercase",
   },
   contact: { fontSize: 10, color: "#444", marginBottom: 2 },
   links: {
@@ -173,7 +174,14 @@ const ClassicTemplate = ({ data }) => (
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
-                <Text style={styles.summaryText}>{edu.description}</Text>
+                <View style={styles.bulletList}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletSymbol}>•</Text>
+                      <Text>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
               )}
             </View>
           ))}

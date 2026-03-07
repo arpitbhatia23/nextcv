@@ -226,6 +226,18 @@ const BoldHeader = ({ data }) => (
               <Text style={styles.itemSubtitle}>
                 {edu.degree} {edu.grade ? `(${edu.grade})` : ""}
               </Text>
+              {edu.description && (
+                <View style={{ marginTop: 4 }}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bullet}>•</Text>
+                      <Text style={{ fontSize: 9.5, flex: 1 }}>
+                        {bullet.replace(/^•\s*/, "")}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>

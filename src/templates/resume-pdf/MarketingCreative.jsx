@@ -155,7 +155,7 @@ const MarketingCreative = ({ data }) => {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.name}>{data.name}</Text>
+            <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
             <Text style={styles.role}>
               {data.jobRole || "Creative Director"}
             </Text>
@@ -310,6 +310,20 @@ const MarketingCreative = ({ data }) => {
                     <Text style={{ fontSize: 9 }}>
                       {edu.institution}, {formatDate(edu.endYear)}
                     </Text>
+                    {edu.description && (
+                      <View style={{ marginTop: 2 }}>
+                        {splitToBullets(edu.description).map((bullet, idx) => (
+                          <View key={idx} style={styles.bullet}>
+                            <Text style={styles.bulletPoint}>›</Text>
+                            <Text
+                              style={[styles.description, styles.bulletText]}
+                            >
+                              {bullet}
+                            </Text>
+                          </View>
+                        ))}
+                      </View>
+                    )}
                   </View>
                 ))}
               </View>

@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
     color: "#000",
+    textTransform: "uppercase",
   },
   dot: {
     width: 6,
@@ -277,6 +278,18 @@ const DeloitteAudit = ({ data }) => {
                 <Text style={{ fontSize: 10 }}>
                   {edu.institution}, {formatDate(edu.endYear)}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
             {data.certificates?.length > 0 && (
@@ -288,7 +301,7 @@ const DeloitteAudit = ({ data }) => {
                     marginBottom: 4,
                   }}
                 >
-                  Certifications
+                  CERTIFICATIONS
                 </Text>
                 {data.certificates.map((cert, i) => (
                   <View key={i} style={{ marginBottom: 2 }}>

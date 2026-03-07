@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: BLUE,
     marginBottom: 2,
     letterSpacing: 1,
+    textTransform: "uppercase",
   },
   role: {
     color: "#3a8dde",
@@ -383,6 +384,15 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                       </>
                     )}
                   </View>
+                  {edu.description && (
+                    <View style={{ marginTop: 2 }}>
+                      {splitToBullets(edu.description).map((bullet, idx) => (
+                        <View key={idx} style={styles.expBullets}>
+                          <Text style={styles.expBullet}>• {bullet}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
                 </View>
               ))}
             </View>

@@ -181,6 +181,18 @@ const GoldmanFinance = ({ data }) => {
                 <Text style={styles.jobCompany}>
                   {edu.degree} {edu.grade ? `(GPA: ${edu.grade})` : ""}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

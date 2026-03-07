@@ -21,7 +21,9 @@ function SigninButton() {
         className="flex flex-col sm:flex-row items-center justify-center gap-4"
       >
         <button
-          onClick={() => signIn("google")}
+          onClick={() =>
+            signIn("google", { callbackUrl: "/dashboard/resumeform" })
+          }
           aria-label="Create Your Resume"
           className="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl text-lg hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-slate-300 flex items-center justify-center gap-2 group"
         >

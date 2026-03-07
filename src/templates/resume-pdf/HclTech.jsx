@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#5e35b1",
     marginBottom: 4,
+    textTransform: "uppercase",
   },
   role: {
     marginTop: 8,
@@ -282,6 +283,18 @@ const HclTech = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
                 </View>
                 <Text style={{ fontSize: 10 }}>{edu.degree}</Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>›</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

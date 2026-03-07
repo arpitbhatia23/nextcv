@@ -259,6 +259,18 @@ const CreativeTeal = ({ data }) => (
               <Text style={{ fontSize: 9, color: "#555" }}>
                 {edu.degree} {edu.grade ? `| Grade: ${edu.grade}` : ""}
               </Text>
+              {edu.description && (
+                <View style={{ marginTop: 4 }}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bullet}>•</Text>
+                      <Text style={styles.bulletText}>
+                        {bullet.replace(/^•\s*/, "")}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>

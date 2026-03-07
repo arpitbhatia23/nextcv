@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     color: "#1d1d1f",
     marginBottom: 8,
     letterSpacing: -0.5,
+    textTransform: "uppercase",
   },
   contactRow: {
     marginTop: 4,
@@ -241,6 +242,18 @@ const AppleCreative = ({ data }) => {
                   {edu.degree}
                   {edu.grade ? ` · ${edu.grade}` : ""}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>●</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

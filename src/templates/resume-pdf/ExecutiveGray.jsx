@@ -226,6 +226,18 @@ const ExecutiveGray = ({ data }) => (
               <Text style={styles.entrySubtitle}>
                 {edu.degree} {edu.grade ? `(Grade: ${edu.grade})` : ""}
               </Text>
+              {edu.description && (
+                <View style={styles.bulletList}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletMarker}>•</Text>
+                      <Text style={styles.bulletContent}>
+                        {bullet.replace(/^•\s*/, "")}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
             </View>
           ))}
         </View>

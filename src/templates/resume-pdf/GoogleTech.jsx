@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#202124",
     marginBottom: 6,
+    textTransform: "uppercase",
   },
   contactRow: {
     marginTop: 4,
@@ -225,7 +226,16 @@ const GoogleTech = ({ data }) => {
                   {edu.degree} {edu.grade ? `(Grade: ${edu.grade})` : ""}
                 </Text>
                 {edu.description && (
-                  <Text style={styles.description}>{edu.description}</Text>
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
                 )}
               </View>
             ))}

@@ -117,7 +117,10 @@ const splitToBullets = (desc) => {
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
-        return trimmed.split(";").map((b) => b.trim()).filter(Boolean);
+        return trimmed
+          .split(";")
+          .map((b) => b.trim())
+          .filter(Boolean);
       return [trimmed];
     })
     .filter(Boolean);
@@ -129,19 +132,27 @@ const AcademicTeacher = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
+          <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
           <Text style={styles.role}>{data.jobRole || "Educator"}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
+            {(data.phone || data.phone_no) && (
+              <Text>| {data.phone || data.phone_no}</Text>
+            )}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
+              <Link
+                src={data.linkedin}
+                style={{ color: "#000", textDecoration: "none" }}
+              >
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-               <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
+              <Link
+                src={data.portfolio}
+                style={{ color: "#000", textDecoration: "none" }}
+              >
                 | Portfolio
               </Link>
             )}
@@ -153,7 +164,7 @@ const AcademicTeacher = ({ data }) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Teaching Philosophy</Text>
             <View style={styles.philosophyBox}>
-               <Text>"{data.summary}"</Text>
+              <Text>"{data.summary}"</Text>
             </View>
           </View>
         )}
@@ -166,23 +177,33 @@ const AcademicTeacher = ({ data }) => {
               <View key={i} style={styles.jobBlock}>
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{edu.degree}</Text>
-                   <Text style={styles.jobDate}>
+                  <Text style={styles.jobDate}>
                     {formatDate(edu.startYear)} - {formatDate(edu.endYear)}
                   </Text>
                 </View>
                 <Text style={styles.jobSub}>{edu.institution}</Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
-             {data.certificates?.map((cert, i) => (
-                 <View key={i} style={styles.jobBlock}>
-                   {/* Certs often treated like Edu in Academia */}
-                   <View style={styles.jobHeader}>
-                      <Text style={styles.jobTitle}>{cert.title}</Text>
-                      <Text style={styles.jobDate}>{formatDate(cert.year)}</Text>
-                   </View>
-                   <Text style={styles.jobSub}>{cert.organization}</Text>
-                 </View>
-              ))}
+            {data.certificates?.map((cert, i) => (
+              <View key={i} style={styles.jobBlock}>
+                {/* Certs often treated like Edu in Academia */}
+                <View style={styles.jobHeader}>
+                  <Text style={styles.jobTitle}>{cert.title}</Text>
+                  <Text style={styles.jobDate}>{formatDate(cert.year)}</Text>
+                </View>
+                <Text style={styles.jobSub}>{cert.organization}</Text>
+              </View>
+            ))}
           </View>
         )}
 
@@ -195,11 +216,12 @@ const AcademicTeacher = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} -{" "}
+                    {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
                 <Text style={{ ...styles.jobSub, fontStyle: "italic" }}>
-                    {exp.companyName}
+                  {exp.companyName}
                 </Text>
 
                 <View>
@@ -216,21 +238,27 @@ const AcademicTeacher = ({ data }) => {
         )}
 
         {/* Publications/Projects */}
-         {data.projects?.length > 0 && (
+        {data.projects?.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Projects & Publications</Text>
             {data.projects.map((proj, i) => (
               <View key={i} style={styles.jobBlock}>
                 <View style={styles.jobHeader}>
-                   <Text style={styles.jobTitle}>{proj.title}</Text>
-                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
+                  <Text style={styles.jobTitle}>{proj.title}</Text>
+                  <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                     <Text style={{ fontSize: 10, fontFamily: "Times-Italic", marginBottom: 2 }}>
-                        Focus: {proj.technologiesOrTopics}
-                     </Text>
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      fontFamily: "Times-Italic",
+                      marginBottom: 2,
+                    }}
+                  >
+                    Focus: {proj.technologiesOrTopics}
+                  </Text>
                 )}
-                 <View>
+                <View>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>-</Text>
@@ -248,7 +276,9 @@ const AcademicTeacher = ({ data }) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Areas of Expertise</Text>
             <Text style={styles.skillList}>
-              {data.skills.map((s) => (typeof s === 'string' ? s : s.name)).join(" • ")}
+              {data.skills
+                .map((s) => (typeof s === "string" ? s : s.name))
+                .join(" • ")}
             </Text>
           </View>
         )}

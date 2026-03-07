@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     color: "#0f172a",
     marginBottom: 8, // Added margin to prevent overlap
+    textTransform: "uppercase",
   },
   role: {
     marginTop: 6,
@@ -252,6 +253,16 @@ const ClinicalTrial = ({ data }) => {
                 <Text style={{ fontSize: 10 }}>
                   {edu.institution}, {formatDate(edu.endYear)}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>›</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>

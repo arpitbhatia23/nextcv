@@ -277,6 +277,18 @@ const MahindraRise = ({ data }) => {
                 <Text style={{ fontSize: 10 }}>
                   {edu.institution}, {formatDate(edu.endYear)}
                 </Text>
+                {edu.description && (
+                  <View style={{ marginTop: 4 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>›</Text>
+                        <Text style={[styles.description, styles.bulletText]}>
+                          {bullet}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
             {data.certificates?.map((cert, i) => (

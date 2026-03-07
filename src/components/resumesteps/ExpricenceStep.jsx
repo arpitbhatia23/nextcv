@@ -119,7 +119,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-xl mdLtext-2xl font-bold text-slate-900">
+        <h2 className="text-xl md:text-2xl font-bold text-slate-900">
           Work Experience
         </h2>
         <p className="text-slate-500">Add your professional experience</p>
