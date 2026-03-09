@@ -36,7 +36,7 @@ const PageContent = () => {
       icon: <GraduationCap className="w-6 h-6 text-indigo-400" />,
       title: "For Students & Pros",
       description:
-        "Whether you're a fresh graduate or an experienced professional, we provide the best Indian resume format templates.",
+        "Whether you're looking for an IT resume sample India 2026 or a resume maker for engineering freshers India, we provide the best formats.",
       className: "bg-slate-900 border-slate-800",
     },
   ];
@@ -65,8 +65,8 @@ const PageContent = () => {
         {/* Intro Section */}
         <div className="mb-20 text-center max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 tracking-tight">
-            Unlock interviews with the{" "}
-            <span className="text-indigo-400">best AI resume generator</span>
+            Unlock interviews with the <br />
+            <span className="text-indigo-400">best resume maker for freshers in India 2026</span>
           </h2>
           <p className="text-lg text-slate-400 leading-relaxed">
             Experience our ATS-friendly templates and professional resume
@@ -129,7 +129,7 @@ const PageContent = () => {
           <div className="space-y-8">
             <h2 className="text-3xl font-bold text-white">
               Built for Success: <br />
-              The Best Indian Resume Format
+              Best Resume Format for Freshers in India with Example
             </h2>
             <div className="space-y-6">
               {cardSecond.map((item, index) => (

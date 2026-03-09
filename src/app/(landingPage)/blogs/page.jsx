@@ -1,15 +1,14 @@
 import Blog from "../../../components/Blog"; // Use @/ alias for better pathing
 
 export const metadata = {
-  title: "Blog - NextCV | Resume Building Tips & Career Advice",
+  title: "Free ATS-Optimized Resume Template India + Download (2026) | NextCV Blog",
   description:
-    "Read expert tips on resume writing, ATS optimization, job search strategies, and career development from NextCV",
+    "Best resume format for freshers in India with examples. Learn how to make a resume for IT jobs with no experience and download free templates for 2026.",
   keywords: [
-    "resume tips",
-    "CV writing",
-    "ATS optimization",
-    "job search",
-    "career advice",
+    "best resume maker for freshers in India 2026",
+    "free resume maker for IT freshers India",
+    "IT resume sample India 2026",
+    "CV format for Indian internships 2026",
   ],
 };
 

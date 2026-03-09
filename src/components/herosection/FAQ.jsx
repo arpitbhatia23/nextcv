@@ -6,29 +6,29 @@ import { Plus, Minus, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
+    question: "How to make a resume for IT jobs in India with no experience?",
+    answer:
+      "To make a resume for IT jobs with no experience: 1) Focus on technical projects and internships. 2) List relevant skills like Python, Java, or React. 3) Use an ATS-friendly resume builder for freshers in India like NextCV to ensure your format is professional and compliant with MNC standards.",
+  },
+  {
+    question: "What is the best resume format for freshers in India 2026?",
+    answer:
+      "The best resume format for freshers in India is a clean, single-column layout that emphasizes education, technical skills, and projects. NextCV provides professional resume templates for India that are free to start and optimized for 2026 hiring trends.",
+  },
+  {
+    question: "Difference between resume and CV for India jobs?",
+    answer:
+      "In India, 'resume' is typically used for private sector and IT jobs (1-2 pages), while 'CV' (Curriculum Vitae) is often used for academic or research roles and can be longer. For most corporate roles, a 1-page ATS-optimized resume is preferred.",
+  },
+  {
+    question: "How do I include software developer resume keywords?",
+    answer:
+      "Use software developer resume keywords that get interview calls in India, such as specific programming languages, frameworks, and tools mentioned in the job description (e.g., 'Full Stack', 'Agile', 'Cloud Computing').",
+  },
+  {
     question: "Is NextCV really free?",
     answer:
-      "Yes, you can check your ATS score for free. Our resume builder also has a free tier to get you started, and premium features are available for a small one-time fee (no subscriptions!).",
-  },
-  {
-    question: "What is an ATS-friendly resume?",
-    answer:
-      "An ATS-friendly resume is formatted in a way that Applicant Tracking Systems can easily parse. This means using standard headings, simple layouts, and avoiding graphics or tables that confuse the software.",
-  },
-  {
-    question: "Why was my resume rejected?",
-    answer:
-      "Resumes are often rejected because they lack specific keywords from the job description or are formatted in a way the ATS cannot read. Our tool helps you identify these issues before you apply.",
-  },
-  {
-    question: "Can I download my resume in Word format?",
-    answer:
-      "Currently, NextCV generates high-quality PDF resumes which are the industry standard for maintaining formatting across all devices and systems.",
-  },
-  {
-    question: "How do I increase my ATS score?",
-    answer:
-      "To increase your score: 1) Use relevant keywords from the job post. 2) Use standard section headers (Experience, Education). 3) Avoid columns and graphics. 4) Use a simple, readable font.",
+      "Yes, you can check your ATS score for free. Our free CV maker for freshers in India also has a free tier to get you started, and premium features are available for a small one-time fee with no subscriptions.",
   },
 ];
 

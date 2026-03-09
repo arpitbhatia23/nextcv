@@ -19,8 +19,10 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title: "Free AI Resume Builder for India – ATS Friendly | NextCV",
-  description: "Create a professional ATS-friendly resume in under 1 minute.",
+  title:
+    "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
+  description:
+    "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
   openGraph: {
     images: ["/opengraph-image.png"],
   },

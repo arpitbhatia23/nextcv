@@ -45,9 +45,9 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
-          Build a Job-Winning <br />
+          Best Resume Maker for <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
-            ATS-Friendly Resume for the Indian Job Market
+            Freshers in India 2026
           </span>
         </h1>
 
@@ -58,11 +58,8 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Designed specifically for the{" "}
-          <span className="font-semibold text-slate-900">
-            freshers and professionals in the Indian job market
-          </span>
-          . Use our AI to create a professional, compliant resume that passes
+          The <span className="font-semibold text-slate-900">free resume maker for IT freshers in India</span>. 
+          Use our AI to create a professional, ATS-friendly resume for engineering freshers that passes 
           automated screening in minutes.
           <br />
           <span className="text-sm font-medium text-blue-600 mt-2 block">

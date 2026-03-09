@@ -20,9 +20,10 @@ const ATSFeatureSection = () => {
               <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              75% of resumes are rejected by Applicant Tracking Systems (ATS)
-              before a human ever sees them. Our free tool checks your resume
-              against key ATS criteria.
+              Curious about <strong>why ATS rejects resumes in India</strong>? Over 75% of resumes are 
+              filtered out by Applicant Tracking Systems before a human ever sees them. Our 
+              ATS-friendly resume builder for freshers in India helps you fix these issues 
+              with keyword-optimized templates.
             </p>
             <div className="space-y-4 mb-8">
               {[

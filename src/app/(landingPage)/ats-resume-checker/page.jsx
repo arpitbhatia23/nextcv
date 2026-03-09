@@ -3,9 +3,9 @@ import ATSChecker from "@/components/ats-checker/ATSChecker";
 import { CheckCircle2, Search, Briefcase } from "lucide-react";
 
 export const metadata = {
-  title: "Free ATS Resume Checker for Freshers in India | Check Score Online",
+  title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
   description:
-    "Check your resume ATS score for free. Best ATS checker for freshers in India. optimized for TCS, Infosys, Wipro, and other top MNCs. No login required.",
+    "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
   keywords: [
     "free ats resume checker for freshers in india",
     "check if my resume is ats friendly free",
@@ -51,15 +51,15 @@ const ATSCheckerPage = () => {
             <span>Updates for 2026 Hiring Season</span>
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">
-            Free ATS Resume Checker for <br />
+            ATS-Friendly Resume Checker for <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
-              Freshers in India
+              Freshers in India 2026
             </span>
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
-            Don't let an algorithm reject your application. Upload your resume
-            and get an instant ATS score analysis, tailored for Indian
-            recruitment standards (TCS, Infosys, Wipro, etc.).
+            Ever wondered <strong>why ATS rejects resumes in India and how to fix it</strong>? 
+            Upload your resume and get an instant ATS score analysis tailored for 
+            Indian recruitment standards in 2026.
           </p>
 
           <ATSChecker />
