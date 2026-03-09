@@ -350,7 +350,8 @@ const BlogDetails = ({ slug, initialData }) => {
               <Image
                 src={urlFor(blog.mainImage).width(1600).url()}
                 alt={blog.title}
-                fill
+                height={500}
+                width={500}
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 priority
