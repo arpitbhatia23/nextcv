@@ -5,7 +5,7 @@ import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 const handler = async (req, { params }) => {
-  const id = await params.id;
+  const { id } = await params;
 
   if (!id) {
     throw new apiError(400, "Resume ID is required");
@@ -17,7 +17,7 @@ const handler = async (req, { params }) => {
   const updatedResume = await Resume.findByIdAndUpdate(
     id,
     { $set: updateData },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
 
   if (!updatedResume) {
@@ -26,7 +26,7 @@ const handler = async (req, { params }) => {
 
   return NextResponse.json(
     new apiResponse(200, "Resume updated successfully", updatedResume),
-    { status: 200 }
+    { status: 200 },
   );
 };
 
