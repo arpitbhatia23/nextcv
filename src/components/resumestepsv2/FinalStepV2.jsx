@@ -403,12 +403,15 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                   </div>
                 )}
                 <div className="pt-4 border-t border-slate-200 flex justify-between items-end">
-                  <span className="text-sm font-black text-slate-900 uppercase tracking-widest">
-                    Total Pay
-                  </span>
-                  <span className="text-3xl font-black text-indigo-600 tracking-tighter">
-                    ₹{amount}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-slate-400 line-through">
+                      ₹199
+                    </span>
+
+                    <span className="text-lg font-bold text-slate-900">
+                      ₹{amount}
+                    </span>
+                  </div>
                 </div>
               </div>
 

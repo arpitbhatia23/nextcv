@@ -327,9 +327,16 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <span className="text-slate-600 font-medium text-sm">
                 Total Amount
               </span>
-              <span className="text-lg font-bold text-slate-900">
-                ₹{amount}
-              </span>
+
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-slate-400 line-through">
+                  ₹199
+                </span>
+
+                <span className="text-lg font-bold text-slate-900">
+                  ₹{amount}
+                </span>
+              </div>
             </div>
 
             {/* Coupon */}
@@ -573,9 +580,15 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 <span className="text-base font-bold text-slate-800">
                   Total Pay
                 </span>
-                <span className="text-xl font-bold text-indigo-600">
-                  ₹{amount}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-slate-400 line-through">
+                    ₹199
+                  </span>
+
+                  <span className="text-lg font-bold text-slate-900">
+                    ₹{amount}
+                  </span>
+                </div>
               </div>
             </div>
 

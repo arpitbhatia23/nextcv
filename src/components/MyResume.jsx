@@ -200,6 +200,7 @@ const MyResume = () => {
   const handelPayment = async (draftId) => {
     const res = await axios.post("/api/payment/order", {
       amount: Math.floor(amount * 100), // Convert ₹ to paise
+      couponCode: applied ? appliedCoupon : "",
       draftId,
       isDraft: true,
     });
