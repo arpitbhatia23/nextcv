@@ -103,7 +103,8 @@ const ptComponents = {
       );
     },
     h3: ({ children }) => {
-      const id = children[0]?.toLowerCase()?.replace(/\s+/g, "-");
+      const text = String(children[0] || children);
+      const id = text?.toLowerCase()?.replace(/\s+/g, "-");
       return (
         <h3
           id={id}
