@@ -38,6 +38,44 @@ export default function RootLayout({ children }) {
           <CookieBanner />
           <Toaster />
         </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+              url: "https://www.nextcv.in",
+              description:
+                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+            }),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+              url: "https://www.nextcv.in",
+              logo: "https://www.nextcv.in/opengraph-image.png",
+              description:
+                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+              sameAs: [
+                "https://www.facebook.com/nextcv",
+                "https://www.twitter.com/nextcv",
+                "https://www.linkedin.com/company/next-cv",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "Customer Support",
+                email: "help@nextcv.in",
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   );
