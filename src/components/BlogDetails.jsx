@@ -103,7 +103,7 @@ const ptComponents = {
       );
     },
     h3: ({ children }) => {
-      const id = children[0]?.toLowerCase().replace(/\s+/g, "-");
+      const id = children[0]?.toLowerCase()?.replace(/\s+/g, "-");
       return (
         <h3
           id={id}
@@ -350,8 +350,7 @@ const BlogDetails = ({ slug, initialData }) => {
               <Image
                 src={urlFor(blog.mainImage).width(1600).url()}
                 alt={blog.title}
-                height={500}
-                width={500}
+                fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 priority
