@@ -44,10 +44,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+              name: "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
               url: "https://www.nextcv.in",
               description:
-                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+                "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
             }),
           }}
         />
@@ -58,11 +58,11 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+              name: "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
               url: "https://www.nextcv.in",
               logo: "https://www.nextcv.in/opengraph-image.png",
               description:
-                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+                "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
               sameAs: [
                 "https://www.facebook.com/nextcv",
                 "https://www.twitter.com/nextcv",

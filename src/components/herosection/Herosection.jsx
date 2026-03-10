@@ -111,9 +111,16 @@ function Herosection() {
           </div>
         </div>
         <p className="sr-only">
-          NextCV is an AI resume builder designed for freshers and job seekers
-          in India. Create ATS-friendly resume formats for IT jobs, campus
-          placements, and MNC companies.
+          NextCV is the best resume maker for freshers in India 2026, offering
+          an AI-powered resume builder for Indian fresh graduates. Our
+          ATS-friendly resume templates for India freshers 2026 are designed for
+          IT jobs, campus placements, and top MNC companies like TCS, Infosys,
+          Wipro, and HCL. Whether you need a Python developer resume for
+          freshers, a React JS developer resume, or a professional resume format
+          for engineering freshers in India with 0 years experience, NextCV provides
+          keyword-optimized, single-column layouts that pass automated screening.
+          Download your professional PDF resume for campus placements and
+          off-campus hiring in India 2026.
         </p>
       </div>
     </section>

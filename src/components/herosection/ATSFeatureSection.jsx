@@ -20,10 +20,11 @@ const ATSFeatureSection = () => {
               <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Curious about <strong>why ATS rejects resumes in India</strong>? Over 75% of resumes are 
+              Wondering <strong>why ATS rejects resumes in India</strong> and how to fix it? Over 75% of resumes are 
               filtered out by Applicant Tracking Systems before a human ever sees them. Our 
-              ATS-friendly resume builder for freshers in India helps you fix these issues 
-              with keyword-optimized templates.
+              <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat 
+              the bots with keyword-optimized, <strong>professional resume format for India freshers 2026</strong>. 
+              Get your resume index-ready for top companies with the best <strong>AI-powered resume builder for Indian fresh graduates</strong>.
             </p>
             <div className="space-y-4 mb-8">
               {[

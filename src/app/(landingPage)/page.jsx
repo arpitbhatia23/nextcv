@@ -16,6 +16,9 @@ const PageContent = dynamic(
 );
 
 const FAQ = dynamic(() => import("@/components/herosection/FAQ"));
+const SEOKeywordCloud = dynamic(
+  () => import("@/components/herosection/SEOKeywordCloud"),
+);
 
 export default function Home() {
   return (
@@ -35,6 +38,8 @@ export default function Home() {
       <FAQ />
 
       <Testimonial />
+
+      <SEOKeywordCloud />
     </>
   );
 }

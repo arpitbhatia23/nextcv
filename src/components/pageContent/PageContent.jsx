@@ -15,28 +15,28 @@ const PageContent = () => {
       icon: <Zap className="w-6 h-6 text-yellow-400" />,
       title: "Smart AI Resume Generator",
       description:
-        "Our advanced AI analyzes your information to create an ATS-friendly resume that's perfectly tailored to your target industry.",
+        "Our AI-powered resume builder for Indian fresh graduates 2026 creates ATS-friendly resumes perfectly tailored for Python, Java, and React roles.",
       className: "bg-slate-900 border-slate-800",
     },
     {
       icon: <Brain className="w-6 h-6 text-teal-400" />,
       title: "ATS-Optimized Templates",
       description:
-        "Guaranteed to beat applicant tracking systems. We give you a clear edge with formats designed to pass automated screening.",
+        "Guaranteed to beat applicant tracking systems. We offer the best resume format for freshers in India with examples for top MNCs.",
       className: "bg-slate-900 border-slate-800",
     },
     {
       icon: <DollarSign className="w-6 h-6 text-green-400" />,
       title: "Just ₹100 per Resume",
       description:
-        "Professional results at a fraction of the cost. No subscriptions, just transparent flat pricing.",
+        "Professional results at a fraction of the cost. The most affordable resume maker online India with one-time payment.",
       className: "bg-slate-900 border-slate-800",
     },
     {
       icon: <GraduationCap className="w-6 h-6 text-indigo-400" />,
       title: "For Students & Pros",
       description:
-        "Whether you're looking for an IT resume sample India 2026 or a resume maker for engineering freshers India, we provide the best formats.",
+        "Whether you need an IT resume sample India 2026 or a free online CV maker India for engineering freshers 2026, we provide the best formats.",
       className: "bg-slate-900 border-slate-800",
     },
   ];

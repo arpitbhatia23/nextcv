@@ -3,10 +3,10 @@ import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {
   title:
-    "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+    "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
   metadataBase: new URL("https://www.nextcv.in"),
   description:
-    "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+    "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
 
   authors: [{ name: "NextCV" }],
   robots: "index, follow",
@@ -78,9 +78,9 @@ export const metadata = {
 
   openGraph: {
     title:
-      "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+      "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
     description:
-      "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+      "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
     url: "/", // optional, relative to metadataBase
     type: "website",
     images: ["/opengraph-image.png"], // relative path will resolve correctly
@@ -88,9 +88,9 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+      "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
     description:
-      "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly..",
+      "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV..",
     images: ["/opengraph-image.png"], // relative path
   },
   alternates: {
@@ -113,10 +113,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              name: "Free AI Resume Builder for India – ATS Friendly in 60 Seconds | NextCV",
+              name: "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
               operatingSystem: "Web",
               description:
-                "Create a professional ATS-friendly resume in under 1 minute. Built for Indian job seekers. No subscriptions. Pay once and download instantly.",
+                "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
               applicationCategory: "Productivity",
               url: "https://www.nextcv.in",
               screenshot: "https://www.nextcv.in/opengraph-image.png",
