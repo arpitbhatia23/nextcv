@@ -20,11 +20,21 @@ const ATSFeatureSection = () => {
               <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Wondering <strong>why ATS rejects resumes in India</strong> and how to fix it? Over 75% of resumes are 
-              filtered out by Applicant Tracking Systems before a human ever sees them. Our 
-              <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat 
-              the bots with keyword-optimized, <strong>professional resume format for India freshers 2026</strong>. 
-              Get your resume index-ready for top companies with the best <strong>AI-powered resume builder for Indian fresh graduates</strong>.
+              Wondering <strong>why ATS rejects resumes in India</strong> and
+              how to fix it? Over 75% of resumes are filtered out by Applicant
+              Tracking Systems before a human ever sees them. Our
+              <strong>
+                ATS-friendly resume builder for freshers in India
+              </strong>{" "}
+              helps you beat the bots with keyword-optimized,{" "}
+              <strong>
+                professional resume format for India freshers 2026
+              </strong>
+              . Get your resume index-ready for top companies with the best{" "}
+              <strong>
+                AI-powered resume builder for Indian fresh graduates
+              </strong>
+              .
             </p>
             <div className="space-y-4 mb-8">
               {[
@@ -55,7 +65,7 @@ const ATSFeatureSection = () => {
             // transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-2xl" />
+            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-lg md:blur-2xl" />
             <div className="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8">
               {/* Mockup of the score display */}
               <div className="flex flex-col items-center">
