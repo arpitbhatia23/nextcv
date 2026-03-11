@@ -252,7 +252,11 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                             <Sparkles
                               className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
                             />
-                            {isGenerating ? "Elevating..." : "AI Polishing"}
+                            {isGenerating
+                              ? "Synthesizing..."
+                              : form.watch("description")?.trim()
+                                ? "Enhance with AI"
+                                : "Generate with AI"}
                           </button>
                         </div>
                         <FormControl>

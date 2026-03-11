@@ -272,7 +272,11 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />
-                          {isGenerating ? "Magic..." : "Generate with AI"}
+                          {isGenerating
+                            ? "Synthesizing..."
+                            : form.watch("description")?.trim()
+                              ? "Enhance with AI"
+                              : "Generate with AI"}
                         </Button>
                       </FormLabel>
                       <div className="relative">

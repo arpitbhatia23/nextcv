@@ -32,7 +32,6 @@ import axios from "axios";
 import { toast } from "sonner";
 
 const SummaryStep = ({ next, previous, formData, updateForm }) => {
-  const [summary, setSummary] = useState(formData.summary || "");
   const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
@@ -40,14 +39,14 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
       .string()
       .min(20, { message: "Summary should be at least 20 characters" }),
   });
+
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      summary: summary,
+      summary: formData.summary || "",
     },
   });
 
-  // Watch for changes to update local state for preview
   const watchedSummary = form.watch("summary");
 
   useEffect(() => {
@@ -55,7 +54,6 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
   }, [watchedSummary]);
 
   const onSubmit = (values) => {
-    console.log(values);
     next();
   };
 
@@ -65,12 +63,20 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
 
       const res = await axios.post("/api/gen/description", {
         type: "summary",
-        data: formData,
+        data: {
+          ...formData,
+          summary: watchedSummary,
+        },
       });
 
       if (res.data?.data) {
         form.setValue("summary", String(res.data.data));
-        toast.success("AI Summary generated!");
+
+        toast.success(
+          watchedSummary?.trim()
+            ? "Summary enhanced ✨"
+            : "Summary generated ✨",
+        );
       }
     } catch (err) {
       console.error("AI generation failed:", err);
@@ -79,6 +85,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
       setIsGenerating(false);
     }
   };
+
   return (
     <div className="py-8">
       <div className="mb-6">
@@ -89,17 +96,19 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
           Write a short professional summary to introduce yourself
         </p>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* Form Section */}
         <Card
           className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200"
           id="tour-summary-form"
         >
-          <CardHeader className=" border-b  p-4 rounded-t-xl">
+          <CardHeader className="border-b p-4 rounded-t-xl">
             <CardTitle className="text-lg font-bold text-slate-800">
               Your Summary
             </CardTitle>
           </CardHeader>
+
           <CardContent className="p-2 md:p-6">
             <Form {...form}>
               <form
@@ -123,19 +132,24 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />
-                          {isGenerating ? "Magic..." : "Generate with AI"}
+                          {isGenerating
+                            ? "Synthesizing..."
+                            : watchedSummary?.trim()
+                              ? "Enhance with AI"
+                              : "Generate with AI"}
                         </Button>
                       </FormLabel>
+
                       <div className="relative">
                         <FormControl>
                           <Textarea
                             placeholder="Experienced software engineer with a focus on..."
                             rows={8}
                             {...field}
+                            disabled={isGenerating}
                             className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-base leading-relaxed ${
                               isGenerating ? "opacity-50" : ""
                             }`}
-                            disabled={isGenerating}
                           />
                         </FormControl>
 
@@ -147,27 +161,29 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                           </div>
                         )}
                       </div>
+
+                      {/* Character Counter */}
+                      <p className="text-xs text-slate-400 text-right mt-1">
+                        {watchedSummary?.length || 0} characters
+                      </p>
+
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
-                <div className="pt-2">
-                  {/* We handle next in the outer button row, but form submit is useful for validation */}
-                </div>
               </form>
             </Form>
           </CardContent>
-          <CardFooter className="p-0 ">
-            <div className=" p-4 w-full rounded-b-xl">
+
+          <CardFooter className="p-0">
+            <div className="p-4 w-full rounded-b-xl">
               <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
                 <AlignLeft className="w-4 h-4 text-blue-600" /> Tips
               </h3>
+
               <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
-                <li>Keep it concise (2-4 sentences).</li>
-                <li>
-                  Highlight your years of experience and key achievements.
-                </li>
+                <li>Keep it concise (2–4 sentences).</li>
+                <li>Highlight your experience and key achievements.</li>
                 <li>Use keywords relevant to the job you are applying for.</li>
               </ul>
             </div>
@@ -208,6 +224,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
+
             <Button
               onClick={() => form.handleSubmit(onSubmit)()}
               className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"

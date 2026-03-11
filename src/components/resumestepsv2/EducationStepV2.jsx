@@ -43,7 +43,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "Start date is required" }),
     endYear: z.string({ message: "End date is required" }),
     grade: z.string({ message: "Grade is required" }),
-    description: z.string().optional(),
+    description: z.string({ message: "description is required" }),
   });
 
   const form = useForm({
@@ -283,7 +283,11 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                             <Sparkles
                               className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
                             />
-                            {isGenerating ? "Synthesizing..." : "AI Magic"}
+                            {isGenerating
+                              ? "Synthesizing..."
+                              : form.watch("description")?.trim()
+                                ? "Enhance with AI"
+                                : "Generate with AI"}
                           </button>
                         </div>
                         <FormControl>

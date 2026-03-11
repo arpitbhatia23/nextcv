@@ -59,7 +59,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
       setIsGenerating(true);
       const res = await axios.post("/api/gen/description", {
         type: "summary",
-        data: formData,
+        data: { ...formData, summary: watchedSummary },
       });
 
       if (res.data?.data) {
@@ -119,7 +119,9 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
                             />
                             {isGenerating
                               ? "Synthesizing..."
-                              : "Generate with AI"}
+                              : form.watch("description")?.trim()
+                                ? "Enhance with AI"
+                                : "Generate with AI"}
                           </Button>
                         </div>
 
