@@ -127,7 +127,7 @@ const splitToBullets = (desc) => {
     .flatMap((line) => {
       const trimmed = line.trim();
       if (!trimmed) return [];
-      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
+      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, ">")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
@@ -193,7 +193,6 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>›</Text>
                       <Text style={[styles.description, styles.bulletText]}>
                         {bullet}
                       </Text>
@@ -223,7 +222,6 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>›</Text>
                       <Text style={[styles.description, styles.bulletText]}>
                         {bullet}
                       </Text>
@@ -265,7 +263,6 @@ const AccentureConsult = ({ data }) => {
                   <View style={{ marginTop: 4 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>›</Text>
                         <Text style={[styles.description, styles.bulletText]}>
                           {bullet}
                         </Text>

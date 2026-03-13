@@ -65,7 +65,7 @@ const ATSFeatureSection = () => {
             // transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-lg md:blur-2xl" />
+            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-lg  md:blur-2xl" />
             <div className="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8">
               {/* Mockup of the score display */}
               <div className="flex flex-col items-center">
