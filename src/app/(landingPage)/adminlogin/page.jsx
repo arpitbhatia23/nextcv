@@ -6,6 +6,9 @@ export const metadata = {
   openGraph: {
     images: ["/opengraph-image.png"],
   },
+  alternates: {
+    canonical: `https://www.nextcv.in/adminlogin`,
+  },
 };
 export default function LoginPage() {
   return (

@@ -7,6 +7,9 @@ export const metadata = {
     "Create your professional resume for just ₹100. No subscriptions, no hidden fees. Pay only when you download. Try for free today.",
   keywords:
     "resume builder price, cheap resume builder india, cv maker cost, professional resume writer cost, one time payment resume builder",
+  alternates: {
+    canonical: `https://www.nextcv.in/pricing`,
+  },
 };
 
 export default function PricingPage() {

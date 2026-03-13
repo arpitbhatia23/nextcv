@@ -45,9 +45,9 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
-          Best Resume Maker for <br />
+          Build a Free ATS-Friendly Resume <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
-            Freshers in India 2026
+            That Gets Interviews Faster
           </span>
         </h1>
 
@@ -58,9 +58,12 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          The <span className="font-semibold text-slate-900">free resume maker for IT freshers in India</span>. 
-          Use our AI to create a professional, ATS-friendly resume for engineering freshers that passes 
-          automated screening in minutes.
+          The{" "}
+          <span className="font-semibold text-slate-900">
+            free resume maker for IT freshers in India
+          </span>
+          . Use our AI to create a professional, ATS-friendly resume for
+          engineering freshers that passes automated screening in minutes.
           <br />
           <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
@@ -117,10 +120,10 @@ function Herosection() {
           IT jobs, campus placements, and top MNC companies like TCS, Infosys,
           Wipro, and HCL. Whether you need a Python developer resume for
           freshers, a React JS developer resume, or a professional resume format
-          for engineering freshers in India with 0 years experience, NextCV provides
-          keyword-optimized, single-column layouts that pass automated screening.
-          Download your professional PDF resume for campus placements and
-          off-campus hiring in India 2026.
+          for engineering freshers in India with 0 years experience, NextCV
+          provides keyword-optimized, single-column layouts that pass automated
+          screening. Download your professional PDF resume for campus placements
+          and off-campus hiring in India 2026.
         </p>
       </div>
     </section>

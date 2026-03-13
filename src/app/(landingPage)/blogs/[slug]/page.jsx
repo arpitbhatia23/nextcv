@@ -40,6 +40,9 @@ export async function generateMetadata({ params }) {
   return {
     title: data.title,
     description: description,
+    alternates: {
+      canonical: `https://www.nextcv.in/blogs/${slug}`,
+    },
     keywords: [
       "resume builder",
       "CV maker",

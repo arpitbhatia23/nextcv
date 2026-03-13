@@ -125,13 +125,13 @@ const Blog = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
             Latest Insights & News
-          </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          </h1>
+          <h2 className="text-lg text-slate-600 max-w-2xl mx-auto">
             Expert tips on resume writing, career development, and job market
             trends to help you land your dream job.
-          </p>
+          </h2>
         </div>
 
         {/* Filters & Search */}

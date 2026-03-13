@@ -1,5 +1,4 @@
 import { CheckCircle2, Users, Heart, Zap } from "lucide-react";
-import Image from "next/image";
 
 export const metadata = {
   title: "About NextCV - The Best AI Resume Builder for Freshers in India",
@@ -12,6 +11,9 @@ export const metadata = {
     "ATS Resume Builder",
     "Student CV Maker",
   ],
+  alternates: {
+    canonical: `https://www.nextcv.in/about-us`,
+  },
 };
 
 export default function AboutPage() {

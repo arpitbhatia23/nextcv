@@ -3,7 +3,8 @@ import ATSChecker from "@/components/ats-checker/ATSChecker";
 import { CheckCircle2, Search, Briefcase } from "lucide-react";
 
 export const metadata = {
-  title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
+  title:
+    "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
   description:
     "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
   keywords: [
@@ -33,6 +34,9 @@ export const metadata = {
     "campus placement resume ats check",
     "resume ats score for 2026 batch",
   ],
+  alternates: {
+    canonical: `https://www.nextcv.in/ats-resume-checker`,
+  },
 };
 
 const ATSCheckerPage = () => {
@@ -57,9 +61,10 @@ const ATSCheckerPage = () => {
             </span>
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
-            Ever wondered <strong>why ATS rejects resumes in India and how to fix it</strong>? 
-            Upload your resume and get an instant ATS score analysis tailored for 
-            Indian recruitment standards in 2026.
+            Ever wondered{" "}
+            <strong>why ATS rejects resumes in India and how to fix it</strong>?
+            Upload your resume and get an instant ATS score analysis tailored
+            for Indian recruitment standards in 2026.
           </p>
 
           <ATSChecker />

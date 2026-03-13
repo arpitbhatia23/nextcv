@@ -16,6 +16,9 @@ export const metadata = {
     "Download the best resume format for freshers in India with examples. 12+ professional, ATS-optimized resume templates for IT freshers and engineering jobs in 2026.",
   keywords:
     "best resume format for freshers in india with example, free ats-optimized resume template india, it resume sample india 2026, resume maker for engineering freshers india, cv format for indian internships 2026",
+  alternates: {
+    canonical: `https://www.nextcv.in/templates`,
+  },
 };
 
 export default function TemplatesPage() {
@@ -58,9 +61,10 @@ export default function TemplatesPage() {
             <span className="text-indigo-600">Freshers in India 2026</span>
           </h1>
           <p className="text-lg leading-8 text-slate-600 mb-10">
-            Don't get lost in the pile. Use our <strong>free ATS-optimized resume template India</strong> 
-            designed to help you pass automated screenings and impress hiring managers in 
-            the 2026 hiring season.
+            Don't get lost in the pile. Use our{" "}
+            <strong>free ATS-optimized resume template India</strong>
+            designed to help you pass automated screenings and impress hiring
+            managers in the 2026 hiring season.
           </p>
           <div className="flex items-center justify-center gap-x-6">
             <Link

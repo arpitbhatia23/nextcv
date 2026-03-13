@@ -11,6 +11,9 @@ export const metadata = {
     "CV Builder Help",
     "NextCV Email",
   ],
+  alternates: {
+    canonical: `https://www.nextcv.in/contact`,
+  },
 };
 
 export default function ContactPage() {

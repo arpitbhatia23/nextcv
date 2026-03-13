@@ -19,8 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title:
-    "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
+  title: "Build a Free ATS-Friendly Resume That Gets Interviews | NextCV",
   description:
     "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
   openGraph: {
@@ -44,7 +43,7 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
+              name: "Build a Free ATS-Friendly Resume That Gets Interviews | NextCV",
               url: "https://www.nextcv.in",
               description:
                 "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
@@ -58,7 +57,7 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Best Resume Maker for Freshers in India 2026 – Free & ATS Friendly | NextCV",
+              name: "Build a Free ATS-Friendly Resume That Gets Interviews | NextCV",
               url: "https://www.nextcv.in",
               logo: "https://www.nextcv.in/opengraph-image.png",
               description:

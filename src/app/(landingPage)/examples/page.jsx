@@ -15,6 +15,9 @@ export const metadata = {
     "Browse professionally written resume examples for Engineering, Marketing, Sales, and more. Get inspired and build your own winning CV.",
   keywords:
     "resume examples, cv samples, software engineer resume, marketing resume sample, sales resume format, fresher resume examples india",
+  alternates: {
+    canonical: `https://www.nextcv.in/examples`,
+  },
 };
 
 const categories = [

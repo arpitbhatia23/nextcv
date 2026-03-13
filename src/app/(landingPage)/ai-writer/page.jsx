@@ -13,6 +13,9 @@ export const metadata = {
     "Beat writer's block with our AI resume writer. Generate professional summaries and experience bullet points instantly personalized for your role.",
   keywords:
     "ai resume writer, free ai cv maker, chatgpt for resume, automated resume writing, resume bullet points generator",
+  alternates: {
+    canonical: `https://www.nextcv.in/ai-writer`,
+  },
 };
 
 export default function AIWriterPage() {

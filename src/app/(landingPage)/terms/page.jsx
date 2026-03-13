@@ -3,6 +3,9 @@ export const metadata = {
   description:
     "Review NextCV's terms and conditions of use for our resume builder platform",
   robots: "index, follow",
+  alternates: {
+    canonical: `https://www.nextcv.in/terms`,
+  },
 };
 
 const page = () => {
