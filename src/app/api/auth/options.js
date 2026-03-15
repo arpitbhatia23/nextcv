@@ -55,8 +55,11 @@ const authOptions = {
           provider: account.provider,
         });
 
-        await sendWellcomeMessage(user?.email, user?.name);
-
+        try {
+          sendWellcomeMessage(user.email, user.name).catch(console.error);
+        } catch (err) {
+          console.error(err);
+        }
         user = newUser;
       } else {
         // Update lastLogin on every login
