@@ -6,7 +6,7 @@ export const metadata = {
     "Read NextCV's privacy policy to understand how we collect, use, and protect your personal data",
   robots: "index, follow",
   alternates: {
-    canonical: `https://www.nextcv.in/privacy-policiy`,
+    canonical: `https://www.nextcv.in/privacy-policy`,
   },
 };
 

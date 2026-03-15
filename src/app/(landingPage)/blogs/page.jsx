@@ -12,7 +12,7 @@ export const metadata = {
     "CV format for Indian internships 2026",
   ],
   alternates: {
-    canonical: `https://www.nextcv.in/blogs/`,
+    canonical: `https://www.nextcv.in/blogs`,
   },
 };
 

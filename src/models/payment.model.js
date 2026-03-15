@@ -24,6 +24,7 @@ const paymentSchema = new Schema(
     couponCode: {
       type: String,
       required: false,
+      lowercase: true,
     },
     discountAmount: {
       type: Number,

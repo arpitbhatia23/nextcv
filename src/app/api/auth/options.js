@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import dbConnect from "@/utils/dbConnect";
 import User from "@/models/user.model";
 import bcrypt from "bcryptjs";
+import { sendWellcomeMessage } from "@/templates/email/sendWelcomeMail";
 const authOptions = {
   providers: [
     Credentialsprovider({
@@ -53,6 +54,8 @@ const authOptions = {
           role: "user",
           provider: account.provider,
         });
+
+        await sendWellcomeMessage(user?.email, user?.name);
 
         user = newUser;
       } else {
