@@ -3,7 +3,7 @@ import { resend } from "@/helper/resend";
 export const sendWellcomeMessage = async (email, name) => {
   try {
     await resend.emails.send({
-      from: "NEXTCV team@nextcv.in",
+      from: "NEXTCV <team@nextcv.in>",
       to: email,
       subject: `${name}, your ATS-friendly resume is 3 minutes away 🚀`,
 

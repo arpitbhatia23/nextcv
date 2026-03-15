@@ -54,7 +54,9 @@ export default function Nav() {
                 className="px-6 py-2.5 text-sm font-semibold rounded-lg
                   bg-indigo-600 text-white
                   hover:bg-indigo-700 transition-colors duration-200"
-                onClick={() => signIn("google")}
+                onClick={() =>
+                  signIn("google", { callbackUrl: "/dashboard/resumeform" })
+                }
               >
                 Get Started
               </Button>

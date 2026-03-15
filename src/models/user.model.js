@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { type } from "os";
 const userSchema = new Schema(
   {
     name: {
@@ -35,6 +36,10 @@ const userSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    reminderCount: {
+      type: Number,
+      default: 0,
+    },
   },
 
   {
@@ -42,5 +47,6 @@ const userSchema = new Schema(
   },
 );
 
+userSchema.index({ resume: 1, reminderCount: 1 });
 const User = mongoose.models.users || mongoose.model("users", userSchema);
 export default User;

@@ -8,7 +8,7 @@ import { Smartphone, Palette, ShieldCheck } from "lucide-react";
 
 const Templates = () => {
   const handleTemplateSelection = () => {
-    signIn("google");
+    signIn("google", { callbackUrl: "/dashboard/resumeform" });
   };
 
   const cards = [
