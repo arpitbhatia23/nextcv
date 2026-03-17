@@ -45,15 +45,14 @@ export async function proxy(req) {
 
     let redirectPath = "/dashboard/resumeform";
 
-    if (bucket < 40) {
+    if (bucket < 60) {
       redirectPath = "/dashboard/resumeform";
-    } else if (bucket < 60) {
-      redirectPath = "/dashboard/resumeform-v2";
     } else {
       redirectPath = "/dashboard/resumeform-v3"; // 40%
     }
-
-    return NextResponse.redirect(new URL(redirectPath, req.url));
+    if (pathname !== redirectPath) {
+      return NextResponse.redirect(new URL(redirectPath, req.url));
+    }
   }
 
   return NextResponse.next();
