@@ -464,7 +464,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
         </Card>
       </section>
 
-      {/* Visitor Analytics */}
+      {/* Visitor Analytics
       <section>
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -508,7 +508,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
             <VisitorsChart data={data?.visitorStats?.dailyVisitors} />
           </CardContent>
         </Card>
-      </section>
+      </section> */}
     </div>
   );
 }

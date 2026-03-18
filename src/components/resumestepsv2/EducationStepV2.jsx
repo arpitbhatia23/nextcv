@@ -43,7 +43,9 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "Start date is required" }),
     endYear: z.string({ message: "End date is required" }),
     grade: z.string({ message: "Grade is required" }),
-    description: z.string({ message: "description is required" }),
+    description: z
+      .string()
+      .nonempty("Please click 'Generate with AI' to create a description"),
   });
 
   const form = useForm({

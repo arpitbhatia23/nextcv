@@ -45,39 +45,39 @@ const AdminFeedbackList = () => {
                 key={item._id}
                 className="flex flex-col sm:flex-row gap-4 p-4 border rounded-lg bg-slate-50/50"
               >
-                <div className="flex items-start gap-3 min-w-[150px]">
-                   <div className="bg-white p-2 rounded-full border">
-                      <User className="w-4 h-4 text-slate-500" />
-                   </div>
-                   <div>
-                      <p className="text-sm font-medium text-slate-900">
-                        {item.userId?.name || "Anonymous"}
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </p>
-                   </div>
+                <div className="flex items-start gap-3 min-w-37.5">
+                  <div className="bg-white p-2 rounded-full border">
+                    <User className="w-4 h-4 text-slate-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">
+                      {item.userId?.name || "Anonymous"}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {new Date(item.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-                
+
                 <div className="flex-1 space-y-2">
-                   <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star
-                          key={star}
-                          className={cn(
-                            "w-4 h-4",
-                            item.rating >= star
-                              ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-200"
-                          )}
-                        />
-                      ))}
-                   </div>
-                   {item.comment && (
-                     <p className="text-sm text-slate-700 italic">
-                       "{item.comment}"
-                     </p>
-                   )}
+                  <div className="flex gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star
+                        key={star}
+                        className={cn(
+                          "w-4 h-4",
+                          item.rating >= star
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "text-gray-200",
+                        )}
+                      />
+                    ))}
+                  </div>
+                  {item.comment && (
+                    <p className="text-sm text-slate-700 italic">
+                      "{item.comment}"
+                    </p>
+                  )}
                 </div>
               </div>
             ))

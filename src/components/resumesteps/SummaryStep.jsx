@@ -51,12 +51,17 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
 
   useEffect(() => {
     updateForm({ summary: watchedSummary });
-  }, [watchedSummary]);
+  }, [watchedSummary, updateForm]);
 
   const onSubmit = (values) => {
     next();
   };
 
+  useEffect(() => {
+    if (!formData.summary) {
+      handelAiGenration();
+    }
+  }, [formData.summary]);
   const handelAiGenration = async () => {
     try {
       setIsGenerating(true);

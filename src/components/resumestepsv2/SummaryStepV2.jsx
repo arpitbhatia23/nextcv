@@ -48,11 +48,16 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
 
   useEffect(() => {
     updateForm({ summary: watchedSummary });
-  }, [watchedSummary]);
+  }, [watchedSummary, updateForm]);
 
   const onSubmit = () => {
     next();
   };
+  useEffect(() => {
+    if (!formData.summary) {
+      handleAiGeneration();
+    }
+  }, [formData.summary]);
 
   const handleAiGeneration = async () => {
     try {

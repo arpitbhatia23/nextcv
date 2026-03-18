@@ -38,7 +38,9 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "date is required" }),
     endYear: z.string({ message: "end date is required" }),
     grade: z.string({ message: "grade is required" }),
-    description: z.string().optional(),
+    description: z
+      .string()
+      .nonempty("Please click 'Generate with AI' to create a description"),
   });
   const form = useForm({
     resolver: zodResolver(schema),

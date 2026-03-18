@@ -140,6 +140,8 @@ CONTENT RULES:
    - Highlight strengths, impact, and key technologies
    - Use confident, ATS-friendly language
    - Maintain a polished and professional tone
+   - summary must be personalize to user 
+   - didn't make just general summary
 
 Candidate Information:
 Target Role: ${role}

@@ -1,7 +1,6 @@
 import Coupons from "@/models/coupon";
 import dbConnect from "@/utils/dbConnect";
 import Payment from "@/models/payment.model";
-import { VisitorStats } from "@/models/VisitorStats.model";
 import User from "@/models/user.model";
 import Resume from "@/models/resume.model";
 import { asyncHandler } from "@/utils/asyncHandler";
@@ -235,44 +234,44 @@ const handler = async (req) => {
     const totalDiscount = totalDiscountResult[0]?.totalDiscount / 2 || 0;
 
     // Visitor Analytics
-    const visitorTimeQuery = startDate ? { date: { $gte: startDate } } : {};
+    // const visitorTimeQuery = startDate ? { date: { $gte: startDate } } : {};
 
-    const [totalVisitorsResult, dailyVisitorsData] = await Promise.all([
-      VisitorStats.aggregate([
-        { $match: visitorTimeQuery },
-        { $group: { _id: null, total: { $sum: "$count" } } },
-      ]),
-      VisitorStats.find(visitorTimeQuery).sort({ date: 1 }).limit(90).lean(),
-    ]);
+    // const [totalVisitorsResult, dailyVisitorsData] = await Promise.all([
+    //   VisitorStats.aggregate([
+    //     { $match: visitorTimeQuery },
+    //     { $group: { _id: null, total: { $sum: "$count" } } },
+    //   ]),
+    //   VisitorStats.find(visitorTimeQuery).sort({ date: 1 }).limit(90).lean(),
+    // ]);
 
-    const totalVisitors = totalVisitorsResult[0]?.total || 0;
+    // const totalVisitors = totalVisitorsResult[0]?.total || 0;
 
-    const dailyVisitors = dailyVisitorsData.map((item) => ({
-      date: formatDate(new Date(item.date)),
-      visitors: item.count,
-    }));
+    // const dailyVisitors = dailyVisitorsData.map((item) => ({
+    //   date: formatDate(new Date(item.date)),
+    //   visitors: item.count,
+    // }));
 
     // Weekly trends (group daily data into weeks)
-    const weeklyTrendsData = await VisitorStats.aggregate([
-      {
-        $match: {
-          date: { $gte: new Date(Date.now() - 8 * 7 * 24 * 60 * 60 * 1000) },
-        },
-      },
-      {
-        $group: {
-          _id: { $week: "$date" },
-          visitors: { $sum: "$count" },
-        },
-      },
-      { $sort: { _id: 1 } },
-      { $limit: 8 },
-    ]);
+    // const weeklyTrendsData = await VisitorStats.aggregate([
+    //   {
+    //     $match: {
+    //       date: { $gte: new Date(Date.now() - 8 * 7 * 24 * 60 * 60 * 1000) },
+    //     },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: { $week: "$date" },
+    //       visitors: { $sum: "$count" },
+    //     },
+    //   },
+    //   { $sort: { _id: 1 } },
+    //   { $limit: 8 },
+    // ]);
 
-    const weeklyTrends = weeklyTrendsData.map((item, index) => ({
-      week: `Week ${item._id}`,
-      visitors: item.visitors,
-    }));
+    // const weeklyTrends = weeklyTrendsData.map((item, index) => ({
+    //   week: `Week ${item._id}`,
+    //   visitors: item.visitors,
+    // }));
 
     return NextResponse.json(
       new apiResponse(200, "data etch sucesfully", {
@@ -303,11 +302,11 @@ const handler = async (req) => {
           couponsByType,
           totalDiscount,
         },
-        visitorStats: {
-          totalVisitors,
-          dailyVisitors,
-          weeklyTrends,
-        },
+        // visitorStats: {
+        //   totalVisitors,
+        //   dailyVisitors,
+        //   weeklyTrends,
+        // },
       }),
       { status: 200 },
     );

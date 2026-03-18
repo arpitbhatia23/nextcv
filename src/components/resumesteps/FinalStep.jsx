@@ -89,9 +89,9 @@ const FinalStep = ({ formData, isdraft = false }) => {
       if (res.data.success) {
         toast.success("Draft saved successfully");
         clearDraft();
-        setSavedResumeId(res.data.data?._id);
         setIsFeedbackOpen(true);
       } else {
+        console.log(res.data);
         toast.error(res.data.message || "Failed to save draft");
       }
       setIsSubmit(false);

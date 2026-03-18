@@ -80,7 +80,6 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [savedResumeId, setSavedResumeId] = useState(null);
   const [isCouponValid, setIsCouponValid] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [windowWidth, setWindowWidth] = useState(
@@ -125,7 +124,6 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
       if (res.data.success) {
         toast.success("Design Archive Saved!");
         clearDraft();
-        setSavedResumeId(res.data.data?._id);
         setIsFeedbackOpen(true);
       } else {
         toast.error(res.data.message || "Failed to save draft");
