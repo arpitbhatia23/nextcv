@@ -15,6 +15,14 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const options = [
+    "Easy to use",
+    "Good templates",
+    "AI helped me",
+    "Saved time",
+    "Clean design",
+  ];
+
   const resetForm = () => {
     setRating(0);
     setHoverRating(0);
@@ -36,7 +44,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
         resumeId,
       });
 
-      toast.success("Thank you for your feedback!");
+      toast.success("Thanks for your feedback 🙌");
 
       resetForm();
       onClose();
@@ -59,27 +67,27 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
       }}
     >
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0" />
+        <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
 
-        <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 data-[state=open]:slide-in-from-top-[48%] data-[state=closed]:slide-out-to-top-[48%] sm:rounded-lg">
-          {/* Title + Description (Required for accessibility) */}
-          <div className="flex flex-col space-y-1.5 text-center sm:text-left">
-            <DialogPrimitive.Title className="text-lg font-semibold leading-none tracking-tight">
-              We value your feedback
+        <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-md -translate-x-1/2 -translate-y-1/2 bg-white p-6 shadow-lg rounded-lg">
+          {/* Title */}
+          <div className="text-center mb-2">
+            <DialogPrimitive.Title className="text-lg font-semibold">
+              🎉 Your resume is ready!
             </DialogPrimitive.Title>
 
             <DialogPrimitive.Description className="text-sm text-gray-500">
-              How was your experience creating your resume?
+              What did you like most about NextCV?
             </DialogPrimitive.Description>
           </div>
 
-          {/* Rating Stars */}
+          {/* Stars */}
           <div className="flex justify-center py-4 gap-2">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
                 key={star}
                 type="button"
-                className="focus:outline-none transition-transform hover:scale-110"
+                className="transition-transform hover:scale-110"
                 onMouseEnter={() => setHoverRating(star)}
                 onMouseLeave={() => setHoverRating(0)}
                 onClick={() => setRating(star)}
@@ -96,18 +104,42 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
             ))}
           </div>
 
-          {/* Comment */}
-          <div className="grid gap-2">
+          {/* Quick options (only for good ratings) */}
+          {rating >= 4 && (
+            <div className="flex flex-wrap gap-2 justify-center mb-3">
+              {options.map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => setComment(opt)}
+                  className="px-3 py-1 border rounded-full text-xs hover:bg-gray-100"
+                >
+                  {opt}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Textarea */}
+          {rating > 0 && (
             <Textarea
-              placeholder="Tell us what you liked or what we can improve..."
+              placeholder={
+                rating >= 4
+                  ? "What did you like most? (optional)"
+                  : "What went wrong? Help us improve"
+              }
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="min-h-25"
+              className="min-h-20"
             />
-          </div>
+          )}
+
+          {/* Privacy */}
+          <p className="text-xs text-gray-400 text-center mt-2">
+            We respect your privacy. No personal data is shared.
+          </p>
 
           {/* Actions */}
-          <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+          <div className="flex justify-end gap-2 mt-4">
             <Button
               variant="outline"
               onClick={() => {
@@ -123,14 +155,13 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
               onClick={handleSubmit}
               disabled={isSubmitting || rating === 0}
             >
-              {isSubmitting ? "Submitting..." : "Submit Feedback"}
+              {isSubmitting ? "Submitting..." : "Submit (10 sec)"}
             </Button>
           </div>
 
-          {/* Close Button */}
-          <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-950 focus:ring-offset-2">
+          {/* Close */}
+          <DialogPrimitive.Close className="absolute right-4 top-4 opacity-70 hover:opacity-100">
             <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
