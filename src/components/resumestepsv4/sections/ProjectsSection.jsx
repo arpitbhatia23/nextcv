@@ -29,8 +29,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
 
 const ProjectsSection = () => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const [projectList, setProjectList] = useState(formData.projects || []);
   const [isEditing, setIsEditing] = useState(false);
@@ -54,29 +54,27 @@ const ProjectsSection = () => {
     updateForm({ projects: projectList });
   }, [projectList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setProjectList((prev) =>
-        prev.map((proj) =>
-          proj.id === editingId ? { ...values, id: editingId } : proj
-        )
+      setProjectList(prev =>
+        prev.map(proj => (proj.id === editingId ? { ...values, id: editingId } : proj))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setProjectList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setProjectList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (project) => {
+  const handleEdit = project => {
     form.reset(project);
     setIsEditing(true);
     setEditingId(project.id);
   };
 
-  const handleDelete = (id) => {
-    setProjectList((prev) => prev.filter((proj) => proj.id !== id));
+  const handleDelete = id => {
+    setProjectList(prev => prev.filter(proj => proj.id !== id));
   };
 
   const cancelEdit = () => {
@@ -120,8 +118,7 @@ const ProjectsSection = () => {
           <Card className="border shadow-sm border-slate-100 bg-white rounded-2xl overflow-hidden">
             <div className="bg-indigo-50/50 px-4 py-3 border-b border-indigo-100 flex items-center justify-between">
               <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest flex items-center gap-2">
-                <Rocket className="w-3 h-3" />{" "}
-                {isEditing ? "Modify Project" : "Launch Project"}
+                <Rocket className="w-3 h-3" /> {isEditing ? "Modify Project" : "Launch Project"}
               </span>
               {isEditing && (
                 <Button
@@ -136,10 +133,7 @@ const ProjectsSection = () => {
             </div>
             <CardContent className="p-4">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="title"
@@ -183,9 +177,7 @@ const ProjectsSection = () => {
                       name="date"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-900 font-bold text-xs">
-                            Date
-                          </FormLabel>
+                          <FormLabel className="text-slate-900 font-bold text-xs">Date</FormLabel>
                           <FormControl>
                             <Input
                               type="month"
@@ -296,7 +288,7 @@ const ProjectsSection = () => {
                   <p className="text-slate-400 font-bold text-sm">Project Deck Empty</p>
                 </motion.div>
               ) : (
-                projectList.map((project) => (
+                projectList.map(project => (
                   <motion.div
                     key={project.id}
                     layout
@@ -309,9 +301,7 @@ const ProjectsSection = () => {
                         <div className="flex items-start justify-between gap-4">
                           <div className="space-y-2 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
-                              <h4 className="font-bold text-slate-900 text-sm">
-                                {project.title}
-                              </h4>
+                              <h4 className="font-bold text-slate-900 text-sm">{project.title}</h4>
                               {project.link && (
                                 <a
                                   href={project.link}
@@ -325,16 +315,14 @@ const ProjectsSection = () => {
                             </div>
 
                             <div className="flex flex-wrap gap-1">
-                              {project.technologiesOrTopics
-                                ?.split(",")
-                                .map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className="text-[9px] font-bold uppercase tracking-widest bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded"
-                                  >
-                                    {tech.trim()}
-                                  </span>
-                                ))}
+                              {project.technologiesOrTopics?.split(",").map((tech, i) => (
+                                <span
+                                  key={i}
+                                  className="text-[9px] font-bold uppercase tracking-widest bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded"
+                                >
+                                  {tech.trim()}
+                                </span>
+                              ))}
                             </div>
 
                             <p className="text-[10px] font-bold text-slate-400 italic">

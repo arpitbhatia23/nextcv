@@ -3,9 +3,7 @@ import { User, Sparkles } from "lucide-react";
 
 export const ChatMessage = ({ message, onQuickReply }) => (
   <div
-    className={`flex w-full mb-6 ${
-      message.sender === "user" ? "justify-end" : "justify-start"
-    }`}
+    className={`flex w-full mb-6 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
   >
     <div
       className={`flex max-w-[90%] md:max-w-[80%] gap-3 ${
@@ -29,9 +27,7 @@ export const ChatMessage = ({ message, onQuickReply }) => (
 
       {/* Message Bubble container */}
       <div
-        className={`flex flex-col gap-2 ${
-          message.sender === "user" ? "items-end" : "items-start"
-        }`}
+        className={`flex flex-col gap-2 ${message.sender === "user" ? "items-end" : "items-start"}`}
       >
         <div
           className={`p-4 shadow-sm text-sm md:text-base leading-relaxed transition-all duration-300 ${

@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
 import mongoose from "mongoose";
-const handler = async (req) => {
+const handler = async () => {
   await dbConnect();
   const session = await getServerSession(authOptions);
   if (!session && !session.user) {
@@ -17,7 +17,6 @@ const handler = async (req) => {
 
   const userId = session.user._id;
 
-  console.log(userId);
   const resumes = await User.aggregate([
     [
       {
@@ -69,10 +68,9 @@ const handler = async (req) => {
     throw new apiError(404, "No resumes found");
   }
 
-  return NextResponse.json(
-    new apiResponse(200, "Resumes fetched successfully", resumes[0]),
-    { status: 200 }
-  );
+  return NextResponse.json(new apiResponse(200, "Resumes fetched successfully", resumes[0]), {
+    status: 200,
+  });
 };
 
 export const GET = asyncHandler(handler);

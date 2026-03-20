@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -112,7 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   // Bar Admissions (Unique to Legal)
-    barBlock: {
+  barBlock: {
     marginBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -120,18 +112,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
-        return trimmed.split(";").map((b) => b.trim()).filter(Boolean);
+        return trimmed
+          .split(";")
+          .map(b => b.trim())
+          .filter(Boolean);
       return [trimmed];
     })
     .filter(Boolean);
@@ -161,26 +156,24 @@ const LegalProfessional = ({ data }) => {
               <View key={i} style={styles.jobBlock}>
                 <View style={styles.jobHeader}>
                   <Text style={{ fontFamily: "Times-Bold" }}>{edu.institution}</Text>
-                  <Text style={styles.jobDate}>
-                    {formatDate(edu.endYear)}
-                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
                 </View>
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                     <Text style={{ fontFamily: "Times-Italic" }}>{edu.degree}</Text>
-                     {edu.location && <Text style={styles.jobLocation}>{edu.location}</Text>}
+                  <Text style={{ fontFamily: "Times-Italic" }}>{edu.degree}</Text>
+                  {edu.location && <Text style={styles.jobLocation}>{edu.location}</Text>}
                 </View>
 
-                 {/* Honors/Activities usually go here for law students/grads */}
-                 {edu.description && (
-                   <View style={{ marginTop: 2 }}>
-                     {splitToBullets(edu.description).map((bullet, idx) => (
-                       <View key={idx} style={styles.bullet}>
-                         <Text style={styles.bulletPoint}>•</Text>
-                         <Text style={styles.bulletText}>{bullet}</Text>
-                       </View>
-                     ))}
-                   </View>
-                 )}
+                {/* Honors/Activities usually go here for law students/grads */}
+                {edu.description && (
+                  <View style={{ marginTop: 2 }}>
+                    {splitToBullets(edu.description).map((bullet, idx) => (
+                      <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>
@@ -188,17 +181,18 @@ const LegalProfessional = ({ data }) => {
 
         {/* Bar Admissions */}
         {data.certificates?.length > 0 && (
-             <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Bar Admissions & Certifications</Text>
-                {data.certificates.map((cert, i) => (
-                    <View key={i} style={styles.barBlock}>
-                        <Text>{cert.title} - {cert.organization}</Text>
-                        <Text style={styles.jobDate}>{formatDate(cert.year)}</Text>
-                    </View>
-                ))}
-             </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Bar Admissions & Certifications</Text>
+            {data.certificates.map((cert, i) => (
+              <View key={i} style={styles.barBlock}>
+                <Text>
+                  {cert.title} - {cert.organization}
+                </Text>
+                <Text style={styles.jobDate}>{formatDate(cert.year)}</Text>
+              </View>
+            ))}
+          </View>
         )}
-
 
         {/* Experience */}
         {data.experience?.length > 0 && (
@@ -212,12 +206,12 @@ const LegalProfessional = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                 <Text style={{ ...styles.jobTitle, marginBottom: 2 }}>{exp.position}</Text>
+                <Text style={{ ...styles.jobTitle, marginBottom: 2 }}>{exp.position}</Text>
 
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                       {/* Lawyers often use numbering or no bullets, sticking to standard bullet for readability here */}
+                      {/* Lawyers often use numbering or no bullets, sticking to standard bullet for readability here */}
                       <Text style={styles.bulletPoint}>•</Text>
                       <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
@@ -232,18 +226,18 @@ const LegalProfessional = ({ data }) => {
         {(data.skills?.length > 0 || data.languages?.length > 0) && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Additional Information</Text>
-             {data.skills?.length > 0 && (
-                <Text style={{ marginBottom: 4 }}>
-                    <Text style={{ fontFamily: "Times-Bold" }}>Skills: </Text>
-                    {data.skills.map(s => (typeof s === 'string' ? s : s.name)).join("; ")}
-                </Text>
-             )}
-             {data.languages?.length > 0 && (
-                <Text>
-                    <Text style={{ fontFamily: "Times-Bold" }}>Languages: </Text>
-                    {data.languages.map(l => l.name).join("; ")}
-                </Text>
-             )}
+            {data.skills?.length > 0 && (
+              <Text style={{ marginBottom: 4 }}>
+                <Text style={{ fontFamily: "Times-Bold" }}>Skills: </Text>
+                {data.skills.map(s => (typeof s === "string" ? s : s.name)).join("; ")}
+              </Text>
+            )}
+            {data.languages?.length > 0 && (
+              <Text>
+                <Text style={{ fontFamily: "Times-Bold" }}>Languages: </Text>
+                {data.languages.map(l => l.name).join("; ")}
+              </Text>
+            )}
           </View>
         )}
       </Page>

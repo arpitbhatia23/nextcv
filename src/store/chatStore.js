@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 // Zustand Store with Persistence
 export const useResumeStoreChat = create(
   persist(
-    (set) => ({
+    set => ({
       messages: [],
       answers: {},
       step: 0,
@@ -15,15 +15,15 @@ export const useResumeStoreChat = create(
       generatedResumeUrl: null,
       isTyping: false,
 
-      setIsTyping: (isTyping) => set({ isTyping }),
-      setMessages: (messages) => set({ messages }),
-      addMessage: (message) =>
-        set((state) => ({
+      setIsTyping: isTyping => set({ isTyping }),
+      setMessages: messages => set({ messages }),
+      addMessage: message =>
+        set(state => ({
           messages: [...state.messages, message],
         })),
-      setAnswers: (answers) => set({ answers }),
+      setAnswers: answers => set({ answers }),
       updateAnswer: (key, value, section, index) =>
-        set((state) => {
+        set(state => {
           if (section !== undefined && index !== undefined) {
             const updated = [...(state.answers[section] || [])];
             if (!updated[index]) updated[index] = {};
@@ -32,19 +32,19 @@ export const useResumeStoreChat = create(
           }
           return { answers: { ...state.answers, [key]: value } };
         }),
-      setStep: (step) => set({ step }),
-      setFieldStep: (fieldStep) => set({ fieldStep }),
-      setRepeatIndex: (repeatIndex) => set({ repeatIndex }),
-      updateRepeatIndex: (key) =>
-        set((state) => ({
+      setStep: step => set({ step }),
+      setFieldStep: fieldStep => set({ fieldStep }),
+      setRepeatIndex: repeatIndex => set({ repeatIndex }),
+      updateRepeatIndex: key =>
+        set(state => ({
           repeatIndex: {
             ...state.repeatIndex,
             [key]: (state.repeatIndex[key] || 0) + 1,
           },
         })),
-      setIsComplete: (isComplete) => set({ isComplete }),
-      setApiError: (apiError) => set({ apiError }),
-      setGeneratedResumeUrl: (url) => set({ generatedResumeUrl: url }),
+      setIsComplete: isComplete => set({ isComplete }),
+      setApiError: apiError => set({ apiError }),
+      setGeneratedResumeUrl: url => set({ generatedResumeUrl: url }),
       resetStore: () =>
         set({
           messages: [],
@@ -60,7 +60,7 @@ export const useResumeStoreChat = create(
     }),
     {
       name: "resume-chat-storage",
-      partialize: (state) => ({
+      partialize: state => ({
         messages: state.messages,
         answers: state.answers,
         step: state.step,

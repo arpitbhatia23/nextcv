@@ -11,13 +11,7 @@ import {
   School,
   Trophy,
 } from "lucide-react";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormControl,
-  FormLabel,
-} from "@/components/ui/form";
+import { Form, FormField, FormItem, FormControl, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -30,8 +24,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
 
 const EducationSection = () => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const [educationList, setEducationList] = useState(formData.education || []);
   const [isEditing, setIsEditing] = useState(false);
@@ -44,9 +38,7 @@ const EducationSection = () => {
     startYear: z.string({ message: "Start date is required" }),
     endYear: z.string({ message: "End date is required" }),
     grade: z.string({ message: "Grade is required" }),
-    description: z
-      .string()
-      .nonempty("Please click 'Generate with AI' to create a description"),
+    description: z.string().nonempty("Please click 'Generate with AI' to create a description"),
   });
 
   const form = useForm({
@@ -65,29 +57,27 @@ const EducationSection = () => {
     updateForm({ education: educationList });
   }, [educationList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setEducationList((prev) =>
-        prev.map((edu) =>
-          edu.id === editingId ? { ...values, id: editingId } : edu,
-        ),
+      setEducationList(prev =>
+        prev.map(edu => (edu.id === editingId ? { ...values, id: editingId } : edu))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setEducationList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setEducationList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (education) => {
+  const handleEdit = education => {
     form.reset(education);
     setIsEditing(true);
     setEditingId(education.id);
   };
 
-  const handleDelete = (id) => {
-    setEducationList((prev) => prev.filter((edu) => edu.id !== id));
+  const handleDelete = id => {
+    setEducationList(prev => prev.filter(edu => edu.id !== id));
   };
 
   const cancelEdit = () => {
@@ -131,8 +121,7 @@ const EducationSection = () => {
           <Card className="border shadow-sm border-slate-100 bg-white rounded-2xl overflow-hidden">
             <div className="bg-indigo-50/50 px-4 py-3 border-b border-indigo-100 flex items-center justify-between">
               <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest flex items-center gap-2">
-                <Plus className="w-3 h-3" />{" "}
-                {isEditing ? "Modify Entry" : "New Qualification"}
+                <Plus className="w-3 h-3" /> {isEditing ? "Modify Entry" : "New Qualification"}
               </span>
               {isEditing && (
                 <Button
@@ -147,18 +136,14 @@ const EducationSection = () => {
             </div>
             <CardContent className="p-4">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="degree"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                          <Trophy className="w-3 h-3 text-indigo-500" /> Degree
-                          / Program
+                          <Trophy className="w-3 h-3 text-indigo-500" /> Degree / Program
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -177,8 +162,7 @@ const EducationSection = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                          <School className="w-3 h-3 text-indigo-500" />{" "}
-                          Institution Name
+                          <School className="w-3 h-3 text-indigo-500" /> Institution Name
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -198,8 +182,7 @@ const EducationSection = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                            <Calendar className="w-3 h-3 text-indigo-500" />{" "}
-                            Started
+                            <Calendar className="w-3 h-3 text-indigo-500" /> Started
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -217,8 +200,7 @@ const EducationSection = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                            <Calendar className="w-3 h-3 text-indigo-500" />{" "}
-                            Completed
+                            <Calendar className="w-3 h-3 text-indigo-500" /> Completed
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -266,9 +248,7 @@ const EducationSection = () => {
                             disabled={isGenerating}
                             className="text-[10px] font-black text-indigo-600 flex items-center gap-1 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
                           >
-                            <Sparkles
-                              className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
-                            />
+                            <Sparkles className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`} />
                             {isGenerating ? "Synthesizing..." : "Generate AI"}
                           </button>
                         </div>
@@ -309,12 +289,10 @@ const EducationSection = () => {
                   className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center"
                 >
                   <GraduationCap className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                  <p className="text-slate-400 font-bold text-sm">
-                    No education added
-                  </p>
+                  <p className="text-slate-400 font-bold text-sm">No education added</p>
                 </motion.div>
               ) : (
-                educationList.map((edu) => (
+                educationList.map(edu => (
                   <motion.div
                     key={edu.id}
                     layout
@@ -328,9 +306,7 @@ const EducationSection = () => {
                       <CardContent className="p-4">
                         <div className="flex items-start justify-between gap-4">
                           <div>
-                            <h4 className="font-bold text-slate-900 text-sm">
-                              {edu.degree}
-                            </h4>
+                            <h4 className="font-bold text-slate-900 text-sm">{edu.degree}</h4>
                             <div className="flex items-center gap-2 text-indigo-600 font-semibold text-xs mt-0.5">
                               <School className="w-3 h-3" />
                               {edu.institution}

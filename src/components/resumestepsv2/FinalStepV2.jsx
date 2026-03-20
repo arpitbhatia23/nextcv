@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,7 @@ import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";
 import FeedbackModal from "@/components/FeedbackModal";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const WatermarkLayer = () => (
   <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden select-none opacity-[0.07]">
@@ -65,11 +66,9 @@ const WatermarkLayer = () => (
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
-const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
-  const selectedTemplate = useResumeStore(
-    (s) => s.selectedTemplate || "InfographicLite",
-  );
-  const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
+const FinalStepV2 = ({ previous, formData }) => {
+  const selectedTemplate = useResumeStore(s => s.selectedTemplate || "InfographicLite");
+  const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [applied, setApplied] = useState(false);
@@ -83,7 +82,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
   const [isCouponValid, setIsCouponValid] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200,
+    typeof window !== "undefined" ? window.innerWidth : 1200
   );
 
   useEffect(() => {
@@ -99,7 +98,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
     return 550; // desktop
   };
 
-  const clearDraft = useResumeStore((s) => s.clearStorage);
+  const clearDraft = useResumeStore(s => s.clearStorage);
 
   const debouncePayment = useDebouncedCallback(() => {
     handlePayment();
@@ -109,7 +108,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
     handleSaveDraft();
   }, 500);
 
-  const debounceCoupon = useDebouncedCallback((coupon) => {
+  const debounceCoupon = useDebouncedCallback(coupon => {
     handleCoupon(coupon);
   }, 500);
 
@@ -129,7 +128,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         toast.error(res.data.message || "Failed to save draft");
       }
     } catch (error) {
-      toast.error("Cloud synchronization failed");
+      toast.error("Cloud synchronization failed" || error.message);
     } finally {
       setIsSubmit(false);
     }
@@ -147,7 +146,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
     let isMounted = true;
-    pdfGen.createPdf().then((url) => {
+    pdfGen.createPdf().then(url => {
       if (isMounted) setPdfUrl(url);
     });
 
@@ -201,7 +200,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
     }
   };
 
-  const handleCoupon = async (coupon) => {
+  const handleCoupon = async coupon => {
     if (appliedCoupon === coupon) {
       toast.info("Coupon active");
       return;
@@ -283,7 +282,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
             className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0"
             id="tour-template-selection-v2"
           >
-            {templates.map((template) => (
+            {templates.map(template => (
               <motion.div
                 key={template.key}
                 whileHover={{ scale: 1.02 }}
@@ -297,9 +296,10 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
               >
                 <div className="aspect-3/4 rounded-xl bg-slate-100 overflow-hidden relative shadow-inner">
                   {template.image ? (
-                    <img
+                    <Image
                       src={template.image}
                       alt={template.label}
+                      fill
                       className="w-full h-full object-cover transition-transform group-hover:scale-110"
                     />
                   ) : (
@@ -333,8 +333,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         >
           <div className="h-16 flex items-center justify-between px-8 border-b border-slate-50 bg-slate-50/30">
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />{" "}
-              High-Resolution Preview
+              <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" /> High-Resolution Preview
             </span>
             <div className="flex gap-1.5">
               <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
@@ -351,7 +350,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 <Document
                   file={pdfUrl}
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  onContextMenu={(e) => e.preventDefault()}
+                  onContextMenu={e => e.preventDefault()}
                 >
                   {Array.from({ length: numPages || 0 }).map((_, idx) => (
                     <Page
@@ -402,13 +401,9 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 )}
                 <div className="pt-4 border-t border-slate-200 flex justify-between items-end">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-slate-400 line-through">
-                      ₹199
-                    </span>
+                    <span className="text-sm text-slate-400 line-through">₹199</span>
 
-                    <span className="text-lg font-bold text-slate-900">
-                      ₹{amount}
-                    </span>
+                    <span className="text-lg font-bold text-slate-900">₹{amount}</span>
                   </div>
                 </div>
               </div>
@@ -417,7 +412,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 <div className="relative group">
                   <Input
                     value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
+                    onChange={e => setCouponCode(e.target.value)}
                     placeholder="PROMO CODE"
                     disabled={applied}
                     className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-bold tracking-widest placeholder:normal-case placeholder:tracking-normal"
@@ -477,9 +472,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 <FileText className="w-6 h-6" />
               </div>
               <div className="space-y-1">
-                <h4 className="font-black text-slate-900 text-sm">
-                  Design Ready
-                </h4>
+                <h4 className="font-black text-slate-900 text-sm">Design Ready</h4>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed">
                   Your resume will be generated in pixel-perfect A4 format.
                 </p>
@@ -489,10 +482,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
         </div>
       </div>
 
-      <FeedbackModal
-        isOpen={isFeedbackOpen}
-        onClose={() => setIsFeedbackOpen(false)}
-      />
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
 
       {/* Redirection Overlay */}
       <AnimatePresence>
@@ -532,9 +522,7 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">
-                    Redirecting
-                  </h3>
+                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Redirecting</h3>
                   <p className="text-slate-500 font-medium">
                     Initialising secure transaction with Paytm...
                   </p>
@@ -552,8 +540,8 @@ const FinalStepV2 = ({ next, previous, formData, isdraft = false }) => {
                       Payment Protocol
                     </p>
                     <p className="text-indigo-700 text-xs font-semibold leading-relaxed">
-                      Please do not close this window. You will be redirected to
-                      the download page automatically after payment.
+                      Please do not close this window. You will be redirected to the download page
+                      automatically after payment.
                     </p>
                   </div>
                 </motion.div>

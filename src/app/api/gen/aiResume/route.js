@@ -5,7 +5,7 @@ import { encode } from "@toon-format/toon";
 import { NextResponse } from "next/server";
 
 // API Route handler
-const handler = async (req, res) => {
+const handler = async req => {
   const { resumeData } = await req.json();
 
   const prompt = `

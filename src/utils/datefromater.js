@@ -1,4 +1,4 @@
-export const formatDate = (date) => {
+export const formatDate = date => {
   if (!date) return "";
   if (date === "Present" || date === "present") return "Present";
   try {

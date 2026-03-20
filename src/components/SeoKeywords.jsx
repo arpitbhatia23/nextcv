@@ -58,9 +58,7 @@ const SeoKeywords = () => {
   return (
     <section className="py-12 bg-black border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <h3 className="text-xl font-semibold text-slate-300 mb-6">
-          Popular Searches
-        </h3>
+        <h3 className="text-xl font-semibold text-slate-300 mb-6">Popular Searches</h3>
         <div className="flex flex-wrap gap-3">
           {keywords.map((keyword, index) => (
             <Link

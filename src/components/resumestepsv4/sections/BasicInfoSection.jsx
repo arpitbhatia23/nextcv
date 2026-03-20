@@ -10,23 +10,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Phone,
-  Mail,
-  Linkedin,
-  Github,
-  Globe,
-  MapPin,
-  User,
-  Briefcase,
-} from "lucide-react";
+import { Phone, Mail, Linkedin, Github, Globe, MapPin, User, Briefcase } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useResumeStore from "@/store/useResumeStore";
 
 const BasicInfoSection = forwardRef(({}, ref) => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
@@ -99,8 +90,7 @@ const BasicInfoSection = forwardRef(({}, ref) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                      <Briefcase className="w-4 h-4 text-indigo-500" /> Target
-                      Role
+                      <Briefcase className="w-4 h-4 text-indigo-500" /> Target Role
                     </FormLabel>
                     <FormControl>
                       <Input

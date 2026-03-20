@@ -1,6 +1,31 @@
 {
+  "extends": ["next", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
+    // 🧹 Clean code
     "no-unused-vars": "warn",
-    "no-unused-imports": "warn"
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+
+    // ⚛️ React
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+
+    // 🔁 Hooks
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
+    // 🧠 JS quality
+    "eqeqeq": ["error", "always"],
+    "no-var": "error",
+    "prefer-const": "error",
+
+    // 📦 Imports
+    "import/no-anonymous-default-export": "warn",
+
+    // 🚀 Next
+    "@next/next/no-img-element": "warn",
+
+    // ✨ Prettier integration
+    "prettier/prettier": "warn"
   }
 }

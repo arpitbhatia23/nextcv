@@ -2,13 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  BrainCircuit,
-  Sparkles,
-  ArrowRight,
-  ArrowLeft,
-  AlignLeft,
-} from "lucide-react";
+import { BrainCircuit, Sparkles, ArrowRight, ArrowLeft, AlignLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -19,13 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -35,9 +23,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
-    summary: z
-      .string()
-      .min(20, { message: "Summary should be at least 20 characters" }),
+    summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
   });
 
   const form = useForm({
@@ -53,7 +39,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
     updateForm({ summary: watchedSummary });
   }, [watchedSummary, updateForm]);
 
-  const onSubmit = (values) => {
+  const onSubmit = () => {
     next();
   };
 
@@ -77,11 +63,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
       if (res.data?.data) {
         form.setValue("summary", String(res.data.data));
 
-        toast.success(
-          watchedSummary?.trim()
-            ? "Summary enhanced ✨"
-            : "Summary generated ✨",
-        );
+        toast.success(watchedSummary?.trim() ? "Summary enhanced ✨" : "Summary generated ✨");
       }
     } catch (err) {
       console.error("AI generation failed:", err);
@@ -94,12 +76,8 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-slate-900">
-          Professional Summary
-        </h2>
-        <p className="text-slate-500">
-          Write a short professional summary to introduce yourself
-        </p>
+        <h2 className="text-2xl font-bold text-slate-900">Professional Summary</h2>
+        <p className="text-slate-500">Write a short professional summary to introduce yourself</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -109,17 +87,12 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
           id="tour-summary-form"
         >
           <CardHeader className="border-b p-4 rounded-t-xl">
-            <CardTitle className="text-lg font-bold text-slate-800">
-              Your Summary
-            </CardTitle>
+            <CardTitle className="text-lg font-bold text-slate-800">Your Summary</CardTitle>
           </CardHeader>
 
           <CardContent className="p-2 md:p-6">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="summary"
@@ -201,9 +174,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
             <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl">
               <div className="flex items-center gap-2">
                 <BrainCircuit className="w-5 h-5 text-indigo-600" />
-                <CardTitle className="text-lg font-bold text-slate-800">
-                  Preview
-                </CardTitle>
+                <CardTitle className="text-lg font-bold text-slate-800">Preview</CardTitle>
               </div>
             </CardHeader>
 

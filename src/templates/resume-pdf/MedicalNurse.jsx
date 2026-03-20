@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -154,13 +147,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
@@ -168,7 +161,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed];
@@ -184,25 +177,17 @@ const MedicalNurse = ({ data }) => {
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <Text style={styles.name}>{data?.name}</Text>
-            <Text style={styles.role}>
-              {data?.jobRole || "Registered Nurse"}
-            </Text>
+            <Text style={styles.role}>{data?.jobRole || "Registered Nurse"}</Text>
           </View>
 
           <View style={styles.headerRight}>
-            {data?.email && (
-              <Text style={styles.contactItem}>{data.email}</Text>
-            )}
+            {data?.email && <Text style={styles.contactItem}>{data.email}</Text>}
 
             {(data?.phone || data?.phone_no) && (
-              <Text style={styles.contactItem}>
-                {data.phone || data.phone_no}
-              </Text>
+              <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
             )}
 
-            {data?.address && (
-              <Text style={styles.contactItem}>{data.address}</Text>
-            )}
+            {data?.address && <Text style={styles.contactItem}>{data.address}</Text>}
 
             {data?.linkedin && (
               <Link
@@ -236,19 +221,11 @@ const MedicalNurse = ({ data }) => {
               <View key={i} style={{ marginBottom: 6 }}>
                 <View style={styles.eduBlock}>
                   <View>
-                    <Text
-                      style={{ fontSize: 10, fontFamily: "Helvetica-Bold" }}
-                    >
-                      {cert.title}
-                    </Text>
-                    <Text style={{ fontSize: 9, color: "#64748b" }}>
-                      {cert.organization}
-                    </Text>
+                    <Text style={{ fontSize: 10, fontFamily: "Helvetica-Bold" }}>{cert.title}</Text>
+                    <Text style={{ fontSize: 9, color: "#64748b" }}>{cert.organization}</Text>
                   </View>
 
-                  <Text style={{ fontSize: 9, color: "#64748b" }}>
-                    {formatDate(cert.year)}
-                  </Text>
+                  <Text style={{ fontSize: 9, color: "#64748b" }}>{formatDate(cert.year)}</Text>
                 </View>
               </View>
             ))}
@@ -265,8 +242,7 @@ const MedicalNurse = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
 
@@ -307,20 +283,13 @@ const MedicalNurse = ({ data }) => {
               <View key={i} style={{ marginBottom: 10 }}>
                 <View style={styles.eduBlock}>
                   <View>
-                    <Text
-                      style={{ fontSize: 10, fontFamily: "Helvetica-Bold" }}
-                    >
-                      {edu.degree}
-                    </Text>
+                    <Text style={{ fontSize: 10, fontFamily: "Helvetica-Bold" }}>{edu.degree}</Text>
 
-                    <Text style={{ fontSize: 9, color: "#64748b" }}>
-                      {edu.institution}
-                    </Text>
+                    <Text style={{ fontSize: 9, color: "#64748b" }}>{edu.institution}</Text>
                   </View>
 
                   <Text style={{ fontSize: 9, color: "#64748b" }}>
-                    {formatDate(edu.startYear)} -{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
                 </View>
 

@@ -7,8 +7,8 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import authOptions from "../../auth/options";
 import Payment from "@/models/payment.model";
-const handler = async (req) => {
-  let { couponCode } = await req.json();
+const handler = async req => {
+  const { couponCode } = await req.json();
   await dbConnect();
   if (!couponCode) {
     throw new apiError(400, "coupon code is required");
@@ -46,10 +46,9 @@ const handler = async (req) => {
   if (!coupon.isActive) {
     throw new apiError(400, "coupon code deactivate");
   }
-  return NextResponse.json(
-    new apiResponse(200, "coupon fetch sucessfully ", coupon),
-    { status: 200 },
-  );
+  return NextResponse.json(new apiResponse(200, "coupon fetch sucessfully ", coupon), {
+    status: 200,
+  });
 };
 
 export const POST = asyncHandler(handler);

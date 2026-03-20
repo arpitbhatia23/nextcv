@@ -6,5 +6,4 @@ const VisitorStatsSchema = new mongoose.Schema({
 });
 
 export const VisitorStats =
-  mongoose.models.VisitorStats ||
-  mongoose.model("VisitorStats", VisitorStatsSchema);
+  mongoose.models.VisitorStats || mongoose.model("VisitorStats", VisitorStatsSchema);

@@ -27,10 +27,6 @@ const ProcessWorks = () => {
     },
   ];
 
-  const handleStartResume = () => {
-    signIn("google");
-  };
-
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -41,8 +37,7 @@ const ProcessWorks = () => {
             <span className="text-indigo-600">NextCV Advantage</span>
           </h2>
           <p className="text-lg text-slate-600">
-            Why thousands of Indian job seekers choose us over generic resume
-            builders.
+            Why thousands of Indian job seekers choose us over generic resume builders.
           </p>
         </div>
 

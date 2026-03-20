@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,8 +27,6 @@ import axios from "axios";
 import { formatDate } from "@/utils/datefromater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
 
 function getChangedFields(original, edited) {
   const changed = {};
@@ -40,8 +38,8 @@ function getChangedFields(original, edited) {
   return changed;
 }
 
-const page = ({ params }) => {
-  const { id } = React.use(params);
+const Page = ({ params }) => {
+  const { id } = use(params);
   const router = useRouter();
   const [editdata, setEditdata] = useState({
     name: "",
@@ -69,7 +67,7 @@ const page = ({ params }) => {
       setEditdata(res.data.data);
       setOriginalData(res.data.data);
     } catch (error) {
-      console.error("Failed to fetch resume");
+      console.error(error?.message || "Failed to fetch resume");
     } finally {
       setLoading(false);
     }
@@ -81,30 +79,30 @@ const page = ({ params }) => {
   }, [id]);
 
   const handleInputChange = (field, value) => {
-    setEditdata((prev) => ({
+    setEditdata(prev => ({
       ...prev,
       [field]: value,
     }));
   };
 
   const handleArrayItemChange = (arrayName, index, field, value) => {
-    setEditdata((prev) => ({
+    setEditdata(prev => ({
       ...prev,
       [arrayName]: prev[arrayName].map((item, i) =>
-        i === index ? { ...item, [field]: value } : item,
+        i === index ? { ...item, [field]: value } : item
       ),
     }));
   };
 
   const addArrayItem = (arrayName, newItem) => {
-    setEditdata((prev) => ({
+    setEditdata(prev => ({
       ...prev,
       [arrayName]: [...prev[arrayName], newItem],
     }));
   };
 
   const removeArrayItem = (arrayName, index) => {
-    setEditdata((prev) => ({
+    setEditdata(prev => ({
       ...prev,
       [arrayName]: prev[arrayName].filter((_, i) => i !== index),
     }));
@@ -124,8 +122,7 @@ const page = ({ params }) => {
       toast.success("Resume saved successfully!");
       setOriginalData(editdata); // update originalData to new state
     } catch (error) {
-      toast.error("Error saving resume. Please try again.");
-      console.log(error);
+      toast.error(error.message || "Error saving resume. Please try again.");
     } finally {
       setSaving(false);
     }
@@ -151,10 +148,7 @@ const page = ({ params }) => {
             >
               <ArrowLeft className="w-4 h-4" /> Back to Dashboard
             </button>
-            <h1
-              className="text-3xl font-bold text-slate-900 tracking-tight"
-              id="tour-edit-header"
-            >
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight" id="tour-edit-header">
               Edit Resume
             </h1>
             <p className="text-slate-500 mt-1">
@@ -179,10 +173,7 @@ const page = ({ params }) => {
 
         {/* Personal Information */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader
-            className="border-b border-slate-100 bg-slate-50/50"
-            id="tour-personal-info"
-          >
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-personal-info">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
                 <User className="w-4 h-4 text-indigo-600" />
@@ -199,7 +190,7 @@ const page = ({ params }) => {
                 <Input
                   id="name"
                   value={editdata.name}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  onChange={e => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
@@ -211,7 +202,7 @@ const page = ({ params }) => {
                 <Input
                   id="jobRole"
                   value={editdata.jobRole}
-                  onChange={(e) => handleInputChange("jobRole", e.target.value)}
+                  onChange={e => handleInputChange("jobRole", e.target.value)}
                   placeholder="e.g., Full Stack Developer"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
@@ -219,10 +210,7 @@ const page = ({ params }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label
-                  htmlFor="email"
-                  className="flex items-center gap-2 text-slate-600"
-                >
+                <Label htmlFor="email" className="flex items-center gap-2 text-slate-600">
                   <Mail className="w-3.5 h-3.5" />
                   Email
                 </Label>
@@ -230,42 +218,34 @@ const page = ({ params }) => {
                   id="email"
                   type="email"
                   value={editdata.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  onChange={e => handleInputChange("email", e.target.value)}
                   placeholder="your.email@example.com"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label
-                  htmlFor="phone"
-                  className="flex items-center gap-2 text-slate-600"
-                >
+                <Label htmlFor="phone" className="flex items-center gap-2 text-slate-600">
                   <Phone className="w-3.5 h-3.5" />
                   Phone Number
                 </Label>
                 <Input
                   id="phone"
                   value={editdata.phone_no}
-                  onChange={(e) =>
-                    handleInputChange("phone_no", e.target.value)
-                  }
+                  onChange={e => handleInputChange("phone_no", e.target.value)}
                   placeholder="Your phone number"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label
-                htmlFor="address"
-                className="flex items-center gap-2 text-slate-600"
-              >
+              <Label htmlFor="address" className="flex items-center gap-2 text-slate-600">
                 <MapPin className="w-3.5 h-3.5" />
                 Address
               </Label>
               <Textarea
                 id="address"
                 value={editdata.address}
-                onChange={(e) => handleInputChange("address", e.target.value)}
+                onChange={e => handleInputChange("address", e.target.value)}
                 placeholder="Your full address"
                 rows={2}
                 className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
@@ -273,53 +253,40 @@ const page = ({ params }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <Label
-                  htmlFor="github"
-                  className="flex items-center gap-2 text-slate-600"
-                >
+                <Label htmlFor="github" className="flex items-center gap-2 text-slate-600">
                   <Github className="w-3.5 h-3.5" />
                   GitHub
                 </Label>
                 <Input
                   id="github"
                   value={editdata.github}
-                  onChange={(e) => handleInputChange("github", e.target.value)}
+                  onChange={e => handleInputChange("github", e.target.value)}
                   placeholder="GitHub profile URL"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label
-                  htmlFor="linkedin"
-                  className="flex items-center gap-2 text-slate-600"
-                >
+                <Label htmlFor="linkedin" className="flex items-center gap-2 text-slate-600">
                   <Linkedin className="w-3.5 h-3.5" />
                   LinkedIn
                 </Label>
                 <Input
                   id="linkedin"
                   value={editdata.linkedin}
-                  onChange={(e) =>
-                    handleInputChange("linkedin", e.target.value)
-                  }
+                  onChange={e => handleInputChange("linkedin", e.target.value)}
                   placeholder="LinkedIn profile URL"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label
-                  htmlFor="portfolio"
-                  className="flex items-center gap-2 text-slate-600"
-                >
+                <Label htmlFor="portfolio" className="flex items-center gap-2 text-slate-600">
                   <Globe className="w-3.5 h-3.5" />
                   Portfolio
                 </Label>
                 <Input
                   id="portfolio"
                   value={editdata.portfolio}
-                  onChange={(e) =>
-                    handleInputChange("portfolio", e.target.value)
-                  }
+                  onChange={e => handleInputChange("portfolio", e.target.value)}
                   placeholder="Portfolio website URL"
                   className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
                 />
@@ -332,7 +299,7 @@ const page = ({ params }) => {
               <Textarea
                 id="summary"
                 value={editdata.summary}
-                onChange={(e) => handleInputChange("summary", e.target.value)}
+                onChange={e => handleInputChange("summary", e.target.value)}
                 placeholder="Brief description of your professional background and goals"
                 rows={4}
                 className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
@@ -343,10 +310,7 @@ const page = ({ params }) => {
 
         {/* Skills */}
         <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader
-            className="border-b border-slate-100 bg-slate-50/50"
-            id="tour-skills-card"
-          >
+          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-skills-card">
             <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
               <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
                 <Code className="w-4 h-4 text-indigo-600" />
@@ -364,14 +328,7 @@ const page = ({ params }) => {
                   <div className="flex-1">
                     <Input
                       value={skill.name}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "skills",
-                          index,
-                          "name",
-                          e.target.value,
-                        )
-                      }
+                      onChange={e => handleArrayItemChange("skills", index, "name", e.target.value)}
                       placeholder="Skill name"
                       className="bg-white border-slate-200"
                     />
@@ -379,13 +336,8 @@ const page = ({ params }) => {
                   <div className="w-32">
                     <Input
                       value={skill.level}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "skills",
-                          index,
-                          "level",
-                          e.target.value,
-                        )
+                      onChange={e =>
+                        handleArrayItemChange("skills", index, "level", e.target.value)
                       }
                       placeholder="Level"
                       className="bg-white border-slate-200"
@@ -434,9 +386,7 @@ const page = ({ params }) => {
                   className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white relative group"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">
-                      Experience {index + 1}
-                    </h4>
+                    <h4 className="font-semibold text-slate-700">Experience {index + 1}</h4>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -451,13 +401,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Job Title</Label>
                       <Input
                         value={exp.position}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "experience",
-                            index,
-                            "position",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("experience", index, "position", e.target.value)
                         }
                         placeholder="Job title"
                         className="bg-slate-50 border-slate-200"
@@ -467,13 +412,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Company</Label>
                       <Input
                         value={exp.companyName}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "experience",
-                            index,
-                            "companyName",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("experience", index, "companyName", e.target.value)
                         }
                         placeholder="Company name"
                         className="bg-slate-50 border-slate-200"
@@ -485,13 +425,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Start Date</Label>
                       <Input
                         value={formatDate(exp.startDate)}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "experience",
-                            index,
-                            "startDate",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("experience", index, "startDate", e.target.value)
                         }
                         placeholder="Start date"
                         className="bg-slate-50 border-slate-200"
@@ -501,13 +436,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">End Date</Label>
                       <Input
                         value={formatDate(exp.endDate)}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "experience",
-                            index,
-                            "endDate",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("experience", index, "endDate", e.target.value)
                         }
                         placeholder="End date"
                         className="bg-slate-50 border-slate-200"
@@ -518,13 +448,8 @@ const page = ({ params }) => {
                     <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={exp.description}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "experience",
-                          index,
-                          "description",
-                          e.target.value,
-                        )
+                      onChange={e =>
+                        handleArrayItemChange("experience", index, "description", e.target.value)
                       }
                       placeholder="Describe your role and achievements"
                       rows={3}
@@ -571,9 +496,7 @@ const page = ({ params }) => {
                   className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">
-                      Education {index + 1}
-                    </h4>
+                    <h4 className="font-semibold text-slate-700">Education {index + 1}</h4>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -588,13 +511,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Degree</Label>
                       <Input
                         value={edu.degree}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "education",
-                            index,
-                            "degree",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("education", index, "degree", e.target.value)
                         }
                         placeholder="Degree name"
                         className="bg-slate-50 border-slate-200"
@@ -604,13 +522,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Institution</Label>
                       <Input
                         value={edu.institution}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "education",
-                            index,
-                            "institution",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("education", index, "institution", e.target.value)
                         }
                         placeholder="Institution name"
                         className="bg-slate-50 border-slate-200"
@@ -622,13 +535,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Start Year</Label>
                       <Input
                         value={formatDate(edu.startYear)}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "education",
-                            index,
-                            "startYear",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("education", index, "startYear", e.target.value)
                         }
                         placeholder="Start year"
                         className="bg-slate-50 border-slate-200"
@@ -638,13 +546,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">End Year</Label>
                       <Input
                         value={formatDate(edu.endYear)}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "education",
-                            index,
-                            "endYear",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("education", index, "endYear", e.target.value)
                         }
                         placeholder="End year"
                         className="bg-slate-50 border-slate-200"
@@ -655,13 +558,8 @@ const page = ({ params }) => {
                     <Label className="text-slate-600">Grade/Score</Label>
                     <Input
                       value={edu.grade}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "education",
-                          index,
-                          "grade",
-                          e.target.value,
-                        )
+                      onChange={e =>
+                        handleArrayItemChange("education", index, "grade", e.target.value)
                       }
                       placeholder="CGPA/Percentage"
                       className="bg-slate-50 border-slate-200"
@@ -671,13 +569,8 @@ const page = ({ params }) => {
                     <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={edu.description}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "education",
-                          index,
-                          "description",
-                          e.target.value,
-                        )
+                      onChange={e =>
+                        handleArrayItemChange("education", index, "description", e.target.value)
                       }
                       placeholder="Describe your education"
                       rows={2}
@@ -725,9 +618,7 @@ const page = ({ params }) => {
                   className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
                 >
                   <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">
-                      Project {index + 1}
-                    </h4>
+                    <h4 className="font-semibold text-slate-700">Project {index + 1}</h4>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -742,13 +633,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Title</Label>
                       <Input
                         value={project.title}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "projects",
-                            index,
-                            "title",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("projects", index, "title", e.target.value)
                         }
                         placeholder="Project title"
                         className="bg-slate-50 border-slate-200"
@@ -758,13 +644,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Role/Type</Label>
                       <Input
                         value={project.roleOrType}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "projects",
-                            index,
-                            "roleOrType",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("projects", index, "roleOrType", e.target.value)
                         }
                         placeholder="Role or type"
                         className="bg-slate-50 border-slate-200"
@@ -776,13 +657,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Organization</Label>
                       <Input
                         value={project.organization}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "projects",
-                            index,
-                            "organization",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("projects", index, "organization", e.target.value)
                         }
                         placeholder="Organization"
                         className="bg-slate-50 border-slate-200"
@@ -792,13 +668,8 @@ const page = ({ params }) => {
                       <Label className="text-slate-600">Date</Label>
                       <Input
                         value={project.date}
-                        onChange={(e) =>
-                          handleArrayItemChange(
-                            "projects",
-                            index,
-                            "date",
-                            e.target.value,
-                          )
+                        onChange={e =>
+                          handleArrayItemChange("projects", index, "date", e.target.value)
                         }
                         placeholder="Date"
                         className="bg-slate-50 border-slate-200"
@@ -806,17 +677,15 @@ const page = ({ params }) => {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-slate-600">
-                      Technologies/Topics
-                    </Label>
+                    <Label className="text-slate-600">Technologies/Topics</Label>
                     <Input
                       value={project.technologiesOrTopics}
-                      onChange={(e) =>
+                      onChange={e =>
                         handleArrayItemChange(
                           "projects",
                           index,
                           "technologiesOrTopics",
-                          e.target.value,
+                          e.target.value
                         )
                       }
                       placeholder="Technologies or topics"
@@ -827,13 +696,8 @@ const page = ({ params }) => {
                     <Label className="text-slate-600">Description</Label>
                     <Textarea
                       value={project.description}
-                      onChange={(e) =>
-                        handleArrayItemChange(
-                          "projects",
-                          index,
-                          "description",
-                          e.target.value,
-                        )
+                      onChange={e =>
+                        handleArrayItemChange("projects", index, "description", e.target.value)
                       }
                       placeholder="Project description"
                       rows={3}
@@ -917,4 +781,4 @@ const page = ({ params }) => {
   );
 };
 
-export default page;
+export default Page;

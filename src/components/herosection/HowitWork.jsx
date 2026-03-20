@@ -1,10 +1,4 @@
-import {
-  FileText,
-  Settings,
-  CreditCard,
-  Download,
-  ArrowRight,
-} from "lucide-react";
+import { FileText, Settings, CreditCard, Download, ArrowRight } from "lucide-react";
 
 function HowitWork() {
   const steps = [
@@ -12,16 +6,14 @@ function HowitWork() {
       id: "01",
       icon: <FileText className="w-6 h-6 text-indigo-600" />,
       title: "Enter Details",
-      description:
-        "Fill in your experience, education, and skills in our simple form.",
+      description: "Fill in your experience, education, and skills in our simple form.",
       color: "bg-indigo-50 border-indigo-100",
     },
     {
       id: "02",
       icon: <Settings className="w-6 h-6 text-purple-600" />,
       title: "AI Optimization",
-      description:
-        "Our AI instantly formats and optimizes your content for ATS.",
+      description: "Our AI instantly formats and optimizes your content for ATS.",
       color: "bg-purple-50 border-purple-100",
     },
     {
@@ -46,12 +38,10 @@ function HowitWork() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-20">
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Create a Professional Resume in{" "}
-            <span className="text-indigo-600">4 Simple Steps</span>
+            Create a Professional Resume in <span className="text-indigo-600">4 Simple Steps</span>
           </h2>
           <p className="text-lg text-slate-600">
-            No complicated design software. No subscriptions. Just a seamless
-            process.
+            No complicated design software. No subscriptions. Just a seamless process.
           </p>
         </div>
 
@@ -75,9 +65,7 @@ function HowitWork() {
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed text-sm">
-                  {step.description}
-                </p>
+                <p className="text-slate-600 leading-relaxed text-sm">{step.description}</p>
 
                 {/* Arrow for mobile/tablet flow */}
                 {index < 3 && (
@@ -95,8 +83,7 @@ function HowitWork() {
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-white rounded-full shadow-lg shadow-slate-200 border border-slate-100">
             <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-slate-700 font-medium">
-              Average completion time:{" "}
-              <span className="font-bold text-slate-900">~5 minutes</span>
+              Average completion time: <span className="font-bold text-slate-900">~5 minutes</span>
             </span>
           </div>
         </div>

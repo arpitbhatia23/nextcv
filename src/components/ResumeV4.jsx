@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
@@ -10,18 +10,15 @@ import Logo2 from "./Logo2";
 const TemplateSelectorV3 = dynamic(() => import("./TemplateSelectorV3"), {
   ssr: false,
 });
-const Step2_CoreDetails = dynamic(
-  () => import("./resumestepsv4/Step2_CoreDetails"),
-  { ssr: false },
-);
-const Step3_TechProfile = dynamic(
-  () => import("./resumestepsv4/Step3_TechProfile"),
-  { ssr: false },
-);
-const Step4_AdditionalInfo = dynamic(
-  () => import("./resumestepsv4/Step4_AdditionalInfo"),
-  { ssr: false },
-);
+const Step2_CoreDetails = dynamic(() => import("./resumestepsv4/Step2_CoreDetails"), {
+  ssr: false,
+});
+const Step3_TechProfile = dynamic(() => import("./resumestepsv4/Step3_TechProfile"), {
+  ssr: false,
+});
+const Step4_AdditionalInfo = dynamic(() => import("./resumestepsv4/Step4_AdditionalInfo"), {
+  ssr: false,
+});
 const FinalStepV2 = dynamic(() => import("./resumesteps/FinalStep"), {
   ssr: false,
 });
@@ -30,8 +27,8 @@ const ResumeV4 = () => {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for back, 1 for forward
 
-  const formData = useResumeStore((state) => state.formData);
-  const updateForm = useResumeStore((state) => state.updateForm);
+  const formData = useResumeStore(state => state.formData);
+  const updateForm = useResumeStore(state => state.updateForm);
 
   const resumeSteps = [
     { component: TemplateSelectorV3, title: "Design", icon: Paintbrush },
@@ -43,17 +40,17 @@ const ResumeV4 = () => {
 
   const next = () => {
     setDirection(1);
-    setStep((prev) => Math.min(prev + 1, resumeSteps.length - 1));
+    setStep(prev => Math.min(prev + 1, resumeSteps.length - 1));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const previous = () => {
     setDirection(-1);
-    setStep((prev) => Math.max(prev - 1, 0));
+    setStep(prev => Math.max(prev - 1, 0));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const goToStep = (stepIndex) => {
+  const goToStep = stepIndex => {
     setDirection(stepIndex > step ? 1 : -1);
     setStep(stepIndex);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -63,17 +60,15 @@ const ResumeV4 = () => {
   const StepComponents = resumeSteps[step]?.component;
 
   const variants = {
-    enter: (direction) => ({
+    enter: direction => ({
       x: direction > 0 ? 100 : -100,
       opacity: 0,
     }),
     center: {
-      zIndex: 1,
       x: 0,
       opacity: 1,
     },
-    exit: (direction) => ({
-      zIndex: 0,
+    exit: direction => ({
       x: direction < 0 ? 100 : -100,
       opacity: 0,
     }),
@@ -82,7 +77,7 @@ const ResumeV4 = () => {
   return (
     <div className="min-h-screen bg-[#f8fafc] pb-20 selection:bg-indigo-100">
       {/* Dynamic Glass Header */}
-      <header className="sticky top-0 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm ">
+      <header className="sticky z-50 top-0 bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-sm ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="h-20 flex items-center justify-between">
             <div className="flex items-center gap-6">
@@ -129,7 +124,6 @@ const ResumeV4 = () => {
               const Icon = stepInfo.icon;
               const isActive = index === step;
               const isCompleted = index < step;
-              const isAccessible = true; // allow free navigation in V4
 
               return (
                 <button

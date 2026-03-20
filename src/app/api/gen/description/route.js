@@ -16,10 +16,9 @@ export async function handler(req) {
     throw new apiError(500, "something went wrong while gerating bulets");
   }
 
-  return NextResponse.json(
-    new apiResponse(200, "response gen sucessfully ", bullets),
-    { status: 200 },
-  );
+  return NextResponse.json(new apiResponse(200, "response gen sucessfully ", bullets), {
+    status: 200,
+  });
 }
 
 export const POST = asyncHandler(handler);

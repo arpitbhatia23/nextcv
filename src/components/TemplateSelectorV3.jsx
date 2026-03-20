@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { CheckCircle2, LayoutTemplate } from "lucide-react";
 import { templates } from "@/utils/template";
 import useResumeStore from "@/store/useResumeStore";
+import Image from "next/image";
 
 const TemplateSelectorV3 = ({ onSelect }) => {
-  const selectedTemplate = useResumeStore((s) => s.selectedTemplate);
-  const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
+  const selectedTemplate = useResumeStore(s => s.selectedTemplate);
+  const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
 
-  const handleSelect = (key) => {
+  const handleSelect = key => {
     setSelectedTemplate(key);
     if (onSelect) onSelect(key);
   };
@@ -20,13 +21,11 @@ const TemplateSelectorV3 = ({ onSelect }) => {
         <h3 className="text-sm md:text-xl font-semibold md:font-black text-slate-900">
           Choose a Template
         </h3>
-        <p className="text-xs text-slate-500">
-          Pick one to begin — you can change later.
-        </p>
+        <p className="text-xs text-slate-500">Pick one to begin — you can change later.</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
-        {templates.map((template) => {
+        {templates.map(template => {
           const isSelected = selectedTemplate === template.key;
           return (
             <motion.button
@@ -40,9 +39,10 @@ const TemplateSelectorV3 = ({ onSelect }) => {
             >
               <div className="aspect-3/4 rounded-xl bg-slate-100 overflow-hidden relative">
                 {template.image ? (
-                  <img
+                  <Image
                     src={template.image}
                     alt={template.label}
+                    fill
                     className="w-full h-full object-cover transition-transform group-hover:scale-110"
                   />
                 ) : (
@@ -66,9 +66,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                     {template.label}
                   </p>
                   {isSelected && (
-                    <span className="text-xs text-emerald-600 font-bold">
-                      Selected
-                    </span>
+                    <span className="text-xs text-emerald-600 font-bold">Selected</span>
                   )}
                 </div>
               </div>

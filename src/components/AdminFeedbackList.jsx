@@ -40,7 +40,7 @@ const AdminFeedbackList = () => {
           {feedbacks.length === 0 ? (
             <p className="text-gray-500 text-center py-4">No feedback yet.</p>
           ) : (
-            feedbacks.map((item) => (
+            feedbacks.map(item => (
               <div
                 key={item._id}
                 className="flex flex-col sm:flex-row gap-4 p-4 border rounded-lg bg-slate-50/50"
@@ -61,22 +61,18 @@ const AdminFeedbackList = () => {
 
                 <div className="flex-1 space-y-2">
                   <div className="flex gap-1">
-                    {[1, 2, 3, 4, 5].map((star) => (
+                    {[1, 2, 3, 4, 5].map(star => (
                       <Star
                         key={star}
                         className={cn(
                           "w-4 h-4",
-                          item.rating >= star
-                            ? "fill-yellow-400 text-yellow-400"
-                            : "text-gray-200",
+                          item.rating >= star ? "fill-yellow-400 text-yellow-400" : "text-gray-200"
                         )}
                       />
                     ))}
                   </div>
                   {item.comment && (
-                    <p className="text-sm text-slate-700 italic">
-                      "{item.comment}"
-                    </p>
+                    <p className="text-sm text-slate-700 italic">"{item.comment}"</p>
                   )}
                 </div>
               </div>

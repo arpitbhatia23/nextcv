@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -111,13 +103,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -128,7 +120,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -142,9 +134,7 @@ const ExecutiveGray = ({ data }) => (
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.subHeader}>
-          {data.jobRole || "Executive Professional"}
-        </Text>
+        <Text style={styles.subHeader}>{data.jobRole || "Executive Professional"}</Text>
         <View style={styles.contactRow}>
           <Text>{data.email}</Text>
           <Text>•</Text>
@@ -154,19 +144,13 @@ const ExecutiveGray = ({ data }) => (
         </View>
         <View style={styles.contactRow}>
           {data.linkedin && (
-            <Link
-              src={data.linkedin}
-              style={{ color: "#374151", textDecoration: "none" }}
-            >
+            <Link src={data.linkedin} style={{ color: "#374151", textDecoration: "none" }}>
               LinkedIn
             </Link>
           )}
           {data.linkedin && data.portfolio && <Text>•</Text>}
           {data.portfolio && (
-            <Link
-              src={data.portfolio}
-              style={{ color: "#374151", textDecoration: "none" }}
-            >
+            <Link src={data.portfolio} style={{ color: "#374151", textDecoration: "none" }}>
               Portfolio
             </Link>
           )}
@@ -190,8 +174,7 @@ const ExecutiveGray = ({ data }) => (
               <View style={styles.entryTitleRow}>
                 <Text style={styles.entryTitle}>{exp.companyName}</Text>
                 <Text style={styles.entryDate}>
-                  {formatDate(exp.startDate)} -{" "}
-                  {formatDate(exp.endDate) || "Present"}
+                  {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                 </Text>
               </View>
               <Text style={styles.entrySubtitle}>{exp.position}</Text>
@@ -199,9 +182,7 @@ const ExecutiveGray = ({ data }) => (
                 {splitToBullets(exp.description).map((bullet, idx) => (
                   <View key={idx} style={styles.bulletItem}>
                     <Text style={styles.bulletMarker}>•</Text>
-                    <Text style={styles.bulletContent}>
-                      {bullet.replace(/^•\s*/, "")}
-                    </Text>
+                    <Text style={styles.bulletContent}>{bullet.replace(/^•\s*/, "")}</Text>
                   </View>
                 ))}
               </View>
@@ -219,8 +200,7 @@ const ExecutiveGray = ({ data }) => (
               <View style={styles.entryTitleRow}>
                 <Text style={styles.entryTitle}>{edu.institution}</Text>
                 <Text style={styles.entryDate}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
               </View>
               <Text style={styles.entrySubtitle}>
@@ -231,9 +211,7 @@ const ExecutiveGray = ({ data }) => (
                   {splitToBullets(edu.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletItem}>
                       <Text style={styles.bulletMarker}>•</Text>
-                      <Text style={styles.bulletContent}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.bulletContent}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -247,9 +225,7 @@ const ExecutiveGray = ({ data }) => (
       {data.skills?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Core Competencies</Text>
-          <Text style={styles.skillText}>
-            {data.skills.map((s) => s.name || s).join(" • ")}
-          </Text>
+          <Text style={styles.skillText}>{data.skills.map(s => s.name || s).join(" • ")}</Text>
         </View>
       )}
 
@@ -264,9 +240,7 @@ const ExecutiveGray = ({ data }) => (
                 <Text style={styles.entryDate}>{formatDate(proj.date)}</Text>
               </View>
               {proj.technologiesOrTopics && (
-                <Text
-                  style={{ fontSize: 9, fontStyle: "italic", marginBottom: 2 }}
-                >
+                <Text style={{ fontSize: 9, fontStyle: "italic", marginBottom: 2 }}>
                   Tech: {proj.technologiesOrTopics}
                 </Text>
               )}
@@ -274,9 +248,7 @@ const ExecutiveGray = ({ data }) => (
                 {splitToBullets(proj.description).map((bullet, idx) => (
                   <View key={idx} style={styles.bulletItem}>
                     <Text style={styles.bulletMarker}>•</Text>
-                    <Text style={styles.bulletContent}>
-                      {bullet.replace(/^•\s*/, "")}
-                    </Text>
+                    <Text style={styles.bulletContent}>{bullet.replace(/^•\s*/, "")}</Text>
                   </View>
                 ))}
               </View>

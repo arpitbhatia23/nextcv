@@ -4,19 +4,19 @@ import { CheckCircle, AlertTriangle, XCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const ScoreDisplay = ({ score, missingKeywords = [], recommendations = [] }) => {
-  const getScoreColor = (value) => {
+  const getScoreColor = value => {
     if (value >= 80) return "text-green-600";
     if (value >= 60) return "text-yellow-600";
     return "text-red-600";
   };
 
-  const getScoreBg = (value) => {
+  const getScoreBg = value => {
     if (value >= 80) return "bg-green-100";
     if (value >= 60) return "bg-yellow-100";
     return "bg-red-100";
   };
 
-  const getStatus = (value) => {
+  const getStatus = value => {
     if (value >= 80) return "Excellent";
     if (value >= 60) return "Good";
     return "Needs Improvement";
@@ -59,12 +59,8 @@ const ScoreDisplay = ({ score, missingKeywords = [], recommendations = [] }) => 
               />
             </svg>
             <div className="absolute flex flex-col items-center inset-0 justify-center">
-              <span className={`text-5xl font-bold ${getScoreColor(score)}`}>
-                {score}
-              </span>
-              <span className="text-slate-400 text-xs uppercase tracking-wide mt-1">
-                ATS Score
-              </span>
+              <span className={`text-5xl font-bold ${getScoreColor(score)}`}>{score}</span>
+              <span className="text-slate-400 text-xs uppercase tracking-wide mt-1">ATS Score</span>
             </div>
           </div>
           <div
@@ -96,8 +92,8 @@ const ScoreDisplay = ({ score, missingKeywords = [], recommendations = [] }) => 
                       )}
                     </div>
                     <div>
-                        <p className="text-slate-700 font-medium text-sm">{rec.title}</p>
-                        <p className="text-slate-500 text-xs mt-0.5">{rec.message}</p>
+                      <p className="text-slate-700 font-medium text-sm">{rec.title}</p>
+                      <p className="text-slate-500 text-xs mt-0.5">{rec.message}</p>
                     </div>
                   </div>
                 ))
@@ -120,7 +116,7 @@ const ScoreDisplay = ({ score, missingKeywords = [], recommendations = [] }) => 
                     key={index}
                     className="px-2.5 py-1 rounded-md bg-red-50 text-red-700 text-xs font-medium border border-red-100 flex items-center gap-1"
                   >
-                   <XCircle className="w-3 h-3" /> {keyword}
+                    <XCircle className="w-3 h-3" /> {keyword}
                   </span>
                 ))}
                 {missingKeywords.length > 10 && (

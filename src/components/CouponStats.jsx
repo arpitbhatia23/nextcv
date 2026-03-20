@@ -3,15 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tag } from "lucide-react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 const CouponStats = () => {
   const [stats, setStats] = useState([]);
@@ -34,7 +26,6 @@ const CouponStats = () => {
     fetchStats();
   }, []);
 
-  console.log(stats);
   if (loading) {
     return <div className="p-4 text-center">Loading coupon analytics...</div>;
   }
@@ -53,20 +44,12 @@ const CouponStats = () => {
             <BarChart data={stats}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="_id" stroke="#888888" fontSize={12} />
-              <YAxis
-                stroke="#888888"
-                fontSize={12}
-                tickFormatter={(value) => `₹${value}`}
-              />
+              <YAxis stroke="#888888" fontSize={12} tickFormatter={value => `₹${value}`} />
               <Tooltip
-                formatter={(value) => [`₹${value}`, "Revenue"]}
+                formatter={value => [`₹${value}`, "Revenue"]}
                 cursor={{ fill: "transparent" }}
               />
-              <Bar
-                dataKey="totalRevenue"
-                fill="#8884d8"
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="totalRevenue" fill="#8884d8" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -95,14 +78,12 @@ const CouponStats = () => {
             <CardTitle className="text-base">Coupon Usage Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {stats.slice(0, 5).map((stat) => (
+            {stats.slice(0, 5).map(stat => (
               <div key={stat._id} className="flex items-center">
                 <div className="w-full space-y-1">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">{stat._id}</span>
-                    <span className="text-sm text-slate-500">
-                      {stat.usageCount} uses
-                    </span>
+                    <span className="text-sm text-slate-500">{stat.usageCount} uses</span>
                   </div>
                   <div className="flex items-center justify-between text-xs text-slate-400">
                     <span>Revenue: ₹{stat.totalRevenue}</span>

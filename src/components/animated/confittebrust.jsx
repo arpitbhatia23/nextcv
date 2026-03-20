@@ -24,7 +24,10 @@ export default function ConfettiBurst({ origin }) {
   const [confetti, setConfetti] = useState([]);
 
   useEffect(() => {
-    setConfetti(generateConfetti(50));
+    const set = () => {
+      setConfetti(generateConfetti(50));
+    };
+    set();
   }, []);
 
   return (
@@ -44,14 +47,13 @@ export default function ConfettiBurst({ origin }) {
             top: origin?.y ?? "50%",
             left: origin?.x ?? "50%",
             transform: "translate(-50%, -50%)",
-            borderRadius:
-              shape === "circle" ? "9999px" : shape === "square" ? "4px" : "0",
+            borderRadius: shape === "circle" ? "9999px" : shape === "square" ? "4px" : "0",
             clipPath:
               shape === "triangle"
                 ? "polygon(50% 0%, 0% 100%, 100% 100%)"
                 : shape === "star"
-                ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
-                : "none",
+                  ? "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
+                  : "none",
           }}
         />
       ))}

@@ -19,16 +19,13 @@ const handler = async (req, { params }) => {
     { new: true, runValidators: true }
   );
 
-  console.log(updatedResume);
-
   if (!updatedResume) {
     throw new apiError(404, "Resume not found");
   }
 
-  return NextResponse.json(
-    new apiResponse(200, "Resume updated successfully", updatedResume),
-    { status: 200 }
-  );
+  return NextResponse.json(new apiResponse(200, "Resume updated successfully", updatedResume), {
+    status: 200,
+  });
 };
 
 export const PATCH = asyncHandler(handler);

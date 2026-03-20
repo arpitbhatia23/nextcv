@@ -68,12 +68,11 @@ const UserDashboard = () => {
                 Welcome to NextCV
               </Badge>
               <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
-                Professional Resume{" "}
-                <span className="text-indigo-600">Launchpad</span>
+                Professional Resume <span className="text-indigo-600">Launchpad</span>
               </h1>
               <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
-                Empower your career growth with high-impact, HR-approved
-                resumes. Fast, simple, and effective.
+                Empower your career growth with high-impact, HR-approved resumes. Fast, simple, and
+                effective.
               </p>
             </div>
             <div className="flex gap-3">
@@ -101,18 +100,15 @@ const UserDashboard = () => {
                       Create Your Masterpiece
                     </h2>
                     <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-                      Start your journey with our expert-guided form builder. It
-                      takes less than 5 minutes to generate a world-class
-                      resume.
+                      Start your journey with our expert-guided form builder. It takes less than 5
+                      minutes to generate a world-class resume.
                     </p>
                     <div className="flex items-center gap-4">
                       <div className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-indigo-200 flex items-center gap-3 group-hover:bg-indigo-700 transition-colors">
                         Launch Builder
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <span className="text-slate-400 font-medium">
-                        Just ₹100
-                      </span>
+                      <span className="text-slate-400 font-medium">Just ₹100</span>
                     </div>
                   </div>
                   <div className="w-full hidden md:w-[45%] bg-slate-50 relative min-h-75 overflow-hidden md:flex items-center justify-center p-8">
@@ -148,12 +144,8 @@ const UserDashboard = () => {
                     >
                       {step.icon}
                     </div>
-                    <h4 className="font-bold text-slate-900 mb-2">
-                      {step.title}
-                    </h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
+                    <h4 className="font-bold text-slate-900 mb-2">{step.title}</h4>
+                    <p className="text-slate-500 text-sm leading-relaxed">{step.description}</p>
                     <div className="mt-auto pt-4 flex items-center text-xs font-bold text-slate-300 uppercase tracking-tighter">
                       Step 0{idx + 1}
                     </div>
@@ -179,8 +171,8 @@ const UserDashboard = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">AI Chat Resume</h3>
                   <p className="text-purple-100 text-sm mb-6 leading-relaxed">
-                    Short on time? Use our AI assistant to generate a
-                    professional resume in seconds via chat.
+                    Short on time? Use our AI assistant to generate a professional resume in seconds
+                    via chat.
                   </p>
                   <div className="flex items-center text-sm font-bold group-hover:translate-x-2 transition-transform">
                     Try AI Assistant <ArrowRight className="ml-2 w-4 h-4" />
@@ -197,16 +189,11 @@ const UserDashboard = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-3">Simple Pricing</h3>
                 <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-                  No subscriptions or hidden fees. Only pay when you're ready to
-                  download.
+                  No subscriptions or hidden fees. Only pay when you're ready to download.
                 </p>
                 <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-5xl font-extrabold tracking-tighter">
-                    ₹100
-                  </span>
-                  <span className="text-indigo-400 font-semibold font-mono text-xl">
-                    /RESUME
-                  </span>
+                  <span className="text-5xl font-extrabold tracking-tighter">₹100</span>
+                  <span className="text-indigo-400 font-semibold font-mono text-xl">/RESUME</span>
                 </div>
                 <ul className="space-y-4 mb-8">
                   {features.map((feature, i) => (
@@ -214,9 +201,7 @@ const UserDashboard = () => {
                       <div className="shrink-0 mt-1">{feature.icon}</div>
                       <div>
                         <div className="font-bold text-sm">{feature.title}</div>
-                        <div className="text-xs text-slate-400">
-                          {feature.desc}
-                        </div>
+                        <div className="text-xs text-slate-400">{feature.desc}</div>
                       </div>
                     </li>
                   ))}
@@ -235,9 +220,8 @@ const UserDashboard = () => {
                   Pro Tip
                 </h4>
                 <p className="text-sm text-slate-500 leading-relaxed italic">
-                  "Tailoring your resume with keywords from the job description
-                  can increase your chances of landing an interview by up to
-                  60%."
+                  "Tailoring your resume with keywords from the job description can increase your
+                  chances of landing an interview by up to 60%."
                 </p>
               </CardContent>
             </Card>

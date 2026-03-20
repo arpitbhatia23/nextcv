@@ -17,18 +17,15 @@ const timeRangeObject = {
   all: null,
 };
 
-function formatDate(date) {
-  return date.toISOString().split("T")[0];
-}
 // Helper function to get date range based on time filter
 function getDateRange(timeRange) {
   const now = new Date();
-  let startDate = timeRangeObject[timeRange];
+  const startDate = timeRangeObject[timeRange];
 
   return { startDate, endDate: now };
 }
 
-const handler = async (req) => {
+const handler = async req => {
   const { timeRange = "all" } = await req.json();
   try {
     await dbConnect();
@@ -44,7 +41,6 @@ const handler = async (req) => {
       lastActive: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
     };
 
-    console.log(timeQuery);
     // User Analytics
     const [totalUsers, activeUsers, adminCount] = await Promise.all([
       User.countDocuments(timeQuery),
@@ -68,7 +64,7 @@ const handler = async (req) => {
       { $sort: { _id: 1 } },
     ]);
 
-    const userGrowth = userGrowthData.map((item) => ({
+    const userGrowth = userGrowthData.map(item => ({
       date: item._id,
       users: item.users,
     }));
@@ -88,7 +84,7 @@ const handler = async (req) => {
       { $limit: 10 },
     ]);
 
-    const topResumeTypes = topResumeTypesData.map((item) => ({
+    const topResumeTypes = topResumeTypesData.map(item => ({
       type: item._id || "Other",
       count: item.count,
     }));
@@ -102,7 +98,7 @@ const handler = async (req) => {
       { $limit: 15 },
     ]);
 
-    const topSkills = topSkillsData.map((item) => ({
+    const topSkills = topSkillsData.map(item => ({
       skill: item._id,
       count: item.count,
     }));
@@ -115,7 +111,7 @@ const handler = async (req) => {
       { $limit: 10 },
     ]);
 
-    const topJobRoles = topJobRolesData.map((item) => ({
+    const topJobRoles = topJobRolesData.map(item => ({
       role: item._id || "Other",
       count: item.count,
     }));
@@ -130,15 +126,13 @@ const handler = async (req) => {
       { $limit: 15 },
     ]);
 
-    const topTechnologies = topTechnologiesData.map((item) => ({
+    const topTechnologies = topTechnologiesData.map(item => ({
       tech: item._id,
       count: item.count,
     }));
 
     // Payment Analytics
-    const paymentTimeQuery = startDate
-      ? { createdAt: { $gte: startDate } }
-      : {};
+    const paymentTimeQuery = startDate ? { createdAt: { $gte: startDate } } : {};
 
     const [totalRevenueResult, avgTransactionResult] = await Promise.all([
       Payment.aggregate([
@@ -175,7 +169,7 @@ const handler = async (req) => {
       { $sort: { "_id.year": 1, "_id.month": 1 } },
     ]);
 
-    const monthlyRevenue = monthlyRevenueData.map((item) => ({
+    const monthlyRevenue = monthlyRevenueData.map(item => ({
       month: `${item._id.month}/${item._id.year}`,
       revenue: item.revenue,
     }));
@@ -193,7 +187,7 @@ const handler = async (req) => {
       { $sort: { count: -1 } },
     ]);
 
-    const topPaymentModes = topPaymentModesData.map((item) => ({
+    const topPaymentModes = topPaymentModesData.map(item => ({
       mode: item._id || "Other",
       count: item.count,
       revenue: item.revenue,
@@ -216,7 +210,7 @@ const handler = async (req) => {
       },
     ]);
 
-    const couponsByType = couponsByTypeData.map((item) => ({
+    const couponsByType = couponsByTypeData.map(item => ({
       type: item._id,
       count: item.count,
     }));
@@ -308,7 +302,7 @@ const handler = async (req) => {
         //   weeklyTrends,
         // },
       }),
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error("Error fetching analytics data:", error);

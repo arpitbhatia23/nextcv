@@ -12,8 +12,7 @@ const customJestConfig = {
     // Handle CSS imports (without modules)
     "^.+\\.(css|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
     // Handle image imports
-    "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$":
-      "<rootDir>/__mocks__/fileMock.js",
+    "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$": "<rootDir>/__mocks__/fileMock.js",
   },
   testEnvironment: "jsdom",
 };

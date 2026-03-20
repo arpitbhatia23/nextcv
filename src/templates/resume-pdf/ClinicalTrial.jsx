@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -122,20 +114,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -149,20 +141,13 @@ const ClinicalTrial = ({ data }) => {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>
-            {data.jobRole || "Clinical Research Associate"}
-          </Text>
+          <Text style={styles.role}>{data.jobRole || "Clinical Research Associate"}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && (
-              <Text>| {data.phone || data.phone_no}</Text>
-            )}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link
-                src={data.linkedin}
-                style={{ color: "#0284c7", textDecoration: "none" }}
-              >
+              <Link src={data.linkedin} style={{ color: "#0284c7", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
@@ -173,25 +158,20 @@ const ClinicalTrial = ({ data }) => {
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Professional Profile</Text>
-            <Text style={{ fontSize: 10, color: "#334155" }}>
-              {data.summary}
-            </Text>
+            <Text style={{ fontSize: 10, color: "#334155" }}>{data.summary}</Text>
           </View>
         )}
 
         {/* Experience */}
         {data.experience?.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>
-              Clinical Research Experience
-            </Text>
+            <Text style={styles.sectionTitle}>Clinical Research Experience</Text>
             {data.experience.map((exp, i) => (
               <View key={i} style={styles.jobBlock}>
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
                 <Text style={styles.jobCompany}>{exp.companyName}</Text>
@@ -229,9 +209,7 @@ const ClinicalTrial = ({ data }) => {
             <Text style={styles.sectionTitle}>Certifications & Training</Text>
             {data.certificates.map((cert, i) => (
               <View key={i} style={{ flexDirection: "row", marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold", width: 150 }}>
-                  {cert.title}
-                </Text>
+                <Text style={{ fontSize: 10, fontWeight: "bold", width: 150 }}>{cert.title}</Text>
                 <Text style={{ fontSize: 10, color: "#475569" }}>
                   {" "}
                   - {cert.organization} ({formatDate(cert.year)})
@@ -247,9 +225,7 @@ const ClinicalTrial = ({ data }) => {
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>
-                  {edu.degree}
-                </Text>
+                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
                 <Text style={{ fontSize: 10 }}>
                   {edu.institution}, {formatDate(edu.endYear)}
                 </Text>

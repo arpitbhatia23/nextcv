@@ -10,7 +10,7 @@ export default async function VisitorStatsCounter() {
   await dbConnect();
   const today = getStartOfDay();
   // Increment today's count
-  const todayStats = await VisitorStats.findOneAndUpdate(
+  await VisitorStats.findOneAndUpdate(
     { date: today },
     { $inc: { count: 1 } },
     { upsert: true, new: true }

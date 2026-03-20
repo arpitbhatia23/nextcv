@@ -7,7 +7,7 @@ import { apiResponse } from "@/utils/apiResponse";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
 
-const handler = async (req) => {
+const handler = async () => {
   await dbConnect();
 
   const session = await getServerSession(authOptions);
@@ -37,11 +37,7 @@ const handler = async (req) => {
   ]);
 
   return NextResponse.json(
-    new apiResponse(
-      200,
-      "Coupon analytics retrieved successfully",
-      couponStats,
-    ),
+    new apiResponse(200, "Coupon analytics retrieved successfully", couponStats)
   );
 };
 

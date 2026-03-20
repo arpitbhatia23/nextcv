@@ -29,13 +29,10 @@ const SkillStep = dynamic(() => import("./resumestepsv2/SkillStepV2"), {
   ssr: false,
   loading: () => <Loading />,
 });
-const ExpricenceStep = dynamic(
-  () => import("./resumestepsv2/ExpricenceStepV2"),
-  {
-    ssr: false,
-    loading: () => <Loading />,
-  },
-);
+const ExpricenceStep = dynamic(() => import("./resumestepsv2/ExpricenceStepV2"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
 const FinalStep = dynamic(() => import("./resumestepsv2/FinalStepV2"), {
   ssr: false,
   loading: () => <Loading />,
@@ -59,8 +56,8 @@ const ResumeV3 = () => {
   // start on the final template selection step so users see template 3 (final) first
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for back, 1 for forward
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const resumeSteps = [
     {
@@ -80,13 +77,13 @@ const ResumeV3 = () => {
 
   const next = () => {
     setDirection(1);
-    setStep((prev) => Math.min(prev + 1, resumeSteps.length - 1));
+    setStep(prev => Math.min(prev + 1, resumeSteps.length - 1));
   };
   const previous = () => {
     setDirection(-1);
-    setStep((prev) => Math.max(prev - 1, 0));
+    setStep(prev => Math.max(prev - 1, 0));
   };
-  const goToStep = (stepIndex) => {
+  const goToStep = stepIndex => {
     setDirection(stepIndex > step ? 1 : -1);
     setStep(stepIndex);
   };
@@ -151,7 +148,7 @@ const ResumeV3 = () => {
   const StepComponents = resumeSteps[step]?.component;
 
   const variants = {
-    enter: (direction) => ({
+    enter: direction => ({
       x: direction > 0 ? 100 : -100,
       opacity: 0,
     }),
@@ -160,7 +157,7 @@ const ResumeV3 = () => {
       x: 0,
       opacity: 1,
     },
-    exit: (direction) => ({
+    exit: direction => ({
       zIndex: 0,
       x: direction < 0 ? 100 : -100,
       opacity: 0,
@@ -178,8 +175,7 @@ const ResumeV3 = () => {
               </div>
               <div className="hidden md:block">
                 <h1 className="text-lg font-bold bg-clip-text text-transparent bg-linear-to-r from-slate-900 via-indigo-900 to-indigo-600">
-                  NextCV{" "}
-                  <span className="text-indigo-600 font-medium">Form 3</span>
+                  NextCV <span className="text-indigo-600 font-medium">Form 3</span>
                 </h1>
                 <p className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
                   Version 3 — Template-first workflow
@@ -187,10 +183,7 @@ const ResumeV3 = () => {
               </div>
             </div>
 
-            <div
-              className="flex items-center gap-6"
-              id="tour-resume-progress-v3"
-            >
+            <div className="flex items-center gap-6" id="tour-resume-progress-v3">
               <div className="text-right hidden sm:block">
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">
                   Overall Completion

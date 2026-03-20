@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -32,8 +32,6 @@ import { useRouter } from "next/navigation";
 import { Input } from "./ui/input";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { toast } from "sonner";
-import dynamic from "next/dynamic";
-// const Tour = dynamic(() => import("./Tour"), { ssr: false });
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -51,24 +49,21 @@ const MyResume = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
 
   const route = useRouter();
-  const buttonRef = useRef();
-
-  const fetchResume = async () => {
-    setLoading(true);
-    const res = await axios.get("/api/resume/getAllResume");
-    setResumes(res.data.data);
-    setLoading(false);
-    console.log(res.data);
-  };
 
   useEffect(() => {
+    const fetchResume = async () => {
+      setLoading(true);
+      const res = await axios.get("/api/resume/getAllResume");
+      setResumes(res.data.data);
+      setLoading(false);
+    };
     fetchResume();
   }, []);
 
   const paidResumes = resumes.paid;
   const draftResumes = resumes.draft;
 
-  const getTemplateDisplayName = (templateKey) => {
+  const getTemplateDisplayName = templateKey => {
     const templateNames = {
       modernTemplate: "Modern",
       classicTemplate: "Classic",
@@ -91,9 +86,7 @@ const MyResume = () => {
   //   return `Edited ${Math.ceil(diffDays / 365)} years ago`;
   // };
 
-  const handleDownload = async (resume) => {
-    console.log("Download resume:", resume);
-
+  const handleDownload = async resume => {
     if (resume.status === "paid") {
       const pdfGen = new pdfGenerator(resume);
       await pdfGen.downloadPdf();
@@ -109,7 +102,7 @@ const MyResume = () => {
     }
   };
 
-  const handleCoupon = async (coupon) => {
+  const handleCoupon = async coupon => {
     // Prevent applying the same coupon multiple times
     if (appliedCoupon === coupon) {
       toast.info("This coupon is already applied");
@@ -148,9 +141,7 @@ const MyResume = () => {
       toast.success("Coupon applied successfully");
     } catch (error) {
       console.error("Coupon apply error:", error);
-      toast.error(
-        error?.response?.data || "Something went wrong while applying coupon",
-      );
+      toast.error(error?.response?.data || "Something went wrong while applying coupon");
     }
   };
 
@@ -163,41 +154,33 @@ const MyResume = () => {
     toast.info("Coupon removed");
   };
 
-  const handleDelete = async (resumeId) => {
+  const handleDelete = async resumeId => {
     try {
       const res = await axios.delete(`/api/resume/deleteById?id=${resumeId}`);
       if (res.data.success) {
-        setResumes((prev) => ({
+        setResumes(prev => ({
           ...prev,
-          paid: prev.paid?.filter(
-            (resume) => resume.resumedata._id !== resumeId,
-          ),
-          draft: prev.draft?.filter(
-            (resume) => resume.resumedata._id !== resumeId,
-          ),
+          paid: prev.paid?.filter(resume => resume.resumedata._id !== resumeId),
+          draft: prev.draft?.filter(resume => resume.resumedata._id !== resumeId),
         }));
       }
     } catch (error) {
-      toast.error(
-        error.message || "something went wrong while deleting resume",
-      );
+      toast.error(error.message || "something went wrong while deleting resume");
     }
   };
 
-  const handleEdit = (resumeId) => {
-    console.log(resumeId);
+  const handleEdit = resumeId => {
     route.push(`/dashboard/resume/${resumeId}`);
   };
 
-  const handleViewResume = async (resumeData) => {
-    console.log(resumeData);
+  const handleViewResume = async resumeData => {
     const pdfGen = new pdfGenerator(resumeData);
     const url = await pdfGen.createPdf();
     setPdfUrl(url);
     setIsModelOpen(true);
   };
 
-  const handelPayment = async (draftId) => {
+  const handelPayment = async draftId => {
     const res = await axios.post("/api/payment/order", {
       amount: Math.floor(amount * 100), // Convert ₹ to paise
       couponCode: applied ? appliedCoupon : "",
@@ -231,10 +214,7 @@ const MyResume = () => {
         <div className="p-5">
           <div className="flex items-start justify-between mb-2">
             <div className="flex-1 min-w-0 pr-3">
-              <h2
-                className="font-bold text-lg text-slate-900 truncate"
-                title={resume.name}
-              >
+              <h2 className="font-bold text-lg text-slate-900 truncate" title={resume.name}>
                 {resume.name || "Untitled Resume"}
               </h2>
               <p className="text-xs text-slate-500 truncate">
@@ -275,9 +255,10 @@ const MyResume = () => {
           <div className="flex items-center justify-between mt-4">
             <div className="flex items-center text-xs text-slate-400">
               <Calendar className="h-3 w-3 mr-1.5" />
-              {new Date(
-                resume.updatedAt || resume.createdAt,
-              ).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+              {new Date(resume.updatedAt || resume.createdAt).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })}
             </div>
 
             <Badge
@@ -301,10 +282,7 @@ const MyResume = () => {
       <div className="container mx-auto p-6 md:p-10 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {[...Array(8)].map((_, i) => (
-            <Card
-              key={i}
-              className="animate-pulse border-slate-100 shadow-none"
-            >
+            <Card key={i} className="animate-pulse border-slate-100 shadow-none">
               <div className="aspect-4/3 bg-slate-100 rounded-t-xl"></div>
               <CardContent className="p-5">
                 <div className="h-5 bg-slate-100 rounded w-3/4 mb-3"></div>
@@ -328,12 +306,8 @@ const MyResume = () => {
         id="tour-my-resumes-header"
       >
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
-            My Resumes
-          </h1>
-          <p className="text-slate-500">
-            Manage your resume collection. View, edit, or download.
-          </p>
+          <h1 className="text-3xl font-extrabold text-slate-900 mb-2">My Resumes</h1>
+          <p className="text-slate-500">Manage your resume collection. View, edit, or download.</p>
         </div>
         <Button
           onClick={() => route.push("/dashboard/resumeform")}
@@ -402,8 +376,7 @@ const MyResume = () => {
           <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-slate-100 flex justify-between items-center">
               <h3 className="font-bold text-lg text-slate-900 flex items-center gap-2">
-                <BadgePercent className="text-indigo-600 w-5 h-5" /> Unlock
-                Download
+                <BadgePercent className="text-indigo-600 w-5 h-5" /> Unlock Download
               </h3>
               <Button
                 variant="ghost"
@@ -420,16 +393,10 @@ const MyResume = () => {
 
             <div className="p-6 space-y-6">
               <div className="bg-indigo-50 rounded-xl p-4 text-center">
-                <div className="text-sm text-indigo-600 font-medium mb-1">
-                  Total Amount
-                </div>
-                <div className="text-3xl font-bold text-indigo-700">
-                  ₹{amount}
-                </div>
+                <div className="text-sm text-indigo-600 font-medium mb-1">Total Amount</div>
+                <div className="text-3xl font-bold text-indigo-700">₹{amount}</div>
                 {discount && (
-                  <div className="text-xs text-indigo-400 line-through mt-1">
-                    ₹{originalAmount}
-                  </div>
+                  <div className="text-xs text-indigo-400 line-through mt-1">₹{originalAmount}</div>
                 )}
               </div>
 
@@ -440,7 +407,7 @@ const MyResume = () => {
                 <div className="flex gap-2">
                   <Input
                     value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
+                    onChange={e => setCouponCode(e.target.value)}
                     placeholder="ENTER COUPON CODE"
                     className="font-mono uppercase placeholder:normal-case"
                     disabled={applied}
@@ -514,12 +481,10 @@ const MyResume = () => {
               <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
                 <FileText className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                No unlocked resumes
-              </h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">No unlocked resumes</h3>
               <p className="text-slate-500 max-w-sm mx-auto mb-6">
-                Once you complete a payment for a resume draft, it will appear
-                here for unlimited downloads.
+                Once you complete a payment for a resume draft, it will appear here for unlimited
+                downloads.
               </p>
               {/* <Button
                 onClick={() =>
@@ -535,11 +500,8 @@ const MyResume = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
               id="tour-resume-list"
             >
-              {paidResumes.map((resume) => (
-                <ResumeCard
-                  key={resume?.resumedata._id}
-                  resume={resume?.resumedata}
-                />
+              {paidResumes.map(resume => (
+                <ResumeCard key={resume?.resumedata._id} resume={resume?.resumedata} />
               ))}
             </div>
           )}
@@ -551,24 +513,16 @@ const MyResume = () => {
               <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
                 <Edit className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Start your first resume
-              </h3>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">Start your first resume</h3>
               <p className="text-slate-500 max-w-sm mx-auto mb-6">
-                Create a new resume to get started. It will be saved here
-                automatically.
+                Create a new resume to get started. It will be saved here automatically.
               </p>
-              <Button onClick={() => route.push("/dashboard/resumeform")}>
-                Create New Resume
-              </Button>
+              <Button onClick={() => route.push("/dashboard/resumeform")}>Create New Resume</Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {draftResumes.map((resume) => (
-                <ResumeCard
-                  key={resume?.resumedata._id}
-                  resume={resume?.resumedata}
-                />
+              {draftResumes.map(resume => (
+                <ResumeCard key={resume?.resumedata._id} resume={resume?.resumedata} />
               ))}
             </div>
           )}

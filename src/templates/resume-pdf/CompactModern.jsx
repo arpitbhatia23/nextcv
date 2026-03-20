@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -91,13 +84,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -108,7 +101,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -156,9 +149,7 @@ const CompactModern = ({ data }) => (
       {data.skills?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionHeader}>Skills</Text>
-          <Text style={styles.skillText}>
-            {data.skills.map((s) => s.name || s).join("  |  ")}
-          </Text>
+          <Text style={styles.skillText}>{data.skills.map(s => s.name || s).join("  |  ")}</Text>
         </View>
       )}
 
@@ -171,8 +162,7 @@ const CompactModern = ({ data }) => (
               <View style={styles.compactRow}>
                 <Text style={styles.title}>{exp.position}</Text>
                 <Text style={styles.date}>
-                  {formatDate(exp.startDate)} -{" "}
-                  {formatDate(exp.endDate) || "Present"}
+                  {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                 </Text>
               </View>
               <Text
@@ -232,14 +222,9 @@ const CompactModern = ({ data }) => (
                 <Text style={styles.projectTitle}>{cert.title}</Text>
                 <Text style={styles.date}>{formatDate(cert.year)}</Text>
               </View>
-              <Text style={{ fontSize: 8.5, color: "#444" }}>
-                {cert.organization}
-              </Text>
+              <Text style={{ fontSize: 8.5, color: "#444" }}>{cert.organization}</Text>
               {cert.credentialUrl && (
-                <Link
-                  src={cert.credentialUrl}
-                  style={{ fontSize: 8, color: "#555", marginTop: 1 }}
-                >
+                <Link src={cert.credentialUrl} style={{ fontSize: 8, color: "#555", marginTop: 1 }}>
                   View Credential
                 </Link>
               )}
@@ -260,8 +245,7 @@ const CompactModern = ({ data }) => (
                   <Text style={{ fontSize: 9 }}>{edu.degree}</Text>
                 </View>
                 <Text style={styles.date}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
               </View>
               {edu.description && (

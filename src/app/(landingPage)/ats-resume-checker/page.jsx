@@ -3,8 +3,7 @@ import ATSChecker from "@/components/ats-checker/ATSChecker";
 import { CheckCircle2, Search, Briefcase } from "lucide-react";
 
 export const metadata = {
-  title:
-    "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
+  title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
   description:
     "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
   keywords: [
@@ -61,10 +60,9 @@ const ATSCheckerPage = () => {
             </span>
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
-            Ever wondered{" "}
-            <strong>why ATS rejects resumes in India and how to fix it</strong>?
-            Upload your resume and get an instant ATS score analysis tailored
-            for Indian recruitment standards in 2026.
+            Ever wondered <strong>why ATS rejects resumes in India and how to fix it</strong>?
+            Upload your resume and get an instant ATS score analysis tailored for Indian recruitment
+            standards in 2026.
           </p>
 
           <ATSChecker />
@@ -80,32 +78,25 @@ const ATSCheckerPage = () => {
               <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
                 <Briefcase className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800">
-                Crack the Code for MNCs
-              </h2>
+              <h2 className="text-2xl font-bold text-slate-800">Crack the Code for MNCs</h2>
             </div>
             <p className="text-slate-600 mb-4">
-              Top Indian companies have specific criteria for screening resumes.
-              Our tool checks against common patterns used by:
+              Top Indian companies have specific criteria for screening resumes. Our tool checks
+              against common patterns used by:
             </p>
             <ul className="grid grid-cols-2 gap-3 text-slate-700 font-medium">
-              {[
-                "TCS",
-                "Infosys",
-                "Wipro",
-                "HCL Technologies",
-                "Accenture",
-                "Tech Mahindra",
-              ].map((company, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                  {company}
-                </li>
-              ))}
+              {["TCS", "Infosys", "Wipro", "HCL Technologies", "Accenture", "Tech Mahindra"].map(
+                (company, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    {company}
+                  </li>
+                )
+              )}
             </ul>
             <p className="text-sm text-slate-500 mt-6 italic">
-              * Note: We are not affiliated with these companies. Scoring is
-              based on general industry standards.
+              * Note: We are not affiliated with these companies. Scoring is based on general
+              industry standards.
             </p>
           </div>
 
@@ -115,34 +106,30 @@ const ATSCheckerPage = () => {
               <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
                 <Search className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800">
-                Why Scores Matter for Freshers?
-              </h2>
+              <h2 className="text-2xl font-bold text-slate-800">Why Scores Matter for Freshers?</h2>
             </div>
             <p className="text-slate-600 mb-4">
-              For campus placements and off-campus drives, ATS scores are
-              critical because of the volume of applicants.
+              For campus placements and off-campus drives, ATS scores are critical because of the
+              volume of applicants.
             </p>
             <ul className="space-y-3">
               <li className="flex gap-3">
                 <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                 <span className="text-slate-700">
-                  <strong>B.Tech/CSE:</strong> Highlights project keywords and
-                  technical stacks.
+                  <strong>B.Tech/CSE:</strong> Highlights project keywords and technical stacks.
                 </span>
               </li>
               <li className="flex gap-3">
                 <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                 <span className="text-slate-700">
-                  <strong>MBA Freshers:</strong> Focuses on leadership and soft
-                  skill terminology.
+                  <strong>MBA Freshers:</strong> Focuses on leadership and soft skill terminology.
                 </span>
               </li>
               <li className="flex gap-3">
                 <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                 <span className="text-slate-700">
-                  <strong>Mechanical/Civil:</strong> Ensures core engineering
-                  competencies are visible.
+                  <strong>Mechanical/Civil:</strong> Ensures core engineering competencies are
+                  visible.
                 </span>
               </li>
             </ul>
@@ -177,9 +164,7 @@ const ATSCheckerPage = () => {
                 key={i}
                 className="bg-white p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {faq.q}
-                </h3>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
                 <p className="text-slate-600">{faq.a}</p>
               </div>
             ))}

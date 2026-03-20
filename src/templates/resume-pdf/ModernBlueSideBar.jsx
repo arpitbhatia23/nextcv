@@ -1,15 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Svg,
-  Path,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 // Blue color theme
@@ -284,13 +275,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -301,7 +292,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -313,10 +304,7 @@ function renderLangBar(level, max = 5) {
   return (
     <View style={styles.langBar}>
       {[...Array(max)].map((_, i) => (
-        <View
-          key={i}
-          style={[styles.langDot, i < level ? styles.langDotActive : undefined]}
-        />
+        <View key={i} style={[styles.langDot, i < level ? styles.langDotActive : undefined]} />
       ))}
     </View>
   );
@@ -374,8 +362,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                   <Text style={styles.eduSchool}>{edu.institution}</Text>
                   <View style={styles.eduMeta}>
                     <Text>
-                      {formatDate(edu.startYear)} -{" "}
-                      {formatDate(edu.endYear) || "Present"}
+                      {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                     </Text>
                     {edu.location && (
                       <>
@@ -480,8 +467,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                   <Text style={styles.expOrg}>{exp.companyName}</Text>
                   <View style={styles.expPeriodLoc}>
                     <Text>
-                      {formatDate(exp.startDate)} -{" "}
-                      {formatDate(exp.endDate) || "Present"}
+                      {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                     </Text>
                     {exp.location && (
                       <>
@@ -490,9 +476,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                       </>
                     )}
                   </View>
-                  {exp.description && (
-                    <Text style={styles.summary}>{exp.description}</Text>
-                  )}
+                  {exp.description && <Text style={styles.summary}>{exp.description}</Text>}
                   {exp.bullets?.length > 0 && (
                     <View style={styles.expBullets}>
                       {exp.bullets.map((b, j) =>
@@ -500,7 +484,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                           <Text key={j} style={styles.expBullet}>
                             • {b}
                           </Text>
-                        ) : null,
+                        ) : null
                       )}
                     </View>
                   )}
@@ -521,9 +505,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                     {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
                   </Text>
                   {proj.technologiesOrTopics && (
-                    <Text style={styles.projTech}>
-                      Tech: {proj.technologiesOrTopics}
-                    </Text>
+                    <Text style={styles.projTech}>Tech: {proj.technologiesOrTopics}</Text>
                   )}
                   {proj.description && (
                     <View style={styles.bulletList}>

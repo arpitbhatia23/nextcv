@@ -26,10 +26,7 @@ const authOptions = {
         if (!user) {
           throw new Error("user not found");
         }
-        const ispaswordVaild = await bcrypt.compare(
-          credentials.password,
-          user.password,
-        );
+        const ispaswordVaild = await bcrypt.compare(credentials.password, user.password);
         if (!ispaswordVaild) {
           throw new Error("inavaild password");
         }
@@ -69,7 +66,7 @@ const authOptions = {
       return true;
     },
 
-    async jwt({ token, user, trigger }) {
+    async jwt({ token, user }) {
       await dbConnect();
       const finduser = await User.findOne({ email: user?.email });
       if (finduser) {

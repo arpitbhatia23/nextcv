@@ -57,12 +57,11 @@ export default function PricingPage() {
               Pricing
             </h2>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-              Pay Once, Use Forever. <br className="hidden sm:block" /> No
-              Hidden Subscriptions.
+              Pay Once, Use Forever. <br className="hidden sm:block" /> No Hidden Subscriptions.
             </h1>
             <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
-              We believe in honest pricing. You shouldn't have to subscribe to a
-              monthly plan just to update your resume once.
+              We believe in honest pricing. You shouldn't have to subscribe to a monthly plan just
+              to update your resume once.
             </p>
           </div>
         </section>
@@ -78,25 +77,19 @@ export default function PricingPage() {
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Professional Resume
-                  </h3>
-                  <p className="text-slate-500 mt-2">
-                    Everything you need to land your dream job.
-                  </p>
+                  <h3 className="text-xl font-bold text-slate-900">Professional Resume</h3>
+                  <p className="text-slate-500 mt-2">Everything you need to land your dream job.</p>
                 </div>
 
                 <div className="flex items-baseline mb-8">
                   <span className="text-5xl font-extrabold tracking-tight text-slate-900">
                     ₹100
                   </span>
-                  <span className="text-xl font-semibold text-slate-500 ml-2">
-                    / resume
-                  </span>
+                  <span className="text-xl font-semibold text-slate-500 ml-2">/ resume</span>
                 </div>
 
                 <ul className="space-y-4 mb-8 flex-1">
-                  {features.map((feature) => (
+                  {features.map(feature => (
                     <li key={feature} className="flex items-start">
                       <div className="shrink-0 w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
                         <Check className="h-4 w-4 text-green-600" />
@@ -133,8 +126,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">No Recurring Billing</h3>
                 <p className="text-slate-500 text-sm">
-                  Most resume builders charge ₹500 - ₹1500 per month
-                  automatically. We charge a one-time fee of ₹100.
+                  Most resume builders charge ₹500 - ₹1500 per month automatically. We charge a
+                  one-time fee of ₹100.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
@@ -143,8 +136,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Instant Download</h3>
                 <p className="text-slate-500 text-sm">
-                  Once purchased, your high-quality PDF is yours forever. No
-                  locked files or low-res previews.
+                  Once purchased, your high-quality PDF is yours forever. No locked files or low-res
+                  previews.
                 </p>
               </div>
               <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 text-center">
@@ -153,8 +146,8 @@ export default function PricingPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Powered by AI</h3>
                 <p className="text-slate-500 text-sm">
-                  Get access to professional content suggestions powered by
-                  Google Gemini AI included in the price.
+                  Get access to professional content suggestions powered by Google Gemini AI
+                  included in the price.
                 </p>
               </div>
             </div>
@@ -165,30 +158,27 @@ export default function PricingPage() {
         <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate">
           <h2>Transparent Pricing for High-Quality Resumes in India</h2>
           <p>
-            Finding a <strong>trustworthy and affordable resume builder</strong>{" "}
-            can be frustrating. Many international tools lure users in with
-            "Free" trials that require credit card details, only to charge hefty
-            monthly subscription fees that are hard to cancel. At NextCV, we are
-            changing that model for Indian job seekers.
+            Finding a <strong>trustworthy and affordable resume builder</strong> can be frustrating.
+            Many international tools lure users in with "Free" trials that require credit card
+            details, only to charge hefty monthly subscription fees that are hard to cancel. At
+            NextCV, we are changing that model for Indian job seekers.
           </p>
 
           <h3>The Problem with Subscription Models</h3>
           <p>
-            Most job searches last a few weeks to a few months. Once you have
-            your resume ready, you don't need to pay for a tool every month.
-            Yet, competitors often charge $10-$20 (approx ₹800 - ₹1600) per
-            month.
+            Most job searches last a few weeks to a few months. Once you have your resume ready, you
+            don't need to pay for a tool every month. Yet, competitors often charge $10-$20 (approx
+            ₹800 - ₹1600) per month.
           </p>
           <p>
-            <strong>NextCV offers a simple, one-time payment of ₹100.</strong>{" "}
-            This micro-payment model ensures that:
+            <strong>NextCV offers a simple, one-time payment of ₹100.</strong> This micro-payment
+            model ensures that:
           </p>
           <ul>
             <li>You only pay for what you use.</li>
             <li>There are no surprise charges on your card statement.</li>
             <li>
-              Student-friendly pricing makes professional career tools
-              accessible to everyone.
+              Student-friendly pricing makes professional career tools accessible to everyone.
             </li>
           </ul>
 
@@ -196,26 +186,25 @@ export default function PricingPage() {
           <p>For the price of a coffee, you get access to:</p>
           <ul>
             <li>
-              <strong>Premium Design:</strong> Templates that would cost
-              thousands to hire a designer for.
+              <strong>Premium Design:</strong> Templates that would cost thousands to hire a
+              designer for.
             </li>
             <li>
-              <strong>ATS Optimization:</strong> Automated formatting that
-              ensures your resume passes Applicant Tracking Systems.
+              <strong>ATS Optimization:</strong> Automated formatting that ensures your resume
+              passes Applicant Tracking Systems.
             </li>
             <li>
-              <strong>AI Writing Assistance:</strong> Struggling to describe
-              your last role? Our AI suggests professional bullet points
-              instantly.
+              <strong>AI Writing Assistance:</strong> Struggling to describe your last role? Our AI
+              suggests professional bullet points instantly.
             </li>
           </ul>
 
           <h3>Is it really just ₹100?</h3>
           <p>
-            Yes. We are a student-built project aimed at solving a real problem
-            for our peers in India. Our goal is sustainability and helpfulness,
-            not corporate greed. By keeping our costs low, we help millions of
-            Indians upgrade their career prospects without breaking the bank.
+            Yes. We are a student-built project aimed at solving a real problem for our peers in
+            India. Our goal is sustainability and helpfulness, not corporate greed. By keeping our
+            costs low, we help millions of Indians upgrade their career prospects without breaking
+            the bank.
           </p>
         </section>
       </main>

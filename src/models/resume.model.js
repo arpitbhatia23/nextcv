@@ -131,10 +131,9 @@ const resumeSchema = new Schema(
       type: String,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-const Resume =
-  mongoose.models.resumes || mongoose.model("resumes", resumeSchema);
+const Resume = mongoose.models.resumes || mongoose.model("resumes", resumeSchema);
 
 export default Resume;

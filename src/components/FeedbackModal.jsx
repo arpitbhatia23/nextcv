@@ -15,13 +15,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const options = [
-    "Easy to use",
-    "Good templates",
-    "AI helped me",
-    "Saved time",
-    "Clean design",
-  ];
+  const options = ["Easy to use", "Good templates", "AI helped me", "Saved time", "Clean design"];
 
   const resetForm = () => {
     setRating(0);
@@ -59,7 +53,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
   return (
     <DialogPrimitive.Root
       open={isOpen}
-      onOpenChange={(open) => {
+      onOpenChange={open => {
         if (!open) {
           resetForm();
           onClose();
@@ -83,7 +77,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
 
           {/* Stars */}
           <div className="flex justify-center py-4 gap-2">
-            {[1, 2, 3, 4, 5].map((star) => (
+            {[1, 2, 3, 4, 5].map(star => (
               <button
                 key={star}
                 type="button"
@@ -97,7 +91,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
                     "w-8 h-8 transition-colors",
                     (hoverRating || rating) >= star
                       ? "fill-yellow-400 text-yellow-400"
-                      : "text-gray-300",
+                      : "text-gray-300"
                   )}
                 />
               </button>
@@ -107,7 +101,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
           {/* Quick options (only for good ratings) */}
           {rating >= 4 && (
             <div className="flex flex-wrap gap-2 justify-center mb-3">
-              {options.map((opt) => (
+              {options.map(opt => (
                 <button
                   key={opt}
                   onClick={() => setComment(opt)}
@@ -128,7 +122,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
                   : "What went wrong? Help us improve"
               }
               value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              onChange={e => setComment(e.target.value)}
               className="min-h-20"
             />
           )}
@@ -151,10 +145,7 @@ const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
               Skip
             </Button>
 
-            <Button
-              onClick={handleSubmit}
-              disabled={isSubmitting || rating === 0}
-            >
+            <Button onClick={handleSubmit} disabled={isSubmitting || rating === 0}>
               {isSubmitting ? "Submitting..." : "Submit (10 sec)"}
             </Button>
           </div>

@@ -1,15 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Svg,
-  Path,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 // Color palette
@@ -366,9 +357,7 @@ const ModernFullStackPDFResume = ({ data }) => (
           )}
           {data.skills?.devOps?.length > 0 && (
             <>
-              <Text style={styles.skillsListLabel}>
-                Development & Operations
-              </Text>
+              <Text style={styles.skillsListLabel}>Development & Operations</Text>
               <View style={styles.skillsWrap}>
                 {data.skills.devOps.map((skill, i) => (
                   <Text key={i} style={styles.skillBadge}>
@@ -408,8 +397,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                 <Text style={styles.expOrg}>{exp.companyName}</Text>
                 <View style={styles.expPeriodLoc}>
                   <Text>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                   {exp.location && (
                     <>
@@ -418,9 +406,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                     </>
                   )}
                 </View>
-                {exp.description && (
-                  <Text style={styles.summary}>{exp.description}</Text>
-                )}
+                {exp.description && <Text style={styles.summary}>{exp.description}</Text>}
                 {/* {exp.bullets?.length > 0 && (
                   <View style={styles.expBullets}>
                     {exp.bullets.map((b, j) =>
@@ -446,8 +432,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                 <Text style={styles.eduSchool}>{edu.institution}</Text>
                 <View style={styles.eduMeta}>
                   <Text>
-                    {formatDate(edu.startYear)} -{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
                   {edu.location && (
                     <>
@@ -508,7 +493,7 @@ const ModernFullStackPDFResume = ({ data }) => (
                         <Text key={j} style={styles.expBullet}>
                           • {b}
                         </Text>
-                      ) : null,
+                      ) : null
                     )}
                   </View>
                 )}

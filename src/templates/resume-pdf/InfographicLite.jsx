@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -175,20 +168,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const getInitials = (name) => {
+const getInitials = name => {
   if (!name) return "ME";
   const parts = name.split(" ");
   if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
   return name.slice(0, 2).toUpperCase();
 };
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -197,7 +190,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed];
@@ -219,25 +212,17 @@ const InfographicLite = ({ data }) => (
           <Text style={styles.role}>{data?.jobRole || "Professional"}</Text>
 
           <View style={styles.contactRow}>
-            {data?.email && (
-              <Text style={styles.contactItem}>{data.email}</Text>
-            )}
+            {data?.email && <Text style={styles.contactItem}>{data.email}</Text>}
 
             {(data?.phone || data?.phone_no) && (
-              <Text style={styles.contactItem}>
-                {data.phone || data.phone_no}
-              </Text>
+              <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
             )}
 
-            {data?.address && (
-              <Text style={styles.contactItem}>{data.address}</Text>
-            )}
+            {data?.address && <Text style={styles.contactItem}>{data.address}</Text>}
 
             {data?.linkedin && (
               <Link src={data.linkedin}>
-                <Text style={{ ...styles.contactItem, color: "#2563eb" }}>
-                  LinkedIn
-                </Text>
+                <Text style={{ ...styles.contactItem, color: "#2563eb" }}>LinkedIn</Text>
               </Link>
             )}
           </View>
@@ -251,9 +236,7 @@ const InfographicLite = ({ data }) => (
             <Text style={styles.sectionTitle}>About Me</Text>
           </View>
 
-          <Text style={{ fontSize: 10, lineHeight: 1.6, paddingLeft: 5 }}>
-            {data.summary}
-          </Text>
+          <Text style={{ fontSize: 10, lineHeight: 1.6, paddingLeft: 5 }}>{data.summary}</Text>
         </View>
       )}
 
@@ -291,8 +274,7 @@ const InfographicLite = ({ data }) => (
                     <Text style={styles.itemTitle}>{exp.position}</Text>
                     <Text style={styles.itemSubtitle}>{exp.companyName}</Text>
                     <Text style={styles.itemDate}>
-                      {formatDate(exp.startDate)} -{" "}
-                      {formatDate(exp.endDate) || "Present"}
+                      {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                     </Text>
                   </View>
 
@@ -403,8 +385,7 @@ const InfographicLite = ({ data }) => (
                   </Text>
 
                   <Text style={styles.itemDate}>
-                    {formatDate(edu.startYear)} -{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
 
                   {edu.description &&

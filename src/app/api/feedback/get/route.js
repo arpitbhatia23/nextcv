@@ -7,13 +7,13 @@ import { apiResponse } from "@/utils/apiResponse";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
 
-const handler = async (req) => {
+const handler = async () => {
   await dbConnect();
-  
+
   const session = await getServerSession(authOptions);
-  
+
   if (!session || session.user.role !== "admin") {
-     throw new apiError(403, "Unauthorized access");
+    throw new apiError(403, "Unauthorized access");
   }
 
   const feedback = await Feedback.find({})
@@ -21,9 +21,7 @@ const handler = async (req) => {
     .sort({ createdAt: -1 })
     .limit(50);
 
-  return NextResponse.json(
-    new apiResponse(200, "Feedback retrieved successfully", feedback)
-  );
+  return NextResponse.json(new apiResponse(200, "Feedback retrieved successfully", feedback));
 };
 
 export const POST = asyncHandler(handler);

@@ -1,7 +1,6 @@
 "use server";
 import { VisitorStats } from "@/models/VisitorStats.model";
 import dbConnect from "@/utils/dbConnect";
-import React from "react";
 
 const ChartServer = async (timePeriod = "90d") => {
   await dbConnect();
@@ -34,7 +33,7 @@ const ChartServer = async (timePeriod = "90d") => {
     },
   ]);
 
-  const formatted = visitorStats.map((entry) => ({
+  const formatted = visitorStats.map(entry => ({
     date: entry._id,
     totalvisitor: entry.count,
   }));

@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -128,13 +121,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -145,7 +138,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -159,9 +152,7 @@ const CreativeTeal = ({ data }) => (
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.role}>
-          {data.jobRole || "Creative Professional"}
-        </Text>
+        <Text style={styles.role}>{data.jobRole || "Creative Professional"}</Text>
         <View style={styles.contact}>
           <Text>{data.email}</Text>
           <Text>|</Text>
@@ -192,9 +183,7 @@ const CreativeTeal = ({ data }) => (
       {data.summary && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>About Me</Text>
-          <Text style={{ fontSize: 9.5, lineHeight: 1.6, color: "#333" }}>
-            {data.summary}
-          </Text>
+          <Text style={{ fontSize: 9.5, lineHeight: 1.6, color: "#333" }}>{data.summary}</Text>
         </View>
       )}
 
@@ -207,8 +196,7 @@ const CreativeTeal = ({ data }) => (
               <View style={styles.jobHeader}>
                 <Text style={styles.jobTitle}>{exp.position}</Text>
                 <Text style={styles.date}>
-                  {formatDate(exp.startDate)} -{" "}
-                  {formatDate(exp.endDate) || "Present"}
+                  {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                 </Text>
               </View>
               <Text style={styles.jobCompany}>{exp.companyName}</Text>
@@ -216,9 +204,7 @@ const CreativeTeal = ({ data }) => (
                 {splitToBullets(exp.description).map((bullet, idx) => (
                   <View key={idx} style={styles.bulletItem}>
                     <Text style={styles.bullet}>•</Text>
-                    <Text style={styles.bulletText}>
-                      {bullet.replace(/^•\s*/, "")}
-                    </Text>
+                    <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                   </View>
                 ))}
               </View>
@@ -248,12 +234,9 @@ const CreativeTeal = ({ data }) => (
           {data.education.map((edu, i) => (
             <View key={i} style={{ marginBottom: 6 }}>
               <View style={styles.jobHeader}>
-                <Text style={{ fontWeight: "bold", fontSize: 10 }}>
-                  {edu.institution}
-                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 10 }}>{edu.institution}</Text>
                 <Text style={styles.date}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
               </View>
               <Text style={{ fontSize: 9, color: "#555" }}>
@@ -264,9 +247,7 @@ const CreativeTeal = ({ data }) => (
                   {splitToBullets(edu.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletItem}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.bulletText}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -283,15 +264,11 @@ const CreativeTeal = ({ data }) => (
           {data.projects.map((proj, i) => (
             <View key={i} style={{ marginBottom: 8, paddingLeft: 8 }}>
               <View style={styles.jobHeader}>
-                <Text style={{ fontWeight: "bold", fontSize: 10 }}>
-                  {proj.title}
-                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 10 }}>{proj.title}</Text>
                 <Text style={styles.date}>{formatDate(proj.date)}</Text>
               </View>
               {proj.technologiesOrTopics && (
-                <Text
-                  style={{ fontSize: 9, color: "#0d9488", marginBottom: 2 }}
-                >
+                <Text style={{ fontSize: 9, color: "#0d9488", marginBottom: 2 }}>
                   {proj.technologiesOrTopics}
                 </Text>
               )}
@@ -300,9 +277,7 @@ const CreativeTeal = ({ data }) => (
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletItem}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.bulletText}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -319,9 +294,7 @@ const CreativeTeal = ({ data }) => (
           {data.certificates.map((cert, i) => (
             <View key={i} style={{ marginBottom: 8, paddingLeft: 8 }}>
               <View style={styles.jobHeader}>
-                <Text style={{ fontWeight: "bold", fontSize: 10 }}>
-                  {cert.title}
-                </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 10 }}>{cert.title}</Text>
                 <Text style={styles.date}>{formatDate(cert.year)}</Text>
               </View>
               <Text style={styles.jobCompany}>{cert.organization}</Text>

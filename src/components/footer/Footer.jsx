@@ -77,16 +77,12 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand Column (Span 4) */}
           <div className="lg:col-span-4 space-y-6">
-            <Link
-              href="/"
-              className="inline-block relative z-10"
-              aria-label="NextCV Home"
-            >
+            <Link href="/" className="inline-block relative z-10" aria-label="NextCV Home">
               <Logo2 size={60} color="white" ClassName="text-white" />
             </Link>
             <p className="text-white leading-relaxed max-w-sm text-sm">
-              NextCV is the advanced AI-powered resume builder designed to help
-              students and professionals create ATS-friendly resumes in minutes.
+              NextCV is the advanced AI-powered resume builder designed to help students and
+              professionals create ATS-friendly resumes in minutes.
             </p>
             <div className="flex gap-4 pt-2">
               {socialLinks.map((social, idx) => (
@@ -106,9 +102,7 @@ export const Footer = () => {
           <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
             {footerLinks.map((column, idx) => (
               <div key={idx} className="flex flex-col">
-                <h3 className="text-white font-semibold mb-6">
-                  {column.title}
-                </h3>
+                <h3 className="text-white font-semibold mb-6">{column.title}</h3>
                 <ul className="space-y-4">
                   {column.links.map((link, linkIdx) => (
                     <li key={linkIdx}>
@@ -129,9 +123,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
-            <span>
-              &copy; {new Date().getFullYear()} NextCV. All rights reserved.
-            </span>
+            <span>&copy; {new Date().getFullYear()} NextCV. All rights reserved.</span>
           </div>
 
           <div className="order-1 md:order-2 grayscale hover:grayscale-0 transition-all duration-300">
@@ -140,8 +132,7 @@ export const Footer = () => {
 
           <div className="flex items-center gap-2 text-sm text-slate-100 order-3 md:order-3">
             <span>
-              Made with <span className="text-red-500 animate-pulse">❤️</span>{" "}
-              by Aurpit & Tamanna
+              Made with <span className="text-red-500 animate-pulse">❤️</span> by Aurpit & Tamanna
             </span>
           </div>
         </div>

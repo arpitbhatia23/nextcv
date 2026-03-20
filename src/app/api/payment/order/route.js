@@ -1,9 +1,5 @@
 import { asyncHandler } from "@/utils/asyncHandler";
-import {
-  Env,
-  StandardCheckoutClient,
-  StandardCheckoutPayRequest,
-} from "pg-sdk-node";
+import { Env, StandardCheckoutClient, StandardCheckoutPayRequest } from "pg-sdk-node";
 import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
 import authOptions from "../../auth/options";
@@ -17,17 +13,11 @@ const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
 
-const env =
-  process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
+const env = process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
 
-const client = StandardCheckoutClient.getInstance(
-  clientId,
-  clinetSecret,
-  clientVersion,
-  env,
-);
+const client = StandardCheckoutClient.getInstance(clientId, clinetSecret, clientVersion, env);
 
-const handler = async (req) => {
+const handler = async req => {
   await dbConnect();
   const reqData = await req.json();
 
@@ -100,13 +90,10 @@ const handler = async (req) => {
           resume: resume._id,
         },
       },
-      { new: true },
+      { new: true }
     );
     if (!addResumeIdToUserModel) {
-      throw new apiError(
-        500,
-        "something went wrong while add resuem id to user model",
-      );
+      throw new apiError(500, "something went wrong while add resuem id to user model");
     }
   }
 

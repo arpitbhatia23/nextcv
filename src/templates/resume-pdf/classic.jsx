@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -85,13 +78,13 @@ const styles = StyleSheet.create({
 });
 
 // Improved splitToBullets function
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -102,7 +95,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -169,8 +162,7 @@ const ClassicTemplate = ({ data }) => (
             <View key={i} style={styles.eduBlock}>
               <Text style={styles.eduTitle}>{edu.institution}</Text>
               <Text style={styles.eduSubtitle}>
-                {edu.degree} | {formatDate(edu.startYear)} -{" "}
-                {formatDate(edu.endYear) || "Present"}
+                {edu.degree} | {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
@@ -198,8 +190,7 @@ const ClassicTemplate = ({ data }) => (
                 {exp.position} @ {exp.companyName}
               </Text>
               <Text style={styles.expMeta}>
-                {formatDate(exp.startDate)} -{" "}
-                {formatDate(exp.endDate) || "Present"}
+                {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
               </Text>
               {exp.description && (
                 <View style={styles.bulletList}>
@@ -229,9 +220,7 @@ const ClassicTemplate = ({ data }) => (
                 {proj.date && ` | ${formatDate(proj.date)}`}
               </Text>
               {proj.technologiesOrTopics && (
-                <Text style={styles.projTech}>
-                  Tech: {proj.technologiesOrTopics}
-                </Text>
+                <Text style={styles.projTech}>Tech: {proj.technologiesOrTopics}</Text>
               )}
               {proj.description && (
                 <View style={styles.bulletList}>

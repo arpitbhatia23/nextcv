@@ -69,8 +69,8 @@ const PageContent = () => {
             <span className="text-indigo-400">best resume maker for freshers in India 2026</span>
           </h2>
           <p className="text-lg text-slate-400 leading-relaxed">
-            Experience our ATS-friendly templates and professional resume
-            building platform designed for modern job seekers.
+            Experience our ATS-friendly templates and professional resume building platform designed
+            for modern job seekers.
           </p>
         </div>
 
@@ -84,12 +84,9 @@ const PageContent = () => {
                   <CheckCircle2 className="w-4 h-4" />
                   Proven Results
                 </div>
-                <h3 className="text-3xl font-bold text-white">
-                  Boost Your Interview Chances
-                </h3>
+                <h3 className="text-3xl font-bold text-white">Boost Your Interview Chances</h3>
                 <p className="text-slate-400 text-lg">
-                  Users who got interviews within 30 days thanks to our
-                  ATS-friendly resume designs.
+                  Users who got interviews within 30 days thanks to our ATS-friendly resume designs.
                 </p>
               </div>
               <div className="shrink-0 text-center">
@@ -114,12 +111,8 @@ const PageContent = () => {
               <div className="mb-6 p-3 bg-white/5 w-fit rounded-xl group-hover:bg-white/10 transition-colors">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
-                {item.title}
-              </h3>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                {item.description}
-              </p>
+              <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+              <p className="text-slate-400 leading-relaxed text-sm">{item.description}</p>
             </div>
           ))}
         </div>
@@ -134,13 +127,9 @@ const PageContent = () => {
             <div className="space-y-6">
               {cardSecond.map((item, index) => (
                 <div key={index} className="flex gap-4">
-                  <div className="mt-1 bg-indigo-500/10 p-2 rounded-lg h-fit">
-                    {item.icon}
-                  </div>
+                  <div className="mt-1 bg-indigo-500/10 p-2 rounded-lg h-fit">{item.icon}</div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">
-                      {item.title}
-                    </h3>
+                    <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
                     <p className="text-slate-400 text-sm">{item.description}</p>
                   </div>
                 </div>
@@ -151,12 +140,9 @@ const PageContent = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-linear-to-br from-indigo-500 to-purple-600 rounded-3xl blur-2xl opacity-20"></div>
             <div className="relative bg-slate-900 border border-white/10 rounded-3xl p-8 sm:p-12 text-center space-y-6">
-              <h3 className="text-2xl font-bold text-white">
-                Ready to get hired?
-              </h3>
+              <h3 className="text-2xl font-bold text-white">Ready to get hired?</h3>
               <p className="text-slate-400">
-                Join thousands of professionals who have accelerated their
-                careers with NextCV.
+                Join thousands of professionals who have accelerated their careers with NextCV.
               </p>
               {/* <button className="w-full py-4 bg-white text-slate-950 font-bold rounded-xl text-lg hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 group">
                 Start Building Now

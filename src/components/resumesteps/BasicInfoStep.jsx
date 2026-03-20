@@ -9,16 +9,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  Phone,
-  Mail,
-  Linkedin,
-  Github,
-  Globe,
-  MapPin,
-  ArrowRight,
-} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Linkedin, Github, Globe, ArrowRight } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
@@ -74,29 +66,20 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
         {/* Form Section */}
         <div className="space-y-6" id="tour-resume-form">
           <div className="mb-2">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-              Basic Details
-            </h2>
-            <p className=" text-sm md: text-slate-500">
-              Start with your contact information
-            </p>
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900">Basic Details</h2>
+            <p className=" text-sm md: text-slate-500">Start with your contact information</p>
           </div>
           <Card className="border border-slate-200 shadow-sm bg-white rounded-lg md:rounded-xl overflow-hidden">
             <CardContent className="p-2 md:p-6">
               <Form {...form}>
-                <form
-                  className="space-y-5"
-                  onSubmit={form.handleSubmit(handlesave)}
-                >
+                <form className="space-y-5" onSubmit={form.handleSubmit(handlesave)}>
                   <div className="grid md:grid-cols-2 gap-5">
                     <FormField
                       name="name"
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">
-                            Full Name
-                          </FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold">Full Name</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="e.g. John Doe"
@@ -114,9 +97,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">
-                            Job Title
-                          </FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold">Job Title</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="e.g. Software Engineer"
@@ -136,9 +117,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">
-                            Email
-                          </FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold">Email</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="john@example.com"
@@ -157,9 +136,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">
-                            Phone
-                          </FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold">Phone</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="+91 98765 43210"
@@ -178,9 +155,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          Address
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">Address</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="City, Country"
@@ -195,8 +170,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
 
                   <div className="pt-4 border-t border-slate-100">
                     <h3 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-indigo-500" /> Social Links
-                      (Optional)
+                      <Globe className="w-4 h-4 text-indigo-500" /> Social Links (Optional)
                     </h3>
                     <div className="space-y-4" id="tour-social-links">
                       <FormField

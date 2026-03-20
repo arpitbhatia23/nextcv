@@ -1,4 +1,4 @@
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const paymentSchema = new Schema(
   {
@@ -35,9 +35,8 @@ const paymentSchema = new Schema(
       default: "complete",
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 paymentSchema.index({ couponCode: 1, userId: 1 });
-const Payment =
-  mongoose.models.payments || mongoose.model("payments", paymentSchema);
+const Payment = mongoose.models.payments || mongoose.model("payments", paymentSchema);
 export default Payment;

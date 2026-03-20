@@ -44,29 +44,27 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
     updateForm({ certificates: certList });
   }, [certList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setCertList((prev) =>
-        prev.map((cert) =>
-          cert.id === editingId ? { ...values, id: editingId } : cert,
-        ),
+      setCertList(prev =>
+        prev.map(cert => (cert.id === editingId ? { ...values, id: editingId } : cert))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setCertList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setCertList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (cert) => {
+  const handleEdit = cert => {
     form.reset(cert);
     setIsEditing(true);
     setEditingId(cert.id);
   };
 
-  const handleDelete = (id) => {
-    setCertList((prev) => prev.filter((cert) => cert.id !== id));
+  const handleDelete = id => {
+    setCertList(prev => prev.filter(cert => cert.id !== id));
   };
 
   return (
@@ -108,10 +106,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
             </div>
             <CardContent className="p-2 md:p-8">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="title"
@@ -138,8 +133,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Building className="w-4 h-4 text-indigo-500" />{" "}
-                          Issuing Organization
+                          <Building className="w-4 h-4 text-indigo-500" /> Issuing Organization
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -160,8 +154,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-indigo-500" />{" "}
-                            Issue Date
+                            <Calendar className="w-4 h-4 text-indigo-500" /> Issue Date
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -181,8 +174,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <ExternalLink className="w-4 h-4 text-indigo-500" />{" "}
-                            Verification URL
+                            <ExternalLink className="w-4 h-4 text-indigo-500" /> Verification URL
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -221,10 +213,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
             </span>
           </div>
 
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            id="tour-certificates-list-v2"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4" id="tour-certificates-list-v2">
             <AnimatePresence initial={false}>
               {certList.length === 0 ? (
                 <motion.div
@@ -235,15 +224,13 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                   <div className="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <Award className="w-10 h-10 text-slate-200" />
                   </div>
-                  <p className="text-slate-400 font-black text-xl">
-                    No certificates listed.
-                  </p>
+                  <p className="text-slate-400 font-black text-xl">No certificates listed.</p>
                   <p className="text-slate-300 font-medium text-sm mt-1">
                     Stand out by listing your professional accolades.
                   </p>
                 </motion.div>
               ) : (
-                certList.map((cert) => (
+                certList.map(cert => (
                   <motion.div
                     key={cert.id}
                     layout
@@ -258,9 +245,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
                             <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
                               <Award className="w-5 h-5 text-indigo-600" />
                             </div>
-                            <h4 className="font-black text-slate-900 leading-snug">
-                              {cert.title}
-                            </h4>
+                            <h4 className="font-black text-slate-900 leading-snug">{cert.title}</h4>
                             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
                               {cert.organization}
                             </p>

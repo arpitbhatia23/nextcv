@@ -10,7 +10,7 @@ export default function ContactForm() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!name || !email || !message) {
       setStatus({ type: "error", text: "Please fill in all fields." });
@@ -22,9 +22,8 @@ export default function ContactForm() {
     // Simulate network request — replace with real API in production
     const form = { name: name, email: email, message: message };
     try {
-      const res = await axios.post("/api/contact", form);
+      await axios.post("/api/contact", form);
 
-      console.log(res);
       setLoading(false);
       setName("");
       setEmail("");
@@ -34,7 +33,6 @@ export default function ContactForm() {
         text: "Thanks — we will get back to you soon.",
       });
     } catch (err) {
-      console.log(err);
       setLoading(false);
 
       setStatus({
@@ -52,7 +50,7 @@ export default function ContactForm() {
           className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium"
           placeholder="Your name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
           aria-label="Full name"
         />
       </div>
@@ -63,7 +61,7 @@ export default function ContactForm() {
           className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium"
           placeholder="you@company.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           aria-label="Email"
         />
       </div>
@@ -75,7 +73,7 @@ export default function ContactForm() {
           className="w-full mt-1 rounded-lg bg-slate-50 border border-slate-200 p-3 text-slate-900 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all font-medium resize-none"
           placeholder="Tell us about your use-case or question"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={e => setMessage(e.target.value)}
           aria-label="Message"
         />
       </div>

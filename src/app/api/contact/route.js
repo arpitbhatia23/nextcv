@@ -6,10 +6,7 @@ export async function POST(request) {
     const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // Create transport
@@ -39,13 +36,10 @@ export async function POST(request) {
 
     return NextResponse.json(
       { success: true, message: "Email sent successfully!" },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error("Email Submission Error:", error);
-    return NextResponse.json(
-      { error: error?.message || "something went wrong" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: error?.message || "something went wrong" }, { status: 500 });
   }
 }

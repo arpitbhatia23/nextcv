@@ -5,17 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { client, urlFor } from "../sanity";
 import Loading from "@/app/loading";
-import {
-  Search,
-  ChevronDown,
-  Calendar,
-  Clock,
-  ArrowRight,
-  User,
-} from "lucide-react";
+import { Search, ChevronDown, Calendar, ArrowRight, User } from "lucide-react";
 
 // --- Helper Functions ---
-const formatDate = (dateString) => {
+const formatDate = dateString => {
   const options = {
     year: "numeric",
     month: "long",
@@ -36,53 +29,54 @@ const Blog = () => {
 
   // 1. Initial Data Fetch
   useEffect(() => {
-    const query = `*[_type == "post"] | order(publishedAt desc){
+    const fetchData = async () => {
+      const query = `*[_type == "post"] | order(publishedAt desc){
         _id, title, slug, excerpt, body, _createdAt, categories[]->{title}, author->{name, image}, mainImage
     }`;
 
-    setIsLoading(true);
+      setIsLoading(true);
 
-    client
-      .fetch(query)
-      .then((data) => {
-        const processedData = data.map((post) => {
-          let finalExcerpt = post.excerpt;
-          if (!finalExcerpt && post.body) {
-            const firstBlock = Array.isArray(post.body)
-              ? post.body.find((block) => block._type === "block")
-              : null;
-            if (firstBlock && firstBlock.children) {
-              finalExcerpt =
-                firstBlock.children
-                  .map((child) => child.text)
-                  .join(" ")
-                  .substring(0, 150) + "...";
-            } else {
-              finalExcerpt =
-                "Read this article to learn more about our career insights.";
+      client
+        .fetch(query)
+        .then(data => {
+          const processedData = data.map(post => {
+            let finalExcerpt = post.excerpt;
+            if (!finalExcerpt && post.body) {
+              const firstBlock = Array.isArray(post.body)
+                ? post.body.find(block => block._type === "block")
+                : null;
+              if (firstBlock && firstBlock.children) {
+                finalExcerpt =
+                  firstBlock.children
+                    .map(child => child.text)
+                    .join(" ")
+                    .substring(0, 150) + "...";
+              } else {
+                finalExcerpt = "Read this article to learn more about our career insights.";
+              }
+            } else if (!finalExcerpt) {
+              finalExcerpt = "Read this article to learn more about our career insights.";
             }
-          } else if (!finalExcerpt) {
-            finalExcerpt =
-              "Read this article to learn more about our career insights.";
-          }
-          return { ...post, excerpt: finalExcerpt };
+            return { ...post, excerpt: finalExcerpt };
+          });
+
+          setBlogs(processedData);
+          setFilteredBlogs(processedData);
+
+          const allCats = new Set();
+          processedData.forEach(post => {
+            post.categories?.forEach(cat => allCats.add(cat.title));
+          });
+          setCategories(["All", ...Array.from(allCats)]);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error("Failed to fetch Sanity posts:", error);
+          setIsLoading(false);
         });
+    };
 
-        setBlogs(processedData);
-        setFilteredBlogs(processedData);
-
-        const allCats = new Set();
-        processedData.forEach((post) => {
-          post.categories?.forEach((cat) => allCats.add(cat.title));
-        });
-        setCategories(["All", ...Array.from(allCats)]);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to fetch Sanity posts:", error);
-        setIsLoading(false);
-      });
-
+    fetchData();
     const updateVisibleCount = () => {
       if (window.innerWidth < 768) setVisibleCount(2);
       else if (window.innerWidth < 1024) setVisibleCount(3);
@@ -96,18 +90,22 @@ const Blog = () => {
 
   // 2. Filtering Logic
   useEffect(() => {
-    let updated = [...blogs];
-    if (category !== "All") {
-      updated = updated.filter((post) =>
-        post.categories?.some((catObj) => catObj.title === category),
-      );
-    }
-    if (searchTerm.trim()) {
-      updated = updated.filter((post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
-    setFilteredBlogs(updated);
+    const fetchdata = async () => {
+      let updated = [...blogs];
+      if (category !== "All") {
+        updated = updated.filter(post =>
+          post.categories?.some(catObj => catObj.title === category)
+        );
+      }
+      if (searchTerm.trim()) {
+        updated = updated.filter(post =>
+          post.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+      setFilteredBlogs(updated);
+    };
+
+    fetchdata();
   }, [category, searchTerm, blogs]);
 
   const visibleCategories = categories.slice(0, visibleCount);
@@ -116,7 +114,7 @@ const Blog = () => {
   const featuredPost = filteredBlogs.length > 0 ? filteredBlogs[0] : null;
   const remainingPosts = filteredBlogs.length > 0 ? filteredBlogs.slice(1) : [];
 
-  const handleCategoryClick = (cat) => setCategory(cat);
+  const handleCategoryClick = cat => setCategory(cat);
 
   if (isLoading) return <Loading />;
 
@@ -129,8 +127,8 @@ const Blog = () => {
             Latest Insights & News
           </h1>
           <h2 className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Expert tips on resume writing, career development, and job market
-            trends to help you land your dream job.
+            Expert tips on resume writing, career development, and job market trends to help you
+            land your dream job.
           </h2>
         </div>
 
@@ -145,7 +143,7 @@ const Blog = () => {
               type="text"
               placeholder="Search articles..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={e => setSearchTerm(e.target.value)}
               className="block w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all shadow-sm"
             />
           </div>
@@ -169,7 +167,7 @@ const Blog = () => {
             {extraCategories.length > 0 && (
               <div className="relative">
                 <select
-                  onChange={(e) => handleCategoryClick(e.target.value)}
+                  onChange={e => handleCategoryClick(e.target.value)}
                   value={extraCategories.includes(category) ? category : ""}
                   className={`appearance-none pl-4 pr-10 py-2 rounded-full text-sm font-medium border transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                     extraCategories.includes(category)
@@ -194,19 +192,13 @@ const Blog = () => {
 
         {/* Featured Post */}
         {featuredPost && (
-          <Link
-            href={`/blogs/${featuredPost.slug.current}`}
-            className="group block mb-16"
-          >
+          <Link href={`/blogs/${featuredPost.slug.current}`} className="group block mb-16">
             <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 transition-all duration-300 hover:shadow-xl hover:translate-y-1">
               <div className="grid lg:grid-cols-2 gap-0">
                 <div className="relative h-64 lg:h-auto overflow-hidden">
                   {featuredPost.mainImage ? (
                     <Image
-                      src={urlFor(featuredPost.mainImage)
-                        .width(1200)
-                        .height(800)
-                        .url()}
+                      src={urlFor(featuredPost.mainImage).width(1200).height(800).url()}
                       alt={featuredPost.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -225,8 +217,7 @@ const Blog = () => {
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
                   <div className="flex items-center gap-3 text-sm text-slate-500 mb-4">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />{" "}
-                      {formatDate(featuredPost._createdAt)}
+                      <Calendar className="w-4 h-4" /> {formatDate(featuredPost._createdAt)}
                     </span>
                     <span className="w-1 h-1 bg-slate-300 rounded-full" />
                     <span className="text-indigo-600 font-medium">
@@ -247,9 +238,7 @@ const Blog = () => {
                       <div className="relative w-10 h-10 rounded-full overflow-hidden bg-slate-200">
                         {featuredPost.author?.image ? (
                           <Image
-                            src={urlFor(featuredPost.author.image)
-                              .width(100)
-                              .url()}
+                            src={urlFor(featuredPost.author.image).width(100).url()}
                             alt={featuredPost.author.name}
                             fill
                             className="object-cover"
@@ -263,10 +252,7 @@ const Blog = () => {
                           {featuredPost.author?.name || "NextCV Team"}
                         </p>
                         <p className="text-xs text-slate-500">
-                          {Math.ceil(
-                            featuredPost.excerpt.split(" ").length / 200,
-                          )}{" "}
-                          min read
+                          {Math.ceil(featuredPost.excerpt.split(" ").length / 200)} min read
                         </p>
                       </div>
                     </div>
@@ -282,12 +268,8 @@ const Blog = () => {
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {remainingPosts.map((post) => (
-            <Link
-              key={post._id}
-              href={`/blogs/${post.slug.current}`}
-              className="group h-full"
-            >
+          {remainingPosts.map(post => (
+            <Link key={post._id} href={`/blogs/${post.slug.current}`} className="group h-full">
               <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
                 <div className="relative aspect-video overflow-hidden bg-slate-100">
                   {post.mainImage ? (
@@ -319,9 +301,7 @@ const Blog = () => {
                     {post.title}
                   </h3>
 
-                  <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">
-                    {post.excerpt}
-                  </p>
+                  <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">{post.excerpt}</p>
 
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
                     <div className="flex items-center gap-2">
@@ -357,12 +337,10 @@ const Blog = () => {
             <div className="mx-auto w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4">
               <Search className="w-8 h-8 text-slate-400" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">
-              No articles found
-            </h3>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">No articles found</h3>
             <p className="text-slate-500 max-w-sm mx-auto">
-              We couldn't find any articles matching your search. Try different
-              keywords or categories.
+              We couldn't find any articles matching your search. Try different keywords or
+              categories.
             </p>
             <button
               onClick={() => {

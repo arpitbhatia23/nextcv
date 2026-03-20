@@ -1,5 +1,3 @@
-import { date } from "zod";
-
 const PromptStrategies = {
   education: ({
     degree = "",
@@ -101,13 +99,7 @@ Example format:
 • Improved ...
 `,
 
-  summary: ({
-    role = "",
-    education = "",
-    experience = "",
-    project = "",
-    summary,
-  }) => `
+  summary: ({ role = "", education = "", experience = "", project = "", summary }) => `
 Generate a highly personalized and professionally written resume summary in PLAIN TEXT.
 
 STRICT OUTPUT RULES:

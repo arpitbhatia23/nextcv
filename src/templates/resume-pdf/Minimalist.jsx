@@ -1,16 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Link,
-  Svg,
-  Path,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 // Icon SVGs
@@ -270,13 +260,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -287,7 +277,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -295,19 +285,13 @@ const splitToBullets = (desc) => {
     .filter(Boolean);
 };
 
-const ClassicMinimalistPDFResume = ({
-  data,
-  imageUrl, // Provide the image URL here (optional)
-}) => (
+const ClassicMinimalistPDFResume = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Top: Photo, Name, Headline, Contacts */}
       <View style={styles.topSection}>
-        {imageUrl && <Image src={imageUrl} style={styles.profileImage} />}
         <Text style={styles.name}>{data.name || "YOUR NAME"}</Text>
-        <Text style={styles.subline}>
-          {data.jobRole && data.jobRole.toUpperCase()}
-        </Text>
+        <Text style={styles.subline}>{data.jobRole && data.jobRole.toUpperCase()}</Text>
         <View style={styles.infoRow}>
           {data.address && (
             <View style={styles.infoItem}>
@@ -405,8 +389,7 @@ const ClassicMinimalistPDFResume = ({
                     {exp.position} {exp.companyName && `at ${exp.companyName}`}
                   </Text>
                   <Text style={styles.historyDate}>
-                    {formatDate(exp.startDate)} —{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} — {formatDate(exp.endDate) || "Present"}
                   </Text>
                   {exp.bullets?.length > 0 && (
                     <View style={styles.bulletList}>
@@ -415,7 +398,7 @@ const ClassicMinimalistPDFResume = ({
                           <Text key={j} style={styles.bullet}>
                             • {bullet}
                           </Text>
-                        ) : null,
+                        ) : null
                       )}
                     </View>
                   )}
@@ -436,17 +419,14 @@ const ClassicMinimalistPDFResume = ({
                   <Text style={styles.eduDegree}>{edu.degree}</Text>
                   <Text style={styles.eduSchool}>{edu.institution}</Text>
                   <Text style={styles.eduDate}>
-                    {formatDate(edu.startYear)} —{" "}
-                    {formatDate(edu.endYear) || "Presnet"}
+                    {formatDate(edu.startYear)} — {formatDate(edu.endYear) || "Presnet"}
                   </Text>
                   {edu.description && (
                     <View style={styles.bulletList}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletItem}>
                           <Text style={styles.bulletSymbol}>•</Text>
-                          <Text style={{ fontSize: 9, color: "#666" }}>
-                            {bullet}
-                          </Text>
+                          <Text style={{ fontSize: 9, color: "#666" }}>{bullet}</Text>
                         </View>
                       ))}
                     </View>
@@ -468,9 +448,7 @@ const ClassicMinimalistPDFResume = ({
                     {formatDate(proj.date) && ` | ${formatDate(proj.date)}`}
                   </Text>
                   {proj.technologiesOrTopics && (
-                    <Text style={styles.projTech}>
-                      Tech: {proj.technologiesOrTopics}
-                    </Text>
+                    <Text style={styles.projTech}>Tech: {proj.technologiesOrTopics}</Text>
                   )}
                   {proj.description && (
                     <View style={styles.bulletList}>

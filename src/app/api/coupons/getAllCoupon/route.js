@@ -6,7 +6,7 @@ import dbConnect from "@/utils/dbConnect";
 import { getServerSession } from "next-auth";
 import authOptions from "@/app/api/auth/options";
 import { NextResponse } from "next/server";
-const handler = async (req) => {
+const handler = async () => {
   await dbConnect();
   const session = await getServerSession(authOptions);
   if (!session || session?.user.role !== "admin") {
@@ -16,9 +16,8 @@ const handler = async (req) => {
   if (!coupons || coupons.length === 0) {
     throw new apiError(400, " coupons not found");
   }
-  return NextResponse.json(
-    new apiResponse(200, "Coupons fetched successfully", coupons),
-    { status: 200 },
-  );
+  return NextResponse.json(new apiResponse(200, "Coupons fetched successfully", coupons), {
+    status: 200,
+  });
 };
 export const GET = asyncHandler(handler);

@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 
 const Logo2 = ({ ClassName, size, color = "black" }) => {
   return (

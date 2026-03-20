@@ -35,7 +35,7 @@ const faqs = [
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const toggleAccordion = (index) => {
+  const toggleAccordion = index => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -52,8 +52,7 @@ const FAQ = () => {
               Frequently Asked Questions
             </h2>
             <p className="text-slate-600 text-lg">
-              Everything you need to know about ATS scores and building a
-              job-winning resume.
+              Everything you need to know about ATS scores and building a job-winning resume.
             </p>
           </div>
 
@@ -98,9 +97,7 @@ const FAQ = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 pb-6 text-slate-600 leading-relaxed">
-                        {faq.answer}
-                      </div>
+                      <div className="px-6 pb-6 text-slate-600 leading-relaxed">{faq.answer}</div>
                     </m.div>
                   )}
                 </AnimatePresence>

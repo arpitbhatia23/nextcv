@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -131,13 +124,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -148,7 +141,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -213,22 +206,17 @@ const SidebarLeft = ({ data }) => (
             <Text style={styles.sidebarTitle}>Education</Text>
             {data.education.map((edu, i) => (
               <View key={i} style={{ marginBottom: 8 }}>
-                <Text style={{ fontSize: 9.5, fontWeight: "bold" }}>
-                  {edu.degree}
-                </Text>
+                <Text style={{ fontSize: 9.5, fontWeight: "bold" }}>{edu.degree}</Text>
                 <Text style={{ fontSize: 9 }}>{edu.institution}</Text>
                 <Text style={{ fontSize: 8, color: "#666" }}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
                 {edu.description && (
                   <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bulletPoint}>
                         <Text style={styles.bullet}>•</Text>
-                        <Text style={styles.description}>
-                          {bullet.replace(/^•\s*/, "")}
-                        </Text>
+                        <Text style={styles.description}>{bullet.replace(/^•\s*/, "")}</Text>
                       </View>
                     ))}
                   </View>
@@ -258,20 +246,15 @@ const SidebarLeft = ({ data }) => (
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>
-                  {exp.companyName}
-                </Text>
+                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletPoint}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.description}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.description}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -291,9 +274,7 @@ const SidebarLeft = ({ data }) => (
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text
-                    style={{ fontSize: 9, color: "#2563eb", marginBottom: 2 }}
-                  >
+                  <Text style={{ fontSize: 9, color: "#2563eb", marginBottom: 2 }}>
                     Tech: {proj.technologiesOrTopics}
                   </Text>
                 )}
@@ -301,9 +282,7 @@ const SidebarLeft = ({ data }) => (
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletPoint}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={styles.description}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.description}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -322,9 +301,7 @@ const SidebarLeft = ({ data }) => (
                   <Text style={styles.jobTitle}>{cert.title}</Text>
                   <Text style={styles.jobDate}>{formatDate(cert.year)}</Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>
-                  {cert.organization}
-                </Text>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{cert.organization}</Text>
                 {cert.credentialUrl && (
                   <Link
                     src={cert.credentialUrl}

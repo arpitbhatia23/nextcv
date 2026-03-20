@@ -8,9 +8,7 @@ export const Avatar = ({ type }) => {
   const Icon = isBot ? Sparkles : CheckCircle;
 
   return (
-    <div
-      className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${bgColor}`}
-    >
+    <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${bgColor}`}>
       <Icon className="text-white" size={16} />
     </div>
   );

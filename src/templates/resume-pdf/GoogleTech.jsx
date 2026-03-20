@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -118,20 +110,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -147,8 +139,7 @@ const GoogleTech = ({ data }) => {
           <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {data.phone ||
-              (data.phone_no && <Text>• {data.phone || data.phone_no}</Text>)}
+            {data.phone || (data.phone_no && <Text>• {data.phone || data.phone_no}</Text>)}
             {data.address && <Text>• {data.address}</Text>}
             {data.linkedin && (
               <Link src={data.linkedin} style={styles.link}>
@@ -172,9 +163,7 @@ const GoogleTech = ({ data }) => {
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Summary</Text>
-            <Text style={{ ...styles.description, lineHeight: 1.5 }}>
-              {data.summary}
-            </Text>
+            <Text style={{ ...styles.description, lineHeight: 1.5 }}>{data.summary}</Text>
           </View>
         )}
 
@@ -186,21 +175,17 @@ const GoogleTech = ({ data }) => {
               <View key={i} style={styles.expItem}>
                 <View style={styles.expHeader}>
                   <Text style={styles.role}>
-                    {exp.position}{" "}
-                    <Text style={styles.company}>at {exp.companyName}</Text>
+                    {exp.position} <Text style={styles.company}>at {exp.companyName}</Text>
                   </Text>
                   <Text style={styles.date}>
-                    {formatDate(exp.startDate)} –{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} – {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -218,8 +203,7 @@ const GoogleTech = ({ data }) => {
                 <View style={styles.expHeader}>
                   <Text style={styles.role}>{edu.institution}</Text>
                   <Text style={styles.date}>
-                    {formatDate(edu.startYear)} –{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} – {formatDate(edu.endYear) || "Present"}
                   </Text>
                 </View>
                 <Text style={styles.company}>
@@ -230,9 +214,7 @@ const GoogleTech = ({ data }) => {
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -253,9 +235,7 @@ const GoogleTech = ({ data }) => {
                   <Text style={styles.date}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text
-                    style={{ fontSize: 9, color: "#1a73e8", marginBottom: 2 }}
-                  >
+                  <Text style={{ fontSize: 9, color: "#1a73e8", marginBottom: 2 }}>
                     {proj.technologiesOrTopics}
                   </Text>
                 )}
@@ -263,9 +243,7 @@ const GoogleTech = ({ data }) => {
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>

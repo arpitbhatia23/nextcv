@@ -31,13 +31,7 @@ const nextConfig = {
   experimental: {
     cssChunking: true,
     optimizeCss: true,
-    optimizePackageImports: [
-      "lodash",
-      "lucide-react",
-      "@heroicons/react",
-      "date-fns",
-      "react-pdf",
-    ],
+    optimizePackageImports: ["lodash", "lucide-react", "@heroicons/react", "date-fns", "react-pdf"],
   },
 };
 

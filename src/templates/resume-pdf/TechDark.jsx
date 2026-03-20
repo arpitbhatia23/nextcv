@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -136,13 +129,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -153,7 +146,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -200,9 +193,7 @@ const TechDark = ({ data }) => (
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Summary</Text>
-            <Text style={{ fontSize: 9.5, lineHeight: 1.6, color: "#334155" }}>
-              {data.summary}
-            </Text>
+            <Text style={{ fontSize: 9.5, lineHeight: 1.6, color: "#334155" }}>{data.summary}</Text>
           </View>
         )}
 
@@ -229,8 +220,7 @@ const TechDark = ({ data }) => (
                 <View style={styles.itemHeader}>
                   <Text style={styles.itemTitle}>{exp.position}</Text>
                   <Text style={styles.itemDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
                 <Text style={styles.itemSubtitle}>{exp.companyName}</Text>
@@ -238,9 +228,7 @@ const TechDark = ({ data }) => (
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletRow}>
                       <Text style={styles.bulletPoint}>›</Text>
-                      <Text style={styles.bulletText}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -275,9 +263,7 @@ const TechDark = ({ data }) => (
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletRow}>
                       <Text style={styles.bulletPoint}>›</Text>
-                      <Text style={styles.bulletText}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -332,9 +318,7 @@ const TechDark = ({ data }) => (
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bulletRow}>
                         <Text style={styles.bulletPoint}>›</Text>
-                        <Text style={styles.bulletText}>
-                          {bullet.replace(/^•\s*/, "")}
-                        </Text>
+                        <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                       </View>
                     ))}
                   </View>

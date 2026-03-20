@@ -11,13 +11,7 @@ export function SaasHuntBadge() {
       aria-label="SaaSHunt Top 1 Daily Winner"
       className="inline-flex items-center"
     >
-      <Image
-        src={src}
-        alt="SaaSHunt Top 1 Daily Winner"
-        width={180}
-        height={54}
-        loading="lazy"
-      />
+      <Image src={src} alt="SaaSHunt Top 1 Daily Winner" width={180} height={54} loading="lazy" />
     </a>
   );
 }

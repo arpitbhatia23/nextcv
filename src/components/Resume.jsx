@@ -52,9 +52,8 @@ import TemplateSelectorV3 from "./TemplateSelectorV3";
 
 const Resume = () => {
   const [step, setStep] = useState(0);
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
-  const clearDraft = useResumeStore((s) => s.clearStorage);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const resumeSteps = [
     {
@@ -73,12 +72,12 @@ const Resume = () => {
   ];
 
   const next = () => {
-    setStep((prev) => Math.min(prev + 1, resumeSteps.length - 1));
+    setStep(prev => Math.min(prev + 1, resumeSteps.length - 1));
   };
   const previous = () => {
-    setStep((prev) => Math.max(prev - 1, 0));
+    setStep(prev => Math.max(prev - 1, 0));
   };
-  const goToStep = (stepIndex) => {
+  const goToStep = stepIndex => {
     setStep(stepIndex);
   };
 
@@ -255,10 +254,7 @@ const Resume = () => {
       </div>
 
       {/* Steps Navigation - Horizontal */}
-      <div
-        className="bg-white border-b border-slate-100 mb-8 overflow-x-auto"
-        id="tour-resume-nav"
-      >
+      <div className="bg-white border-b border-slate-100 mb-8 overflow-x-auto" id="tour-resume-nav">
         <div className="max-w-7xl mx-auto px-4 min-w-max">
           <div className="flex items-center py-4 gap-4 md:gap-8">
             {resumeSteps.map((stepInfo, index) => {
@@ -295,9 +291,7 @@ const Resume = () => {
                       <Icon className="w-4 h-4" />
                     )}
                   </div>
-                  <span
-                    className={`text-sm font-medium ${isActive ? "text-indigo-900" : ""}`}
-                  >
+                  <span className={`text-sm font-medium ${isActive ? "text-indigo-900" : ""}`}>
                     {stepInfo.title}
                   </span>
                 </button>

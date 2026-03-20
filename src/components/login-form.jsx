@@ -2,14 +2,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,14 +22,12 @@ export function LoginForm({ className, ...props }) {
       password: "",
     },
   });
-  const submit = async (data) => {
-    console.log(data);
+  const submit = async data => {
     const res = await signIn("credentials", {
       redirect: false,
       email: data.email,
       password: data.password,
     });
-    console.log(res);
     if (res.ok) {
       router.push("/dashboard");
     } else {
@@ -49,9 +40,7 @@ export function LoginForm({ className, ...props }) {
         <form onSubmit={form.handleSubmit(submit)}>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col items-center gap-2">
-              <h1 className="text-xl font-bold">
-                Welcome to Nxtcv Admin Login .
-              </h1>
+              <h1 className="text-xl font-bold">Welcome to Nxtcv Admin Login .</h1>
             </div>
             <div className="flex flex-col gap-6">
               <FormField
@@ -75,11 +64,7 @@ export function LoginForm({ className, ...props }) {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="enter enter your password"
-                        type="password"
-                        {...field}
-                      />
+                      <Input placeholder="enter enter your password" type="password" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

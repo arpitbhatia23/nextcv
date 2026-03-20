@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { type } from "os";
 const userSchema = new Schema(
   {
     name: {
@@ -44,7 +43,7 @@ const userSchema = new Schema(
 
   {
     timestamps: true,
-  },
+  }
 );
 
 userSchema.index({ resume: 1, reminderCount: 1 });

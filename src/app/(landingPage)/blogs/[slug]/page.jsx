@@ -34,8 +34,7 @@ export async function generateMetadata({ params }) {
 
   // Use the main image URL or a professional placeholder if none exists
   const imageUrl =
-    data.mainImage?.asset?.url ||
-    "https://placehold.co/1200x600/000/fff?text=Logistics+Blog";
+    data.mainImage?.asset?.url || "https://placehold.co/1200x600/000/fff?text=Logistics+Blog";
 
   return {
     title: data.title,
@@ -43,13 +42,7 @@ export async function generateMetadata({ params }) {
     alternates: {
       canonical: `https://www.nextcv.in/blogs/${slug}`,
     },
-    keywords: [
-      "resume builder",
-      "CV maker",
-      "AI resume",
-      "job application",
-      "professional resume",
-    ],
+    keywords: ["resume builder", "CV maker", "AI resume", "job application", "professional resume"],
     openGraph: {
       title: data.title,
       description: description,
@@ -115,12 +108,9 @@ export default async function BlogDetailsPage({ params }) {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: blogData.title,
-        image:
-          blogData.mainImage?.asset?.url ||
-          "https://www.nextcv.in/opengraph-image.png",
+        image: blogData.mainImage?.asset?.url || "https://www.nextcv.in/opengraph-image.png",
         datePublished: blogData.publishedAt || blogData._createdAt,
-        dateModified:
-          blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
+        dateModified: blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
         author: {
           "@type": "Person",
           name: blogData.author?.name || "NextCV Team",

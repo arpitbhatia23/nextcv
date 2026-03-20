@@ -1,14 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Edit2,
-  Trash2,
-  Sparkles,
-  ArrowRight,
-  ArrowLeft,
-  Wrench,
-} from "lucide-react";
+import { Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft, Wrench } from "lucide-react";
 import {
   Form,
   FormField,
@@ -19,13 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -65,54 +52,49 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
   }, [skillList]);
 
   // ✅ Add skill (supports comma separated)
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     const names = values.name
       .split(",")
-      .map((n) => n.trim())
-      .filter((n) => n.length > 0);
+      .map(n => n.trim())
+      .filter(n => n.length > 0);
 
     if (isEditing) {
-      setSkillList((prev) =>
-        prev.map((skill) =>
+      setSkillList(prev =>
+        prev.map(skill =>
           skill.id === editingId
             ? {
                 ...skill,
                 name: names[0],
                 level: values.level || "Intermediate",
               }
-            : skill,
-        ),
+            : skill
+        )
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
       const newSkills = names
-        .filter(
-          (name) =>
-            !skillList.some(
-              (skill) => skill.name.toLowerCase() === name.toLowerCase(),
-            ),
-        )
-        .map((name) => ({
+        .filter(name => !skillList.some(skill => skill.name.toLowerCase() === name.toLowerCase()))
+        .map(name => ({
           id: Date.now() + Math.random(),
           name,
           level: values.level || "Intermediate",
         }));
 
-      setSkillList((prev) => [...prev, ...newSkills]);
+      setSkillList(prev => [...prev, ...newSkills]);
     }
 
     form.reset();
   };
 
-  const handleEdit = (skill) => {
+  const handleEdit = skill => {
     form.reset(skill);
     setIsEditing(true);
     setEditingId(skill.id);
   };
 
-  const handleDelete = (id) => {
-    setSkillList((prev) => prev.filter((skill) => skill.id !== id));
+  const handleDelete = id => {
+    setSkillList(prev => prev.filter(skill => skill.id !== id));
   };
 
   const cancelEdit = () => {
@@ -121,13 +103,9 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
     setEditingId(null);
   };
 
-  const addSuggestion = (skillName) => {
-    if (
-      !skillList.some(
-        (skill) => skill.name.toLowerCase() === skillName.toLowerCase(),
-      )
-    ) {
-      setSkillList((prev) => [
+  const addSuggestion = skillName => {
+    if (!skillList.some(skill => skill.name.toLowerCase() === skillName.toLowerCase())) {
+      setSkillList(prev => [
         ...prev,
         {
           id: Date.now() + Math.random(),
@@ -150,9 +128,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
     <div className="py-8">
       <div className="mb-6">
         <h2 className="text-xl md:text-2xl font-bold text-slate-900">Skills</h2>
-        <p className="text-slate-500">
-          Showcase your technical and soft skills
-        </p>
+        <p className="text-slate-500">Showcase your technical and soft skills</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -172,7 +148,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
           <CardContent className="p-2 md:p-6">
             {/* Suggestions */}
             <div className="flex flex-wrap gap-2 mb-4">
-              {suggestions.map((skill) => (
+              {suggestions.map(skill => (
                 <Button
                   key={skill}
                   type="button"
@@ -187,10 +163,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
             </div>
 
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -216,20 +189,14 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <FormLabel>Proficiency</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Beginner / Intermediate / Expert"
-                            {...field}
-                          />
+                          <Input placeholder="Beginner / Intermediate / Expert" {...field} />
                         </FormControl>
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-slate-900 text-white"
-                >
+                <Button type="submit" className="w-full bg-slate-900 text-white">
                   {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
               </form>
@@ -262,15 +229,13 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
               </div>
             ) : (
               <div className="flex flex-wrap gap-2">
-                {skillList.map((skill) => (
+                {skillList.map(skill => (
                   <div
                     key={skill.id}
                     className="bg-white pl-4 pr-2 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-3"
                   >
                     <div className="flex flex-col">
-                      <span className="font-semibold text-slate-800 text-sm">
-                        {skill.name}
-                      </span>
+                      <span className="font-semibold text-slate-800 text-sm">{skill.name}</span>
                       <span className="text-[10px] text-slate-500 uppercase font-medium">
                         {skill.level}
                       </span>

@@ -22,31 +22,29 @@ function DownloadPageContent() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const resumeId = searchParams.get("resumeId");
 
-  const fetchResumeData = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(`/api/resume/getResumeById/${resumeId}`);
-      if (res.data.success) {
-        setResumeData(res.data.data);
-      } else {
-        toast(res.data.message || "something went wrong");
-      }
-    } catch (err) {
-      toast(err.message || "something went wrong");
-    }
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const fetchResumeData = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get(`/api/resume/getResumeById/${resumeId}`);
+        if (res.data.success) {
+          setResumeData(res.data.data);
+        } else {
+          toast(res.data.message || "something went wrong");
+        }
+      } catch (err) {
+        toast(err.message || "something went wrong");
+      }
+      setLoading(false);
+    };
     fetchResumeData();
-    // eslint-disable-next-line
-  }, []);
+  }, [resumeId]);
 
   useEffect(() => {
     let currentUrl = null;
     const generatePdf = async () => {
       if (!resumeData) return;
-      const selected = templates.find((t) => t.key === resumeData?.ResumeType);
+      const selected = templates.find(t => t.key === resumeData?.ResumeType);
       if (!selected) {
         return;
       }
@@ -54,10 +52,10 @@ function DownloadPageContent() {
       const blob = await pdf(<TemplateComponent data={resumeData} />).toBlob();
       const url = URL.createObjectURL(blob);
       setPdfUrl(url);
+      setIsFeedbackOpen(true);
       currentUrl = url;
     };
     generatePdf();
-    setIsFeedbackOpen(true);
     return () => {
       if (currentUrl) URL.revokeObjectURL(currentUrl);
     };
@@ -100,9 +98,7 @@ function DownloadPageContent() {
                   </Document>
                 </div>
               ) : (
-                <div className="text-gray-500 text-lg py-12">
-                  No preview available.
-                </div>
+                <div className="text-gray-500 text-lg py-12">No preview available.</div>
               )}
             </div>
             <div className="w-full md:w-1/3 flex flex-col items-center gap-4">

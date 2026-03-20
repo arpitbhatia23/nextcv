@@ -19,10 +19,7 @@ const handler = async (req, { params }) => {
   }
   await Coupon.findByIdAndDelete(id);
 
-  return NextResponse.json(
-    new apiResponse(200, "Coupon deleted successfully"),
-    { status: 200 }
-  );
+  return NextResponse.json(new apiResponse(200, "Coupon deleted successfully"), { status: 200 });
 };
 
 export const DELETE = asyncHandler(handler);

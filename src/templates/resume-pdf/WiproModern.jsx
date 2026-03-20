@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -121,18 +114,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
-        return trimmed.split(";").map((b) => b.trim()).filter(Boolean);
+        return trimmed
+          .split(";")
+          .map(b => b.trim())
+          .filter(Boolean);
       return [trimmed];
     })
     .filter(Boolean);
@@ -181,23 +177,15 @@ const WiproModern = ({ data }) => {
               <Text style={styles.leftTitle}>Education</Text>
               {data.education.map((edu, i) => (
                 <View key={i} style={{ marginBottom: 8 }}>
-                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>
-                    {edu.degree}
-                  </Text>
-                  <Text style={{ fontSize: 9 }}>
-                    {edu.institution}
-                  </Text>
-                  <Text style={{ fontSize: 8, color: "#666" }}>
-                    {formatDate(edu.endYear)}
-                  </Text>
+                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
+                  <Text style={{ fontSize: 9 }}>{edu.institution}</Text>
+                  <Text style={{ fontSize: 8, color: "#666" }}>{formatDate(edu.endYear)}</Text>
                   {edu.description && (
                     <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
                           <Text style={styles.bulletPoint}>•</Text>
-                          <Text style={[styles.description, styles.bulletText]}>
-                            {bullet}
-                          </Text>
+                          <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                         </View>
                       ))}
                     </View>
@@ -225,12 +213,8 @@ const WiproModern = ({ data }) => {
               <Text style={styles.leftTitle}>Certifications</Text>
               {data.certificates.map((cert, i) => (
                 <View key={i} style={{ marginBottom: 4 }}>
-                  <Text style={{ fontSize: 9, fontWeight: "bold" }}>
-                    {cert.title}
-                  </Text>
-                   <Text style={{ fontSize: 8 }}>
-                    {cert.organization}
-                  </Text>
+                  <Text style={{ fontSize: 9, fontWeight: "bold" }}>{cert.title}</Text>
+                  <Text style={{ fontSize: 8 }}>{cert.organization}</Text>
                 </View>
               ))}
             </View>
@@ -241,7 +225,7 @@ const WiproModern = ({ data }) => {
         <View style={styles.rightColumn}>
           <Text style={styles.name}>{data.name}</Text>
           <Text style={styles.role}>{data.jobRole || "Software Engineer"}</Text>
-          
+
           {data.summary && <Text style={styles.summary}>{data.summary}</Text>}
 
           {/* Experience */}
@@ -252,15 +236,14 @@ const WiproModern = ({ data }) => {
                 <View key={i} style={styles.jobBlock}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobMeta}>
-                    {exp.companyName} | {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
+                    {exp.companyName} | {formatDate(exp.startDate)} -{" "}
+                    {formatDate(exp.endDate) || "Present"}
                   </Text>
                   <View>
                     {splitToBullets(exp.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -278,17 +261,15 @@ const WiproModern = ({ data }) => {
                   <Text style={styles.jobTitle}>{proj.title}</Text>
                   <Text style={styles.jobMeta}>{formatDate(proj.date)}</Text>
                   {proj.technologiesOrTopics && (
-                     <Text style={{ fontSize: 9, color: "#2196f3", marginBottom: 2 }}>
-                       {proj.technologiesOrTopics}
-                     </Text>
+                    <Text style={{ fontSize: 9, color: "#2196f3", marginBottom: 2 }}>
+                      {proj.technologiesOrTopics}
+                    </Text>
                   )}
                   <View>
                     {splitToBullets(proj.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>

@@ -19,10 +19,7 @@ function GrowthBadge({ value }) {
   if (value === null || value === undefined) return null;
   const isUp = value >= 0;
   return (
-    <Badge
-      variant="outline"
-      className={isUp ? "text-green-600" : "text-red-600"}
-    >
+    <Badge variant="outline" className={isUp ? "text-green-600" : "text-red-600"}>
       {isUp ? <IconTrendingUp /> : <IconTrendingDown />}
       {isUp ? "+" : ""}
       {value}%
@@ -33,12 +30,11 @@ function GrowthBadge({ value }) {
 function SectionCards() {
   const [data, setData] = useState(null);
 
-  const fetchData = async () => {
-    const res = await sectionServer();
-    setData(res);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const res = await sectionServer();
+      setData(res);
+    };
     fetchData().catch(console.error);
   }, []);
 
@@ -80,17 +76,14 @@ function SectionCards() {
           </CardHeader>
           <CardFooter className="flex-col items-start gap-1.5 text-sm">
             <div className="line-clamp-1 flex gap-2 font-medium">
-              {data?.paymentGrowth >= 0 ? "Trending up" : "Trending down"} this
-              month{" "}
+              {data?.paymentGrowth >= 0 ? "Trending up" : "Trending down"} this month{" "}
               {data?.paymentGrowth >= 0 ? (
                 <IconTrendingUp className="size-4 text-green-600" />
               ) : (
                 <IconTrendingDown className="size-4 text-red-600" />
               )}
             </div>
-            <div className="text-muted-foreground">
-              Payments in the last 1 month
-            </div>
+            <div className="text-muted-foreground">Payments in the last 1 month</div>
           </CardFooter>
         </Card>
 
@@ -107,8 +100,7 @@ function SectionCards() {
           </CardHeader>
           <CardFooter className="flex-col items-start gap-1.5 text-sm">
             <div className="line-clamp-1 flex gap-2 font-medium">
-              {data?.newUserGrowth >= 0 ? "Up" : "Down"}{" "}
-              {Math.abs(data?.newUserGrowth || 0)}%
+              {data?.newUserGrowth >= 0 ? "Up" : "Down"} {Math.abs(data?.newUserGrowth || 0)}%
               {data?.newUserGrowth >= 0 ? (
                 <IconTrendingUp className="size-4 text-green-600" />
               ) : (
@@ -136,8 +128,7 @@ function SectionCards() {
           </CardHeader>
           <CardFooter className="flex-col items-start gap-1.5 text-sm">
             <div className="line-clamp-1 flex gap-2 font-medium">
-              {data?.activeUserGrowth >= 0 ? "Up" : "Down"}{" "}
-              {Math.abs(data?.activeUserGrowth || 0)}%
+              {data?.activeUserGrowth >= 0 ? "Up" : "Down"} {Math.abs(data?.activeUserGrowth || 0)}%
               {data?.activeUserGrowth >= 0 ? (
                 <IconTrendingUp className="size-4 text-green-600" />
               ) : (
@@ -145,9 +136,7 @@ function SectionCards() {
               )}
             </div>
             <div className="text-muted-foreground">
-              {data?.activeUserGrowth >= 0
-                ? "Strong user retention"
-                : "Engagement has dropped"}
+              {data?.activeUserGrowth >= 0 ? "Strong user retention" : "Engagement has dropped"}
             </div>
           </CardFooter>
         </Card>

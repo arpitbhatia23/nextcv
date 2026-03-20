@@ -12,13 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -29,9 +23,7 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
 
   const schema = z.object({
     title: z.string().min(2, { message: "Certificate name is required" }),
-    organization: z
-      .string()
-      .min(2, { message: "Issuing organization is required" }),
+    organization: z.string().min(2, { message: "Issuing organization is required" }),
     year: z.string().optional(),
     credentialUrl: z.string().url().optional().or(z.literal("")),
   });
@@ -50,29 +42,27 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
     updateForm({ certificates: certList });
   }, [certList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setCertList((prev) =>
-        prev.map((cert) =>
-          cert.id === editingId ? { ...values, id: editingId } : cert,
-        ),
+      setCertList(prev =>
+        prev.map(cert => (cert.id === editingId ? { ...values, id: editingId } : cert))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setCertList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setCertList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (cert) => {
+  const handleEdit = cert => {
     form.reset(cert);
     setIsEditing(true);
     setEditingId(cert.id);
   };
 
-  const handleDelete = (id) => {
-    setCertList((prev) => prev.filter((cert) => cert.id !== id));
+  const handleDelete = id => {
+    setCertList(prev => prev.filter(cert => cert.id !== id));
   };
 
   const cancelEdit = () => {
@@ -84,9 +74,7 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-          Certifications
-        </h2>
+        <h2 className="text-xl md:text-2xl font-bold text-slate-900">Certifications</h2>
         <p className="text-slate-500">Add your credentials and awards</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -115,10 +103,7 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
 
           <CardContent className="p-2 md:p-6">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="title"
@@ -216,12 +201,8 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
                 <Award className="w-4 h-4 text-blue-600" /> Tips
               </h3>
               <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
-                <li>
-                  Add valid certifications that are relevant to your career.
-                </li>
-                <li>
-                  Include the link to verify your credential if available.
-                </li>
+                <li>Add valid certifications that are relevant to your career.</li>
+                <li>Include the link to verify your credential if available.</li>
               </ul>
             </div>
           </CardFooter>
@@ -239,29 +220,21 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
 
             {certList.length === 0 ? (
               <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-sm">
-                  No certifications added yet.
-                </p>
+                <p className="text-slate-400 text-sm">No certifications added yet.</p>
               </div>
             ) : (
               <div className="space-y-3">
-                {certList.map((cert) => (
+                {certList.map(cert => (
                   <div
                     key={cert.id}
                     className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors"
                   >
                     <div className="flex justify-between items-start">
                       <div>
-                        <h4 className="font-bold text-slate-800">
-                          {cert.title}
-                        </h4>
+                        <h4 className="font-bold text-slate-800">{cert.title}</h4>
                         <div className="text-sm text-indigo-600 font-medium">
                           {cert.organization}
-                          {cert.year && (
-                            <span className="text-slate-400 ml-1">
-                              ({cert.year})
-                            </span>
-                          )}
+                          {cert.year && <span className="text-slate-400 ml-1">({cert.year})</span>}
                         </div>
                         {cert.credentialUrl && (
                           <a

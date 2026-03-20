@@ -12,7 +12,7 @@ const handler = async () => {
     $or: [{ reminderCount: { $lt: 3 } }, { reminderCount: { $exists: false } }],
   });
 
-  const promises = users.map(async (user) => {
+  const promises = users.map(async user => {
     await ReminderEmail(user.email, user.name);
 
     user.reminderCount = (user.reminderCount || 0) + 1;

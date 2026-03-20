@@ -29,12 +29,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
 
 const ExperienceSection = () => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
-  const [experienceList, setExperienceList] = useState(
-    formData.experience || [],
-  );
+  const [experienceList, setExperienceList] = useState(formData.experience || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -55,29 +53,27 @@ const ExperienceSection = () => {
     updateForm({ experience: experienceList });
   }, [experienceList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setExperienceList((prev) =>
-        prev.map((exp) =>
-          exp.id === editingId ? { ...values, id: editingId } : exp,
-        ),
+      setExperienceList(prev =>
+        prev.map(exp => (exp.id === editingId ? { ...values, id: editingId } : exp))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setExperienceList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setExperienceList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (experience) => {
+  const handleEdit = experience => {
     form.reset(experience);
     setIsEditing(true);
     setEditingId(experience.id);
   };
 
-  const handleDelete = (id) => {
-    setExperienceList((prev) => prev.filter((exp) => exp.id !== id));
+  const handleDelete = id => {
+    setExperienceList(prev => prev.filter(exp => exp.id !== id));
   };
 
   const cancelEdit = () => {
@@ -121,8 +117,7 @@ const ExperienceSection = () => {
           <Card className="border shadow-sm border-slate-100 bg-white rounded-2xl overflow-hidden">
             <div className="bg-indigo-50/50 px-4 py-3 border-b border-indigo-100 flex items-center justify-between">
               <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest flex items-center gap-2">
-                <Briefcase className="w-3 h-3" />{" "}
-                {isEditing ? "Refine Role" : "New Experience"}
+                <Briefcase className="w-3 h-3" /> {isEditing ? "Refine Role" : "New Experience"}
               </span>
               {isEditing && (
                 <Button
@@ -137,18 +132,14 @@ const ExperienceSection = () => {
             </div>
             <CardContent className="p-4">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="companyName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                          <Building2 className="w-3 h-3 text-indigo-500" />{" "}
-                          Company Name
+                          <Building2 className="w-3 h-3 text-indigo-500" /> Company Name
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -187,8 +178,7 @@ const ExperienceSection = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                            <Calendar className="w-3 h-3 text-indigo-500" />{" "}
-                            From
+                            <Calendar className="w-3 h-3 text-indigo-500" /> From
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -235,9 +225,7 @@ const ExperienceSection = () => {
                             disabled={isGenerating}
                             className="text-[10px] font-black text-indigo-600 flex items-center gap-1 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
                           >
-                            <Sparkles
-                              className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
-                            />
+                            <Sparkles className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`} />
                             {isGenerating ? "Synthesizing..." : "Generate AI"}
                           </button>
                         </div>
@@ -278,12 +266,10 @@ const ExperienceSection = () => {
                   className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center"
                 >
                   <Briefcase className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                  <p className="text-slate-400 font-bold text-sm">
-                    No history added
-                  </p>
+                  <p className="text-slate-400 font-bold text-sm">No history added</p>
                 </motion.div>
               ) : (
-                experienceList.map((exp) => (
+                experienceList.map(exp => (
                   <motion.div
                     key={exp.id}
                     layout
@@ -300,9 +286,7 @@ const ExperienceSection = () => {
                             <div className="inline-block bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase mb-1">
                               {exp.companyName}
                             </div>
-                            <h4 className="font-bold text-slate-900 text-sm">
-                              {exp.position}
-                            </h4>
+                            <h4 className="font-bold text-slate-900 text-sm">{exp.position}</h4>
                             <p className="text-xs text-slate-500 mt-1">
                               {exp.startDate} - {exp.endDate || "Present"}
                             </p>
@@ -324,9 +308,7 @@ const ExperienceSection = () => {
                         </div>
                         {exp.description && (
                           <div className="mt-3 pt-3 border-t border-slate-50">
-                            <p className="text-xs text-slate-500 line-clamp-2">
-                              {exp.description}
-                            </p>
+                            <p className="text-xs text-slate-500 line-clamp-2">{exp.description}</p>
                           </div>
                         )}
                       </CardContent>

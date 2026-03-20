@@ -17,17 +17,16 @@ const handler = async (req, { params }) => {
   const updatedResume = await Resume.findByIdAndUpdate(
     id,
     { $set: updateData },
-    { new: true, runValidators: true },
+    { new: true, runValidators: true }
   );
 
   if (!updatedResume) {
     throw new apiError(404, "Resume not found");
   }
 
-  return NextResponse.json(
-    new apiResponse(200, "Resume updated successfully", updatedResume),
-    { status: 200 },
-  );
+  return NextResponse.json(new apiResponse(200, "Resume updated successfully", updatedResume), {
+    status: 200,
+  });
 };
 
 export const PATCH = asyncHandler(handler);

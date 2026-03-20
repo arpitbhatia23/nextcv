@@ -8,7 +8,7 @@ import authOptions from "../../auth/options";
 import { apiResponse } from "@/utils/apiResponse";
 import dbConnect from "@/utils/dbConnect";
 
-const handler = async (req) => {
+const handler = async req => {
   // ✅ Connect DB once
   await dbConnect();
 
@@ -23,7 +23,7 @@ const handler = async (req) => {
     data.summary,
   ];
 
-  if (requiredFields.some((f) => !f || f.trim() === "")) {
+  if (requiredFields.some(f => !f || f.trim() === "")) {
     throw new apiError(400, "All required fields must be filled");
   }
 
@@ -57,9 +57,7 @@ const handler = async (req) => {
 
   await User.updateOne({ _id: userId }, { $push: { resume: draft._id } });
 
-  return NextResponse.json(
-    new apiResponse(201, "Draft generated successfully"),
-  );
+  return NextResponse.json(new apiResponse(201, "Draft generated successfully"));
 };
 
 export const POST = asyncHandler(handler);

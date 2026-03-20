@@ -12,7 +12,7 @@ export async function exportAnalyticsCSV({ data, section }) {
       { metric: "Total Resumes", value: data.resumeStats.totalResumes },
       { metric: "Paid Resumes", value: data.resumeStats.paidResumes },
       { metric: "Draft Resumes", value: data.resumeStats.draftResumes },
-      ...data.resumeStats.topSkills.map((skill) => ({
+      ...data.resumeStats.topSkills.map(skill => ({
         metric: `Skill: ${skill.skill.name}`,
         value: skill.count,
       })),
@@ -23,7 +23,7 @@ export async function exportAnalyticsCSV({ data, section }) {
         metric: "Average Transaction",
         value: data.paymentStats.avgTransactionValue,
       },
-      ...data.paymentStats.monthlyRevenue.map((month) => ({
+      ...data.paymentStats.monthlyRevenue.map(month => ({
         metric: `Revenue ${month.month}`,
         value: month.revenue,
       })),
@@ -35,7 +35,7 @@ export async function exportAnalyticsCSV({ data, section }) {
     ]),
     visitors: convertToCSV([
       { metric: "Total Visitors", value: data.visitorStats.totalVisitors },
-      ...data.visitorStats.dailyVisitors.slice(-30).map((day) => ({
+      ...data.visitorStats.dailyVisitors.slice(-30).map(day => ({
         metric: `Visitors ${day.date}`,
         value: day.visitors,
       })),
@@ -61,10 +61,9 @@ export async function exportAnalyticsCSV({ data, section }) {
 // Helper function to convert data to CSV format
 function convertToCSV(data) {
   const headers = ["Metric", "Value"];
-  const csvContent = [
-    headers.join(","),
-    ...data.map((row) => `"${row.metric}",${row.value}`),
-  ].join("\n");
+  const csvContent = [headers.join(","), ...data.map(row => `"${row.metric}",${row.value}`)].join(
+    "\n"
+  );
 
   return csvContent;
 }

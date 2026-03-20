@@ -1,8 +1,7 @@
 import Blog from "../../../components/Blog"; // Use @/ alias for better pathing
 
 export const metadata = {
-  title:
-    "Free ATS-Optimized Resume Template India + Download (2026) | NextCV Blog",
+  title: "Free ATS-Optimized Resume Template India + Download (2026) | NextCV Blog",
   description:
     "Best resume format for freshers in India with examples. Learn how to make a resume for IT jobs with no experience and download free templates for 2026.",
   keywords: [

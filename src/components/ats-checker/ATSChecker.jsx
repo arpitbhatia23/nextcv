@@ -19,32 +19,30 @@ const ATSChecker = () => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = acceptedFiles => {
     const uploadedFile = acceptedFiles[0];
     if (uploadedFile) {
       if (uploadedFile.size > MAX_FILE_SIZE) {
         setError("File size exceeds 5MB limit.");
         return;
       }
-      console.log(uploadedFile);
       setFile(uploadedFile);
       setError(null);
       setResult(null);
       analyzeFile(uploadedFile);
     }
-  }, []);
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
       "application/pdf": [".pdf"],
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-        [".docx"],
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
     },
     multiple: false,
   });
 
-  const analyzeFile = async (uploadedFile) => {
+  const analyzeFile = async uploadedFile => {
     setAnalyzing(true);
     try {
       let text = "";
@@ -59,7 +57,7 @@ const ATSChecker = () => {
 
       if (!text || text.trim().length === 0) {
         throw new Error(
-          "Could not extract text from file. Please ensure it is not an image-based resume.",
+          "Could not extract text from file. Please ensure it is not an image-based resume."
         );
       }
 
@@ -70,13 +68,12 @@ const ATSChecker = () => {
         setAnalyzing(false);
       }, 1500);
     } catch (err) {
-      console.error(err);
       setError(err.message || "Failed to analyze resume. Please try again.");
       setAnalyzing(false);
     }
   };
 
-  const extractTextFromPDF = async (file) => {
+  const extractTextFromPDF = async file => {
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
     let fullText = "";
@@ -84,19 +81,19 @@ const ATSChecker = () => {
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
-      const pageText = textContent.items.map((item) => item.str).join(" ");
+      const pageText = textContent.items.map(item => item.str).join(" ");
       fullText += pageText + "\n";
     }
     return fullText;
   };
 
-  const extractTextFromDOCX = async (file) => {
+  const extractTextFromDOCX = async file => {
     const arrayBuffer = await file.arrayBuffer();
     const result = await mammoth.extractRawText({ arrayBuffer });
     return result.value;
   };
 
-  const calculateATSScore = (text) => {
+  const calculateATSScore = text => {
     let score = 0;
     const recommendations = [];
     // const missingKeywords = [];
@@ -135,7 +132,7 @@ const ATSChecker = () => {
       "contact",
     ];
     let foundSections = 0;
-    essentialSections.forEach((section) => {
+    essentialSections.forEach(section => {
       if (lowerText.includes(section)) {
         foundSections++;
       }
@@ -203,7 +200,7 @@ const ATSChecker = () => {
     ];
 
     let keywordCount = 0;
-    commonKeywords.forEach((keyword) => {
+    commonKeywords.forEach(keyword => {
       if (lowerText.includes(keyword)) {
         keywordCount++;
       }
@@ -235,7 +232,7 @@ const ATSChecker = () => {
     };
   };
 
-  const removeFile = (e) => {
+  const removeFile = e => {
     e.stopPropagation();
     setFile(null);
     setResult(null);
@@ -267,9 +264,7 @@ const ATSChecker = () => {
                     ? "Drop your resume here"
                     : "Drag & drop your resume, or click to select"}
                 </p>
-                <p className="text-sm text-slate-500 mt-1">
-                  Supports PDF & DOCX (Max 5MB)
-                </p>
+                <p className="text-sm text-slate-500 mt-1">Supports PDF & DOCX (Max 5MB)</p>
               </div>
             </div>
           </div>
@@ -283,9 +278,7 @@ const ATSChecker = () => {
                 <p className="font-semibold text-indigo-900 truncate max-w-50 sm:max-w-xs">
                   {file.name}
                 </p>
-                <p className="text-xs text-indigo-600">
-                  {(file.size / 1024).toFixed(2)} KB
-                </p>
+                <p className="text-xs text-indigo-600">{(file.size / 1024).toFixed(2)} KB</p>
               </div>
             </div>
             {!analyzing && (
@@ -309,9 +302,7 @@ const ATSChecker = () => {
         {analyzing && (
           <div className="py-12 flex flex-col items-center justify-center">
             <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
-            <p className="text-slate-600 font-medium animate-pulse">
-              Analyzing your resume...
-            </p>
+            <p className="text-slate-600 font-medium animate-pulse">Analyzing your resume...</p>
             <p className="text-slate-400 text-sm mt-2">
               Checking formatting, keywords, and sections
             </p>

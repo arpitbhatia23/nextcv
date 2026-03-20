@@ -1,14 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Edit2,
-  Trash2,
-  GraduationCap,
-  Sparkles,
-  ArrowRight,
-  ArrowLeft,
-} from "lucide-react";
+import { Edit2, Trash2, GraduationCap, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -38,9 +31,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "date is required" }),
     endYear: z.string({ message: "end date is required" }),
     grade: z.string({ message: "grade is required" }),
-    description: z
-      .string()
-      .nonempty("Please click 'Generate with AI' to create a description"),
+    description: z.string().nonempty("Please click 'Generate with AI' to create a description"),
   });
   const form = useForm({
     resolver: zodResolver(schema),
@@ -58,29 +49,27 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     updateForm({ education: educationList });
   }, [educationList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setEducationList((prev) =>
-        prev.map((edu) =>
-          edu.id === editingId ? { ...values, id: editingId } : edu,
-        ),
+      setEducationList(prev =>
+        prev.map(edu => (edu.id === editingId ? { ...values, id: editingId } : edu))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setEducationList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setEducationList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (education) => {
+  const handleEdit = education => {
     form.reset(education);
     setIsEditing(true);
     setEditingId(education.id);
   };
 
-  const handleDelete = (id) => {
-    setEducationList((prev) => prev.filter((edu) => edu.id !== id));
+  const handleDelete = id => {
+    setEducationList(prev => prev.filter(edu => edu.id !== id));
   };
 
   const cancelEdit = () => {
@@ -122,9 +111,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-          Education
-        </h2>
+        <h2 className="text-xl md:text-2xl font-bold text-slate-900">Education</h2>
         <p className="text-slate-500">Add your academic background</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -152,10 +139,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
           </CardHeader>
           <CardContent className="p-2 md:p-6">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="degree"
@@ -202,9 +186,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                     name="startYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          Start Date
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">Start Date</FormLabel>
                         <FormControl>
                           <Input
                             type={"month"}
@@ -221,9 +203,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                     name="endYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          End Date
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">End Date</FormLabel>
                         <FormControl>
                           <Input
                             type={"month"}
@@ -242,9 +222,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   name="grade"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Grade/GPA
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Grade/GPA</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. 3.8 GPA"
@@ -327,15 +305,12 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
             id="tour-education-list"
           >
             <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-indigo-500" /> Added
-              Education
+              <GraduationCap className="w-5 h-5 text-indigo-500" /> Added Education
             </h3>
 
             {educationList.length === 0 ? (
               <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-sm">
-                  No education added yet.
-                </p>
+                <p className="text-slate-400 text-sm">No education added yet.</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -346,9 +321,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                   >
                     <div>
                       <h4 className="font-bold text-slate-800">{edu.degree}</h4>
-                      <div className="text-sm text-slate-600 font-medium">
-                        {edu.institution}
-                      </div>
+                      <div className="text-sm text-slate-600 font-medium">{edu.institution}</div>
                       <div className="text-xs text-slate-400 mt-1">
                         {edu.startYear} - {edu.endYear || "Present"}
                       </div>

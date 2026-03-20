@@ -12,15 +12,9 @@ import authOptions from "../../auth/options";
 const clientId = process.env.PHONE_PE_CLIENT_ID;
 const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
 const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env =
-  process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
-const client = StandardCheckoutClient.getInstance(
-  clientId,
-  clinetSecret,
-  clientVersion,
-  env,
-);
-const handler = async (req) => {
+const env = process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
+const client = StandardCheckoutClient.getInstance(clientId, clinetSecret, clientVersion, env);
+const handler = async req => {
   const searchParams = req.nextUrl.searchParams;
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
@@ -33,15 +27,13 @@ const handler = async (req) => {
   const userId = session.user._id;
   const couponCode = searchParams.get("couponCode");
   const discountAmount = searchParams.get("discountAmount");
-  console.log(couponCode);
   if (response.state === "COMPLETED") {
-    console.log("payment insitate");
     const isPaymentAllreadyDone = await Payment.findOne({
       transcationId: response?.paymentDetails[0]?.transactionId,
     });
     if (isPaymentAllreadyDone) {
       return NextResponse.redirect(
-        `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`,
+        `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
       );
     }
     const payment = await Payment.create({
@@ -60,7 +52,7 @@ const handler = async (req) => {
           status: "paid",
         },
       },
-      { new: true },
+      { new: true }
     );
     await User.findByIdAndUpdate(userId, {
       $push: {
@@ -68,19 +60,12 @@ const handler = async (req) => {
       },
     });
     if (!updateResume) {
-      throw new apiError(
-        500,
-        "something went wrong while updateins resume status",
-      );
+      throw new apiError(500, "something went wrong while updateins resume status");
     }
 
-    return NextResponse.redirect(
-      `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`,
-    );
+    return NextResponse.redirect(`${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`);
   } else {
-    return NextResponse.redirect(
-      `${process.env.BASE_URL}/payement/fails?status=fail`,
-    );
+    return NextResponse.redirect(`${process.env.BASE_URL}/payement/fails?status=fail`);
   }
 };
 

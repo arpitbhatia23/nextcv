@@ -37,7 +37,9 @@ const Step4_AdditionalInfo = ({ next, previous }) => {
         {/* Certificates */}
         <section>
           <div className="flex items-center gap-4 mb-6 pb-2 border-b border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">1</div>
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+              1
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-slate-800">Certifications & Awards</h3>
           </div>
           <CertificateSection />
@@ -46,7 +48,9 @@ const Step4_AdditionalInfo = ({ next, previous }) => {
         {/* Summary */}
         <section>
           <div className="flex items-center gap-4 mb-6 pb-2 border-b border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">2</div>
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+              2
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-slate-800">Career Summary</h3>
           </div>
           <SummarySection ref={summaryRef} />

@@ -18,14 +18,8 @@ const handler = async (req, { params }) => {
     throw new apiError(400, "id and isactive is required");
   }
 
-  const data = await Coupon.findByIdAndUpdate(
-    id,
-    { $set: { isActive: isActive } },
-    { new: true }
-  );
+  const data = await Coupon.findByIdAndUpdate(id, { $set: { isActive: isActive } }, { new: true });
 
-  return NextResponse.json(
-    new apiResponse(200, "Coupon status updated successfully", data)
-  );
+  return NextResponse.json(new apiResponse(200, "Coupon status updated successfully", data));
 };
 export const PUT = asyncHandler(handler);

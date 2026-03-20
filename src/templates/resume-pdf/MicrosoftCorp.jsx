@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -130,18 +123,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
-        return trimmed.split(";").map((b) => b.trim()).filter(Boolean);
+        return trimmed
+          .split(";")
+          .map(b => b.trim())
+          .filter(Boolean);
       return [trimmed];
     })
     .filter(Boolean);
@@ -187,17 +183,14 @@ const MicrosoftCorp = ({ data }) => {
                   <Text style={styles.eduDegree}>{edu.degree}</Text>
                   <Text style={styles.eduInst}>{edu.institution}</Text>
                   <Text style={styles.eduDate}>
-                    {formatDate(edu.startYear)} -{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
                   {edu.description && (
                     <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletPoint}>
                           <Text style={styles.bullet}>•</Text>
-                          <Text style={{ ...styles.description, flex: 1 }}>
-                            {bullet}
-                          </Text>
+                          <Text style={{ ...styles.description, flex: 1 }}>{bullet}</Text>
                         </View>
                       ))}
                     </View>

@@ -43,9 +43,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
     startYear: z.string({ message: "Start date is required" }),
     endYear: z.string({ message: "End date is required" }),
     grade: z.string({ message: "Grade is required" }),
-    description: z
-      .string()
-      .nonempty("Please click 'Generate with AI' to create a description"),
+    description: z.string().nonempty("Please click 'Generate with AI' to create a description"),
   });
 
   const form = useForm({
@@ -64,29 +62,27 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
     updateForm({ education: educationList });
   }, [educationList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setEducationList((prev) =>
-        prev.map((edu) =>
-          edu.id === editingId ? { ...values, id: editingId } : edu,
-        ),
+      setEducationList(prev =>
+        prev.map(edu => (edu.id === editingId ? { ...values, id: editingId } : edu))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setEducationList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setEducationList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (education) => {
+  const handleEdit = education => {
     form.reset(education);
     setIsEditing(true);
     setEditingId(education.id);
   };
 
-  const handleDelete = (id) => {
-    setEducationList((prev) => prev.filter((edu) => edu.id !== id));
+  const handleDelete = id => {
+    setEducationList(prev => prev.filter(edu => edu.id !== id));
   };
 
   const cancelEdit = () => {
@@ -116,7 +112,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
         toast.success("AI Content Generated!");
       }
     } catch (err) {
-      toast.error("AI Generation failed.");
+      toast.error(err.message || "AI Generation failed.");
     } finally {
       setIsGenerating(false);
     }
@@ -155,10 +151,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
             </div>
             <CardContent className="p-2 md:p-8" id="tour-education-form-v2">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 gap-6">
                     <FormField
                       control={form.control}
@@ -166,8 +159,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <Trophy className="w-4 h-4 text-indigo-500" />{" "}
-                            Degree / Program
+                            <Trophy className="w-4 h-4 text-indigo-500" /> Degree / Program
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -187,8 +179,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <School className="w-4 h-4 text-indigo-500" />{" "}
-                            Institution Name
+                            <School className="w-4 h-4 text-indigo-500" /> Institution Name
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -210,8 +201,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-indigo-500" />{" "}
-                            Started
+                            <Calendar className="w-4 h-4 text-indigo-500" /> Started
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -230,8 +220,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-indigo-500" />{" "}
-                            Completed
+                            <Calendar className="w-4 h-4 text-indigo-500" /> Completed
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -251,9 +240,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                     name="grade"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold">
-                          Grade / CGPA
-                        </FormLabel>
+                        <FormLabel className="text-slate-900 font-bold">Grade / CGPA</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. 3.9 / 4.0 or 92%"
@@ -282,9 +269,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                             className="text-xs font-black text-indigo-600 flex items-center gap-x-1.5 hover:bg-indigo-50 px-2 py-0 md:py-1 rounded-lg transition-colors disabled:opacity-50"
                             id="tour-ai-button-v2"
                           >
-                            <Sparkles
-                              className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
-                            />
+                            <Sparkles className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`} />
                             {isGenerating
                               ? "Synthesizing..."
                               : form.watch("description")?.trim()
@@ -346,13 +331,11 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                   <p className="text-slate-400 font-bold">
                     No academic history added yet.
                     <br />
-                    <span className="text-xs font-medium">
-                      Your credentials will appear here.
-                    </span>
+                    <span className="text-xs font-medium">Your credentials will appear here.</span>
                   </p>
                 </motion.div>
               ) : (
-                educationList.map((edu, idx) => (
+                educationList.map(edu => (
                   <motion.div
                     key={edu.id}
                     layout
@@ -377,8 +360,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
                             </div>
                             <div className="text-xs font-light md:font-black text-slate-400 flex md:items-center gap-2 md:gap-4 mt-2">
                               <span className="flex items-center gap-1.5">
-                                <Calendar className="w-3 h-3" /> {edu.startYear}{" "}
-                                - {edu.endYear}
+                                <Calendar className="w-3 h-3" /> {edu.startYear} - {edu.endYear}
                               </span>
                               <span className="flex items-center gap-1 md:gap-1.5 bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-md md:rounded-lg">
                                 {edu.grade}

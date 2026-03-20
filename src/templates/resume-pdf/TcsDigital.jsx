@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -115,20 +108,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -145,23 +138,15 @@ const TcsDigital = ({ data }) => {
           <Text style={styles.role}>{data.jobRole}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && (
-              <Text>| {data.phone || data.phone_no}</Text>
-            )}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link
-                src={data.linkedin}
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link
-                src={data.portfolio}
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -185,8 +170,7 @@ const TcsDigital = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
                 <Text style={styles.jobCompany}>{exp.companyName}</Text>
@@ -194,9 +178,7 @@ const TcsDigital = ({ data }) => {
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -216,9 +198,7 @@ const TcsDigital = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text
-                    style={{ fontSize: 9, color: "#e91e63", marginBottom: 2 }}
-                  >
+                  <Text style={{ fontSize: 9, color: "#e91e63", marginBottom: 2 }}>
                     {proj.technologiesOrTopics}
                   </Text>
                 )}
@@ -226,9 +206,7 @@ const TcsDigital = ({ data }) => {
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -270,9 +248,7 @@ const TcsDigital = ({ data }) => {
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>

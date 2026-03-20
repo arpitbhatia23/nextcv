@@ -1,14 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Font,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -106,20 +98,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -136,23 +128,15 @@ const AcademicTeacher = ({ data }) => {
           <Text style={styles.role}>{data.jobRole || "Educator"}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && (
-              <Text>| {data.phone || data.phone_no}</Text>
-            )}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link
-                src={data.linkedin}
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link
-                src={data.portfolio}
-                style={{ color: "#000", textDecoration: "none" }}
-              >
+              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -215,13 +199,10 @@ const AcademicTeacher = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} -{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobSub, fontStyle: "italic" }}>
-                  {exp.companyName}
-                </Text>
+                <Text style={{ ...styles.jobSub, fontStyle: "italic" }}>{exp.companyName}</Text>
 
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
@@ -274,9 +255,7 @@ const AcademicTeacher = ({ data }) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Areas of Expertise</Text>
             <Text style={styles.skillList}>
-              {data.skills
-                .map((s) => (typeof s === "string" ? s : s.name))
-                .join(" • ")}
+              {data.skills.map(s => (typeof s === "string" ? s : s.name)).join(" • ")}
             </Text>
           </View>
         )}

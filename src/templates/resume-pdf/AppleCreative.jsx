@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -103,20 +96,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -132,22 +125,14 @@ const AppleCreative = ({ data }) => {
           <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && (
-              <Text>{data.phone || data.phone_no}</Text>
-            )}
+            {(data.phone || data.phone_no) && <Text>{data.phone || data.phone_no}</Text>}
             {data.linkedin && (
-              <Link
-                src={data.linkedin}
-                style={{ color: "#86868b", textDecoration: "none" }}
-              >
+              <Link src={data.linkedin} style={{ color: "#86868b", textDecoration: "none" }}>
                 LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link
-                src={data.portfolio}
-                style={{ color: "#86868b", textDecoration: "none" }}
-              >
+              <Link src={data.portfolio} style={{ color: "#86868b", textDecoration: "none" }}>
                 Portfolio
               </Link>
             )}
@@ -171,20 +156,15 @@ const AppleCreative = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{exp.position}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(exp.startDate)} —{" "}
-                    {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} — {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 6 }}>
-                  {exp.companyName}
-                </Text>
+                <Text style={{ ...styles.jobCompany, marginBottom: 6 }}>{exp.companyName}</Text>
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>●</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -204,9 +184,7 @@ const AppleCreative = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text
-                    style={{ fontSize: 9, color: "#86868b", marginBottom: 4 }}
-                  >
+                  <Text style={{ fontSize: 9, color: "#86868b", marginBottom: 4 }}>
                     {proj.technologiesOrTopics}
                   </Text>
                 )}
@@ -214,9 +192,7 @@ const AppleCreative = ({ data }) => {
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>●</Text>
-                      <Text style={[styles.description, styles.bulletText]}>
-                        {bullet}
-                      </Text>
+                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -234,8 +210,7 @@ const AppleCreative = ({ data }) => {
                 <View style={styles.jobHeader}>
                   <Text style={styles.jobTitle}>{edu.institution}</Text>
                   <Text style={styles.jobDate}>
-                    {formatDate(edu.startYear)} —{" "}
-                    {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} — {formatDate(edu.endYear) || "Present"}
                   </Text>
                 </View>
                 <Text style={styles.jobCompany}>
@@ -247,9 +222,7 @@ const AppleCreative = ({ data }) => {
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>●</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -279,9 +252,7 @@ const AppleCreative = ({ data }) => {
             <Text style={styles.sectionTitle}>Certificates</Text>
             {data.certificates.map((cert, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 9.5 }}>
-                  {cert.title}
-                </Text>
+                <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 9.5 }}>{cert.title}</Text>
                 <Text style={{ fontSize: 9, color: "#86868b" }}>
                   {cert.organization} · {formatDate(cert.year)}
                 </Text>

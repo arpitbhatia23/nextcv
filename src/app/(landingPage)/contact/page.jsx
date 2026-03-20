@@ -5,12 +5,7 @@ export const metadata = {
   title: "Contact NextCV - Resume Support & Enquiries",
   description:
     "Get in touch with the NextCV team. We support students and job seekers with 24/7 assistance for their resume building needs.",
-  keywords: [
-    "Contact NextCV",
-    "Resume Support",
-    "CV Builder Help",
-    "NextCV Email",
-  ],
+  keywords: ["Contact NextCV", "Resume Support", "CV Builder Help", "NextCV Email"],
   alternates: {
     canonical: `https://www.nextcv.in/contact`,
   },
@@ -50,13 +45,11 @@ export default function ContactPage() {
               We're here to help
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 transition-all">
-              Let's build your{" "}
-              <span className="text-indigo-600">career together</span>
+              Let's build your <span className="text-indigo-600">career together</span>
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Have questions about our{" "}
-              <span className="font-semibold">AI Resume Builder</span>? Need
-              help with your template? We typically reply within 24 hours.
+              Have questions about our <span className="font-semibold">AI Resume Builder</span>?
+              Need help with your template? We typically reply within 24 hours.
             </p>
           </div>
         </section>
@@ -74,9 +67,7 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
-              <div className="flex justify-center mb-2 text-indigo-500 font-bold">
-                ₹
-              </div>
+              <div className="flex justify-center mb-2 text-indigo-500 font-bold">₹</div>
               <div className="text-2xl font-bold text-slate-900">100</div>
               <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
                 Fixed Price
@@ -91,12 +82,9 @@ export default function ContactPage() {
             {/* Left: Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-slate-100">
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                  Send us a message
-                </h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">Send us a message</h2>
                 <p className="text-slate-500 mb-8">
-                  Fill out the form below and we'll get back to you as soon as
-                  possible.
+                  Fill out the form below and we'll get back to you as soon as possible.
                 </p>
 
                 {/* Reuse existing accessible form component, ensure it's styled for light mode internally or has neutral styles */}
@@ -111,8 +99,7 @@ export default function ContactPage() {
                 <Mail className="w-8 h-8 mb-4 opacity-80" />
                 <h3 className="text-xl font-bold mb-2">Email Support</h3>
                 <p className="text-indigo-100 mb-6 text-sm">
-                  Prefer email? reaching out directly is always faster for
-                  technical support.
+                  Prefer email? reaching out directly is always faster for technical support.
                 </p>
                 <a
                   href="mailto:support@nextcv.in"

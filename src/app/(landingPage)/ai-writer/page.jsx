@@ -1,11 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Sparkles,
-  BrainCircuit,
-  Wand2,
-  RefreshCcw,
-} from "lucide-react";
+import { ArrowRight, Sparkles, Wand2, RefreshCcw } from "lucide-react";
 
 export const metadata = {
   title: "AI Resume Writer | Generate CV Points with AI",
@@ -40,9 +34,8 @@ export default function AIWriterPage() {
             </span>
           </h1>
           <p className="text-lg leading-8 text-slate-600 mb-10">
-            Stop staring at a blank cursor. Let our intelligent AI write
-            professional summaries and impactful bullet points for you in
-            seconds.
+            Stop staring at a blank cursor. Let our intelligent AI write professional summaries and
+            impactful bullet points for you in seconds.
           </p>
           <div className="flex items-center justify-center gap-x-6">
             <Link
@@ -59,21 +52,16 @@ export default function AIWriterPage() {
       <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">
-              How It Works
-            </h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-6">How It Works</h2>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
                   <span className="font-bold text-indigo-600">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">
-                    Enter Your Job Title
-                  </h3>
+                  <h3 className="font-semibold text-lg">Enter Your Job Title</h3>
                   <p className="text-slate-600">
-                    Simply tell the AI what role you want to apply for (e.g.,
-                    "Software Engineer").
+                    Simply tell the AI what role you want to apply for (e.g., "Software Engineer").
                   </p>
                 </div>
               </div>
@@ -82,12 +70,10 @@ export default function AIWriterPage() {
                   <span className="font-bold text-purple-600">2</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">
-                    Detailed Suggestions
-                  </h3>
+                  <h3 className="font-semibold text-lg">Detailed Suggestions</h3>
                   <p className="text-slate-600">
-                    Our AI analyzes thousands of successful resumes to generate
-                    relevant skills and achievements.
+                    Our AI analyzes thousands of successful resumes to generate relevant skills and
+                    achievements.
                   </p>
                 </div>
               </div>
@@ -98,8 +84,8 @@ export default function AIWriterPage() {
                 <div>
                   <h3 className="font-semibold text-lg">One-Click Add</h3>
                   <p className="text-slate-600">
-                    Review the suggestions and add them to your resume with a
-                    single click. Edit as needed.
+                    Review the suggestions and add them to your resume with a single click. Edit as
+                    needed.
                   </p>
                 </div>
               </div>
@@ -114,9 +100,7 @@ export default function AIWriterPage() {
                 <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <div className="font-semibold text-slate-900">
-                  NextCV AI Assistant
-                </div>
+                <div className="font-semibold text-slate-900">NextCV AI Assistant</div>
               </div>
 
               <div className="space-y-4">
@@ -128,21 +112,17 @@ export default function AIWriterPage() {
                   <div className="absolute top-0 right-0 p-2">
                     <Wand2 className="w-4 h-4 text-indigo-400" />
                   </div>
-                  <p className="text-sm text-indigo-900 mb-2 font-medium">
-                    Suggestion:
-                  </p>
+                  <p className="text-sm text-indigo-900 mb-2 font-medium">Suggestion:</p>
                   <p className="text-sm text-slate-700">
-                    "Developed scalable REST APIs using Node.js and Express,
-                    reducing server response time by 40%."
+                    "Developed scalable REST APIs using Node.js and Express, reducing server
+                    response time by 40%."
                   </p>
                 </div>
                 <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
-                  <p className="text-sm text-indigo-900 mb-2 font-medium">
-                    Suggestion:
-                  </p>
+                  <p className="text-sm text-indigo-900 mb-2 font-medium">Suggestion:</p>
                   <p className="text-sm text-slate-700">
-                    "Collaborated with cross-functional teams to deploy
-                    microservices architecture on AWS."
+                    "Collaborated with cross-functional teams to deploy microservices architecture
+                    on AWS."
                   </p>
                 </div>
               </div>
@@ -159,47 +139,42 @@ export default function AIWriterPage() {
       <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate prose-indigo">
         <h2>Why Use an AI Resume Writer?</h2>
         <p>
-          Writer's block is real. Staring at a blank screen wondering how to
-          phrase "I answered calls" into a professional achievement can be
-          paralyzing. An <strong>AI Resume Writer</strong> solves this by acting
-          as your personal career coach.
+          Writer's block is real. Staring at a blank screen wondering how to phrase "I answered
+          calls" into a professional achievement can be paralyzing. An{" "}
+          <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
         </p>
 
         <h3>Professional Summaries in Seconds</h3>
         <p>
-          The summary section is the first thing recruiters read. It needs to be
-          punchy, relevant, and keyword-rich. Instead of spending hours crafting
-          the perfect 3 sentences, let NextCV AI analyze your job title and
-          generate a compelling professional summary that highlights your years
-          of experience and key strengths.
+          The summary section is the first thing recruiters read. It needs to be punchy, relevant,
+          and keyword-rich. Instead of spending hours crafting the perfect 3 sentences, let NextCV
+          AI analyze your job title and generate a compelling professional summary that highlights
+          your years of experience and key strengths.
         </p>
 
         <h3>Optimizing for Keywords</h3>
         <p>
-          Applicant Tracking Systems look for specific keywords in your resume.
-          If you are applying for a "Project Manager" role, your resume needs
-          words like "Agile," "Budget Management," and "Stakeholder
-          Communication." Our AI is trained on thousands of job descriptions to
-          understand exactly what keywords correspond to your target role,
-          ensuring you don't miss out on these critical terms.
+          Applicant Tracking Systems look for specific keywords in your resume. If you are applying
+          for a "Project Manager" role, your resume needs words like "Agile," "Budget Management,"
+          and "Stakeholder Communication." Our AI is trained on thousands of job descriptions to
+          understand exactly what keywords correspond to your target role, ensuring you don't miss
+          out on these critical terms.
         </p>
 
         <h3>Improving Grammar and Tone</h3>
         <p>
-          Even small grammatical errors can lead to rejection. AI helps maintain
-          a consistent, professional tone throughout your document. It ensures
-          you use strong action verbs (like "Spearheaded," "Orchestrated,"
-          "Delivered") instead of passive language, making your contributions
-          sound more impactful.
+          Even small grammatical errors can lead to rejection. AI helps maintain a consistent,
+          professional tone throughout your document. It ensures you use strong action verbs (like
+          "Spearheaded," "Orchestrated," "Delivered") instead of passive language, making your
+          contributions sound more impactful.
         </p>
 
         <h3>Is AI Cheating?</h3>
         <p>
-          Absolutely not. AI is a tool to help you articulate <em>your</em>{" "}
-          actual experiences better. You still control the content. You select
-          the suggestions that match your history and edit them to reflect the
-          truth. It simply does the heavy lifting of phrasing and formatting,
-          allowing you to focus on the substance of your career.
+          Absolutely not. AI is a tool to help you articulate <em>your</em> actual experiences
+          better. You still control the content. You select the suggestions that match your history
+          and edit them to reflect the truth. It simply does the heavy lifting of phrasing and
+          formatting, allowing you to focus on the substance of your career.
         </p>
       </section>
     </main>

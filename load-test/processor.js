@@ -73,9 +73,7 @@ function generateResumeData(userContext, events, done) {
 
 function logResponse(requestParams, response, context, ee, next) {
   if (response.statusCode >= 400) {
-    console.error(
-      `Request to ${requestParams.url} failed with status ${response.statusCode}`,
-    );
+    console.error(`Request to ${requestParams.url} failed with status ${response.statusCode}`);
     if (response.body) {
       console.error("Body:", response.body);
     }

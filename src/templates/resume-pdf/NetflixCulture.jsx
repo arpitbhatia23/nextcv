@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -124,20 +117,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
       if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
       return [trimmed];
     })
@@ -154,30 +147,19 @@ const NetflixCulture = ({ data }) => {
           <Text style={styles.role}>{data.jobRole}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && (
-              <Text>| {data.phone || data.phone_no}</Text>
-            )}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.linkedin && (
-              <Link
-                src={data.linkedin}
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
+              <Link src={data.linkedin} style={{ color: "#fff", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.github && (
-              <Link
-                src={data.github}
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
+              <Link src={data.github} style={{ color: "#fff", textDecoration: "none" }}>
                 | GitHub
               </Link>
             )}
             {data.portfolio && (
-              <Link
-                src={data.portfolio}
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
+              <Link src={data.portfolio} style={{ color: "#fff", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -202,20 +184,15 @@ const NetflixCulture = ({ data }) => {
                   <View style={styles.jobHeader}>
                     <Text style={styles.jobTitle}>{exp.position}</Text>
                     <Text style={styles.jobDate}>
-                      {formatDate(exp.startDate)} -{" "}
-                      {formatDate(exp.endDate) || "Present"}
+                      {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                     </Text>
                   </View>
-                  <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>
-                    {exp.companyName}
-                  </Text>
+                  <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
                   <View>
                     {splitToBullets(exp.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -250,9 +227,7 @@ const NetflixCulture = ({ data }) => {
                     {splitToBullets(proj.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
-                        <Text style={[styles.description, styles.bulletText]}>
-                          {bullet}
-                        </Text>
+                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -281,9 +256,7 @@ const NetflixCulture = ({ data }) => {
               <Text style={styles.sectionTitle}>Education</Text>
               {data.education?.map((edu, i) => (
                 <View key={i} style={{ marginBottom: 4 }}>
-                  <Text style={{ fontSize: 11, fontWeight: "bold" }}>
-                    {edu.degree}
-                  </Text>
+                  <Text style={{ fontSize: 11, fontWeight: "bold" }}>{edu.degree}</Text>
                   <Text style={{ fontSize: 10 }}>
                     {edu.institution}, {formatDate(edu.endYear)}
                   </Text>
@@ -292,9 +265,7 @@ const NetflixCulture = ({ data }) => {
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
                           <Text style={styles.bulletPoint}>›</Text>
-                          <Text style={[styles.description, styles.bulletText]}>
-                            {bullet}
-                          </Text>
+                          <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                         </View>
                       ))}
                     </View>
@@ -303,9 +274,7 @@ const NetflixCulture = ({ data }) => {
               ))}
               {data.certificates?.map((cert, i) => (
                 <View key={i} style={{ marginTop: 4 }}>
-                  <Text style={{ fontSize: 11, fontWeight: "bold" }}>
-                    {cert.title}
-                  </Text>
+                  <Text style={{ fontSize: 11, fontWeight: "bold" }}>{cert.title}</Text>
                   <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
                 </View>
               ))}

@@ -7,11 +7,10 @@ import { NextResponse } from "next/server";
 import { apiResponse } from "@/utils/apiResponse";
 import { asyncHandler } from "@/utils/asyncHandler";
 import User from "@/models/user.model";
-const handler = async (req) => {
+const handler = async req => {
   await dbConnect();
   const searchParams = req.nextUrl.searchParams;
   const id = searchParams.get("id");
-  console.log(id);
   if (!id) {
     throw new apiError(400, "Resume ID is required");
   }

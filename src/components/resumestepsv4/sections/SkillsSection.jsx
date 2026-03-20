@@ -20,12 +20,10 @@ import { toast } from "sonner";
 import useResumeStore from "@/store/useResumeStore";
 
 const SkillsSection = () => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
-  const [skillList, setSkillList] = useState(
-    Array.isArray(formData.skills) ? formData.skills : [],
-  );
+  const [skillList, setSkillList] = useState(Array.isArray(formData.skills) ? formData.skills : []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
@@ -54,62 +52,53 @@ const SkillsSection = () => {
     updateForm({ skills: skillList });
   }, [skillList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     const names = values.name
       .split(",")
-      .map((n) => n.trim())
-      .filter((n) => n.length > 0);
+      .map(n => n.trim())
+      .filter(n => n.length > 0);
 
     if (isEditing) {
-      setSkillList((prev) =>
-        prev.map((skill) =>
+      setSkillList(prev =>
+        prev.map(skill =>
           skill.id === editingId
             ? {
                 ...skill,
                 name: names[0],
                 level: values.level || "Intermediate",
               }
-            : skill,
-        ),
+            : skill
+        )
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
       const newSkills = names
-        .filter(
-          (name) =>
-            !skillList.some(
-              (skill) => skill.name.toLowerCase() === name.toLowerCase(),
-            ),
-        )
-        .map((name) => ({
+        .filter(name => !skillList.some(skill => skill.name.toLowerCase() === name.toLowerCase()))
+        .map(name => ({
           id: crypto.randomUUID(),
           name,
           level: values.level || "Intermediate",
         }));
 
-      setSkillList((prev) => [...prev, ...newSkills]);
+      setSkillList(prev => [...prev, ...newSkills]);
     }
     form.reset({ name: "", level: "" });
   };
 
-  const handleEdit = (skill) => {
+  const handleEdit = skill => {
     form.reset(skill);
     setIsEditing(true);
     setEditingId(skill.id);
   };
 
-  const handleDelete = (id) => {
-    setSkillList((prev) => prev.filter((skill) => skill.id !== id));
+  const handleDelete = id => {
+    setSkillList(prev => prev.filter(skill => skill.id !== id));
   };
 
-  const addSuggestion = (skillName) => {
-    if (
-      !skillList.some(
-        (skill) => skill.name.toLowerCase() === skillName.toLowerCase(),
-      )
-    ) {
-      setSkillList((prev) => [
+  const addSuggestion = skillName => {
+    if (!skillList.some(skill => skill.name.toLowerCase() === skillName.toLowerCase())) {
+      setSkillList(prev => [
         ...prev,
         {
           id: crypto.randomUUID(),
@@ -128,7 +117,7 @@ const SkillsSection = () => {
           <Card className="border shadow-sm border-slate-100 bg-white rounded-2xl overflow-hidden">
             <div className="p-4">
               <div className="flex flex-wrap gap-4 mb-4">
-                {suggestions.map((skill) => (
+                {suggestions.map(skill => (
                   <button
                     key={skill}
                     type="button"
@@ -141,10 +130,7 @@ const SkillsSection = () => {
               </div>
 
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="name"
@@ -169,9 +155,7 @@ const SkillsSection = () => {
                     name="level"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold text-xs">
-                          Level
-                        </FormLabel>
+                        <FormLabel className="text-slate-900 font-bold text-xs">Level</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Expert"
@@ -202,14 +186,12 @@ const SkillsSection = () => {
             {skillList.length === 0 ? (
               <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center">
                 <Target className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                <h4 className="text-slate-400 font-bold text-sm">
-                  Skill Matrix Empty
-                </h4>
+                <h4 className="text-slate-400 font-bold text-sm">Skill Matrix Empty</h4>
               </div>
             ) : (
               <div className="flex flex-wrap gap-2">
                 <AnimatePresence>
-                  {skillList.map((skill) => (
+                  {skillList.map(skill => (
                     <motion.div
                       key={skill.id}
                       layout
@@ -219,9 +201,7 @@ const SkillsSection = () => {
                       className="group flex items-center gap-2 bg-white pl-3 pr-1 py-1 rounded-xl shadow-sm border border-slate-100 hover:border-indigo-200"
                     >
                       <div className="flex flex-col">
-                        <span className="font-bold text-slate-900 text-sm">
-                          {skill.name}
-                        </span>
+                        <span className="font-bold text-slate-900 text-sm">{skill.name}</span>
                         <span className="text-[9px] font-black text-indigo-500 uppercase tracking-widest">
                           {skill.level}
                         </span>

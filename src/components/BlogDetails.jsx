@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useMemo, Suspense } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -7,14 +7,12 @@ import {
   Clock,
   Calendar,
   Linkedin,
-  Facebook,
   Link as LinkIcon,
   Twitter,
   ArrowUp,
   User,
   Check,
   ChevronRight,
-  Share2,
 } from "lucide-react";
 
 import { client, urlFor } from "../sanity";
@@ -23,13 +21,13 @@ import Loading from "@/app/loading";
 import Link from "next/link";
 
 // --- Helper Functions ---
-const estimateReadingTime = (text) => {
+const estimateReadingTime = text => {
   const wordsPerMinute = 200;
   let wordCount = 0;
   if (text) {
-    text.forEach((block) => {
+    text.forEach(block => {
       if (block.children) {
-        block.children.forEach((child) => {
+        block.children.forEach(child => {
           if (child.text) {
             wordCount += child.text.split(/\s+/).length;
           }
@@ -45,12 +43,9 @@ const ErrorDisplay = () => (
     <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-6">
       <LinkIcon className="w-10 h-10 text-red-500" />
     </div>
-    <h2 className="text-2xl font-bold text-slate-800 mb-2">
-      Unable to load article
-    </h2>
+    <h2 className="text-2xl font-bold text-slate-800 mb-2">Unable to load article</h2>
     <p className="mb-8 text-slate-500 max-w-md">
-      We're having trouble retrieving this content. The article might have been
-      moved or deleted.
+      We're having trouble retrieving this content. The article might have been moved or deleted.
     </p>
     <div className="flex gap-4">
       <button
@@ -83,9 +78,7 @@ const ptComponents = {
           />
         </div>
         {value.caption && (
-          <p className="mt-4 text-center text-sm text-slate-500 italic">
-            {value.caption}
-          </p>
+          <p className="mt-4 text-center text-sm text-slate-500 italic">{value.caption}</p>
         )}
       </div>
     ),
@@ -94,10 +87,7 @@ const ptComponents = {
     h2: ({ children }) => {
       const id = children[0]?.toLowerCase().replace(/\s+/g, "-");
       return (
-        <h2
-          id={id}
-          className="text-3xl font-bold text-slate-900 mt-16 mb-6 scroll-mt-24"
-        >
+        <h2 id={id} className="text-3xl font-bold text-slate-900 mt-16 mb-6 scroll-mt-24">
           {children}
         </h2>
       );
@@ -106,10 +96,7 @@ const ptComponents = {
       const text = String(children[0] || children);
       const id = text?.toLowerCase()?.replace(/\s+/g, "-");
       return (
-        <h3
-          id={id}
-          className="text-2xl font-bold text-slate-800 mt-12 mb-4 scroll-mt-24"
-        >
+        <h3 id={id} className="text-2xl font-bold text-slate-800 mt-12 mb-4 scroll-mt-24">
           {children}
         </h3>
       );
@@ -120,19 +107,13 @@ const ptComponents = {
       </blockquote>
     ),
     normal: ({ children }) => (
-      <p className="text-lg text-slate-600 leading-relaxed mb-6 last:mb-0">
-        {children}
-      </p>
+      <p className="text-lg text-slate-600 leading-relaxed mb-6 last:mb-0">{children}</p>
     ),
   },
   list: {
-    bullet: ({ children }) => (
-      <ul className="space-y-4 mb-8 list-none">{children}</ul>
-    ),
+    bullet: ({ children }) => <ul className="space-y-4 mb-8 list-none">{children}</ul>,
     number: ({ children }) => (
-      <ol className="space-y-4 mb-8 list-decimal list-inside text-lg text-slate-600">
-        {children}
-      </ol>
+      <ol className="space-y-4 mb-8 list-decimal list-inside text-lg text-slate-600">{children}</ol>
     ),
   },
   listItem: ({ children }) => (
@@ -143,9 +124,7 @@ const ptComponents = {
   ),
   marks: {
     link: ({ children, value }) => {
-      const rel = !value.href.startsWith("/")
-        ? "noreferrer noopener"
-        : undefined;
+      const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
       return (
         <a
           href={value.href}
@@ -173,8 +152,7 @@ const BlogDetails = ({ slug, initialData }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
     };
@@ -187,10 +165,11 @@ const BlogDetails = ({ slug, initialData }) => {
     if (!slug) return;
 
     if (!initialData) {
-      setIsLoading(true);
-      setError(null);
+      const fetchData = async () => {
+        setIsLoading(true);
+        setError(null);
 
-      const query = `*[_type == "post" && slug.current == $slug][0]{
+        const query = `*[_type == "post" && slug.current == $slug][0]{
         title,
         body,
         _createdAt,
@@ -199,18 +178,20 @@ const BlogDetails = ({ slug, initialData }) => {
         "estimatedReadTime": round(length(pt::text(body)) / 5 / 180)
       }`;
 
-      client
-        .fetch(query, { slug })
-        .then((data) => {
-          if (!data) throw new Error("Article not found");
-          setBlog(data);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          console.error("Failed to fetch blog post:", err);
-          setError(err);
-          setIsLoading(false);
-        });
+        client
+          .fetch(query, { slug })
+          .then(data => {
+            if (!data) throw new Error("Article not found");
+            setBlog(data);
+            setIsLoading(false);
+          })
+          .catch(err => {
+            console.error("Failed to fetch blog post:", err);
+            setError(err);
+            setIsLoading(false);
+          });
+      };
+      fetchData();
     }
 
     // Fetch related posts
@@ -227,18 +208,19 @@ const BlogDetails = ({ slug, initialData }) => {
 
   useEffect(() => {
     if (blog?.body) {
-      const headings = blog.body
-        .filter(
-          (block) =>
-            block._type === "block" &&
-            (block.style === "h2" || block.style === "h3"),
-        )
-        .map((block) => ({
-          text: block.children[0]?.text,
-          id: block.children[0]?.text?.toLowerCase().replace(/\s+/g, "-"),
-          level: block.style === "h2" ? 2 : 3,
-        }));
-      setToc(headings);
+      const fetchData = async () => {
+        const headings = blog.body
+          .filter(
+            block => block._type === "block" && (block.style === "h2" || block.style === "h3")
+          )
+          .map(block => ({
+            text: block.children[0]?.text,
+            id: block.children[0]?.text?.toLowerCase().replace(/\s+/g, "-"),
+            level: block.style === "h2" ? 2 : 3,
+          }));
+        setToc(headings);
+      };
+      fetchData();
     }
   }, [blog]);
 
@@ -251,27 +233,24 @@ const BlogDetails = ({ slug, initialData }) => {
     }
   }, [copySuccess]);
 
-  const formattedDate = useMemo(() => {
+  const formattedDate = () => {
     if (!blog?._createdAt) return "";
     return new Date(blog._createdAt).toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
-  }, [blog?._createdAt]);
+  };
 
-  const readingTime = useMemo(() => {
+  const readingTime = () => {
     if (!blog) return "0";
-    if (
-      typeof blog.estimatedReadTime === "number" &&
-      blog.estimatedReadTime > 0
-    ) {
+    if (typeof blog.estimatedReadTime === "number" && blog.estimatedReadTime > 0) {
       return Math.max(1, Math.round(blog.estimatedReadTime));
     }
     return Math.max(1, Math.round(estimateReadingTime(blog.body)));
-  }, [blog]);
+  };
 
-  const handleShare = (platform) => {
+  const handleShare = platform => {
     const currentUrl = window.location.href;
     const title = blog?.title || "Great logistics article";
     const hashtags = "resume";
@@ -288,9 +267,7 @@ const BlogDetails = ({ slug, initialData }) => {
         shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
         break;
       case "copy":
-        navigator.clipboard
-          .writeText(currentUrl)
-          .then(() => setCopySuccess(true));
+        navigator.clipboard.writeText(currentUrl).then(() => setCopySuccess(true));
         return;
       default:
         return;
@@ -381,9 +358,7 @@ const BlogDetails = ({ slug, initialData }) => {
             <div className="mt-20 pt-12 border-t border-slate-100">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
                 <div className="flex items-center gap-3">
-                  <span className="text-slate-500 font-medium">
-                    Share this article:
-                  </span>
+                  <span className="text-slate-500 font-medium">Share this article:</span>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleShare("twitter")}
@@ -411,9 +386,7 @@ const BlogDetails = ({ slug, initialData }) => {
                 </div>
 
                 <button
-                  onClick={() =>
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="flex items-center gap-2 px-6 py-3 bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-xl transition-all font-semibold"
                 >
                   <ArrowUp className="w-5 h-5" /> Back to Top
@@ -438,9 +411,7 @@ const BlogDetails = ({ slug, initialData }) => {
                         key={index}
                         href={`#${heading.id}`}
                         className={`block text-sm transition-all hover:text-indigo-600 ${
-                          heading.level === 3
-                            ? "ml-4 text-slate-500"
-                            : "font-medium text-slate-700"
+                          heading.level === 3 ? "ml-4 text-slate-500" : "font-medium text-slate-700"
                         }`}
                       >
                         {heading.text}
@@ -475,9 +446,7 @@ const BlogDetails = ({ slug, initialData }) => {
                   </div>
                 </div>
                 {blog.author?.bio && (
-                  <p className="text-white/80 leading-relaxed text-sm mb-6">
-                    {blog.author.bio}
-                  </p>
+                  <p className="text-white/80 leading-relaxed text-sm mb-6">{blog.author.bio}</p>
                 )}
                 <Link
                   href="/blogs"
@@ -489,12 +458,9 @@ const BlogDetails = ({ slug, initialData }) => {
 
               {/* Newsletter or CTA (Optional) */}
               <div className="p-8 rounded-3xl border-2 border-dashed border-slate-200 text-center">
-                <h4 className="font-bold text-slate-900 mb-2">
-                  Build Your Expert Resume
-                </h4>
+                <h4 className="font-bold text-slate-900 mb-2">Build Your Expert Resume</h4>
                 <p className="text-sm text-slate-500 mb-6">
-                  Create a professional resume in minutes with our AI-powered
-                  builder.
+                  Create a professional resume in minutes with our AI-powered builder.
                 </p>
                 <Link
                   href="/dashboard"
@@ -512,12 +478,8 @@ const BlogDetails = ({ slug, initialData }) => {
           <section className="mt-32 pt-24 border-t border-slate-100">
             <div className="flex items-end justify-between mb-12">
               <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-4">
-                  You might also like
-                </h2>
-                <p className="text-slate-500">
-                  More insights and career tips from our experts.
-                </p>
+                <h2 className="text-3xl font-bold text-slate-900 mb-4">You might also like</h2>
+                <p className="text-slate-500">More insights and career tips from our experts.</p>
               </div>
               <Link
                 href="/blogs"
@@ -528,7 +490,7 @@ const BlogDetails = ({ slug, initialData }) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedPosts.map((post) => (
+              {relatedPosts.map(post => (
                 <Link
                   key={post.slug.current}
                   href={`/blogs/${post.slug.current}`}

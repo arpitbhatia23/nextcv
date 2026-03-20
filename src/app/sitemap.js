@@ -76,14 +76,13 @@ export default async function sitemap() {
   ];
 
   // Dynamic blog pages
-  const blogPages = blogs.map((blog) => ({
+  const blogPages = blogs.map(blog => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
     lastModified: new Date(blog._updatedAt),
     changeFrequency: "daily",
     priority: 0.9,
   }));
 
-  console.log(blogPages?.length);
   // Return all sitemap entries
   return [...pages, ...blogPages];
 }

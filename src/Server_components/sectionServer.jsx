@@ -9,7 +9,7 @@ const sectionServer = async () => {
   const now = new Date();
   const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-  const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0); // day before this month
+  // const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0); // day before this month
 
   // === NEW USERS ===
   const currentNewUsers = await User.countDocuments({
@@ -21,9 +21,7 @@ const sectionServer = async () => {
   });
 
   const newUserGrowth =
-    lastNewUsers > 0
-      ? +(((currentNewUsers - lastNewUsers) / lastNewUsers) * 100).toFixed(2)
-      : null;
+    lastNewUsers > 0 ? +(((currentNewUsers - lastNewUsers) / lastNewUsers) * 100).toFixed(2) : null;
 
   // === ACTIVE USERS ===
   const currentActiveUsers = await User.countDocuments({
@@ -36,10 +34,7 @@ const sectionServer = async () => {
 
   const activeUserGrowth =
     lastActiveUsers > 0
-      ? +(
-          ((currentActiveUsers - lastActiveUsers) / lastActiveUsers) *
-          100
-        ).toFixed(2)
+      ? +(((currentActiveUsers - lastActiveUsers) / lastActiveUsers) * 100).toFixed(2)
       : null;
 
   // === PAYMENTS ===
@@ -79,8 +74,7 @@ const sectionServer = async () => {
   const paymentGrowth =
     lastPayment.totalAmount > 0
       ? +(
-          ((currentPayment.totalAmount - lastPayment.totalAmount) /
-            lastPayment.totalAmount) *
+          ((currentPayment.totalAmount - lastPayment.totalAmount) / lastPayment.totalAmount) *
           100
         ).toFixed(2)
       : null;
@@ -118,9 +112,7 @@ const sectionServer = async () => {
     .map((item, index, arr) => {
       const prev = arr[index - 1];
       const growthRate =
-        prev && prev.newUsers > 0
-          ? ((item.newUsers - prev.newUsers) / prev.newUsers) * 100
-          : null;
+        prev && prev.newUsers > 0 ? ((item.newUsers - prev.newUsers) / prev.newUsers) * 100 : null;
 
       return {
         ...item,

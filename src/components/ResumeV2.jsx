@@ -29,13 +29,10 @@ const SkillStep = dynamic(() => import("./resumestepsv2/SkillStepV2"), {
   ssr: false,
   loading: () => <Loading />,
 });
-const ExpricenceStep = dynamic(
-  () => import("./resumestepsv2/ExpricenceStepV2"),
-  {
-    ssr: false,
-    loading: () => <Loading />,
-  },
-);
+const ExpricenceStep = dynamic(() => import("./resumestepsv2/ExpricenceStepV2"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
 const FinalStep = dynamic(() => import("./resumestepsv2/FinalStepV2"), {
   ssr: false,
   loading: () => <Loading />,
@@ -57,8 +54,8 @@ import Loading from "@/app/loading";
 const ResumeV2 = () => {
   const [step, setStep] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for back, 1 for forward
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const resumeSteps = [
     { component: BasicInfoStep, title: "Basic Info", icon: User },
@@ -73,13 +70,13 @@ const ResumeV2 = () => {
 
   const next = () => {
     setDirection(1);
-    setStep((prev) => Math.min(prev + 1, resumeSteps.length - 1));
+    setStep(prev => Math.min(prev + 1, resumeSteps.length - 1));
   };
   const previous = () => {
     setDirection(-1);
-    setStep((prev) => Math.max(prev - 1, 0));
+    setStep(prev => Math.max(prev - 1, 0));
   };
-  const goToStep = (stepIndex) => {
+  const goToStep = stepIndex => {
     setDirection(stepIndex > step ? 1 : -1);
     setStep(stepIndex);
   };
@@ -225,7 +222,7 @@ const ResumeV2 = () => {
   const StepComponents = resumeSteps[step]?.component;
 
   const variants = {
-    enter: (direction) => ({
+    enter: direction => ({
       x: direction > 0 ? 100 : -100,
       opacity: 0,
     }),
@@ -234,7 +231,7 @@ const ResumeV2 = () => {
       x: 0,
       opacity: 1,
     },
-    exit: (direction) => ({
+    exit: direction => ({
       zIndex: 0,
       x: direction < 0 ? 100 : -100,
       opacity: 0,
@@ -262,10 +259,7 @@ const ResumeV2 = () => {
               </div> */}
             </div>
 
-            <div
-              className="flex items-center gap-6"
-              id="tour-resume-progress-v2"
-            >
+            <div className="flex items-center gap-6" id="tour-resume-progress-v2">
               <div className="text-right hidden sm:block">
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">
                   Overall Completion

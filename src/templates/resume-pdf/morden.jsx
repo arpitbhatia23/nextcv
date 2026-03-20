@@ -1,15 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-  Svg,
-  Path,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 // SVG Icons for LinkedIn, GitHub, Portfolio
@@ -198,13 +189,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -215,7 +206,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -229,9 +220,7 @@ const morden = ({ data }) => (
       <View style={styles.header}>
         <View style={styles.nameBlock}>
           <Text style={styles.name}>{data.name || "Your Name"}</Text>
-          {data.headline && (
-            <Text style={styles.headline}>{data.headline}</Text>
-          )}
+          {data.headline && <Text style={styles.headline}>{data.headline}</Text>}
           <Text style={styles.contact}>
             {data.email} | {data.phone || data.phone_no} | {data.address}
           </Text>
@@ -324,8 +313,7 @@ const morden = ({ data }) => (
                 {exp.position} @ {exp.companyName}
               </Text>
               <Text style={styles.expMeta}>
-                {formatDate(exp.startDate)} -{" "}
-                {formatDate(exp.endDate) || "Present"}
+                {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
               </Text>
               <View style={styles.bulletList}>
                 {splitToBullets(exp.description).map((bullets, idx) => (
@@ -353,9 +341,7 @@ const morden = ({ data }) => (
                 {proj.date && ` | ${proj.date}`}
               </Text>
               {proj.technologiesOrTopics && (
-                <Text style={styles.projTech}>
-                  Tech: {proj.technologiesOrTopics}
-                </Text>
+                <Text style={styles.projTech}>Tech: {proj.technologiesOrTopics}</Text>
               )}
               {proj.description && (
                 <View style={styles.bulletList}>

@@ -1,23 +1,7 @@
 "use client";
 
-import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from "@tabler/icons-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -27,9 +11,7 @@ import {
 import { useSession } from "next-auth/react";
 
 export function NavUser({ user }) {
-  const { isMobile } = useSidebar();
   const { data: session } = useSession();
-  const isAdmin = session?.user?.role === "admin";
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -47,9 +29,7 @@ export function NavUser({ user }) {
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user?.name}</span>
-                <span className="text-muted-foreground truncate text-xs">
-                  {user?.email}
-                </span>
+                <span className="text-muted-foreground truncate text-xs">{user?.email}</span>
               </div>
 
               {/* {isAdmin && <IconDotsVertical className="ml-auto size-4" />} */}

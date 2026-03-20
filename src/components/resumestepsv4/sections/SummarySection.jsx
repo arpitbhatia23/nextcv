@@ -1,19 +1,8 @@
 "use client";
 import React, { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import {
-  BrainCircuit,
-  Sparkles,
-  AlignLeft,
-  CheckCircle2,
-} from "lucide-react";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormControl,
-  FormLabel,
-} from "@/components/ui/form";
+import { BrainCircuit, Sparkles, AlignLeft, CheckCircle2 } from "lucide-react";
+import { Form, FormField, FormItem, FormControl, FormLabel } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,14 +14,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
 
 const SummarySection = forwardRef(({}, ref) => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
   const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
-    summary: z
-      .string()
-      .min(20, { message: "Summary should be at least 20 characters" }),
+    summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
   });
 
   const form = useForm({
@@ -52,7 +39,7 @@ const SummarySection = forwardRef(({}, ref) => {
     validate: async () => {
       const isValid = await form.trigger();
       return isValid;
-    }
+    },
   }));
 
   const handleAiGeneration = async () => {
@@ -155,20 +142,19 @@ const SummarySection = forwardRef(({}, ref) => {
                     : "Impactful"}
               </span>
             </div>
-            <span className="text-xs font-bold">
-              {watchedSummary?.length || 0} Chars
-            </span>
+            <span className="text-xs font-bold">{watchedSummary?.length || 0} Chars</span>
           </div>
         </div>
       </Card>
-      
+
       {/* Checklist Hint */}
       <div className="bg-indigo-50/50 border border-indigo-50 rounded-xl p-4 flex gap-4 mt-4">
-         <Sparkles className="w-5 h-5 text-indigo-400 shrink-0" />
-         <div className="text-xs text-indigo-800">
-           <strong className="block mb-1">Make it stand out:</strong>
-           Start with years of experience, highlight top technical skills, and conclude with a key achievement or goal.
-         </div>
+        <Sparkles className="w-5 h-5 text-indigo-400 shrink-0" />
+        <div className="text-xs text-indigo-800">
+          <strong className="block mb-1">Make it stand out:</strong>
+          Start with years of experience, highlight top technical skills, and conclude with a key
+          achievement or goal.
+        </div>
       </div>
     </div>
   );

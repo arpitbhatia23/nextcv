@@ -1,14 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Plus,
-  Trash2,
-  Copy,
-  Calendar,
-  Percent,
-  DollarSign,
-  Tag,
-} from "lucide-react";
+import { Plus, Trash2, Copy, Calendar, Percent, DollarSign, Tag } from "lucide-react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import {
@@ -40,7 +32,7 @@ const couponSchema = z.object({
   expiryDate: z.string().min(1),
 });
 
-const page = () => {
+const Page = () => {
   const [coupons, setCoupons] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCoupon, setEditingCoupon] = useState(null);
@@ -55,21 +47,19 @@ const page = () => {
     },
   });
 
-  const fetchCoupons = async () => {
-    try {
-      const res = await axios.get("/api/coupons/getAllCoupon");
-      setCoupons(res?.data?.data || []);
-    } catch (error) {
-      console.log(error.message);
-      toast.error(error.response.data || "something went wrong");
-    }
-  };
-
   useEffect(() => {
+    const fetchCoupons = async () => {
+      try {
+        const res = await axios.get("/api/coupons/getAllCoupon");
+        setCoupons(res?.data?.data || []);
+      } catch (error) {
+        toast.error(error.response.data || "something went wrong");
+      }
+    };
     fetchCoupons();
   }, []);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async values => {
     const payload = {
       couponCode: values.code,
       discount: values.discount,
@@ -79,38 +69,34 @@ const page = () => {
 
     try {
       const created = await axios.post("/api/coupons/create", payload);
-      setCoupons((prev) => [...prev, created.data]);
+      setCoupons(prev => [...prev, created.data]);
 
       form.reset();
       setEditingCoupon(null);
       setShowAddForm(false);
     } catch (err) {
       toast.error(err.response.data);
-      console.error(err);
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     await axios.delete(`/api/coupons/delete/${id}`);
-    setCoupons((prev) => prev.filter((c) => c._id !== id));
+    setCoupons(prev => prev.filter(c => c._id !== id));
   };
 
-  const toggleStatus = async (id) => {
+  const toggleStatus = async id => {
     try {
-      const coupon = coupons.find((c) => c._id === id);
+      const coupon = coupons.find(c => c._id === id);
       const updated = await axios.put(`/api/coupons/toggle/${id}`, {
         isActive: !coupon.isActive,
       });
-      console.log(updated.data);
-      setCoupons((prev) =>
-        prev.map((c) => (c._id === id ? updated.data.data : c)),
-      );
+      setCoupons(prev => prev.map(c => (c._id === id ? updated.data.data : c)));
     } catch (error) {
       toast.error(error.response.data);
     }
   };
 
-  const copyToClipboard = (code) => {
+  const copyToClipboard = code => {
     navigator.clipboard.writeText(code);
   };
 
@@ -120,12 +106,8 @@ const page = () => {
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Coupon Management
-            </h1>
-            <p className="text-gray-600 mt-1">
-              Create, edit, and manage your promotional coupons
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900">Coupon Management</h1>
+            <p className="text-gray-600 mt-1">Create, edit, and manage your promotional coupons</p>
           </div>
           <Button
             onClick={() => {
@@ -166,10 +148,7 @@ const page = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Discount Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select" />
@@ -214,9 +193,7 @@ const page = () => {
               />
 
               <div className="md:col-span-2 flex gap-4">
-                <Button type="submit">
-                  {editingCoupon ? "Update Coupon" : "Create Coupon"}
-                </Button>
+                <Button type="submit">{editingCoupon ? "Update Coupon" : "Create Coupon"}</Button>
                 <Button
                   type="button"
                   variant="outline"
@@ -236,10 +213,7 @@ const page = () => {
         {/* Coupon Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {coupons.map((coupon, index) => (
-            <div
-              key={coupon._id || index}
-              className="bg-white rounded-lg border shadow-sm p-6"
-            >
+            <div key={coupon._id || index} className="bg-white rounded-lg border shadow-sm p-6">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-blue-100 rounded">
@@ -259,17 +233,11 @@ const page = () => {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button
-                    onClick={() => copyToClipboard(coupon.couponCode)}
-                    title="Copy"
-                  >
+                  <button onClick={() => copyToClipboard(coupon.couponCode)} title="Copy">
                     <Copy className="h-6 w-6 text-gray-500 hover:text-gray-700" />
                   </button>
 
-                  <button
-                    onClick={() => handleDelete(coupon._id)}
-                    title="Delete"
-                  >
+                  <button onClick={() => handleDelete(coupon._id)} title="Delete">
                     <Trash2 className="h-6 w-6 text-red-500 hover:text-red-700" />
                   </button>
                 </div>
@@ -282,14 +250,10 @@ const page = () => {
                   <DollarSign className="h-4 w-4 text-green-600" />
                 )}
                 <span>
-                  {coupon.type === "percentage"
-                    ? `${coupon.discount}%`
-                    : `$${coupon.discount}`}
+                  {coupon.type === "percentage" ? `${coupon.discount}%` : `$${coupon.discount}`}
                 </span>
                 <Calendar className="h-4 w-4 text-gray-500" />
-                <span>
-                  Expires {new Date(coupon.expiry).toLocaleDateString()}
-                </span>
+                <span>Expires {new Date(coupon.expiry).toLocaleDateString()}</span>
               </div>
 
               <Button
@@ -308,13 +272,11 @@ const page = () => {
         </div>
 
         {coupons.length === 0 && (
-          <div className="mt-10 text-center text-blue-600">
-            No coupons yet. Add one!
-          </div>
+          <div className="mt-10 text-center text-blue-600">No coupons yet. Add one!</div>
         )}
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;

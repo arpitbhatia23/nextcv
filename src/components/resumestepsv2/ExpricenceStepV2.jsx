@@ -12,7 +12,6 @@ import {
   Building2,
   Calendar,
   Layers,
-  CheckCircle2,
 } from "lucide-react";
 import {
   Form,
@@ -31,9 +30,7 @@ import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
-  const [experienceList, setExperienceList] = useState(
-    formData.experience || [],
-  );
+  const [experienceList, setExperienceList] = useState(formData.experience || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -54,29 +51,27 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
     updateForm({ experience: experienceList });
   }, [experienceList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setExperienceList((prev) =>
-        prev.map((exp) =>
-          exp.id === editingId ? { ...values, id: editingId } : exp,
-        ),
+      setExperienceList(prev =>
+        prev.map(exp => (exp.id === editingId ? { ...values, id: editingId } : exp))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setExperienceList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setExperienceList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (experience) => {
+  const handleEdit = experience => {
     form.reset(experience);
     setIsEditing(true);
     setEditingId(experience.id);
   };
 
-  const handleDelete = (id) => {
-    setExperienceList((prev) => prev.filter((exp) => exp.id !== id));
+  const handleDelete = id => {
+    setExperienceList(prev => prev.filter(exp => exp.id !== id));
   };
 
   const cancelEdit = () => {
@@ -106,7 +101,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
         toast.success("Experience content polished!");
       }
     } catch (err) {
-      toast.error("AI Generation failed.");
+      toast.error(err.message || "AI Generation failed.");
     } finally {
       setIsGenerating(false);
     }
@@ -129,8 +124,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
           <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounde-2xl  md:rounded-3xl overflow-hidden">
             <div className="bg-indigo-600/5 px-6 py-2 md:py-4 border-b border-indigo-100/50 flex items-center justify-between">
               <span className="text-sm font-semibold md:font-black text-indigo-600 uppercase tracking-widest flex items-center gap-2">
-                <Briefcase className="w-4 h-4" />{" "}
-                {isEditing ? "Refine Role" : "New Career Chapter"}
+                <Briefcase className="w-4 h-4" /> {isEditing ? "Refine Role" : "New Career Chapter"}
               </span>
               {isEditing && (
                 <Button
@@ -145,18 +139,14 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
             </div>
             <CardContent className="p-2 md:p-8" id="tour-experience-form-v2">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="companyName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Building2 className="w-4 h-4 text-indigo-500" />{" "}
-                          Company Name
+                          <Building2 className="w-4 h-4 text-indigo-500" /> Company Name
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -176,8 +166,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Layers className="w-4 h-4 text-indigo-500" />{" "}
-                          Position / Role
+                          <Layers className="w-4 h-4 text-indigo-500" /> Position / Role
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -198,8 +187,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-indigo-500" />{" "}
-                            From
+                            <Calendar className="w-4 h-4 text-indigo-500" /> From
                           </FormLabel>
                           <FormControl>
                             <Input
@@ -249,9 +237,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                             className="text-xs font-black text-indigo-600 flex items-center gap-1.5 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
                             id="tour-ai-button-v2"
                           >
-                            <Sparkles
-                              className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
-                            />
+                            <Sparkles className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`} />
                             {isGenerating
                               ? "Synthesizing..."
                               : form.watch("description")?.trim()
@@ -318,7 +304,7 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                   </p>
                 </motion.div>
               ) : (
-                experienceList.map((exp, idx) => (
+                experienceList.map(exp => (
                   <motion.div
                     key={exp.id}
                     layout
@@ -334,16 +320,15 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
                         <div className="flex items-start justify-between gap-6">
                           <div className="space-y-3">
                             <div className="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">
-                              <Building2 className="w-3 h-3" />{" "}
-                              {exp.companyName}
+                              <Building2 className="w-3 h-3" /> {exp.companyName}
                             </div>
                             <h4 className="font-black text-slate-900 text-md md:text-xl leading-tight">
                               {exp.position}
                             </h4>
                             <div className="flex items-center gap-3 text-xs font-black text-slate-400">
                               <span className="flex items-center gap-1.5">
-                                <Calendar className="w-3.5 h-3.5" />{" "}
-                                {exp.startDate} - {exp.endDate || "Present"}
+                                <Calendar className="w-3.5 h-3.5" /> {exp.startDate} -{" "}
+                                {exp.endDate || "Present"}
                               </span>
                             </div>
                           </div>

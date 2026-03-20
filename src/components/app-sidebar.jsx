@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { IconDashboard, IconReport } from "@tabler/icons-react";
+import { IconDashboard } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -74,10 +74,7 @@ export function AppSidebar({ ...props }) {
       <SidebarHeader className="bg-white p-4">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="h-14 hover:bg-slate-50 transition-all rounded-xl"
-            >
+            <SidebarMenuButton asChild className="h-14 hover:bg-slate-50 transition-all rounded-xl">
               <a href="#" className="flex justify-start pl-2">
                 <Logo2 size={32} color="#0f172a" />
               </a>
@@ -85,15 +82,15 @@ export function AppSidebar({ ...props }) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      
+
       <Separator className="bg-slate-100" />
-      
+
       <SidebarContent className="bg-white px-4 py-6">
         <NavMain items={data.navMain} />
       </SidebarContent>
-      
+
       <Separator className="bg-slate-100" />
-      
+
       <SidebarFooter className="bg-white p-6">
         <NavUser user={user} />
       </SidebarFooter>

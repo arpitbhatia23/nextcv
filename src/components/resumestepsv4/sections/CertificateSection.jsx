@@ -26,8 +26,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import useResumeStore from "@/store/useResumeStore";
 
 const CertificateSection = () => {
-  const formData = useResumeStore((s) => s.formData);
-  const updateForm = useResumeStore((s) => s.updateForm);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
 
   const [certList, setCertList] = useState(formData.certificates || []);
   const [isEditing, setIsEditing] = useState(false);
@@ -46,29 +46,27 @@ const CertificateSection = () => {
     updateForm({ certificates: certList });
   }, [certList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setCertList((prev) =>
-        prev.map((cert) =>
-          cert.id === editingId ? { ...values, id: editingId } : cert
-        )
+      setCertList(prev =>
+        prev.map(cert => (cert.id === editingId ? { ...values, id: editingId } : cert))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setCertList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setCertList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (cert) => {
+  const handleEdit = cert => {
     form.reset(cert);
     setIsEditing(true);
     setEditingId(cert.id);
   };
 
-  const handleDelete = (id) => {
-    setCertList((prev) => prev.filter((cert) => cert.id !== id));
+  const handleDelete = id => {
+    setCertList(prev => prev.filter(cert => cert.id !== id));
   };
 
   return (
@@ -98,10 +96,7 @@ const CertificateSection = () => {
             </div>
             <CardContent className="p-4">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField
                     control={form.control}
                     name="title"
@@ -127,8 +122,7 @@ const CertificateSection = () => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs">
-                          <Building className="w-3 h-3 text-indigo-500" />{" "}
-                          Issuing Org
+                          <Building className="w-3 h-3 text-indigo-500" /> Issuing Org
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -208,7 +202,7 @@ const CertificateSection = () => {
                   <p className="text-slate-400 font-bold text-sm">No certificates</p>
                 </motion.div>
               ) : (
-                certList.map((cert) => (
+                certList.map(cert => (
                   <motion.div
                     key={cert.id}
                     layout
@@ -227,9 +221,7 @@ const CertificateSection = () => {
                           </p>
                         </div>
                         <div className="flex items-center justify-between pt-2 border-t border-slate-50 mt-auto">
-                          <span className="text-[10px] font-bold text-slate-400">
-                            {cert.year}
-                          </span>
+                          <span className="text-[10px] font-bold text-slate-400">{cert.year}</span>
                           <div className="flex gap-1">
                             <button
                               onClick={() => handleEdit(cert)}

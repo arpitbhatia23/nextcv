@@ -1,12 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +15,7 @@ import {
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-
+import Image from "next/image";
 import axios from "axios";
 import { toast } from "sonner";
 import { templates } from "@/utils/template";
@@ -48,8 +42,8 @@ const WatermarkLayer = () => (
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStep = ({ formData, isdraft = false }) => {
-  const selectedTemplate = useResumeStore((s) => s.selectedTemplate);
-  const setSelectedTemplate = useResumeStore((s) => s.setSelectedTemplate);
+  const selectedTemplate = useResumeStore(s => s.selectedTemplate);
+  const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   // const [selectedTemplate, setSelectedTemplate] = useState("InfographicLite");
   const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
@@ -64,7 +58,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [isCouponValid, setIsCouponValid] = useState(true);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
-  const clearDraft = useResumeStore((s) => s.clearStorage);
+  const clearDraft = useResumeStore(s => s.clearStorage);
   // Debounced handlers
   const debouncePayment = useDebouncedCallback(() => {
     handelPayment();
@@ -74,7 +68,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
     handleSaveDraft();
   }, 1000);
 
-  const debounceCoupon = useDebouncedCallback((coupon) => {
+  const debounceCoupon = useDebouncedCallback(coupon => {
     handleCoupon(coupon);
   }, 1000);
 
@@ -114,7 +108,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   useEffect(() => {
     const pdfGen = new pdfGenerator(formData, selectedTemplate);
     let isMounted = true;
-    pdfGen.createPdf().then((url) => {
+    pdfGen.createPdf().then(url => {
       if (isMounted) setPdfUrl(url);
     });
 
@@ -162,13 +156,13 @@ const FinalStep = ({ formData, isdraft = false }) => {
         clearDraft();
       }
     } catch (error) {
-      toast.error("Payment initialization failed");
+      toast.error(error.message || "Payment initialization failed");
     } finally {
       setIsSubmit(false);
     }
   };
 
-  const handleCoupon = async (coupon) => {
+  const handleCoupon = async coupon => {
     if (appliedCoupon === coupon) {
       toast.info("This coupon is already applied");
       return;
@@ -223,9 +217,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
     <div className="py-4 h-[calc(100vh-100px)] flex flex-col">
       <div className="mb-4">
         <h2 className="text-2xl font-bold text-slate-900">Review & Download</h2>
-        <p className="text-slate-500">
-          Choose a template, preview, and download your resume.
-        </p>
+        <p className="text-slate-500">Choose a template, preview, and download your resume.</p>
       </div>
 
       {/* Mobile Layout */}
@@ -233,11 +225,10 @@ const FinalStep = ({ formData, isdraft = false }) => {
         {!isdraft && (
           <div className="space-y-3">
             <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select
-              Template
+              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
             </label>
             <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x">
-              {templates.map((template) => (
+              {templates.map(template => (
                 <div
                   key={template.key}
                   onClick={() => setSelectedTemplate(template.key)}
@@ -278,16 +269,14 @@ const FinalStep = ({ formData, isdraft = false }) => {
             {pdfUrl ? (
               <div
                 className="p-4 w-full flex justify-center relative overflow-hidden"
-                onContextMenu={(e) => e.preventDefault()}
+                onContextMenu={e => e.preventDefault()}
               >
                 <WatermarkLayer />
 
                 <Document
                   file={pdfUrl}
                   loading={
-                    <div className="text-slate-400 text-sm animate-pulse">
-                      Loading Preview...
-                    </div>
+                    <div className="text-slate-400 text-sm animate-pulse">Loading Preview...</div>
                   }
                   onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                   className="shadow-md"
@@ -306,8 +295,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               </div>
             ) : (
               <div className="text-slate-400 text-sm flex gap-2 items-center">
-                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" />{" "}
-                Generating...
+                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" /> Generating...
               </div>
             )}
           </CardContent>
@@ -317,25 +305,18 @@ const FinalStep = ({ formData, isdraft = false }) => {
         <Card className="border border-slate-200 shadow-sm bg-white">
           <CardHeader className="p-4 border-b border-slate-100">
             <CardTitle className="flex items-center gap-2 text-base">
-              <IndianRupee className="w-4 h-4 text-indigo-600" /> Payment &
-              Download
+              <IndianRupee className="w-4 h-4 text-indigo-600" /> Payment & Download
             </CardTitle>
           </CardHeader>
           <CardContent className="p-4 space-y-5">
             {/* Total */}
             <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-100">
-              <span className="text-slate-600 font-medium text-sm">
-                Total Amount
-              </span>
+              <span className="text-slate-600 font-medium text-sm">Total Amount</span>
 
               <div className="flex items-center gap-2">
-                <span className="text-sm text-slate-400 line-through">
-                  ₹199
-                </span>
+                <span className="text-sm text-slate-400 line-through">₹199</span>
 
-                <span className="text-lg font-bold text-slate-900">
-                  ₹{amount}
-                </span>
+                <span className="text-lg font-bold text-slate-900">₹{amount}</span>
               </div>
             </div>
 
@@ -344,7 +325,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <div className="flex gap-2">
                 <Input
                   value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
+                  onChange={e => setCouponCode(e.target.value)}
                   placeholder="Coupon code"
                   className="bg-white border-slate-200 h-10 text-sm"
                   disabled={applied}
@@ -353,9 +334,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                   onClick={() => debounceCoupon(couponCode)}
                   disabled={!couponCode.trim() || isSubmit || applied}
                   variant={applied ? "outline" : "default"}
-                  className={
-                    !applied ? "bg-slate-900 text-white h-10 px-5" : "h-10 px-5"
-                  }
+                  className={!applied ? "bg-slate-900 text-white h-10 px-5" : "h-10 px-5"}
                 >
                   {applied ? "Applied" : "Apply"}
                 </Button>
@@ -374,9 +353,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 <p className="text-xs text-green-600 font-medium flex items-center gap-1 pl-1">
                   <CheckCircle2 className="w-3 h-3" />
                   Saved{" "}
-                  {discount.type === "percentage"
-                    ? `${discount.value}%`
-                    : `₹${discount.value}`}
+                  {discount.type === "percentage" ? `${discount.value}%` : `₹${discount.value}`}
                 </p>
               )}
             </div>
@@ -412,14 +389,13 @@ const FinalStep = ({ formData, isdraft = false }) => {
           >
             <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
               <h3 className="font-semibold text-slate-800 flex items-center gap-2">
-                <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select
-                Template
+                <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
               </h3>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
               <div className="grid grid-cols-1 gap-4">
-                {templates.map((template) => (
+                {templates.map(template => (
                   <div
                     key={template.key}
                     onClick={() => setSelectedTemplate(template.key)}
@@ -432,17 +408,16 @@ const FinalStep = ({ formData, isdraft = false }) => {
                     {/* Image Preview */}
                     <div className="aspect-3/4 w-full bg-slate-200 relative overflow-hidden">
                       {template.image ? (
-                        <img
+                        <Image
                           src={template.image}
                           alt={template.label}
+                          fill
                           className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                         />
                       ) : (
                         <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-slate-100 gap-2">
                           <LayoutTemplate className="w-10 h-10 opacity-20" />
-                          <span className="text-xs font-medium opacity-50">
-                            No Preview
-                          </span>
+                          <span className="text-xs font-medium opacity-50">No Preview</span>
                         </div>
                       )}
 
@@ -502,7 +477,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
           <div className="flex-1 overflow-y-auto p-4 md:p-8 flex justify-center bg-slate-100/50">
             <div
               className="shadow-2xl h-fit relative overflow-hidden"
-              onContextMenu={(e) => e.preventDefault()}
+              onContextMenu={e => e.preventDefault()}
             >
               {pdfUrl && <WatermarkLayer />}
 
@@ -549,45 +524,30 @@ const FinalStep = ({ formData, isdraft = false }) => {
           id="tour-payment-section"
         >
           <div className="p-5 border-b border-slate-100 bg-linear-to-r from-indigo-50 to-white">
-            <h3 className="text-lg font-bold text-slate-900">
-              Finalize Resume
-            </h3>
-            <p className="text-xs text-slate-500 mt-1">
-              Download specifically in PDF format.
-            </p>
+            <h3 className="text-lg font-bold text-slate-900">Finalize Resume</h3>
+            <p className="text-xs text-slate-500 mt-1">Download specifically in PDF format.</p>
           </div>
           <div className="p-5 space-y-6">
             {/* Price Breakdown */}
             <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-slate-600">Resume Base Price</span>
-                <span className="font-semibold text-slate-900">
-                  ₹{originalAmount}
-                </span>
+                <span className="font-semibold text-slate-900">₹{originalAmount}</span>
               </div>
               {applied && discount && (
                 <div className="flex justify-between items-center text-sm text-green-600">
                   <span>Coupon Discount</span>
                   <span className="font-semibold">
-                    -{" "}
-                    {discount.type === "percentage"
-                      ? `${discount.value}%`
-                      : `₹${discount.value}`}
+                    - {discount.type === "percentage" ? `${discount.value}%` : `₹${discount.value}`}
                   </span>
                 </div>
               )}
               <div className="pt-3 border-t border-slate-200 flex justify-between items-center">
-                <span className="text-base font-bold text-slate-800">
-                  Total Pay
-                </span>
+                <span className="text-base font-bold text-slate-800">Total Pay</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-slate-400 line-through">
-                    ₹199
-                  </span>
+                  <span className="text-sm text-slate-400 line-through">₹199</span>
 
-                  <span className="text-lg font-bold text-slate-900">
-                    ₹{amount}
-                  </span>
+                  <span className="text-lg font-bold text-slate-900">₹{amount}</span>
                 </div>
               </div>
             </div>
@@ -600,7 +560,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <div className="flex gap-2 relative">
                 <Input
                   value={couponCode}
-                  onChange={(e) => setCouponCode(e.target.value)}
+                  onChange={e => setCouponCode(e.target.value)}
                   placeholder="ENTER CODE"
                   className="bg-white border-slate-200 focus:border-indigo-500 transition-all uppercase placeholder:normal-case"
                   disabled={applied}
@@ -628,8 +588,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               </div>
               {applied && (
                 <div className="flex items-center gap-2 text-xs text-green-600 bg-green-50 p-2 rounded border border-green-100">
-                  <CheckCircle2 className="w-3 h-3" /> Coupon applied
-                  successfully!
+                  <CheckCircle2 className="w-3 h-3" /> Coupon applied successfully!
                 </div>
               )}
             </div>
@@ -670,9 +629,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">
-                  Redirecting to Paytm
-                </h3>
+                <h3 className="text-2xl font-bold text-slate-900">Redirecting to Paytm</h3>
                 <p className="text-slate-500">
                   Securely connecting to payment gateway. Please wait...
                 </p>
@@ -683,9 +640,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
                 <div className="text-sm">
                   <p className="font-semibold text-amber-900">Important</p>
                   <p className="text-amber-800 leading-relaxed">
-                    Do not refresh or close this window. After successful
-                    payment, you will be automatically redirected to your
-                    download page.
+                    Do not refresh or close this window. After successful payment, you will be
+                    automatically redirected to your download page.
                   </p>
                 </div>
               </div>

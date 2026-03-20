@@ -16,25 +16,17 @@ const ATSFeatureSection = () => {
               <span>New Free Tool</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-              Is Your Resume{" "}
-              <span className="text-indigo-600">ATS-Friendly?</span>
+              Is Your Resume <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
             <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Wondering <strong>why ATS rejects resumes in India</strong> and
-              how to fix it? Over 75% of resumes are filtered out by Applicant
-              Tracking Systems before a human ever sees them. Our
-              <strong>
-                ATS-friendly resume builder for freshers in India
-              </strong>{" "}
-              helps you beat the bots with keyword-optimized,{" "}
-              <strong>
-                professional resume format for India freshers 2026
-              </strong>
-              . Get your resume index-ready for top companies with the best{" "}
-              <strong>
-                AI-powered resume builder for Indian fresh graduates
-              </strong>
-              .
+              Wondering <strong>why ATS rejects resumes in India</strong> and how to fix it? Over
+              75% of resumes are filtered out by Applicant Tracking Systems before a human ever sees
+              them. Our
+              <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat the
+              bots with keyword-optimized,{" "}
+              <strong>professional resume format for India freshers 2026</strong>. Get your resume
+              index-ready for top companies with the best{" "}
+              <strong>AI-powered resume builder for Indian fresh graduates</strong>.
             </p>
             <div className="space-y-4 mb-8">
               {[
@@ -94,12 +86,8 @@ const ATSFeatureSection = () => {
                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-4xl font-bold text-slate-800">
-                      85
-                    </span>
-                    <span className="text-xs uppercase text-slate-400 font-semibold">
-                      Score
-                    </span>
+                    <span className="text-4xl font-bold text-slate-800">85</span>
+                    <span className="text-xs uppercase text-slate-400 font-semibold">Score</span>
                   </div>
                 </div>
 
@@ -115,9 +103,7 @@ const ATSFeatureSection = () => {
                     <div className="h-full bg-green-500 w-full rounded-full" />
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-slate-600 font-medium">
-                      Formatting
-                    </span>
+                    <span className="text-slate-600 font-medium">Formatting</span>
                     <span className="text-green-600 font-bold">Perfect</span>
                   </div>
                 </div>

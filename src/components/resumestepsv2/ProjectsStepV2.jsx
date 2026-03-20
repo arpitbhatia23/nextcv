@@ -52,29 +52,27 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
     updateForm({ projects: projectList });
   }, [projectList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setProjectList((prev) =>
-        prev.map((proj) =>
-          proj.id === editingId ? { ...values, id: editingId } : proj,
-        ),
+      setProjectList(prev =>
+        prev.map(proj => (proj.id === editingId ? { ...values, id: editingId } : proj))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setProjectList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setProjectList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (project) => {
+  const handleEdit = project => {
     form.reset(project);
     setIsEditing(true);
     setEditingId(project.id);
   };
 
-  const handleDelete = (id) => {
-    setProjectList((prev) => prev.filter((proj) => proj.id !== id));
+  const handleDelete = id => {
+    setProjectList(prev => prev.filter(proj => proj.id !== id));
   };
 
   const cancelEdit = () => {
@@ -146,18 +144,13 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
             </div>
             <CardContent className="p-2 md:p-8">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold">
-                          Project Heading
-                        </FormLabel>
+                        <FormLabel className="text-slate-900 font-bold">Project Heading</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Decentralized Finance Dashboard"
@@ -176,9 +169,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                       name="roleOrType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-900 font-bold">
-                            Your Focus
-                          </FormLabel>
+                          <FormLabel className="text-slate-900 font-bold">Your Focus</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="e.g. Lead Architect"
@@ -195,9 +186,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                       name="date"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-900 font-bold">
-                            Launch Date
-                          </FormLabel>
+                          <FormLabel className="text-slate-900 font-bold">Launch Date</FormLabel>
                           <FormControl>
                             <Input
                               type="month"
@@ -217,8 +206,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Tag className="w-4 h-4 text-indigo-500" /> Technology
-                          Stack
+                          <Tag className="w-4 h-4 text-indigo-500" /> Technology Stack
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -238,8 +226,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <LinkIcon className="w-4 h-4 text-indigo-500" />{" "}
-                          External Link
+                          <LinkIcon className="w-4 h-4 text-indigo-500" /> External Link
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -269,9 +256,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                             className="text-xs font-black text-indigo-600 flex items-center gap-1.5 hover:bg-indigo-50 px-2 py-1 rounded-lg transition-colors disabled:opacity-50"
                             id="tour-ai-button-v2"
                           >
-                            <Sparkles
-                              className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`}
-                            />
+                            <Sparkles className={`w-3 h-3 ${isGenerating ? "animate-spin" : ""}`} />
                             {isGenerating
                               ? "Synthesizing..."
                               : form.watch("description")?.trim()
@@ -327,9 +312,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                   <div className="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <FolderKanban className="w-10 h-10 text-slate-200" />
                   </div>
-                  <p className="text-slate-400 font-black text-xl">
-                    Project Deck Empty
-                  </p>
+                  <p className="text-slate-400 font-black text-xl">Project Deck Empty</p>
                   <p className="text-slate-300 font-medium text-sm mt-1">
                     Add projects to demonstrate domain mastery.
                   </p>
@@ -364,16 +347,14 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                             </div>
 
                             <div className="flex flex-wrap gap-2">
-                              {project.technologiesOrTopics
-                                ?.split(",")
-                                .map((tech, i) => (
-                                  <span
-                                    key={i}
-                                    className="text-[10px] font-black uppercase tracking-widest bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-lg"
-                                  >
-                                    {tech.trim()}
-                                  </span>
-                                ))}
+                              {project.technologiesOrTopics?.split(",").map((tech, i) => (
+                                <span
+                                  key={i}
+                                  className="text-[10px] font-black uppercase tracking-widest bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-lg"
+                                >
+                                  {tech.trim()}
+                                </span>
+                              ))}
                             </div>
 
                             <div className="flex items-center gap-4 text-xs font-black text-slate-400">

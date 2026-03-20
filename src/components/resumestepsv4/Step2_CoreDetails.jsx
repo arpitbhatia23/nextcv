@@ -39,7 +39,9 @@ const Step2_CoreDetails = ({ next, previous }) => {
         {/* Basic Info */}
         <section>
           <div className="flex items-center gap-4 mb-6 pb-2 border-b border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">1</div>
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+              1
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-slate-800">Personal Details</h3>
           </div>
           <BasicInfoSection ref={basicInfoRef} />
@@ -48,7 +50,9 @@ const Step2_CoreDetails = ({ next, previous }) => {
         {/* Experience */}
         <section>
           <div className="flex items-center gap-4 mb-6 pb-2 border-b border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">2</div>
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+              2
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-slate-800">Professional History</h3>
           </div>
           <ExperienceSection />
@@ -57,7 +61,9 @@ const Step2_CoreDetails = ({ next, previous }) => {
         {/* Education */}
         <section>
           <div className="flex items-center gap-4 mb-6 pb-2 border-b border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">3</div>
+            <div className="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-black text-sm">
+              3
+            </div>
             <h3 className="text-lg md:text-xl font-bold text-slate-800">Academic Background</h3>
           </div>
           <EducationSection />

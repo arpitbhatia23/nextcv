@@ -32,9 +32,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
-    summary: z
-      .string()
-      .min(20, { message: "Summary should be at least 20 characters" }),
+    summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
   });
 
   const form = useForm({
@@ -95,10 +93,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
           <Card className="border-none shadow-[0_8px_30px_rgb(0,0,0,0.04)] bg-white rounded-3xl overflow-hidden">
             <div className="p-2">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-6"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
                     control={form.control}
                     name="summary"
@@ -106,8 +101,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
                       <FormItem>
                         <div className="flex justify-between items-center mb-4">
                           <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                            <AlignLeft className="w-4 h-4 text-indigo-500" />{" "}
-                            Editor
+                            <AlignLeft className="w-4 h-4 text-indigo-500" /> Editor
                           </FormLabel>
 
                           <Button
@@ -180,9 +174,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
                         : "Impactful"}
                   </span>
                 </div>
-                <span className="text-xs font-black">
-                  {watchedSummary.length} Characters
-                </span>
+                <span className="text-xs font-black">{watchedSummary.length} Characters</span>
               </div>
             </div>
           </Card>
@@ -220,8 +212,7 @@ const SummaryStepV2 = ({ next, previous, formData, updateForm }) => {
 
             <div className="bg-white border-2 border-slate-100 rounded-4xl p-8 space-y-6">
               <h4 className="font-black text-slate-900 uppercase tracking-widest text-sm flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-500" /> Success
-                Checklist
+                <Sparkles className="w-4 h-4 text-amber-500" /> Success Checklist
               </h4>
 
               <ul className="space-y-4">

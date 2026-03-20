@@ -62,8 +62,8 @@ function Herosection() {
           <span className="font-semibold text-slate-900">
             free resume maker for IT freshers in India
           </span>
-          . Use our AI to create a professional, ATS-friendly resume for
-          engineering freshers that passes automated screening in minutes.
+          . Use our AI to create a professional, ATS-friendly resume for engineering freshers that
+          passes automated screening in minutes.
           <br />
           <span className="text-sm font-medium text-blue-600 mt-2 block">
             ✨ Just ₹100 • No subscriptions • Instant Download
@@ -114,16 +114,14 @@ function Herosection() {
           </div>
         </div>
         <p className="sr-only">
-          NextCV is the best resume maker for freshers in India 2026, offering
-          an AI-powered resume builder for Indian fresh graduates. Our
-          ATS-friendly resume templates for India freshers 2026 are designed for
-          IT jobs, campus placements, and top MNC companies like TCS, Infosys,
-          Wipro, and HCL. Whether you need a Python developer resume for
-          freshers, a React JS developer resume, or a professional resume format
-          for engineering freshers in India with 0 years experience, NextCV
-          provides keyword-optimized, single-column layouts that pass automated
-          screening. Download your professional PDF resume for campus placements
-          and off-campus hiring in India 2026.
+          NextCV is the best resume maker for freshers in India 2026, offering an AI-powered resume
+          builder for Indian fresh graduates. Our ATS-friendly resume templates for India freshers
+          2026 are designed for IT jobs, campus placements, and top MNC companies like TCS, Infosys,
+          Wipro, and HCL. Whether you need a Python developer resume for freshers, a React JS
+          developer resume, or a professional resume format for engineering freshers in India with 0
+          years experience, NextCV provides keyword-optimized, single-column layouts that pass
+          automated screening. Download your professional PDF resume for campus placements and
+          off-campus hiring in India 2026.
         </p>
       </div>
     </section>

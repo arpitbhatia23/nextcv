@@ -26,16 +26,13 @@ function PaymentFailContent() {
         <div className="flex justify-center mb-4 text-red-500">
           <XCircle className="w-16 h-16 text-red-500" />
         </div>
-        <h1 className="text-2xl font-semibold text-red-600 mb-2">
-          Payment Failed
-        </h1>
+        <h1 className="text-2xl font-semibold text-red-600 mb-2">Payment Failed</h1>
         <p className="text-gray-600 mb-4">
           Oops! Something went wrong while processing your payment.
         </p>
         <p className="text-gray-700 text-sm mb-6">
-          If money has been debited from your account, it will be automatically
-          refunded to your bank via <strong>PhonePe</strong> within{" "}
-          <strong>5–7 business days</strong>.
+          If money has been debited from your account, it will be automatically refunded to your
+          bank via <strong>PhonePe</strong> within <strong>5–7 business days</strong>.
         </p>
       </div>
     </div>

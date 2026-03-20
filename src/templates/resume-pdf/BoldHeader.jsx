@@ -1,13 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Link,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
 
 const styles = StyleSheet.create({
@@ -104,13 +97,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = (desc) => {
+const splitToBullets = desc => {
   if (Array.isArray(desc)) return desc;
   if (typeof desc !== "string") return [];
 
   return desc
     .split("\n")
-    .flatMap((line) => {
+    .flatMap(line => {
       const trimmed = line.trim();
       if (!trimmed) return [];
 
@@ -121,7 +114,7 @@ const splitToBullets = (desc) => {
       if (trimmed.includes(";"))
         return trimmed
           .split(";")
-          .map((b) => b.trim())
+          .map(b => b.trim())
           .filter(Boolean);
 
       return [trimmed]; // keep full sentence
@@ -145,28 +138,19 @@ const BoldHeader = ({ data }) => (
         </View>
         <View style={{ ...styles.contact, marginTop: 4 }}>
           {data.linkedin && (
-            <Link
-              src={data.linkedin}
-              style={{ color: "#000", textDecoration: "none" }}
-            >
+            <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
               LINKEDIN
             </Link>
           )}
           {data.linkedin && data.github && <Text> • </Text>}
           {data.github && (
-            <Link
-              src={data.github}
-              style={{ color: "#000", textDecoration: "none" }}
-            >
+            <Link src={data.github} style={{ color: "#000", textDecoration: "none" }}>
               GITHUB
             </Link>
           )}
           {data.portfolio && data.github && <Text> • </Text>}
           {data.portfolio && (
-            <Link
-              src={data.portfolio}
-              style={{ color: "#000", textDecoration: "none" }}
-            >
+            <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
               PORTFOLIO
             </Link>
           )}
@@ -190,8 +174,7 @@ const BoldHeader = ({ data }) => (
               <View style={styles.itemHeader}>
                 <Text style={styles.itemTitle}>{exp.position}</Text>
                 <Text style={styles.itemDate}>
-                  {formatDate(exp.startDate)} -{" "}
-                  {formatDate(exp.endDate) || "Present"}
+                  {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                 </Text>
               </View>
               <Text style={styles.itemSubtitle}>{exp.companyName}</Text>
@@ -199,9 +182,7 @@ const BoldHeader = ({ data }) => (
                 {splitToBullets(exp.description).map((bullet, idx) => (
                   <View key={idx} style={styles.bulletItem}>
                     <Text style={styles.bullet}>•</Text>
-                    <Text style={{ fontSize: 9.5, flex: 1 }}>
-                      {bullet.replace(/^•\s*/, "")}
-                    </Text>
+                    <Text style={{ fontSize: 9.5, flex: 1 }}>{bullet.replace(/^•\s*/, "")}</Text>
                   </View>
                 ))}
               </View>
@@ -219,8 +200,7 @@ const BoldHeader = ({ data }) => (
               <View style={styles.itemHeader}>
                 <Text style={styles.itemTitle}>{edu.institution}</Text>
                 <Text style={styles.itemDate}>
-                  {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
               </View>
               <Text style={styles.itemSubtitle}>
@@ -231,9 +211,7 @@ const BoldHeader = ({ data }) => (
                   {splitToBullets(edu.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletItem}>
                       <Text style={styles.bullet}>•</Text>
-                      <Text style={{ fontSize: 9.5, flex: 1 }}>
-                        {bullet.replace(/^•\s*/, "")}
-                      </Text>
+                      <Text style={{ fontSize: 9.5, flex: 1 }}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
                 </View>
@@ -247,9 +225,7 @@ const BoldHeader = ({ data }) => (
       {data.skills?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Skills</Text>
-          <Text style={styles.skillsText}>
-            {data.skills.map((s) => s.name || s).join("  //  ")}
-          </Text>
+          <Text style={styles.skillsText}>{data.skills.map(s => s.name || s).join("  //  ")}</Text>
         </View>
       )}
 
@@ -264,9 +240,7 @@ const BoldHeader = ({ data }) => (
                 <Text style={styles.itemDate}>{formatDate(proj.date)}</Text>
               </View>
               {proj.technologiesOrTopics && (
-                <Text
-                  style={{ fontSize: 9, fontStyle: "italic", marginBottom: 2 }}
-                >
+                <Text style={{ fontSize: 9, fontStyle: "italic", marginBottom: 2 }}>
                   {proj.technologiesOrTopics}
                 </Text>
               )}
@@ -274,9 +248,7 @@ const BoldHeader = ({ data }) => (
                 {splitToBullets(proj.description).map((bullet, idx) => (
                   <View key={idx} style={styles.bulletItem}>
                     <Text style={styles.bullet}>•</Text>
-                    <Text style={{ fontSize: 9.5, flex: 1 }}>
-                      {bullet.replace(/^•\s*/, "")}
-                    </Text>
+                    <Text style={{ fontSize: 9.5, flex: 1 }}>{bullet.replace(/^•\s*/, "")}</Text>
                   </View>
                 ))}
               </View>

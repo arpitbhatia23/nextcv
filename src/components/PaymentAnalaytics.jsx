@@ -42,7 +42,6 @@ const AdminPaymentDashboard = () => {
     try {
       // Simulate API delay
       const res = await axios.get("/api/payment/getTransctionData");
-      console.log(res.data.data);
       setPayments(res.data.data);
       setFilteredPayments(res.data.data);
     } catch (error) {
@@ -63,13 +62,9 @@ const AdminPaymentDashboard = () => {
     // Apply search filter
     if (searchTerm) {
       filtered = filtered.filter(
-        (payment) =>
-          payment.transactionId
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          payment.paymentMode
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
+        payment =>
+          payment.transactionId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          payment.paymentMode.toLowerCase().includes(searchTerm.toLowerCase()) ||
           payment.status.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -81,28 +76,24 @@ const AdminPaymentDashboard = () => {
 
       switch (dateFilter.period) {
         case "today":
-          startDate = new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate()
-          );
-          filtered = filtered.filter((p) => new Date(p.createdAt) >= startDate);
+          startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          filtered = filtered.filter(p => new Date(p.createdAt) >= startDate);
           break;
         case "thisWeek":
           startDate = new Date(now.setDate(now.getDate() - now.getDay()));
-          filtered = filtered.filter((p) => new Date(p.createdAt) >= startDate);
+          filtered = filtered.filter(p => new Date(p.createdAt) >= startDate);
           break;
         case "thisMonth":
           startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-          filtered = filtered.filter((p) => new Date(p.createdAt) >= startDate);
+          filtered = filtered.filter(p => new Date(p.createdAt) >= startDate);
           break;
         case "thisYear":
           startDate = new Date(now.getFullYear(), 0, 1);
-          filtered = filtered.filter((p) => new Date(p.createdAt) >= startDate);
+          filtered = filtered.filter(p => new Date(p.createdAt) >= startDate);
           break;
         case "custom":
           if (dateFilter.startDate && dateFilter.endDate) {
-            filtered = filtered.filter((p) => {
+            filtered = filtered.filter(p => {
               const paymentDate = new Date(p.createdAt);
               return (
                 paymentDate >= new Date(dateFilter.startDate) &&
@@ -126,14 +117,10 @@ const AdminPaymentDashboard = () => {
 
   // Calculate totals
   const accountingTotals = useMemo(() => {
-    const totalAmount = filteredPayments.reduce(
-      (sum, payment) => sum + payment.amount,
-      0
-    );
+    const totalAmount = filteredPayments.reduce((sum, payment) => sum + payment.amount, 0);
 
     const byPaymentMode = filteredPayments.reduce((acc, payment) => {
-      acc[payment.paymentMode] =
-        (acc[payment.paymentMode] || 0) + payment.amount;
+      acc[payment.paymentMode] = (acc[payment.paymentMode] || 0) + payment.amount;
       return acc;
     }, {});
 
@@ -163,16 +150,9 @@ const AdminPaymentDashboard = () => {
 
   // Export to CSV
   const exportToCSV = () => {
-    const headers = [
-      "Transaction ID",
-      "Date",
-      "Time",
-      "Amount (₹)",
-      "Payment Mode",
-      "Status",
-    ];
+    const headers = ["Transaction ID", "Date", "Time", "Amount (₹)", "Payment Mode", "Status"];
 
-    const csvData = filteredPayments.map((payment) => [
+    const csvData = filteredPayments.map(payment => [
       payment.transactionId,
       new Date(payment.createdAt).toLocaleDateString("en-IN"),
       new Date(payment.createdAt).toLocaleTimeString("en-IN"),
@@ -197,26 +177,24 @@ const AdminPaymentDashboard = () => {
     });
 
     const csvContent = [headers, ...csvData]
-      .map((row) => row.map((cell) => `"${cell}"`).join(","))
+      .map(row => row.map(cell => `"${cell}"`).join(","))
       .join("\n");
 
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `payment_report_${
-      new Date().toISOString().split("T")[0]
-    }.csv`;
+    link.download = `payment_report_${new Date().toISOString().split("T")[0]}.csv`;
     link.click();
   };
 
-  const formatCurrency = (amount) => {
+  const formatCurrency = amount => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
     }).format(amount);
   };
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = status => {
     const styles = {
       completed: "bg-green-100 text-green-800 border-green-200",
       pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
@@ -225,7 +203,7 @@ const AdminPaymentDashboard = () => {
     return styles[status] || "bg-gray-100 text-gray-800 border-gray-200";
   };
 
-  const getPaymentModeColor = (mode) => {
+  const getPaymentModeColor = mode => {
     const colors = {
       "Bank Transfer": "bg-blue-100 text-blue-800",
       UPI: "bg-purple-100 text-purple-800",
@@ -253,9 +231,7 @@ const AdminPaymentDashboard = () => {
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Admin Payment Dashboard
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900">Admin Payment Dashboard</h1>
               <p className="text-gray-600 mt-1">
                 View all transactions with advanced filtering and pagination
               </p>
@@ -266,9 +242,7 @@ const AdminPaymentDashboard = () => {
                 disabled={loading}
                 className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50"
               >
-                <RefreshCw
-                  className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
-                />
+                <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
                 Refresh
               </button>
               <button
@@ -287,9 +261,7 @@ const AdminPaymentDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">
-                  Total Revenue
-                </p>
+                <p className="text-sm font-medium text-gray-600">Total Revenue</p>
                 <p className="text-3xl font-bold text-blue-600">
                   {formatCurrency(accountingTotals.total)}
                 </p>
@@ -301,12 +273,8 @@ const AdminPaymentDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">
-                  Total Transactions
-                </p>
-                <p className="text-3xl font-bold text-green-800">
-                  {accountingTotals.count}
-                </p>
+                <p className="text-sm font-medium text-gray-600">Total Transactions</p>
+                <p className="text-3xl font-bold text-green-800">{accountingTotals.count}</p>
               </div>
               <FileText className="text-green-800" size={32} />
             </div>
@@ -315,9 +283,7 @@ const AdminPaymentDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-purple-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">
-                  Average Amount
-                </p>
+                <p className="text-sm font-medium text-gray-600">Average Amount</p>
                 <p className="text-3xl font-bold text-purple-600">
                   {formatCurrency(accountingTotals.average)}
                 </p>
@@ -329,9 +295,7 @@ const AdminPaymentDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">
-                  Payment Methods
-                </p>
+                <p className="text-sm font-medium text-gray-600">Payment Methods</p>
                 <p className="text-3xl font-bold text-orange-600">
                   {Object.keys(accountingTotals.byPaymentMode).length}
                 </p>
@@ -355,16 +319,14 @@ const AdminPaymentDashboard = () => {
                 type="text"
                 placeholder="Search transactions..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={e => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
 
             <select
               value={dateFilter.period}
-              onChange={(e) =>
-                setDateFilter({ ...dateFilter, period: e.target.value })
-              }
+              onChange={e => setDateFilter({ ...dateFilter, period: e.target.value })}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               aria-label="time range"
             >
@@ -381,17 +343,13 @@ const AdminPaymentDashboard = () => {
                 <input
                   type="date"
                   value={dateFilter.startDate}
-                  onChange={(e) =>
-                    setDateFilter({ ...dateFilter, startDate: e.target.value })
-                  }
+                  onChange={e => setDateFilter({ ...dateFilter, startDate: e.target.value })}
                   className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
                 <input
                   type="date"
                   value={dateFilter.endDate}
-                  onChange={(e) =>
-                    setDateFilter({ ...dateFilter, endDate: e.target.value })
-                  }
+                  onChange={e => setDateFilter({ ...dateFilter, endDate: e.target.value })}
                   className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </>
@@ -428,30 +386,22 @@ const AdminPaymentDashboard = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {currentPayments.map((payment) => (
+                {currentPayments.map(payment => (
                   <TableRow key={payment._id} className="hover:bg-muted/50">
-                    <TableCell className="font-medium">
-                      {payment?.transcationId}
+                    <TableCell className="font-medium">{payment?.transcationId}</TableCell>
+                    <TableCell>
+                      {new Date(payment?.createdAt).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
                     </TableCell>
                     <TableCell>
-                      {new Date(payment?.createdAt).toLocaleDateString(
-                        "en-IN",
-                        {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        }
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {new Date(payment?.createdAt).toLocaleTimeString(
-                        "en-IN",
-                        {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          hour12: true,
-                        }
-                      )}
+                      {new Date(payment?.createdAt).toLocaleTimeString("en-IN", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
                     </TableCell>
                     <TableCell className="text-green-800 font-bold">
                       {formatCurrency(payment?.amount)}
@@ -471,8 +421,7 @@ const AdminPaymentDashboard = () => {
                           payment?.status
                         )}`}
                       >
-                        {payment.status?.charAt(0).toUpperCase() +
-                          payment.status?.slice(1)}
+                        {payment.status?.charAt(0).toUpperCase() + payment.status?.slice(1)}
                       </span>
                     </TableCell>
                   </TableRow>
@@ -486,12 +435,8 @@ const AdminPaymentDashboard = () => {
             <div className="flex items-center">
               <p className="text-sm text-gray-700">
                 Showing <span className="font-medium">{startIndex + 1}</span> to{" "}
-                <span className="font-medium">
-                  {Math.min(endIndex, filteredPayments.length)}
-                </span>{" "}
-                of{" "}
-                <span className="font-medium">{filteredPayments.length}</span>{" "}
-                results
+                <span className="font-medium">{Math.min(endIndex, filteredPayments.length)}</span>{" "}
+                of <span className="font-medium">{filteredPayments.length}</span> results
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -534,9 +479,7 @@ const AdminPaymentDashboard = () => {
               </div>
 
               <button
-                onClick={() =>
-                  setCurrentPage(Math.min(totalPages, currentPage + 1))
-                }
+                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
                 className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -552,9 +495,7 @@ const AdminPaymentDashboard = () => {
                 <Search size={48} className="mx-auto mb-4" />
               </div>
               <p className="text-gray-500 text-lg">No transactions found</p>
-              <p className="text-gray-400 text-sm">
-                Try adjusting your search or filter criteria
-              </p>
+              <p className="text-gray-400 text-sm">Try adjusting your search or filter criteria</p>
             </div>
           )}
         </div>
@@ -567,27 +508,23 @@ const AdminPaymentDashboard = () => {
               Payment Mode Breakdown
             </h4>
             <div className="space-y-3">
-              {Object.entries(accountingTotals.byPaymentMode).map(
-                ([mode, amount]) => (
-                  <div
-                    key={mode}
-                    className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getPaymentModeColor(
-                          mode
-                        )}`}
-                      >
-                        {mode}
-                      </span>
-                    </div>
-                    <span className="font-bold text-blue-600">
-                      {formatCurrency(amount)}
+              {Object.entries(accountingTotals.byPaymentMode).map(([mode, amount]) => (
+                <div
+                  key={mode}
+                  className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getPaymentModeColor(
+                        mode
+                      )}`}
+                    >
+                      {mode}
                     </span>
                   </div>
-                )
-              )}
+                  <span className="font-bold text-blue-600">{formatCurrency(amount)}</span>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -597,27 +534,23 @@ const AdminPaymentDashboard = () => {
               Transaction Status Overview
             </h5>
             <div className="space-y-3">
-              {Object.entries(accountingTotals.byStatus).map(
-                ([status, count]) => (
-                  <div
-                    key={status}
-                    className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full border ${getStatusBadge(
-                          status
-                        )}`}
-                      >
-                        {status.charAt(0).toUpperCase() + status.slice(1)}
-                      </span>
-                    </div>
-                    <span className="font-bold text-green-800">
-                      {count} transactions
+              {Object.entries(accountingTotals.byStatus).map(([status, count]) => (
+                <div
+                  key={status}
+                  className="flex justify-between items-center p-3 bg-gray-50 rounded-lg"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full border ${getStatusBadge(
+                        status
+                      )}`}
+                    >
+                      {status.charAt(0).toUpperCase() + status.slice(1)}
                     </span>
                   </div>
-                )
-              )}
+                  <span className="font-bold text-green-800">{count} transactions</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -637,9 +570,7 @@ const AdminPaymentDashboard = () => {
                   className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-100"
                 >
                   <p className="text-sm font-medium text-gray-600">{month}</p>
-                  <p className="text-xl font-bold text-purple-600">
-                    {formatCurrency(amount)}
-                  </p>
+                  <p className="text-xl font-bold text-purple-600">{formatCurrency(amount)}</p>
                 </div>
               ))}
           </div>
@@ -650,9 +581,7 @@ const AdminPaymentDashboard = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
             <div>
               <p className="text-blue-100 font-medium">TOTAL REVENUE</p>
-              <p className="text-2xl font-bold">
-                {formatCurrency(accountingTotals.total)}
-              </p>
+              <p className="text-2xl font-bold">{formatCurrency(accountingTotals.total)}</p>
             </div>
             <div>
               <p className="text-blue-100 font-medium">TRANSACTIONS</p>
@@ -660,9 +589,7 @@ const AdminPaymentDashboard = () => {
             </div>
             <div>
               <p className="text-blue-100 font-medium">AVERAGE AMOUNT</p>
-              <p className="text-2xl font-bold">
-                {formatCurrency(accountingTotals.average)}
-              </p>
+              <p className="text-2xl font-bold">{formatCurrency(accountingTotals.average)}</p>
             </div>
             <div>
               <p className="text-blue-100 font-medium">DATA STATUS</p>

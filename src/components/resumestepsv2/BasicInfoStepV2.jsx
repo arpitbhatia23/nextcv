@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Phone,
   Mail,
@@ -21,14 +20,12 @@ import {
   ArrowRight,
   User,
   Briefcase,
-  CheckCircle,
 } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
-import { motion } from "framer-motion";
 
-const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
+const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
@@ -69,9 +66,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
     }
   }, [formData, form]);
 
-  const watchedValues = useWatch({ control: form.control });
-
-  const handlesave = (values) => {
+  const handlesave = values => {
     updateForm(values);
     next();
   };
@@ -92,10 +87,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
 
           <div id="tour-resume-form-v2">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(handlesave)}
-                className="space-y-8"
-              >
+              <form onSubmit={form.handleSubmit(handlesave)} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
                     name="name"
@@ -123,8 +115,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Briefcase className="w-4 h-4 text-indigo-500" />{" "}
-                          Target Role
+                          <Briefcase className="w-4 h-4 text-indigo-500" /> Target Role
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -146,8 +137,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-indigo-500" /> Email
-                          Address
+                          <Mail className="w-4 h-4 text-indigo-500" /> Email Address
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -168,8 +158,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-indigo-500" /> Phone
-                          Number
+                          <Phone className="w-4 h-4 text-indigo-500" /> Phone Number
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -190,8 +179,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-indigo-500" /> Current
-                        Location
+                        <MapPin className="w-4 h-4 text-indigo-500" /> Current Location
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -209,10 +197,7 @@ const BasicInfoStepV2 = ({ next, previous, formData, updateForm }) => {
                   <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6">
                     Digital Presence
                   </h3>
-                  <div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-4"
-                    id="tour-social-links-v2"
-                  >
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="tour-social-links-v2">
                     <FormField
                       name="linkedin"
                       control={form.control}

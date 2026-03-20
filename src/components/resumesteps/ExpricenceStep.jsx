@@ -1,15 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Briefcase,
-  Plus,
-  Edit2,
-  Trash2,
-  Sparkles,
-  ArrowRight,
-  ArrowLeft,
-} from "lucide-react";
+import { Briefcase, Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -20,22 +12,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { z } from "zod";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "../ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
-  const [experienceList, setExperienceList] = useState(
-    formData.experience || [],
-  );
+  const [experienceList, setExperienceList] = useState(formData.experience || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -56,29 +39,27 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
     updateForm({ experience: experienceList });
   }, [experienceList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setExperienceList((prev) =>
-        prev.map((exp) =>
-          exp.id === editingId ? { ...values, id: editingId } : exp,
-        ),
+      setExperienceList(prev =>
+        prev.map(exp => (exp.id === editingId ? { ...values, id: editingId } : exp))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setExperienceList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setExperienceList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (experience) => {
+  const handleEdit = experience => {
     form.reset(experience);
     setIsEditing(true);
     setEditingId(experience.id);
   };
 
-  const handleDelete = (id) => {
-    setExperienceList((prev) => prev.filter((exp) => exp.id !== id));
+  const handleDelete = id => {
+    setExperienceList(prev => prev.filter(exp => exp.id !== id));
   };
 
   const cancelEdit = () => {
@@ -119,9 +100,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   return (
     <div className="py-8">
       <div className="mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-slate-900">
-          Work Experience
-        </h2>
+        <h2 className="text-xl md:text-2xl font-bold text-slate-900">Work Experience</h2>
         <p className="text-slate-500">Add your professional experience</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -149,18 +128,13 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
           </CardHeader>
           <CardContent className="p-2 md:p-6">
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Company Name
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Company Name</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Google, Amazon"
@@ -177,9 +151,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Position/Role
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Position/Role</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Frontend Developer"
@@ -197,9 +169,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="startDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          Start Date
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">Start Date</FormLabel>
                         <FormControl>
                           <Input
                             type="month"
@@ -216,9 +186,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     name="endDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">
-                          End Date
-                        </FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold">End Date</FormLabel>
                         <FormControl>
                           <Input
                             type="month"
@@ -244,15 +212,11 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                           placeholder="e.g. UI development, API integration"
                           className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           value={
-                            Array.isArray(field.value)
-                              ? field.value.join(", ")
-                              : field.value || ""
+                            Array.isArray(field.value) ? field.value.join(", ") : field.value || ""
                           }
-                          onChange={(e) =>
+                          onChange={e =>
                             field.onChange(
-                              e.target.value
-                                ? e.target.value.split(",").map((s) => s.trim())
-                                : [],
+                              e.target.value ? e.target.value.split(",").map(s => s.trim()) : []
                             )
                           }
                         />
@@ -274,15 +238,11 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                           placeholder="e.g. React, Tailwind CSS"
                           className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all"
                           value={
-                            Array.isArray(field.value)
-                              ? field.value.join(", ")
-                              : field.value || ""
+                            Array.isArray(field.value) ? field.value.join(", ") : field.value || ""
                           }
-                          onChange={(e) =>
+                          onChange={e =>
                             field.onChange(
-                              e.target.value
-                                ? e.target.value.split(",").map((s) => s.trim())
-                                : [],
+                              e.target.value ? e.target.value.split(",").map(s => s.trim()) : []
                             )
                           }
                         />
@@ -361,15 +321,12 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
             id="tour-experience-list"
           >
             <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-indigo-500" /> Professional
-              Experience
+              <Briefcase className="w-5 h-5 text-indigo-500" /> Professional Experience
             </h3>
 
             {experienceList.length === 0 ? (
               <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-sm">
-                  No work experience added.
-                </p>
+                <p className="text-slate-400 text-sm">No work experience added.</p>
               </div>
             ) : (
               <div className="space-y-3">
@@ -380,12 +337,8 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                   >
                     <div className="flex justify-between items-start">
                       <div>
-                        <h4 className="font-bold text-slate-800">
-                          {exp.position}
-                        </h4>
-                        <div className="text-sm text-indigo-600 font-medium">
-                          {exp.companyName}
-                        </div>
+                        <h4 className="font-bold text-slate-800">{exp.position}</h4>
+                        <div className="text-sm text-indigo-600 font-medium">{exp.companyName}</div>
                       </div>
                       <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                         <Button
@@ -412,9 +365,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
                     </div>
 
                     {exp.description && (
-                      <p className="text-xs text-slate-600 line-clamp-2 mt-1">
-                        {exp.description}
-                      </p>
+                      <p className="text-xs text-slate-600 line-clamp-2 mt-1">{exp.description}</p>
                     )}
                   </div>
                 ))}

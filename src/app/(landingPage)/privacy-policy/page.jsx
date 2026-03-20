@@ -41,34 +41,30 @@ const page = () => {
 
         <section className="space-y-6">
           <p>
-            This Privacy Policy describes how <strong>NEXTCV</strong> and its
-            affiliates ("NEXTCV", "we", "our", "us") collect, use, share, and
-            protect your personal data through our website{" "}
+            This Privacy Policy describes how <strong>NEXTCV</strong> and its affiliates ("NEXTCV",
+            "we", "our", "us") collect, use, share, and protect your personal data through our
+            website{" "}
           </p>
 
           <p>
-            By visiting this Platform, providing your information, or availing
-            services, you agree to be bound by this Privacy Policy, Terms of
-            Use, and applicable laws of India.
+            By visiting this Platform, providing your information, or availing services, you agree
+            to be bound by this Privacy Policy, Terms of Use, and applicable laws of India.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8">
-            1. Collection of Information
-          </h2>
+          <h2 className="text-2xl font-semibold mt-8">1. Collection of Information</h2>
           <p>
-            We collect personal data during registration or use of our Platform
-            including your name, DOB, address, phone number, email, and other
-            identity proof. Sensitive data like card info or biometrics may be
-            collected with your consent.
+            We collect personal data during registration or use of our Platform including your name,
+            DOB, address, phone number, email, and other identity proof. Sensitive data like card
+            info or biometrics may be collected with your consent.
           </p>
           <p>
-            Behavioral data such as preferences and transaction records may also
-            be collected. If you interact with third-party partners, their
-            privacy policies will apply. We are not responsible for them.
+            Behavioral data such as preferences and transaction records may also be collected. If
+            you interact with third-party partners, their privacy policies will apply. We are not
+            responsible for them.
           </p>
           <p>
-            Beware of fraud: GHOSTNOTES will never ask for your card PIN or
-            banking passwords. Report such cases to law enforcement immediately.
+            Beware of fraud: GHOSTNOTES will never ask for your card PIN or banking passwords.
+            Report such cases to law enforcement immediately.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8">2. Use of Information</h2>
@@ -80,62 +76,47 @@ const page = () => {
           </ul>
           <p>You may opt-out of marketing communication at any time.</p>
 
-          <h2 className="text-2xl font-semibold mt-8">
-            3. Sharing of Information
-          </h2>
+          <h2 className="text-2xl font-semibold mt-8">3. Sharing of Information</h2>
           <p>
-            We may share your data internally and with third-party sellers,
-            logistics providers, payment gateways, and legal authorities as
-            required.
+            We may share your data internally and with third-party sellers, logistics providers,
+            payment gateways, and legal authorities as required.
           </p>
           <p>
-            We may also disclose information to government or law enforcement
-            agencies under legal obligations or to protect our users and
-            platform.
+            We may also disclose information to government or law enforcement agencies under legal
+            obligations or to protect our users and platform.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8">4. Security Measures</h2>
           <p>
-            We follow reasonable practices to secure your data using encrypted
-            servers and limited access. However, transmission over the internet
-            carries inherent risks.
+            We follow reasonable practices to secure your data using encrypted servers and limited
+            access. However, transmission over the internet carries inherent risks.
           </p>
           <p>Users must keep their login credentials safe and secure.</p>
 
-          <h2 className="text-2xl font-semibold mt-8">
-            5. Data Deletion & Retention
-          </h2>
+          <h2 className="text-2xl font-semibold mt-8">5. Data Deletion & Retention</h2>
           <p>
-            You can delete your account through your profile settings. We may
-            delay deletion if services, claims, or disputes are pending. After
-            deletion, data may be kept in anonymized form for research and fraud
-            prevention.
+            You can delete your account through your profile settings. We may delay deletion if
+            services, claims, or disputes are pending. After deletion, data may be kept in
+            anonymized form for research and fraud prevention.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8">6. Your Rights</h2>
-          <p>
-            You may access, update, or rectify your personal data via the
-            Platform.
-          </p>
+          <p>You may access, update, or rectify your personal data via the Platform.</p>
 
           <h2 className="text-2xl font-semibold mt-8">7. Consent</h2>
           <p>
-            By using our Platform, you consent to our use of your data. If you
-            provide data of others, you confirm you have the authority to do so.
-            You can withdraw your consent by writing to our Grievance Officer
-            (details below).
+            By using our Platform, you consent to our use of your data. If you provide data of
+            others, you confirm you have the authority to do so. You can withdraw your consent by
+            writing to our Grievance Officer (details below).
           </p>
           <p>
-            Subject line:{" "}
-            <strong>
-              “Withdrawal of consent for processing personal data”
-            </strong>
+            Subject line: <strong>“Withdrawal of consent for processing personal data”</strong>
           </p>
 
           <h2 className="text-2xl font-semibold mt-8">8. Policy Updates</h2>
           <p>
-            We may update this policy. Please review periodically. Significant
-            changes may be notified as per legal requirements.
+            We may update this policy. Please review periodically. Significant changes may be
+            notified as per legal requirements.
           </p>
         </section>
       </main>

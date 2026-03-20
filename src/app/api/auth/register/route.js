@@ -5,10 +5,10 @@ import { asyncHandler } from "@/utils/asyncHandler";
 import dbConnect from "@/utils/dbConnect";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
-const handler = async (req) => {
+const handler = async req => {
   await dbConnect();
   const { name, email, password, role } = await req.json();
-  if ([name, email, password].some((field) => field.trim() === "")) {
+  if ([name, email, password].some(field => field.trim() === "")) {
     throw new apiError(400, "all fields are required");
   }
 

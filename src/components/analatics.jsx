@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, use, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,6 @@ import {
   FileText,
   CreditCard,
   Tag,
-  Eye,
   TrendingUp,
   Calendar,
   Download,
@@ -27,8 +26,6 @@ import {
 import {
   LineChart,
   Line,
-  BarChart,
-  Bar,
   PieChart,
   Pie,
   Cell,
@@ -43,14 +40,7 @@ import axios from "axios";
 import { exportAnalyticsCSV } from "@/lib/gencsv";
 
 // Color schemes for charts
-const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#8884D8",
-  "#82CA9D",
-];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8", "#82CA9D"];
 
 // Metric Card Component
 function MetricCard({ title, value, icon: Icon, change, color = "blue" }) {
@@ -65,9 +55,7 @@ function MetricCard({ title, value, icon: Icon, change, color = "blue" }) {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-gray-600">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
         <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
           <Icon className="h-4 w-4" />
         </div>
@@ -89,7 +77,7 @@ function RevenueChart({ data }) {
         <XAxis dataKey="month" stroke="#666" />
         <YAxis stroke="#666" />
         <Tooltip
-          formatter={(value) => [`$${value}`, "Revenue"]}
+          formatter={value => [`$${value}`, "Revenue"]}
           labelStyle={{ color: "#666" }}
           contentStyle={{
             backgroundColor: "white",
@@ -108,28 +96,7 @@ function RevenueChart({ data }) {
   );
 }
 
-function VisitorsChart({ data }) {
-  return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data.slice(-30)}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-        <XAxis dataKey="date" stroke="#666" />
-        <YAxis stroke="#666" />
-        <Tooltip
-          formatter={(value) => [value, "Visitors"]}
-          labelStyle={{ color: "#666" }}
-          contentStyle={{
-            backgroundColor: "white",
-            border: "1px solid #e0e0e0",
-          }}
-        />
-        <Bar dataKey="visitors" fill="#00C49F" />
-      </BarChart>
-    </ResponsiveContainer>
-  );
-}
-
-function PieChartComponent({ data, title }) {
+function PieChartComponent({ data }) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <PieChart>
@@ -138,9 +105,7 @@ function PieChartComponent({ data, title }) {
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={({ name, percent }) =>
-            `${name} ${(percent * 100).toFixed(0)}%`
-          }
+          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
@@ -162,23 +127,22 @@ function AnalyticsDashboard({ timeRange = "all" }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.post("/api/analytics/getAnalaticsData", {
-        timeRange,
-      });
-      console.log(res);
-      setData(res?.data?.data); // Store fetched data
-    } catch (err) {
-      console.error("Error fetching analytics data:", err);
-      setError("Failed to fetch analytics data.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post("/api/analytics/getAnalaticsData", {
+          timeRange,
+        });
+        setData(res?.data?.data); // Store fetched data
+      } catch (err) {
+        console.error("Error fetching analytics data:", err);
+        setError("Failed to fetch analytics data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchData();
   }, [timeRange]);
 
@@ -243,9 +207,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() =>
-              exportAnalyticsCSV({ data: data, section: "resumes" })
-            }
+            onClick={() => exportAnalyticsCSV({ data: data, section: "resumes" })}
           >
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -280,7 +242,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
             </CardHeader>
             <CardContent>
               <PieChartComponent
-                data={data?.resumeStats?.topResumeTypes?.map((item) => ({
+                data={data?.resumeStats?.topResumeTypes?.map(item => ({
                   name: item.type,
                   value: item.count,
                 }))}
@@ -295,35 +257,24 @@ function AnalyticsDashboard({ timeRange = "all" }) {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {data?.resumeStats?.topSkills
-                  .slice(0, 10)
-                  .map((skill, index) => (
-                    <div
-                      key={skill?.skill._id}
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-sm font-medium">
-                        {skill?.skill?.name}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-24 bg-gray-200 rounded-full h-2">
-                          <div
-                            className="bg-blue-600 h-2 rounded-full"
-                            style={{
-                              width: `${
-                                (skill?.count /
-                                  data?.resumeStats?.topSkills[0].count) *
-                                100
-                              }%`,
-                            }}
-                          />
-                        </div>
-                        <span className="text-sm text-gray-500">
-                          {skill?.count}
-                        </span>
+                {data?.resumeStats?.topSkills.slice(0, 10).map(skill => (
+                  <div key={skill?.skill._id} className="flex items-center justify-between">
+                    <span className="text-sm font-medium">{skill?.skill?.name}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full"
+                          style={{
+                            width: `${
+                              (skill?.count / data?.resumeStats?.topSkills[0].count) * 100
+                            }%`,
+                          }}
+                        />
                       </div>
+                      <span className="text-sm text-gray-500">{skill?.count}</span>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -340,9 +291,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() =>
-              exportAnalyticsCSV({ data: data, section: "payments" })
-            }
+            onClick={() => exportAnalyticsCSV({ data: data, section: "payments" })}
           >
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -388,7 +337,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
             </CardHeader>
             <CardContent>
               <PieChartComponent
-                data={data?.paymentStats?.topPaymentModes.map((mode) => ({
+                data={data?.paymentStats?.topPaymentModes.map(mode => ({
                   name: mode.mode,
                   value: mode.count,
                 }))}
@@ -409,9 +358,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() =>
-              exportAnalyticsCSV({ data: data, section: "coupons" })
-            }
+            onClick={() => exportAnalyticsCSV({ data: data, section: "coupons" })}
           >
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -440,8 +387,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           <MetricCard
             title="Total Coupons"
             value={(
-              data?.couponStats?.activeCoupons +
-              data?.couponStats?.expiredCoupons
+              data?.couponStats?.activeCoupons + data?.couponStats?.expiredCoupons
             ).toLocaleString()}
             icon={Award}
             color="purple"
@@ -454,7 +400,7 @@ function AnalyticsDashboard({ timeRange = "all" }) {
           </CardHeader>
           <CardContent>
             <PieChartComponent
-              data={data?.couponStats?.couponsByType.map((type) => ({
+              data={data?.couponStats?.couponsByType.map(type => ({
                 name: type.type,
                 value: type.count,
               }))}
@@ -522,9 +468,7 @@ export default function AnalyticsPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">
-              Analytics Dashboard
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h1>
             <p className="text-gray-600 mt-1">
               Comprehensive insights into your platform performance
             </p>
@@ -532,10 +476,7 @@ export default function AnalyticsPage() {
 
           {/* Time Range Filter */}
           <div className="mt-4 sm:mt-0">
-            <Select
-              defaultValue={timeRange}
-              onValueChange={(value) => SettimeRage(value)}
-            >
+            <Select defaultValue={timeRange} onValueChange={value => SettimeRage(value)}>
               <SelectTrigger className="w-45" aria-label="Select time range">
                 <SelectValue placeholder="Select time range" />
               </SelectTrigger>

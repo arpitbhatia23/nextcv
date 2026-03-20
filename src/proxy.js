@@ -16,14 +16,7 @@ export async function proxy(req) {
   }
 
   // 3. Define Public Routes (Where logged-in users shouldn't hang out)
-  const authRoutes = [
-    "/",
-    "/adminlogin",
-    "/about-us",
-    "/contact",
-    "/blogs",
-    "/ats-resume-checker",
-  ];
+  const authRoutes = ["/", "/adminlogin", "/about-us", "/contact", "/blogs", "/ats-resume-checker"];
 
   // Redirect signed-in users away from landing/auth pages to dashboard
   if (token && authRoutes.includes(pathname)) {
@@ -48,7 +41,7 @@ export async function proxy(req) {
     if (bucket < 30) {
       redirectPath = "/dashboard/resumeform";
     } else if (bucket < 60) {
-      redirectPath = "/dashboard/resumeform -v3";
+      redirectPath = "/dashboard/resumeform-v3";
     } else {
       redirectPath = "/dashboard/resumeform-v4"; // 40%
     }

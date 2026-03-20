@@ -19,15 +19,14 @@ const initialFormData = {
 
 const useResumeStore = create(
   persist(
-    (set, get) => ({
+    set => ({
       formData: initialFormData,
       selectedTemplate: "",
 
-      setSelectedTemplate: (key = "InfographicLite") =>
-        set((state) => ({ selectedTemplate: key })),
+      setSelectedTemplate: (key = "InfographicLite") => set(() => ({ selectedTemplate: key })),
 
-      updateForm: (data) =>
-        set((state) => ({
+      updateForm: data =>
+        set(state => ({
           formData: { ...state.formData, ...data },
         })),
 
@@ -41,8 +40,8 @@ const useResumeStore = create(
     {
       name: "resume-draft",
       storage: createJSONStorage(() => localStorage),
-    },
-  ),
+    }
+  )
 );
 
 export default useResumeStore;

@@ -21,7 +21,7 @@ export default function Nav() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const isScrolled = window.scrollY > 20;
-          setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
+          setScrolled(prev => (prev !== isScrolled ? isScrolled : prev));
           ticking = false;
         });
         ticking = true;
@@ -35,9 +35,7 @@ export default function Nav() {
   return (
     <nav
       className={`w-full fixed z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-sm border-b border-slate-200 py-3"
-          : "bg-transparent py-5"
+        scrolled ? "bg-white shadow-sm border-b border-slate-200 py-3" : "bg-transparent py-5"
       }`}
     >
       <div className="flex items-center justify-between max-w-7xl mx-auto px-6 lg:px-8">
@@ -54,9 +52,7 @@ export default function Nav() {
                 className="px-6 py-2.5 text-sm font-semibold rounded-lg
                   bg-indigo-600 text-white
                   hover:bg-indigo-700 transition-colors duration-200"
-                onClick={() =>
-                  signIn("google", { callbackUrl: "/dashboard/resumeform" })
-                }
+                onClick={() => signIn("google", { callbackUrl: "/dashboard/resumeform" })}
               >
                 Get Started
               </Button>

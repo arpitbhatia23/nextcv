@@ -1,15 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {
-  Plus,
-  Edit2,
-  Trash2,
-  FolderKanban,
-  Sparkles,
-  ArrowRight,
-  ArrowLeft,
-} from "lucide-react";
+import { Edit2, Trash2, FolderKanban, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
 import {
   Form,
   FormField,
@@ -48,29 +40,27 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
     updateForm({ projects: projectList });
   }, [projectList]);
 
-  const onSubmit = (values) => {
+  const onSubmit = values => {
     if (isEditing) {
-      setProjectList((prev) =>
-        prev.map((proj) =>
-          proj.id === editingId ? { ...values, id: editingId } : proj,
-        ),
+      setProjectList(prev =>
+        prev.map(proj => (proj.id === editingId ? { ...values, id: editingId } : proj))
       );
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setProjectList((prev) => [...prev, { ...values, id: Date.now() }]);
+      setProjectList(prev => [...prev, { ...values, id: Date.now() }]);
     }
     form.reset();
   };
 
-  const handleEdit = (project) => {
+  const handleEdit = project => {
     form.reset(project);
     setIsEditing(true);
     setEditingId(project.id);
   };
 
-  const handleDelete = (id) => {
-    setProjectList((prev) => prev.filter((proj) => proj.id !== id));
+  const handleDelete = id => {
+    setProjectList(prev => prev.filter(proj => proj.id !== id));
   };
 
   const cancelEdit = () => {
@@ -138,18 +128,13 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
           </CardHeader>
           <CardContent className={"p-2 md:p-6"}>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                   control={form.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Project Title
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Project Title</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. AI Resume Builder"
@@ -167,9 +152,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="roleOrType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Your Role
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Your Role</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Fullstack Developer"
@@ -207,9 +190,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="date"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Date
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Date</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="MM/YYYY or YYYY"
@@ -228,9 +209,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="technologiesOrTopics"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Tech Stack
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Tech Stack</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Next.js, OpenAI API"
@@ -248,9 +227,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   name="link"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold">
-                        Project Link
-                      </FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold">Project Link</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="https://..."
@@ -353,8 +330,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
             id="tour-projects-list"
           >
             <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-              <FolderKanban className="w-5 h-5 text-indigo-500" /> Added
-              Projects
+              <FolderKanban className="w-5 h-5 text-indigo-500" /> Added Projects
             </h3>
 
             {projectList.length === 0 ? (
@@ -370,9 +346,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                   >
                     <div className="flex justify-between items-start">
                       <div>
-                        <h4 className="font-bold text-slate-800">
-                          {project.title}
-                        </h4>
+                        <h4 className="font-bold text-slate-800">{project.title}</h4>
                         <div className="text-sm text-indigo-600 font-medium">
                           {project.roleOrType}
                         </div>

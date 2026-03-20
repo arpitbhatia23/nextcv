@@ -7,9 +7,9 @@ import { apiResponse } from "@/utils/apiResponse";
 import apiError from "@/utils/apiError";
 import { asyncHandler } from "@/utils/asyncHandler";
 
-const handler = async (req) => {
+const handler = async req => {
   await dbConnect();
-  
+
   const { rating, comment, resumeId } = await req.json();
 
   if (!rating) {
@@ -29,9 +29,7 @@ const handler = async (req) => {
     resumeId,
   });
 
-  return NextResponse.json(
-    new apiResponse(201, "Feedback submitted successfully", feedback)
-  );
+  return NextResponse.json(new apiResponse(201, "Feedback submitted successfully", feedback));
 };
 
 export const POST = asyncHandler(handler);

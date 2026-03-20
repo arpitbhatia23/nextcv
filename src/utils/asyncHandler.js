@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import * as sentry from "@sentry/nextjs";
-export const asyncHandler = (handler) => {
+export const asyncHandler = handler => {
   return async (req, ctx) => {
     try {
       return await handler(req, ctx);

@@ -25,10 +25,9 @@ const handler = async (req, { params }) => {
   if (!resumeData) {
     throw new apiError(404, "resume not found");
   }
-  return NextResponse.json(
-    new apiResponse(200, "resume found sucessfull", resumeData),
-    { status: 200 },
-  );
+  return NextResponse.json(new apiResponse(200, "resume found sucessfull", resumeData), {
+    status: 200,
+  });
 };
 
 export const GET = asyncHandler(handler);

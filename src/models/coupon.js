@@ -25,7 +25,7 @@ const couponSchema = new Schema(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);
