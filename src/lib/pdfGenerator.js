@@ -24,6 +24,9 @@ export class pdfGenerator {
     return url;
   }
   async downloadPdf() {
+    if (this.isGenerating) return;
+
+    this.isGenerating = true;
     if (!this.url) {
       await this.createPdf();
     }
