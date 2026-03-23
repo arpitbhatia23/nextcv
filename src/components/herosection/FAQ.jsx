@@ -3,27 +3,56 @@
 import React, { useState } from "react";
 import { m, AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import { Plus, Minus, HelpCircle } from "lucide-react";
+import Link from "next/link";
 
 const faqs = [
   {
     question: "How to make a resume for IT jobs in India with no experience?",
-    answer:
-      "To make a resume for IT jobs with no experience: 1) Focus on technical projects and internships. 2) List relevant skills like Python, Java, or React. 3) Use an AI-powered resume builder for Indian fresh graduates 2026 like NextCV to ensure your format is professional and compliant with MNC standards for TCS, Infosys, and Wipro.",
+    answer: (
+      <>
+        To{" "}
+        <Link href="/blogs/how-to-make-a-resume-for-it-jobs-in-india-even-if-you-have-zero-experience" className="text-indigo-600 hover:underline">
+          make a resume for IT jobs with no experience
+        </Link>
+        : 1) Focus on technical projects and internships. 2) List relevant skills like Python, Java, or React. 3) Use an AI-powered resume builder for Indian fresh graduates 2026 like NextCV to ensure your format is professional and compliant with MNC standards for TCS, Infosys, and Wipro.
+      </>
+    ),
   },
   {
     question: "What is the best resume format for freshers in India 2026?",
-    answer:
-      "The best resume format for freshers in India is a clean, single-column, ATS-friendly resume template. NextCV provides professional resume examples for Indian freshers 2026 that are free to start and optimized for modern hiring trends in Bangalore, Hyderabad, and Pune.",
+    answer: (
+      <>
+        The{" "}
+        <Link href="/blogs/best-resume-format-for-freshers-in-india-2026" className="text-indigo-600 hover:underline">
+          best resume format for freshers in India
+        </Link>{" "}
+        is a clean, single-column, ATS-friendly resume template. NextCV provides professional resume examples for Indian freshers 2026 that are free to start and optimized for modern hiring trends in Bangalore, Hyderabad, and Pune.
+      </>
+    ),
   },
   {
     question: "Difference between resume and CV for India jobs?",
-    answer:
-      "In India, 'resume' is typically used for private sector and IT jobs (1-2 pages), while 'CV' (Curriculum Vitae) is often used for academic or research roles. For most corporate roles, an ATS-optimized resume format for Indian freshers with cover letter is preferred.",
+    answer: (
+      <>
+        In India,{" "}
+        <Link href="/blogs/resume-vs-cv-in-india-what-you-actually-need-for-jobs-internships-and-mncs" className="text-indigo-600 hover:underline">
+          'resume' is typically used for private sector and IT jobs (1-2 pages), while 'CV'
+        </Link>{" "}
+        (Curriculum Vitae) is often used for academic or research roles. For most corporate roles, an ATS-optimized resume format for Indian freshers with cover letter is preferred.
+      </>
+    ),
   },
   {
     question: "How do I include software developer resume keywords?",
-    answer:
-      "Use software developer resume keywords that get interview calls in India, such as 'Full Stack', 'Agile', 'Cloud Computing', and 'DevOps'. Our role-based content suggestions help you integrate these naturally for entry-level IT jobs.",
+    answer: (
+      <>
+        Use{" "}
+        <Link href="/blogs/top-resume-keywords-for-indian-jobs-that-increase-interview-calls-by-3x" className="text-indigo-600 hover:underline">
+          software developer resume keywords
+        </Link>{" "}
+        that get interview calls in India, such as 'Full Stack', 'Agile', 'Cloud Computing', and 'DevOps'. Our role-based content suggestions help you integrate these naturally for entry-level IT jobs.
+      </>
+    ),
   },
   {
     question: "Is NextCV really free?",

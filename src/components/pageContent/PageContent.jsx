@@ -8,6 +8,7 @@ import {
   Headset,
   CheckCircle2,
 } from "lucide-react";
+import Link from "next/link";
 
 const PageContent = () => {
   const card_detail = [
@@ -21,8 +22,15 @@ const PageContent = () => {
     {
       icon: <Brain className="w-6 h-6 text-teal-400" />,
       title: "ATS-Optimized Templates",
-      description:
-        "Guaranteed to beat applicant tracking systems. We offer the best resume format for freshers in India with examples for top MNCs.",
+      description: (
+        <>
+          Guaranteed to beat applicant tracking systems. We offer the{" "}
+          <Link href="/blogs/ats-friendly-resume-meaning-examples-and-how-to-create-one" className="text-indigo-400 hover:underline">
+            ATS-friendly resume templates
+          </Link>{" "}
+          with examples for top MNCs.
+        </>
+      ),
       className: "bg-slate-900 border-slate-800",
     },
     {
@@ -50,7 +58,14 @@ const PageContent = () => {
     {
       icon: <Package className="w-5 h-5 text-indigo-400" />,
       title: "Multiple Formats",
-      description: "Download in PDF or Word. formatting preserved.",
+      description: (
+        <>
+          <Link href="/templates" className="text-indigo-400 hover:underline">
+            Download in PDF or Word
+          </Link>
+          . formatting preserved.
+        </>
+      ),
     },
     {
       icon: <Headset className="w-5 h-5 text-indigo-400" />,

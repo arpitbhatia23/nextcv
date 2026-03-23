@@ -25,6 +25,8 @@ export async function proxy(req) {
 
   // 4. Protect Dashboard
   if (!token && pathname.startsWith("/dashboard")) {
+    // if (process.env.NODE_ENV == "production") return;
+
     return NextResponse.redirect(new URL("/", req.url));
   }
 

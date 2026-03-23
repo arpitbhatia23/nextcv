@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import authOptions from "../../auth/options";
 const handler = async req => {
-  const { couponCode, discount, expiry, type } = await req.json();
+  let { couponCode, discount, expiry, type } = await req.json();
 
   if (!couponCode && !discount && !expiry && !type) {
     throw new apiError(400, "Missing required fields: couponCode, discount, or expiry");
