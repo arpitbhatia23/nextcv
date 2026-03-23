@@ -107,6 +107,16 @@ const SEOKeywordCloud = () => {
     "Professional branding for Indian students",
     "Career guidance for engineering freshers India 2026",
     "Job winning resume strategies for India",
+    "tcs resume builder",
+    "techncv.com",
+    "nest cv",
+    "next gen cv",
+    "indian ats friendly resume",
+    "accenture infographic resume builder",
+    "ltimindtree resume format",
+    "ats resume india",
+    "best ats friendly resume builder india",
+    "resume builder for campus placement",
   ];
 
   return (

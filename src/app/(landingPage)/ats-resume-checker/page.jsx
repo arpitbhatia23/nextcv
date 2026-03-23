@@ -31,7 +31,13 @@ export const metadata = {
     "ats resume score for mba freshers",
     "ats friendly resume for mechanical engineer fresher",
     "campus placement resume ats check",
-    "resume ats score for 2026 batch",
+    "tcs resume builder",
+    "accenture resume builder",
+    "ltimindtree resume format",
+    "ats resume india",
+    "best ats friendly resume builder india",
+    "resume builder for campus placement",
+    "check if my resume is ats friendly",
   ],
   alternates: {
     canonical: `https://www.nextcv.in/ats-resume-checker`,
@@ -158,6 +164,18 @@ const ATSCheckerPage = () => {
               {
                 q: "Is this tool free for freshers?",
                 a: "Yes, our ATS resume checker is completely free for freshers and experienced professionals in India.",
+              },
+            {
+                q: "What is a good ATS score for TCS or Accenture?",
+                a: "A score above 80 is generally considered good for MNCs. However, ensure that your 'Technical Skills' section includes the specific keywords mentioned in the job description to rank higher in their system.",
+              },
+              {
+                q: "Is it better to use a free ATS resume builder or manual formatting?",
+                a: "Manual formatting can be risky if you aren't familiar with ATS parsing logic. Using a specialized tool like NextCV ensures that your resume is machine-readable while maintaining a professional look for human recruiters at firms like LTIMindtree.",
+              },
+              {
+                q: "Does this checker work for campus placements in India?",
+                a: "Yes, it is specifically optimized for the 2026 campus recruitment cycle. It checks for common student-specific keywords and formats used in engineering and MBA placements across India.",
               },
             ].map((faq, i) => (
               <div

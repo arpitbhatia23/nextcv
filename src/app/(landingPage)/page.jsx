@@ -9,6 +9,7 @@ const PageContent = dynamic(() => import("@/components/pageContent/PageContent")
 
 const FAQ = dynamic(() => import("@/components/herosection/FAQ"));
 const SEOKeywordCloud = dynamic(() => import("@/components/herosection/SEOKeywordCloud"));
+const SEOSection = dynamic(() => import("@/components/herosection/SEOSection"));
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ATSFeatureSection />
 
       <PageContent />
+      <SEOSection />
       <section id="Templates">
         <Templates />
       </section>

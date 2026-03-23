@@ -8,7 +8,7 @@ export const metadata = {
   description:
     "Download the best resume format for freshers in India with examples. 12+ professional, ATS-optimized resume templates for IT freshers and engineering jobs in 2026.",
   keywords:
-    "best resume format for freshers in india with example, free ats-optimized resume template india, it resume sample india 2026, resume maker for engineering freshers india, cv format for indian internships 2026",
+    "best resume format for freshers in india with example, tcs resume builder format, accenture infographic resume builder, ltimindtree resume format, free ats-optimized resume template india, it resume sample india 2026, resume maker for engineering freshers india, cv format for indian internships 2026",
   alternates: {
     canonical: `https://www.nextcv.in/templates`,
   },
@@ -192,10 +192,11 @@ export default function TemplatesPage() {
         <h2>Why Choosing the Right Resume Template Matters for Your Career in India</h2>
         <p>
           In today's competitive job market, your resume is often the only chance you get to make a
-          first impression. With recruiters spending an average of just 6-7 seconds scanning a
-          resume, the visual appeal and structure of your document are just as critical as the
-          content itself. A well-structured resume template doesn't just look good—it organizes your
-          professional story in a way that highlights your strengths immediately.
+          first impression. Whether you are applying for <strong>TCS, Accenture, or LTIMindtree</strong>, 
+          the visual appeal and structure of your document are just as critical as the
+          content itself. Recruiters at top Indian MNCs spend an average of just 6-7 seconds scanning a
+          resume, and a well-structured resume template organizes your professional story in a way 
+          that highlights your strengths immediately.
         </p>
 
         <h3>The Importance of ATS Compatibility</h3>

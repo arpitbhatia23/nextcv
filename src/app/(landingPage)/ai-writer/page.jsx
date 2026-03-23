@@ -6,7 +6,7 @@ export const metadata = {
   description:
     "Beat writer's block with our AI resume writer. Generate professional summaries and experience bullet points instantly personalized for your role.",
   keywords:
-    "ai resume writer, free ai cv maker, chatgpt for resume, automated resume writing, resume bullet points generator",
+    "ai resume builder india, ai cv, best ats ai resume builder, free ats resume builder websites, ai resume writer, free ai cv maker, chatgpt for resume, automated resume writing, resume bullet points generator",
   alternates: {
     canonical: `https://www.nextcv.in/ai-writer`,
   },
@@ -137,11 +137,13 @@ export default function AIWriterPage() {
 
       {/* SEO Content */}
       <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate prose-indigo">
-        <h2>Why Use an AI Resume Writer?</h2>
+        <h2>Why Use an AI Resume Writer in India?</h2>
         <p>
-          Writer's block is real. Staring at a blank screen wondering how to phrase "I answered
-          calls" into a professional achievement can be paralyzing. An{" "}
-          <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
+          The Indian job market is unique, with recruiters at MNCs like TCS and Wipro 
+          receiving thousands of applications daily. An <strong>AI Resume Builder India</strong>-focused tool 
+          helps you navigate these challenges. Writer's block is real, and staring at a blank screen 
+          wondering how to phrase "I answered calls" into a professional achievement can be paralyzing. 
+          An <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
         </p>
 
         <h3>Professional Summaries in Seconds</h3>

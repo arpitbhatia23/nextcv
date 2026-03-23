@@ -7,14 +7,14 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "How to make a resume for IT jobs in India with no experience?",
+    question: "How do I make my resume ATS-friendly for Indian companies?",
     answer: (
       <>
-        To{" "}
-        <Link href="/blogs/how-to-make-a-resume-for-it-jobs-in-india-even-if-you-have-zero-experience" className="text-indigo-600 hover:underline">
-          make a resume for IT jobs with no experience
+        To make an{" "}
+        <Link href="/blogs/ats-friendly-resume-meaning-examples-and-how-to-create-one" className="text-indigo-600 hover:underline">
+          ATS-friendly resume in India
         </Link>
-        : 1) Focus on technical projects and internships. 2) List relevant skills like Python, Java, or React. 3) Use an AI-powered resume builder for Indian fresh graduates 2026 like NextCV to ensure your format is professional and compliant with MNC standards for TCS, Infosys, and Wipro.
+        , use a single-column layout, standard fonts (Arial, Calibri), and clear section headings. Ensure you include relevant keywords for roles at companies like TCS, Infosys, and Tech Mahindra. NextCV automatically handles these formatting rules for you.
       </>
     ),
   },
@@ -24,40 +24,41 @@ const faqs = [
       <>
         The{" "}
         <Link href="/blogs/best-resume-format-for-freshers-in-india-2026" className="text-indigo-600 hover:underline">
-          best resume format for freshers in India
+          best resume format for freshers in 2026
         </Link>{" "}
-        is a clean, single-column, ATS-friendly resume template. NextCV provides professional resume examples for Indian freshers 2026 that are free to start and optimized for modern hiring trends in Bangalore, Hyderabad, and Pune.
+        is the reverse-chronological format. It highlights your recent internships, projects, and education first. For Indian graduates, including a 'Technical Skills' section with keywords like Java, Python, or React is crucial to pass recruiter screenings.
       </>
     ),
   },
   {
-    question: "Difference between resume and CV for India jobs?",
-    answer: (
-      <>
-        In India,{" "}
-        <Link href="/blogs/resume-vs-cv-in-india-what-you-actually-need-for-jobs-internships-and-mncs" className="text-indigo-600 hover:underline">
-          'resume' is typically used for private sector and IT jobs (1-2 pages), while 'CV'
-        </Link>{" "}
-        (Curriculum Vitae) is often used for academic or research roles. For most corporate roles, an ATS-optimized resume format for Indian freshers with cover letter is preferred.
-      </>
-    ),
-  },
-  {
-    question: "How do I include software developer resume keywords?",
-    answer: (
-      <>
-        Use{" "}
-        <Link href="/blogs/top-resume-keywords-for-indian-jobs-that-increase-interview-calls-by-3x" className="text-indigo-600 hover:underline">
-          software developer resume keywords
-        </Link>{" "}
-        that get interview calls in India, such as 'Full Stack', 'Agile', 'Cloud Computing', and 'DevOps'. Our role-based content suggestions help you integrate these naturally for entry-level IT jobs.
-      </>
-    ),
-  },
-  {
-    question: "Is NextCV really free?",
+    question: "How do companies like TCS, Accenture, and LTIMindtree screen resumes?",
     answer:
-      "Yes, you can check your ATS score for free. Our free online CV maker India for engineering freshers 2026 also has a free tier to get you started, and premium features are available for a small one-time fee with no subscriptions.",
+      "Large Indian MNCs use Applicant Tracking Systems (ATS) to filter thousands of applications. They look for specific keywords matching the job description (e.g., 'TCS NQT', 'Full Stack Developer', 'Aptitude'). Using an ATS-friendly resume builder like NextCV ensures your resume is readable by these systems, increasing your interview chances.",
+  },
+  {
+    question: "Can I use Canva or infographic resumes for Indian jobs?",
+    answer:
+      "While infographic resumes look good, they often fail ATS scans because the text is embedded in images or complex layouts. For campus placements and off-campus drives in India, a clean text-based resume is always safer and more effective at getting you past the first round.",
+  },
+  {
+    question: "How long should a fresher resume be for 2026 placements?",
+    answer:
+      "For freshers, a 1-page resume is ideal. It forces you to be concise and highlights your most important achievements without overwhelming recruiters who spend only 6 seconds scanning each CV.",
+  },
+  {
+    question: "How to write a professional summary for freshers with no experience?",
+    answer:
+      "Focus on your passion for technology, your key projects, and what you aim to achieve. For example: 'Enthusiastic Computer Science graduate with strong foundations in React and Node.js. Developed a full-stack e-commerce project and seeking to leverage technical skills at a forward-thinking Indian tech firm.'",
+  },
+  {
+    question: "Should I include internships or freelance work in my resume?",
+    answer:
+      "Absolutely! For freshers, internships, freelance projects, and even college society roles are vital 'experience' substitutes. They demonstrate practical application of your skills and professional work ethic to Indian recruiters.",
+  },
+  {
+    question: "Can NextCV improve my ATS score for IT roles?",
+    answer:
+      "Yes! NextCV is built specifically for the Indian job market. Our templates are tested against various ATS platforms to ensure high readability and keyword density for roles in Bangalore, Hyderabad, Pune, and beyond.",
   },
 ];
 

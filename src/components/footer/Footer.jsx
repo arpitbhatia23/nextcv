@@ -39,6 +39,16 @@ const footerLinks = [
       { label: "Terms of Service", href: "/terms" },
     ],
   },
+  {
+    title: "Resources",
+    links: [
+      { label: "ATS-Friendly Resume Format", href: "/" },
+      { label: "Fresher Resume Builder India", href: "/" },
+      { label: "Resume Templates 2026", href: "/templates" },
+      { label: "TCS Resume Guide", href: "/templates" },
+      { label: "Accenture Resume Tips", href: "/templates" },
+    ],
+  },
 ];
 
 const stats = [
@@ -99,7 +109,7 @@ export const Footer = () => {
           </div>
 
           {/* Links Columns (Span 8 -> 2+3+3) */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
             {footerLinks.map((column, idx) => (
               <div key={idx} className="flex flex-col">
                 <h3 className="text-white font-semibold mb-6">{column.title}</h3>

@@ -121,7 +121,8 @@ function Herosection() {
           developer resume, or a professional resume format for engineering freshers in India with 0
           years experience, NextCV provides keyword-optimized, single-column layouts that pass
           automated screening. Download your professional PDF resume for campus placements and
-          off-campus hiring in India 2026.
+          off-campus hiring in India 2026. Use our specialized TCS resume builder, Accenture infographic resume builder, 
+          and LTIMindtree resume formats to stand out in the 2026 hiring season.
         </p>
       </div>
     </section>

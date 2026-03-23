@@ -71,7 +71,17 @@ export const metadata = {
     "AI resume builder for high-demand tech roles",
     "AI resume builder with drag-and-drop editor",
     "AI resume builder for senior developers",
-    "AI resume builder with real-time skill analysis",
+    "AI-powered resume builder for Indian fresh graduates 2026",
+    "tcs resume builder",
+    "techncv.com",
+    "nest cv",
+    "next gen cv",
+    "indian ats friendly resume",
+    "accenture infographic resume builder",
+    "ltimindtree resume format",
+    "ats resume india",
+    "best ats friendly resume builder india",
+    "resume builder for campus placement",
   ],
   // ⚡ Fix for Open Graph / Twitter images
 
