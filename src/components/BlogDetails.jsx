@@ -84,8 +84,8 @@ const ptComponents = {
     ),
   },
   block: {
-    h2: ({ children }) => {
-      const id = children[0]?.toLowerCase().replace(/\s+/g, "-");
+    h2: ({ children = "" }) => {
+      const id = String(children[0])?.toLowerCase().replace(/\s+/g, "-") || "";
       return (
         <h2 id={id} className="text-3xl font-bold text-slate-900 mt-16 mb-6 scroll-mt-24">
           {children}
@@ -311,7 +311,7 @@ const BlogDetails = ({ slug, initialData }) => {
             <span className="text-slate-300">•</span>
             <div className="flex items-center gap-4 text-sm text-slate-500">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4" /> {formattedDate}
+                <Calendar className="w-4 h-4" /> {formattedDate()}
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4" /> {readingTime} min read
