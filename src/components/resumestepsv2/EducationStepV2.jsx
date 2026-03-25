@@ -30,6 +30,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { Tips } from "../Tips";
 
 const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
   const [educationList, setEducationList] = useState(formData.education || []);
@@ -394,7 +395,7 @@ const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
               )}
             </AnimatePresence>
           </div>
-
+          <Tips section={"education"} />
           <div className="pt-8 flex justify-between gap-4">
             <Button
               onClick={previous}

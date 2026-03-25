@@ -25,7 +25,7 @@ export async function proxy(req) {
 
   // 4. Protect Dashboard
   if (!token && pathname.startsWith("/dashboard")) {
-    // if (process.env.NODE_ENV == "production") return;
+    if (process.env.NODE_ENV == "production") return;
 
     return NextResponse.redirect(new URL("/", req.url));
   }
@@ -42,10 +42,8 @@ export async function proxy(req) {
 
     if (bucket < 30) {
       redirectPath = "/dashboard/resumeform";
-    } else if (bucket < 60) {
-      redirectPath = "/dashboard/resumeform-v3";
     } else {
-      redirectPath = "/dashboard/resumeform-v4"; // 40%
+      redirectPath = "/dashboard/resumeform-v3";
     }
     if (pathname !== redirectPath) {
       return NextResponse.redirect(new URL(redirectPath, req.url));

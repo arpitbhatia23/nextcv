@@ -16,6 +16,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { Tips } from "../Tips";
 const SkillStep = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(formData.skills || []);
   const [isEditing, setIsEditing] = useState(false);
@@ -264,6 +265,8 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
+
+          <Tips section={"skills"} />
 
           <div className="flex justify-between items-center pt-4">
             <Button variant="outline" onClick={previous}>

@@ -44,6 +44,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                     alt={template.label}
                     fill
                     className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                    priority={true}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-300">

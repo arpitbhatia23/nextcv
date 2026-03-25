@@ -2,13 +2,17 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AuthProvider from "@/context/authprovider";
-
+import { getServerSession } from "next-auth";
+import authOptions from "../api/auth/options";
+import { InitUser } from "@/components/initUser";
 export const metadata = {
   title: "Dashboard - NextCV",
   description: "Manage your resumes and create new ones with AI assistance",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <>
       {/* JSON-LD for Dashboard/Tool Application */}
@@ -32,6 +36,7 @@ export default function RootLayout({ children }) {
       />
       <section className={` antialiased`}>
         <AuthProvider>
+          <InitUser session={session} />
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>

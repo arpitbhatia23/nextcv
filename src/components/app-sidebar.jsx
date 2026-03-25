@@ -16,7 +16,7 @@ import {
 import Logo2 from "./Logo2";
 import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
 import { Separator } from "./ui/separator";
-import { useSession } from "next-auth/react";
+import { userStore } from "@/store/user.store";
 
 const userData = {
   navMain: [
@@ -65,9 +65,8 @@ const adminData = {
 };
 
 export function AppSidebar({ ...props }) {
-  const { data: session } = useSession();
-  const user = session?.user;
-  const data = session?.user?.role === "admin" ? adminData : userData;
+  const user = userStore(s => s.user);
+  const data = user?.role === "admin" ? adminData : userData;
 
   return (
     <Sidebar collapsible="offcanvas" className="bg-white border-r border-slate-200" {...props}>

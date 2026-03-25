@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
 import { toast } from "sonner";
+import { Tips } from "../Tips";
 
 const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);
@@ -385,6 +386,8 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
+
+          <Tips section={"projects"} />
 
           <div className="flex justify-between items-center pt-4">
             <Button

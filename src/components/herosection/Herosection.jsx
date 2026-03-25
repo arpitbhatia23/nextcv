@@ -45,7 +45,7 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
-          Build a Free ATS-Friendly Resume <br />
+          Build a ATS-Friendly Resume <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
             That Gets Interviews Faster
           </span>
@@ -121,8 +121,9 @@ function Herosection() {
           developer resume, or a professional resume format for engineering freshers in India with 0
           years experience, NextCV provides keyword-optimized, single-column layouts that pass
           automated screening. Download your professional PDF resume for campus placements and
-          off-campus hiring in India 2026. Use our specialized TCS resume builder, Accenture infographic resume builder, 
-          and LTIMindtree resume formats to stand out in the 2026 hiring season.
+          off-campus hiring in India 2026. Use our specialized TCS resume builder, Accenture
+          infographic resume builder, and LTIMindtree resume formats to stand out in the 2026 hiring
+          season.
         </p>
       </div>
     </section>

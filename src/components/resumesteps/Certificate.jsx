@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Tips } from "../Tips";
 
 const CertificateStep = ({ next, previous, formData, updateForm }) => {
   const [certList, setCertList] = useState(formData.certificates || []);
@@ -271,7 +272,7 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
-
+          <Tips section={"certificates"} />
           <div className="flex justify-between items-center pt-4">
             <Button
               variant="outline"

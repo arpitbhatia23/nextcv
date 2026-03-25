@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "../ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
+import { Tips } from "../Tips";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(formData.experience || []);
@@ -372,7 +373,7 @@ const ExperienceStep = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
-
+          <Tips section={"experience"} />
           <div className="flex justify-between items-center pt-4">
             <Button
               variant="outline"

@@ -18,6 +18,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
+import { Tips } from "../Tips";
 
 const EducationStep = ({ next, previous, formData, updateForm }) => {
   const [educationList, setEducationList] = useState(formData.education || []);
@@ -349,6 +350,8 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
+
+          <Tips section={"education"} />
 
           <div className="flex justify-between items-center pt-4">
             <Button

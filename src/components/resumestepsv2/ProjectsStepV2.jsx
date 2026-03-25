@@ -28,6 +28,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { Tips } from "../Tips";
 
 const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);
@@ -386,7 +387,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
               )}
             </AnimatePresence>
           </div>
-
+          <Tips section={"projects"} />
           <div className="pt-8 flex justify-between gap-2  md:gap-4">
             <Button
               onClick={previous}

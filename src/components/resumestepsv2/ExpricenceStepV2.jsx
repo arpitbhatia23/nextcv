@@ -28,6 +28,7 @@ import { Textarea } from "../ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import { Tips } from "../Tips";
 
 const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(formData.experience || []);
@@ -363,6 +364,8 @@ const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
               )}
             </AnimatePresence>
           </div>
+
+          <Tips section={"experience"} />
 
           <div className="pt-8 flex justify-between gap-4">
             <Button

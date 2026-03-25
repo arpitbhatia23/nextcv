@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
+import { Tips } from "../Tips";
 
 const CertificateV2 = ({ next, previous, formData, updateForm }) => {
   const [certList, setCertList] = useState(formData.certificates || []);
@@ -278,7 +279,7 @@ const CertificateV2 = ({ next, previous, formData, updateForm }) => {
               )}
             </AnimatePresence>
           </div>
-
+          <Tips section={"certificates"} />
           <div className="pt-8 flex justify-between gap-4">
             <Button
               onClick={previous}

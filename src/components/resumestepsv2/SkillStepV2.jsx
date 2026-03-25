@@ -17,6 +17,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { Tips } from "../Tips";
 
 const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(Array.isArray(formData.skills) ? formData.skills : []);
@@ -264,6 +265,8 @@ const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
               </div>
             )}
           </div>
+
+          <Tips section={"skills"} />
 
           <div className="pt-8 flex justify-between gap-2 md:gap-4">
             <Button onClick={previous} variant="ghost">
