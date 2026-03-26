@@ -73,6 +73,18 @@ export default async function sitemap() {
       changeFrequency: "weekly",
       lastModified: new Date(),
     },
+    {
+      url: `${baseUrl}/free-resume-builder-no-payment`,
+      priority: 0.9,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/best-ai-resume-builder-india`,
+      priority: 0.9,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
   ];
 
   // Dynamic blog pages

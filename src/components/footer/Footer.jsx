@@ -42,11 +42,12 @@ const footerLinks = [
   {
     title: "Resources",
     links: [
-      { label: "ATS-Friendly Resume Format", href: "/" },
-      { label: "Fresher Resume Builder India", href: "/" },
-      { label: "Resume Templates 2026", href: "/templates" },
-      { label: "TCS Resume Guide", href: "/templates" },
-      { label: "Accenture Resume Tips", href: "/templates" },
+      { label: "Resume Price in India", href: "/pricing" },
+      { label: "Best AI Resume Builder India", href: "/best-ai-resume-builder-india" },
+      { label: "Free Resume Builder (No Payment)", href: "/free-resume-builder-no-payment" },
+      { label: "How Much Resume Cost?", href: "/pricing" },
+      { label: "Free vs Paid Resume Builder", href: "/pricing" },
+      { label: "Resume Writing Services Cost", href: "/pricing" },
     ],
   },
 ];
