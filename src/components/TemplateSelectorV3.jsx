@@ -43,6 +43,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                     src={template.image}
                     alt={template.label}
                     fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 200px"
                     className="w-full h-full object-cover transition-transform group-hover:scale-110"
                     priority={true}
                   />
