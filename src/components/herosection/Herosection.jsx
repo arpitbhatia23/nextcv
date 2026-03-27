@@ -45,7 +45,7 @@ function Herosection() {
           // transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]"
         >
-          Build a ATS-Friendly Resume <br />
+          Build a Free ATS-Friendly Resume <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
             That Gets Interviews Faster
           </span>
