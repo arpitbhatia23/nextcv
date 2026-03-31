@@ -18,7 +18,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import Image from "next/image";
 import axios from "axios";
 import { toast } from "sonner";
-import { templates } from "@/utils/template";
+import { templates } from "@/shared/utils/template";
 import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";

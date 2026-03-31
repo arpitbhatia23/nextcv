@@ -1,53 +1,53 @@
-import ClassicTemplate from "../templates/resume-pdf/classic";
-import ModernPDFResumeTemplate from "../templates/resume-pdf/morden";
-import ClassicMinimalistPDFResume from "../templates/resume-pdf/Minimalist";
-import ModernBlueSidebarPDFResume from "../templates/resume-pdf/ModernBlueSideBar";
+import ClassicTemplate from "../../templates/resume-pdf/classic";
+import ModernPDFResumeTemplate from "../../templates/resume-pdf/morden";
+import ClassicMinimalistPDFResume from "../../templates/resume-pdf/Minimalist";
+import ModernBlueSidebarPDFResume from "../../templates/resume-pdf/ModernBlueSideBar";
 
 // New Templates
-import ProfessionalClean from "../templates/resume-pdf/ProfessionalClean";
-import CreativeTeal from "../templates/resume-pdf/CreativeTeal";
-import ExecutiveGray from "../templates/resume-pdf/ExecutiveGray";
-import TechDark from "../templates/resume-pdf/TechDark";
-import CompactModern from "../templates/resume-pdf/CompactModern";
-import BoldHeader from "../templates/resume-pdf/BoldHeader";
-import SidebarLeft from "../templates/resume-pdf/SidebarLeft";
-import InfographicLite from "../templates/resume-pdf/InfographicLite";
+import ProfessionalClean from "../../templates/resume-pdf/ProfessionalClean";
+import CreativeTeal from "../../templates/resume-pdf/CreativeTeal";
+import ExecutiveGray from "../../templates/resume-pdf/ExecutiveGray";
+import TechDark from "../../templates/resume-pdf/TechDark";
+import CompactModern from "../../templates/resume-pdf/CompactModern";
+import BoldHeader from "../../templates/resume-pdf/BoldHeader";
+import SidebarLeft from "../../templates/resume-pdf/SidebarLeft";
+import InfographicLite from "../../templates/resume-pdf/InfographicLite";
 
 // Batch 1: Tech Giants
-import GoogleTech from "../templates/resume-pdf/GoogleTech";
-import MicrosoftCorp from "../templates/resume-pdf/MicrosoftCorp";
-import AmazonOperations from "../templates/resume-pdf/AmazonOperations";
-import AppleCreative from "../templates/resume-pdf/AppleCreative";
-import MetaSocial from "../templates/resume-pdf/MetaSocial";
+import GoogleTech from "../../templates/resume-pdf/GoogleTech";
+import MicrosoftCorp from "../../templates/resume-pdf/MicrosoftCorp";
+import AmazonOperations from "../../templates/resume-pdf/AmazonOperations";
+import AppleCreative from "../../templates/resume-pdf/AppleCreative";
+import MetaSocial from "../../templates/resume-pdf/MetaSocial";
 
 // Batch 2: Indian MNCs
-import TcsDigital from "../templates/resume-pdf/TcsDigital";
-import InfosysSystem from "../templates/resume-pdf/InfosysSystem";
-import WiproModern from "../templates/resume-pdf/WiproModern";
-import HclTech from "../templates/resume-pdf/HclTech";
-import MahindraRise from "../templates/resume-pdf/MahindraRise";
+import TcsDigital from "../../templates/resume-pdf/TcsDigital";
+import InfosysSystem from "../../templates/resume-pdf/InfosysSystem";
+import WiproModern from "../../templates/resume-pdf/WiproModern";
+import HclTech from "../../templates/resume-pdf/HclTech";
+import MahindraRise from "../../templates/resume-pdf/MahindraRise";
 
 // Batch 3: Global Corporate
-import IbmClassic from "../templates/resume-pdf/IbmClassic";
-import AccentureConsult from "../templates/resume-pdf/AccentureConsult";
-import DeloitteAudit from "../templates/resume-pdf/DeloitteAudit";
-import CapgeminiFlow from "../templates/resume-pdf/CapgeminiFlow";
-import CiscoNet from "../templates/resume-pdf/CiscoNet";
+import IbmClassic from "../../templates/resume-pdf/IbmClassic";
+import AccentureConsult from "../../templates/resume-pdf/AccentureConsult";
+import DeloitteAudit from "../../templates/resume-pdf/DeloitteAudit";
+import CapgeminiFlow from "../../templates/resume-pdf/CapgeminiFlow";
+import CiscoNet from "../../templates/resume-pdf/CiscoNet";
 
 // Batch 4: Finance & Enterprise
-import OracleDb from "../templates/resume-pdf/OracleDb";
-import SapEnterprise from "../templates/resume-pdf/SapEnterprise";
-import GoldmanFinance from "../templates/resume-pdf/GoldmanFinance";
-import JpmorganChase from "../templates/resume-pdf/JpmorganChase";
-import NetflixCulture from "../templates/resume-pdf/NetflixCulture";
+import OracleDb from "../../templates/resume-pdf/OracleDb";
+import SapEnterprise from "../../templates/resume-pdf/SapEnterprise";
+import GoldmanFinance from "../../templates/resume-pdf/GoldmanFinance";
+import JpmorganChase from "../../templates/resume-pdf/JpmorganChase";
+import NetflixCulture from "../../templates/resume-pdf/NetflixCulture";
 
 // Batch 5: Role-Specific
-import MedicalNurse from "../templates/resume-pdf/MedicalNurse";
-import AcademicTeacher from "../templates/resume-pdf/AcademicTeacher";
-import SalesGrowth from "../templates/resume-pdf/SalesGrowth";
-import LegalProfessional from "../templates/resume-pdf/LegalProfessional";
-import MarketingCreative from "../templates/resume-pdf/MarketingCreative";
-import ClinicalTrial from "../templates/resume-pdf/ClinicalTrial";
+import MedicalNurse from "../../templates/resume-pdf/MedicalNurse";
+import AcademicTeacher from "../../templates/resume-pdf/AcademicTeacher";
+import SalesGrowth from "../../templates/resume-pdf/SalesGrowth";
+import LegalProfessional from "../../templates/resume-pdf/LegalProfessional";
+import MarketingCreative from "../../templates/resume-pdf/MarketingCreative";
+import ClinicalTrial from "../../templates/resume-pdf/ClinicalTrial";
 
 export const templates = [
   {

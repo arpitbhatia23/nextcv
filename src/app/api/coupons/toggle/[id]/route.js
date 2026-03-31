@@ -1,8 +1,8 @@
-import authOptions from "@/app/api/auth/options";
+import authOptions from "@/modules/auth/services/options";
 import Coupon from "@/models/coupon";
-import apiError from "@/utils/apiError";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
+import apiError from "@/shared/utils/apiError";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 const handler = async (req, { params }) => {

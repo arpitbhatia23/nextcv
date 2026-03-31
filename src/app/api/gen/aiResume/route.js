@@ -1,6 +1,6 @@
-import { ai, ai_model } from "@/utils/aiConfig";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
+import { ai, ai_model } from "@/shared/utils/aiConfig";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
 import { encode } from "@toon-format/toon";
 import { NextResponse } from "next/server";
 

@@ -1,7 +1,7 @@
 "use server";
-import Payment from "@/models/payment.model.js";
-import User from "@/models/user.model";
-import dbConnect from "@/utils/dbConnect";
+import Payment from "@/modules/payment/model/payment.model.js";
+import { User } from "@/modules/auth";
+import dbConnect from "@/shared/utils/dbConnect";
 
 const sectionServer = async () => {
   await dbConnect();

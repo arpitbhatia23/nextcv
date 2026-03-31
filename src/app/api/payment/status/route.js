@@ -1,29 +1,20 @@
-import Payment from "@/models/payment.model";
-import Resume from "@/models/resume.model";
+import Payment from "@/modules/payment/model/payment.model";
+import Resume from "@/modules/resume/models/resume.model";
 import User from "@/models/user.model";
-import apiError from "@/utils/apiError";
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
-import { getServerSession } from "next-auth";
+import apiError from "@/shared/utils/apiError";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
 import { NextResponse } from "next/server";
-import { Env, StandardCheckoutClient } from "pg-sdk-node";
-import authOptions from "../../auth/options";
+import { client, createPayment } from "@/modules/payment/phonepe/service";
+import { requiredAuth } from "@/shared";
 
-const clientId = process.env.PHONE_PE_CLIENT_ID;
-const clinetSecret = process.env.PHONE_PE_CLIENT_SECRET;
-const clientVersion = process.env.PHONE_PE_CLIENT_VERSION;
-const env = process.env.NODE_ENV === "production" ? Env.PRODUCTION : Env.SANDBOX;
-const client = StandardCheckoutClient.getInstance(clientId, clinetSecret, clientVersion, env);
 const handler = async req => {
   const searchParams = req.nextUrl.searchParams;
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
   const resumeID = searchParams.get("resumeId");
   const response = await client.getOrderStatus(merchantOrderId);
-  const session = await getServerSession(authOptions);
-  if (!session && !session?.user) {
-    throw new apiError(401, "unauthorizes access");
-  }
+  const session = await requiredAuth();
   const userId = session.user._id;
   const couponCode = searchParams.get("couponCode");
   const discountAmount = searchParams.get("discountAmount");
@@ -36,15 +27,7 @@ const handler = async req => {
         `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
       );
     }
-    const payment = await Payment.create({
-      transcationId: response?.paymentDetails[0]?.transactionId,
-      paymentMode: response?.paymentDetails[0]?.paymentMode,
-      amount: response?.amount / 100,
-      userId: userId,
-      couponCode: couponCode || null,
-      discountAmount: discountAmount ? parseFloat(discountAmount) : 0,
-    });
-
+    const payment = await createPayment({ response, couponCode, discountAmount });
     const updateResume = await Resume.findByIdAndUpdate(
       resumeID,
       {

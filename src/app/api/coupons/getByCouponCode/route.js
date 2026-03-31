@@ -1,12 +1,12 @@
 import Coupon from "@/models/coupon";
-import apiError from "@/utils/apiError";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
+import apiError from "@/shared/utils/apiError";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import authOptions from "../../auth/options";
-import Payment from "@/models/payment.model";
+import authOptions from "../../../../modules/auth/services/options";
+import Payment from "@/modules/payment/model/payment.model";
 const handler = async req => {
   const { couponCode } = await req.json();
   await dbConnect();

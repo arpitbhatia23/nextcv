@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 const AdminPaymentDashboard = dynamic(() => import("@/components/PaymentAnalaytics"));
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/options";
+import authOptions from "@/modules/auth/services/options";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata() {

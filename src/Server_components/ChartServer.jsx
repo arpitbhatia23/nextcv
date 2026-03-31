@@ -1,6 +1,6 @@
 "use server";
 import { VisitorStats } from "@/models/VisitorStats.model";
-import dbConnect from "@/utils/dbConnect";
+import dbConnect from "@/shared/utils/dbConnect";
 
 const ChartServer = async (timePeriod = "90d") => {
   await dbConnect();

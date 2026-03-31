@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import authOptions from "../api/auth/options";
+import authOptions from "../../modules/auth/services/options";
 import dynamic from "next/dynamic";
 
 const AdminiDashboard = dynamic(() => import("@/components/AdminiDashboard"));

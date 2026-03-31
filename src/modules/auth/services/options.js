@@ -1,9 +1,9 @@
 import Credentialsprovider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import dbConnect from "@/utils/dbConnect";
-import User from "@/models/user.model";
+import dbConnect from "@/shared/utils/dbConnect";
 import bcrypt from "bcryptjs";
 import { sendWellcomeMessage } from "@/templates/email/sendWelcomeMail";
+import User from "../models/user.model";
 const authOptions = {
   providers: [
     Credentialsprovider({

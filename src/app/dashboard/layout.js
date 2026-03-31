@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AuthProvider from "@/context/authprovider";
 import { getServerSession } from "next-auth";
-import authOptions from "../api/auth/options";
+import authOptions from "../../modules/auth/services/options";
 import { InitUser } from "@/components/initUser";
 export const metadata = {
   title: "Dashboard - NextCV",

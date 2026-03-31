@@ -1,7 +1,7 @@
-import apiError from "@/utils/apiError";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
+import apiError from "@/shared/utils/apiError";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
 import { NextResponse } from "next/server";
 const handler = async (req, { params }) => {
   const id = await params.id;

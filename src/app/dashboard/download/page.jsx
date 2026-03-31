@@ -1,7 +1,7 @@
 "use client";
 import FeedbackModal from "@/components/FeedbackModal";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { templates } from "@/utils/template";
+import { templates } from "@/shared/utils/template";
 import { pdf } from "@react-pdf/renderer";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";

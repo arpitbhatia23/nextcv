@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, LayoutTemplate } from "lucide-react";
-import { templates } from "@/utils/template";
+import { templates } from "@/shared/utils/template";
 import useResumeStore from "@/store/useResumeStore";
 import Image from "next/image";
 

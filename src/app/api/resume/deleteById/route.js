@@ -1,12 +1,11 @@
-import dbConnect from "@/utils/dbConnect";
-import apiError from "@/utils/apiError";
-import authOptions from "../../auth/options";
-import { getServerSession } from "next-auth";
-import Resume from "@/models/resume.model";
+import dbConnect from "@/shared/utils/dbConnect";
+import apiError from "@/shared/utils/apiError";
+
 import { NextResponse } from "next/server";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import User from "@/models/user.model";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import { requiredAuth } from "@/shared";
+import { deleteResumeById } from "@/modules/resume";
 const handler = async req => {
   await dbConnect();
   const searchParams = req.nextUrl.searchParams;
@@ -14,23 +13,10 @@ const handler = async req => {
   if (!id) {
     throw new apiError(400, "Resume ID is required");
   }
-  const session = await getServerSession(authOptions);
+  const session = await requiredAuth();
 
-  if (!session && !session.user) {
-    throw new apiError(403, "Unauthorized");
-  }
   const userId = session.user._id;
-
-  const resume = await Resume.findOne({
-    _id: id,
-  });
-
-  if (!resume) {
-    throw new apiError(404, "Resume not found");
-  }
-  await Resume.deleteOne({ _id: id });
-  await User.findByIdAndUpdate(userId, { $pull: { resume: id } });
-
+  await deleteResumeById({ id, userId });
   return NextResponse.json(new apiResponse(200, "Resume deleted successfully"));
 };
 export const DELETE = asyncHandler(handler);

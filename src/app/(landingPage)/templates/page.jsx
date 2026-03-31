@@ -1,4 +1,4 @@
-import { templates } from "@/utils/template";
+import { templates } from "@/shared/utils/template";
 import TemplateImage from "../../../components/TemplateImage";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Layout, Zap, Award, Edit } from "lucide-react";
@@ -192,11 +192,11 @@ export default function TemplatesPage() {
         <h2>Why Choosing the Right Resume Template Matters for Your Career in India</h2>
         <p>
           In today's competitive job market, your resume is often the only chance you get to make a
-          first impression. Whether you are applying for <strong>TCS, Accenture, or LTIMindtree</strong>, 
-          the visual appeal and structure of your document are just as critical as the
-          content itself. Recruiters at top Indian MNCs spend an average of just 6-7 seconds scanning a
-          resume, and a well-structured resume template organizes your professional story in a way 
-          that highlights your strengths immediately.
+          first impression. Whether you are applying for{" "}
+          <strong>TCS, Accenture, or LTIMindtree</strong>, the visual appeal and structure of your
+          document are just as critical as the content itself. Recruiters at top Indian MNCs spend
+          an average of just 6-7 seconds scanning a resume, and a well-structured resume template
+          organizes your professional story in a way that highlights your strengths immediately.
         </p>
 
         <h3>The Importance of ATS Compatibility</h3>

@@ -1,8 +1,8 @@
 import User from "@/models/user.model";
 import { ReminderEmail } from "@/templates/email/remiderEmail";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
 import { NextResponse } from "next/server";
 const handler = async () => {
   await dbConnect();

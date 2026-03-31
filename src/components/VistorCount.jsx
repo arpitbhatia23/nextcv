@@ -1,6 +1,6 @@
 "use server";
 import { VisitorStats } from "@/models/VisitorStats.model.js";
-import dbConnect from "@/utils/dbConnect";
+import dbConnect from "@/shared/utils/dbConnect";
 
 function getStartOfDay(date = new Date()) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate());

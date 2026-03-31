@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const AnalyticsPage = dynamic(() => import("@/components/analatics"));
 
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/options";
+import authOptions from "@/modules/auth/services/options";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata() {

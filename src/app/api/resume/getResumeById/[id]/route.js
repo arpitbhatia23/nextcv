@@ -1,30 +1,15 @@
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
-import mongoose from "mongoose";
-
-const { default: authOptions } = require("@/app/api/auth/options");
-const { default: Resume } = require("@/models/resume.model");
-const { default: apiError } = require("@/utils/apiError");
-const { apiResponse } = require("@/utils/apiResponse");
-const { getServerSession } = require("next-auth");
-const { NextResponse } = require("next/server");
+import { requiredAuth } from "@/shared";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { NextResponse } from "next/server";
+import { getResumeById } from "@/modules/resume";
 
 const handler = async (req, { params }) => {
   const { id } = await params;
   await dbConnect();
-  const session = await getServerSession(authOptions);
-  if (!session && !session.user) {
-    throw new apiError(401, "unauthorized user");
-  }
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    throw new apiError(400, "invalid resume id");
-  }
-
-  const resumeData = await Resume.findById(id);
-
-  if (!resumeData) {
-    throw new apiError(404, "resume not found");
-  }
+  await requiredAuth();
+  const resumeData = await getResumeById({ id });
   return NextResponse.json(new apiResponse(200, "resume found sucessfull", resumeData), {
     status: 200,
   });

@@ -1,11 +1,11 @@
-import Payment from "@/models/payment.model";
-import apiError from "@/utils/apiError";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import dbConnect from "@/utils/dbConnect";
+import Payment from "@/modules/payment/model/payment.model";
+import apiError from "@/shared/utils/apiError";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import dbConnect from "@/shared/utils/dbConnect";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
-import authOptions from "../../auth/options";
+import authOptions from "../../../../modules/auth/services/options";
 const handler = async () => {
   await dbConnect();
 

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
-import { formatDate } from "@/utils/datefromater";
+import { formatDate } from "@/shared/utils/datefromater";
 
 // Color palette
 const GREEN = "#36b37e";

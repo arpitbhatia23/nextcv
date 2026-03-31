@@ -24,7 +24,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import axios from "axios";
-import { formatDate } from "@/utils/datefromater";
+import { formatDate } from "@/shared/utils/datefromater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 

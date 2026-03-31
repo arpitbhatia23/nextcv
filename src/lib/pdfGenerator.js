@@ -1,4 +1,4 @@
-import { templates } from "@/utils/template";
+import { templates } from "@/shared/utils/template";
 import { pdf } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";

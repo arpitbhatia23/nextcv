@@ -1,5 +1,5 @@
-import { asyncHandler } from "@/utils/asyncHandler";
-import { apiResponse } from "@/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import { apiResponse } from "@/shared/utils/apiResponse";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 

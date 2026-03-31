@@ -1,7 +1,7 @@
-import apiError from "@/utils/apiError";
-import { apiResponse } from "@/utils/apiResponse";
-import { asyncHandler } from "@/utils/asyncHandler";
-import { ResumeGenerator } from "@/utils/resumeDescriptionGenereation";
+import apiError from "@/shared/utils/apiError";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
+import { ResumeGenerator } from "@/shared/utils/resumeDescriptionGenereation";
 import { NextResponse } from "next/server";
 
 export const maxDuration = 30;

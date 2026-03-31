@@ -1,13 +1,13 @@
 import Coupons from "@/models/coupon";
-import dbConnect from "@/utils/dbConnect";
-import Payment from "@/models/payment.model";
+import dbConnect from "@/shared/utils/dbConnect";
+import Payment from "@/modules/payment/model/payment.model";
 import User from "@/models/user.model";
-import Resume from "@/models/resume.model";
-import { asyncHandler } from "@/utils/asyncHandler";
+import Resume from "@/modules/resume/models/resume.model";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
 import { NextResponse } from "next/server";
-import { apiResponse } from "@/utils/apiResponse";
+import { apiResponse } from "@/shared/utils/apiResponse";
 import { getServerSession } from "next-auth";
-import authOptions from "../../auth/options";
+import authOptions from "../../../../modules/auth/services/options";
 const now = new Date();
 
 const timeRangeObject = {

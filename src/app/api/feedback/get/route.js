@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import dbConnect from "@/utils/dbConnect";
+import dbConnect from "@/shared/utils/dbConnect";
 import Feedback from "@/models/feedback.model";
 import { getServerSession } from "next-auth";
-import authOptions from "@/app/api/auth/options";
-import { apiResponse } from "@/utils/apiResponse";
-import apiError from "@/utils/apiError";
-import { asyncHandler } from "@/utils/asyncHandler";
+import authOptions from "@/modules/auth/services/options";
+import { apiResponse } from "@/shared/utils/apiResponse";
+import apiError from "@/shared/utils/apiError";
+import { asyncHandler } from "@/shared/utils/asyncHandler";
 
 const handler = async () => {
   await dbConnect();
