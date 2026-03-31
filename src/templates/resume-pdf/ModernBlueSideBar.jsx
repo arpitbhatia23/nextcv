@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
-import { formatDate } from "@/shared/utils/datefromater";
+import { formatDate } from "@/utils/datefromater";
+import { splitToBullets } from "@/utils/splitBullets";
 
 // Blue color theme
 const BLUE = "#2072c9";
@@ -274,31 +275,6 @@ const styles = StyleSheet.create({
     color: "#444",
   },
 });
-
-const splitToBullets = desc => {
-  if (Array.isArray(desc)) return desc;
-  if (typeof desc !== "string") return [];
-
-  return desc
-    .split("\n")
-    .flatMap(line => {
-      const trimmed = line.trim();
-      if (!trimmed) return [];
-
-      // Keep AI bullet points intact
-      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
-
-      // Split semicolon separated items
-      if (trimmed.includes(";"))
-        return trimmed
-          .split(";")
-          .map(b => b.trim())
-          .filter(Boolean);
-
-      return [trimmed]; // keep full sentence
-    })
-    .filter(Boolean);
-};
 
 function renderLangBar(level, max = 5) {
   return (
