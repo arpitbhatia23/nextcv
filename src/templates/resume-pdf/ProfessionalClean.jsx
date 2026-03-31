@@ -2,6 +2,7 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
+import { splitToBullets } from "@/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
@@ -108,30 +109,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = desc => {
-  if (Array.isArray(desc)) return desc;
-  if (typeof desc !== "string") return [];
-
-  return desc
-    .split("\n")
-    .flatMap(line => {
-      const trimmed = line.trim();
-      if (!trimmed) return [];
-
-      // Keep AI bullet points intact
-      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
-
-      // Split semicolon separated items
-      if (trimmed.includes(";"))
-        return trimmed
-          .split(";")
-          .map(b => b.trim())
-          .filter(Boolean);
-
-      return [trimmed]; // keep full sentence
-    })
-    .filter(Boolean);
-};
 const ProfessionalClean = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>

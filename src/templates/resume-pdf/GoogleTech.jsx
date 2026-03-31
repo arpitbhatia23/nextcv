@@ -2,6 +2,7 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
+import { splitToBullets } from "@/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
@@ -109,26 +110,6 @@ const styles = StyleSheet.create({
     color: "#3c4043",
   },
 });
-
-const splitToBullets = desc => {
-  if (Array.isArray(desc)) return desc;
-  if (typeof desc !== "string") return [];
-
-  return desc
-    .split("\n")
-    .flatMap(line => {
-      const trimmed = line.trim();
-      if (!trimmed) return [];
-      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
-      if (trimmed.includes(";"))
-        return trimmed
-          .split(";")
-          .map(b => b.trim())
-          .filter(Boolean);
-      return [trimmed];
-    })
-    .filter(Boolean);
-};
 
 const GoogleTech = ({ data }) => {
   return (

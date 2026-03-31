@@ -2,6 +2,7 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/utils/datefromater";
+import { splitToBullets } from "@/utils/splitBullets";
 
 // Icon SVGs
 const LocationIcon = () => (
@@ -260,31 +261,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const splitToBullets = desc => {
-  if (Array.isArray(desc)) return desc;
-  if (typeof desc !== "string") return [];
-
-  return desc
-    .split("\n")
-    .flatMap(line => {
-      const trimmed = line.trim();
-      if (!trimmed) return [];
-
-      // Keep AI bullet points intact
-      if (trimmed.startsWith("•")) return [trimmed.replace(/^•\s*/, "")];
-
-      // Split semicolon separated items
-      if (trimmed.includes(";"))
-        return trimmed
-          .split(";")
-          .map(b => b.trim())
-          .filter(Boolean);
-
-      return [trimmed]; // keep full sentence
-    })
-    .filter(Boolean);
-};
-
 const ClassicMinimalistPDFResume = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -396,7 +372,7 @@ const ClassicMinimalistPDFResume = ({ data }) => (
                       {exp.bullets.map((bullet, j) =>
                         bullet ? (
                           <Text key={j} style={styles.bullet}>
-                            • {bullet}
+                            {bullet}
                           </Text>
                         ) : null
                       )}
@@ -425,7 +401,8 @@ const ClassicMinimalistPDFResume = ({ data }) => (
                     <View style={styles.bulletList}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletItem}>
-                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text style={styles.bulletPoint}>•</Text>
+
                           <Text style={{ fontSize: 9, color: "#666" }}>{bullet}</Text>
                         </View>
                       ))}
@@ -454,7 +431,8 @@ const ClassicMinimalistPDFResume = ({ data }) => (
                     <View style={styles.bulletList}>
                       {splitToBullets(proj.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletItem}>
-                          <Text style={styles.bulletSymbol}>•</Text>
+                          <Text style={styles.bulletPoint}>•</Text>
+
                           <Text>{bullet}</Text>
                         </View>
                       ))}
