@@ -1,6 +1,3 @@
-import Resume from "@/modules/resume/models/resume.model";
-import User from "@/models/user.model";
-import apiError from "@/shared/utils/apiError";
 import { asyncHandler } from "@/shared/utils/asyncHandler";
 import { NextResponse } from "next/server";
 import { apiResponse } from "@/shared/utils/apiResponse";

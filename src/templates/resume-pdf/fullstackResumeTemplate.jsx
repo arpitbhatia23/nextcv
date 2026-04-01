@@ -2,6 +2,7 @@
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
+import { splitToBullets } from "@/shared/utils/splitBullets";
 
 // Color palette
 const GREEN = "#36b37e";

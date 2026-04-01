@@ -12,17 +12,20 @@ import {
   AlertCircle,
   FileText,
 } from "lucide-react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import Image from "next/image";
-import axios from "axios";
-import { toast } from "sonner";
+
 import { templates } from "@/shared/utils/template";
-import { pdfGenerator } from "@/lib/pdfGenerator";
 import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";
 import FeedbackModal from "@/components/FeedbackModal";
+import { usePayment } from "@/modules/payment/hooks/usePayment";
+import { useCoupon } from "@/modules/payment/hooks/useCoupon";
+import { useDraft } from "@/modules/resume/hooks/usedraft";
+import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
+import { usePricing } from "@/modules/payment/hooks/usePricing";
 
 const WatermarkLayer = () => (
   <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center opacity-[0.06] select-none">
@@ -39,27 +42,51 @@ const WatermarkLayer = () => (
   </div>
 );
 
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-
 const FinalStep = ({ formData, isdraft = false }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
-  // const [selectedTemplate, setSelectedTemplate] = useState("InfographicLite");
-  const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
-  const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(100);
-  const [originalAmount] = useState(100);
-  const [discount, setDiscount] = useState(null);
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
-  const [isSubmit, setIsSubmit] = useState(false);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [isCouponValid, setIsCouponValid] = useState(true);
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [originalAmount, setOriginalAmount] = useState(0);
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  const clearDraft = useResumeStore(s => s.clearStorage);
+  const { handelPayment, isRedirecting } = usePayment({
+    discount,
+    originalAmount,
+    formData,
+    applied,
+    selectedTemplate,
+    setIsSubmit,
+    couponCode,
+  });
+
+  const { applied, discount, handleCoupon, removeCoupon } = useCoupon({
+    setIsSubmit,
+    originalAmount,
+    setAmount,
+    setCouponCode,
+  });
+
+  const { handleSaveDraft } = useDraft({
+    setIsSubmit,
+    selectedTemplate,
+    formData,
+    setIsFeedbackOpen,
+  });
+
+  const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
   // Debounced handlers
+
+  const { basePrice } = usePricing({
+    selectedTemplate,
+    applied,
+    originalAmount,
+    discount,
+    setAmount,
+    setOriginalAmount,
+  });
   const debouncePayment = useDebouncedCallback(() => {
     handelPayment();
   }, 1000);
@@ -71,147 +98,6 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const debounceCoupon = useDebouncedCallback(coupon => {
     handleCoupon(coupon);
   }, 1000);
-
-  const handleSaveDraft = async () => {
-    try {
-      setIsSubmit(true);
-      const res = await axios.post("/api/resume/savedraft", {
-        ResumeType: selectedTemplate,
-        ...formData,
-      });
-
-      if (res.data.success) {
-        toast.success("Draft saved successfully");
-        clearDraft();
-        setIsFeedbackOpen(true);
-      } else {
-        console.log(res.data);
-        toast.error(res.data.message || "Failed to save draft");
-      }
-      setIsSubmit(false);
-    } catch (error) {
-      setIsSubmit(false);
-      console.log(error);
-      toast.error("Error saving draft");
-    }
-  };
-
-  const removeCoupon = () => {
-    setAmount(originalAmount);
-    setDiscount(null);
-    setApplied(false);
-    setCouponCode("");
-    setAppliedCoupon(null);
-    toast.info("Coupon removed");
-  };
-
-  useEffect(() => {
-    const pdfGen = new pdfGenerator(formData, selectedTemplate);
-    let isMounted = true;
-    pdfGen.createPdf().then(url => {
-      if (isMounted) setPdfUrl(url);
-    });
-
-    return () => {
-      isMounted = false;
-      pdfGen.cleanUp();
-    };
-  }, [formData, selectedTemplate]);
-
-  const handelPayment = async () => {
-    if (couponCode && !applied) {
-      toast.error("Please apply a valid coupon before payment");
-      return;
-    }
-
-    try {
-      setIsSubmit(true);
-
-      const payAmount =
-        discount?.type === "percentage"
-          ? Math.floor(originalAmount * (1 - discount.value / 100))
-          : discount?.type === "amount"
-            ? Math.max(originalAmount - discount.value, 0)
-            : originalAmount;
-
-      const discountAmount =
-        discount?.type === "percentage"
-          ? Math.round(originalAmount * (discount.value / 100))
-          : discount?.type === "amount"
-            ? discount.value
-            : 0;
-      const res = await axios.post("/api/payment/order", {
-        amount: payAmount * 100,
-        ResumeType: selectedTemplate,
-        couponCode: applied ? couponCode : null,
-        discountAmount,
-        ...formData,
-      });
-
-      if (res.data.success) {
-        setIsRedirecting(true);
-        setTimeout(() => {
-          window.location.href = res.data.data.redirectUrl;
-        }, 2000);
-        clearDraft();
-      }
-    } catch (error) {
-      toast.error(error.message || "Payment initialization failed");
-    } finally {
-      setIsSubmit(false);
-    }
-  };
-
-  const handleCoupon = async coupon => {
-    if (appliedCoupon === coupon) {
-      toast.info("This coupon is already applied");
-      return;
-    }
-
-    setIsSubmit(true);
-
-    try {
-      const res = await axios.post("/api/coupons/getByCouponCode", {
-        couponCode: coupon,
-      });
-
-      const couponData = res.data.data;
-
-      const discountInfo = {
-        type: couponData.type,
-        value: couponData.discount,
-      };
-
-      setDiscount(discountInfo);
-      setApplied(true);
-      setAppliedCoupon(coupon);
-      setIsCouponValid(true);
-
-      let finalAmount = originalAmount;
-
-      if (discountInfo.type === "percentage") {
-        finalAmount = originalAmount * (1 - discountInfo.value / 100);
-      } else if (discountInfo.type === "amount") {
-        finalAmount = originalAmount - discountInfo.value;
-      }
-
-      finalAmount = Math.max(Math.round(finalAmount), 0);
-      setAmount(finalAmount);
-
-      toast.success("Coupon applied successfully");
-    } catch (error) {
-      setDiscount(null);
-      setApplied(false);
-      setAppliedCoupon(null);
-      setIsCouponValid(false);
-      setAmount(originalAmount);
-      setCouponCode("");
-      console.log(error?.response?.data);
-      toast.error(error?.response?.data || "Invalid coupon code");
-    } finally {
-      setIsSubmit(false);
-    }
-  };
 
   return (
     <div className="py-4 h-[calc(100vh-100px)] flex flex-col">
@@ -314,7 +200,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <span className="text-slate-600 font-medium text-sm">Total Amount</span>
 
               <div className="flex items-center gap-2">
-                <span className="text-sm text-slate-400 line-through">₹199</span>
+                <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
 
                 <span className="text-lg font-bold text-slate-900">₹{amount}</span>
               </div>
@@ -532,7 +418,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
             <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-slate-600">Resume Base Price</span>
-                <span className="font-semibold text-slate-900">₹{originalAmount}</span>
+                <span className="font-semibold text-slate-900">₹{basePrice}</span>
               </div>
               {applied && discount && (
                 <div className="flex justify-between items-center text-sm text-green-600">
@@ -545,7 +431,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
               <div className="pt-3 border-t border-slate-200 flex justify-between items-center">
                 <span className="text-base font-bold text-slate-800">Total Pay</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-slate-400 line-through">₹199</span>
+                  <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
 
                   <span className="text-lg font-bold text-slate-900">₹{amount}</span>
                 </div>

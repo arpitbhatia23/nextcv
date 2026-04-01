@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
-import { formatDate } from "@/utils/datefromater";
-import { splitToBullets } from "@/utils/splitBullets";
+import { formatDate } from "@/shared/utils/datefromater";
+import { splitToBullets } from "@/shared/utils/splitBullets";
 
 // Icon SVGs
 const LocationIcon = () => (
