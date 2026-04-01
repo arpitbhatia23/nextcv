@@ -28,7 +28,7 @@ export default async function RootLayout({ children }) {
             applicationCategory: "Productivity",
             offers: {
               "@type": "Offer",
-              price: "100",
+              price: "49",
               priceCurrency: "INR",
             },
           }),

@@ -247,7 +247,7 @@ export default function TemplatesPage() {
         <p>
           Unlike international tools that might not cater to local nuances (like including a photo
           optionally, or specific educational formats), NextCV is built with the Indian context in
-          mind. We offer affordable pricing (just ₹100 per resume) compared to expensive monthly
+          mind. We offer affordable pricing (starting from ₹49) compared to expensive monthly
           subscriptions, making premium career tools accessible to students and freshers.
         </p>
         <p>

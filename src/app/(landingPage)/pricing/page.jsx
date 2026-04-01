@@ -4,7 +4,7 @@ import { Check, ShieldCheck, Zap, Download, HelpCircle } from "lucide-react";
 export const metadata = {
   title: "Resume Price in India (2026) – Free vs Paid + Actual Cost Breakdown",
   description:
-    "Wondering how much a resume costs in India? Compare free vs paid resume builders, pricing, and what you actually get. See NextCV plans starting at ₹100.",
+    "Wondering how much a resume costs in India? Compare free vs paid resume builders, pricing, and what you actually get. See NextCV plans starting at ₹49.",
   keywords:
     "resume price, resume builder price, resume builder cost, resume charges, cv rates, resume builder pricing, resume banane ka kitna paisa lagta hai, cv cost, cv-resume subscription, resume fees, resume pricing, resume maker price, resume making price, cv fee, resume builder india pricing, how much resume cost, pay for resume, resume payment",
   alternates: {
@@ -27,15 +27,15 @@ export default function PricingPage() {
   const faqs = [
     {
       question: "How much does a resume cost in India?",
-      answer: "A professional resume in India can cost anywhere from ₹500 for a basic freelancer service to ₹10,000 for executive agency packages. NextCV provides a professional AI-powered resume builder for just ₹100 per resume."
+      answer: "A professional resume in India can cost anywhere from ₹500 for a basic freelancer service to ₹10,000 for executive agency packages. NextCV provides professional AI-powered resume templates starting at just ₹49."
     },
     {
       question: "Is a resume builder free or paid?",
-      answer: "Most quality resume builders have a cost associated with high-quality PDF downloads. While some offer 'free' previews, NextCV offers a transparent one-time payment of ₹100 with no hidden subscriptions."
+      answer: "Most quality resume builders have a cost associated with high-quality PDF downloads. While some offer 'free' previews, NextCV offers transparent one-time template-based pricing starting at ₹49."
     },
     {
       question: "What is the cheapest way to create a resume?",
-      answer: "The cheapest way is using Word or Google Docs, but these often fail ATS checks. A professional yet affordable tool like NextCV (₹100) ensures your resume is ATS-optimized and professionally designed."
+      answer: "The cheapest way is using Word or Google Docs, but these often fail ATS checks. A professional yet affordable tool like NextCV (starting at ₹49) ensures your resume is ATS-optimized and professionally designed."
     },
     {
       question: "Are paid resume builders worth it?",
@@ -43,11 +43,11 @@ export default function PricingPage() {
     },
     {
       question: "Can I download my resume for free?",
-      answer: "NextCV allows you to build and preview your resume for free. To download the high-quality, watermark-free PDF ready for job applications, there is a small one-time fee of ₹100."
+      answer: "NextCV allows you to build and preview your resume for free. To download the high-quality, watermark-free PDF ready for job applications, pricing starts at a nominal ₹49 one-time fee."
     },
     {
       question: "Is NextCV free or paid?",
-      answer: "NextCV follows a 'Pay per Resume' model. You can create your profile for free, but downloading the final professional PDF costs ₹100. No monthly subscriptions or recurring charges."
+      answer: "NextCV follows a 'Pay per Template' model. You can create your profile for free, but downloading the final professional PDF costs between ₹49 and ₹999 depending on the template. No monthly subscriptions."
     }
   ];
 
@@ -104,8 +104,11 @@ export default function PricingPage() {
                 </div>
 
                 <div className="flex items-baseline mb-8">
+                  <span className="text-2xl font-bold tracking-tight text-slate-500 mr-2 uppercase text-xs">
+                    Starting at
+                  </span>
                   <span className="text-5xl font-extrabold tracking-tight text-slate-900">
-                    ₹100
+                    ₹49
                   </span>
                   <span className="text-xl font-semibold text-slate-500 ml-2">/ resume</span>
                 </div>
@@ -166,7 +169,7 @@ export default function PricingPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2 text-slate-900">AI-Powered Value</h3>
                 <p className="text-slate-500 text-sm">
-                  Don't pay thousands to professional writers. Use our Gemini-powered AI to generate perfect bullet points included in the ₹100 price.
+                  Don't pay thousands to professional writers. Use our Gemini-powered AI to generate perfect bullet points included in the affordable template price.
                 </p>
               </div>
             </div>
@@ -197,7 +200,7 @@ export default function PricingPage() {
             </div>
           </div>
           <p>
-            NextCV bridges the gap by offering <strong>agency-level quality</strong> with <strong>tool-level pricing</strong>. At just ₹100, it's the most affordable professional resume maker in India.
+            NextCV bridges the gap by offering <strong>agency-level quality</strong> with <strong>tool-level pricing</strong>. With templates starting at just ₹49, it's the most affordable professional resume maker in India.
           </p>
 
           <h2 className="text-3xl font-bold text-slate-900 mt-12">Why Resume Pricing Varies (Free vs Paid)</h2>
@@ -212,7 +215,7 @@ export default function PricingPage() {
 
           <h2 className="text-3xl font-bold text-slate-900 mt-12">NextCV Pricing Explained (What You Actually Get)</h2>
           <p>
-            Our resume fees are straightforward. For ₹100 per resume, you unlock:
+            Our resume fees are straightforward. For a one-time fee between ₹49 and ₹999 per resume, you unlock:
           </p>
           <ul>
             <li><strong>Advanced AI Writing:</strong> Powered by Google Gemini to help you phrase complex achievements.</li>
@@ -223,7 +226,7 @@ export default function PricingPage() {
 
           <h2 className="text-3xl font-bold text-slate-900 mt-12">Is Paying for a Resume Worth It?</h2>
           <p>
-            A professional resume is an investment in your career. If a ₹100 tool helps you land a job even one day faster, it has already paid for itself. Professional resumes often lead to:
+            A professional resume is an investment in your career. If a ₹49 tool helps you land a job even one day faster, it has already paid for itself. Professional resumes often lead to:
           </p>
           <ul>
             <li>Higher response rates from top companies.</li>
@@ -240,7 +243,7 @@ export default function PricingPage() {
               </p>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Professional writers aapse ₹1000 se ₹3000 tak charge kar sakte hain.</li>
-                <li>NextCV par aap wahi professional quality ka resume sirf <strong>₹100</strong> me bana sakte hain.</li>
+                <li>NextCV par aap wahi professional quality ka resume sirf <strong>₹49</strong> se shuruat me bana sakte hain.</li>
                 <li>Isme aapko AI suggestions aur ATS friendly templates milte hain jo aapke interview ke chances badhate hain.</li>
               </ul>
               <p className="font-bold text-white">Ab har koi apna professional CV saste me bana sakta hai!</p>

@@ -18,7 +18,7 @@ export default function AIResumeIndiaPage() {
     { feature: "ATS-Friendly Templates", nextcv: true, other: "Often not" },
     { feature: "One-Time Payment", nextcv: true, other: "Subscription" },
     { feature: "India Specific Layouts", nextcv: true, other: "No" },
-    { feature: "Affordability (₹100)", nextcv: true, other: "₹800 - ₹1500" },
+    { feature: "Affordability (₹49)", nextcv: true, other: "₹800 - ₹1500" },
   ];
 
   return (
@@ -105,7 +105,7 @@ export default function AIResumeIndiaPage() {
         <h2 className="text-3xl font-bold mt-12">Is It Worth Paying for AI?</h2>
         <p>
           Many job seekers hesitate to pay for tools. However, international builders charge high recurring fees. 
-          <strong> NextCV charges a one-time fee of ₹100</strong>, which is less than the cost of a lunch in most Indian cities. For that price, you get:
+          <strong> NextCV charges a one-time fee starting at ₹49</strong>, which is less than the cost of a lunch in most Indian cities. For that price, you get:
         </p>
         <ol>
           <li>Professional AI bullet suggestions.</li>

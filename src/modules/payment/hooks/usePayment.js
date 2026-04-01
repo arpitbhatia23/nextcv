@@ -16,6 +16,7 @@ export const usePayment = ({
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   const handelPayment = async () => {
+    console.log(applied, couponCode);
     if (couponCode && !applied) {
       toast.error("Please apply a valid coupon before payment");
       return;

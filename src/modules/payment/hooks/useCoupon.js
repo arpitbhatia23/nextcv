@@ -2,11 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const useCoupon = ({ setIsSubmit, originalAmount, setAmount, setCouponCode }) => {
+export const useCoupon = ({
+  setIsSubmit,
+  originalAmount,
+  setAmount,
+  setCouponCode,
+  setApplied,
+}) => {
   const [isCouponValid, setIsCouponValid] = useState(true);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [discount, setDiscount] = useState(null);
-  const [applied, setApplied] = useState(false);
 
   const handleCoupon = async coupon => {
     if (appliedCoupon === coupon) {
@@ -68,5 +73,5 @@ export const useCoupon = ({ setIsSubmit, originalAmount, setAmount, setCouponCod
     toast.info("Coupon removed");
   };
 
-  return { handleCoupon, discount, removeCoupon, applied };
+  return { handleCoupon, discount, removeCoupon };
 };

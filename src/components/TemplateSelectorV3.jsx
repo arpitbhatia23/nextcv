@@ -3,9 +3,21 @@ import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, LayoutTemplate } from "lucide-react";
 import { templates } from "@/shared/utils/template";
+import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import useResumeStore from "@/store/useResumeStore";
 import Image from "next/image";
-
+const getTierStyles = tier => {
+  switch (tier?.toLowerCase()) {
+    case "premium":
+      return "bg-purple-100 text-purple-700 border border-purple-200";
+    case "pro":
+      return "bg-indigo-100 text-indigo-700 border border-indigo-200";
+    case "standard":
+      return "bg-blue-100 text-blue-700 border border-blue-200";
+    default:
+      return "bg-slate-100 text-slate-600 border border-slate-200";
+  }
+};
 const TemplateSelectorV3 = ({ onSelect }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
@@ -27,6 +39,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         {templates.map(template => {
           const isSelected = selectedTemplate === template.key;
+          const tier = getTemplateByName(template.key)?.tier || "Basic";
           return (
             <motion.button
               key={template.key}
@@ -61,15 +74,22 @@ const TemplateSelectorV3 = ({ onSelect }) => {
               </div>
 
               <div className="p-3">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-1.5 ">
                   <p
-                    className={`text-xs font-black uppercase tracking-widest ${isSelected ? "text-indigo-900" : "text-slate-600"}`}
+                    className={`text-[10px] font-black uppercase tracking-widest ${isSelected ? "text-indigo-900" : "text-slate-600"}`}
                   >
                     {template.label}
                   </p>
-                  {isSelected && (
-                    <span className="text-xs text-emerald-600 font-bold">Selected</span>
-                  )}
+                  <div className="flex items-center justify-between ">
+                    <span
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide ${getTierStyles(tier)}`}
+                    >
+                      {tier}
+                    </span>
+                    {/* <span className="text-[10px] font-black text-indigo-600">
+                      ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                    </span> */}
+                  </div>
                 </div>
               </div>
             </motion.button>

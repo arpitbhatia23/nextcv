@@ -49,7 +49,7 @@ const UserDashboard = () => {
     },
     {
       icon: <IndianRupee className="w-5 h-5 text-orange-500" />,
-      title: "Just ₹100",
+      title: "From ₹49",
       desc: "No subscriptions, pay once.",
     },
   ];
@@ -108,7 +108,7 @@ const UserDashboard = () => {
                         Launch Builder
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <span className="text-slate-400 font-medium">Just ₹100</span>
+                      <span className="text-slate-400 font-medium">Starting at ₹49</span>
                     </div>
                   </div>
                   <div className="w-full hidden md:w-[45%] bg-slate-50 relative min-h-75 overflow-hidden md:flex items-center justify-center p-8">
@@ -192,7 +192,7 @@ const UserDashboard = () => {
                   No subscriptions or hidden fees. Only pay when you're ready to download.
                 </p>
                 <div className="flex items-baseline gap-2 mb-8">
-                  <span className="text-5xl font-extrabold tracking-tighter">₹100</span>
+                  <span className="text-5xl font-extrabold tracking-tighter">₹49</span>
                   <span className="text-indigo-400 font-semibold font-mono text-xl">/RESUME</span>
                 </div>
                 <ul className="space-y-4 mb-8">

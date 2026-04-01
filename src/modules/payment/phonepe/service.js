@@ -9,7 +9,7 @@ export const client = StandardCheckoutClient.getInstance(
   env
 );
 
-export const createPayment = async ({ response, couponCode, discountAmount }) => {
+export const createPayment = async ({ response, couponCode, discountAmount, userId }) => {
   const payment = await Payment.create({
     transcationId: response?.paymentDetails[0]?.transactionId,
     paymentMode: response?.paymentDetails[0]?.paymentMode,

@@ -20,7 +20,7 @@ function HowitWork() {
       id: "03",
       icon: <CreditCard className="w-6 h-6 text-pink-600" />,
       title: "Pay & Finalize",
-      description: "Preview your resume. Pay just ₹100 to unlock the download.",
+      description: "Preview your resume. Pay starting from ₹49 to unlock the download.",
       color: "bg-pink-50 border-pink-100",
     },
     {

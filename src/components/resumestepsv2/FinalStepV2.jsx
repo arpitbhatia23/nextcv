@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,6 @@ import {
   IndianRupee,
   Save,
   Download,
-  LayoutTemplate,
   CheckCircle2,
   AlertCircle,
   FileText,
@@ -15,93 +14,86 @@ import {
   Zap,
   ArrowLeft,
   Crown,
+  Check,
 } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
-import axios from "axios";
-import { toast } from "sonner";
 import { templates } from "@/shared/utils/template";
-import { pdfGenerator } from "@/lib/pdfGenerator";
+import resumeTemplateCatalog from "@/shared/utils/resumeTemplateCatlog";
 import { useDebouncedCallback } from "use-debounce";
-import useResumeStore from "@/store/useResumeStore";
 import FeedbackModal from "@/components/FeedbackModal";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
-const WatermarkLayer = () => (
-  <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden select-none opacity-[0.07]">
-    <svg className="w-full h-full">
-      <defs>
-        <pattern
-          id="watermark-pattern"
-          width="250"
-          height="150"
-          patternUnits="userSpaceOnUse"
-          patternTransform="rotate(-30)"
-        >
-          <text
-            x="0"
-            y="50"
-            className="text-[14px] font-black fill-slate-900 uppercase tracking-[0.2em]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            NextCV Premium
-          </text>
-          <text
-            x="125"
-            y="125"
-            className="text-[14px] font-black fill-slate-900 uppercase tracking-[0.2em]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            NextCV Premium
-          </text>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#watermark-pattern)" />
-    </svg>
-  </div>
-);
+import useResumeStore from "@/store/useResumeStore";
+import { usePayment } from "@/modules/payment/hooks/usePayment";
+import { useCoupon } from "@/modules/payment/hooks/useCoupon";
+import { useDraft } from "@/modules/resume/hooks/usedraft";
+import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
+import { usePricing } from "@/modules/payment/hooks/usePricing";
+import { WatermarkLayer } from "@/modules/payment/components/WatermarkLayer";
+import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const FinalStepV2 = ({ previous, formData }) => {
-  const selectedTemplate = useResumeStore(s => s.selectedTemplate || "InfographicLite");
+  const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
-  const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
-  const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-  const [amount, setAmount] = useState(100);
-  const [originalAmount] = useState(100);
-  const [discount, setDiscount] = useState(null);
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [amount, setAmount] = useState(49);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [isCouponValid, setIsCouponValid] = useState(true);
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [originalAmount, setOriginalAmount] = useState(0);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [applied, setApplied] = useState(false);
+
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
+  const { discount, handleCoupon, removeCoupon } = useCoupon({
+    setIsSubmit,
+    originalAmount,
+    setAmount,
+    setCouponCode,
+    setApplied,
+  });
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    console.log(formData);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { handelPayment, isRedirecting } = usePayment({
+    discount,
+    originalAmount,
+    formData,
+    applied,
+    selectedTemplate,
+    setIsSubmit,
+    couponCode,
+  });
+  const { handleSaveDraft } = useDraft({
+    setIsSubmit,
+    selectedTemplate,
+    formData,
+    setIsFeedbackOpen,
+  });
 
+  const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
+  // Debounced handlers
+
+  const { basePrice } = usePricing({
+    selectedTemplate,
+    applied,
+    originalAmount,
+    discount,
+    setAmount,
+    setOriginalAmount,
+  });
   const getPdfWidth = () => {
     if (windowWidth < 640) return windowWidth - 64; // mobile
     if (windowWidth < 1024) return 600; // tablet
     return 550; // desktop
   };
 
-  const clearDraft = useResumeStore(s => s.clearStorage);
-
   const debouncePayment = useDebouncedCallback(() => {
-    handlePayment();
+    handelPayment();
   }, 500);
 
   const debounceDraft = useDebouncedCallback(() => {
@@ -111,133 +103,6 @@ const FinalStepV2 = ({ previous, formData }) => {
   const debounceCoupon = useDebouncedCallback(coupon => {
     handleCoupon(coupon);
   }, 500);
-
-  const handleSaveDraft = async () => {
-    try {
-      setIsSubmit(true);
-      const res = await axios.post("/api/resume/savedraft", {
-        ResumeType: selectedTemplate,
-        ...formData,
-      });
-
-      if (res.data.success) {
-        toast.success("Design Archive Saved!");
-        clearDraft();
-        setIsFeedbackOpen(true);
-      } else {
-        toast.error(res.data.message || "Failed to save draft");
-      }
-    } catch (error) {
-      toast.error("Cloud synchronization failed" || error.message);
-    } finally {
-      setIsSubmit(false);
-    }
-  };
-
-  const removeCoupon = () => {
-    setAmount(originalAmount);
-    setDiscount(null);
-    setApplied(false);
-    setCouponCode("");
-    setAppliedCoupon(null);
-    toast.info("Coupon detached");
-  };
-
-  useEffect(() => {
-    const pdfGen = new pdfGenerator(formData, selectedTemplate);
-    let isMounted = true;
-    pdfGen.createPdf().then(url => {
-      if (isMounted) setPdfUrl(url);
-    });
-
-    return () => {
-      isMounted = false;
-      pdfGen.cleanUp();
-    };
-  }, [formData, selectedTemplate]);
-
-  const handlePayment = async () => {
-    if (couponCode && !applied) {
-      toast.error("Authenticate your coupon first");
-      return;
-    }
-
-    try {
-      setIsSubmit(true);
-      const payAmount =
-        discount?.type === "percentage"
-          ? Math.floor(originalAmount * (1 - discount.value / 100))
-          : discount?.type === "amount"
-            ? Math.max(originalAmount - discount.value, 0)
-            : originalAmount;
-
-      const discountAmount =
-        discount?.type === "percentage"
-          ? Math.round(originalAmount * (discount.value / 100))
-          : discount?.type === "amount"
-            ? discount.value
-            : 0;
-
-      const res = await axios.post("/api/payment/order", {
-        amount: payAmount * 100,
-        ResumeType: selectedTemplate,
-        couponCode: applied ? couponCode : null,
-        discountAmount,
-        ...formData,
-      });
-
-      if (res.data.success) {
-        setIsRedirecting(true);
-        setTimeout(() => {
-          window.location.href = res.data.data.redirectUrl;
-        }, 2000);
-        clearDraft();
-      }
-    } catch (error) {
-      toast.error("Payment secure layer failed");
-    } finally {
-      setIsSubmit(false);
-    }
-  };
-
-  const handleCoupon = async coupon => {
-    if (appliedCoupon === coupon) {
-      toast.info("Coupon active");
-      return;
-    }
-
-    setIsSubmit(true);
-    try {
-      const res = await axios.post("/api/coupons/getByCouponCode", {
-        couponCode: coupon,
-      });
-
-      const couponData = res.data.data;
-      const discountInfo = {
-        type: couponData.type,
-        value: couponData.discount,
-      };
-
-      setDiscount(discountInfo);
-      setApplied(true);
-      setAppliedCoupon(coupon);
-      setIsCouponValid(true);
-
-      let finalAmount = originalAmount;
-      if (discountInfo.type === "percentage") {
-        finalAmount = originalAmount * (1 - discountInfo.value / 100);
-      } else if (discountInfo.type === "amount") {
-        finalAmount = originalAmount - discountInfo.value;
-      }
-      setAmount(Math.max(Math.round(finalAmount), 0));
-      toast.success("Price discounted!");
-    } catch (error) {
-      setIsCouponValid(false);
-      toast.error("Invalid Promo Code");
-    } finally {
-      setIsSubmit(false);
-    }
-  };
 
   return (
     <div className="py-2 lg:h-[calc(100vh-120px)] flex flex-col h-auto">
@@ -271,57 +136,76 @@ const FinalStepV2 = ({ previous, formData }) => {
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0 lg:overflow-hidden overflow-visible">
         {/* Template Selector Section */}
-        <div className="lg:col-span-3 flex flex-col gap-6 lg:overflow-hidden overflow-visible order-2 lg:order-1">
+        <div className="lg:col-span-3 flex flex-col gap-6 lg:h-[calc(100vh-200px)] h-[50vh] overflow-y-auto order-2 lg:order-1 custom-scrollbar pr-2 pb-10">
           <div className="flex items-center justify-between">
             <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
               Architectural Templates
             </h3>
           </div>
 
-          <div
-            className="flex-1 overflow-x-auto lg:overflow-y-auto pr-2 custom-scrollbar flex lg:flex-col gap-4 pb-4 lg:pb-0"
-            id="tour-template-selection-v2"
-          >
-            {templates.map(template => (
-              <motion.div
-                key={template.key}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedTemplate(template.key)}
-                className={`group relative cursor-pointer rounded-2xl border-2 transition-all duration-300 p-1 min-w-35 lg:min-w-0 ${
-                  selectedTemplate === template.key
-                    ? "border-indigo-600 bg-indigo-50/50 shadow-lg shadow-indigo-100 ring-4 ring-indigo-50"
-                    : "border-slate-100 bg-white hover:border-slate-200"
-                }`}
-              >
-                <div className="aspect-3/4 rounded-xl bg-slate-100 overflow-hidden relative shadow-inner">
-                  {template.image ? (
-                    <Image
-                      src={template.image}
-                      alt={template.label}
-                      fill
-                      className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-300">
-                      <LayoutTemplate className="w-12 h-12 opacity-20" />
-                    </div>
-                  )}
-
-                  {selectedTemplate === template.key && (
-                    <div className="absolute top-3 right-3 bg-indigo-600 text-white p-1.5 rounded-full shadow-lg z-10 border border-white/20">
-                      <CheckCircle2 className="w-3 h-3" />
-                    </div>
-                  )}
+          <div className="space-y-10 pb-24">
+            {resumeTemplateCatalog.map(tier => (
+              <div key={tier.tierName} className="space-y-4">
+                {
+                  <div className="px-1 flex items-center justify-between">
+                    <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                      {tier.tierName} Tier
+                    </h3>
+                    <div className="h-px flex-1 bg-slate-100 ml-3"></div>
+                  </div>
+                }
+                <div className="grid grid-cols-1 gap-4">
+                  {tier.templates.map(t => {
+                    const template = templates.find(x => x.key === t.templateName);
+                    if (!template) return null;
+                    return (
+                      <motion.div
+                        key={template.key}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => {
+                          setSelectedTemplate(template.key);
+                          if (setSidebarOpen) setSidebarOpen(false);
+                        }}
+                        className={`group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 border-2 ${selectedTemplate === template.key ? "bg-white border-indigo-500 shadow-lg shadow-indigo-100 ring-2 ring-indigo-500/20" : "bg-white border-slate-100 hover:border-indigo-300 shadow-sm"}`}
+                      >
+                        <div className="relative aspect-3/4 overflow-hidden">
+                          <Image
+                            src={template.image}
+                            alt={template.label}
+                            height={500}
+                            width={500}
+                            className={`object-cover transition-transform duration-700 ${selectedTemplate === template.key ? "scale-110" : "group-hover:scale-105"}`}
+                          />
+                          <div
+                            className={`absolute inset-0 bg-linear-to-t transition-opacity duration-300 ${selectedTemplate === template.key ? "from-indigo-600/40 via-transparent opacity-100" : "from-slate-900/40 via-transparent opacity-0 group-hover:opacity-100"}`}
+                          />
+                          {selectedTemplate === template.key && (
+                            <div className="absolute top-2 right-2 bg-indigo-500 text-white p-1.5 rounded-lg shadow-lg">
+                              <Check className="w-3.5 h-3.5" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3 text-center">
+                          <p
+                            className={`text-[10px] font-black uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
+                          >
+                            {template.label}
+                          </p>
+                          <div className="flex items-center justify-center gap-2 mt-1.5 ">
+                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
+                              {tier.tierName}
+                            </span>
+                            <span className="text-[10px] font-black text-indigo-600">
+                              ₹{t.priceDiscounted || 49}
+                            </span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
-                <div className="p-3 text-center">
-                  <p
-                    className={`text-xs font-black uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
-                  >
-                    {template.label}
-                  </p>
-                </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -391,7 +275,7 @@ const FinalStepV2 = ({ previous, formData }) => {
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-4">
                 <div className="flex justify-between items-center text-sm font-bold text-slate-500">
                   <span>Base Rate</span>
-                  <span>₹{originalAmount}</span>
+                  <span>₹{basePrice}</span>
                 </div>
                 {applied && (
                   <div className="flex justify-between items-center text-sm font-bold text-emerald-600">
@@ -401,7 +285,7 @@ const FinalStepV2 = ({ previous, formData }) => {
                 )}
                 <div className="pt-4 border-t border-slate-200 flex justify-between items-end">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-slate-400 line-through">₹199</span>
+                    <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
 
                     <span className="text-lg font-bold text-slate-900">₹{amount}</span>
                   </div>
@@ -485,86 +369,7 @@ const FinalStepV2 = ({ previous, formData }) => {
       <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
 
       {/* Redirection Overlay */}
-      <AnimatePresence>
-        {isRedirecting && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 bg-slate-900/40 backdrop-blur-xl flex items-center justify-center p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="max-w-md w-full bg-white rounded-[2.5rem] shadow-[0_40px_100px_rgba(0,0,0,0.2)] overflow-hidden border border-slate-100"
-            >
-              <div className="p-10 text-center space-y-8">
-                <div className="relative mx-auto w-24 h-24">
-                  <div className="absolute inset-0 border-4 border-indigo-50 rounded-full"></div>
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                    className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent"
-                  ></motion.div>
-                  <div className="absolute inset-0 flex items-center justify-center text-indigo-600">
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      <IndianRupee className="w-10 h-10" />
-                    </motion.div>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-black text-slate-900 tracking-tight">Redirecting</h3>
-                  <p className="text-slate-500 font-medium">
-                    Initialising secure transaction with Paytm...
-                  </p>
-                </div>
-
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-indigo-50 rounded-3xl p-6 border border-indigo-100 flex gap-4 text-left"
-                >
-                  <AlertCircle className="w-6 h-6 text-indigo-600 shrink-0 mt-0.5" />
-                  <div className="space-y-1">
-                    <p className="font-black text-indigo-900 text-sm uppercase tracking-wider">
-                      Payment Protocol
-                    </p>
-                    <p className="text-indigo-700 text-xs font-semibold leading-relaxed">
-                      Please do not close this window. You will be redirected to the download page
-                      automatically after payment.
-                    </p>
-                  </div>
-                </motion.div>
-
-                <div className="flex items-center justify-center gap-6 opacity-30">
-                  <div className="flex items-center gap-1.5 grayscale">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
-                      256-bit
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 grayscale">
-                    <Zap className="w-4 h-4" />
-                    <span className="text-[10px] font-black uppercase tracking-widest">
-                      Instant
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AnimatePresence>{isRedirecting && <RedirectToPayment />}</AnimatePresence>
     </div>
   );
 };

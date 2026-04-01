@@ -8,7 +8,7 @@ const testimonials = [
   {
     name: "Priya Sharma",
     title: "Software Engineer",
-    text: "Best ₹100 I've ever spent! Got my dream job at a tech startup within 2 weeks of using Next CV.",
+    text: "Best ₹49 I've ever spent! Got my dream job at a tech startup within 2 weeks of using Next CV.",
     initials: "PS",
     color: "bg-indigo-100 text-indigo-700",
   },
@@ -155,7 +155,7 @@ export default function TestimonialCarousel() {
               <h3 className="text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
               <p className="text-slate-300 mb-0">
                 Get your professional ATS resume today for just{" "}
-                <span className="text-white font-bold text-lg">₹100</span>. No hidden fees.
+                Starting from <span className="text-white font-bold text-lg">₹49</span>. No hidden fees.
               </p>
             </div>
           </div>

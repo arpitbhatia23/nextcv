@@ -22,7 +22,7 @@ const ProcessWorks = () => {
       icon: <Wallet className="w-8 h-8 text-indigo-500" />,
       title: "Wallet-Friendly",
       description:
-        "Get professional, interview-ready results for just ₹100. A fraction of the cost of other services.",
+        "Get professional, interview-ready results starting at just ₹49. A fraction of the cost of other services.",
       isHighlighted: false,
     },
   ];

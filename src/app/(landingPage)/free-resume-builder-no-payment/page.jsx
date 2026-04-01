@@ -80,7 +80,7 @@ export default function FreeResumePage() {
 
         <h2 className="text-3xl font-bold mt-12">NextCV: The Most Affordable Alternative in India</h2>
         <p>
-          While we offer a premium download for a small one-time fee of ₹100, we provide value that free tools can't match:
+          While we offer a premium download for a small one-time fee of ₹49, we provide value that free tools can't match:
         </p>
         <ul>
           <li><strong>ATS-Optimized PDF:</strong> Guaranteed to be readable by major Indian companies (TCS, Infosys, Accenture).</li>
@@ -90,7 +90,7 @@ export default function FreeResumePage() {
 
         <div className="my-16 flex flex-col items-center text-center bg-indigo-900 text-white p-10 rounded-3xl not-prose">
           <h3 className="text-3xl font-bold mb-4 italic text-white">"Your resume is your ticket to a better life. Don't let a bad template hold you back."</h3>
-          <p className="text-indigo-200 mb-8">Get a professional, ATS-ready resume for just ₹100 today.</p>
+          <p className="text-indigo-200 mb-8">Get a professional, ATS-ready resume starting for just ₹49 today.</p>
           <Link
             href="/dashboard/resume/new"
             className="bg-white text-indigo-900 hover:bg-indigo-50 font-bold py-4 px-10 rounded-full transition-all text-lg"
@@ -103,7 +103,7 @@ export default function FreeResumePage() {
         <div className="space-y-6 not-prose mt-8">
           <div className="p-6 bg-slate-50 rounded-xl border border-slate-100">
             <h4 className="font-bold text-slate-900 mb-2">Can I download my resume for free in PDF?</h4>
-            <p className="text-slate-600 text-sm">NextCV allows free previews. For a high-quality, ATS-optimized PDF without watermarks, we charge a nominal one-time fee of ₹100.</p>
+            <p className="text-slate-600 text-sm">NextCV allows free previews. For a high-quality, ATS-optimized PDF without watermarks, we charge a nominal one-time fee starting at ₹49.</p>
           </div>
           <div className="p-6 bg-slate-50 rounded-xl border border-slate-100">
             <h4 className="font-bold text-slate-900 mb-2">Is there any free AI resume builder?</h4>

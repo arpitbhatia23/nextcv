@@ -3,7 +3,7 @@ import { CheckCircle2, Users, Heart, Zap } from "lucide-react";
 export const metadata = {
   title: "About NextCV - The Best AI Resume Builder for Freshers in India",
   description:
-    "NextCV is an ATS-friendly resume builder designed by students for students. Create professional resumes for the Indian job market for just ₹100.",
+    "NextCV is an ATS-friendly resume builder designed by students for students. Create professional resumes for the Indian job market starting for just ₹49.",
   keywords: [
     "About NextCV",
     "Resume Builder India",
@@ -89,7 +89,7 @@ export default function AboutPage() {
                   </p>
                   <p>
                     So we built NextCV with a simple promise:{" "}
-                    <b className="text-indigo-600">₹100, one time. No hidden fees.</b>
+                    Starting from <b className="text-indigo-600">₹49, one time. No hidden fees.</b>
                   </p>
                 </div>
               </div>
@@ -98,8 +98,8 @@ export default function AboutPage() {
               <div className="flex-1 w-full">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-indigo-50 p-6 rounded-2xl text-center">
-                    <div className="text-3xl font-bold text-indigo-600 mb-1">₹100</div>
-                    <div className="text-sm text-indigo-800 font-medium">One-time Fee</div>
+                    <div className="text-3xl font-bold text-indigo-600 mb-1">₹49</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wider font-bold">One time</div>
                   </div>
                   <div className="bg-emerald-50 p-6 rounded-2xl text-center">
                     <div className="text-3xl font-bold text-emerald-600 mb-1">100%</div>

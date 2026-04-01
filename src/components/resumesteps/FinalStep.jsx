@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,8 @@ import { useCoupon } from "@/modules/payment/hooks/useCoupon";
 import { useDraft } from "@/modules/resume/hooks/usedraft";
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
+import { getTemplateByName } from "@/modules/resume/services/templateMap";
+import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 
 const WatermarkLayer = () => (
   <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center opacity-[0.06] select-none">
@@ -47,10 +49,11 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   const [numPages, setNumPages] = useState(null);
   const [couponCode, setCouponCode] = useState("");
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(49);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [originalAmount, setOriginalAmount] = useState(0);
   const [isSubmit, setIsSubmit] = useState(false);
+  const [applied, setApplied] = useState(false);
 
   const { handelPayment, isRedirecting } = usePayment({
     discount,
@@ -62,11 +65,12 @@ const FinalStep = ({ formData, isdraft = false }) => {
     couponCode,
   });
 
-  const { applied, discount, handleCoupon, removeCoupon } = useCoupon({
+  const { discount, handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
     originalAmount,
     setAmount,
     setCouponCode,
+    setApplied,
   });
 
   const { handleSaveDraft } = useDraft({
@@ -129,12 +133,20 @@ const FinalStep = ({ formData, isdraft = false }) => {
                   >
                     <LayoutTemplate className="w-6 h-6" />
                   </div>
-                  <div className="w-full text-center">
+                  <div className="w-full text-center space-y-1">
                     <p
-                      className={`text-xs font-medium whitespace-normal text-center leading-tight ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-700"}`}
+                      className={`text-[10px] font-black uppercase tracking-widest leading-tight ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
                     >
                       {template.label}
                     </p>
+                    <div className="flex items-center justify-center gap-1.5 ">
+                      <span className="text-[8px] px-1 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase">
+                        {getTemplateByName(template.key)?.tier || "Basic"}
+                      </span>
+                      <span className="text-[9px] font-black text-indigo-600">
+                        ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                      </span>
+                    </div>
                   </div>
                   {selectedTemplate === template.key && (
                     <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-1" />
@@ -297,7 +309,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
                         <Image
                           src={template.image}
                           alt={template.label}
-                          fill
+                          height={500}
+                          width={500}
                           className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                         />
                       ) : (
@@ -318,10 +331,18 @@ const FinalStep = ({ formData, isdraft = false }) => {
                       className={`p-3 text-center border-t ${selectedTemplate === template.key ? "bg-indigo-50 border-indigo-100" : "bg-white border-slate-100"}`}
                     >
                       <span
-                        className={`font-medium text-sm ${selectedTemplate === template.key ? "text-indigo-700" : "text-slate-700"}`}
+                        className={`font-black text-[10px] uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-700" : "text-slate-700"}`}
                       >
                         {template.label}
                       </span>
+                      <div className="flex items-center justify-center gap-2 mt-1.5 ">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
+                          {getTemplateByName(template.key)?.tier || "Basic"}
+                        </span>
+                        <span className="text-[10px] font-black text-indigo-600">
+                          ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                        </span>
+                      </div>
                     </div>
 
                     {selectedTemplate === template.key && (
@@ -502,43 +523,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
       />
 
       {/* Redirection Overlay */}
-      {isRedirecting && (
-        <div className="fixed inset-0 z-100 bg-slate-900/80 backdrop-blur-md flex items-center justify-center p-4">
-          <Card className="max-w-md w-full border-none shadow-2xl bg-white overflow-hidden">
-            <div className="p-8 text-center space-y-6">
-              <div className="relative mx-auto w-20 h-20">
-                <div className="absolute inset-0 border-4 border-indigo-100 rounded-full"></div>
-                <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-indigo-600">
-                  <IndianRupee className="w-8 h-8" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-slate-900">Redirecting to Paytm</h3>
-                <p className="text-slate-500">
-                  Securely connecting to payment gateway. Please wait...
-                </p>
-              </div>
-
-              <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 flex gap-3 text-left">
-                <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <p className="font-semibold text-amber-900">Important</p>
-                  <p className="text-amber-800 leading-relaxed">
-                    Do not refresh or close this window. After successful payment, you will be
-                    automatically redirected to your download page.
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest font-medium">
-                Safe & Secure 256-bit SSL Payment
-              </p>
-            </div>
-          </Card>
-        </div>
-      )}
+      {isRedirecting && <RedirectToPayment />}
     </div>
   );
 };

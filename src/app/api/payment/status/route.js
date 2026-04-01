@@ -12,7 +12,7 @@ const handler = async req => {
   const session = await requiredAuth();
   const userId = session.user._id;
   const discountAmount = searchParams.get("discountAmount");
-  await PaymentStatus({ merchantOrderId, resumeID, couponCode, discountAmount, userId });
+  return await PaymentStatus({ merchantOrderId, resumeID, couponCode, discountAmount, userId });
 };
 
 export const GET = asyncHandler(handler);

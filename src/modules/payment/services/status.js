@@ -1,10 +1,9 @@
-import Resume from "@/components/Resume";
-import { client } from "../phonepe/service";
+import { client, createPayment } from "../phonepe/service";
 import { User } from "@/modules/auth";
 import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
 import { apiError } from "@/shared";
-
+import Resume from "@/modules/resume/models/resume.model";
 export const PaymentStatus = async ({
   merchantOrderId,
   userId,
@@ -22,7 +21,7 @@ export const PaymentStatus = async ({
         `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
       );
     }
-    const payment = await createPayment({ response, couponCode, discountAmount });
+    const payment = await createPayment({ response, couponCode, discountAmount, userId });
     const updateResume = await Resume.findByIdAndUpdate(
       resumeID,
       {
@@ -30,7 +29,7 @@ export const PaymentStatus = async ({
           status: "paid",
         },
       },
-      { new: true }
+      { returnDocument: "after" }
     );
     await User.findByIdAndUpdate(userId, {
       $push: {

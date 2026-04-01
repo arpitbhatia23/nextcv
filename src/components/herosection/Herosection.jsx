@@ -66,7 +66,7 @@ function Herosection() {
           passes automated screening in minutes.
           <br />
           <span className="text-sm font-medium text-blue-600 mt-2 block">
-            ✨ Just ₹100 • No subscriptions • Instant Download
+            ✨ Starting from ₹49 • No subscriptions • Instant Download
           </span>
         </p>
 
