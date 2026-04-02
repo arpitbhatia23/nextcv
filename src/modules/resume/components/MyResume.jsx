@@ -366,10 +366,17 @@ const MyResume = () => {
             <div className="p-6 space-y-6">
               <div className="bg-indigo-50 rounded-xl p-4 text-center">
                 <div className="text-sm text-indigo-600 font-medium mb-1">Total Amount</div>
+
+                {/* Discounted price (what user pays) */}
                 <div className="text-3xl font-bold text-indigo-700">₹{basePrice}</div>
-                {couponDiscount && (
-                  <div className="text-xs text-indigo-400 line-through mt-1">₹{originalAmount}</div>
-                )}
+
+                {/* Original higher price */}
+                <div className="text-xs text-indigo-400 line-through mt-1">₹{originalAmount}</div>
+
+                {/* Optional: show savings */}
+                <div className="text-xs text-green-600 mt-1 font-medium">
+                  You saved ₹{originalAmount - basePrice}
+                </div>
               </div>
 
               <div className="space-y-3">
