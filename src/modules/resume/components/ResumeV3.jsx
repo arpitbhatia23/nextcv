@@ -46,7 +46,7 @@ const ProjectsStep = dynamic(() => import("./resumestepsv2/ProjectsStepV2"), {
   loading: () => <Loading />,
 });
 
-import Logo2 from "../../../components/Logo2";
+import Logo2 from "@/shared/components/Logo2";
 import useResumeStore from "@/store/useResumeStore";
 import Loading from "@/app/loading";
 import TemplateSelectorV3 from "./TemplateSelectorV3";
