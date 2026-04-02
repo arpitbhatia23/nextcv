@@ -7,7 +7,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { toast } from "sonner";
 import axios from "axios";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 const FeedbackModal = ({ isOpen, onClose, resumeId }) => {
   const [rating, setRating] = useState(0);

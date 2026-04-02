@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui
 import { Textarea } from "../../../../shared/components/ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const ExperienceStep = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(formData.experience || []);

@@ -1,11 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const SectionCards = dynamic(() => import("@/components/section-cards.jsx"));
+const SectionCards = dynamic(() => import("@/shared/components/section-cards.jsx"));
 // const ChartAreaInteractive = dynamic(
 //   () => import("@/components/chart-area-interactive.jsx"),
 // );
-const AdminFeedbackList = dynamic(() => import("@/components/AdminFeedbackList"));
+const AdminFeedbackList = dynamic(() => import("@/shared/components/AdminFeedbackList"));
 const CouponStats = dynamic(() => import("@/modules/coupon/components/CouponStats"));
 
 const AdminiDashboard = () => {

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
-const AnalyticsPage = dynamic(() => import("@/components/analatics"));
+const AnalyticsPage = dynamic(() => import("@/shared/components/analatics"));
 
 import { getServerSession } from "next-auth";
 import authOptions from "@/modules/auth/services/options";

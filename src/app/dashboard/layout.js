@@ -1,17 +1,17 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/site-header";
+import { AppSidebar } from "@/shared/components/app-sidebar";
+import { SiteHeader } from "@/shared/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
 import AuthProvider from "@/context/authprovider";
-import { getServerSession } from "next-auth";
-import authOptions from "../../modules/auth/services/options";
+
 import { InitUser } from "@/modules/auth/components/initUser";
+import { requiredAuth } from "@/shared";
 export const metadata = {
   title: "Dashboard - NextCV",
   description: "Manage your resumes and create new ones with AI assistance",
 };
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions);
+  const session = await requiredAuth();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import Nav from "@/shared/components/ui/navbar";
-import { Footer } from "@/components/footer/Footer";
+import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
   title: "Create an ATS Resume for Freshers – Designed for TCS, Infosys & Wipro | NextCV",

@@ -1,7 +1,8 @@
-import { client } from "../../../../sanity"; // Adjust path as needed
-import BlogDetails from "../../../../components/BlogDetails"; // Adjust path as needed
-
 // 🛑 1. Dynamic Metadata Function (Server-side SEO)
+
+import { client } from "@/sanity";
+import BlogDetails from "@/shared/components/BlogDetails";
+
 // Fetches necessary data (title, image, description) for OpenGraph and SEO tags
 export async function generateMetadata({ params }) {
   const { slug } = await params;

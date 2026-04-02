@@ -17,7 +17,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const SkillStepV2 = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(Array.isArray(formData.skills) ? formData.skills : []);

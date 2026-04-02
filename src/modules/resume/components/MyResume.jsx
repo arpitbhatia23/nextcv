@@ -30,7 +30,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Input } from "../../../shared/components/ui/input";
-import { pdfGenerator } from "@/lib/pdfGenerator";
+import { pdfGenerator } from "@/shared/lib/pdfGenerator";
 import { toast } from "sonner";
 
 const MyResume = () => {

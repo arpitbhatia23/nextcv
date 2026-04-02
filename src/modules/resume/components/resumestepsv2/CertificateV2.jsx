@@ -25,7 +25,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const CertificateV2 = ({ next, previous, formData, updateForm }) => {
   const [certList, setCertList] = useState(formData.certificates || []);

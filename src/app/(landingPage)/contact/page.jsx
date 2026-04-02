@@ -1,4 +1,4 @@
-import ContactForm from "@/components/ContactForm";
+import ContactForm from "@/modules/contact/components/ContactForm";
 import { Mail, MessageSquare, MapPin, Clock } from "lucide-react";
 
 export const metadata = {

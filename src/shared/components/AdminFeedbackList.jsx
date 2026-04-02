@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Star, User } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 
 const AdminFeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);

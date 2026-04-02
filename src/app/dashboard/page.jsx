@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import authOptions from "../../modules/auth/services/options";
 import dynamic from "next/dynamic";
 
-const AdminiDashboard = dynamic(() => import("@/components/AdminiDashboard"));
-const UserDashboard = dynamic(() => import("@/components/UserDashboard"));
+const AdminiDashboard = dynamic(() => import("@/shared/components/AdminiDashboard"));
+const UserDashboard = dynamic(() => import("@/shared/components/UserDashboard"));
 
 export async function generateMetadata() {
   const session = await getServerSession(authOptions);

@@ -1,6 +1,6 @@
 import React from "react";
-import ATSChecker from "@/components/ats-checker/ATSChecker";
 import { CheckCircle2, Search, Briefcase } from "lucide-react";
+import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 
 export const metadata = {
   title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
@@ -165,7 +165,7 @@ const ATSCheckerPage = () => {
                 q: "Is this tool free for freshers?",
                 a: "Yes, our ATS resume checker is completely free for freshers and experienced professionals in India.",
               },
-            {
+              {
                 q: "What is a good ATS score for TCS or Accenture?",
                 a: "A score above 80 is generally considered good for MNCs. However, ensure that your 'Technical Skills' section includes the specific keywords mentioned in the job description to rank higher in their system.",
               },

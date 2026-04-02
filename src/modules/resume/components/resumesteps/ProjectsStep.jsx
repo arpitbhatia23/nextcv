@@ -16,7 +16,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import axios from "axios";
 import { toast } from "sonner";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);

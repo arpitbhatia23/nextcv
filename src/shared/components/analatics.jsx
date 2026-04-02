@@ -37,7 +37,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import axios from "axios";
-import { exportAnalyticsCSV } from "@/lib/gencsv";
+import { exportAnalyticsCSV } from "@/shared/lib/gencsv";
 
 // Color schemes for charts
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8", "#82CA9D"];

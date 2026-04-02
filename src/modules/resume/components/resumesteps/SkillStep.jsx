@@ -16,7 +16,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/c
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 const SkillStep = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(formData.skills || []);
   const [isEditing, setIsEditing] = useState(false);

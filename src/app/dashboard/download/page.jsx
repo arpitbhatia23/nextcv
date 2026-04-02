@@ -6,16 +6,14 @@ import { pdf } from "@react-pdf/renderer";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, Suspense } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 import { toast } from "sonner";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 
 function DownloadPageContent() {
   const [resumeData, setResumeData] = useState(null);
-  const [pdfUrl, setPdfUrl] = useState("");
   const [numPages, setNumPages] = useState(null);
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
@@ -40,26 +38,16 @@ function DownloadPageContent() {
     fetchResumeData();
   }, [resumeId]);
 
-  useEffect(() => {
-    let currentUrl = null;
-    const generatePdf = async () => {
-      if (!resumeData) return;
-      const selected = templates.find(t => t.key === resumeData?.ResumeType);
-      if (!selected) {
-        return;
-      }
-      const TemplateComponent = selected.component;
-      const blob = await pdf(<TemplateComponent data={resumeData} />).toBlob();
-      const url = URL.createObjectURL(blob);
-      setPdfUrl(url);
-      setIsFeedbackOpen(true);
-      currentUrl = url;
-    };
-    generatePdf();
-    return () => {
-      if (currentUrl) URL.revokeObjectURL(currentUrl);
-    };
-  }, [resumeData]);
+  const pdfDataReady = resumeData && resumeData.ResumeType;
+
+  const { pdfUrl } = useResumeGen(
+    pdfDataReady
+      ? {
+          formData: resumeData,
+          selectedTemplate: resumeData.ResumeType,
+        }
+      : {}
+  );
 
   const handleDownload = () => {
     if (!pdfUrl) return;

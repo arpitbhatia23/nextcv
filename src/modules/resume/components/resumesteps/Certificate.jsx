@@ -15,7 +15,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const CertificateStep = ({ next, previous, formData, updateForm }) => {
   const [certList, setCertList] = useState(formData.certificates || []);

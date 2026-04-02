@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import sectionServer from "../Server_components/sectionServer";
+import sectionServer from "@/Server_components/sectionServer";
 import { useEffect, useState } from "react";
 import { IndianRupee } from "lucide-react";
 import axios from "axios";

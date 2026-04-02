@@ -28,7 +28,7 @@ import { Textarea } from "../../../../shared/components/ui/textarea";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const ExpricenceStepV2 = ({ next, previous, formData, updateForm }) => {
   const [experienceList, setExperienceList] = useState(formData.experience || []);

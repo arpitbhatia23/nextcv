@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Check, Download, ShieldCheck, Zap, Star, Trophy } from "lucide-react";
+import { Check, Star, Trophy } from "lucide-react";
 
 export const metadata = {
   title: "Best AI Resume Builder India (Free vs Paid) – NextCV vs Others",
@@ -50,7 +50,9 @@ export default function AIResumeIndiaPage() {
       <section className="py-20 px-6 lg:px-8 max-w-4xl mx-auto prose prose-slate prose-indigo">
         <h2 className="text-3xl font-bold">The Top Choice for Job Seekers in India</h2>
         <p>
-          In 2026, AI has changed the recruitment landscape. Most major Indian companies use automated systems to filter out resumes. To stand out, you need more than just a template; you need an <strong>AI-powered partner</strong>.
+          In 2026, AI has changed the recruitment landscape. Most major Indian companies use
+          automated systems to filter out resumes. To stand out, you need more than just a template;
+          you need an <strong>AI-powered partner</strong>.
         </p>
 
         <h2 className="text-3xl font-bold mt-12">NextCV vs. Other Resume Builders</h2>
@@ -65,7 +67,10 @@ export default function AIResumeIndiaPage() {
             </thead>
             <tbody>
               {comparisonData.map((row, idx) => (
-                <tr key={idx} className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors">
+                <tr
+                  key={idx}
+                  className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors"
+                >
                   <td className="p-4 text-slate-700 text-sm font-medium">{row.feature}</td>
                   <td className="p-4 text-indigo-600 bg-indigo-50/30">
                     {row.nextcv ? <Check className="w-5 h-5" /> : "—"}
@@ -79,12 +84,22 @@ export default function AIResumeIndiaPage() {
 
         <h2 className="text-3xl font-bold mt-12">Why AI Resumes are Essential Now</h2>
         <p>
-          Recruiters at companies like <strong>TCS, Infosys, and HCL</strong> get thousands of applications per day. AI helps you bridge that gap:
+          Recruiters at companies like <strong>TCS, Infosys, and HCL</strong> get thousands of
+          applications per day. AI helps you bridge that gap:
         </p>
         <ul>
-          <li><strong>Keyword Matching:</strong> AI scans your job description and inserts the keywords recruiters are searching for.</li>
-          <li><strong>Quantifiable Achievements:</strong> Our AI (powered by Gemini) turns "I did marketing" into "Increased lead generation by 45% over 6 months."</li>
-          <li><strong>Grammar & Tone:</strong> Every sentence is checked for professionalism and impact.</li>
+          <li>
+            <strong>Keyword Matching:</strong> AI scans your job description and inserts the
+            keywords recruiters are searching for.
+          </li>
+          <li>
+            <strong>Quantifiable Achievements:</strong> Our AI (powered by Gemini) turns "I did
+            marketing" into "Increased lead generation by 45% over 6 months."
+          </li>
+          <li>
+            <strong>Grammar & Tone:</strong> Every sentence is checked for professionalism and
+            impact.
+          </li>
         </ul>
 
         <div className="bg-slate-900 text-white p-8 rounded-3xl my-12 not-prose">
@@ -92,7 +107,8 @@ export default function AIResumeIndiaPage() {
             <Star className="text-yellow-400 fill-yellow-400" /> Professional Edge
           </h3>
           <p className="text-slate-300 mb-6">
-            While most tools are built for the US or European markets, NextCV is optimized for the Indian corporate culture and recruitment standards.
+            While most tools are built for the US or European markets, NextCV is optimized for the
+            Indian corporate culture and recruitment standards.
           </p>
           <Link
             href="/dashboard/resume/new"
@@ -104,8 +120,10 @@ export default function AIResumeIndiaPage() {
 
         <h2 className="text-3xl font-bold mt-12">Is It Worth Paying for AI?</h2>
         <p>
-          Many job seekers hesitate to pay for tools. However, international builders charge high recurring fees. 
-          <strong> NextCV charges a one-time fee starting at ₹49</strong>, which is less than the cost of a lunch in most Indian cities. For that price, you get:
+          Many job seekers hesitate to pay for tools. However, international builders charge high
+          recurring fees.
+          <strong> NextCV charges a one-time fee starting at ₹49</strong>, which is less than the
+          cost of a lunch in most Indian cities. For that price, you get:
         </p>
         <ol>
           <li>Professional AI bullet suggestions.</li>
@@ -115,7 +133,10 @@ export default function AIResumeIndiaPage() {
 
         <h2 className="text-3xl font-bold mt-12">Verdict for 2026</h2>
         <p>
-          If you are looking for the <strong>best AI resume builder in India</strong> that is affordable, effective, and tailored to local job markets, NextCV is the top choice. Our commitment to students and professionals has made us the go-to platform for over 10,000+ happy users.
+          If you are looking for the <strong>best AI resume builder in India</strong> that is
+          affordable, effective, and tailored to local job markets, NextCV is the top choice. Our
+          commitment to students and professionals has made us the go-to platform for over 10,000+
+          happy users.
         </p>
         <div className="mt-16 flex flex-col items-center text-center">
           <Link

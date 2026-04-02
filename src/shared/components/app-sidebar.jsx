@@ -2,8 +2,8 @@
 import * as React from "react";
 import { IconDashboard } from "@tabler/icons-react";
 
-import { NavMain } from "@/components/nav-main";
-import { NavUser } from "@/components/nav-user";
+import { NavMain } from "@/shared/components/nav-main";
+import { NavUser } from "@/shared/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -15,7 +15,7 @@ import {
 } from "@/shared/components/ui/sidebar";
 import Logo2 from "./Logo2";
 import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
-import { Separator } from "../shared/components/ui/separator";
+import { Separator } from "@/shared/components/ui/separator";
 import { userStore } from "@/store/user.store";
 
 const userData = {

@@ -44,7 +44,7 @@ import {
   Settings,
   User,
 } from "lucide-react";
-import Logo2 from "../../../components/Logo2";
+import Logo2 from "@/shared/components/Logo2";
 import useResumeStore from "@/store/useResumeStore";
 import Loading from "@/app/loading";
 // const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });

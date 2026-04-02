@@ -30,7 +30,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const EducationStepV2 = ({ next, previous, formData, updateForm }) => {
   const [educationList, setEducationList] = useState(formData.education || []);

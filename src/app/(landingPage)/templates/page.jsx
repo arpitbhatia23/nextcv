@@ -1,7 +1,8 @@
 import { templates } from "@/shared/utils/template";
-import TemplateImage from "../../../components/TemplateImage";
+
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Layout, Zap, Award, Edit } from "lucide-react";
+import TemplateImage from "@/shared/components/TemplateImage";
 
 export const metadata = {
   title: "Best Resume Format for Freshers in India 2026 | Free ATS Templates",

@@ -35,8 +35,6 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { WatermarkLayer } from "@/modules/payment/components/WatermarkLayer";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 
-pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
-
 const FinalStepV2 = ({ previous, formData }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);

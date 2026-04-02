@@ -11,7 +11,7 @@ export class pdfGenerator {
   }
   async createPdf() {
     const selectedTemplate = templates.find(
-      t => t.key === (this.selectedTemplate || this.resumeData.ResumeType)
+      t => t.key === (this?.selectedTemplate || this.resumeData?.ResumeType)
     );
     if (!selectedTemplate) {
       throw new Error("Template not found");

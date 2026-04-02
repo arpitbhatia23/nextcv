@@ -1,4 +1,4 @@
-import Blog from "../../../components/Blog"; // Use @/ alias for better pathing
+import Blog from "@/shared/components/Blog";
 
 export const metadata = {
   title: "Free ATS-Optimized Resume Template India + Download (2026) | NextCV Blog",

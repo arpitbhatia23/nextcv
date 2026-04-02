@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useResumeStoreChat } from "@/store/chatStore";
-import { ChatMessage } from "@/components/Chat";
+import { ChatMessage } from "@/shared/components/Chat";
 import { Sparkles, Lightbulb, RotateCcw, Loader2, Menu, X, ArrowRight, Ban } from "lucide-react";
 import { flow } from "@/shared/utils/resumeFlow";
 import useResumeStore from "@/store/useResumeStore";

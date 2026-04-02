@@ -28,7 +28,7 @@ import { Card, CardContent } from "@/shared/components/ui/card";
 import axios from "axios";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);

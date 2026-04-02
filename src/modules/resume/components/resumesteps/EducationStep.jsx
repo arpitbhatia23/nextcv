@@ -18,7 +18,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { toast } from "sonner";
-import { Tips } from "../../../../components/Tips";
+import { Tips } from "../Tips";
 
 const EducationStep = ({ next, previous, formData, updateForm }) => {
   const [educationList, setEducationList] = useState(formData.education || []);
