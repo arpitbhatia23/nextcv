@@ -365,7 +365,7 @@ const ProjectsStepV2 = ({ next, previous, formData, updateForm }) => {
                             </div>
                           </div>
 
-                          <div className="flex flex-col gap-2 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                          <div className="flex flex-col gap-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={() => handleEdit(project)}
                               className="p-3 bg-white text-slate-400 hover:text-indigo-600 rounded-2xl shadow-sm border border-slate-50 transition-all"
