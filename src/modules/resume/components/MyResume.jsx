@@ -32,6 +32,8 @@ import { useRouter } from "next/navigation";
 import { Input } from "../../../shared/components/ui/input";
 import { pdfGenerator } from "@/shared/lib/pdfGenerator";
 import { toast } from "sonner";
+import { useCoupon } from "@/modules/payment/hooks/useCoupon";
+import { usePayment } from "@/modules/payment/hooks/usePayment";
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -45,8 +47,7 @@ const MyResume = () => {
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(100);
   const [originalAmount] = useState(100); // Store original amount
-  const [discount, setDiscount] = useState(null);
-  const [appliedCoupon, setAppliedCoupon] = useState(null); // Track applied coupon
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const route = useRouter();
 
@@ -95,64 +96,23 @@ const MyResume = () => {
       setResumeData(resume);
       // Reset payment modal state when opening
       setAmount(originalAmount);
-      setDiscount(null);
       setApplied(false);
       setCouponCode("");
-      setAppliedCoupon(null);
+      removeCoupon();
     }
   };
 
-  const handleCoupon = async coupon => {
-    // Prevent applying the same coupon multiple times
-    if (appliedCoupon === coupon) {
-      toast.info("This coupon is already applied");
-      return;
-    }
-
-    try {
-      const res = await axios.post(`/api/coupons/getByCouponCode`, {
-        couponCode: coupon,
-      });
-
-      const couponData = res.data.data;
-
-      // Store discount info
-      const discountInfo = {
-        type: couponData.type,
-        value: couponData.discount,
-      };
-      setDiscount(discountInfo);
-
-      // Calculate final amount from original amount
-      let finalAmount = Math.round(originalAmount);
-
-      if (discountInfo.type === "percentage") {
-        finalAmount = originalAmount * (1 - discountInfo.value / 100);
-      } else if (discountInfo.type === "amount") {
-        finalAmount = originalAmount - discountInfo.value;
-      }
-
-      // Ensure minimum price is not negative
-      finalAmount = Math.max(finalAmount, 0);
-      setAmount(Math.round(finalAmount));
-
-      setApplied(true);
-      setAppliedCoupon(coupon);
-      toast.success("Coupon applied successfully");
-    } catch (error) {
-      console.error("Coupon apply error:", error);
-      toast.error(error?.response?.data || "Something went wrong while applying coupon");
-    }
-  };
-
-  const removeCoupon = () => {
-    setAmount(originalAmount);
-    setDiscount(null);
-    setApplied(false);
-    setCouponCode("");
-    setAppliedCoupon(null);
-    toast.info("Coupon removed");
-  };
+  const {
+    discount: couponDiscount,
+    handleCoupon,
+    removeCoupon,
+  } = useCoupon({
+    setIsSubmit,
+    originalAmount,
+    setAmount,
+    setCouponCode,
+    setApplied,
+  });
 
   const handleDelete = async resumeId => {
     try {
@@ -180,19 +140,21 @@ const MyResume = () => {
     setIsModelOpen(true);
   };
 
-  const handelPayment = async draftId => {
-    const res = await axios.post("/api/payment/order", {
-      amount: Math.floor(amount * 100), // Convert ₹ to paise
-      couponCode: applied ? appliedCoupon : "",
-      draftId,
-      isDraft: true,
-    });
-
-    if (res.data.success) {
-      const paymentUrl = res.data.data?.redirectUrl;
-      window.location.href = paymentUrl;
-    }
+  const paymentFormData = {
+    draftId: resumeData?._id,
+    isDraft: true,
+    ResumeType: resumeData?.ResumeType,
   };
+
+  const { handelPayment, isRedirecting } = usePayment({
+    discount: couponDiscount,
+    originalAmount,
+    formData: paymentFormData,
+    applied,
+    selectedTemplate: resumeData?.ResumeType,
+    setIsSubmit,
+    couponCode,
+  });
 
   const ResumeCard = ({ resume }) => (
     <Card className="group hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-400 bg-white rounded-xl overflow-hidden">
@@ -395,7 +357,7 @@ const MyResume = () => {
               <div className="bg-indigo-50 rounded-xl p-4 text-center">
                 <div className="text-sm text-indigo-600 font-medium mb-1">Total Amount</div>
                 <div className="text-3xl font-bold text-indigo-700">₹{amount}</div>
-                {discount && (
+                {couponDiscount && (
                   <div className="text-xs text-indigo-400 line-through mt-1">₹{originalAmount}</div>
                 )}
               </div>
@@ -415,7 +377,7 @@ const MyResume = () => {
                   {!applied ? (
                     <Button
                       onClick={() => handleCoupon(couponCode)}
-                      disabled={!couponCode.trim()}
+                      disabled={!couponCode.trim() || isSubmit || applied}
                       variant="secondary"
                       className="font-bold text-slate-700"
                     >
@@ -432,19 +394,20 @@ const MyResume = () => {
                     </Button>
                   )}
                 </div>
-                {applied && discount && (
+                {applied && couponDiscount && (
                   <div className="flex items-center gap-2 text-emerald-600 text-sm font-medium bg-emerald-50 p-2 rounded-lg">
                     <BadgePercent className="w-4 h-4" />
-                    {discount.type === "percentage"
-                      ? `${discount.value}% OFF applied`
-                      : `₹${discount.value} OFF applied`}
+                    {couponDiscount.type === "percentage"
+                      ? `${couponDiscount.value}% OFF applied`
+                      : `₹${couponDiscount.value} OFF applied`}
                   </div>
                 )}
               </div>
 
               <Button
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold h-12 rounded-xl text-lg shadow-lg shadow-indigo-500/20"
-                onClick={() => handelPayment(resumeData._id)}
+                onClick={() => handelPayment()}
+                disabled={isSubmit || isRedirecting}
               >
                 Pay ₹{amount} & Download
               </Button>
