@@ -1,4 +1,4 @@
-import { apiError, requiredAuth } from "@/shared";
+import { apiError, apiResponse, requiredAuth } from "@/shared";
 import { NextResponse } from "next/server";
 import Coupon from "../models/coupon";
 

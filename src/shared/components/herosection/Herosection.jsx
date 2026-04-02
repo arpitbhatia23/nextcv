@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 // import { m } from "framer-motion";
 import { Ticket } from "lucide-react";
-import SigninButton from "../../modules/auth/components/SigninButton";
+import SigninButton from "@/modules/auth/components/SigninButton";
 
 function Herosection() {
   const mncLogos = [

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { client, urlFor } from "../sanity";
+import { client, urlFor } from "@/sanity";
 import Loading from "@/app/loading";
 import { Search, ChevronDown, Calendar, ArrowRight, User } from "lucide-react";
 

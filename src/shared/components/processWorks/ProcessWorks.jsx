@@ -1,6 +1,5 @@
-import { signIn } from "next-auth/react";
 import { Zap, Eye, Wallet } from "lucide-react";
-import SigninButton from "../../modules/auth/components/SigninButton";
+import SigninButton from "@/modules/auth/components/SigninButton";
 
 const ProcessWorks = () => {
   const works = [

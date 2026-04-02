@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
-import Herosection from "@/components/herosection/Herosection";
-import ATSFeatureSection from "@/components/herosection/ATSFeatureSection";
+import Herosection from "@/shared/components/herosection/Herosection";
+import ATSFeatureSection from "@/shared/components/herosection/ATSFeatureSection";
 const HowitWork = dynamic(() => import("@/shared/components/herosection/HowitWork"));
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 const ProcessWorks = dynamic(() => import("@/shared/components/processWorks/ProcessWorks"));

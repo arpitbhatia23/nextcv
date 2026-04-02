@@ -6,7 +6,7 @@ import {
   NavigationMenuItem,
 } from "@/shared/components/ui/navigation-menu";
 
-import Logo2 from "../../../components/Logo2";
+import Logo2 from "@/shared/components/Logo2";
 import { Button } from "./button";
 import { signIn } from "next-auth/react";
 import { useState, useEffect } from "react";

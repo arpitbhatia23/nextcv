@@ -15,7 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { client, urlFor } from "../sanity";
+import { client, urlFor } from "@/sanity";
 import { PortableText } from "next-sanity";
 import Loading from "@/app/loading";
 import Link from "next/link";
@@ -314,7 +314,7 @@ const BlogDetails = ({ slug, initialData }) => {
                 <Calendar className="w-4 h-4" /> {formattedDate()}
               </span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" /> {readingTime} min read
+                <Clock className="w-4 h-4" /> {readingTime()} min read
               </span>
             </div>
           </div>
