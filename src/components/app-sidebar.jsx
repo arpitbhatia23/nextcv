@@ -12,10 +12,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/shared/components/ui/sidebar";
 import Logo2 from "./Logo2";
 import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
-import { Separator } from "./ui/separator";
+import { Separator } from "../shared/components/ui/separator";
 import { userStore } from "@/store/user.store";
 
 const userData = {

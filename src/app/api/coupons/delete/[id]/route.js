@@ -1,11 +1,7 @@
-import authOptions from "@/modules/auth/services/options";
-import Coupon from "@/models/coupon";
+import { deleteCoupon } from "@/modules/coupon";
 import apiError from "@/shared/utils/apiError";
-import { apiResponse } from "@/shared/utils/apiResponse";
 import { asyncHandler } from "@/shared/utils/asyncHandler";
 import dbConnect from "@/shared/utils/dbConnect";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
 const handler = async (req, { params }) => {
   const { id } = await params;
   if (!id) {
@@ -13,13 +9,7 @@ const handler = async (req, { params }) => {
   }
 
   await dbConnect();
-  const session = await getServerSession(authOptions);
-  if (!session || session?.user.role !== "admin") {
-    throw new apiError(401, "unauthorized acess");
-  }
-  await Coupon.findByIdAndDelete(id);
-
-  return NextResponse.json(new apiResponse(200, "Coupon deleted successfully"), { status: 200 });
+  return await deleteCoupon({ id });
 };
 
 export const DELETE = asyncHandler(handler);

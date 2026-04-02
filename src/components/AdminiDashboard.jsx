@@ -6,7 +6,7 @@ const SectionCards = dynamic(() => import("@/components/section-cards.jsx"));
 //   () => import("@/components/chart-area-interactive.jsx"),
 // );
 const AdminFeedbackList = dynamic(() => import("@/components/AdminFeedbackList"));
-const CouponStats = dynamic(() => import("@/components/CouponStats"));
+const CouponStats = dynamic(() => import("@/modules/coupon/components/CouponStats"));
 
 const AdminiDashboard = () => {
   return (

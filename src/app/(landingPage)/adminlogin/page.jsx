@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/modules/auth/components/login-form";
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
   title: "Admin Login | NextCV",

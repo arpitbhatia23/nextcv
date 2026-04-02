@@ -1,4 +1,4 @@
-import Resume from "@/components/Resume";
+import Resume from "@/modules/resume/components/Resume";
 import React from "react";
 
 const page = () => {

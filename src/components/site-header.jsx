@@ -1,6 +1,6 @@
 "use client";
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Separator } from "@/shared/components/ui/separator";
+import { SidebarTrigger } from "@/shared/components/ui/sidebar";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 

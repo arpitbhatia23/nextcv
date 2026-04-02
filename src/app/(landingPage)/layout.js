@@ -1,4 +1,4 @@
-import Nav from "@/components/ui/navbar";
+import Nav from "@/shared/components/ui/navbar";
 import { Footer } from "@/components/footer/Footer";
 
 export const metadata = {

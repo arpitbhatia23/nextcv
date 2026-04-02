@@ -6,7 +6,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/shared/components/ui/sidebar";
 import Link from "next/link";
 
 export function NavMain({ items }) {

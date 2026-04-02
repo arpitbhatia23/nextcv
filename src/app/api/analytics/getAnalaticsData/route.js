@@ -1,4 +1,4 @@
-import Coupons from "@/models/coupon";
+import Coupons from "@/modules/coupon/models/coupon";
 import dbConnect from "@/shared/utils/dbConnect";
 import Payment from "@/modules/payment/model/payment.model";
 import User from "@/models/user.model";

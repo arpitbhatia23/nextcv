@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 
-const Coupons = dynamic(() => import("@/components/Coupons"));
+const Coupons = dynamic(() => import("@/modules/coupon/components/Coupons"));
 
 import { getServerSession } from "next-auth";
 import authOptions from "@/modules/auth/services/options";

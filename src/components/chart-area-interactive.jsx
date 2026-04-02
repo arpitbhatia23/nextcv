@@ -11,16 +11,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+} from "@/shared/components/ui/card";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/shared/components/ui/chart";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+} from "@/shared/components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "@/shared/components/ui/toggle-group";
 import ChartServer from "../Server_components/ChartServer";
 
 export const description = "An interactive area chart";

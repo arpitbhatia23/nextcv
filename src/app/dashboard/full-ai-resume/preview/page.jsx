@@ -1,5 +1,5 @@
 "use client";
-import FinalStep from "@/components/resumesteps/FinalStep";
+import FinalStep from "@/modules/resume/components/resumesteps/FinalStep";
 import useResumeStore from "@/store/useResumeStore";
 
 const Page = () => {

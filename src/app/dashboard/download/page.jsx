@@ -1,6 +1,6 @@
 "use client";
-import FeedbackModal from "@/components/FeedbackModal";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
+import { Card, CardContent, CardTitle } from "@/shared/components/ui/card";
 import { templates } from "@/shared/utils/template";
 import { pdf } from "@react-pdf/renderer";
 import axios from "axios";

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../shared/components/ui/button";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { Smartphone, Palette, ShieldCheck } from "lucide-react";

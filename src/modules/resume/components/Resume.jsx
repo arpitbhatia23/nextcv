@@ -1,0 +1,319 @@
+"use client";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+const BasicInfoStep = dynamic(() => import("./resumesteps/BasicInfoStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const SummaryStep = dynamic(() => import("./resumesteps/SummaryStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const EducationStep = dynamic(() => import("./resumesteps/EducationStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const SkillStep = dynamic(() => import("./resumesteps/SkillStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const ExpricenceStep = dynamic(() => import("./resumesteps/ExpricenceStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const FinalStep = dynamic(() => import("./resumesteps/FinalStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const CertificateStep = dynamic(() => import("./resumesteps/Certificate"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+const ProjectsStep = dynamic(() => import("./resumesteps/ProjectsStep"), {
+  ssr: false,
+  loading: () => <Loading />,
+});
+
+import {
+  Award,
+  Briefcase,
+  CheckCircle,
+  Code,
+  FileText,
+  GraduationCap,
+  Settings,
+  User,
+} from "lucide-react";
+import Logo2 from "../../../components/Logo2";
+import useResumeStore from "@/store/useResumeStore";
+import Loading from "@/app/loading";
+// const Tour = dynamic(() => import("@/components/Tour"), { ssr: false });
+import TemplateSelectorV3 from "./TemplateSelectorV3";
+
+const Resume = () => {
+  const [step, setStep] = useState(0);
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+
+  const resumeSteps = [
+    {
+      component: TemplateSelectorV3,
+      title: "Select Template",
+      icon: FileText,
+    },
+    { component: BasicInfoStep, title: "Basic Info", icon: User },
+    { component: EducationStep, title: "Education", icon: GraduationCap },
+    { component: SkillStep, title: "Skills", icon: Settings },
+    { component: ExpricenceStep, title: "Experience", icon: Briefcase },
+    { component: ProjectsStep, title: "Projects", icon: Code },
+    { component: CertificateStep, title: "Certifications", icon: Award },
+    { component: SummaryStep, title: "Summary", icon: FileText },
+    { component: FinalStep, title: "Review", icon: CheckCircle },
+  ];
+
+  const next = () => {
+    setStep(prev => Math.min(prev + 1, resumeSteps.length - 1));
+  };
+  const previous = () => {
+    setStep(prev => Math.max(prev - 1, 0));
+  };
+  const goToStep = stepIndex => {
+    setStep(stepIndex);
+  };
+
+  // const getTourSteps = () => {
+  //   const commonSteps = [
+  //     {
+  //       target: "#tour-resume-progress",
+  //       content:
+  //         "Track your progress here. There are 8 total steps to complete your resume.",
+  //       disableBeacon: true,
+  //     },
+  //     {
+  //       target: "#tour-resume-nav",
+  //       content:
+  //         "You can quickly jump between sections once you've completed them.",
+  //     },
+  //   ];
+
+  //   const stepSpecificSteps = {
+  //     0: [
+  //       {
+  //         target: "#tour-resume-form",
+  //         content: "Fill in your personal details here.",
+  //       },
+  //       {
+  //         target: "#tour-social-links",
+  //         content: "Add your LinkedIn, GitHub, and Portfolio.",
+  //       },
+  //       {
+  //         target: "#tour-resume-preview",
+  //         content: "See your changes in real-time.",
+  //       },
+  //     ],
+  //     1: [
+  //       {
+  //         target: "#tour-education-form",
+  //         content: "Add your educational background.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button",
+  //         content: "Let AI help you write professional descriptions!",
+  //       },
+  //       {
+  //         target: "#tour-education-list",
+  //         content: "Manage your added education entries.",
+  //       },
+  //     ],
+  //     2: [
+  //       {
+  //         target: "#tour-skills-form",
+  //         content: "Add your technical and soft skills.",
+  //       },
+  //       {
+  //         target: "#tour-skills-list",
+  //         content: "View and manage your skills list.",
+  //       },
+  //     ],
+  //     3: [
+  //       {
+  //         target: "#tour-experience-form",
+  //         content: "Detail your professional work history.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button",
+  //         content: "AI can help polish your job responsibilities.",
+  //       },
+  //       {
+  //         target: "#tour-experience-list",
+  //         content: "Manage your work experience entries.",
+  //       },
+  //     ],
+  //     4: [
+  //       {
+  //         target: "#tour-projects-form",
+  //         content: "Showcase your best projects.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button",
+  //         content: "Use AI to describe your project achievements.",
+  //       },
+  //       {
+  //         target: "#tour-projects-list",
+  //         content: "Manage your project portfolio.",
+  //       },
+  //     ],
+  //     5: [
+  //       {
+  //         target: "#tour-certificates-form",
+  //         content: "Add your professional certifications.",
+  //       },
+  //       {
+  //         target: "#tour-certificates-list",
+  //         content: "Manage your credentials.",
+  //       },
+  //     ],
+  //     6: [
+  //       {
+  //         target: "#tour-summary-form",
+  //         content: "Write a brief professional summary.",
+  //       },
+  //       {
+  //         target: "#tour-ai-button",
+  //         content: "Let AI draft a compelling summary for you.",
+  //       },
+  //     ],
+  //     7: [
+  //       {
+  //         target: "#tour-template-selection",
+  //         content: "Pick a professional template for your resume.",
+  //       },
+  //       {
+  //         target: "#tour-final-preview",
+  //         content: "Check the final look of your resume.",
+  //       },
+  //       {
+  //         target: "#tour-payment-section",
+  //         content: "Unlock the high-quality PDF for download.",
+  //       },
+  //       {
+  //         target: "#tour-coupon-section",
+  //         content: "Have a discount code? Apply it here.",
+  //       },
+  //     ],
+  //   };
+
+  //   const nextStepInfo =
+  //     step < 7
+  //       ? [
+  //           {
+  //             target: "#tour-next-button",
+  //             content: "Click here to save and move to the next step.",
+  //           },
+  //         ]
+  //       : [];
+
+  //   return [
+  //     ...(step === 0 ? commonSteps : []),
+  //     ...(stepSpecificSteps[step] || []),
+  //     ...nextStepInfo,
+  //   ];
+  // };
+
+  // const currentTourSteps = getTourSteps();
+
+  const progress = ((step + 1) / resumeSteps.length) * 100;
+  const StepComponents = resumeSteps[step]?.component;
+
+  return (
+    <div className="min-h-screen bg-slate-50 pb-20">
+      {/* Sticky Header */}
+      <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="h-16 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Logo2 size={40} color="#0f172a" />
+              <div className="hidden md:block h-6 w-px bg-slate-200" />
+              <h1 className="hidden md:block text-sm font-semibold text-slate-900">
+                Resume Builder
+              </h1>
+            </div>
+            <div className="flex items-center gap-4" id="tour-resume-progress">
+              <div className="text-xs font-medium text-slate-500">
+                Step {step + 1} of {resumeSteps.length}
+              </div>
+              <div className="w-24 md:w-32 lg:w-48 h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-indigo-600 transition-all duration-300 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Steps Navigation - Horizontal */}
+      <div className="bg-white border-b border-slate-100 mb-8 overflow-x-auto" id="tour-resume-nav">
+        <div className="max-w-7xl mx-auto px-4 min-w-max">
+          <div className="flex items-center py-4 gap-4 md:gap-8">
+            {resumeSteps.map((stepInfo, index) => {
+              const Icon = stepInfo.icon;
+              const isActive = index === step;
+              const isCompleted = index < step;
+              const isAccessible = index <= step;
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => isAccessible && goToStep(index)}
+                  className={`flex items-center gap-2 group outline-none transition-colors ${
+                    isActive
+                      ? "text-indigo-600"
+                      : isCompleted
+                        ? "text-emerald-600"
+                        : "text-slate-400"
+                  } ${!isAccessible && "opacity-50 cursor-not-allowed"}`}
+                  disabled={!isAccessible}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+                      isActive
+                        ? "bg-indigo-50 border-indigo-200 text-indigo-600 shadow-sm"
+                        : isCompleted
+                          ? "bg-emerald-50 border-emerald-200 text-emerald-600"
+                          : "bg-white border-slate-200 text-slate-400 group-hover:border-slate-300"
+                    }`}
+                  >
+                    {isCompleted ? (
+                      <CheckCircle className="w-4 h-4" />
+                    ) : (
+                      <Icon className="w-4 h-4" />
+                    )}
+                  </div>
+                  <span className={`text-sm font-medium ${isActive ? "text-indigo-900" : ""}`}>
+                    {stepInfo.title}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`mx-auto px-4 md:px-6 ${step === resumeSteps.length - 1 ? "max-w-400" : "max-w-7xl"}`}
+      >
+        <StepComponents
+          next={next}
+          previous={previous}
+          formData={formData}
+          updateForm={updateForm}
+          onSelect={next}
+        />
+      </div>
+      {/* <Tour steps={currentTourSteps} tourId={`resume-step-${step}`} /> */}
+    </div>
+  );
+};
+export default Resume;

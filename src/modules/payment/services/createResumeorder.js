@@ -1,4 +1,4 @@
-import Coupon from "@/models/coupon";
+import Coupon from "@/modules/coupon/models/coupon";
 import Resume from "@/modules/resume/models/resume.model";
 import { createResume } from "@/modules/resume/services/createResume";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";

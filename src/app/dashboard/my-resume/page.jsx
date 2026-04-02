@@ -1,4 +1,4 @@
-import MyResume from "@/components/MyResume";
+import MyResume from "@/modules/resume/components/MyResume";
 import React from "react";
 export async function generateMetadata() {
   return {
