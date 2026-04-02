@@ -34,6 +34,7 @@ import { pdfGenerator } from "@/shared/lib/pdfGenerator";
 import { toast } from "sonner";
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
 import { usePayment } from "@/modules/payment/hooks/usePayment";
+import { usePricing } from "@/modules/payment/hooks/usePricing";
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -46,7 +47,7 @@ const MyResume = () => {
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(100);
-  const [originalAmount] = useState(100); // Store original amount
+  const [originalAmount, setOriginalAmount] = useState(100); // Store original amount
   const [isSubmit, setIsSubmit] = useState(false);
 
   const route = useRouter();
@@ -154,6 +155,15 @@ const MyResume = () => {
     selectedTemplate: resumeData?.ResumeType,
     setIsSubmit,
     couponCode,
+  });
+
+  const { basePrice } = usePricing({
+    selectedTemplate: resumeData?.ResumeType,
+    applied,
+    originalAmount,
+    discount: couponDiscount,
+    setAmount,
+    setOriginalAmount,
   });
 
   const ResumeCard = ({ resume }) => (
@@ -356,7 +366,7 @@ const MyResume = () => {
             <div className="p-6 space-y-6">
               <div className="bg-indigo-50 rounded-xl p-4 text-center">
                 <div className="text-sm text-indigo-600 font-medium mb-1">Total Amount</div>
-                <div className="text-3xl font-bold text-indigo-700">₹{amount}</div>
+                <div className="text-3xl font-bold text-indigo-700">₹{basePrice}</div>
                 {couponDiscount && (
                   <div className="text-xs text-indigo-400 line-through mt-1">₹{originalAmount}</div>
                 )}
