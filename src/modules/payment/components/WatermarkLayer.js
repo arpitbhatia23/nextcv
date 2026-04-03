@@ -1,33 +1,14 @@
 export const WatermarkLayer = () => (
-  <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden select-none opacity-[0.07]">
-    <svg className="w-full h-full">
-      <defs>
-        <pattern
-          id="watermark-pattern"
-          width="250"
-          height="150"
-          patternUnits="userSpaceOnUse"
-          patternTransform="rotate(-30)"
+  <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center opacity-[0.06] select-none">
+    <div className="flex flex-wrap content-center justify-center gap-28 w-[300%] h-[300%] -rotate-45 transform origin-center">
+      {Array.from({ length: 30 }).map((_, i) => (
+        <span
+          key={i}
+          className="text-lg md:text-xl font-black text-gray-950 whitespace-nowrap uppercase"
         >
-          <text
-            x="0"
-            y="50"
-            className="text-[14px] font-black fill-slate-900 uppercase tracking-[0.2em]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            NextCV Premium
-          </text>
-          <text
-            x="125"
-            y="125"
-            className="text-[14px] font-black fill-slate-900 uppercase tracking-[0.2em]"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            NextCV Premium
-          </text>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#watermark-pattern)" />
-    </svg>
+          NextCV Preview
+        </span>
+      ))}
+    </div>
   </div>
 );

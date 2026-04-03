@@ -28,26 +28,11 @@ import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
-
-const WatermarkLayer = () => (
-  <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden flex items-center justify-center opacity-[0.06] select-none">
-    <div className="flex flex-wrap content-center justify-center gap-32 w-[200%] h-[200%] -rotate-45 transform origin-center">
-      {Array.from({ length: 80 }).map((_, i) => (
-        <span
-          key={i}
-          className="text-xl md:text-2xl font-black text-gray-950 whitespace-nowrap uppercase"
-        >
-          NextCV Preview
-        </span>
-      ))}
-    </div>
-  </div>
-);
+import PDFPreview from "../pdfPreview";
 
 const FinalStep = ({ formData, isdraft = false }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
-  const [numPages, setNumPages] = useState(null);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(49);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
@@ -164,38 +149,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0 bg-slate-100/50 min-h-75 flex items-center justify-center">
-            {pdfUrl ? (
-              <div
-                className="p-4 w-full flex justify-center relative overflow-hidden"
-                onContextMenu={e => e.preventDefault()}
-              >
-                <WatermarkLayer />
-
-                <Document
-                  file={pdfUrl}
-                  loading={
-                    <div className="text-slate-400 text-sm animate-pulse">Loading Preview...</div>
-                  }
-                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  className="shadow-md"
-                >
-                  {Array.from({ length: numPages || 0 }).map((_, idx) => (
-                    <Page
-                      key={idx}
-                      pageNumber={idx + 1}
-                      width={280}
-                      className="mb-2"
-                      renderAnnotationLayer={false}
-                      renderTextLayer={false}
-                    />
-                  ))}
-                </Document>
-              </div>
-            ) : (
-              <div className="text-slate-400 text-sm flex gap-2 items-center">
-                <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" /> Generating...
-              </div>
-            )}
+            <PDFPreview pdfUrl={pdfUrl} variant="mobile" />
           </CardContent>
         </Card>
 
@@ -342,6 +296,9 @@ const FinalStep = ({ formData, isdraft = false }) => {
                         <span className="text-[10px] font-black text-indigo-600">
                           ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
                         </span>
+                        <span className="text-[10px] font-black text-indigo-600">
+                          {getTemplateByName(template.key)?.tag}
+                        </span>
                       </div>
                     </div>
 
@@ -381,48 +338,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
               </span>
             </span>
           </div>
-          <div className="flex-1 overflow-y-auto p-4 md:p-8 flex justify-center bg-slate-100/50">
-            <div
-              className="shadow-2xl h-fit relative overflow-hidden"
-              onContextMenu={e => e.preventDefault()}
-            >
-              {pdfUrl && <WatermarkLayer />}
 
-              {pdfUrl ? (
-                <Document
-                  file={pdfUrl}
-                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  loading={
-                    <div className="flex flex-col items-center gap-3 p-12 bg-white rounded-xl shadow-sm border border-slate-100">
-                      <div className="w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
-                      <p className="text-sm font-medium text-slate-500 animate-pulse">
-                        Rendering Resume...
-                      </p>
-                    </div>
-                  }
-                  error={
-                    <div className="text-red-500 bg-white p-4 rounded-lg shadow-sm">
-                      Failed to load preview
-                    </div>
-                  }
-                >
-                  {Array.from({ length: numPages || 0 }).map((_, idx) => (
-                    <div key={idx} className="mb-4 last:mb-0">
-                      <Page
-                        pageNumber={idx + 1}
-                        width={numPages > 0 ? undefined : 600}
-                        className="bg-white max-w-full"
-                        renderAnnotationLayer={false}
-                        renderTextLayer={false}
-                      />
-                    </div>
-                  ))}
-                </Document>
-              ) : (
-                <div className="h-200 w-150 bg-white animate-pulse rounded-sm shadow-sm border border-slate-200" />
-              )}
-            </div>
-          </div>
+          <PDFPreview pdfUrl={pdfUrl} />
         </div>
 
         {/* Right: Payment (Desktop) - Fixed Sidebar */}

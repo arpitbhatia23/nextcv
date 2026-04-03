@@ -1,6 +1,6 @@
+import { User } from "@/modules/auth";
 import { apiResponse } from "@/shared";
 import { ReminderEmail } from "@/templates/email/remiderEmail";
-import { User } from "lucide-react";
 import { NextResponse } from "next/server";
 
 export const sendReminder = async () => {

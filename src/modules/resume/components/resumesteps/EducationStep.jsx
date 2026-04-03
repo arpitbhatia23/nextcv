@@ -16,15 +16,15 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../shared/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { toast } from "sonner";
+
 import { Tips } from "../Tips";
+import { useAiGeneration } from "../../hooks/useAiGeneation";
 
 const EducationStep = ({ next, previous, formData, updateForm }) => {
   const [educationList, setEducationList] = useState(formData.education || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  // const [isGenerating, setIsGenerating] = useState(false);
 
   const schema = z.object({
     degree: z.string().min(2, { message: "degree is required" }),
@@ -79,36 +79,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
     setEditingId(null);
   };
 
-  const handelAiGenration = async () => {
-    try {
-      const educationdetail = form.getValues();
-      console.log(educationdetail);
-      const isValid = Object.entries(educationdetail)
-        .filter(([key]) => key !== "description")
-        .some(([, val]) => val && val.trim() !== "");
-
-      console.log(isValid);
-      if (!isValid) {
-        toast("Please fill in all education field before generating");
-      } else {
-        setIsGenerating(true);
-
-        const res = await axios.post("/api/gen/description", {
-          type: "education",
-          data: educationdetail,
-        });
-
-        if (res.data?.data) {
-          form.setValue("description", String(res.data.data));
-        }
-      }
-    } catch (err) {
-      console.error("AI generation failed:", err);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
+  const { handleAiGeneration, isGenerating } = useAiGeneration({ form, type: "education" });
   return (
     <div className="py-8">
       <div className="mb-6">
@@ -249,7 +220,7 @@ const EducationStep = ({ next, previous, formData, updateForm }) => {
                           size="sm"
                           className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                           disabled={isGenerating}
-                          onClick={handelAiGenration}
+                          onClick={handleAiGeneration}
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />

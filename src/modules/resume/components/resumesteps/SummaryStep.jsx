@@ -16,12 +16,25 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/shared/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
-import { toast } from "sonner";
+
+import { useAiGeneration } from "../../hooks/useAiGeneation";
 
 const SummaryStep = ({ next, previous, formData, updateForm }) => {
-  const [isGenerating, setIsGenerating] = useState(false);
-
+  const [hasGenerated, setHasGenerated] = useState(false);
+  const { handleAiGeneration, isGenerating } = useAiGeneration({
+    getPayload: () => ({
+      ...formData,
+      summary: watchedSummary,
+    }),
+    type: "summary",
+    onSuccess: result => form.setValue("summary", result),
+  });
+  useEffect(() => {
+    if (formData.summary == null && !hasGenerated) {
+      handleAiGeneration();
+      setHasGenerated(true);
+    }
+  }, [formData.summary, hasGenerated, handleAiGeneration]);
   const schema = z.object({
     summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
   });
@@ -41,36 +54,6 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
 
   const onSubmit = () => {
     next();
-  };
-
-  useEffect(() => {
-    if (!formData.summary) {
-      handelAiGenration();
-    }
-  }, [formData.summary]);
-  const handelAiGenration = async () => {
-    try {
-      setIsGenerating(true);
-
-      const res = await axios.post("/api/gen/description", {
-        type: "summary",
-        data: {
-          ...formData,
-          summary: watchedSummary,
-        },
-      });
-
-      if (res.data?.data) {
-        form.setValue("summary", String(res.data.data));
-
-        toast.success(watchedSummary?.trim() ? "Summary enhanced ✨" : "Summary generated ✨");
-      }
-    } catch (err) {
-      console.error("AI generation failed:", err);
-      toast.error("Failed to generate summary");
-    } finally {
-      setIsGenerating(false);
-    }
   };
 
   return (
@@ -106,7 +89,7 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
                           size="sm"
                           className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                           disabled={isGenerating}
-                          onClick={handelAiGenration}
+                          onClick={handleAiGeneration}
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />

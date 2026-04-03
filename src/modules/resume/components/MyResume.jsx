@@ -35,13 +35,15 @@ import { toast } from "sonner";
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
 import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
+import PDFPreview from "./pdfPreview";
+import { useIsMobile } from "@/shared/hooks/use-mobile";
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
-  const [numPages, setNumPages] = useState(null);
+  const [paid, setPaid] = useState(null);
   const [paymentModal, setPaymentModal] = useState(false);
   const [resumeData, setResumeData] = useState(null);
   const [applied, setApplied] = useState(false);
@@ -137,9 +139,15 @@ const MyResume = () => {
   const handleViewResume = async resumeData => {
     const pdfGen = new pdfGenerator(resumeData);
     const url = await pdfGen.createPdf();
+
     setPdfUrl(url);
+    if (resumeData.status === "paid") {
+      setPaid(true);
+    }
     setIsModelOpen(true);
   };
+
+  const isMobile = useIsMobile();
 
   const paymentFormData = {
     draftId: resumeData?._id,
@@ -301,7 +309,7 @@ const MyResume = () => {
                 size="icon"
                 onClick={() => {
                   setPdfUrl("");
-                  setNumPages(null);
+                  setPaid(false);
                   setIsModelOpen(false);
                 }}
                 className="rounded-full hover:bg-slate-100"
@@ -311,32 +319,7 @@ const MyResume = () => {
             </div>
 
             <div className="flex-1 bg-slate-100 overflow-auto p-8 flex justify-center">
-              {pdfUrl ? (
-                <Document
-                  file={pdfUrl}
-                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  loading={
-                    <div className="flex flex-col items-center justify-center py-20 text-slate-500">
-                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mb-4"></div>
-                      Generating Preview...
-                    </div>
-                  }
-                  className="shadow-2xl"
-                >
-                  {Array.from(new Array(numPages), (el, idx) => (
-                    <div key={idx} className="mb-8 last:mb-0 shadow-lg">
-                      <Page
-                        pageNumber={idx + 1}
-                        width={600}
-                        renderTextLayer={false}
-                        renderAnnotationLayer={false}
-                      />
-                    </div>
-                  ))}
-                </Document>
-              ) : (
-                <div className="text-slate-500">No preview available</div>
-              )}
+              <PDFPreview pdfUrl={pdfUrl} paid={paid} variant={isMobile ? "mobile" : "desktop"} />
             </div>
           </div>
         </div>

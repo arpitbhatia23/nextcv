@@ -6,18 +6,19 @@ import { templates } from "@/shared/utils/template";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import useResumeStore from "@/store/useResumeStore";
 import Image from "next/image";
+
 const getTierStyles = tier => {
   switch (tier?.toLowerCase()) {
     case "premium":
+    case "elite":
       return "bg-purple-100 text-purple-700 border border-purple-200";
-    case "pro":
-      return "bg-indigo-100 text-indigo-700 border border-indigo-200";
     case "standard":
       return "bg-blue-100 text-blue-700 border border-blue-200";
     default:
       return "bg-slate-100 text-slate-600 border border-slate-200";
   }
 };
+
 const TemplateSelectorV3 = ({ onSelect }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
@@ -29,17 +30,28 @@ const TemplateSelectorV3 = ({ onSelect }) => {
 
   return (
     <section className="p-2 md:p-6">
+      {/* Header */}
       <div className="flex-col md:flex items-center justify-between mb-4">
         <h3 className="text-sm md:text-xl font-semibold md:font-black text-slate-900">
           Choose a Template
         </h3>
-        <p className="text-xs text-slate-500">Pick one to begin — you can change later.</p>
+        <p className="text-xs text-indigo-600 font-semibold">
+          🔥 Most users choose Standard templates
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-2">
         {templates.map(template => {
+          const templateData = getTemplateByName(template.key);
+
           const isSelected = selectedTemplate === template.key;
-          const tier = getTemplateByName(template.key)?.tier || "Basic";
+          const tier = templateData?.tier || "Basic";
+          const price = templateData?.priceDiscounted || 49;
+          const original = templateData?.priceOriginal || 99;
+          const tag = templateData?.tag;
+          const badge = templateData?.badge;
+
           return (
             <motion.button
               key={template.key}
@@ -47,18 +59,28 @@ const TemplateSelectorV3 = ({ onSelect }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               aria-pressed={isSelected}
-              aria-label={`Select ${template.label} template`}
-              className={`group relative text-left w-full cursor-pointer rounded-2xl border transition-all duration-300 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-400 ${isSelected ? "border-indigo-600 bg-indigo-50 shadow-lg" : "border-slate-100 bg-white hover:shadow"} `}
+              className={`group relative text-left w-full cursor-pointer rounded-2xl border transition-all duration-300 p-1 focus:outline-none focus:ring-2 focus:ring-indigo-400 
+              ${
+                isSelected
+                  ? "border-indigo-600 bg-indigo-50 shadow-lg"
+                  : "border-slate-100 bg-white hover:shadow"
+              }
+              ${
+                tier === "Premium" || tier === "Elite"
+                  ? "ring-1 ring-purple-300 hover:ring-purple-500"
+                  : ""
+              }
+              `}
             >
+              {/* Image */}
               <div className="aspect-3/4 rounded-xl bg-slate-100 overflow-hidden relative">
                 {template.image ? (
                   <Image
                     src={template.image}
                     alt={template.label}
                     fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 200px"
-                    className="w-full h-full object-cover transition-transform group-hover:scale-110"
-                    priority={true}
+                    className="object-cover transition-transform group-hover:scale-110"
+                    priority
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-300">
@@ -66,30 +88,59 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                   </div>
                 )}
 
+                {/* Selected Tick */}
                 {isSelected && (
-                  <div className="absolute top-3 right-3 bg-indigo-600 text-white p-1.5 rounded-full shadow-lg z-10 border border-white/20">
+                  <div className="absolute top-3 right-3 bg-indigo-600 text-white p-1.5 rounded-full shadow-lg z-10">
                     <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                )}
+
+                {/* Badge */}
+                {badge && (
+                  <div className="absolute top-3 left-3 bg-orange-500 text-white text-[9px] px-2 py-1 rounded-full font-bold shadow">
+                    {badge}
                   </div>
                 )}
               </div>
 
-              <div className="p-3">
-                <div className="flex flex-col gap-1.5 ">
-                  <p
-                    className={`text-[10px] font-black uppercase tracking-widest ${isSelected ? "text-indigo-900" : "text-slate-600"}`}
+              {/* Content */}
+              <div className="p-3 space-y-2">
+                {/* Title */}
+                <p
+                  className={`text-[11px] font-black uppercase tracking-widest ${
+                    isSelected ? "text-indigo-900" : "text-slate-700"
+                  }`}
+                >
+                  {template.label}
+                </p>
+
+                {/* Tier + Tag */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide ${getTierStyles(
+                      tier
+                    )}`}
                   >
-                    {template.label}
-                  </p>
-                  <div className="flex items-center justify-between ">
-                    <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide ${getTierStyles(tier)}`}
-                    >
-                      {tier}
+                    {tier}
+                  </span>
+
+                  {tag && (
+                    <span className="text-[9px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">
+                      {tag}
                     </span>
-                    {/* <span className="text-[10px] font-black text-indigo-600">
-                      ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
-                    </span> */}
+                  )}
+                </div>
+
+                {/* Pricing */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm font-black text-indigo-600">₹{price}</span>
+                    <span className="text-[10px] line-through text-slate-400">₹{original}</span>
                   </div>
+
+                  <span className="text-[9px] text-green-600 font-bold">
+                    Save ₹{original - price}
+                  </span>
                 </div>
               </div>
             </motion.button>

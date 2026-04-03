@@ -11,3 +11,4 @@ export { default as apiError } from "./utils/apiError";
 export { asyncHandler } from "./utils/asyncHandler";
 export { default as dbConnect } from "./utils/dbConnect";
 export { requiredAuth } from "./utils/ReqireAuth";
+export { checkRateLimit } from "./utils/rateLimiter";

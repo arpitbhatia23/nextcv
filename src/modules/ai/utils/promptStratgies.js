@@ -142,6 +142,35 @@ Education: ${education}
 Projects: ${project}
 summary:${summary}
 `,
+
+  skills: ({ role = "" }) => `
+Generate a list of relevant resume skills.
+
+STRICT RULES:
+- Output ONLY skill names
+- NO explanation
+- NO headings
+- NO numbering
+- NO markdown
+- NO JSON or arrays
+- Each skill MUST be on a new line
+- Maximum 6–10 skills
+- Skills must be relevant to the given job role
+- Avoid duplicates
+- Include a mix of technical + soft skills
+- If existingSkills are provided, avoid repeating them
+
+Job Role:
+${role}
+
+
+
+Example format:
+React.js
+Node.js
+Communication
+Problem Solving
+`,
 };
 
 export { PromptStrategies };

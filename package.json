@@ -57,6 +57,7 @@
     "nodemailer": "^7.0.13",
     "pdfjs-dist": "^4.8.69",
     "pg-sdk-node": "https://phonepe.mycloudrepo.io/public/repositories/phonepe-pg-sdk-node/releases/v2/phonepe-pg-sdk-node.tgz",
+    "rate-limiter-flexible": "^10.0.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-dropzone": "^15.0.0",

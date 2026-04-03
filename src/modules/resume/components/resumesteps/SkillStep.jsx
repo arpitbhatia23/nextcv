@@ -17,26 +17,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Tips } from "../Tips";
+import { useAiGeneration } from "../../hooks/useAiGeneation";
 const SkillStep = ({ next, previous, formData, updateForm }) => {
   const [skillList, setSkillList] = useState(formData.skills || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
-
-  // ✅ Suggestions
-  const suggestions = [
-    "React.js",
-    "Node.js",
-    "MongoDB",
-    "Docker",
-    "AWS",
-    "TypeScript",
-    "Python",
-    "Java",
-    "Leadership",
-    "Communication",
-    "Teamwork",
-    "Problem Solving",
-  ];
 
   const schema = z.object({
     name: z.string().min(2, { message: "Skill name is required" }),
@@ -104,18 +89,48 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
     setEditingId(null);
   };
 
-  const addSuggestion = skillName => {
-    if (!skillList.some(skill => skill.name.toLowerCase() === skillName.toLowerCase())) {
-      setSkillList(prev => [
-        ...prev,
-        {
-          id: Date.now() + Math.random(),
-          name: skillName,
-          level: "Intermediate",
-        },
-      ]);
+  const handleClearAll = () => {
+    if (skillList.length === 0) {
+      toast("No skills to clear");
+      return;
     }
+
+    toast("Remove all skills?", {
+      description: "This action cannot be undone",
+      action: {
+        label: "Clear All",
+        onClick: () => {
+          setSkillList([]);
+          toast("All skills cleared 🧹");
+        },
+      },
+    });
   };
+
+  const { handleAiGeneration, isGenerating } = useAiGeneration({
+    type: "skills",
+
+    getPayload: () => ({
+      role: formData.jobRole,
+    }),
+
+    onSuccess: result => {
+      const skills = result
+        .split("\n")
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const newSkills = skills
+        .filter(s => !skillList.some(skill => skill.name.toLowerCase() === s.toLowerCase()))
+        .map(skill => ({
+          id: Date.now() + Math.random(),
+          name: skill,
+          level: "Intermediate",
+        }));
+
+      setSkillList(prev => [...prev, ...newSkills]);
+    },
+  });
 
   const handleNext = () => {
     if (skillList.length < 4) {
@@ -144,24 +159,21 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
                 Cancel
               </Button>
             )}
+            <Button
+              // variant="outline"
+              size="sm"
+              onClick={handleAiGeneration}
+              disabled={isGenerating}
+              variant="default"
+              className="bg-indigo-600 text-white"
+            >
+              <Sparkles className="w-4 h-4" />
+              {isGenerating ? "Generating..." : "Suggest Skills"}
+            </Button>
           </CardHeader>
 
           <CardContent className="p-2 md:p-6">
             {/* Suggestions */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {suggestions.map(skill => (
-                <Button
-                  key={skill}
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  className="rounded-full"
-                  onClick={() => addSuggestion(skill)}
-                >
-                  {skill}
-                </Button>
-              ))}
-            </div>
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -220,9 +232,19 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
         {/* List Section */}
         <div className="space-y-6">
           <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
-            <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-              <Wrench className="w-5 h-5 text-indigo-500" /> Added Skills
-            </h3>
+            <div className="flex justify-between">
+              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
+                <Wrench className="w-5 h-5 text-indigo-500" /> Added Skills
+              </h3>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleClearAll}
+                className="text-red-500 hover:text-red-600"
+              >
+                Clear All
+              </Button>
+            </div>
 
             {skillList.length === 0 ? (
               <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">

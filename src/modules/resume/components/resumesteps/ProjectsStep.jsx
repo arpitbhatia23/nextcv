@@ -14,15 +14,15 @@ import { Input } from "@/shared/components/ui/input";
 import { Textarea } from "@/shared/components/ui/textarea";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import axios from "axios";
-import { toast } from "sonner";
+
 import { Tips } from "../Tips";
+import { useAiGeneration } from "../../hooks/useAiGeneation";
 
 const ProjectsStep = ({ next, previous, formData, updateForm }) => {
   const [projectList, setProjectList] = useState(formData.projects || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  // const [isGenerating, setIsGenerating] = useState(false);
 
   const form = useForm({
     defaultValues: {
@@ -69,34 +69,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
     setIsEditing(false);
     setEditingId(null);
   };
-  const handelAiGenration = async () => {
-    try {
-      const detail = form.getValues();
-      console.log(detail);
-      const isValid = Object.entries(detail)
-        .filter(([key]) => key !== "description")
-        .some(([, val]) => val && val.trim() !== "");
-
-      if (!isValid) {
-        toast("Please fill in all project field before generating");
-      } else {
-        setIsGenerating(true);
-
-        const res = await axios.post("/api/gen/description", {
-          type: "project",
-          data: detail,
-        });
-
-        if (res.data?.data) {
-          form.setValue("description", String(res.data.data));
-        }
-      }
-    } catch (err) {
-      console.error("AI generation failed:", err);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
+  const { handleAiGeneration, isGenerating } = useAiGeneration({ type: "project", form });
 
   return (
     <div className="py-8">
@@ -274,7 +247,7 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
                           size="sm"
                           className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
                           disabled={isGenerating}
-                          onClick={handelAiGenration}
+                          onClick={handleAiGeneration}
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />

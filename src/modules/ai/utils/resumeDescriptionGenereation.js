@@ -15,6 +15,7 @@ export const ResumeGenerator = {
   education: async data => generateFromPrompt(PromptStrategies.education(data)),
   project: async data => generateFromPrompt(PromptStrategies.project(data)),
   experience: async data => generateFromPrompt(PromptStrategies.experience(data)),
+  skills: async data => generateFromPrompt(PromptStrategies.skills(data)),
   summary: async data =>
     generateFromPrompt(
       PromptStrategies.summary({
