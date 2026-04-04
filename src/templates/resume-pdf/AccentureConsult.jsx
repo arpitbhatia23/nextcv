@@ -159,6 +159,8 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
+                      <Text style={styles.bulletPoint}>•</Text>
+
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -186,6 +188,8 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
+                      <Text style={styles.bulletPoint}>•</Text>
+
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -223,6 +227,8 @@ const AccentureConsult = ({ data }) => {
                   <View style={{ marginTop: 4 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
+                        <Text style={styles.bulletPoint}>•</Text>
+
                         <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}

@@ -33,9 +33,10 @@ export const createResuemOrder = async ({ reqData }) => {
 
   // 1️⃣ Create or get draft resume
   let resumeId = null;
+  console.log(isDraft);
   if (isDraft) {
-    if (!draftId) throw new apiError(400, "Draft id is required");
-    const resume = await Resume.findById(draftId);
+    if (!isDraft) throw new apiError(400, "Draft id is required");
+    const resume = await Resume.findById(isDraft);
     if (!resume) throw new apiError(404, "Draft not found");
     resumeId = resume._id;
   } else {

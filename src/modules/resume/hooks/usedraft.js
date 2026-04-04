@@ -1,8 +1,15 @@
 import useResumeStore from "@/store/useResumeStore";
 import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
 
-export const useDraft = ({ setIsSubmit, selectedTemplate, formData, setIsFeedbackOpen }) => {
+export const useDraft = ({
+  setIsSubmit,
+  selectedTemplate,
+  formData,
+  setIsFeedbackOpen,
+  setIsDraft,
+}) => {
   const clearDraft = useResumeStore(s => s.clearStorage);
 
   const handleSaveDraft = async () => {
@@ -15,6 +22,7 @@ export const useDraft = ({ setIsSubmit, selectedTemplate, formData, setIsFeedbac
 
       if (res.data.success) {
         toast.success("Draft saved successfully");
+        setIsDraft(res.data.data);
         clearDraft();
         setIsFeedbackOpen(true);
       } else {

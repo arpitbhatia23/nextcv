@@ -1,6 +1,4 @@
 import { asyncHandler } from "@/shared/utils/asyncHandler";
-import { NextResponse } from "next/server";
-import { apiResponse } from "@/shared/utils/apiResponse";
 import dbConnect from "@/shared/utils/dbConnect";
 import { requiredAuth } from "@/shared";
 import { saveResumeAsDraft } from "@/modules/resume";
@@ -14,8 +12,7 @@ const handler = async req => {
   const session = await requiredAuth();
 
   const userId = session.user._id;
-  await saveResumeAsDraft({ data, userId });
-  return NextResponse.json(new apiResponse(201, "Draft generated successfully"));
+  return await saveResumeAsDraft({ data, userId });
 };
 
 export const POST = asyncHandler(handler);

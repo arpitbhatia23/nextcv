@@ -30,7 +30,7 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import PDFPreview from "../pdfPreview";
 
-const FinalStep = ({ formData, isdraft = false }) => {
+const FinalStep = ({ formData }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   const [couponCode, setCouponCode] = useState("");
@@ -39,6 +39,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [originalAmount, setOriginalAmount] = useState(0);
   const [isSubmit, setIsSubmit] = useState(false);
   const [applied, setApplied] = useState(false);
+  const [isDraft, setIsDraft] = useState(null);
 
   const { handelPayment, isRedirecting } = usePayment({
     discount,
@@ -48,6 +49,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
     selectedTemplate,
     setIsSubmit,
     couponCode,
+    isDraft,
   });
 
   const { discount, handleCoupon, removeCoupon } = useCoupon({
@@ -63,6 +65,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
     selectedTemplate,
     formData,
     setIsFeedbackOpen,
+    setIsDraft,
   });
 
   const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
@@ -97,50 +100,48 @@ const FinalStep = ({ formData, isdraft = false }) => {
 
       {/* Mobile Layout */}
       <div className="w-full flex flex-col gap-4 lg:hidden pb-20">
-        {!isdraft && (
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
-            </label>
-            <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x">
-              {templates.map(template => (
+        <div className="space-y-3">
+          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+            <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
+          </label>
+          <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x">
+            {templates.map(template => (
+              <div
+                key={template.key}
+                onClick={() => setSelectedTemplate(template.key)}
+                className={`flex-none w-40 flex flex-col items-center gap-2 p-3 rounded-lg border transition-all cursor-pointer snap-start ${
+                  selectedTemplate === template.key
+                    ? "bg-indigo-50 border-indigo-500 shadow-sm"
+                    : "bg-white border-slate-200 hover:border-slate-300"
+                }`}
+              >
                 <div
-                  key={template.key}
-                  onClick={() => setSelectedTemplate(template.key)}
-                  className={`flex-none w-40 flex flex-col items-center gap-2 p-3 rounded-lg border transition-all cursor-pointer snap-start ${
-                    selectedTemplate === template.key
-                      ? "bg-indigo-50 border-indigo-500 shadow-sm"
-                      : "bg-white border-slate-200 hover:border-slate-300"
-                  }`}
+                  className={`p-3 rounded-full ${selectedTemplate === template.key ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"}`}
                 >
-                  <div
-                    className={`p-3 rounded-full ${selectedTemplate === template.key ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"}`}
-                  >
-                    <LayoutTemplate className="w-6 h-6" />
-                  </div>
-                  <div className="w-full text-center space-y-1">
-                    <p
-                      className={`text-[10px] font-black uppercase tracking-widest leading-tight ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
-                    >
-                      {template.label}
-                    </p>
-                    <div className="flex items-center justify-center gap-1.5 ">
-                      <span className="text-[8px] px-1 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase">
-                        {getTemplateByName(template.key)?.tier || "Basic"}
-                      </span>
-                      <span className="text-[9px] font-black text-indigo-600">
-                        ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
-                      </span>
-                    </div>
-                  </div>
-                  {selectedTemplate === template.key && (
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-1" />
-                  )}
+                  <LayoutTemplate className="w-6 h-6" />
                 </div>
-              ))}
-            </div>
+                <div className="w-full text-center space-y-1">
+                  <p
+                    className={`text-[10px] font-black uppercase tracking-widest leading-tight ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
+                  >
+                    {template.label}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 ">
+                    <span className="text-[8px] px-1 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase">
+                      {getTemplateByName(template.key)?.tier || "Basic"}
+                    </span>
+                    <span className="text-[9px] font-black text-indigo-600">
+                      ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                    </span>
+                  </div>
+                </div>
+                {selectedTemplate === template.key && (
+                  <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-1" />
+                )}
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
         <Card className="border border-slate-200 shadow-sm overflow-hidden bg-white">
           <CardHeader className="p-4 border-b border-slate-100 bg-white">
@@ -234,96 +235,95 @@ const FinalStep = ({ formData, isdraft = false }) => {
       {/* Desktop Layout */}
       <div className="hidden lg:flex flex-1 overflow-hidden w-full gap-6 h-full min-h-0">
         {/* Left: Template List - Fixed Sidebar */}
-        {!isdraft && (
-          <div
-            className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0"
-            id="tour-template-selection"
-          >
-            <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
-              <h3 className="font-semibold text-slate-800 flex items-center gap-2">
-                <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
-              </h3>
-            </div>
 
-            <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
-              <div className="grid grid-cols-1 gap-4">
-                {templates.map(template => (
-                  <div
-                    key={template.key}
-                    onClick={() => setSelectedTemplate(template.key)}
-                    className={`group relative cursor-pointer rounded-xl border-2 overflow-hidden transition-all duration-300 ${
-                      selectedTemplate === template.key
-                        ? "border-indigo-600 shadow-md ring-2 ring-indigo-100"
-                        : "border-slate-200 hover:border-indigo-300 hover:shadow-sm"
-                    }`}
-                  >
-                    {/* Image Preview */}
-                    <div className="aspect-3/4 w-full bg-slate-200 relative overflow-hidden">
-                      {template.image ? (
-                        <Image
-                          src={template.image}
-                          alt={template.label}
-                          height={500}
-                          width={500}
-                          className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                        />
-                      ) : (
-                        <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-slate-100 gap-2">
-                          <LayoutTemplate className="w-10 h-10 opacity-20" />
-                          <span className="text-xs font-medium opacity-50">No Preview</span>
-                        </div>
-                      )}
+        <div
+          className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0"
+          id="tour-template-selection"
+        >
+          <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
+            <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
+            </h3>
+          </div>
 
-                      {/* Overlay for selection */}
-                      <div
-                        className={`absolute inset-0 bg-indigo-900/10 transition-opacity ${selectedTemplate === template.key ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+          <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
+            <div className="grid grid-cols-1 gap-4">
+              {templates.map(template => (
+                <div
+                  key={template.key}
+                  onClick={() => setSelectedTemplate(template.key)}
+                  className={`group relative cursor-pointer rounded-xl border-2 overflow-hidden transition-all duration-300 ${
+                    selectedTemplate === template.key
+                      ? "border-indigo-600 shadow-md ring-2 ring-indigo-100"
+                      : "border-slate-200 hover:border-indigo-300 hover:shadow-sm"
+                  }`}
+                >
+                  {/* Image Preview */}
+                  <div className="aspect-3/4 w-full bg-slate-200 relative overflow-hidden">
+                    {template.image ? (
+                      <Image
+                        src={template.image}
+                        alt={template.label}
+                        height={500}
+                        width={500}
+                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                       />
-                    </div>
-
-                    {/* Label */}
-                    <div
-                      className={`p-3 text-center border-t ${selectedTemplate === template.key ? "bg-indigo-50 border-indigo-100" : "bg-white border-slate-100"}`}
-                    >
-                      <span
-                        className={`font-black text-[10px] uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-700" : "text-slate-700"}`}
-                      >
-                        {template.label}
-                      </span>
-                      <div className="flex items-center justify-center gap-2 mt-1.5 ">
-                        <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
-                          {getTemplateByName(template.key)?.tier || "Basic"}
-                        </span>
-                        <span className="text-[10px] font-black text-indigo-600">
-                          ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
-                        </span>
-                        <span className="text-[10px] font-black text-indigo-600">
-                          {getTemplateByName(template.key)?.tag}
-                        </span>
-                      </div>
-                    </div>
-
-                    {selectedTemplate === template.key && (
-                      <div className="absolute top-2 right-2 bg-indigo-600 text-white p-1 rounded-full shadow-lg z-10">
-                        <CheckCircle2 className="w-4 h-4" />
+                    ) : (
+                      <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-slate-100 gap-2">
+                        <LayoutTemplate className="w-10 h-10 opacity-20" />
+                        <span className="text-xs font-medium opacity-50">No Preview</span>
                       </div>
                     )}
+
+                    {/* Overlay for selection */}
+                    <div
+                      className={`absolute inset-0 bg-indigo-900/10 transition-opacity ${selectedTemplate === template.key ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                    />
                   </div>
-                ))}
-              </div>
-            </div>
-            <div className="p-4 border-t border-slate-200 bg-white shrink-0">
-              <Button
-                variant="outline"
-                className="w-full border-slate-300 text-slate-700 hover:bg-slate-50"
-                disabled={isSubmit}
-                onClick={debounceDraft}
-              >
-                <Save className="h-4 w-4 mr-2" />
-                Save Draft
-              </Button>
+
+                  {/* Label */}
+                  <div
+                    className={`p-3 text-center border-t ${selectedTemplate === template.key ? "bg-indigo-50 border-indigo-100" : "bg-white border-slate-100"}`}
+                  >
+                    <span
+                      className={`font-black text-[10px] uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-700" : "text-slate-700"}`}
+                    >
+                      {template.label}
+                    </span>
+                    <div className="flex items-center justify-center gap-2 mt-1.5 ">
+                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
+                        {getTemplateByName(template.key)?.tier || "Basic"}
+                      </span>
+                      <span className="text-[10px] font-black text-indigo-600">
+                        ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                      </span>
+                      <span className="text-[10px] font-black text-indigo-600">
+                        {getTemplateByName(template.key)?.tag}
+                      </span>
+                    </div>
+                  </div>
+
+                  {selectedTemplate === template.key && (
+                    <div className="absolute top-2 right-2 bg-indigo-600 text-white p-1 rounded-full shadow-lg z-10">
+                      <CheckCircle2 className="w-4 h-4" />
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
-        )}
+          <div className="p-4 border-t border-slate-200 bg-white shrink-0">
+            <Button
+              variant="outline"
+              className="w-full border-slate-300 text-slate-700 hover:bg-slate-50"
+              disabled={isSubmit}
+              onClick={debounceDraft}
+            >
+              <Save className="h-4 w-4 mr-2" />
+              Save Draft
+            </Button>
+          </div>
+        </div>
 
         {/* Center: Resume Preview */}
         <div
