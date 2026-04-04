@@ -4,13 +4,7 @@ import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
 import { apiError } from "@/shared";
 import Resume from "@/modules/resume/models/resume.model";
-export const PaymentStatus = async ({
-  merchantOrderId,
-  userId,
-  discountAmount,
-  resumeID,
-  couponCode,
-}) => {
+export const PaymentStatus = async ({ merchantOrderId, userId, resumeID }) => {
   const response = await client.getOrderStatus(merchantOrderId);
   if (response.state === "COMPLETED") {
     const isPaymentAllreadyDone = await Payment.findOne({
@@ -21,7 +15,21 @@ export const PaymentStatus = async ({
         `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
       );
     }
-    const payment = await createPayment({ response, couponCode, discountAmount, userId });
+
+    const payment = await Payment.findOneAndUpdate(
+      {
+        merchantOrderID: merchantOrderId,
+        status: { $ne: "SUCCESS" },
+      },
+      {
+        $set: {
+          status: "SUCCESS",
+          transcationId: response?.paymentDetails[0]?.transactionId,
+        },
+      },
+      { returnDocument: "after" }
+    );
+
     const updateResume = await Resume.findByIdAndUpdate(
       resumeID,
       {

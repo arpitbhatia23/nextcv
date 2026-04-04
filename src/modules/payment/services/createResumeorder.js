@@ -5,6 +5,7 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import { apiError, apiResponse, requiredAuth } from "@/shared";
 import { order } from "./order";
 import { NextResponse } from "next/server";
+import { createPayment } from "../phonepe/service";
 
 export const createResuemOrder = async ({ reqData }) => {
   const {
@@ -67,13 +68,16 @@ export const createResuemOrder = async ({ reqData }) => {
 
   // 3️⃣ Apply coupon if exists
   let finalAmount = originalAmount;
+  let discountAmount;
   if (couponCode) {
     const coupon = await Coupon.findOne({ couponCode: couponCode });
     if (coupon) {
       if (coupon.type === "percentage") {
+        discountAmount = (originalAmount * coupon.discount) / 100;
         finalAmount = originalAmount * (1 - coupon.discount / 100);
       } else if (coupon.type === "amount") {
         finalAmount = originalAmount - coupon.discount;
+        discountAmount = (originalAmount * coupon.discount) / 100;
       }
     }
   }
@@ -85,6 +89,7 @@ export const createResuemOrder = async ({ reqData }) => {
   const res = await order({
     amount: finalAmount,
     resumeId,
+    discountAmount,
     couponCode,
     userId,
   });
