@@ -11,6 +11,8 @@ export const usePayment = ({
   selectedTemplate,
   couponCode,
   setIsSubmit,
+  isDraft,
+  draftId,
 }) => {
   const clearDraft = useResumeStore(s => s.clearStorage);
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -44,6 +46,7 @@ export const usePayment = ({
         couponCode: applied ? couponCode : null,
         discountAmount,
         ...formData,
+        isDraft: draftId ? true : false,
       });
 
       if (res.data.success) {

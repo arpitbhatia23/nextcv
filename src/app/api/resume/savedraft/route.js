@@ -14,8 +14,7 @@ const handler = async req => {
   const session = await requiredAuth();
 
   const userId = session.user._id;
-  await saveResumeAsDraft({ data, userId });
-  return NextResponse.json(new apiResponse(201, "Draft generated successfully"));
+  return await saveResumeAsDraft({ data, userId });
 };
 
 export const POST = asyncHandler(handler);

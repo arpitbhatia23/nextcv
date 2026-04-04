@@ -1,6 +1,7 @@
 import { User } from "@/modules/auth";
 import Resume from "../models/resume.model";
-import { apiError } from "@/shared";
+import { apiError, apiResponse } from "@/shared";
+import { NextResponse } from "next/server";
 
 export const saveResumeAsDraft = async ({ data, userId }) => {
   const requiredFields = [
@@ -34,4 +35,5 @@ export const saveResumeAsDraft = async ({ data, userId }) => {
   });
 
   await User.updateOne({ _id: userId }, { $push: { resume: draft._id } });
+  return NextResponse.json(new apiResponse(201, "Draft generated successfully", draft._id));
 };

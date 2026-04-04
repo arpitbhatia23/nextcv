@@ -39,7 +39,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
   const [originalAmount, setOriginalAmount] = useState(0);
   const [isSubmit, setIsSubmit] = useState(false);
   const [applied, setApplied] = useState(false);
-
+  const [draftId, setDraftId] = useState(null);
   const { handelPayment, isRedirecting } = usePayment({
     discount,
     originalAmount,
@@ -48,6 +48,8 @@ const FinalStep = ({ formData, isdraft = false }) => {
     selectedTemplate,
     setIsSubmit,
     couponCode,
+    draftId,
+    isDraft: isdraft,
   });
 
   const { discount, handleCoupon, removeCoupon } = useCoupon({
@@ -63,6 +65,7 @@ const FinalStep = ({ formData, isdraft = false }) => {
     selectedTemplate,
     formData,
     setIsFeedbackOpen,
+    setDraftId,
   });
 
   const { pdfUrl } = useResumeGen({ formData, selectedTemplate });

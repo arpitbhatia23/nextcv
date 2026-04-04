@@ -78,7 +78,8 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                   <Image
                     src={template.image}
                     alt={template.label}
-                    fill
+                    height={500}
+                    width={500}
                     className="object-cover transition-transform group-hover:scale-110"
                     priority
                   />
@@ -116,23 +117,27 @@ const TemplateSelectorV3 = ({ onSelect }) => {
 
                 {/* Tier + Tag */}
                 <div className="flex items-center justify-between">
-                  <span
-                    className={`text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide ${getTierStyles(
-                      tier
-                    )}`}
-                  >
-                    {tier}
-                  </span>
+                  {/* Tier Badge */}
+                  {tier && (
+                    <span
+                      className={`text-lg px-3 py-3 rounded-lg font-semibold uppercase tracking-wide ${getTierStyles(
+                        tier
+                      )} `}
+                    >
+                      {tier}
+                    </span>
+                  )}
 
+                  {/* Tag Badge */}
                   {tag && (
-                    <span className="text-[9px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">
+                    <span className="text-lg font-bold text-orange-600  px-3 py-3 rounded-lg">
                       {tag}
                     </span>
                   )}
                 </div>
 
                 {/* Pricing */}
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <span className="text-sm font-black text-indigo-600">₹{price}</span>
                     <span className="text-[10px] line-through text-slate-400">₹{original}</span>
@@ -141,7 +146,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                   <span className="text-[9px] text-green-600 font-bold">
                     Save ₹{original - price}
                   </span>
-                </div>
+                </div> */}
               </div>
             </motion.button>
           );

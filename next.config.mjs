@@ -15,7 +15,7 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
 
   compiler: {
-    removeConsole: true,
+    removeConsole: ture,
   },
 
   images: {
