@@ -16,12 +16,7 @@ export async function handler(req) {
   if (!authorization) {
     return NextResponse.json({ error: "Missing authorization header" }, { status: 400 });
   }
-  console.log(
-    process.env.PHONEPE_WEBHOOK_USERNAME,
-    process.env.PHONEPE_WEBHOOK_PASSWORD,
-    authorization,
-    rawBody
-  );
+
   // 🔐 Validate callback using SDK
   const callbackResponse = client.validateCallback(
     process.env.PHONEPE_WEBHOOK_USERNAME,
