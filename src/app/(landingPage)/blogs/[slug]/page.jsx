@@ -75,8 +75,17 @@ export default async function BlogDetailsPage({ params }) {
       author->{name, image},
     }`;
 
-  const blogData = await client.fetch(query, { slug });
-
+  const relatedQuery = `*[_type == "post" && slug.current != $slug][0...3]{
+    title,
+    slug,
+    mainImage { asset->{url} },
+    _createdAt,
+    author->{name}
+  }`;
+  const [blogData, relatedPosts] = await Promise.all([
+    client.fetch(query, { slug }),
+    client.fetch(relatedQuery, { slug }),
+  ]);
   const BreadcrumbListjson = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -148,7 +157,7 @@ export default async function BlogDetailsPage({ params }) {
         />
       )}
       {/* The Client Component (BlogDetails) handles data fetching, loading, and interactive rendering */}
-      <BlogDetails slug={slug} initialData={blogData} />
+      <BlogDetails slug={slug} initialData={blogData} relatedPosts={relatedPosts} />
     </>
   );
 }
