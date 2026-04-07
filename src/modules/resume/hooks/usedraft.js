@@ -8,7 +8,7 @@ export const useDraft = ({
   selectedTemplate,
   formData,
   setIsFeedbackOpen,
-  setIsDraft,
+  setDraftId,
 }) => {
   const clearDraft = useResumeStore(s => s.clearStorage);
 
@@ -22,7 +22,7 @@ export const useDraft = ({
 
       if (res.data.success) {
         toast.success("Draft saved successfully");
-        setIsDraft(res.data.data);
+        setDraftId(res.data.data);
         clearDraft();
         setIsFeedbackOpen(true);
       } else {

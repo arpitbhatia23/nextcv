@@ -238,6 +238,20 @@ const TcsDigital = ({ data }) => {
             ))}
           </View>
         )}
+
+        {data.certificates?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={[styles.sectionTitle, { padding: 2 }]}>Certifications</Text>
+            {data.certificates.map((cert, i) => (
+              <View key={i} style={{ marginBottom: 6 }}>
+                <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+                  {String(cert.title).toUpperCase()}
+                </Text>
+                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </Page>
     </Document>
   );

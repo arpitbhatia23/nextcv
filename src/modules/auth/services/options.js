@@ -22,7 +22,7 @@ const authOptions = {
       },
       async authorize(credentials) {
         await dbConnect();
-        const user = await User.findOne({ email: credentials?.email });
+        const user = await User.findOne({ email: credentials?.email }).lean();
         if (!user) {
           throw new Error("user not found");
         }
@@ -43,7 +43,7 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       await dbConnect();
-      const finduser = await User.findOne({ email: user?.email });
+      const finduser = await User.findOne({ email: user?.email }).lean();
       if (!finduser) {
         const newUser = await User.create({
           name: user.name,
@@ -67,10 +67,8 @@ const authOptions = {
     },
 
     async jwt({ token, user }) {
-      await dbConnect();
-      const finduser = await User.findOne({ email: user?.email });
-      if (finduser) {
-        token.user = finduser;
+      if (user) {
+        token.user = user;
       }
 
       return token;

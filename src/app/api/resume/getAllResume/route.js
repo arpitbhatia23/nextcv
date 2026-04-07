@@ -1,12 +1,9 @@
-import dbConnect from "@/shared/utils/dbConnect";
-
 import { NextResponse } from "next/server";
 import { apiResponse } from "@/shared/utils/apiResponse";
 import { asyncHandler } from "@/shared/utils/asyncHandler";
 import { requiredAuth } from "@/shared";
 import { getAllResume } from "@/modules/resume";
 const handler = async () => {
-  await dbConnect();
   const session = await requiredAuth();
 
   const userId = session.user._id;

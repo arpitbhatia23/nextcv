@@ -162,51 +162,6 @@ const BlogDetails = ({ slug, initialData }) => {
   }, []);
 
   useEffect(() => {
-    if (!slug) return;
-
-    if (!initialData) {
-      const fetchData = async () => {
-        setIsLoading(true);
-        setError(null);
-
-        const query = `*[_type == "post" && slug.current == $slug][0]{
-        title,
-        body,
-        _createdAt,
-        author->{name, image, bio},
-        mainImage { asset->{url} },
-        "estimatedReadTime": round(length(pt::text(body)) / 5 / 180)
-      }`;
-
-        client
-          .fetch(query, { slug })
-          .then(data => {
-            if (!data) throw new Error("Article not found");
-            setBlog(data);
-            setIsLoading(false);
-          })
-          .catch(err => {
-            console.error("Failed to fetch blog post:", err);
-            setError(err);
-            setIsLoading(false);
-          });
-      };
-      fetchData();
-    }
-
-    // Fetch related posts
-    const relatedQuery = `*[_type == "post" && slug.current != $slug][0...3]{
-      title,
-      slug,
-      mainImage { asset->{url} },
-      _createdAt,
-      author->{name}
-    }`;
-
-    client.fetch(relatedQuery, { slug }).then(setRelatedPosts);
-  }, [slug, initialData]);
-
-  useEffect(() => {
     if (blog?.body) {
       const fetchData = async () => {
         const headings = blog.body

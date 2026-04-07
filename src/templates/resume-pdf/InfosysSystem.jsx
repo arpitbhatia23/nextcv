@@ -247,13 +247,16 @@ const InfosysSystem = ({ data }) => {
               ))}
             </View>
           )}
-
+        </View>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
           {data.certificates?.length > 0 && (
             <View style={{ flex: 1 }}>
               <Text style={styles.sectionTitle}>Certifications</Text>
               {data.certificates.map((cert, i) => (
                 <View key={i} style={{ marginBottom: 6 }}>
-                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>{cert.title}</Text>
+                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+                    {String(cert.title).toUpperCase()}
+                  </Text>
                   <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
                 </View>
               ))}

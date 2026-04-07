@@ -1,8 +1,9 @@
-import React from "react";
+import React, { cache } from "react";
 import Link from "next/link";
 import Logo2 from "../Logo2";
 import { SaasHuntBadge } from "../Saashunt";
 import { FaTwitter, FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
+import { GetYear } from "./getyear";
 
 // Social Links Data
 const socialLinks = [
@@ -134,7 +135,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
-            <span>&copy; {new Date().getFullYear()} NextCV. All rights reserved.</span>
+            <GetYear />
           </div>
 
           <div className="order-1 md:order-2 grayscale hover:grayscale-0 transition-all duration-300">

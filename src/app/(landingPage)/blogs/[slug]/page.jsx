@@ -1,52 +1,68 @@
-// 🛑 1. Dynamic Metadata Function (Server-side SEO)
-
+// ✅ 1. Imports
 import { client } from "@/sanity";
 import BlogDetails from "@/shared/components/BlogDetails";
+import { cache } from "react";
 
-// Fetches necessary data (title, image, description) for OpenGraph and SEO tags
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
+// ✅ 2. ISR (VERY IMPORTANT)
+export const revalidate = 300; // 5 minutes
 
-  // Query optimized to fetch only the essential SEO data
+// ✅ 3. Cached Blog Fetch (SHARED)
+const getBlog = cache(async slug => {
   const query = `*[_type == "post" && slug.current == $slug][0]{
-      title,
-      // Fetch body for description extraction
-      body, 
-      mainImage { asset->{url} },
-      publishedAt,
-      author->{name},
-    }`;
+    title,
+    body,
+    mainImage { asset->{url} },
+    publishedAt,
+    _createdAt,
+    _updatedAt,
+    author->{name, image},
+  }`;
 
-  const data = await client.fetch(query, { slug });
+  return await client.fetch(query, { slug });
+});
+
+// ✅ 4. Cached Related Posts
+const getRelatedPosts = cache(async slug => {
+  const query = `*[_type == "post" && slug.current != $slug][0...3]{
+    title,
+    slug,
+    mainImage { asset->{url} },
+    _createdAt,
+    author->{name}
+  }`;
+
+  return await client.fetch(query, { slug });
+});
+
+// 🧠 5. Dynamic Metadata (NOW OPTIMIZED)
+export async function generateMetadata({ params }) {
+  const { slug } = params;
+
+  const data = await getBlog(slug); // ✅ cached
 
   if (!data) {
-    // If the article isn't found, return a default metadata object
     return {
       title: "Article Not Found",
       description: "The requested blog post could not be located.",
     };
   }
 
-  // Sanity PortableText body is an array of blocks. Extract text from the first block.
-  const firstBlock = data.body?.[0];
   const description =
-    firstBlock?.children?.[0]?.text ||
-    `Read this expert blog on logistics, shipping, and supply chain.`;
+    data.body?.[0]?.children?.[0]?.text ||
+    "Read this expert blog on logistics, shipping, and supply chain.";
 
-  // Use the main image URL or a professional placeholder if none exists
-  const imageUrl =
-    data.mainImage?.asset?.url || "https://placehold.co/1200x600/000/fff?text=Logistics+Blog";
+  const imageUrl = data.mainImage?.asset?.url || "https://placehold.co/1200x600/000/fff?text=Blog";
 
   return {
     title: data.title,
-    description: description,
+    description,
     alternates: {
       canonical: `https://www.nextcv.in/blogs/${slug}`,
     },
     keywords: ["resume builder", "CV maker", "AI resume", "job application", "professional resume"],
     openGraph: {
       title: data.title,
-      description: description,
+      description,
       images: [
         {
           url: imageUrl,
@@ -60,23 +76,14 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// 🛑 2. Server Component Page
+// 🧾 6. Page Component (OPTIMIZED)
 export default async function BlogDetailsPage({ params }) {
-  const { slug } = await params;
+  const { slug } = params;
 
-  // Fetch blog data for JSON-LD
-  const query = `*[_type == "post" && slug.current == $slug][0]{
-      title,
-      body,
-      mainImage { asset->{url} },
-      publishedAt,
-      _createdAt,
-      _updatedAt,
-      author->{name, image},
-    }`;
+  // ✅ Parallel + cached
+  const [blogData, relatedPosts] = await Promise.all([getBlog(slug), getRelatedPosts(slug)]);
 
-  const blogData = await client.fetch(query, { slug });
-
+  // 🧠 Breadcrumb JSON-LD
   const BreadcrumbListjson = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,23 +94,22 @@ export default async function BlogDetailsPage({ params }) {
         name: "Home",
         item: "https://www.nextcv.in",
       },
-
       {
         "@type": "ListItem",
         position: 2,
         name: "Blog",
-        item: "https://www.nextcv.in/blog",
+        item: "https://www.nextcv.in/blogs",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: blogData?.title,
-        item: `https://www.nextcv.in/blog/${blogData?.slug}`,
+        item: `https://www.nextcv.in/blogs/${slug}`,
       },
     ],
   };
 
-  // Generate JSON-LD structured data
+  // 🧠 Blog Schema
   const jsonLdSchema = blogData
     ? {
         "@context": "https://schema.org",
@@ -131,6 +137,7 @@ export default async function BlogDetailsPage({ params }) {
 
   return (
     <>
+      {/* ✅ Blog Schema */}
       {jsonLdSchema && (
         <script
           type="application/ld+json"
@@ -139,16 +146,17 @@ export default async function BlogDetailsPage({ params }) {
           }}
         />
       )}
-      {BreadcrumbListjson && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(BreadcrumbListjson),
-          }}
-        />
-      )}
-      {/* The Client Component (BlogDetails) handles data fetching, loading, and interactive rendering */}
-      <BlogDetails slug={slug} initialData={blogData} />
+
+      {/* ✅ Breadcrumb Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(BreadcrumbListjson),
+        }}
+      />
+
+      {/* ✅ Client Component */}
+      <BlogDetails slug={slug} initialData={blogData} relatedPosts={relatedPosts} />
     </>
   );
 }

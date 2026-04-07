@@ -117,16 +117,20 @@ const TemplateSelectorV3 = ({ onSelect }) => {
 
                 {/* Tier + Tag */}
                 <div className="flex items-center justify-between">
-                  <span
-                    className={`text-[10px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide ${getTierStyles(
-                      tier
-                    )}`}
-                  >
-                    {tier}
-                  </span>
+                  {/* Tier Badge */}
+                  {tier && (
+                    <span
+                      className={`text-lg px-3 py-3 rounded-lg font-semibold uppercase tracking-wide ${getTierStyles(
+                        tier
+                      )} `}
+                    >
+                      {tier}
+                    </span>
+                  )}
 
+                  {/* Tag Badge */}
                   {tag && (
-                    <span className="text-[9px] font-bold  text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">
+                    <span className="text-lg font-bold text-orange-600  px-3 py-3 rounded-lg">
                       {tag}
                     </span>
                   )}

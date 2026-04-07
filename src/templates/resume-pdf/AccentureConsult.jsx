@@ -159,8 +159,7 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>•</Text>
-
+                      <Text style={styles.bulletPoint}>-</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -188,7 +187,7 @@ const AccentureConsult = ({ data }) => {
                 <View>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>•</Text>
+                      <Text style={styles.bulletPoint}>-</Text>
 
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
@@ -216,7 +215,7 @@ const AccentureConsult = ({ data }) => {
         {/* Certs */}
         {(data.education?.length > 0 || data.certificates?.length > 0) && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Education & Certifications</Text>
+            <Text style={styles.sectionTitle}>Education </Text>
             {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
                 <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
@@ -227,7 +226,7 @@ const AccentureConsult = ({ data }) => {
                   <View style={{ marginTop: 4 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>•</Text>
+                        <Text style={styles.bulletPoint}>-</Text>
 
                         <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
@@ -236,8 +235,10 @@ const AccentureConsult = ({ data }) => {
                 )}
               </View>
             ))}
+            <Text style={styles.sectionTitle}> Certifications</Text>
+
             {data.certificates?.map((cert, i) => (
-              <View key={i} style={{ marginTop: 4 }}>
+              <View key={i} style={{ marginTop: 2 }}>
                 <Text style={{ fontSize: 10, fontWeight: "bold" }}>{cert.title}</Text>
                 <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
               </View>
