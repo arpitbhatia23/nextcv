@@ -29,7 +29,7 @@ const nextConfig = {
     ],
   },
 
-  cacheComponents: true,
+  // cacheComponents: true,
   experimental: {
     cssChunking: true,
     optimizeCss: true,
