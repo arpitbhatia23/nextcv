@@ -8,6 +8,7 @@ export const revalidate = 300; // 5 minutes
 
 // ✅ 3. Cached Blog Fetch (SHARED)
 const getBlog = cache(async slug => {
+  console.log(slug);
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     body,
@@ -37,6 +38,7 @@ const getRelatedPosts = cache(async slug => {
 // 🧠 5. Dynamic Metadata (NOW OPTIMIZED)
 export async function generateMetadata({ params }) {
   const { slug } = await params;
+  console.log(slug);
 
   const data = await getBlog(slug); // ✅ cached
 
@@ -78,7 +80,7 @@ export async function generateMetadata({ params }) {
 
 // 🧾 6. Page Component (OPTIMIZED)
 export default async function BlogDetailsPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   // ✅ Parallel + cached
   const [blogData, relatedPosts] = await Promise.all([getBlog(slug), getRelatedPosts(slug)]);
