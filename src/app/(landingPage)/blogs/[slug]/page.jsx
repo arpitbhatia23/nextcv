@@ -36,7 +36,7 @@ const getRelatedPosts = cache(async slug => {
 
 // 🧠 5. Dynamic Metadata (NOW OPTIMIZED)
 export async function generateMetadata({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const data = await getBlog(slug); // ✅ cached
 
