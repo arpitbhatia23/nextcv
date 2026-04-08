@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import Payment from "@/modules/payment/model/payment.model";
 import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
-import { asyncHandler } from "@/shared";
+import { apiError, apiResponse, asyncHandler } from "@/shared";
 import { client } from "@/modules/payment/phonepe/service";
 
 export async function handler(req) {
@@ -14,7 +14,7 @@ export async function handler(req) {
   const authorization = req.headers.get("authorization");
 
   if (!authorization) {
-    return NextResponse.json({ error: "Missing authorization header" }, { status: 400 });
+    throw new apiError(400, "Missing authorization header");
   }
 
   // 🔐 Validate callback using SDK
@@ -29,7 +29,7 @@ export async function handler(req) {
 
   // 🎯 Only handle successful payment
   if (type !== "CHECKOUT_ORDER_COMPLETED") {
-    return NextResponse.json({ message: "Event ignored" });
+    return NextResponse.json(new apiResponse(400, "order not complete"));
   }
 
   const merchantOrderId = payload.originalMerchantOrderId;
@@ -39,13 +39,13 @@ export async function handler(req) {
   // 🛑 Idempotency check
   const existing = await Payment.findOne({ transcationId: transactionId });
   if (existing) {
-    return NextResponse.json({ message: "Already processed" });
+    return NextResponse.json();
   }
 
   // ✅ Update Payment
   const payment = await Payment.findOneAndUpdate(
     {
-      merchantOrderID: merchantOrderId,
+      merchantOrderId: merchantOrderId,
     },
     {
       $set: {
@@ -58,7 +58,7 @@ export async function handler(req) {
   );
 
   if (!payment) {
-    return NextResponse.json({ error: "Payment not found" }, { status: 404 });
+    throw new apiError(400, "payment not found");
   }
 
   // ✅ Update Resume
@@ -71,7 +71,7 @@ export async function handler(req) {
     $push: { payments: payment._id },
   });
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json(new apiResponse(200, "sucess"));
 }
 
 export const POST = asyncHandler(handler);
