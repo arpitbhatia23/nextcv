@@ -3,10 +3,11 @@ import { NextResponse } from "next/server";
 import Payment from "@/modules/payment/model/payment.model";
 import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
-import { apiError, apiResponse, asyncHandler } from "@/shared";
+import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
 import { client } from "@/modules/payment/phonepe/service";
 
 export async function handler(req) {
+  dbConnect();
   // ⚠️ IMPORTANT: raw body required
   const rawBody = await req.text();
 
@@ -54,8 +55,10 @@ export async function handler(req) {
         paymentMode: paymentMode,
       },
     },
-    { returnDocument: "after" }
+    { returnDocument: "after", upsert: true }
   );
+
+  console.log("payment", payment);
 
   if (!payment) {
     throw new apiError(400, "payment not found");
