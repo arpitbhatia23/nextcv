@@ -2,9 +2,13 @@ import mongoose, { Schema } from "mongoose";
 
 const paymentSchema = new Schema(
   {
+    merchantOrderId: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     transcationId: {
       type: String,
-      required: true,
     },
 
     userId: {
@@ -13,9 +17,13 @@ const paymentSchema = new Schema(
       required: true,
     },
 
+    resumeId: {
+      type: Schema.Types.ObjectId,
+      ref: "resumes",
+      required: true,
+    },
     paymentMode: {
       type: String,
-      required: true,
     },
     amount: {
       type: Number,
@@ -32,7 +40,8 @@ const paymentSchema = new Schema(
     },
     status: {
       type: String,
-      default: "complete",
+      enum: ["PENDING", "FAILED", "SUCCESS"],
+      default: "PENDING",
     },
   },
   { timestamps: true }

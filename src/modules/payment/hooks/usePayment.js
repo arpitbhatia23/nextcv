@@ -11,7 +11,6 @@ export const usePayment = ({
   selectedTemplate,
   couponCode,
   setIsSubmit,
-  isDraft,
   draftId,
 }) => {
   const clearDraft = useResumeStore(s => s.clearStorage);
@@ -24,6 +23,7 @@ export const usePayment = ({
       return;
     }
 
+    console.log(formData);
     try {
       setIsSubmit(true);
 
@@ -45,7 +45,7 @@ export const usePayment = ({
         ResumeType: selectedTemplate,
         couponCode: applied ? couponCode : null,
         discountAmount,
-        ...formData,
+        ...(formData || {}),
         isDraft: draftId ? true : false,
       });
 

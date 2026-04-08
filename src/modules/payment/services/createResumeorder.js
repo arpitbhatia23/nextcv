@@ -33,6 +33,7 @@ export const createResuemOrder = async ({ reqData }) => {
 
   // 1️⃣ Create or get draft resume
   let resumeId = null;
+  console.log(isDraft);
   if (isDraft) {
     if (!draftId) throw new apiError(400, "Draft id is required");
     const resume = await Resume.findById(draftId);
@@ -63,7 +64,7 @@ export const createResuemOrder = async ({ reqData }) => {
   if (!templateData) throw new apiError(400, "Invalid Resume Type");
 
   let originalAmount = templateData.priceDiscounted || 0;
-
+  let discount = 0;
   // 3️⃣ Apply coupon if exists
   let finalAmount = originalAmount;
   if (couponCode) {
@@ -71,8 +72,10 @@ export const createResuemOrder = async ({ reqData }) => {
     if (coupon) {
       if (coupon.type === "percentage") {
         finalAmount = originalAmount * (1 - coupon.discount / 100);
+        discount = (originalAmount * coupon.discount) / 100;
       } else if (coupon.type === "amount") {
         finalAmount = originalAmount - coupon.discount;
+        discount = coupon.discount;
       }
     }
   }
@@ -86,6 +89,7 @@ export const createResuemOrder = async ({ reqData }) => {
     resumeId,
     couponCode,
     userId,
+    discountAmount: discount,
   });
 
   return NextResponse.json(new apiResponse(200, "Order initiated", res));

@@ -34,8 +34,7 @@ export async function handler(req) {
 
   const merchantOrderId = payload.originalMerchantOrderId;
   const transactionId = payload.paymentDetails?.[0]?.transactionId;
-  const userId = payload.metaInfo?.userId;
-  const resumeID = payload.metaInfo?.resumeID;
+  const paymentMode = payload.paymentDetails?.[0]?.paymentMode;
 
   // 🛑 Idempotency check
   const existing = await Payment.findOne({ transcationId: transactionId });
@@ -53,6 +52,7 @@ export async function handler(req) {
       $set: {
         status: "SUCCESS",
         transcationId: transactionId,
+        paymentMode: paymentMode,
       },
     },
     { returnDocument: "after" }
@@ -63,12 +63,12 @@ export async function handler(req) {
   }
 
   // ✅ Update Resume
-  await Resume.findByIdAndUpdate(resumeID, {
+  await Resume.findByIdAndUpdate(payment.resumeId, {
     $set: { status: "paid" },
   });
 
   // ✅ Update User
-  await User.findByIdAndUpdate(userId, {
+  await User.findByIdAndUpdate(payment.userId, {
     $push: { payments: payment._id },
   });
 
