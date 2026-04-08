@@ -27,7 +27,7 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
           paymentMode: response?.paymentDetails[0]?.paymentMode,
         },
       },
-      { returnDocument: "after", upsert: true }
+      { returnDocument: "after" }
     );
     console.log(payment);
     const updateResume = await Resume.findByIdAndUpdate(

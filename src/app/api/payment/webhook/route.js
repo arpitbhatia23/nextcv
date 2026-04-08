@@ -33,10 +33,10 @@ export async function handler(req) {
     return NextResponse.json(new apiResponse(400, "order not complete"));
   }
 
-  const merchantOrderId = payload.originalMerchantOrderId;
+  const merchantOrderId = payload.merchantOrderId;
   const transactionId = payload.paymentDetails?.[0]?.transactionId;
   const paymentMode = payload.paymentDetails?.[0]?.paymentMode;
-
+  console.log(merchantOrderId);
   // 🛑 Idempotency check
   const existing = await Payment.findOne({ transcationId: transactionId });
   if (existing) {
@@ -55,7 +55,7 @@ export async function handler(req) {
         paymentMode: paymentMode,
       },
     },
-    { returnDocument: "after", upsert: true }
+    { returnDocument: "after" }
   );
 
   console.log("payment", payment);
