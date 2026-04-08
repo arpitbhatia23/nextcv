@@ -46,7 +46,6 @@ export async function handler(req) {
   const payment = await Payment.findOneAndUpdate(
     {
       merchantOrderID: merchantOrderId,
-      status: "PENDING",
     },
     {
       $set: {
