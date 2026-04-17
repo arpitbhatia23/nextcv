@@ -65,7 +65,7 @@ export const createResuemOrder = async ({ reqData }) => {
   if (!templateData) throw new apiError(400, "Invalid Resume Type");
 
   let originalAmount = templateData.priceDiscounted || 0;
-
+  let discount = 0;
   // 3️⃣ Apply coupon if exists
   let finalAmount = originalAmount;
   let discountAmount;
@@ -75,9 +75,10 @@ export const createResuemOrder = async ({ reqData }) => {
       if (coupon.type === "percentage") {
         discountAmount = (originalAmount * coupon.discount) / 100;
         finalAmount = originalAmount * (1 - coupon.discount / 100);
+        discount = (originalAmount * coupon.discount) / 100;
       } else if (coupon.type === "amount") {
         finalAmount = originalAmount - coupon.discount;
-        discountAmount = (originalAmount * coupon.discount) / 100;
+        discount = coupon.discount;
       }
     }
   }
@@ -92,6 +93,7 @@ export const createResuemOrder = async ({ reqData }) => {
     discountAmount,
     couponCode,
     userId,
+    discountAmount: discount,
   });
 
   return NextResponse.json(new apiResponse(200, "Order initiated", res));

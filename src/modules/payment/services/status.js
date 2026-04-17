@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
 import { apiError } from "@/shared";
 import Resume from "@/modules/resume/models/resume.model";
-export const PaymentStatus = async ({ merchantOrderId, userId, resumeID }) => {
+export const PaymentStatus = async ({ merchantOrderId, userId }) => {
   const response = await client.getOrderStatus(merchantOrderId);
   if (response.state === "COMPLETED") {
     const isPaymentAllreadyDone = await Payment.findOne({
@@ -12,26 +12,26 @@ export const PaymentStatus = async ({ merchantOrderId, userId, resumeID }) => {
     });
     if (isPaymentAllreadyDone) {
       return NextResponse.redirect(
-        `${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`
+        `${process.env.BASE_URL}/dashboard/download?resumeId=${isPaymentAllreadyDone.resumeId}`
       );
     }
 
     const payment = await Payment.findOneAndUpdate(
       {
-        merchantOrderID: merchantOrderId,
-        status: { $ne: "SUCCESS" },
+        merchantOrderId: merchantOrderId,
       },
       {
         $set: {
           status: "SUCCESS",
           transcationId: response?.paymentDetails[0]?.transactionId,
+          paymentMode: response?.paymentDetails[0]?.paymentMode,
         },
       },
       { returnDocument: "after" }
     );
-
+    console.log(payment);
     const updateResume = await Resume.findByIdAndUpdate(
-      resumeID,
+      payment.resumeId,
       {
         $set: {
           status: "paid",
@@ -48,7 +48,9 @@ export const PaymentStatus = async ({ merchantOrderId, userId, resumeID }) => {
       throw new apiError(500, "something went wrong while updateins resume status");
     }
 
-    return NextResponse.redirect(`${process.env.BASE_URL}/dashboard/download?resumeId=${resumeID}`);
+    return NextResponse.redirect(
+      `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`
+    );
   } else {
     return NextResponse.redirect(`${process.env.BASE_URL}/payement/fails?status=fail`);
   }

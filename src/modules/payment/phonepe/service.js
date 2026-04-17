@@ -10,17 +10,18 @@ export const client = StandardCheckoutClient.getInstance(
 );
 
 export const createPayment = async ({
-  merchantOrderId,
   amount,
   couponCode,
   discountAmount,
   userId,
+  merchantOrderId,
+  resumeId,
 }) => {
-  console.log(merchantOrderId);
   const payment = await Payment.create({
-    merchantOrderID: merchantOrderId,
+    merchantOrderId: merchantOrderId,
     amount: amount / 100,
     userId: userId,
+    resumeId: resumeId,
     couponCode: couponCode || null,
     discountAmount: discountAmount ? parseFloat(discountAmount) : 0,
   });

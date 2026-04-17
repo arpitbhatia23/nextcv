@@ -3,15 +3,17 @@ import { client, createPayment, phonepeBuilder } from "../phonepe/service";
 
 export const order = async ({ amount, resumeId, userId, discountAmount, couponCode }) => {
   const merchantOrderId = randomUUID();
-
+  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}`;
+  console.log(resumeId);
   await createPayment({
-    merchantOrderId,
+    amount,
     couponCode,
     discountAmount,
-    amount,
+    resumeId,
+    discountAmount,
     userId,
+    merchantOrderId,
   });
-  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}&resumeId=${resumeId}`;
 
   const request = await phonepeBuilder({ merchantOrderId, amount, redirectUrl });
 

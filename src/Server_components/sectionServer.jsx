@@ -42,6 +42,7 @@ const sectionServer = async () => {
     {
       $match: {
         createdAt: { $gte: startOfCurrentMonth },
+        status: "SUCCESS",
       },
     },
     {

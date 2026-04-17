@@ -151,8 +151,6 @@ const MyResume = () => {
 
   const paymentFormData = {
     draftId: resumeData?._id,
-    isDraft: true,
-    ResumeType: resumeData?.ResumeType,
   };
 
   const { handelPayment, isRedirecting } = usePayment({
@@ -162,6 +160,7 @@ const MyResume = () => {
     applied,
     selectedTemplate: resumeData?.ResumeType,
     setIsSubmit,
+    draftId: resumeData?._id,
     couponCode,
   });
 

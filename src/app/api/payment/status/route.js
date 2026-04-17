@@ -7,10 +7,9 @@ const handler = async req => {
   const searchParams = req.nextUrl.searchParams;
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
-  const resumeID = searchParams.get("resumeId");
   const session = await requiredAuth();
   const userId = session.user._id;
-  return await PaymentStatus({ merchantOrderId, resumeID, userId });
+  return await PaymentStatus({ merchantOrderId, userId });
 };
 
 export const GET = asyncHandler(handler);
