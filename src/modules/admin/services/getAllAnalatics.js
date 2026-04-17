@@ -113,11 +113,11 @@ export const getAllAnalytics = async ({ timeRange }) => {
 
   const [totalRevenueResult, avgTransactionResult] = await Promise.all([
     Payment.aggregate([
-      { $match: paymentTimeQuery },
+      { $match: { ...paymentTimeQuery, status: "SUCCESS" } },
       { $group: { _id: null, total: { $sum: "$amount" } } },
     ]),
     Payment.aggregate([
-      { $match: paymentTimeQuery },
+      { $match: { ...paymentTimeQuery, status: "SUCCESS" } },
       { $group: { _id: null, avg: { $avg: "$amount" } } },
     ]),
   ]);
