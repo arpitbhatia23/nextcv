@@ -163,7 +163,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
               // variant="outline"
               size="sm"
               onClick={handleAiGeneration}
-              disabled={isGenerating}
+              disabled={isGenerating || skillList.length > 0}
               variant="default"
               className="bg-indigo-600 text-white"
             >

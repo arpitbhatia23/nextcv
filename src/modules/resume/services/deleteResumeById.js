@@ -1,6 +1,6 @@
 import { User } from "@/modules/auth";
 import Resume from "../models/resume.model";
-
+import { apiError } from "@/shared";
 export const deleteResumeById = async ({ id, userId }) => {
   const resume = await Resume.findOne({
     _id: id,

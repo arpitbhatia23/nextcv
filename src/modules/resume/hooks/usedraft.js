@@ -1,5 +1,6 @@
 import useResumeStore from "@/store/useResumeStore";
 import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
 
 export const useDraft = ({

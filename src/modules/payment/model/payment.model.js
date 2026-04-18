@@ -11,6 +11,10 @@ const paymentSchema = new Schema(
       type: String,
     },
 
+    resumeId: {
+      type: Schema.Types.ObjectId,
+      ref: "resumes",
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "users",

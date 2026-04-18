@@ -1,6 +1,4 @@
 import { asyncHandler } from "@/shared/utils/asyncHandler";
-import { NextResponse } from "next/server";
-import { apiResponse } from "@/shared/utils/apiResponse";
 import dbConnect from "@/shared/utils/dbConnect";
 import { requiredAuth } from "@/shared";
 import { saveResumeAsDraft } from "@/modules/resume";

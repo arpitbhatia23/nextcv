@@ -1,8 +1,20 @@
 import { User } from "@/modules/auth";
-import { apiError } from "@/shared";
+import { apiError, dbConnect } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import mongoose from "mongoose";
 
 export const getAllResume = async ({ userId }) => {
+  const cacheKey = `resumes:user:${userId}`;
+  console.time("redis");
+  const cached = await redis.get(cacheKey);
+  console.timeEnd("redis");
+
+  if (cached) {
+    return JSON.parse(cached);
+  }
+
+  console.log("resuem not chaced");
+  await dbConnect();
   const resumes = await User.aggregate([
     [
       {
@@ -53,5 +65,7 @@ export const getAllResume = async ({ userId }) => {
   if (resumes.length <= 0) {
     throw new apiError(404, "No resumes found");
   }
+  await redis.set(cacheKey, JSON.stringify(resumes), "EX", 1200);
+
   return resumes;
 };

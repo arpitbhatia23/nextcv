@@ -15,6 +15,7 @@ export const saveResumeAsDraft = async ({ data, userId }) => {
   if (requiredFields.some(f => !f || f.trim() === "")) {
     throw new apiError(400, "All required fields must be filled");
   }
+
   const draft = await Resume.create({
     status: "draft",
     ResumeType: data.ResumeType,
