@@ -42,7 +42,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-2">
-        {templates.map(template => {
+        {templates.map((template, index) => {
           const templateData = getTemplateByName(template.key);
 
           const isSelected = selectedTemplate === template.key;
@@ -81,7 +81,8 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                     height={500}
                     width={500}
                     className="object-cover transition-transform group-hover:scale-110"
-                    priority
+                    priority={index < 6}
+                    quality={50}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-300">
@@ -156,4 +157,4 @@ const TemplateSelectorV3 = ({ onSelect }) => {
   );
 };
 
-export default TemplateSelectorV3;
+export default React.memo(TemplateSelectorV3);
