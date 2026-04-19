@@ -45,7 +45,7 @@ export const usePayment = ({
         ResumeType: selectedTemplate,
         couponCode: applied ? couponCode : null,
         discountAmount,
-        ...(formData || {}),
+        ...({ formData, draftId } || {}),
         isDraft: draftId ? true : false,
       });
 

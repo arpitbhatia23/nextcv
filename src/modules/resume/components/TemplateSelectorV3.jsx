@@ -82,7 +82,7 @@ const TemplateSelectorV3 = ({ onSelect }) => {
                     width={500}
                     className="object-cover transition-transform group-hover:scale-110"
                     priority={index < 6}
-                    quality={50}
+                    quality={75}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-slate-300">

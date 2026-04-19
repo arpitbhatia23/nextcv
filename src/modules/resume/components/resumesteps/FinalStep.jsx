@@ -49,7 +49,7 @@ const FinalStep = ({ formData }) => {
     setIsSubmit,
     couponCode,
     draftId,
-    isDraft: isdraft,
+    // isDraft: draftId ? true : false,
   });
 
   const { discount, handleCoupon, removeCoupon } = useCoupon({

@@ -24,6 +24,7 @@ export const useDraft = ({
         toast.success("Draft saved successfully");
         setDraftId(res.data.data);
         clearDraft();
+
         setIsFeedbackOpen(true);
       } else {
         console.log(res.data);
