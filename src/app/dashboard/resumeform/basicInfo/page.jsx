@@ -1,10 +1,10 @@
-import TemplateSelectorV3 from "@/modules/resume/components/TemplateSelectorV3";
+import BasicInfoStep from "@/modules/resume/components/resumesteps/BasicInfoStep";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <TemplateSelectorV3 />
+      <BasicInfoStep />
     </div>
   );
 };

@@ -10,9 +10,11 @@ export class pdfGenerator {
     this.url = null;
   }
   async createPdf() {
+    if (!this.selectedTemplate) return;
     const selectedTemplate = templates.find(
       t => t.key === (this?.selectedTemplate || this.resumeData?.ResumeType)
     );
+    console.log("selected", selectedTemplate);
     if (!selectedTemplate) {
       throw new Error("Template not found");
     }

@@ -8,10 +8,10 @@ export const useCoupon = ({
   setAmount,
   setCouponCode,
   setApplied,
+  setDiscount,
 }) => {
   const [isCouponValid, setIsCouponValid] = useState(true);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
-  const [discount, setDiscount] = useState(null);
 
   const handleCoupon = async coupon => {
     if (appliedCoupon === coupon) {
@@ -73,5 +73,5 @@ export const useCoupon = ({
     toast.info("Coupon removed");
   };
 
-  return { handleCoupon, discount, removeCoupon };
+  return { handleCoupon, removeCoupon };
 };

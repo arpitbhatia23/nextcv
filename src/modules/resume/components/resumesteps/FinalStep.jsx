@@ -30,7 +30,9 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import PDFPreview from "../pdfPreview";
 
-const FinalStep = ({ formData }) => {
+const FinalStep = () => {
+  const formData = useResumeStore(s => s.formData);
+
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   const [couponCode, setCouponCode] = useState("");
@@ -40,6 +42,8 @@ const FinalStep = ({ formData }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [applied, setApplied] = useState(false);
   const [draftId, setDraftId] = useState(null);
+  const [discount, setDiscount] = useState(null);
+
   const { handelPayment, isRedirecting } = usePayment({
     discount,
     originalAmount,
@@ -52,12 +56,13 @@ const FinalStep = ({ formData }) => {
     // isDraft: draftId ? true : false,
   });
 
-  const { discount, handleCoupon, removeCoupon } = useCoupon({
+  const { handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
     originalAmount,
     setAmount,
     setCouponCode,
     setApplied,
+    setDiscount,
   });
 
   const { handleSaveDraft } = useDraft({

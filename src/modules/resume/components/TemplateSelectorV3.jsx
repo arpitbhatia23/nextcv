@@ -6,6 +6,7 @@ import { templates } from "@/shared/utils/template";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import useResumeStore from "@/store/useResumeStore";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const getTierStyles = tier => {
   switch (tier?.toLowerCase()) {
@@ -19,13 +20,14 @@ const getTierStyles = tier => {
   }
 };
 
-const TemplateSelectorV3 = ({ onSelect }) => {
+const TemplateSelectorV3 = () => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
+  const router = useRouter();
 
   const handleSelect = key => {
     setSelectedTemplate(key);
-    if (onSelect) onSelect(key);
+    router.push("/dashboard/resumeform/basicInfo");
   };
 
   return (

@@ -17,8 +17,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui
 
 import { Tips } from "../Tips";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
+import useResumeStore from "@/store/useResumeStore";
+import { useRouter } from "next/navigation";
 
-const ProjectsStep = ({ next, previous, formData, updateForm }) => {
+const ProjectsStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+  const router = useRouter();
   const [projectList, setProjectList] = useState(formData.projects || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -365,13 +370,13 @@ const ProjectsStep = ({ next, previous, formData, updateForm }) => {
           <div className="flex justify-between items-center pt-4">
             <Button
               variant="outline"
-              onClick={previous}
+              onClick={() => router.push("/dashboard/resumeform/experience")}
               className="border-slate-300 text-slate-600 hover:bg-slate-50"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button
-              onClick={next}
+              onClick={() => router.push("/dashboard/resumeform/certificate")}
               className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
               id="tour-next-button"
             >

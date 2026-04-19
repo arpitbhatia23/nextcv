@@ -15,8 +15,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../shared/components/ui/button";
 import React, { useEffect } from "react";
+import useResumeStore from "@/store/useResumeStore";
+import { useRouter } from "next/navigation";
 
-const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
+const BasicInfoStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+  const router = useRouter();
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
@@ -58,7 +63,6 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
 
   const handlesave = () => {
     updateForm(watchedValues);
-    next();
   };
   return (
     <div className="py-8">
@@ -238,6 +242,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
                       className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-4 md:px-8 h-9 md:h-11 rounded-lg font-semibold"
                       type="submit"
                       id="tour-next-button"
+                      onClick={() => router.push("/dashboard/resumeform/education")}
                     >
                       Next Step <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>

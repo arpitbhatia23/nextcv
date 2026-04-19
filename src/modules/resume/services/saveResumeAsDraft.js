@@ -2,6 +2,7 @@ import { User } from "@/modules/auth";
 import Resume from "../models/resume.model";
 import { apiError, apiResponse } from "@/shared";
 import { NextResponse } from "next/server";
+import { redis } from "@/shared/utils/Redis";
 
 export const saveResumeAsDraft = async ({ data, userId }) => {
   const requiredFields = [
@@ -34,6 +35,8 @@ export const saveResumeAsDraft = async ({ data, userId }) => {
     projects: data.projects,
     certificates: data.certificates,
   });
+  const cacheKey = `resumes:user:${userId}`;
+  await redis.del(cacheKey);
 
   await User.updateOne({ _id: userId }, { $push: { resume: draft._id } });
   return NextResponse.json(new apiResponse(201, "Draft generated successfully", draft._id));

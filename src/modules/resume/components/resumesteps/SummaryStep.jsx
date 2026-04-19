@@ -18,42 +18,73 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAiGeneration } from "../../hooks/useAiGeneation";
+import { useRouter } from "next/navigation";
+import useResumeStore from "@/store/useResumeStore";
 
-const SummaryStep = ({ next, previous, formData, updateForm }) => {
+const schema = z.object({
+  summary: z.string().min(20, {
+    message: "Summary should be at least 20 characters",
+  }),
+});
+
+const SummaryStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+  const hasHydrated = useResumeStore(s => s._hasHydrated); // ⚠️ required
+
+  const router = useRouter();
   const [hasGenerated, setHasGenerated] = useState(false);
+
+  const form = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      summary: "",
+    },
+  });
+
+  const watchedSummary = form.watch("summary");
+
+  // ✅ Sync Zustand → Form AFTER hydration
+  useEffect(() => {
+    if (hasHydrated && formData.summary) {
+      form.setValue("summary", formData.summary);
+    }
+  }, [hasHydrated, formData.summary]);
+
+  // ✅ Save Form → Zustand (correct value)
+  useEffect(() => {
+    if (!hasHydrated) return;
+    updateForm({ summary: watchedSummary });
+  }, [watchedSummary]);
+
+  // ✅ AI Generation Hook
   const { handleAiGeneration, isGenerating } = useAiGeneration({
     getPayload: () => ({
       ...formData,
       summary: watchedSummary,
     }),
     type: "summary",
-    onSuccess: result => form.setValue("summary", result),
-  });
-  useEffect(() => {
-    if (formData.summary == null && !hasGenerated) {
-      handleAiGeneration();
-      setHasGenerated(true);
-    }
-  }, [formData.summary, hasGenerated, handleAiGeneration]);
-  const schema = z.object({
-    summary: z.string().min(20, { message: "Summary should be at least 20 characters" }),
-  });
-
-  const form = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      summary: formData.summary || "",
+    onSuccess: result => {
+      form.setValue("summary", result);
+      updateForm({ summary: result });
     },
   });
 
-  const watchedSummary = form.watch("summary");
-
+  // ✅ Safe AI auto-trigger (no overwrite)
   useEffect(() => {
-    updateForm({ summary: watchedSummary });
-  }, [watchedSummary, updateForm]);
+    if (!hasHydrated) return;
+
+    if (!formData.summary?.trim() && !hasGenerated) {
+      handleAiGeneration();
+      setHasGenerated(true);
+    }
+  }, [hasHydrated, formData.summary, hasGenerated]);
+
+  // 🚫 Prevent render before hydration
+  if (!hasHydrated) return null;
 
   const onSubmit = () => {
-    next();
+    router.push("/dashboard/resumeform/review");
   };
 
   return (
@@ -64,68 +95,44 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        {/* Form Section */}
-        <Card
-          className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200"
-          id="tour-summary-form"
-        >
-          <CardHeader className="border-b p-4 rounded-t-xl">
-            <CardTitle className="text-lg font-bold text-slate-800">Your Summary</CardTitle>
+        {/* Form */}
+        <Card className="bg-white rounded-xl shadow-sm border">
+          <CardHeader className="border-b p-4">
+            <CardTitle>Your Summary</CardTitle>
           </CardHeader>
 
-          <CardContent className="p-2 md:p-6">
+          <CardContent className="p-6">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                   control={form.control}
                   name="summary"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold">
+                      <FormLabel className="flex justify-between">
                         Summary
                         <Button
                           type="button"
-                          variant="ghost"
                           size="sm"
-                          className="h-6 text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50"
+                          variant="ghost"
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
-                          id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
-                            ? "Synthesizing..."
+                            ? "Writing..."
                             : watchedSummary?.trim()
-                              ? "Enhance with AI"
-                              : "Generate with AI"}
+                              ? "Enhance"
+                              : "Generate"}
                         </Button>
                       </FormLabel>
 
-                      <div className="relative">
-                        <FormControl>
-                          <Textarea
-                            placeholder="Experienced software engineer with a focus on..."
-                            rows={8}
-                            {...field}
-                            disabled={isGenerating}
-                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-base leading-relaxed ${
-                              isGenerating ? "opacity-50" : ""
-                            }`}
-                          />
-                        </FormControl>
+                      <FormControl>
+                        <Textarea rows={8} {...field} disabled={isGenerating} />
+                      </FormControl>
 
-                        {isGenerating && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-                            <div className="flex items-center gap-2 text-indigo-600 font-semibold animate-pulse">
-                              <Sparkles className="w-4 h-4" /> Writing...
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Character Counter */}
-                      <p className="text-xs text-slate-400 text-right mt-1">
-                        {watchedSummary?.length || 0} characters
+                      <p className="text-xs text-right text-slate-400">
+                        {watchedSummary?.length || 0} chars
                       </p>
 
                       <FormMessage />
@@ -136,63 +143,42 @@ const SummaryStep = ({ next, previous, formData, updateForm }) => {
             </Form>
           </CardContent>
 
-          <CardFooter className="p-0">
-            <div className="p-4 w-full rounded-b-xl">
-              <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
-                <AlignLeft className="w-4 h-4 text-blue-600" /> Tips
-              </h3>
-
-              <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
-                <li>Keep it concise (2–4 sentences).</li>
-                <li>Highlight your experience and key achievements.</li>
-                <li>Use keywords relevant to the job you are applying for.</li>
-              </ul>
-            </div>
+          <CardFooter>
+            <ul className="text-sm text-blue-800 list-disc pl-4">
+              <li>Keep it concise</li>
+              <li>Highlight achievements</li>
+              <li>Use job keywords</li>
+            </ul>
           </CardFooter>
         </Card>
 
-        {/* Preview Section */}
-        <div className="space-y-6">
-          <Card className="bg-white rounded-xl shadow-sm border border-slate-200 h-full">
-            <CardHeader className="bg-slate-50 border-b border-slate-100 p-4 rounded-t-xl">
-              <div className="flex items-center gap-2">
-                <BrainCircuit className="w-5 h-5 text-indigo-600" />
-                <CardTitle className="text-lg font-bold text-slate-800">Preview</CardTitle>
-              </div>
-            </CardHeader>
+        {/* Preview */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex gap-2 items-center">
+              <BrainCircuit className="w-5 h-5" /> Preview
+            </CardTitle>
+          </CardHeader>
 
-            <CardContent className="p-6">
-              {watchedSummary ? (
-                <div className="prose prose-slate max-w-none text-slate-700 leading-relaxed text-sm">
-                  {watchedSummary}
-                </div>
-              ) : (
-                <div className="text-center py-12 text-slate-400">
-                  <AlignLeft className="w-12 h-12 mx-auto mb-3 text-slate-200" />
-                  <p>Start writing to see the preview here.</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+          <CardContent>
+            {watchedSummary ? (
+              <p>{watchedSummary}</p>
+            ) : (
+              <p className="text-slate-400">Start writing...</p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
 
-          <div className="flex justify-between items-center pt-4">
-            <Button
-              variant="outline"
-              onClick={previous}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back
-            </Button>
+      {/* Navigation */}
+      <div className="flex justify-between mt-6">
+        <Button variant="outline" onClick={() => router.push("/dashboard/resumeform/certificate")}>
+          <ArrowLeft className="w-4 h-4 mr-2" /> Back
+        </Button>
 
-            <Button
-              onClick={() => form.handleSubmit(onSubmit)()}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
-              id="tour-next-button"
-            >
-              Save & Next <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-        </div>
+        <Button onClick={form.handleSubmit(onSubmit)}>
+          Next <ArrowRight className="w-4 h-4 ml-2" />
+        </Button>
       </div>
     </div>
   );
