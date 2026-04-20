@@ -372,4 +372,4 @@ const ExperienceStep = () => {
   );
 };
 
-export default ExperienceStep;
+export default React.memo(ExperienceStep);

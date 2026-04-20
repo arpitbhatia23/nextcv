@@ -12,7 +12,9 @@ export const getFeedback = async () => {
   }
   const cached = await redis.get(cacheKey);
   if (cached) {
-    return JSON.parse(cached);
+    return NextResponse.json(
+      new apiResponse(200, "Feedback retrieved successfully", JSON.parse(cached))
+    );
   }
   const feedback = await Feedback.find({})
     .populate("userId", "name email")

@@ -389,4 +389,4 @@ const ProjectsStep = () => {
   );
 };
 
-export default ProjectsStep;
+export default React.memo(ProjectsStep);

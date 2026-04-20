@@ -351,4 +351,4 @@ const EducationStep = () => {
   );
 };
 
-export default EducationStep;
+export default React.memo(EducationStep);

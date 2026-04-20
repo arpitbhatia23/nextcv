@@ -253,7 +253,7 @@ const FinalStep = () => {
 
           <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
             <div className="grid grid-cols-1 gap-4">
-              {templates.map(template => (
+              {templates.map((template, index) => (
                 <div
                   key={template.key}
                   onClick={() => setSelectedTemplate(template.key)}
@@ -271,6 +271,8 @@ const FinalStep = () => {
                         alt={template.label}
                         height={500}
                         width={500}
+                        priority={index > 6}
+                        quality={75}
                         className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
@@ -450,4 +452,4 @@ const FinalStep = () => {
   );
 };
 
-export default FinalStep;
+export default React.memo(FinalStep);

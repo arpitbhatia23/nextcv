@@ -49,7 +49,7 @@ export default function StepNav() {
 
   return (
     <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-8xl mx-auto px-4">
         {/* Top Row */}
         <div className="flex items-center justify-between h-14">
           <h2 className="text-sm font-semibold text-slate-800">Resume Builder</h2>

@@ -137,6 +137,7 @@ const MyResume = () => {
   };
 
   const handleViewResume = async resumeData => {
+    console.log(resumeData);
     const pdfGen = new pdfGenerator(resumeData);
     const url = await pdfGen.createPdf();
 

@@ -304,4 +304,4 @@ const CertificateStep = () => {
   );
 };
 
-export default CertificateStep;
+export default React.memo(CertificateStep);

@@ -184,4 +184,4 @@ const SummaryStep = () => {
   );
 };
 
-export default SummaryStep;
+export default React.memo(SummaryStep);

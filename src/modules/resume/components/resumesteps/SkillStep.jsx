@@ -312,4 +312,4 @@ const SkillStep = () => {
   );
 };
 
-export default SkillStep;
+export default React.memo(SkillStep);
