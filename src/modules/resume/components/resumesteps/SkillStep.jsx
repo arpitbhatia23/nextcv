@@ -18,10 +18,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Tips } from "../Tips";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
-const SkillStep = ({ next, previous, formData, updateForm }) => {
+import { useRouter } from "next/navigation";
+import useResumeStore from "@/store/useResumeStore";
+const SkillStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
   const [skillList, setSkillList] = useState(formData.skills || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const router = useRouter();
 
   const schema = z.object({
     name: z.string().min(2, { message: "Skill name is required" }),
@@ -137,7 +142,7 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
       toast("Please add at least 4 skills to continue.");
       return;
     }
-    next();
+    router.push("/dashboard/resumeform/experience");
   };
 
   return (
@@ -291,7 +296,10 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
           <Tips section={"skills"} />
 
           <div className="flex justify-between items-center pt-4">
-            <Button variant="outline" onClick={previous}>
+            <Button
+              variant="outline"
+              onClick={() => router.push("/dashboard/resumeform/education")}
+            >
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button onClick={handleNext} className="bg-indigo-600 text-white">
@@ -304,4 +312,4 @@ const SkillStep = ({ next, previous, formData, updateForm }) => {
   );
 };
 
-export default SkillStep;
+export default React.memo(SkillStep);

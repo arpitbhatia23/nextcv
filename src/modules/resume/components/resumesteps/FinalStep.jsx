@@ -30,7 +30,9 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import PDFPreview from "../pdfPreview";
 
-const FinalStep = ({ formData }) => {
+const FinalStep = () => {
+  const formData = useResumeStore(s => s.formData);
+
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
   const [couponCode, setCouponCode] = useState("");
@@ -40,6 +42,8 @@ const FinalStep = ({ formData }) => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [applied, setApplied] = useState(false);
   const [draftId, setDraftId] = useState(null);
+  const [discount, setDiscount] = useState(null);
+
   const { handelPayment, isRedirecting } = usePayment({
     discount,
     originalAmount,
@@ -52,12 +56,13 @@ const FinalStep = ({ formData }) => {
     // isDraft: draftId ? true : false,
   });
 
-  const { discount, handleCoupon, removeCoupon } = useCoupon({
+  const { handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
     originalAmount,
     setAmount,
     setCouponCode,
     setApplied,
+    setDiscount,
   });
 
   const { handleSaveDraft } = useDraft({
@@ -248,7 +253,7 @@ const FinalStep = ({ formData }) => {
 
           <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
             <div className="grid grid-cols-1 gap-4">
-              {templates.map(template => (
+              {templates.map((template, index) => (
                 <div
                   key={template.key}
                   onClick={() => setSelectedTemplate(template.key)}
@@ -266,6 +271,8 @@ const FinalStep = ({ formData }) => {
                         alt={template.label}
                         height={500}
                         width={500}
+                        priority={index > 6}
+                        quality={75}
                         className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
@@ -445,4 +452,4 @@ const FinalStep = ({ formData }) => {
   );
 };
 
-export default FinalStep;
+export default React.memo(FinalStep);

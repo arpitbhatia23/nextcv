@@ -15,8 +15,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../shared/components/ui/button";
 import React, { useEffect } from "react";
+import useResumeStore from "@/store/useResumeStore";
+import { useRouter } from "next/navigation";
 
-const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
+const BasicInfoStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+  const router = useRouter();
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
@@ -58,7 +63,7 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
 
   const handlesave = () => {
     updateForm(watchedValues);
-    next();
+    router.push("/dashboard/resumeform/education");
   };
   return (
     <div className="py-8">
@@ -247,77 +252,6 @@ const BasicInfoStep = ({ next, previous, formData, updateForm }) => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Live Preview Section */}
-        {/* <div className="sticky top-24" id="tour-resume-preview">
-          <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider">
-              Live Preview
-            </h3>
-          </div>
-          <Card className="border border-slate-200 shadow-xl shadow-slate-200/50 bg-white rounded-xl overflow-hidden min-h-125">
-            <CardHeader className="border-b border-slate-100 bg-slate-50/50 p-4">
-              <div className="flex items-center gap-2">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-8">
-              <div className="text-center space-y-4">
-                <div>
-                  <h1 className="text-3xl font-bold text-slate-900 wrap-break-words">
-                    {watchedValues.name || formData?.name || "Your Name"}
-                  </h1>
-                  <p className="text-xl text-indigo-600 font-medium mt-1 wrap-break-words">
-                    {watchedValues.jobRole || formData?.jobRole || "Job Title"}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap justify-center gap-3 text-sm text-slate-600">
-                  {(watchedValues.email || formData?.email) && (
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-full border border-slate-100">
-                      <Mail className="w-3.5 h-3.5" />
-                      <span>{watchedValues.email || formData?.email}</span>
-                    </div>
-                  )}
-                  {(watchedValues.phone || formData?.phone) && (
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-full border border-slate-100">
-                      <Phone className="w-3.5 h-3.5" />
-                      <span>{watchedValues.phone || formData?.phone}</span>
-                    </div>
-                  )}
-                  {(watchedValues.address || formData?.address) && (
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-50 rounded-full border border-slate-100">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{watchedValues.address || formData?.address}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="flex flex-wrap justify-center gap-4 text-sm pt-2 border-t border-slate-100 mt-4">
-                  {(watchedValues.linkedin || formData?.linkedin) && (
-                    <span className="flex items-center gap-1 text-slate-600">
-                      <Linkedin className="w-3.5 h-3.5" /> LinkedIn
-                    </span>
-                  )}
-                  {(watchedValues.github || formData?.github) && (
-                    <span className="flex items-center gap-1 text-slate-600">
-                      <Github className="w-3.5 h-3.5" /> GitHub
-                    </span>
-                  )}
-                  {(watchedValues.portfolio || formData?.portfolio) && (
-                    <span className="flex items-center gap-1 text-slate-600">
-                      <Globe className="w-3.5 h-3.5" /> Portfolio
-                    </span>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div> */}
       </div>
     </div>
   );

@@ -40,6 +40,9 @@ const useResumeStore = create(
     {
       name: "resume-draft",
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => state => {
+        state._hasHydrated = true;
+      },
     }
   )
 );

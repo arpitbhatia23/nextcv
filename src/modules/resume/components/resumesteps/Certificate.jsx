@@ -16,8 +16,13 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/c
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Tips } from "../Tips";
+import useResumeStore from "@/store/useResumeStore";
+import { useRouter } from "next/navigation";
 
-const CertificateStep = ({ next, previous, formData, updateForm }) => {
+const CertificateStep = () => {
+  const formData = useResumeStore(s => s.formData);
+  const updateForm = useResumeStore(s => s.updateForm);
+  const router = useRouter();
   const [certList, setCertList] = useState(formData.certificates || []);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -276,13 +281,17 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
           <div className="flex justify-between items-center pt-4">
             <Button
               variant="outline"
-              onClick={previous}
+              onClick={() => {
+                router.push("/dashboard/resumeform/projects");
+              }}
               className="border-slate-300 text-slate-600 hover:bg-slate-50"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button
-              onClick={next}
+              onClick={() => {
+                router.push("/dashboard/resumeform/summary");
+              }}
               className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
               id="tour-next-button"
             >
@@ -295,4 +304,4 @@ const CertificateStep = ({ next, previous, formData, updateForm }) => {
   );
 };
 
-export default CertificateStep;
+export default React.memo(CertificateStep);
