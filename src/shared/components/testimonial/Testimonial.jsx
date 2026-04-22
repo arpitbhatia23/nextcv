@@ -55,7 +55,7 @@ function AnimatedCounter({ to, className }) {
     return controls.stop;
   }, [to]);
 
-  return <span className={`text-4xl sm:text-5xl font-bold ${className}`}>{display}</span>;
+  return <span className={`text-xl sm:text-5xl font-bold ${className}`}>{display}</span>;
 }
 
 export default function TestimonialCarousel() {
@@ -92,10 +92,10 @@ export default function TestimonialCarousel() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-4">
               Stop Guessing. <span className="text-indigo-600">Start Getting Interviews.</span>
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-xs sm:text-lg text-slate-600">
               Join thousands of professionals who improved their career with Next CV.
             </p>
           </div>
@@ -152,10 +152,10 @@ export default function TestimonialCarousel() {
           <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full" />
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
-              <p className="text-slate-300 mb-0">
-                Get your professional ATS resume today for just{" "}
-                Starting from <span className="text-white font-bold text-lg">₹49</span>. No hidden fees.
+              <h3 className="text-lg sm:text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
+              <p className="text-slate-300 mb-0 text-xs sm:text-lg">
+                Get your professional ATS resume today for just Starting from
+                <span className="text-white font-bold ">₹49</span>. No hidden fees.
               </p>
             </div>
           </div>

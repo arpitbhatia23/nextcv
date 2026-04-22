@@ -200,7 +200,8 @@ const Blog = () => {
                     <Image
                       src={urlFor(featuredPost.mainImage).width(1200).height(800).url()}
                       alt={featuredPost.title}
-                      fill
+                      width={1200}
+                      height={800}
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
                     />
@@ -240,7 +241,8 @@ const Blog = () => {
                           <Image
                             src={urlFor(featuredPost.author.image).width(100).url()}
                             alt={featuredPost.author.name}
-                            fill
+                            width={100}
+                            height={100}
                             className="object-cover"
                           />
                         ) : (
@@ -276,7 +278,8 @@ const Blog = () => {
                     <Image
                       src={urlFor(post.mainImage).width(600).url()}
                       alt={post.title}
-                      fill
+                      width={600}
+                      height={600}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
@@ -310,7 +313,8 @@ const Blog = () => {
                           <Image
                             src={urlFor(post.author.image).width(64).url()}
                             alt={post.author.name}
-                            fill
+                            width={64}
+                            height={64}
                             className="object-cover"
                           />
                         ) : (

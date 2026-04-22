@@ -11,10 +11,15 @@ const faqs = [
     answer: (
       <>
         To make an{" "}
-        <Link href="/blogs/ats-friendly-resume-meaning-examples-and-how-to-create-one" className="text-indigo-600 hover:underline">
+        <Link
+          href="/blogs/ats-friendly-resume-meaning-examples-and-how-to-create-one"
+          className="text-indigo-600 hover:underline"
+        >
           ATS-friendly resume in India
         </Link>
-        , use a single-column layout, standard fonts (Arial, Calibri), and clear section headings. Ensure you include relevant keywords for roles at companies like TCS, Infosys, and Tech Mahindra. NextCV automatically handles these formatting rules for you.
+        , use a single-column layout, standard fonts (Arial, Calibri), and clear section headings.
+        Ensure you include relevant keywords for roles at companies like TCS, Infosys, and Tech
+        Mahindra. NextCV automatically handles these formatting rules for you.
       </>
     ),
   },
@@ -23,10 +28,15 @@ const faqs = [
     answer: (
       <>
         The{" "}
-        <Link href="/blogs/best-resume-format-for-freshers-in-india-2026" className="text-indigo-600 hover:underline">
+        <Link
+          href="/blogs/best-resume-format-for-freshers-in-india-2026"
+          className="text-indigo-600 hover:underline"
+        >
           best resume format for freshers in 2026
         </Link>{" "}
-        is the reverse-chronological format. It highlights your recent internships, projects, and education first. For Indian graduates, including a 'Technical Skills' section with keywords like Java, Python, or React is crucial to pass recruiter screenings.
+        is the reverse-chronological format. It highlights your recent internships, projects, and
+        education first. For Indian graduates, including a 'Technical Skills' section with keywords
+        like Java, Python, or React is crucial to pass recruiter screenings.
       </>
     ),
   },
@@ -78,10 +88,10 @@ const FAQ = () => {
               <HelpCircle className="w-4 h-4" />
               <span>Got Questions?</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-slate-600 text-lg">
+            <p className="text-slate-600 text-sm sm:text-lg">
               Everything you need to know about ATS scores and building a job-winning resume.
             </p>
           </div>
@@ -105,7 +115,7 @@ const FAQ = () => {
                   className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                 >
                   <span
-                    className={`text-lg font-semibold ${activeIndex === index ? "text-indigo-900" : "text-slate-800"}`}
+                    className={`text-xs sm:text-lg font-semibold ${activeIndex === index ? "text-indigo-900" : "text-slate-800"}`}
                   >
                     {faq.question}
                   </span>
@@ -127,7 +137,9 @@ const FAQ = () => {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="px-6 pb-6 text-slate-600 leading-relaxed">{faq.answer}</div>
+                      <div className="px-6 pb-6 text-slate-600 leading-relaxed text-xs sm:text-lg">
+                        {faq.answer}
+                      </div>
                     </m.div>
                   )}
                 </AnimatePresence>
