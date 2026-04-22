@@ -127,32 +127,6 @@
   font-family: sans-serif;
 }
 
-.resume-wrapper {
-  background: white;
-  padding: 2rem;
-  margin: auto;
-  max-width: 800px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.heading {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.subheading {
-  color: #4b5563;
-  margin-bottom: 0.5rem;
-}
-
-.section-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
 /* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

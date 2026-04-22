@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/shared/components/ui/sonner";
 import CookieBanner from "@/shared/components/cookies";
@@ -10,12 +10,12 @@ const geistSans = Geist({
   preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+//   display: "swap",
+//   preload: true,
+// });
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
@@ -29,7 +29,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable}  antialiased`}>
         <main>
           {children}
           <CookieBanner />

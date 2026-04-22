@@ -15,20 +15,36 @@ const ATSFeatureSection = () => {
               <Zap className="w-4 h-4" />
               <span>New Free Tool</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+            <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
               Is Your Resume <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
-            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-              Wondering <strong><Link href="/blogs/why-90-of-indian-resumes-fail-ats-in-2025-and-how-to-fix-yours-in-10-minutes" className="text-indigo-600 hover:underline">why ATS rejects resumes in India</Link></strong> and how to fix it? Over
-              75% of resumes are filtered out by Applicant Tracking Systems before a human ever sees
-              them. Our
+            <p className="text-xs sm:text-lg text-slate-600 mb-8 leading-relaxed">
+              Wondering{" "}
+              <strong>
+                <Link
+                  href="/blogs/why-90-of-indian-resumes-fail-ats-in-2025-and-how-to-fix-yours-in-10-minutes"
+                  className="text-indigo-600 hover:underline"
+                >
+                  why ATS rejects resumes in India
+                </Link>
+              </strong>{" "}
+              and how to fix it? Over 75% of resumes are filtered out by Applicant Tracking Systems
+              before a human ever sees them. Our
               <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat the
               bots with keyword-optimized,{" "}
               <strong>professional resume format for India freshers 2026</strong>. Get your resume
               index-ready for top companies with the best{" "}
-              <strong><Link href="/blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026" className="text-indigo-600 hover:underline">AI-powered resume builder for Indian fresh graduates</Link></strong>.
+              <strong>
+                <Link
+                  href="/blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026"
+                  className="text-indigo-600 hover:underline"
+                >
+                  AI-powered resume builder for Indian fresh graduates
+                </Link>
+              </strong>
+              .
             </p>
-            <div className="space-y-4 mb-8">
+            <div className="text-xs sm:text-lg space-y-4 mb-8">
               {[
                 "Instant score analysis",
                 "Keyword gap detection",
@@ -43,29 +59,23 @@ const ATSFeatureSection = () => {
             </div>
             <Link
               href="/ats-resume-checker"
-              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
+              className="inline-flex items-center justify-center p-2 sm:px-8 py-3.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
             >
               Check My Resume Score
               <FileSearch className="ml-2 w-5 h-5" />
             </Link>
           </div>
 
-          <div
-            // initial={{ opacity: 0, scale: 0.95 }}
-            // whileInView={{ opacity: 1, scale: 1 }}
-            // viewport={{ once: true }}
-            // transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-lg  md:blur-2xl" />
+          <div className="relative">
+            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-sm  md:blur-2xl" />
             <div className="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8">
               {/* Mockup of the score display */}
-              <div className="flex flex-col items-center">
-                <div className="relative w-40 h-40 mb-6">
-                  <svg className="w-full h-full transform -rotate-90">
+              <div className="flex flex-col items-center w-full max-w-xs mx-auto">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 mb-6">
+                  <svg viewBox="0 0 160 160" className="w-full h-full transform -rotate-90">
                     <circle
                       className="text-slate-100"
-                      strokeWidth="8"
+                      strokeWidth="6"
                       stroke="currentColor"
                       fill="transparent"
                       r="70"
@@ -73,8 +83,8 @@ const ATSFeatureSection = () => {
                       cy="80"
                     />
                     <circle
-                      className="text-green-500"
-                      strokeWidth="8"
+                      className="text-green-500 transition-all duration-1000"
+                      strokeWidth="6"
                       strokeDasharray={2 * Math.PI * 70}
                       strokeDashoffset={2 * Math.PI * 70 * (1 - 0.85)}
                       strokeLinecap="round"
@@ -85,22 +95,26 @@ const ATSFeatureSection = () => {
                       cy="80"
                     />
                   </svg>
+
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-4xl font-bold text-slate-800">85</span>
-                    <span className="text-xs uppercase text-slate-400 font-semibold">Score</span>
+                    <span className="text-2xl sm:text-4xl font-bold text-slate-800">85</span>
+                    <span className="text-[10px] sm:text-xs uppercase text-slate-400 font-semibold">
+                      Score
+                    </span>
                   </div>
                 </div>
 
                 <div className="w-full space-y-3">
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-indigo-500 w-3/4 rounded-full" />
+                    <div className="h-full bg-indigo-500 w-[75%] rounded-full transition-all duration-700" />
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600 font-medium">Keywords</span>
                     <span className="text-indigo-600 font-bold">Good</span>
                   </div>
+
                   <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-green-500 w-full rounded-full" />
+                    <div className="h-full bg-green-500 w-full rounded-full transition-all duration-700" />
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-600 font-medium">Formatting</span>

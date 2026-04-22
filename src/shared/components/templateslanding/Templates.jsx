@@ -352,10 +352,10 @@ const Templates = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-4">
             Professional Templates for <span className="text-indigo-600">Every Career Path</span>
           </h2>
-          <p className="text-lg text-slate-600">
+          <p className="text-sm sm:text-lg text-slate-600">
             Choose from our collection of ATS-optimized designs. proven to get results.
           </p>
         </div>
@@ -408,8 +408,10 @@ const Templates = () => {
 
               {/* Content */}
               <div className="p-6 flex flex-col grow">
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
-                <p className="text-sm text-slate-500 mb-6 grow leading-relaxed">{description}</p>
+                <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-2">{title}</h3>
+                <p className="text-xs sm:text-sm text-slate-500 mb-6 grow leading-relaxed">
+                  {description}
+                </p>
 
                 <Button
                   className="w-full bg-slate-900 hover:bg-indigo-600 text-white font-medium rounded-lg transition-colors group-hover:shadow-lg group-hover:shadow-indigo-500/20"
@@ -426,8 +428,12 @@ const Templates = () => {
         <div className="bg-white rounded-2xl border border-slate-100 p-8 sm:p-12 shadow-sm">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-slate-900 mb-1">Why choose our templates?</h3>
-              <p className="text-slate-500 text-sm">Built by recruiters, optimized by AI.</p>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1">
+                Why choose our templates?
+              </h3>
+              <p className="text-slate-500 text-xs sm:text-sm">
+                Built for professional's, optimized by AI.
+              </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-6 sm:gap-12">
@@ -435,7 +441,9 @@ const Templates = () => {
                 <div key={i} className="flex items-center gap-3">
                   <div className="p-2 bg-slate-50 rounded-lg">{feature.icon}</div>
                   <div className="text-left">
-                    <h4 className="font-bold text-slate-900 text-sm">{feature.title}</h4>
+                    <h4 className="font-semibold sm:font-bold text-slate-900 text-sm">
+                      {feature.title}
+                    </h4>
                     <p className="text-xs text-slate-500 hidden sm:block">{feature.description}</p>
                   </div>
                 </div>

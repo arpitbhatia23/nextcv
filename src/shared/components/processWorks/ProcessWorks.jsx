@@ -31,11 +31,11 @@ const ProcessWorks = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Headline */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+          <h2 className="text-xl sm:text-5xl font-bold text-slate-900 tracking-tight">
             Land Your Dream Job with the <br />
             <span className="text-indigo-600">NextCV Advantage</span>
           </h2>
-          <p className="text-lg text-slate-600">
+          <p className="text-sm sm:text-lg text-slate-600">
             Why thousands of Indian job seekers choose us over generic resume builders.
           </p>
         </div>
@@ -45,14 +45,14 @@ const ProcessWorks = () => {
           {works.map((item, index) => (
             <div
               key={index}
-              className={`relative p-8 rounded-3xl transition-all duration-300 ${
+              className={`relative p-2 sm:p-8 rounded-xl sm:rounded-3xl transition-all duration-300 ${
                 item.isHighlighted
                   ? "bg-indigo-600 text-white shadow-2xl shadow-indigo-200 scale-105 z-10"
                   : "bg-slate-50 text-slate-900 hover:bg-white hover:shadow-xl hover:shadow-slate-100 border border-slate-100"
               }`}
             >
               <div
-                className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                className={`w-7 sm:w-14 h-7 sm:h-14 rounded-2xl flex items-center justify-center mb-6 ${
                   item.isHighlighted
                     ? "bg-white/20 text-white"
                     : "bg-white text-indigo-600 shadow-sm"
@@ -61,9 +61,9 @@ const ProcessWorks = () => {
                 {item.icon}
               </div>
 
-              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+              <h3 className="text-sm sm:text-xl font-bold mb-3">{item.title}</h3>
               <p
-                className={`leading-relaxed text-sm ${item.isHighlighted ? "text-indigo-100" : "text-slate-600"}`}
+                className={`leading-relaxed text-xs sm:text-sm ${item.isHighlighted ? "text-indigo-100" : "text-slate-600"}`}
               >
                 {item.description}
               </p>
@@ -73,12 +73,12 @@ const ProcessWorks = () => {
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <div className="inline-block relative group">
-            <SigninButton />
-          </div>
+          {/* <div className="inline-block relative group"> */}
+          <SigninButton />
+          {/* </div> */}
 
           <div className="mt-8 flex flex-col items-center">
-            <p className="text-4xl font-black text-slate-900">10k+</p>
+            <p className="text-xl sm:text-4xl font-black text-slate-900">10k+</p>
             <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mt-1">
               Successful Resumes Created
             </p>
