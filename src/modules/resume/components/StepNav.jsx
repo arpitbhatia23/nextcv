@@ -40,10 +40,9 @@ export default function StepNav() {
 
   const handleNavigation = index => {
     if (stepsConfig[index].key == "template") {
-      router.push("/dashboard/resumeform/");
-    }
-    if (index <= currentStep) {
-      router.push(`/dashboard/resumeform/${stepsConfig[index].key}`);
+      router.push("/dashboard/builder/");
+    } else if (index <= currentStep) {
+      router.push(`/dashboard/builder/${stepsConfig[index].key}`);
     }
   };
 

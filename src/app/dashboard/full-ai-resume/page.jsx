@@ -61,7 +61,7 @@ export default function ResumeChat() {
         </p>
 
         <button
-          onClick={() => (window.location.href = "/dashboard/resumeform")}
+          onClick={() => (window.location.href = "/dashboard/builder")}
           className="mt-6 px-5 py-2 bg-black text-white rounded-lg hover:opacity-90 transition"
         >
           Use Classic Resume Builder

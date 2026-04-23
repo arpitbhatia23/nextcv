@@ -4,6 +4,7 @@ import dbConnect from "@/shared/utils/dbConnect";
 import bcrypt from "bcryptjs";
 import { sendWellcomeMessage } from "@/templates/email/sendWelcomeMail";
 import User from "../models/user.model";
+import { ClockFading } from "lucide-react";
 const authOptions = {
   providers: [
     Credentialsprovider({
@@ -43,7 +44,7 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       await dbConnect();
-      const finduser = await User.findOne({ email: user?.email }).lean();
+      const finduser = await User.findOne({ email: user?.email });
       if (!finduser) {
         const newUser = await User.create({
           name: user.name,
@@ -61,6 +62,7 @@ const authOptions = {
       } else {
         // Update lastLogin on every login
         finduser.lastLogin = new Date();
+        console.log(finduser);
         await finduser.save();
       }
       return true;

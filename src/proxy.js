@@ -30,26 +30,6 @@ export async function proxy(req) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // // 5. A/B Testing for Resume Form
-  // if (pathname === "/dashboard/resumeform" && token?.user?._id) {
-  //   if (process.env.NODE_ENV !== "production") return;
-  //   const userId = token.user._id.toString();
-
-  //   const hash = parseInt(userId.slice(-2), 16);
-  //   const bucket = hash % 100; // 0–99
-
-  //   let redirectPath = "/dashboard/resumeform";
-
-  //   if (bucket < 30) {
-  //     redirectPath = "/dashboard/resumeform";
-  //   } else {
-  //     redirectPath = "/dashboard/resumeform-v3";
-  //   }
-  //   if (pathname !== redirectPath) {
-  //     return NextResponse.redirect(new URL(redirectPath, req.url));
-  //   }
-  // }
-
   return NextResponse.next();
 }
 

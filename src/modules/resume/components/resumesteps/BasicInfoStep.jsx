@@ -63,7 +63,7 @@ const BasicInfoStep = () => {
 
   const handlesave = () => {
     updateForm(watchedValues);
-    router.push("/dashboard/resumeform/education");
+    router.push("/dashboard/builder/education");
   };
   return (
     <div className="py-8">

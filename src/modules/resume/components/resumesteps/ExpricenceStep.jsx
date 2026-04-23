@@ -353,13 +353,13 @@ const ExperienceStep = () => {
           <div className="flex justify-between items-center pt-4">
             <Button
               variant="outline"
-              onClick={() => router.push("/dashboard/resumeform/skills")}
+              onClick={() => router.push("/dashboard/builder/skills")}
               className="border-slate-300 text-slate-600 hover:bg-slate-50"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button
-              onClick={() => router.push("/dashboard/resumeform/projects")}
+              onClick={() => router.push("/dashboard/builder/projects")}
               className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
               id="tour-next-button"
             >
