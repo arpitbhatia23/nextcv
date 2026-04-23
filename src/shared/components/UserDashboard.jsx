@@ -89,7 +89,7 @@ const UserDashboard = () => {
           {/* Main Action Area */}
           <div className="lg:col-span-8 space-y-8">
             {/* Primary CTA Card */}
-            <Link href="/dashboard/resumeform" className="block group">
+            <Link href="/dashboard/builder" className="block group">
               <Card className="overflow-hidden border-0 shadow-2xl shadow-indigo-200/40 rounded-3xl transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-indigo-300/50">
                 <CardContent className="p-0 flex flex-col md:flex-row">
                   <div className="flex-1 p-8 md:p-12 bg-white flex flex-col justify-center">

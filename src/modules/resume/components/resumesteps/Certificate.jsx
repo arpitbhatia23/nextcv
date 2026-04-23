@@ -282,7 +282,7 @@ const CertificateStep = () => {
             <Button
               variant="outline"
               onClick={() => {
-                router.push("/dashboard/resumeform/projects");
+                router.push("/dashboard/builder/projects");
               }}
               className="border-slate-300 text-slate-600 hover:bg-slate-50"
             >
@@ -290,7 +290,7 @@ const CertificateStep = () => {
             </Button>
             <Button
               onClick={() => {
-                router.push("/dashboard/resumeform/summary");
+                router.push("/dashboard/builder/summary");
               }}
               className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-8"
               id="tour-next-button"

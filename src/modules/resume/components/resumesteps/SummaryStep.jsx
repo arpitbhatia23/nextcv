@@ -84,7 +84,7 @@ const SummaryStep = () => {
   if (!hasHydrated) return null;
 
   const onSubmit = () => {
-    router.push("/dashboard/resumeform/review");
+    router.push("/dashboard/builder/review");
   };
 
   return (
@@ -172,7 +172,7 @@ const SummaryStep = () => {
 
       {/* Navigation */}
       <div className="flex justify-between mt-6">
-        <Button variant="outline" onClick={() => router.push("/dashboard/resumeform/certificate")}>
+        <Button variant="outline" onClick={() => router.push("/dashboard/builder/certificate")}>
           <ArrowLeft className="w-4 h-4 mr-2" /> Back
         </Button>
 

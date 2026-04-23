@@ -290,7 +290,7 @@ const MyResume = () => {
           <p className="text-slate-500">Manage your resume collection. View, edit, or download.</p>
         </div>
         <Button
-          onClick={() => route.push("/dashboard/resumeform")}
+          onClick={() => route.push("/dashboard/builder")}
           className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 rounded-xl px-6 h-11"
           id="tour-create-new-button"
         >
@@ -480,7 +480,7 @@ const MyResume = () => {
               <p className="text-slate-500 max-w-sm mx-auto mb-6">
                 Create a new resume to get started. It will be saved here automatically.
               </p>
-              <Button onClick={() => route.push("/dashboard/resumeform")}>Create New Resume</Button>
+              <Button onClick={() => route.push("/dashboard/builder")}>Create New Resume</Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

@@ -27,7 +27,7 @@ const TemplateSelectorV3 = () => {
 
   const handleSelect = key => {
     setSelectedTemplate(key);
-    router.push("/dashboard/resumeform/basicInfo");
+    router.push("/dashboard/builder/basicInfo");
   };
 
   return (

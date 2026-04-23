@@ -142,7 +142,7 @@ const SkillStep = () => {
       toast("Please add at least 4 skills to continue.");
       return;
     }
-    router.push("/dashboard/resumeform/experience");
+    router.push("/dashboard/builder/experience");
   };
 
   return (
@@ -296,10 +296,7 @@ const SkillStep = () => {
           <Tips section={"skills"} />
 
           <div className="flex justify-between items-center pt-4">
-            <Button
-              variant="outline"
-              onClick={() => router.push("/dashboard/resumeform/education")}
-            >
+            <Button variant="outline" onClick={() => router.push("/dashboard/builder/education")}>
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <Button onClick={handleNext} className="bg-indigo-600 text-white">
