@@ -34,11 +34,11 @@ const TemplateSelectorV3 = () => {
     <section className="p-2 md:p-6">
       {/* Header */}
       <div className="flex-col md:flex items-center justify-between mb-4">
-        <h3 className="text-sm md:text-xl font-semibold md:font-black text-slate-900">
+        <h3 className="text-sm md:text-2xl font-semibold md:font-black text-slate-900">
           Choose a Template
         </h3>
         <p className="text-xs text-indigo-600 font-semibold">
-          🔥 Most users choose Standard templates
+          🔥 Standard templates are the most popular — quick, clean, and ATS-friendly
         </p>
       </div>
 
