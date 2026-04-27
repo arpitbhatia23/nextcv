@@ -10,7 +10,7 @@ export const getCouponById = async ({ couponCode }) => {
   const session = await requiredAuth();
   const normalizeCode = couponCode?.toLowerCase();
 
-  const userId = session?.user?._id;
+  const userId = session?.user?.id;
   const coupon = await Coupon.findOne({
     couponCode: normalizeCode,
   });

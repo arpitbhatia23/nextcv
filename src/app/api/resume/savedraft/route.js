@@ -11,7 +11,7 @@ const handler = async req => {
   // ✅ Session check
   const session = await requiredAuth();
 
-  const userId = session.user._id;
+  const userId = session.user.id;
   return await saveResumeAsDraft({ data, userId });
 };
 

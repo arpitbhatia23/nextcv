@@ -20,6 +20,7 @@ import { Tips } from "../Tips";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/useResumeStore";
+
 const SkillStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
@@ -27,6 +28,11 @@ const SkillStep = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const router = useRouter();
+
+  // OPTIMIZATION: Prefetch next step on mount
+  useEffect(() => {
+    router.prefetch("/dashboard/builder/experience");
+  }, [router]);
 
   const schema = z.object({
     name: z.string().min(2, { message: "Skill name is required" }),
@@ -39,7 +45,15 @@ const SkillStep = () => {
   });
 
   useEffect(() => {
-    updateForm({ skills: skillList });
+    if (formData.skills) {
+      setSkillList(formData.skills);
+    }
+  }, [formData]);
+
+  useEffect(() => {
+    if (skillList.length > 0) {
+      updateForm({ skills: skillList });
+    }
   }, [skillList]);
 
   // ✅ Add skill (supports comma separated)
@@ -106,6 +120,7 @@ const SkillStep = () => {
         label: "Clear All",
         onClick: () => {
           setSkillList([]);
+          updateForm({ skills: [] });
           toast("All skills cleared 🧹");
         },
       },
@@ -146,56 +161,56 @@ const SkillStep = () => {
   };
 
   return (
-    <div className="py-8">
-      <div className="mb-6">
-        <h2 className="text-xl md:text-2xl font-bold text-slate-900">Skills</h2>
-        <p className="text-slate-500">Showcase your technical and soft skills</p>
+    <div className="py-4 md:py-8">
+      <div className="mb-4 md:mb-6">
+        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Skills</h2>
+        <p className="text-[10px] md:text-sm text-slate-500">Showcase your technical and soft skills</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200">
-          <CardHeader className="border-b p-4 rounded-t-xl flex justify-between items-center">
-            <CardTitle className="text-lg font-bold text-slate-800">
+        <Card className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <CardHeader className="border-b bg-slate-50/50 p-3 md:p-4 rounded-t-xl flex justify-between items-center gap-2">
+            <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
               {isEditing ? "Edit Skill" : "Add Skill"}
             </CardTitle>
-            {isEditing && (
-              <Button variant="ghost" size="sm" onClick={cancelEdit}>
-                Cancel
+            <div className="flex items-center gap-2">
+              {isEditing && (
+                <Button variant="ghost" size="sm" onClick={cancelEdit} className="h-7 text-xs">
+                  Cancel
+                </Button>
+              )}
+              <Button
+                size="sm"
+                onClick={handleAiGeneration}
+                disabled={isGenerating || skillList.length > 0}
+                variant="default"
+                className="bg-indigo-600 text-white h-7 text-[10px] md:text-xs font-bold"
+              >
+                <Sparkles className="w-3 md:w-4 h-3 md:h-4 mr-1 md:mr-2" />
+                {isGenerating ? "Wait..." : "Suggest"}
               </Button>
-            )}
-            <Button
-              // variant="outline"
-              size="sm"
-              onClick={handleAiGeneration}
-              disabled={isGenerating || skillList.length > 0}
-              variant="default"
-              className="bg-indigo-600 text-white"
-            >
-              <Sparkles className="w-4 h-4" />
-              {isGenerating ? "Generating..." : "Suggest Skills"}
-            </Button>
+            </div>
           </CardHeader>
 
-          <CardContent className="p-2 md:p-6">
-            {/* Suggestions */}
-
+          <CardContent className="p-3 md:p-6">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                   <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Skill Name</FormLabel>
+                        <FormLabel className="text-xs md:text-sm font-semibold">Skill Name</FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g. React.js, Node.js (comma separated)"
+                            placeholder="React, Node etc."
                             {...field}
+                            className="text-xs md:text-sm h-9 md:h-11 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -205,16 +220,20 @@ const SkillStep = () => {
                     name="level"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Proficiency</FormLabel>
+                        <FormLabel className="text-xs md:text-sm font-semibold">Proficiency</FormLabel>
                         <FormControl>
-                          <Input placeholder="Beginner / Intermediate / Expert" {...field} />
+                          <Input
+                            placeholder="e.g. Expert"
+                            {...field}
+                            className="text-xs md:text-sm h-9 md:h-11 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
+                          />
                         </FormControl>
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-slate-900 text-white">
+                <Button type="submit" className="w-full bg-slate-900 text-white font-bold h-9 md:h-11 text-xs md:text-sm">
                   {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
               </form>
@@ -222,13 +241,13 @@ const SkillStep = () => {
           </CardContent>
 
           <CardFooter className="p-0">
-            <div className="bg-blue-50 p-4 w-full rounded-b-xl">
-              <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-blue-600" /> Tips
+            <div className="bg-blue-50/50 p-3 md:p-4 w-full border-t border-blue-100">
+              <h3 className="text-[10px] md:text-sm font-bold text-blue-900 mb-2 flex items-center gap-2 uppercase tracking-tight">
+                <Sparkles className="w-3 md:w-4 h-3 md:h-4 text-blue-600" /> Tips
               </h3>
-              <ul className="text-sm text-blue-800 space-y-1 pl-6 list-disc">
-                <li>You can add multiple skills separated by commas.</li>
-                <li>Include both technical and soft skills.</li>
+              <ul className="text-[10px] md:text-sm text-blue-800/80 space-y-1 pl-4 list-disc font-medium">
+                <li>Comma separated list works! (React, Next.js)</li>
+                <li>Balance hard skills with soft skills.</li>
               </ul>
             </div>
           </CardFooter>
@@ -236,55 +255,57 @@ const SkillStep = () => {
 
         {/* List Section */}
         <div className="space-y-6">
-          <div className="bg-slate-50 rounded-xl border border-slate-200 p-5">
-            <div className="flex justify-between">
-              <h3 className="font-semibold text-slate-700 mb-4 flex items-center gap-2">
-                <Wrench className="w-5 h-5 text-indigo-500" /> Added Skills
+          <div className="bg-slate-50 rounded-xl border border-slate-200 p-4 md:p-5">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-[10px] md:text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                <Wrench className="w-4 h-4 text-indigo-500" /> Added Skills
               </h3>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 onClick={handleClearAll}
-                className="text-red-500 hover:text-red-600"
+                className="text-red-500 hover:text-red-600 h-7 text-[10px] font-bold"
               >
                 Clear All
               </Button>
             </div>
 
             {skillList.length === 0 ? (
-              <div className="text-center py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-sm">No skills added yet.</p>
+              <div className="text-center py-8 md:py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
+                <p className="text-slate-400 text-xs">No skills added yet.</p>
               </div>
             ) : (
               <div className="flex flex-wrap gap-2">
                 {skillList.map(skill => (
                   <div
                     key={skill.id}
-                    className="bg-white pl-4 pr-2 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-3"
+                    className="bg-white pl-3 pr-1.5 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 md:gap-3 group hover:border-indigo-300 transition-colors"
                   >
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-slate-800 text-sm">{skill.name}</span>
-                      <span className="text-[10px] text-slate-500 uppercase font-medium">
-                        {skill.level}
-                      </span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-bold text-slate-800 text-[10px] md:text-sm truncate">{skill.name}</span>
+                      {skill.level && (
+                        <span className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black leading-none">
+                          {skill.level}
+                        </span>
+                      )}
                     </div>
 
-                    <div className="flex items-center border-l border-slate-100 pl-2 ml-1">
+                    <div className="flex items-center border-l border-slate-100 pl-1.5 shrink-0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                       <Button
                         variant="ghost"
                         onClick={() => handleEdit(skill)}
                         size="icon"
                         className="h-6 w-6"
                       >
-                        <Edit2 className="w-3 h-3" />
+                        <Edit2 className="w-2.5 h-2.5 md:w-3 md:h-3" />
                       </Button>
                       <Button
                         variant="ghost"
                         onClick={() => handleDelete(skill.id)}
                         size="icon"
-                        className="h-6 w-6"
+                        className="h-6 w-6 text-red-500"
                       >
-                        <Trash2 className="w-3 h-3" />
+                        <Trash2 className="w-2.5 h-2.5 md:w-3 md:h-3" />
                       </Button>
                     </div>
                   </div>
@@ -296,11 +317,18 @@ const SkillStep = () => {
           <Tips section={"skills"} />
 
           <div className="flex justify-between items-center pt-4">
-            <Button variant="outline" onClick={() => router.push("/dashboard/builder/education")}>
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back
+            <Button
+              variant="outline"
+              onClick={() => router.push("/dashboard/builder/education")}
+              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 md:h-11 px-4 md:px-6 text-xs md:text-sm font-bold"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
-            <Button onClick={handleNext} className="bg-indigo-600 text-white">
-              Next Step <ArrowRight className="w-4 h-4 ml-2" />
+            <Button
+              onClick={handleNext}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+            >
+              Experience Info <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
@@ -310,3 +338,4 @@ const SkillStep = () => {
 };
 
 export default React.memo(SkillStep);
+

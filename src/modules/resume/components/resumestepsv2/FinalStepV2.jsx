@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "@/shared/components/ui/card";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
@@ -16,7 +16,7 @@ import {
   Crown,
   Check,
 } from "lucide-react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
@@ -49,6 +49,13 @@ const FinalStepV2 = ({ previous, formData }) => {
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1200
   );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const { discount, handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
     originalAmount,
@@ -66,6 +73,7 @@ const FinalStepV2 = ({ previous, formData }) => {
     setIsSubmit,
     couponCode,
   });
+
   const { handleSaveDraft } = useDraft({
     setIsSubmit,
     selectedTemplate,
@@ -74,7 +82,6 @@ const FinalStepV2 = ({ previous, formData }) => {
   });
 
   const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
-  // Debounced handlers
 
   const { basePrice } = usePricing({
     selectedTemplate,
@@ -84,9 +91,10 @@ const FinalStepV2 = ({ previous, formData }) => {
     setAmount,
     setOriginalAmount,
   });
+
   const getPdfWidth = () => {
-    if (windowWidth < 640) return windowWidth - 64; // mobile
-    if (windowWidth < 1024) return 600; // tablet
+    if (windowWidth < 640) return windowWidth - 32; // mobile
+    if (windowWidth < 1024) return 500; // tablet
     return 550; // desktop
   };
 
@@ -104,55 +112,51 @@ const FinalStepV2 = ({ previous, formData }) => {
 
   return (
     <div className="py-2 lg:h-[calc(100vh-120px)] flex flex-col h-auto">
-      <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4 px-2">
+      <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 px-2">
         <div>
           <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
             Final Blueprint
           </h2>
-          <p className="text-slate-500 mt-2 text-sm md:text-lg">
-            Select a template and finalize your career document.
+          <p className="text-slate-500 mt-1 text-xs md:text-lg">
+            Select a template and finalize your master document.
           </p>
         </div>
 
-        <div className="flex gap-1  md:gap-3">
+        <div className="flex gap-2">
           <Button
             variant="ghost"
             onClick={previous}
-            className="h-10 md:h-12 rounded-lg md:rounded-xl font-bold text-slate-500 hover:text-indigo-600"
+            className="h-9 md:h-12 px-3 md:px-5 rounded-xl font-bold text-slate-500 hover:text-indigo-600 text-xs md:text-sm"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back
+            <ArrowLeft className="w-4 h-4 mr-1.5" /> Back
           </Button>
           <Button
             onClick={debounceDraft}
             variant="outline"
-            className="h-10 md:h-12 rounded-lg md:rounded-xl border-slate-200  font-bold text-slate-700 bg-white shadow-sm"
+            className="h-9 md:h-12 px-3 md:px-5 rounded-xl border-slate-200 font-bold text-slate-700 bg-white shadow-sm text-xs md:text-sm"
           >
-            <Save className="w-4 h-4 mr-2" /> Archive Draft
+            <Save className="w-4 h-4 mr-1.5" /> Archive
           </Button>
         </div>
       </div>
 
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0 lg:overflow-hidden overflow-visible">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-0 lg:overflow-hidden">
         {/* Template Selector Section */}
-        <div className="lg:col-span-3 flex flex-col gap-6 lg:h-[calc(100vh-200px)] h-[50vh] overflow-y-auto order-2 lg:order-1 custom-scrollbar pr-2 pb-10">
-          <div className="flex items-center justify-between">
-            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-              Architectural Templates
-            </h3>
-          </div>
+        <div className="lg:col-span-3 flex flex-col gap-4 lg:h-[calc(100vh-200px)] h-[300px] md:h-[400px] overflow-y-auto order-2 lg:order-1 custom-scrollbar pr-2 pb-10">
+          <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">
+            Engine Themes
+          </h3>
 
-          <div className="space-y-10 pb-24">
+          <div className="space-y-8">
             {resumeTemplateCatalog.map(tier => (
               <div key={tier.tierName} className="space-y-4">
-                {
-                  <div className="px-1 flex items-center justify-between">
-                    <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-                      {tier.tierName} Tier
-                    </h3>
-                    <div className="h-px flex-1 bg-slate-100 ml-3"></div>
-                  </div>
-                }
-                <div className="grid grid-cols-1 gap-4">
+                <div className="px-1 flex items-center justify-between">
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    {tier.tierName}
+                  </h3>
+                  <div className="h-px flex-1 bg-slate-100 ml-3"></div>
+                </div>
+                <div className="grid grid-cols-2 lg:grid-cols-1 gap-4">
                   {tier.templates.map(t => {
                     const template = templates.find(x => x.key === t.templateName);
                     if (!template) return null;
@@ -161,40 +165,29 @@ const FinalStepV2 = ({ previous, formData }) => {
                         key={template.key}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        onClick={() => {
-                          setSelectedTemplate(template.key);
-                          if (setSidebarOpen) setSidebarOpen(false);
-                        }}
-                        className={`group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 border-2 ${selectedTemplate === template.key ? "bg-white border-indigo-500 shadow-lg shadow-indigo-100 ring-2 ring-indigo-500/20" : "bg-white border-slate-100 hover:border-indigo-300 shadow-sm"}`}
+                        onClick={() => setSelectedTemplate(template.key)}
+                        className={`group relative overflow-hidden rounded-xl cursor-pointer transition-all border-2 ${selectedTemplate === template.key ? "bg-white border-indigo-500 shadow-md ring-2 ring-indigo-500/10" : "bg-white border-slate-100 hover:border-indigo-200 shadow-sm"}`}
                       >
-                        <div className="relative aspect-3/4 overflow-hidden">
+                        <div className="relative aspect-[3/4] overflow-hidden">
                           <Image
                             src={template.image}
                             alt={template.label}
-                            height={500}
-                            width={500}
-                            className={`object-cover transition-transform duration-700 ${selectedTemplate === template.key ? "scale-110" : "group-hover:scale-105"}`}
-                          />
-                          <div
-                            className={`absolute inset-0 bg-linear-to-t transition-opacity duration-300 ${selectedTemplate === template.key ? "from-indigo-600/40 via-transparent opacity-100" : "from-slate-900/40 via-transparent opacity-0 group-hover:opacity-100"}`}
+                            height={300}
+                            width={300}
+                            className={`object-cover transition-transform duration-500 ${selectedTemplate === template.key ? "scale-105" : "group-hover:scale-105"}`}
                           />
                           {selectedTemplate === template.key && (
-                            <div className="absolute top-2 right-2 bg-indigo-500 text-white p-1.5 rounded-lg shadow-lg">
-                              <Check className="w-3.5 h-3.5" />
+                            <div className="absolute top-2 right-2 bg-indigo-500 text-white p-1 rounded-lg">
+                              <Check className="w-3 h-3" />
                             </div>
                           )}
                         </div>
-                        <div className="p-3 text-center">
-                          <p
-                            className={`text-[10px] font-black uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
-                          >
+                        <div className="p-2 flex flex-col items-center gap-1">
+                          <p className="text-[9px] md:text-[10px] font-black uppercase tracking-widest truncate w-full text-center">
                             {template.label}
                           </p>
-                          <div className="flex items-center justify-center gap-2 mt-1.5 ">
-                            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
-                              {tier.tierName}
-                            </span>
-                            <span className="text-[10px] font-black text-indigo-600">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[8px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase">
                               ₹{t.priceDiscounted || 49}
                             </span>
                           </div>
@@ -210,24 +203,23 @@ const FinalStepV2 = ({ previous, formData }) => {
 
         {/* Global Preview Section */}
         <div
-          className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[3rem] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.03)] lg:overflow-hidden overflow-visible min-h-0 order-1 lg:order-2"
+          className="lg:col-span-6 flex flex-col bg-white border border-slate-100 lg:rounded-[2.5rem] rounded-xl shadow-xl lg:overflow-hidden min-h-0 order-1 lg:order-2"
           id="tour-final-preview-v2"
         >
-          <div className="h-16 flex items-center justify-between px-8 border-b border-slate-50 bg-slate-50/30">
+          <div className="h-12 md:h-14 flex items-center justify-between px-6 border-b border-slate-50 bg-slate-50/30">
             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" /> High-Resolution Preview
+              <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" /> Professional Render
             </span>
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
+            <div className="flex gap-1">
+              <div className="w-2 h-2 rounded-full bg-slate-200" />
+              <div className="w-2 h-2 rounded-full bg-slate-200" />
+              <div className="w-2 h-2 rounded-full bg-slate-200" />
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 lg:p-10 bg-slate-50/50 flex justify-center custom-scrollbar">
-            <div className="relative shadow-[0_40px_100px_rgba(0,0,0,0.1)] rounded-lg overflow-hidden bg-white h-fit w-full lg:scale-[0.9] scale-100 origin-top">
+          <div className="flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50/30 flex justify-center custom-scrollbar">
+            <div className="relative shadow-2xl rounded-sm overflow-hidden bg-white h-fit w-full max-w-[550px]">
               {pdfUrl && <WatermarkLayer />}
-
               {pdfUrl ? (
                 <Document
                   file={pdfUrl}
@@ -246,10 +238,10 @@ const FinalStepV2 = ({ previous, formData }) => {
                   ))}
                 </Document>
               ) : (
-                <div className="w-137.5 aspect-[1/1.41] bg-white flex flex-col items-center justify-center gap-4 text-slate-300">
-                  <Zap className="w-12 h-12 animate-pulse text-indigo-200" />
-                  <span className="text-xs font-black uppercase tracking-[0.3em]">
-                    Synthesizing Document
+                <div className="w-full aspect-[1/1.41] bg-white flex flex-col items-center justify-center gap-4 text-slate-300">
+                  <Zap className="w-10 h-10 animate-pulse text-indigo-300" />
+                  <span className="text-[10px] font-black uppercase tracking-widest">
+                    Assembling Document...
                   </span>
                 </div>
               )}
@@ -258,105 +250,103 @@ const FinalStepV2 = ({ previous, formData }) => {
         </div>
 
         {/* Checkout & Actions Section */}
-        <div className="lg:col-span-3 space-y-6 order-3">
-          <Card className="border-none shadow-[20px_40px_80px_rgba(0,0,0,0.05)] bg-white rounded-4xl overflow-hidden">
-            <div className="p-2 md:p-8 space-y-8">
-              <div className="space-y-2">
-                <h3 className="text-lg md:text-xl font-black text-slate-900 tracking-tight">
-                  Checkout
+        <div className="lg:col-span-3 space-y-4 md:space-y-6 order-3">
+          <Card className="border-none shadow-xl bg-white rounded-2xl md:rounded-3xl overflow-hidden">
+            <div className="p-4 md:p-6 space-y-6">
+              <div className="space-y-1">
+                <h3 className="text-sm md:text-lg font-black text-slate-900 tracking-tight">
+                  Checkout Summary
                 </h3>
-                <p className="text-xs text-slate-400 font-medium">
-                  Standard License for Single Download
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                  Standard Access
                 </p>
               </div>
 
-              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-4">
-                <div className="flex justify-between items-center text-sm font-bold text-slate-500">
-                  <span>Base Rate</span>
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 space-y-3">
+                <div className="flex justify-between items-center text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                  <span>Price</span>
                   <span>₹{basePrice}</span>
                 </div>
                 {applied && (
-                  <div className="flex justify-between items-center text-sm font-bold text-emerald-600">
-                    <span>Promo Applied</span>
+                  <div className="flex justify-between items-center text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+                    <span>Discount</span>
                     <span>- ₹{originalAmount - amount}</span>
                   </div>
                 )}
-                <div className="pt-4 border-t border-slate-200 flex justify-between items-end">
+                <div className="pt-3 border-t border-slate-200 flex justify-between items-center">
+                  <span className="text-xs font-black text-slate-900">Total</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
-
-                    <span className="text-lg font-bold text-slate-900">₹{amount}</span>
+                    {applied && <span className="text-[10px] text-slate-400 line-through">₹{basePrice}</span>}
+                    <span className="text-base font-black text-slate-900">₹{amount}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 <div className="relative group">
                   <Input
                     value={couponCode}
                     onChange={e => setCouponCode(e.target.value)}
                     placeholder="PROMO CODE"
                     disabled={applied}
-                    className="h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-bold tracking-widest placeholder:normal-case placeholder:tracking-normal"
-                    id="tour-coupon-section-v2"
+                    className="h-10 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-600 rounded-xl transition-all uppercase px-4 font-black text-xs tracking-widest placeholder:normal-case placeholder:tracking-normal placeholder:font-bold"
                   />
                   {applied ? (
                     <button
                       onClick={removeCoupon}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all"
                     >
-                      <AlertCircle className="w-4 h-4" />
+                      <AlertCircle className="w-3.5 h-3.5" />
                     </button>
                   ) : (
                     <button
                       onClick={() => debounceCoupon(couponCode)}
                       disabled={!couponCode || isSubmit}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-[10px] font-black uppercase px-3 py-2 rounded-lg hover:bg-indigo-600 transition-all disabled:opacity-50"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-[9px] font-black uppercase px-2 py-1 rounded-md hover:bg-indigo-600 transition-all disabled:opacity-50"
                     >
                       Apply
                     </button>
                   )}
                 </div>
                 {applied && (
-                  <div className="flex items-center gap-2 text-[10px] font-black text-emerald-600 uppercase tracking-widest px-2 group">
-                    <CheckCircle2 className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />{" "}
-                    Discount Success
+                  <div className="flex items-center gap-1.5 text-[9px] font-black text-emerald-600 uppercase tracking-widest px-1">
+                    <CheckCircle2 className="w-3 h-3" /> Offer Logic Active
                   </div>
                 )}
               </div>
 
               <Button
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-2xl shadow-indigo-100 py-4 md:py-8 rounded-xl md:rounded-2xl font-semibold md:font-black text-lg transition-all hover:-translate-y-1 active:scale-95 group"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-100 h-12 md:h-14 rounded-xl md:rounded-2xl font-black text-sm md:text-base transition-all group"
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
                 id="tour-payment-section-v2"
               >
-                <Download className="mr-3 w-6 h-6 group-hover:translate-y-0.5 transition-transform" />
-                {isSubmit ? "Authenticating..." : "Unlock PDF"}
+                <Download className="mr-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-0.5 transition-transform" />
+                {isSubmit ? "Processing..." : "Generate PDF"}
               </Button>
 
-              <div className="flex flex-col items-center gap-4 text-[10px] font-black uppercase tracking-widest text-slate-300">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4" /> Secure SSL Server
+              <div className="flex flex-col items-center gap-3 text-[8px] font-black uppercase tracking-widest text-slate-300">
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3 h-3" /> Secure Payment Gateway
                 </div>
                 <div className="flex gap-4">
-                  <IndianRupee className="w-4 h-4" />
-                  <Crown className="w-4 h-4" />
-                  <Zap className="w-4 h-4" />
+                  <IndianRupee className="w-3 h-3" />
+                  <Crown className="w-3 h-3" />
+                  <Zap className="w-3 h-3" />
                 </div>
               </div>
             </div>
           </Card>
 
-          <div className="p-2 md:p-6 bg-linear-to-br from-indigo-50 to-white border border-indigo-100 rounded-3xl">
-            <div className="flex gap-1 md:gap-4">
-              <div className="w-12 h-12 bg-indigo-600 text-white rounded-lg md:rounded-xl flex items-center justify-center shadow-lg shadow-indigo-100">
-                <FileText className="w-6 h-6" />
+          <div className="p-4 md:p-5 bg-indigo-50/30 border border-indigo-100/50 rounded-2xl hidden lg:block">
+            <div className="flex gap-3">
+              <div className="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center shrink-0">
+                <FileText className="w-5 h-5" />
               </div>
-              <div className="space-y-1">
-                <h4 className="font-black text-slate-900 text-sm">Design Ready</h4>
-                <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                  Your resume will be generated in pixel-perfect A4 format.
+              <div className="space-y-0.5">
+                <h4 className="font-black text-slate-900 text-[10px] md:text-xs">ATS Perfect</h4>
+                <p className="text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-tighter leading-tight">
+                  Formatted for high-performance job applications.
                 </p>
               </div>
             </div>
@@ -365,8 +355,6 @@ const FinalStepV2 = ({ previous, formData }) => {
       </div>
 
       <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
-
-      {/* Redirection Overlay */}
       <AnimatePresence>{isRedirecting && <RedirectToPayment />}</AnimatePresence>
     </div>
   );

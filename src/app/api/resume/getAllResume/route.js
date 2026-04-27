@@ -6,7 +6,7 @@ import { getAllResume } from "@/modules/resume";
 const handler = async () => {
   const session = await requiredAuth();
 
-  const userId = session.user._id;
+  const userId = session.user.id;
   const resumes = await getAllResume({ userId });
 
   return NextResponse.json(new apiResponse(200, "Resumes fetched successfully", resumes[0]), {

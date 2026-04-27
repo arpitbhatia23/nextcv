@@ -51,6 +51,7 @@ const MyResume = () => {
   const [amount, setAmount] = useState(100);
   const [originalAmount, setOriginalAmount] = useState(100); // Store original amount
   const [isSubmit, setIsSubmit] = useState(false);
+  const [discount, setDiscount] = useState(null);
 
   const route = useRouter();
 
@@ -101,7 +102,7 @@ const MyResume = () => {
       setAmount(originalAmount);
       setApplied(false);
       setCouponCode("");
-      removeCoupon();
+      // removeCoupon();
     }
   };
 
@@ -115,6 +116,7 @@ const MyResume = () => {
     setAmount,
     setCouponCode,
     setApplied,
+    setDiscount,
   });
 
   const handleDelete = async resumeId => {
