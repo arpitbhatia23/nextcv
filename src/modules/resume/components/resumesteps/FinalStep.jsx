@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
   FileText,
+  Sparkles,
 } from "lucide-react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -53,7 +54,6 @@ const FinalStep = () => {
     setIsSubmit,
     couponCode,
     draftId,
-    // isDraft: draftId ? true : false,
   });
 
   const { handleCoupon, removeCoupon } = useCoupon({
@@ -74,7 +74,6 @@ const FinalStep = () => {
   });
 
   const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
-  // Debounced handlers
 
   const { basePrice } = usePricing({
     selectedTemplate,
@@ -84,6 +83,7 @@ const FinalStep = () => {
     setAmount,
     setOriginalAmount,
   });
+
   const debouncePayment = useDebouncedCallback(() => {
     handelPayment();
   }, 1000);
@@ -97,61 +97,69 @@ const FinalStep = () => {
   }, 1000);
 
   return (
-    <div className="py-4 h-[calc(100vh-100px)] flex flex-col">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold text-slate-900">Review & Download</h2>
-        <p className="text-slate-500">Choose a template, preview, and download your resume.</p>
+    <div className="py-4 md:py-8">
+      <div className="mb-4 md:mb-6">
+        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Review & Download</h2>
+        <p className="text-[10px] md:text-sm text-slate-500">
+          Perfect your resume and choose your signature style
+        </p>
       </div>
 
       {/* Mobile Layout */}
-      <div className="w-full flex flex-col gap-4 lg:hidden pb-20">
+      <div className="w-full flex flex-col gap-4 lg:hidden pb-10">
         <div className="space-y-3">
-          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
+          <label className="text-xs font-bold text-slate-700 flex items-center gap-2 uppercase tracking-wide">
+            <LayoutTemplate className="w-3.5 h-3.5 text-indigo-500" /> Select Style
           </label>
-          <div className="flex overflow-x-auto gap-3 pb-2 scrollbar-hide snap-x">
+          <div className="flex overflow-x-auto gap-3 pb-4 scrollbar-hide snap-x">
             {templates.map(template => (
               <div
                 key={template.key}
                 onClick={() => setSelectedTemplate(template.key)}
-                className={`flex-none w-40 flex flex-col items-center gap-2 p-3 rounded-lg border transition-all cursor-pointer snap-start ${
+                className={`flex-none w-36 flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all cursor-pointer snap-start ${
                   selectedTemplate === template.key
-                    ? "bg-indigo-50 border-indigo-500 shadow-sm"
-                    : "bg-white border-slate-200 hover:border-slate-300"
+                    ? "bg-indigo-50 border-indigo-500 shadow-md ring-2 ring-indigo-100"
+                    : "bg-white border-slate-100 hover:border-slate-200"
                 }`}
               >
-                <div
-                  className={`p-3 rounded-full ${selectedTemplate === template.key ? "bg-indigo-100 text-indigo-600" : "bg-slate-100 text-slate-500"}`}
-                >
-                  <LayoutTemplate className="w-6 h-6" />
+                <div className="w-full aspect-3/4 bg-slate-200 rounded-lg overflow-hidden mb-1">
+                  {template.image ? (
+                    <Image
+                      src={template.image}
+                      alt={template.label}
+                      height={200}
+                      width={150}
+                      className="object-cover w-full h-full"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full bg-slate-50">
+                      <LayoutTemplate className="w-6 h-6 text-slate-300" />
+                    </div>
+                  )}
                 </div>
-                <div className="w-full text-center space-y-1">
+                <div className="w-full text-center">
                   <p
-                    className={`text-[10px] font-black uppercase tracking-widest leading-tight ${selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"}`}
+                    className={`text-[9px] font-black uppercase tracking-widest truncate ${
+                      selectedTemplate === template.key ? "text-indigo-900" : "text-slate-500"
+                    }`}
                   >
                     {template.label}
                   </p>
-                  <div className="flex items-center justify-center gap-1.5 ">
-                    <span className="text-[8px] px-1 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase">
-                      {getTemplateByName(template.key)?.tier || "Basic"}
-                    </span>
-                    <span className="text-[9px] font-black text-indigo-600">
+                  <div className="flex items-center justify-center gap-1.5 mt-1">
+                    <span className="text-[8px] font-black text-indigo-600">
                       ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
                     </span>
                   </div>
                 </div>
-                {selectedTemplate === template.key && (
-                  <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-1" />
-                )}
               </div>
             ))}
           </div>
         </div>
 
-        <Card className="border border-slate-200 shadow-sm overflow-hidden bg-white">
-          <CardHeader className="p-4 border-b border-slate-100 bg-white">
-            <CardTitle className="text-base flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-500" /> Live Preview
+        <Card className="border border-slate-200 shadow-sm rounded-xl overflow-hidden bg-white">
+          <CardHeader className="p-3 border-b border-slate-50 bg-slate-50/30">
+            <CardTitle className="text-sm font-bold flex items-center gap-2">
+              <FileText className="w-4 h-4 text-indigo-500" /> Professional Preview
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0 bg-slate-100/50 min-h-75 flex items-center justify-center">
@@ -159,78 +167,54 @@ const FinalStep = () => {
           </CardContent>
         </Card>
 
-        {/* Payment Section Mobile */}
-        <Card className="border border-slate-200 shadow-sm bg-white">
-          <CardHeader className="p-4 border-b border-slate-100">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <IndianRupee className="w-4 h-4 text-indigo-600" /> Payment & Download
+        {/* Payment Summary Mobile */}
+        <Card className="border border-slate-200 shadow-lg rounded-xl overflow-hidden bg-white">
+          <CardHeader className="p-4 border-b border-slate-50 bg-indigo-50/30">
+            <CardTitle className="flex items-center gap-2 text-sm font-black text-indigo-900 uppercase tracking-tight">
+              <IndianRupee className="w-4 h-4 text-indigo-600" /> Checkout
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-4 space-y-5">
-            {/* Total */}
+          <CardContent className="p-4 space-y-4">
             <div className="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-100">
-              <span className="text-slate-600 font-medium text-sm">Total Amount</span>
-
+              <span className="text-slate-600 font-bold text-xs">Total Amount</span>
               <div className="flex items-center gap-2">
-                <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
-
-                <span className="text-lg font-bold text-slate-900">₹{amount}</span>
+                <span className="text-[10px] text-slate-400 line-through">₹{basePrice}</span>
+                <span className="text-base font-black text-slate-900">₹{amount}</span>
               </div>
             </div>
 
-            {/* Coupon */}
-            <div className="space-y-2">
-              <div className="flex gap-2">
-                <Input
-                  value={couponCode}
-                  onChange={e => setCouponCode(e.target.value)}
-                  placeholder="Coupon code"
-                  className="bg-white border-slate-200 h-10 text-sm"
-                  disabled={applied}
-                />
-                <Button
-                  onClick={() => debounceCoupon(couponCode)}
-                  disabled={!couponCode.trim() || isSubmit || applied}
-                  variant={applied ? "outline" : "default"}
-                  className={!applied ? "bg-slate-900 text-white h-10 px-5" : "h-10 px-5"}
-                >
-                  {applied ? "Applied" : "Apply"}
-                </Button>
-                {applied && (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={removeCoupon}
-                    className="h-10 w-10 shrink-0 text-red-500 hover:bg-red-50"
-                  >
-                    <AlertCircle className="w-5 h-5" />
-                  </Button>
-                )}
-              </div>
-              {applied && discount && (
-                <p className="text-xs text-green-600 font-medium flex items-center gap-1 pl-1">
-                  <CheckCircle2 className="w-3 h-3" />
-                  Saved{" "}
-                  {discount.type === "percentage" ? `${discount.value}%` : `₹${discount.value}`}
-                </p>
-              )}
+            <div className="flex gap-2">
+              <Input
+                value={couponCode}
+                onChange={e => setCouponCode(e.target.value)}
+                placeholder="PROMO CODE"
+                className="bg-white border-slate-200 h-10 text-xs font-bold uppercase"
+                disabled={applied}
+              />
+              <Button
+                onClick={() => debounceCoupon(couponCode)}
+                disabled={!couponCode.trim() || isSubmit || applied}
+                className={`h-10 px-4 text-xs font-black ${applied ? "bg-emerald-500 hover:bg-emerald-600" : "bg-slate-900"}`}
+              >
+                {applied ? "APPLIED" : "APPLY"}
+              </Button>
             </div>
 
             <div className="space-y-3 pt-2">
               <Button
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-12 text-base"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-500/20 h-12 text-sm font-bold"
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
               >
-                Unlock Download
+                <Download className="w-4 h-4 mr-2" /> Download Premium PDF
               </Button>
               <Button
                 variant="outline"
-                className="w-full border-slate-200 text-slate-600 h-10"
+                className="w-full border-slate-200 text-slate-500 h-10 text-xs font-bold"
                 onClick={debounceDraft}
                 disabled={isSubmit}
               >
-                <Save className="mr-2 h-4 w-4" /> Save Draft
+                <Save className="mr-2 h-3.5 w-3.5" /> Save Changes
               </Button>
             </div>
           </CardContent>
@@ -238,162 +222,147 @@ const FinalStep = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex flex-1 overflow-hidden w-full gap-6 h-full min-h-0">
-        {/* Left: Template List - Fixed Sidebar */}
-
-        <div
-          className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full shrink-0"
-          id="tour-template-selection"
-        >
-          <div className="p-4 border-b border-slate-100 bg-white z-10 shrink-0">
-            <h3 className="font-semibold text-slate-800 flex items-center gap-2">
-              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Select Template
+      <div className="hidden lg:flex gap-6 h-[70vh] min-h-150">
+        {/* Left: Template Selector */}
+        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+          <div className="p-4 border-b border-slate-100 bg-slate-50/30">
+            <h3 className="font-bold text-slate-800 flex items-center gap-2 text-sm uppercase tracking-wider">
+              <LayoutTemplate className="w-4 h-4 text-indigo-500" /> Choose Style
             </h3>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 bg-slate-50/50 custom-scrollbar">
-            <div className="grid grid-cols-1 gap-4">
-              {templates.map((template, index) => (
-                <div
-                  key={template.key}
-                  onClick={() => setSelectedTemplate(template.key)}
-                  className={`group relative cursor-pointer rounded-xl border-2 overflow-hidden transition-all duration-300 ${
-                    selectedTemplate === template.key
-                      ? "border-indigo-600 shadow-md ring-2 ring-indigo-100"
-                      : "border-slate-200 hover:border-indigo-300 hover:shadow-sm"
-                  }`}
-                >
-                  {/* Image Preview */}
-                  <div className="aspect-3/4 w-full bg-slate-200 relative overflow-hidden">
-                    {template.image ? (
-                      <Image
-                        src={template.image}
-                        alt={template.label}
-                        height={500}
-                        width={500}
-                        priority={index > 6}
-                        quality={75}
-                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center h-full text-slate-400 bg-slate-100 gap-2">
-                        <LayoutTemplate className="w-10 h-10 opacity-20" />
-                        <span className="text-xs font-medium opacity-50">No Preview</span>
-                      </div>
-                    )}
-
-                    {/* Overlay for selection */}
-                    <div
-                      className={`absolute inset-0 bg-indigo-900/10 transition-opacity ${selectedTemplate === template.key ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+            {templates.map((template, index) => (
+              <div
+                key={template.key}
+                onClick={() => setSelectedTemplate(template.key)}
+                className={`group relative cursor-pointer rounded-xl border-2 transition-all duration-300 ${
+                  selectedTemplate === template.key
+                    ? "border-indigo-600 shadow-md ring-2 ring-indigo-50"
+                    : "border-slate-100 hover:border-indigo-200"
+                }`}
+              >
+                <div className="aspect-3/4 w-full bg-slate-100 overflow-hidden">
+                  {template.image ? (
+                    <Image
+                      src={template.image}
+                      alt={template.label}
+                      height={400}
+                      width={300}
+                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
                     />
-                  </div>
-
-                  {/* Label */}
-                  <div
-                    className={`p-3 text-center border-t ${selectedTemplate === template.key ? "bg-indigo-50 border-indigo-100" : "bg-white border-slate-100"}`}
-                  >
-                    <span
-                      className={`font-black text-[10px] uppercase tracking-widest ${selectedTemplate === template.key ? "text-indigo-700" : "text-slate-700"}`}
-                    >
-                      {template.label}
-                    </span>
-                    <div className="flex items-center justify-center gap-2 mt-1.5 ">
-                      <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 font-bold uppercase tracking-wider">
-                        {getTemplateByName(template.key)?.tier || "Basic"}
-                      </span>
-                      <span className="text-[10px] font-black text-indigo-600">
-                        ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
-                      </span>
-                      <span className="text-[10px] font-black text-indigo-600">
-                        {getTemplateByName(template.key)?.tag}
-                      </span>
-                    </div>
-                  </div>
-
-                  {selectedTemplate === template.key && (
-                    <div className="absolute top-2 right-2 bg-indigo-600 text-white p-1 rounded-full shadow-lg z-10">
-                      <CheckCircle2 className="w-4 h-4" />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-slate-300 gap-2 opacity-30">
+                      <LayoutTemplate className="w-8 h-8" />
+                      <span className="text-[10px] uppercase font-bold">Preview</span>
                     </div>
                   )}
                 </div>
-              ))}
-            </div>
+                <div
+                  className={`p-3 text-center border-t border-slate-50 ${
+                    selectedTemplate === template.key ? "bg-indigo-50/50" : "bg-white"
+                  }`}
+                >
+                  <span
+                    className={`font-black text-[10px] uppercase tracking-widest ${
+                      selectedTemplate === template.key ? "text-indigo-800" : "text-slate-600"
+                    }`}
+                  >
+                    {template.label}
+                  </span>
+                  <div className="flex items-center justify-center gap-2 mt-1">
+                    <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-white border border-slate-100 text-slate-400 font-bold uppercase">
+                      {getTemplateByName(template.key)?.tier || "Basic"}
+                    </span>
+                    <span className="text-[10px] font-black text-indigo-600">
+                      ₹{getTemplateByName(template.key)?.priceDiscounted || 49}
+                    </span>
+                  </div>
+                </div>
+                {selectedTemplate === template.key && (
+                  <div className="absolute top-2 right-2 bg-indigo-600 text-white p-1 rounded-full shadow-lg z-10">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-          <div className="p-4 border-t border-slate-200 bg-white shrink-0">
+          <div className="p-4 border-t border-slate-100">
             <Button
               variant="outline"
-              className="w-full border-slate-300 text-slate-700 hover:bg-slate-50"
+              className="w-full border-slate-200 text-slate-500 hover:bg-slate-50 font-bold text-xs"
               disabled={isSubmit}
               onClick={debounceDraft}
             >
-              <Save className="h-4 w-4 mr-2" />
-              Save Draft
+              <Save className="h-3.5 w-3.5 mr-2" />
+              Save Progress
             </Button>
           </div>
         </div>
 
-        {/* Center: Resume Preview */}
-        <div
-          className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-xl shadow-sm overflow-hidden h-full"
-          id="tour-final-preview"
-        >
-          <div className="p-3 border-b border-slate-200 bg-white flex justify-between items-center px-6">
-            <span className="text-sm font-medium text-slate-500 flex items-center gap-2">
-              Live Preview{" "}
-              <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 text-xs border border-indigo-100">
-                A4
+        {/* Center: Live Preview */}
+        <div className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-2xl shadow-inner overflow-hidden">
+          <div className="p-3 bg-white border-b border-slate-200 flex justify-between items-center px-6">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+              A4 Studio Preview
+              <span className="px-2 py-0.5 rounded bg-indigo-50 text-indigo-600 text-[10px] border border-indigo-100">
+                LIVE
               </span>
             </span>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] font-bold text-emerald-600 uppercase">Synchronized</span>
+            </div>
           </div>
-
           <PDFPreview pdfUrl={pdfUrl} />
         </div>
 
-        {/* Right: Payment (Desktop) - Fixed Sidebar */}
-        <div
-          className="w-64 lg:w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit sticky top-4"
-          id="tour-payment-section"
-        >
-          <div className="p-5 border-b border-slate-100 bg-linear-to-r from-indigo-50 to-white">
-            <h3 className="text-lg font-bold text-slate-900">Finalize Resume</h3>
-            <p className="text-xs text-slate-500 mt-1">Download specifically in PDF format.</p>
+        {/* Right: Checkout Sidebar */}
+        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden h-fit">
+          <div className="p-5 border-b border-slate-50 bg-linear-to-br from-indigo-50/50 to-white">
+            <h3 className="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-indigo-500" /> Complete Build
+            </h3>
+            <p className="text-[10px] text-slate-400 font-medium uppercase tracking-wider mt-1">
+              Premium ATS-Friendly Export
+            </p>
           </div>
+
           <div className="p-5 space-y-6">
-            {/* Price Breakdown */}
-            <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 space-y-3">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-slate-600">Resume Base Price</span>
-                <span className="font-semibold text-slate-900">₹{basePrice}</span>
+            <div className="bg-slate-50/80 rounded-xl p-4 border border-slate-100 space-y-3">
+              <div className="flex justify-between items-center text-xs text-slate-500 font-medium">
+                <span>Standard License</span>
+                <span className="font-bold text-slate-800">₹{basePrice}</span>
               </div>
               {applied && discount && (
-                <div className="flex justify-between items-center text-sm text-green-600">
-                  <span>Coupon Discount</span>
-                  <span className="font-semibold">
+                <div className="flex justify-between items-center text-xs text-emerald-600 font-bold">
+                  <span>Special Coupon</span>
+                  <span>
                     - {discount.type === "percentage" ? `${discount.value}%` : `₹${discount.value}`}
                   </span>
                 </div>
               )}
               <div className="pt-3 border-t border-slate-200 flex justify-between items-center">
-                <span className="text-base font-bold text-slate-800">Total Pay</span>
+                <span className="text-sm font-black text-slate-800 uppercase">Grand Total</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-slate-400 line-through">₹{basePrice}</span>
-
-                  <span className="text-lg font-bold text-slate-900">₹{amount}</span>
+                  <span className="text-xs text-slate-300 line-through">₹{basePrice}</span>
+                  <span className="text-xl font-black text-slate-900 tracking-tighter">
+                    ₹{amount}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Coupon Code */}
-            <div className="space-y-2" id="tour-coupon-section">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                Have a coupon?
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                Discount Rewards
               </label>
               <div className="flex gap-2 relative">
                 <Input
                   value={couponCode}
                   onChange={e => setCouponCode(e.target.value)}
                   placeholder="ENTER CODE"
-                  className="bg-white border-slate-200 focus:border-indigo-500 transition-all uppercase placeholder:normal-case"
+                  className="bg-white border-slate-200 focus:border-indigo-500 h-10 text-xs font-black uppercase tracking-widest placeholder:normal-case placeholder:font-medium placeholder:tracking-normal"
                   disabled={applied}
                 />
                 {!applied ? (
@@ -401,52 +370,47 @@ const FinalStep = () => {
                     onClick={() => debounceCoupon(couponCode)}
                     disabled={!couponCode.trim() || isSubmit}
                     size="sm"
-                    className="bg-slate-800 text-white hover:bg-slate-700 px-4"
+                    className="bg-slate-900 text-white hover:bg-slate-800 px-4 font-bold h-10"
                   >
                     Apply
                   </Button>
                 ) : (
-                  <Button
-                    variant="ghost"
+                  <button
                     onClick={removeCoupon}
-                    size="icon"
-                    className="text-red-500 hover:text-red-600 hover:bg-red-50 absolute right-1 top-1 h-8 w-8"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-red-500 hover:text-red-700 transition-colors"
                   >
-                    <span className="sr-only">Remove</span>
-                    &times;
-                  </Button>
+                    <AlertCircle className="w-5 h-5" />
+                  </button>
                 )}
               </div>
               {applied && (
-                <div className="flex items-center gap-2 text-xs text-green-600 bg-green-50 p-2 rounded border border-green-100">
-                  <CheckCircle2 className="w-3 h-3" /> Coupon applied successfully!
-                </div>
+                <p className="text-[10px] font-bold text-emerald-600 flex items-center gap-1 animate-in fade-in slide-in-from-top-1">
+                  <CheckCircle2 className="w-3 h-3" /> Promotion code applied!
+                </p>
               )}
             </div>
           </div>
 
-          <div className="p-5 border-t border-slate-100 bg-slate-50/50">
+          <div className="p-5 border-t border-slate-50 bg-slate-50/30">
             <Button
-              className="w-full bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-lg shadow-indigo-500/20 py-6 text-base font-semibold transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white shadow-xl shadow-indigo-200 py-7 text-sm font-black uppercase tracking-wider transition-all hover:-translate-y-0.5 active:translate-y-0"
               onClick={debouncePayment}
               disabled={isSubmit || (couponCode && !applied)}
             >
               <Download className="mr-2 h-5 w-5" />
-              Unlock Download
+              Download Resume
             </Button>
-            <p className="text-center text-[10px] text-slate-400 mt-4 flex items-center justify-center gap-1">
-              <AlertCircle className="w-3 h-3" /> Secure 256-bit SSL Payment
-            </p>
+            <div className="mt-4 flex items-center justify-center gap-3 opacity-40 grayscale group-hover:grayscale-0 transition-all">
+              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
+              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
+              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
+            </div>
           </div>
         </div>
       </div>
-      <FeedbackModal
-        isOpen={isFeedbackOpen}
-        onClose={() => setIsFeedbackOpen(false)}
-        // resumeId={savedResumeId}
-      />
 
-      {/* Redirection Overlay */}
+      <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
+
       {isRedirecting && <RedirectToPayment />}
     </div>
   );

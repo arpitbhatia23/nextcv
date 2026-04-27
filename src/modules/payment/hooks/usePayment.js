@@ -17,13 +17,11 @@ export const usePayment = ({
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   const handelPayment = async () => {
-    console.log(applied, couponCode);
     if (couponCode && !applied) {
       toast.error("Please apply a valid coupon before payment");
       return;
     }
 
-    console.log(formData);
     try {
       setIsSubmit(true);
 
@@ -45,7 +43,7 @@ export const usePayment = ({
         ResumeType: selectedTemplate,
         couponCode: applied ? couponCode : null,
         discountAmount,
-        ...({ formData, draftId } || {}),
+        ...({ ...formData, draftId } || {}),
         isDraft: draftId ? true : false,
       });
 

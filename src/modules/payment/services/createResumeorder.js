@@ -30,8 +30,9 @@ export const createResuemOrder = async ({ reqData }) => {
   } = reqData;
 
   const session = await requiredAuth();
-  const userId = session.user._id;
+  const userId = session.user.id;
 
+  console.log(name);
   // 1️⃣ Create or get draft resume
   let resumeId = null;
   console.log(isDraft);

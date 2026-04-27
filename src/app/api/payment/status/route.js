@@ -8,7 +8,7 @@ const handler = async req => {
   await dbConnect();
   const merchantOrderId = searchParams.get("merchantId");
   const session = await requiredAuth();
-  const userId = session.user._id;
+  const userId = session.user.id;
   return await PaymentStatus({ merchantOrderId, userId });
 };
 

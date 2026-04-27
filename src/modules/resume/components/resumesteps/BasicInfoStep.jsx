@@ -13,15 +13,22 @@ import { Card, CardContent } from "@/shared/components/ui/card";
 import { Linkedin, Github, Globe, ArrowRight } from "lucide-react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../../../../shared/components/ui/button";
-import React, { useEffect } from "react";
+import { Button } from "@/shared/components/ui/button";
+import React, { useEffect, useState } from "react";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 
 const BasicInfoStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
+  const [isloading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  // OPTIMIZATION: Prefetch next step on mount
+  useEffect(() => {
+    router.prefetch("/dashboard/builder/education");
+  }, [router]);
+
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
@@ -62,37 +69,39 @@ const BasicInfoStep = () => {
   const watchedValues = useWatch({ control: form.control });
 
   const handlesave = () => {
+    setIsLoading(true);
     updateForm(watchedValues);
+
     router.push("/dashboard/builder/education");
   };
   return (
-    <div className="py-8">
-      <div className="grid  gap-2 md:gap-8 items-start">
+    <div className="py-4 md:py-8">
+      <div className="grid gap-2 md:gap-8 items-start">
         {/* Form Section */}
-        <div className="space-y-6" id="tour-resume-form">
+        <div className="space-y-4 md:space-y-6" id="tour-resume-form">
           <div className="mb-2">
-            <h2 className="text-xl md:text-2xl font-bold text-slate-900">Basic Details</h2>
-            <p className=" text-sm md: text-slate-500">Start with your contact information</p>
+            <h2 className="text-lg md:text-2xl font-bold text-slate-900">Basic Details</h2>
+            <p className="text-[10px] md:text-sm text-slate-500 font-medium">Start with your contact information</p>
           </div>
           <Card className="border border-slate-200 shadow-sm bg-white rounded-lg md:rounded-xl overflow-hidden">
-            <CardContent className="p-2 md:p-6">
+            <CardContent className="p-3 md:p-6">
               <Form {...form}>
-                <form className="space-y-5" onSubmit={form.handleSubmit(handlesave)}>
-                  <div className="grid md:grid-cols-2 gap-5">
+                <form className="space-y-4 md:space-y-5" onSubmit={form.handleSubmit(handlesave)}>
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-5">
                     <FormField
                       name="name"
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">Full Name</FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Full Name</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="e.g. John Doe"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm"
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[10px]" />
                         </FormItem>
                       )}
                     />
@@ -102,36 +111,36 @@ const BasicInfoStep = () => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">Job Title</FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Job Title</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="e.g. Software Engineer"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm"
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[10px]" />
                         </FormItem>
                       )}
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-5">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-5">
                     <FormField
                       name="email"
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">Email</FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Email</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="john@example.com"
                               type="email"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm"
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[10px]" />
                         </FormItem>
                       )}
                     />
@@ -141,15 +150,15 @@ const BasicInfoStep = () => {
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-slate-700 font-semibold">Phone</FormLabel>
+                          <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Phone</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="+91 98765 43210"
                               {...field}
-                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                              className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm"
                             />
                           </FormControl>
-                          <FormMessage />
+                          <FormMessage className="text-[10px]" />
                         </FormItem>
                       )}
                     />
@@ -160,24 +169,24 @@ const BasicInfoStep = () => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold">Address</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Address</FormLabel>
                         <FormControl>
                           <Input
                             placeholder="City, Country"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
 
                   <div className="pt-4 border-t border-slate-100">
-                    <h3 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-indigo-500" /> Social Links (Optional)
+                    <h3 className="text-[10px] md:text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2 uppercase tracking-wider">
+                      <Globe className="w-3 md:w-4 h-3 md:h-4 text-indigo-500" /> Social Links (Optional)
                     </h3>
-                    <div className="space-y-4" id="tour-social-links">
+                    <div className="space-y-3 md:space-y-4" id="tour-social-links">
                       <FormField
                         name="linkedin"
                         control={form.control}
@@ -185,11 +194,11 @@ const BasicInfoStep = () => {
                           <FormItem>
                             <FormControl>
                               <div className="relative">
-                                <Linkedin className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                                <Linkedin className="absolute left-3 top-2.5 md:top-3 w-4 md:w-5 h-4 md:h-5 text-slate-400" />
                                 <Input
                                   placeholder="LinkedIn URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                                  className="pl-9 md:pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                 />
                               </div>
                             </FormControl>
@@ -204,11 +213,11 @@ const BasicInfoStep = () => {
                           <FormItem>
                             <FormControl>
                               <div className="relative">
-                                <Github className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                                <Github className="absolute left-3 top-2.5 md:top-3 w-4 md:w-5 h-4 md:h-5 text-slate-400" />
                                 <Input
                                   placeholder="GitHub URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                                  className="pl-9 md:pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                 />
                               </div>
                             </FormControl>
@@ -223,28 +232,30 @@ const BasicInfoStep = () => {
                           <FormItem>
                             <FormControl>
                               <div className="relative">
-                                <Globe className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                                <Globe className="absolute left-3 top-2.5 md:top-3 w-4 md:w-5 h-4 md:h-5 text-slate-400" />
                                 <Input
                                   placeholder="Portfolio URL"
                                   {...field}
-                                  className="pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-9 md:h-11"
+                                  className="pl-9 md:pl-10 bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                 />
                               </div>
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage className="text-[10px]" />
                           </FormItem>
                         )}
                       />
                     </div>
                   </div>
 
-                  <div className="flex justify-end pt-4">
+                  <div className="flex justify-end pt-4" onMouseEnter={() => router.prefetch("/dashboard/builder/education")}>
                     <Button
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-4 md:px-8 h-9 md:h-11 rounded-lg font-semibold"
+                      className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 px-4 md:px-8 h-10 md:h-11 rounded-lg font-bold text-sm md:text-base"
                       type="submit"
                       id="tour-next-button"
+                      disabled={isloading}
                     >
-                      Next Step <ArrowRight className="ml-2 w-4 h-4" />
+                      {isloading ? "loading..." : "Next Step"}{" "}
+                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
                 </form>
@@ -258,3 +269,4 @@ const BasicInfoStep = () => {
 };
 
 export default React.memo(BasicInfoStep);
+

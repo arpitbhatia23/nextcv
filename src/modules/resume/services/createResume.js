@@ -48,7 +48,7 @@ export const createResume = async ({
         resume: resume._id,
       },
     },
-    { new: true }
+    { returnDocument: "after" }
   );
   if (!addResumeIdToUserModel) {
     throw new apiError(500, "something went wrong while add resuem id to user model");

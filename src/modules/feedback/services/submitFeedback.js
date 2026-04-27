@@ -8,7 +8,7 @@ export const submitFeedback = async ({ rating, comment, resumeId }) => {
   }
 
   const session = await requiredAuth();
-  let userId = session.user._id;
+  let userId = session.user.id;
 
   const feedback = await Feedback.create({
     userId,

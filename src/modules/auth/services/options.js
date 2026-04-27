@@ -4,7 +4,6 @@ import dbConnect from "@/shared/utils/dbConnect";
 import bcrypt from "bcryptjs";
 import { sendWellcomeMessage } from "@/templates/email/sendWelcomeMail";
 import User from "../models/user.model";
-import { ClockFading } from "lucide-react";
 const authOptions = {
   providers: [
     Credentialsprovider({
@@ -58,12 +57,14 @@ const authOptions = {
         } catch (err) {
           console.error(err);
         }
-        user = newUser;
+        user.id = newUser._id;
+        user.role = newUser.role;
       } else {
         // Update lastLogin on every login
         finduser.lastLogin = new Date();
-        console.log(finduser);
         await finduser.save();
+        user.id = finduser._id;
+        user.role = finduser.role;
       }
       return true;
     },
@@ -78,7 +79,6 @@ const authOptions = {
 
     async session({ session, token }) {
       session.user = token?.user;
-
       return session;
     },
   },

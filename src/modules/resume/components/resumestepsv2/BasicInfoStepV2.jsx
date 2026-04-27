@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   Form,
   FormControl,
@@ -24,8 +24,16 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../../../shared/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
+  const router = useRouter();
+
+  // OPTIMIZATION: Prefetch next step on mount
+  useEffect(() => {
+    router.prefetch("/dashboard/builder/education");
+  }, [router]);
+
   const schema = z.object({
     name: z.string().min(1, { message: "Name is required" }),
     phone: z.string().min(1, { message: "Phone number is required" }),
@@ -72,39 +80,39 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
   };
 
   return (
-    <div className="py-2 ">
-      <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10">
+    <div className="py-2 md:py-4">
+      <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 md:gap-10">
         {/* Form Section */}
-        <div className="lg:col-span-7 space-y-8">
-          <div>
+        <div className="lg:col-span-8 space-y-4 md:space-y-8">
+          <div className="mb-2">
             <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight">
               Personal Branding
             </h2>
-            <p className="text-slate-500 mt-2 text-sm md:text-lg">
-              Let's start with how employers can reach you.
+            <p className="text-slate-500 mt-1 text-xs md:text-lg">
+              Set the foundation for your professional identity.
             </p>
           </div>
 
-          <div id="tour-resume-form-v2">
+          <div id="tour-resume-form-v2" className="bg-white p-4 md:p-8 rounded-2xl md:rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handlesave)} className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={form.handleSubmit(handlesave)} className="space-y-4 md:space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <FormField
                     name="name"
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <User className="w-4 h-4 text-indigo-500" /> Full Name
+                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs md:text-sm">
+                          <User className="w-3.5 md:w-4 h-3.5 md:h-4 text-indigo-500" /> Full Name
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Alex Rivera"
                             {...field}
-                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-xs md:text-base placeholder:text-[10px]"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -114,40 +122,40 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Briefcase className="w-4 h-4 text-indigo-500" /> Target Role
+                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs md:text-sm">
+                          <Briefcase className="w-3.5 md:w-4 h-3.5 md:h-4 text-indigo-500" /> Target Role
                         </FormLabel>
                         <FormControl>
                           <Input
-                            placeholder="e.g. Product Designer"
+                            placeholder="e.g. Lead Engineer"
                             {...field}
-                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-xs md:text-base placeholder:text-[10px]"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <FormField
                     name="email"
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-indigo-500" /> Email Address
+                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs md:text-sm">
+                          <Mail className="w-3.5 md:w-4 h-3.5 md:h-4 text-indigo-500" /> Email
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="alex@example.com"
                             type="email"
                             {...field}
-                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-xs md:text-base placeholder:text-[10px]"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -157,17 +165,17 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                     control={form.control}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-indigo-500" /> Phone Number
+                        <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs md:text-sm">
+                          <Phone className="w-3.5 md:w-4 h-3.5 md:h-4 text-indigo-500" /> Phone
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="+1 (555) 000-0000"
                             {...field}
-                            className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
+                            className="h-10 md:h-14 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-xs md:text-base placeholder:text-[10px]"
                           />
                         </FormControl>
-                        <FormMessage />
+                        <FormMessage className="text-[10px]" />
                       </FormItem>
                     )}
                   />
@@ -178,26 +186,26 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-900 font-bold flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-indigo-500" /> Current Location
+                      <FormLabel className="text-slate-900 font-bold flex items-center gap-2 text-xs md:text-sm">
+                        <MapPin className="w-3.5 md:w-4 h-3.5 md:h-4 text-indigo-500" /> Location
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="San Francisco, CA"
+                          placeholder="City, State / Country"
                           {...field}
-                          className="h-10 md:h-14 bg-white border-slate-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-base"
+                          className="h-10 md:h-14 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl md:rounded-2xl transition-all text-xs md:text-base placeholder:text-[10px]"
                         />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-[10px]" />
                     </FormItem>
                   )}
                 />
 
-                <div className="pt-6 border-t border-slate-100">
-                  <h3 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em] mb-6">
-                    Digital Presence
+                <div className="pt-4 md:pt-6 border-t border-slate-100">
+                  <h3 className="text-[10px] md:text-sm font-black text-slate-400 uppercase tracking-widest mb-4 md:mb-6">
+                    Digital Nexus
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4" id="tour-social-links-v2">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4" id="tour-social-links-v2">
                     <FormField
                       name="linkedin"
                       control={form.control}
@@ -205,11 +213,11 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                         <FormItem>
                           <FormControl>
                             <div className="relative group">
-                              <Linkedin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                              <Linkedin className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                               <Input
-                                placeholder="LinkedIn"
+                                placeholder="LinkedIn URL"
                                 {...field}
-                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
+                                className="pl-10 md:pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all text-xs md:text-sm placeholder:text-[10px]"
                               />
                             </div>
                           </FormControl>
@@ -224,11 +232,11 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                         <FormItem>
                           <FormControl>
                             <div className="relative group">
-                              <Github className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                              <Github className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                               <Input
-                                placeholder="GitHub"
+                                placeholder="GitHub URL"
                                 {...field}
-                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
+                                className="pl-10 md:pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all text-xs md:text-sm placeholder:text-[10px]"
                               />
                             </div>
                           </FormControl>
@@ -243,11 +251,11 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
                         <FormItem>
                           <FormControl>
                             <div className="relative group">
-                              <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
+                              <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                               <Input
-                                placeholder="Portfolio"
+                                placeholder="Portfolio URL"
                                 {...field}
-                                className="pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-lg md:rounded-xl transition-all"
+                                className="pl-10 md:pl-12 h-10 md:h-12 bg-slate-50 border-transparent focus:bg-white focus:border-indigo-500 rounded-xl transition-all text-xs md:text-sm placeholder:text-[10px]"
                               />
                             </div>
                           </FormControl>
@@ -259,116 +267,17 @@ const BasicInfoStepV2 = ({ next, formData, updateForm }) => {
 
                 <div className="flex justify-end pt-4 md:pt-8">
                   <Button
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-100 px-5 md:px-10 h-10 md:h-14 rounded-xl md:rounded-2xl font-semibold md:font-bold text-sm md:text-lg group"
+                    className="w-full md:w-auto bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl shadow-indigo-100 px-8 h-11 md:h-14 rounded-xl md:rounded-2xl font-black transition-all group text-xs md:text-sm"
                     type="submit"
                     id="tour-next-button-v2"
                   >
-                    Continue to Education{" "}
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    Education Path
+                    <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
               </form>
             </Form>
           </div>
-
-          {/* Dynamic Preview Section */}
-          {/* <div className="lg:col-span-5 relative">
-            <div className="sticky top-32">
-              <div className="mb-4">
-                <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
-                  Live Document Preview
-                </span>
-              </div>
-
-              <Card className="border-none shadow-[20px_40px_80px_rgba(0,0,0,0.05)] bg-white rounded-4xl overflow-hidden">
-                <div className="h-3 bg-linear-to-r from-indigo-500 via-purple-500 to-indigo-600" />
-                <CardContent
-                  className="p-4 md:p-10"
-                  id="tour-resume-preview-v2"
-                >
-                  <div className="space-y-8">
-                    <div className="border-b border-slate-100 pb-8 text-center sm:text-left">
-                      <motion.h1
-                        layout
-                        className="text-lg md:text-4xl font-black text-slate-900 tracking-tight transition-all"
-                      >
-                        {watchedValues.name || "Your Name"}
-                      </motion.h1>
-                      <motion.p
-                        layout
-                        className="text-lg md:text-4xl text-indigo-600 font-bold mt-2"
-                      >
-                        {watchedValues.jobRole || "Target Job Title"}
-                      </motion.p>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-4">
-                      <div className="flex items-center gap-4 text-slate-600 bg-slate-50 p-4 rounded-2xl">
-                        <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                          <Mail className="w-5 h-5 text-indigo-500" />
-                        </div>
-                        <span className="font-semibold truncate">
-                          {watchedValues.email || "email@example.com"}
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-4 text-slate-600 bg-slate-50 p-4 md:rounded-2xl">
-                          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                            <Phone className="w-5 h-5 text-indigo-500" />
-                          </div>
-                          <span className="font-semibold">
-                            {watchedValues.phone || "Phone No"}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-4 text-slate-600 bg-slate-50 p-4 rounded-2xl">
-                          <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
-                            <MapPin className="w-5 h-5 text-indigo-500" />
-                          </div>
-                          <span className="font-semibold">
-                            {watchedValues.address || "Location"}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 pt-4">
-                      {watchedValues.linkedin && (
-                        <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 text-indigo-700 rounded-xl text-sm font-bold">
-                          <Linkedin className="w-4 h-4" /> Profile Linked
-                        </div>
-                      )}
-                      {watchedValues.github && (
-                        <div className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-sm font-bold">
-                          <Github className="w-4 h-4" /> Code Ready
-                        </div>
-                      )}
-                      {watchedValues.portfolio && (
-                        <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold">
-                          <Globe className="w-4 h-4" /> Web Live
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="mt-8 p-6 bg-linear-to-br from-indigo-600 to-purple-700 rounded-3xl text-white shadow-lg shadow-indigo-100">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">ATS Optimized</h4>
-                    <p className="text-white/70 text-sm">
-                      Your contact info is being formatted for maximum
-                      readability.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
