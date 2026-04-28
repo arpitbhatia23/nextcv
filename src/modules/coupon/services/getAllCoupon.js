@@ -11,7 +11,8 @@ export const getAllCoupon = async () => {
   const cachedKey = `allcoupon`;
   const cached = await redis.get(cachedKey);
   if (cached) {
-    return JSON.parse(cached);
+        return NextResponse.json(new apiResponse(200,"coupon fetched successfully",JSON.parse(cached)));
+
   }
   const coupons = await Coupon.find();
   if (!coupons || coupons.length === 0) {
