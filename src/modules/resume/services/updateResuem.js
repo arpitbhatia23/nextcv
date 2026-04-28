@@ -1,5 +1,6 @@
 import { apiError } from "@/shared";
 import Resume from "../models/resume.model";
+import { redis } from "@/shared/utils/Redis";
 
 export const updateResume = async ({ id, updateData }) => {
   const cacheKey = `resumebyID:${id}`;
@@ -13,7 +14,8 @@ export const updateResume = async ({ id, updateData }) => {
   if (!updatedResume) {
     throw new apiError(404, "Resume not found");
   }
-  await redis.set(cacheKey, JSON.stringify(updateData), "EX", 1200);
 
-  return updateResume;
+  await redis.set(cacheKey, JSON.stringify(updatedResume), "EX", 1200);
+
+  return updatedResume;
 };
