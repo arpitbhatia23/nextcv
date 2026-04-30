@@ -7,10 +7,10 @@ import { apiError } from "@/shared";
 // Helper function to get date range based on time filter
 
 const handler = async req => {
-  const { timeRange = "all" } = await req.json();
+  const { timeRange = "all", customStart, customEnd } = await req.json();
   try {
     await dbConnect();
-    return await getAllAnalytics({ timeRange });
+    return await getAllAnalytics({ timeRange, customStart, customEnd });
   } catch (error) {
     console.error("Error fetching analytics data:", error);
     throw new apiError(500, "Failed to fetch analytics data");

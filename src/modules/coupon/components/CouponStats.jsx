@@ -14,6 +14,7 @@ const CouponStats = () => {
       try {
         const res = await axios.post("/api/analytics/coupons");
         if (res.data.success) {
+          console.log(res.data.data);
           setStats(res.data.data);
         }
       } catch (error) {
