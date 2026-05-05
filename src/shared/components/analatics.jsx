@@ -122,19 +122,24 @@ const PieChartComponent = memo(({ data }) => {
           stroke="none"
         >
           {data?.map((_, index) => (
-            <Cell 
-              key={`cell-${index}`} 
-              fill={COLORS[index % COLORS.length]} 
+            <Cell
+              key={`cell-${index}`}
+              fill={COLORS[index % COLORS.length]}
               className="hover:opacity-80 transition-opacity cursor-pointer"
             />
           ))}
         </Pie>
-        <Tooltip 
-          contentStyle={{ fontSize: 12, borderRadius: 12, border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }} 
+        <Tooltip
+          contentStyle={{
+            fontSize: 12,
+            borderRadius: 12,
+            border: "none",
+            boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+          }}
         />
-        <Legend 
-          verticalAlign="bottom" 
-          height={36} 
+        <Legend
+          verticalAlign="bottom"
+          height={36}
           wrapperStyle={{ fontSize: 10, paddingTop: 10 }}
           iconType="circle"
         />
@@ -376,23 +381,31 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             <CardContent className="p-4 sm:p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 {data?.resumeStats?.topSkills?.length > 0 ? (
-                  data.resumeStats.topSkills.slice(0, 10).map((skill, index) => {
+                  data.resumeStats.topSkills.slice(0, 10).map((skilldata, index) => {
                     const maxCount = data.resumeStats.topSkills[0]?.count || 1;
-                    const percentage = Math.round((skill.count / maxCount) * 100);
-                    
+                    const percentage = Math.round((skilldata.count / maxCount) * 100);
+
                     return (
-                      <div key={index} className="space-y-1.5 group">
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate group-hover:text-indigo-600 transition-colors">
-                            {skill.name || "Unknown Skill"}
-                          </span>
-                          <span className="text-[10px] font-bold text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
-                            {skill.count}
-                          </span>
+                      <div
+                        key={index}
+                        className="group/skill relative p-3 rounded-xl hover:bg-slate-50/80 transition-all duration-300 min-w-0"
+                      >
+                        <div className="flex items-center justify-between mb-2 gap-4">
+                          <div className="flex items-center gap-2 min-w-0 flex-1">
+                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover/skill:scale-150 transition-transform shadow-[0_0_8px_rgba(99,102,241,0.6)] shrink-0" />
+                            <span className="text-sm font-bold text-slate-800 tracking-tight group-hover/skill:text-indigo-600 transition-colors truncate">
+                              {skilldata.skill.name || "Unknown Skill"}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="text-[11px] font-black text-slate-900 bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-100">
+                              {skilldata.count}
+                            </span>
+                          </div>
                         </div>
-                        <div className="relative h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="relative h-2 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200/30">
                           <div
-                            className="absolute inset-y-0 left-0 bg-indigo-500 rounded-full transition-all duration-1000 ease-out group-hover:bg-indigo-600 shadow-[0_0_8px_rgba(99,102,241,0.3)]"
+                            className="absolute inset-y-0 left-0 bg-linear-to-r from-indigo-500 via-indigo-600 to-violet-600 rounded-full transition-all duration-1500ms ease-out group-hover/skill:shadow-[0_0_12px_rgba(99,102,241,0.4)]"
                             style={{ width: `${percentage}%` }}
                           />
                         </div>
@@ -400,7 +413,9 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                     );
                   })
                 ) : (
-                  <p className="text-xs text-slate-400 text-center py-8 col-span-2">No skill data available.</p>
+                  <p className="text-xs text-slate-400 text-center py-8 col-span-2">
+                    No skill data available.
+                  </p>
                 )}
               </div>
             </CardContent>
