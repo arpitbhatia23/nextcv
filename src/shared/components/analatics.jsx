@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { memo, Suspense, useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -73,7 +73,7 @@ function MetricCard({ title, value, icon: Icon, color = "blue" }) {
   );
 }
 
-function RevenueChart({ data }) {
+const RevenueChart = memo(({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={240}>
       <LineChart data={data}>
@@ -94,31 +94,54 @@ function RevenueChart({ data }) {
       </LineChart>
     </ResponsiveContainer>
   );
-}
+});
 
-function PieChartComponent({ data }) {
+const PieChartComponent = memo(({ data }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <ResponsiveContainer width="100%" height={240}>
+    <ResponsiveContainer width="100%" height={260}>
       <PieChart>
         <Pie
           data={data}
           cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-          outerRadius={75}
+          cy="45%"
+          labelLine={!isMobile}
+          label={isMobile ? false : ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          outerRadius={isMobile ? 65 : 80}
+          innerRadius={isMobile ? 40 : 0}
+          paddingAngle={isMobile ? 5 : 0}
           dataKey="value"
+          stroke="none"
         >
           {data?.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell 
+              key={`cell-${index}`} 
+              fill={COLORS[index % COLORS.length]} 
+              className="hover:opacity-80 transition-opacity cursor-pointer"
+            />
           ))}
         </Pie>
-        <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #e2e8f0" }} />
-        <Legend wrapperStyle={{ fontSize: 11 }} />
+        <Tooltip 
+          contentStyle={{ fontSize: 12, borderRadius: 12, border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }} 
+        />
+        <Legend 
+          verticalAlign="bottom" 
+          height={36} 
+          wrapperStyle={{ fontSize: 10, paddingTop: 10 }}
+          iconType="circle"
+        />
       </PieChart>
     </ResponsiveContainer>
   );
-}
+});
 
 function SectionHeader({ icon: Icon, title, color, onExport }) {
   return (
@@ -343,33 +366,43 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
               />
             </CardContent>
           </Card>
-          <Card className="border border-slate-100 shadow-sm">
-            <CardHeader className="px-4 pt-4 pb-2">
-              <CardTitle className="text-xs sm:text-sm font-semibold text-slate-600">
+          <Card className="border border-slate-100 shadow-sm col-span-1 lg:col-span-2">
+            <CardHeader className="px-4 sm:px-6 pt-5 pb-3 border-b border-slate-50">
+              <CardTitle className="text-sm sm:text-base font-bold text-slate-700 flex items-center gap-2">
+                <Target className="w-4 h-4 text-indigo-500" />
                 Top Skills in Demand
               </CardTitle>
             </CardHeader>
-            <CardContent className="px-4 pb-4 space-y-3">
-              {data?.resumeStats?.topSkills?.slice(0, 10).map((skill, index) => (
-                <div key={index} className="flex items-center justify-between gap-3">
-                  <span className="text-xs sm:text-sm font-medium text-slate-600 truncate">
-                    {skill?.name}
-                  </span>
-                  <div className="flex items-center gap-2 shrink-0">
-                    <div className="w-16 sm:w-24 bg-slate-100 rounded-full h-1.5">
-                      <div
-                        className="bg-indigo-500 h-1.5 rounded-full"
-                        style={{
-                          width: `${
-                            (skill?.count / (data?.resumeStats?.topSkills?.[0]?.count || 1)) * 100
-                          }%`,
-                        }}
-                      />
-                    </div>
-                    <span className="text-xs text-slate-400 w-5">{skill?.count}</span>
-                  </div>
-                </div>
-              ))}
+            <CardContent className="p-4 sm:p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                {data?.resumeStats?.topSkills?.length > 0 ? (
+                  data.resumeStats.topSkills.slice(0, 10).map((skill, index) => {
+                    const maxCount = data.resumeStats.topSkills[0]?.count || 1;
+                    const percentage = Math.round((skill.count / maxCount) * 100);
+                    
+                    return (
+                      <div key={index} className="space-y-1.5 group">
+                        <div className="flex items-center justify-between gap-3">
+                          <span className="text-xs sm:text-sm font-semibold text-slate-700 truncate group-hover:text-indigo-600 transition-colors">
+                            {skill.name || "Unknown Skill"}
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-400 bg-slate-50 px-1.5 py-0.5 rounded">
+                            {skill.count}
+                          </span>
+                        </div>
+                        <div className="relative h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                          <div
+                            className="absolute inset-y-0 left-0 bg-indigo-500 rounded-full transition-all duration-1000 ease-out group-hover:bg-indigo-600 shadow-[0_0_8px_rgba(99,102,241,0.3)]"
+                            style={{ width: `${percentage}%` }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <p className="text-xs text-slate-400 text-center py-8 col-span-2">No skill data available.</p>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>

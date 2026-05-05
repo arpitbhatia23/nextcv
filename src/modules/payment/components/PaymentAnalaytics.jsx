@@ -90,7 +90,7 @@ const TX_TABS = [
   { id: "pending", label: "Pending", icon: Clock },
 ];
 
-function TransactionTable({ payments }) {
+const TransactionTable = React.memo(({ payments }) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(payments.length / ITEMS_PER_PAGE);
   const start = (page - 1) * ITEMS_PER_PAGE;
@@ -277,7 +277,7 @@ function TransactionTable({ payments }) {
       )}
     </div>
   );
-}
+});
 
 const AdminPaymentDashboard = () => {
   const [payments, setPayments] = useState([]);
@@ -367,17 +367,15 @@ const AdminPaymentDashboard = () => {
 
   const totals = useMemo(() => {
     // Only successful / completed payments count toward revenue
-    const total = successPayments.reduce((s, p) => s + (p.amount || 0), 0);
-    return {
-      total,
-      count: filteredPayments.length,
-      successCount: successPayments.length,
-      average: total / (successPayments.length || 1),
-      byPaymentMode: filteredPayments.reduce((acc, p) => {
-        acc[p.paymentMode] = (acc[p.paymentMode] || 0) + p.amount;
-        return acc;
-      }, {}),
-    };
+    return successPayments.reduce((acc, p) => {
+      const amount = p.amount || 0;
+      acc.total += amount;
+      acc.successCount += 1;
+      acc.byPaymentMode[p.paymentMode] = (acc.byPaymentMode[p.paymentMode] || 0) + amount;
+      acc.count = filteredPayments.length;
+      acc.average = acc.total / (acc.successCount || 1);
+      return acc;
+    }, { total: 0, count: 0, successCount: 0, average: 0, byPaymentMode: {} });
   }, [filteredPayments, successPayments]);
 
   const exportToCSV = () => {

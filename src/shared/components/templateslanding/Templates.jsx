@@ -382,9 +382,10 @@ const Templates = () => {
                   src={img}
                   width={width}
                   height={height}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:shadow-lg"
+                  className="w-full h-full object-cover object-top"
                   alt={`${title} resume template`}
-                  loading="lazy"
+                  priority={index < 4}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
 
                 {/* Subtle Gradient Overlay */}

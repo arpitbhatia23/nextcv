@@ -97,56 +97,39 @@ const AdminiDashboard = () => {
         </div>
       </div>
 
-      {/* ── Tab Panels — ALL kept mounted, only visibility toggled ─── */}
-      {/*    This means API calls fire once; switching is instant.      */}
-
-      {/* Overview */}
-      <div
-        id="panel-overview"
-        role="tabpanel"
-        aria-labelledby="tab-overview"
-        hidden={activeTab !== "overview"}
-        className={activeTab === "overview" ? "@container/main flex flex-1 flex-col gap-2" : ""}
-      >
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <SectionCards />
-          <div className="px-3 sm:px-4 lg:px-6">
-            <div className="grid grid-cols-1 gap-4 sm:gap-6">
-              <CouponStats />
-              <AdminFeedbackList />
+      {/* ── Tab Panels — Only render active tab to optimize INP ─── */}
+      <div className="flex-1 flex flex-col">
+        {activeTab === "overview" && (
+          <div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" className="@container/main flex flex-1 flex-col gap-2">
+            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+              <SectionCards />
+              <div className="px-3 sm:px-4 lg:px-6">
+                <div className="grid grid-cols-1 gap-4 sm:gap-6">
+                  <CouponStats />
+                  <AdminFeedbackList />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
 
-      {/* Analytics */}
-      <div
-        id="panel-analytics"
-        role="tabpanel"
-        aria-labelledby="tab-analytics"
-        hidden={activeTab !== "analytics"}
-      >
-        <AnalyticsPage />
-      </div>
+        {activeTab === "analytics" && (
+          <div id="panel-analytics" role="tabpanel" aria-labelledby="tab-analytics" className="flex-1">
+            <AnalyticsPage />
+          </div>
+        )}
 
-      {/* Payments */}
-      <div
-        id="panel-payment"
-        role="tabpanel"
-        aria-labelledby="tab-payment"
-        hidden={activeTab !== "payment"}
-      >
-        <AdminPaymentDashboard />
-      </div>
+        {activeTab === "payment" && (
+          <div id="panel-payment" role="tabpanel" aria-labelledby="tab-payment" className="flex-1">
+            <AdminPaymentDashboard />
+          </div>
+        )}
 
-      {/* Coupons */}
-      <div
-        id="panel-coupons"
-        role="tabpanel"
-        aria-labelledby="tab-coupons"
-        hidden={activeTab !== "coupons"}
-      >
-        <Coupons />
+        {activeTab === "coupons" && (
+          <div id="panel-coupons" role="tabpanel" aria-labelledby="tab-coupons" className="flex-1">
+            <Coupons />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Payment from "@/modules/payment/model/payment.model.js";
 import { User } from "@/modules/auth";
 import dbConnect from "@/shared/utils/dbConnect";
 import { redis } from "@/shared/utils/Redis";
+import Resume from "@/modules/resume/models/resume.model.js";
 
 const sectionServer = async (params = {}) => {
   const { range = "30d", customStart, customEnd } = params;
@@ -74,9 +75,20 @@ const sectionServer = async (params = {}) => {
     User.countDocuments(lastTimeQuery),
     User.countDocuments({ createdAt: { $gte: new Date(new Date().setHours(0, 0, 0, 0)) } }),
 
-    // Active Users
-    User.countDocuments(activeQuery),
-    User.countDocuments(lastActiveQuery),
+    // Active Users (based on Resume activity)
+    (async () => {
+      const rQuery = startDate ? { updatedAt: { $gte: startDate, $lte: endDate } } : {};
+      const activeEmails = await Resume.distinct("email", rQuery);
+      return activeEmails.length;
+    })(),
+    (async () => {
+      if (!startDate) return 0;
+      const startOfLastMonth = new Date(startDate);
+      startOfLastMonth.setMonth(startOfLastMonth.getMonth() - 1);
+      const endOfLastMonth = new Date(startDate);
+      const activeEmails = await Resume.distinct("email", { updatedAt: { $gte: startOfLastMonth, $lt: endOfLastMonth } });
+      return activeEmails.length;
+    })(),
 
     // Total Users
     User.countDocuments({}),

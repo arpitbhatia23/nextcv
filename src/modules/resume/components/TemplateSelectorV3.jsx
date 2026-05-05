@@ -110,7 +110,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                       alt={template.label}
                       fill
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
-                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                      className="object-cover"
                       priority={index < 5}
                     />
                     {/* Glass Overlay on Hover */}
