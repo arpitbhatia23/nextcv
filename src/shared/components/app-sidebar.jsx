@@ -69,29 +69,39 @@ export function AppSidebar({ ...props }) {
   const data = user?.role === "admin" ? adminData : userData;
 
   return (
-    <Sidebar collapsible="offcanvas" className="bg-white border-r border-slate-200" {...props}>
-      <SidebarHeader className="bg-white p-4">
+    <Sidebar
+      collapsible="offcanvas"
+      className="bg-slate-50/50 backdrop-blur-xl border-r border-slate-200/60"
+      {...props}
+    >
+      <SidebarHeader className="p-6">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="h-14 hover:bg-slate-50 transition-all rounded-xl">
-              <a href="#" className="flex justify-start pl-2">
-                <Logo2 size={32} color="#0f172a" />
+            <SidebarMenuButton asChild>
+              <a href="/dashboard" className="flex items-center justify-center mt-6 p-6">
+                <Logo2 size={60} />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
 
-      <Separator className="bg-slate-100" />
+      <div className="px-6">
+        <Separator className="bg-slate-200/50" />
+      </div>
 
-      <SidebarContent className="bg-white px-4 py-6">
+      <SidebarContent className="px-4 py-8">
         <NavMain items={data.navMain} />
       </SidebarContent>
 
-      <Separator className="bg-slate-100" />
+      <div className="px-6">
+        <Separator className="bg-slate-200/50" />
+      </div>
 
-      <SidebarFooter className="bg-white p-6">
-        <NavUser user={user} />
+      <SidebarFooter className="p-4 mb-2">
+        <div className="bg-white/60 backdrop-blur-md rounded-2xl p-2 border border-slate-200/50 shadow-sm hover:shadow-md transition-all duration-300">
+          <NavUser user={user} />
+        </div>
       </SidebarFooter>
     </Sidebar>
   );
