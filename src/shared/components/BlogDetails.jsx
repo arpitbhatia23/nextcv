@@ -281,12 +281,13 @@ const BlogDetails = ({ slug, initialData }) => {
           <div className="relative w-full min-h-100 md:min-h-125 rounded-3xl overflow-hidden shadow-2xl shadow-indigo-100 mb-16 group">
             {blog.mainImage && (
               <Image
-                src={urlFor(blog.mainImage).width(1600).url()}
+                src={urlFor(blog.mainImage).width(1600).format('webp').auto('format').url()}
                 alt={blog.title}
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 priority
+                unoptimized={true}
               />
             )}
             <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-30" />
@@ -382,10 +383,11 @@ const BlogDetails = ({ slug, initialData }) => {
                   <div className="relative w-16 h-16 rounded-2xl overflow-hidden ring-4 ring-indigo-500/30">
                     {blog.author?.image ? (
                       <Image
-                        src={urlFor(blog.author.image).width(128).url()}
+                        src={urlFor(blog.author.image).width(128).format('webp').auto('format').url()}
                         alt={blog.author.name}
                         fill
                         className="object-cover"
+                        unoptimized={true}
                       />
                     ) : (
                       <div className="w-full h-full bg-white/20 flex items-center justify-center">
@@ -454,10 +456,11 @@ const BlogDetails = ({ slug, initialData }) => {
                   <div className="relative aspect-video rounded-2xl overflow-hidden mb-6">
                     {post.mainImage && (
                       <Image
-                        src={urlFor(post.mainImage).width(600).url()}
+                        src={urlFor(post.mainImage).width(600).format('webp').auto('format').url()}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        unoptimized={true}
                       />
                     )}
                   </div>

@@ -23,6 +23,9 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
     if (cached) {
       return NextResponse.json(new apiResponse(200, "data fetch successfully", JSON.parse(cached)), {
         status: 200,
+        headers: {
+          "Cache-Control": "public, s-maxage=300, stale-while-revalidate=59",
+        },
       });
     }
   } catch (err) {
@@ -144,7 +147,12 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
 
   await redis.set(cacheKey, JSON.stringify(responseData), "EX", 320);
 
-  return NextResponse.json(new apiResponse(200, "data fetch successfully", responseData), { status: 200 });
+  return NextResponse.json(new apiResponse(200, "data fetch successfully", responseData), { 
+    status: 200,
+    headers: {
+      "Cache-Control": "public, s-maxage=300, stale-while-revalidate=59",
+    },
+  });
 };
 
 

@@ -20,7 +20,7 @@ const nextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60 * 60 * 24, // 1 day 🔥
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
       { protocol: "https", hostname: "api.dicebear.com" },
