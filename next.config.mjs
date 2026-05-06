@@ -11,7 +11,8 @@ const nextConfig = {
 
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,
-  compress: true,
+  // Disabled because Cloudflare/Vercel Edge handles Brotli/Gzip much more efficiently
+  compress: false,
   productionBrowserSourceMaps: false,
 
   compiler: {
