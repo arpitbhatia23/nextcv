@@ -172,10 +172,12 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.post("/api/analytics/getAnalaticsData", {
-          timeRange,
-          customStart,
-          customEnd,
+        const res = await axios.get("/api/analytics/getAnalaticsData", {
+          params: {
+            timeRange,
+            customStart,
+            customEnd,
+          }
         });
         setData(res?.data?.data);
       } catch (err) {

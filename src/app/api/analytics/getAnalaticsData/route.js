@@ -7,7 +7,11 @@ import { apiError } from "@/shared";
 // Helper function to get date range based on time filter
 
 const handler = async req => {
-  const { timeRange = "all", customStart, customEnd } = await req.json();
+  const { searchParams } = new URL(req.url);
+  const timeRange = searchParams.get("timeRange") || "all";
+  const customStart = searchParams.get("customStart");
+  const customEnd = searchParams.get("customEnd");
+
   try {
     await dbConnect();
     return await getAllAnalytics({ timeRange, customStart, customEnd });
@@ -17,4 +21,4 @@ const handler = async req => {
   }
 };
 
-export const POST = asyncHandler(handler);
+export const GET = asyncHandler(handler);

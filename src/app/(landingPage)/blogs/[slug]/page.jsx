@@ -35,6 +35,16 @@ const getRelatedPosts = cache(async slug => {
   return await client.fetch(query, { slug });
 });
 
+// ✅ 4.5 Static Params (Fixes CPU Usage and improves TTFB)
+export async function generateStaticParams() {
+  const query = `*[_type == "post"]{ "slug": slug.current }`;
+  const slugs = await client.fetch(query);
+  
+  return slugs.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 // 🧠 5. Dynamic Metadata (NOW OPTIMIZED)
 export async function generateMetadata({ params }) {
   const { slug } = await params;
