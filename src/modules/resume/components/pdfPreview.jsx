@@ -3,6 +3,8 @@ import { WatermarkLayer } from "@/modules/payment/components/WatermarkLayer";
 import React, { useState } from "react";
 import { Document, Page } from "react-pdf";
 
+
+
 const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
   const [numPages, setNumPages] = useState(null);
 
