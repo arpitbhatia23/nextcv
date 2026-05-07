@@ -16,12 +16,11 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
 
   compiler: {
-    removeConsole: true,
+    removeConsole: false,
   },
 
   images: {
     formats: ["image/avif", "image/webp"],
-    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
       { protocol: "https", hostname: "api.dicebear.com" },

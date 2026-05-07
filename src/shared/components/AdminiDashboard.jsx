@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import dynamic from "next/dynamic";
 import { BarChart3, CreditCard, TicketPercent, LayoutDashboard } from "lucide-react";
 
@@ -41,6 +41,13 @@ const TAB_ACCENT = {
 
 const AdminiDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isPending, startTransition] = useTransition();
+
+  const handleTabChange = (id) => {
+    startTransition(() => {
+      setActiveTab(id);
+    });
+  };
 
   return (
     <div className="flex flex-1 flex-col min-h-screen bg-slate-50">
@@ -63,12 +70,14 @@ const AdminiDashboard = () => {
                   aria-selected={isActive}
                   aria-controls={`panel-${id}`}
                   id={`tab-${id}`}
-                  onClick={() => setActiveTab(id)}
+                  onClick={() => handleTabChange(id)}
+                  disabled={isPending}
                   className={[
                     // base
                     "group relative flex items-center gap-2 px-3 sm:px-5 py-3.5 sm:py-4",
                     "text-xs sm:text-sm font-semibold whitespace-nowrap select-none",
                     "border-b-2 transition-all duration-200 shrink-0",
+                    isPending ? "opacity-50 grayscale-[0.5]" : "opacity-100",
                     // state
                     isActive
                       ? accentCls

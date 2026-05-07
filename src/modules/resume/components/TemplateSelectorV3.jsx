@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { CheckCircle2, LayoutTemplate, Sparkles, ArrowRight, Zap } from "lucide-react";
 import { templates } from "@/shared/utils/template";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
@@ -24,19 +24,23 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
     router.prefetch("/dashboard/builder/basicInfo");
   }, [router]);
 
+  const [isPending, startTransition] = useTransition();
+
   const handleSelect = key => {
-    setSelectedTemplate(key);
-    if (onSelect) {
-      onSelect(key);
-    } else if (next) {
-      next();
-    } else {
-      router.push("/dashboard/builder/basicInfo");
-    }
+    startTransition(() => {
+      setSelectedTemplate(key);
+      if (onSelect) {
+        onSelect(key);
+      } else if (next) {
+        next();
+      } else {
+        router.push("/dashboard/builder/basicInfo");
+      }
+    });
   };
 
   return (
-    <div className="space-y-8 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 p-4 md:p-6 lg:p-8">
+    <div className={`space-y-8 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 p-4 md:p-6 lg:p-8 ${isPending ? "pointer-events-none opacity-80" : ""}`}>
       {/* Premium Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">

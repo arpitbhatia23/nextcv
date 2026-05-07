@@ -1,4 +1,4 @@
-import { templates } from "@/shared/utils/template";
+import { templates, getTemplateComponent } from "@/shared/utils/template";
 import { pdf } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
@@ -11,15 +11,9 @@ export class pdfGenerator {
   }
   async createPdf() {
     // if (!this.selectedTemplate || this.resumeData?.ResumeType) return;
-    const selectedTemplate = templates.find(
-      t => t.key === (this?.selectedTemplate || this.resumeData?.ResumeType)
+    const TemplateComponent = await getTemplateComponent(
+      this?.selectedTemplate || this.resumeData?.ResumeType
     );
-    console.log("selected", selectedTemplate);
-    if (!selectedTemplate) {
-      return;
-    }
-
-    const TemplateComponent = selectedTemplate.component;
     const blob = await pdf(<TemplateComponent data={this.resumeData} />).toBlob();
     const url = URL.createObjectURL(blob);
     this.url = url;

@@ -38,6 +38,89 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import PDFPreview from "./pdfPreview";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 
+const ResumeCard = ({ resume, onPreview, onDownload, onEdit, onDelete, getTemplateDisplayName }) => (
+  <Card className="group hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-400 bg-white rounded-xl overflow-hidden">
+    <CardContent className="p-0">
+      <div
+        className="bg-slate-50 border-b border-slate-100 p-4 flex items-center justify-center h-48 relative overflow-hidden group-hover:bg-indigo-50/30 transition-colors cursor-pointer"
+        onClick={() => onPreview(resume)}
+      >
+        <FileText
+          className="w-16 h-16 text-slate-300 group-hover:text-indigo-400 transition-colors"
+          strokeWidth={1.5}
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <span className="bg-white/90 text-indigo-700 px-4 py-2 rounded-full font-medium text-sm shadow-sm backdrop-blur-sm">
+            Quick Preview
+          </span>
+        </div>
+      </div>
+      <div className="p-5">
+        <div className="flex items-start justify-between mb-2">
+          <div className="flex-1 min-w-0 pr-3">
+            <h2 className="font-bold text-lg text-slate-900 truncate" title={resume.name}>
+              {resume.name || "Untitled Resume"}
+            </h2>
+            <p className="text-xs text-slate-500 truncate">
+              {getTemplateDisplayName(resume.ResumeType)}
+            </p>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 hover:bg-slate-100 -mr-2 text-slate-400"
+              >
+                <MoreVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={() => onDownload(resume)}>
+                <Download className="mr-2 h-4 w-4" />
+                Download PDF
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onEdit(resume?._id)}>
+                <Edit2 className="mr-2 h-4 w-4" />
+                Edit Resume
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => onDelete(resume._id)}
+                className="text-red-600 focus:text-red-600 focus:bg-red-50"
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center text-xs text-slate-400">
+            <Calendar className="h-3 w-3 mr-1.5" />
+            {new Date(resume.updatedAt || resume.createdAt).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+            })}
+          </div>
+
+          <Badge
+            variant={resume.status === "paid" ? "default" : "secondary"}
+            className={`uppercase px-2.5 py-0.5 text-[10px] font-bold tracking-wide rounded-md border-0 ${
+              resume.status === "paid"
+                ? "bg-emerald-100 text-emerald-700"
+                : "bg-amber-100 text-amber-700"
+            }`}
+          >
+            {resume.status}
+          </Badge>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -176,88 +259,6 @@ const MyResume = () => {
     setOriginalAmount,
   });
 
-  const ResumeCard = ({ resume }) => (
-    <Card className="group hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-400 bg-white rounded-xl overflow-hidden">
-      <CardContent className="p-0">
-        <div
-          className="bg-slate-50 border-b border-slate-100 p-4 flex items-center justify-center h-48 relative overflow-hidden group-hover:bg-indigo-50/30 transition-colors cursor-pointer"
-          onClick={() => handleViewResume(resume)}
-        >
-          <FileText
-            className="w-16 h-16 text-slate-300 group-hover:text-indigo-400 transition-colors"
-            strokeWidth={1.5}
-          />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <span className="bg-white/90 text-indigo-700 px-4 py-2 rounded-full font-medium text-sm shadow-sm backdrop-blur-sm">
-              Quick Preview
-            </span>
-          </div>
-        </div>
-        <div className="p-5">
-          <div className="flex items-start justify-between mb-2">
-            <div className="flex-1 min-w-0 pr-3">
-              <h2 className="font-bold text-lg text-slate-900 truncate" title={resume.name}>
-                {resume.name || "Untitled Resume"}
-              </h2>
-              <p className="text-xs text-slate-500 truncate">
-                {getTemplateDisplayName(resume.ResumeType)}
-              </p>
-            </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-slate-100 -mr-2 text-slate-400"
-                >
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem onClick={() => handleDownload(resume)}>
-                  <Download className="mr-2 h-4 w-4" />
-                  Download PDF
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleEdit(resume?._id)}>
-                  <Edit2 className="mr-2 h-4 w-4" />
-                  Edit Resume
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => handleDelete(resume._id)}
-                  className="text-red-600 focus:text-red-600 focus:bg-red-50"
-                >
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex items-center text-xs text-slate-400">
-              <Calendar className="h-3 w-3 mr-1.5" />
-              {new Date(resume.updatedAt || resume.createdAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              })}
-            </div>
-
-            <Badge
-              variant={resume.status === "paid" ? "default" : "secondary"}
-              className={`uppercase px-2.5 py-0.5 text-[10px] font-bold tracking-wide rounded-md border-0 ${
-                resume.status === "paid"
-                  ? "bg-emerald-100 text-emerald-700"
-                  : "bg-amber-100 text-amber-700"
-              }`}
-            >
-              {resume.status}
-            </Badge>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
 
   if (loading) {
     return (
@@ -466,7 +467,15 @@ const MyResume = () => {
               id="tour-resume-list"
             >
               {paidResumes.map(resume => (
-                <ResumeCard key={resume?.resumedata._id} resume={resume?.resumedata} />
+                <ResumeCard 
+                  key={resume?.resumedata._id} 
+                  resume={resume?.resumedata} 
+                  onPreview={handleViewResume}
+                  onDownload={handleDownload}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  getTemplateDisplayName={getTemplateDisplayName}
+                />
               ))}
             </div>
           )}
@@ -487,7 +496,15 @@ const MyResume = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {draftResumes.map(resume => (
-                <ResumeCard key={resume?.resumedata._id} resume={resume?.resumedata} />
+                <ResumeCard 
+                  key={resume?.resumedata._id} 
+                  resume={resume?.resumedata} 
+                  onPreview={handleViewResume}
+                  onDownload={handleDownload}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  getTemplateDisplayName={getTemplateDisplayName}
+                />
               ))}
             </div>
           )}
