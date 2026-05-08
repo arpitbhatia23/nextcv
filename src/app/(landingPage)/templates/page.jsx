@@ -15,6 +15,8 @@ export const metadata = {
   },
 };
 
+export const revalidate = 3600;
+
 export default function TemplatesPage() {
   const jsonLdSchema = {
     "@context": "https://schema.org",

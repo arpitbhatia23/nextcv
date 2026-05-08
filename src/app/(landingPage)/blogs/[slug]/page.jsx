@@ -4,7 +4,7 @@ import BlogDetails from "@/shared/components/BlogDetails";
 import { cache } from "react";
 
 // ✅ 2. ISR (VERY IMPORTANT)
-export const revalidate = 300; // 5 minutes
+export const revalidate = 3600; // 1 hour
 
 // ✅ 3. Cached Blog Fetch (SHARED)
 const getBlog = cache(async slug => {

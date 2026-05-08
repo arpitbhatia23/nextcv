@@ -21,7 +21,8 @@ const nextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
-    unoptimized: true,
+    loader: "custom",
+    loaderFile: "./src/shared/utils/cloudflareLoader.js",
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },
       { protocol: "https", hostname: "api.dicebear.com" },
