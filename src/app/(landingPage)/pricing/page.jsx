@@ -12,6 +12,8 @@ export const metadata = {
   },
 };
 
+export const revalidate = 3600;
+
 export default function PricingPage() {
   const features = [
     "Unlimited Edits & AI Generations",

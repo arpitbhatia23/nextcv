@@ -11,6 +11,8 @@ export const metadata = {
   },
 };
 
+export const revalidate = 86400;
+
 export default function ContactPage() {
   const jsonLdSchema = {
     "@context": "https://schema.org",

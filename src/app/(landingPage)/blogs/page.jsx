@@ -15,6 +15,8 @@ export const metadata = {
   },
 };
 
+export const revalidate = 3600; // Cache for 1 hour
+
 const Blogspage = () => {
   const jsonld = {
     "@context": "https://schema.org",

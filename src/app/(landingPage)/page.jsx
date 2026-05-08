@@ -11,6 +11,8 @@ const FAQ = dynamic(() => import("@/shared/components/herosection/FAQ"));
 const SEOKeywordCloud = dynamic(() => import("@/shared/components/herosection/SEOKeywordCloud"));
 const SEOSection = dynamic(() => import("@/shared/components/herosection/SEOSection"));
 
+export const revalidate = 3600; // Cache for 1 hour
+
 export default function Home() {
   return (
     <>
