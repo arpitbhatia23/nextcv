@@ -429,6 +429,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 }
 
 export default function AnalyticsPage() {
+  const [isPending, startTransition] = useTransition();
   const [timeRange, setTimeRange] = useState("all");
   const [customStart, setCustomStart] = useState("");
   const [customEnd, setCustomEnd] = useState("");
@@ -442,8 +443,8 @@ export default function AnalyticsPage() {
             <h1 className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 tracking-tight">
               Analytics Studio
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Live platform metrics and business intelligence
+            <p className={`text-xs sm:text-sm text-slate-500 ${isPending ? 'animate-pulse' : ''}`}>
+              {isPending ? 'Updating metrics...' : 'Live platform metrics and business intelligence'}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -452,18 +453,36 @@ export default function AnalyticsPage() {
                 <input
                   type="date"
                   value={customStart}
-                  onChange={e => setCustomStart(e.target.value)}
+                  onChange={e => {
+                    const val = e.target.value;
+                    startTransition(() => {
+                      setCustomStart(val);
+                    });
+                  }}
                   className="text-xs border rounded-lg px-2 py-1.5 h-9 focus:ring-2 focus:ring-indigo-500 outline-none"
                 />
                 <input
                   type="date"
                   value={customEnd}
-                  onChange={e => setCustomEnd(e.target.value)}
+                  onChange={e => {
+                    const val = e.target.value;
+                    startTransition(() => {
+                      setCustomEnd(val);
+                    });
+                  }}
                   className="text-xs border rounded-lg px-2 py-1.5 h-9 focus:ring-2 focus:ring-indigo-500 outline-none"
                 />
               </div>
             )}
-            <Select defaultValue={timeRange} onValueChange={value => setTimeRange(value)}>
+            <Select 
+              defaultValue={timeRange} 
+              onValueChange={value => {
+                startTransition(() => {
+                  setTimeRange(value);
+                });
+              }}
+              disabled={isPending}
+            >
               <SelectTrigger
                 className="w-36 sm:w-44 text-xs sm:text-sm font-bold bg-slate-50 border-slate-200"
                 aria-label="Select time range"
