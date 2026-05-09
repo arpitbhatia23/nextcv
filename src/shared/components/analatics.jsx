@@ -1,5 +1,5 @@
 "use client";
-import { memo, Suspense, useEffect, useState } from "react";
+import { memo, Suspense, useEffect, useState, useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -177,7 +177,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             timeRange,
             customStart,
             customEnd,
-          }
+          },
         });
         setData(res?.data?.data);
       } catch (err) {
@@ -443,8 +443,10 @@ export default function AnalyticsPage() {
             <h1 className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 tracking-tight">
               Analytics Studio
             </h1>
-            <p className={`text-xs sm:text-sm text-slate-500 ${isPending ? 'animate-pulse' : ''}`}>
-              {isPending ? 'Updating metrics...' : 'Live platform metrics and business intelligence'}
+            <p className={`text-xs sm:text-sm text-slate-500 ${isPending ? "animate-pulse" : ""}`}>
+              {isPending
+                ? "Updating metrics..."
+                : "Live platform metrics and business intelligence"}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
@@ -474,8 +476,8 @@ export default function AnalyticsPage() {
                 />
               </div>
             )}
-            <Select 
-              defaultValue={timeRange} 
+            <Select
+              defaultValue={timeRange}
               onValueChange={value => {
                 startTransition(() => {
                   setTimeRange(value);
