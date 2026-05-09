@@ -355,6 +355,8 @@ const morden = ({ data }) => (
           ))}
         </View>
       )}
+      {/* Hidden Signature for ATS Detection */}
+      <Text style={{ fontSize: 1, color: "#fff", marginTop: 10,display:"none" }}>NextCV Resume Optimized</Text>
     </Page>
   </Document>
 );

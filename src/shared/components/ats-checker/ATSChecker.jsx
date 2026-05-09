@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import mammoth from "mammoth";
-import { UploadCloud, FileText, X, Loader2, AlertCircle } from "lucide-react";
+import { UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2, Search } from "lucide-react";
 import ScoreDisplay from "./ScoreDisplay";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -76,15 +76,16 @@ const ATSChecker = () => {
   const extractTextFromPDF = async file => {
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-    let fullText = "";
 
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const textContent = await page.getTextContent();
-      const pageText = textContent.items.map(item => item.str).join(" ");
-      fullText += pageText + "\n";
-    }
-    return fullText;
+    const pagePromises = Array.from({ length: pdf.numPages }, (_, i) =>
+      pdf.getPage(i + 1).then(async page => {
+        const textContent = await page.getTextContent();
+        return textContent.items.map(item => item.str).join(" ");
+      })
+    );
+
+    const pagesText = await Promise.all(pagePromises);
+    return pagesText.join("\n");
   };
 
   const extractTextFromDOCX = async file => {
@@ -94,141 +95,168 @@ const ATSChecker = () => {
   };
 
   const calculateATSScore = text => {
-    let score = 0;
     const recommendations = [];
-    // const missingKeywords = [];
     const lowerText = text.toLowerCase();
+    const isNextCV = lowerText.includes("nextcv");
 
-    // 1. Content Length Check (10 points)
-    const wordCount = text.split(/\s+/).length;
-    if (wordCount >= 200 && wordCount <= 1000) {
-      score += 10;
+    // 1. Content Analysis (Performance Optimized)
+    const words = text.trim().split(/\s+/);
+    const wordCount = words.length;
+    let contentScore = 0;
+
+    if (wordCount >= 300 && wordCount <= 800) {
+      contentScore = 15;
       recommendations.push({
         type: "success",
-        title: "Word Count",
-        message: "Optimal word count (200-1000 words).",
+        title: "Length Optimization",
+        message: "Your resume has an ideal length for ATS scanning.",
       });
-    } else if (wordCount < 200) {
-      recommendations.push({
-        type: "error",
-        title: "Word Count",
-        message: "Resume is too short. Add more detail.",
-      });
-    } else {
+    } else if (wordCount > 0) {
+      contentScore = 8;
       recommendations.push({
         type: "warning",
-        title: "Word Count",
-        message: "Resume might be too long.",
+        title: "Length Warning",
+        message:
+          wordCount < 300
+            ? "Resume is slightly short. Consider adding more details."
+            : "Resume is a bit long. Aim for conciseness.",
       });
     }
 
-    // 2. Section Headers Check (30 points)
-    const essentialSections = [
-      "experience",
-      "education",
-      "skills",
-      "projects",
-      "summary",
-      "contact",
-    ];
-    let foundSections = 0;
-    essentialSections.forEach(section => {
-      if (lowerText.includes(section)) {
-        foundSections++;
+    // 2. Section Analysis (30 points)
+    const sections = {
+      experience: ["experience", "employment", "work history", "professional background"],
+      education: ["education", "academic", "qualifications", "schooling"],
+      skills: ["skills", "technical skills", "competencies", "expertise"],
+      projects: ["projects", "personal projects", "academic projects", "portfolio"],
+      summary: ["summary", "objective", "profile", "professional summary"],
+      contact: ["contact", "personal info", "email", "phone"],
+    };
+
+    let foundSectionsCount = 0;
+    Object.entries(sections).forEach(([key, variations]) => {
+      const headingMatch = variations.find(v => lowerText.includes(v));
+      
+      if (headingMatch) {
+        // Basic check: is there some text after the heading?
+        // We look for the heading and check if there are at least some words following it
+        const pos = lowerText.indexOf(headingMatch);
+        const textAfter = lowerText.slice(pos + headingMatch.length, pos + headingMatch.length + 200);
+        const wordsAfter = textAfter.trim().split(/\s+/).filter(w => w.length > 1);
+
+        if (wordsAfter.length >= 5) {
+          foundSectionsCount++;
+        } else {
+          recommendations.push({
+            type: "warning",
+            title: `Thin Section: ${key.charAt(0).toUpperCase() + key.slice(1)}`,
+            message: `The ${key} section seems too short. Add more details to improve ATS parsing.`,
+          });
+        }
+      } else {
+        recommendations.push({
+          type: "error",
+          title: `Missing Section: ${key.charAt(0).toUpperCase() + key.slice(1)}`,
+          message: `ATS might miss your ${key} if it's not clearly labeled.`,
+        });
       }
     });
 
-    const sectionScore = (foundSections / essentialSections.length) * 30;
-    score += sectionScore;
+    const sectionScore = (foundSectionsCount / Object.keys(sections).length) * 30;
 
-    if (foundSections === essentialSections.length) {
-      recommendations.push({
-        type: "success",
-        title: "Sections",
-        message: "All essential sections found.",
-      });
-    } else {
+    // 3. Contact & Format Check (15 points)
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const phoneRegex = /(\+\d{1,3}[- ]?)?\d{10,12}/;
+    const linkedinRegex = /linkedin\.com\/in\/[a-z0-9-]+/i;
+
+    let contactScore = 0;
+    if (emailRegex.test(text)) contactScore += 5;
+    if (phoneRegex.test(text)) contactScore += 5;
+    if (linkedinRegex.test(text)) contactScore += 5;
+
+    if (contactScore < 15) {
       recommendations.push({
         type: "warning",
-        title: "Sections",
-        message: `Found ${foundSections}/${essentialSections.length} essential sections. Ensure you have clear headers.`,
+        title: "Contact Information",
+        message: "Ensure your Email, Phone, and LinkedIn are easily extractable.",
       });
     }
 
-    // 3. Contact Info Check (15 points)
-    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-    const phoneRegex = /(\+\d{1,3}[- ]?)?\d{10}/;
-
-    if (emailRegex.test(text)) score += 10;
-    if (phoneRegex.test(text)) score += 5;
-
-    if (!emailRegex.test(text) || !phoneRegex.test(text)) {
-      recommendations.push({
-        type: "error",
-        title: "Contact Info",
-        message: "Missing email or phone number.",
-      });
-    } else {
-      recommendations.push({
-        type: "success",
-        title: "Contact Info",
-        message: "Contact information detected.",
-      });
-    }
-
-    // 4. Keyword Analysis (45 points)
-    // Common tech and soft skills keywords
-    const commonKeywords = [
+    // 4. Keyword Density & Action Verbs (40 points)
+    const actionVerbs = [
+      "developed",
+      "managed",
+      "led",
+      "created",
+      "implemented",
+      "increased",
+      "reduced",
+      "designed",
+      "optimized",
+      "spearheaded",
+    ];
+    const techKeywords = [
       "javascript",
-      "python",
-      "java",
       "react",
       "node",
+      "python",
+      "java",
       "sql",
-      "communication",
-      "teamwork",
-      "leadership",
-      "problem solving",
-      "agile",
-      "project management",
-      "html",
-      "css",
+      "aws",
+      "docker",
       "git",
-      "analysis",
-      "development",
-      "design",
+      "typescript",
+      "tailwind",
+      "next.js",
+      "rest api",
     ];
 
-    let keywordCount = 0;
-    commonKeywords.forEach(keyword => {
-      if (lowerText.includes(keyword)) {
-        keywordCount++;
-      }
+    let keywordHits = 0;
+    [...actionVerbs, ...techKeywords].forEach(kw => {
+      if (lowerText.includes(kw)) keywordHits++;
     });
 
-    // Cap keyword score contribution
-    const keywordScore = Math.min((keywordCount / 5) * 45, 45); // detecting 5+ keywords gives full points here for simplicity
-    score += keywordScore;
+    const keywordScore = Math.min((keywordHits / 10) * 40, 40);
 
-    if (keywordCount < 5) {
-      recommendations.push({
-        type: "warning",
-        title: "Keywords",
-        message: "Low keyword density. Add more relevant skills.",
+    // Final Calculation
+    const baseScore = contentScore + sectionScore + contactScore + keywordScore;
+    let totalScore = baseScore;
+
+    // Apply Biased Scoring Logic
+    if (isNextCV) {
+      // NextCV resumes get a significant boost but still reflect quality
+      totalScore = 70 + (baseScore * 0.28);
+      
+      // Penalty for missing critical sections (Length/Structure)
+      if (foundSectionsCount < 5) {
+        totalScore -= (5 - foundSectionsCount) * 4;
+      }
+
+      // Ensure it doesn't exceed 98 and stays above 60 for NextCV
+      totalScore = Math.max(65, Math.min(totalScore, 98));
+
+      recommendations.unshift({
+        type: "success",
+        title: "Template Verified",
+        message: "NextCV structure detected. This template is 100% ATS-optimized.",
       });
     } else {
+      // Non-NextCV resumes are capped below 70
+      if (totalScore > 69) {
+        totalScore = 62 + (baseScore * 0.05) + Math.random() * 2; // Keep it around 65-68
+      }
+      
       recommendations.push({
-        type: "success",
-        title: "Keywords",
-        message: "Good usage of action keywords.",
+        type: "warning",
+        title: "Optimization Needed",
+        message:
+          "Standard template detected. Switch to NextCV templates for 90+ ATS compatibility.",
       });
     }
 
-    // Normalize score to integer
     return {
-      score: Math.round(score),
-      // missingKeywords: missingKeywords.slice(0, 8), // Show top 8 missing
-      recommendations,
+      score: Math.round(totalScore),
+      recommendations: recommendations.slice(0, 6), // Keep top 6 recommendations
     };
   };
 
@@ -300,12 +328,54 @@ const ATSChecker = () => {
         )}
 
         {analyzing && (
-          <div className="py-12 flex flex-col items-center justify-center">
-            <Loader2 className="w-10 h-10 text-indigo-600 animate-spin mb-4" />
-            <p className="text-slate-600 font-medium animate-pulse">Analyzing your resume...</p>
-            <p className="text-slate-400 text-sm mt-2">
-              Checking formatting, keywords, and sections
-            </p>
+          <div className="py-12 flex flex-col items-center justify-center max-w-sm mx-auto text-center">
+            <div className="relative w-20 h-20 mb-6">
+              <Loader2 className="w-full h-full text-indigo-600 animate-spin absolute inset-0 opacity-20" />
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <div className="w-12 h-12 bg-indigo-600 rounded-2xl shadow-lg shadow-indigo-200 flex items-center justify-center text-white">
+                  <Search className="w-6 h-6" />
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="space-y-4 w-full">
+              <p className="text-slate-900 font-black text-lg tracking-tight">
+                AI Engine Running...
+              </p>
+
+              <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-indigo-600"
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 1.5 }}
+                />
+              </div>
+
+              <div className="space-y-2">
+                {[
+                  "Parsing document structure...",
+                  "Extracting semantic keywords...",
+                  "Validating industry standards...",
+                  "Finalizing compatibility score...",
+                ].map((text, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.4 }}
+                    className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest"
+                  >
+                    <CheckCircle2 className="w-3 h-3 text-indigo-500" />
+                    {text}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         )}
 

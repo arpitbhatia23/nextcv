@@ -19,8 +19,8 @@ import { useRouter } from "next/navigation";
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
   const loginSchema = z.object({
-    email: z.string().email({ message: "vaild email is required" }),
-    password: z.string().min(3, { message: "Password is required" }),
+    email: z.string().email({ message: "valid email is required" }),
+    password: z.string().min(3, { message: "Password must be at least 3 characters" }),
   });
   const form = useForm({
     resolver: zodResolver(loginSchema),
@@ -30,15 +30,21 @@ export function LoginForm({ className, ...props }) {
     },
   });
   const submit = async data => {
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    });
-    if (res.ok) {
-      router.push("/dashboard");
-    } else {
-      console.log("invalid email and password");
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+      console.log(res);
+
+      if (res?.ok) {
+        router.push("/dashboard");
+      } else {
+        console.error("Login failed", res?.error ?? res);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
   return (

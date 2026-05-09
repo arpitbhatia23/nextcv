@@ -378,7 +378,9 @@ const InfographicLite = ({ data }) => (
           </View>
         </View>
       )}
-    </Page>
+    
+        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+      </Page>
   </Document>
 );
 

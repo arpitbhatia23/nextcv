@@ -234,6 +234,16 @@ const ClassicTemplate = ({ data }) => (
           ))}
         </View>
       )}
+      {/* Hidden Signature for ATS Detection */}
+<Text style={{ 
+  fontSize: 1, 
+  color: "#fff", 
+  opacity: 0.01, // Optional: makes it even more "hidden"
+  position: "absolute", 
+  bottom: 0 
+}}>
+  NextCV Resume Optimized
+</Text>
     </Page>
   </Document>
 );
