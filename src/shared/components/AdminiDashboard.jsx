@@ -107,9 +107,14 @@ const AdminiDashboard = () => {
       </div>
 
       {/* ── Tab Panels — Only render active tab to optimize INP ─── */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-[600px]">
         {activeTab === "overview" && (
-          <div id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" className="@container/main flex flex-1 flex-col gap-2">
+          <div 
+            id="panel-overview" 
+            role="tabpanel" 
+            aria-labelledby="tab-overview" 
+            className="@container/main flex flex-1 flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300"
+          >
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
               <SectionCards />
               <div className="px-3 sm:px-4 lg:px-6">
@@ -123,19 +128,34 @@ const AdminiDashboard = () => {
         )}
 
         {activeTab === "analytics" && (
-          <div id="panel-analytics" role="tabpanel" aria-labelledby="tab-analytics" className="flex-1">
+          <div 
+            id="panel-analytics" 
+            role="tabpanel" 
+            aria-labelledby="tab-analytics" 
+            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+          >
             <AnalyticsPage />
           </div>
         )}
 
         {activeTab === "payment" && (
-          <div id="panel-payment" role="tabpanel" aria-labelledby="tab-payment" className="flex-1">
+          <div 
+            id="panel-payment" 
+            role="tabpanel" 
+            aria-labelledby="tab-payment" 
+            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+          >
             <AdminPaymentDashboard />
           </div>
         )}
 
         {activeTab === "coupons" && (
-          <div id="panel-coupons" role="tabpanel" aria-labelledby="tab-coupons" className="flex-1">
+          <div 
+            id="panel-coupons" 
+            role="tabpanel" 
+            aria-labelledby="tab-coupons" 
+            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+          >
             <Coupons />
           </div>
         )}

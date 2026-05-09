@@ -114,7 +114,9 @@ const ExperienceStep = () => {
                   name="companyName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Company Name</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Company Name
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Google"
@@ -131,7 +133,9 @@ const ExperienceStep = () => {
                   name="position"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Position/Role</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Position/Role
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Developer"
@@ -149,7 +153,9 @@ const ExperienceStep = () => {
                     name="startDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Start Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          Start Date
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type="month"
@@ -166,7 +172,9 @@ const ExperienceStep = () => {
                     name="endDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">End Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          End Date
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type="month"
@@ -317,8 +325,12 @@ const ExperienceStep = () => {
                   >
                     <div className="flex justify-between items-start">
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">{exp.position}</h4>
-                        <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">{exp.companyName}</div>
+                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                          {exp.position}
+                        </h4>
+                        <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">
+                          {exp.companyName}
+                        </div>
                       </div>
                       <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity ml-2 shrink-0">
                         <Button
@@ -378,4 +390,3 @@ const ExperienceStep = () => {
 };
 
 export default React.memo(ExperienceStep);
-

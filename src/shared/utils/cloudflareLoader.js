@@ -5,16 +5,7 @@
  * Documentation: https://developers.cloudflare.com/images/image-resizing/url-format/
  */
 export default function cloudflareLoader({ src, width, quality }) {
-  // If the src is already a full URL (like from Sanity), we use it as is
-  // If it's a data URL, we don't transform it
   if (src.startsWith('data:')) return src;
-
-  const isExternal = src.startsWith('http');
-  
-  // Normalize the source URL
-  const normalizedSrc = isExternal 
-    ? src 
-    : `https://www.nextcv.in${src.startsWith('/') ? '' : '/'}${src}`;
 
   // Cloudflare Image Resizing parameters
   const params = [
@@ -24,7 +15,15 @@ export default function cloudflareLoader({ src, width, quality }) {
     'fit=scale-down'
   ];
 
-  // Return the Cloudflare transformation URL
-  // Note: /cdn-cgi/image/ is the standard path for Cloudflare Image Resizing
-  return `https://www.nextcv.in/cdn-cgi/image/${params.join(',')}/${normalizedSrc}`;
+  const paramsString = params.join(',');
+
+  // If the src is an external URL, use it as is
+  if (src.startsWith('http')) {
+    return `https://www.nextcv.in/cdn-cgi/image/${paramsString}/${src}`;
+  }
+  
+  // For internal images, use the relative path (starting with /)
+  // Cloudflare handles relative paths on the same domain more efficiently
+  const relativeSrc = src.startsWith('/') ? src : `/${src}`;
+  return `/cdn-cgi/image/${paramsString}${relativeSrc}`;
 }
