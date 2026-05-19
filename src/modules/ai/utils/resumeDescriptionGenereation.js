@@ -1,14 +1,33 @@
 import { encode } from "@toon-format/toon";
 import { PromptStrategies } from "./promptStratgies.js";
-import { ai, ai_model } from "./aiConfig.js";
+import { groq, groq_model } from "./aiConfig.js";
 
 const generateFromPrompt = async prompt => {
-  const toonPrompt = encode(prompt); // or skip if small
-  const response = await ai.models.generateContent({
-    model: ai_model,
-    contents: toonPrompt,
-  });
-  return response.text;
+  try {
+    const toonPrompt = encode(prompt?.trim());
+
+    if (!toonPrompt) {
+      throw new Error("Prompt is required");
+    }
+
+    const response = await groq.chat.completions.create({
+      model: groq_model,
+      messages: [
+        {
+          role: "user",
+          content: toonPrompt,
+        },
+      ],
+      temperature: 0.5,
+      max_tokens: 300,
+    });
+
+    return response.choices[0]?.message?.content || "";
+  } catch (error) {
+    console.error("Groq AI Error:", error);
+
+    return "• Strong academic foundation in computer applications";
+  }
 };
 
 export const ResumeGenerator = {

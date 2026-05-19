@@ -48,6 +48,7 @@
     "critters": "^0.0.23",
     "dotenv": "^17.4.2",
     "framer-motion": "^12.18.1",
+    "groq-sdk": "^1.2.0",
     "ioredis": "^5.10.1",
     "lucide-react": "^0.513.0",
     "mammoth": "^1.11.0",

@@ -46,7 +46,9 @@ const ExperienceStep = () => {
   });
 
   useEffect(() => {
-    updateForm({ experience: experienceList });
+    if (experienceList.length > 0) {
+      updateForm({ experience: experienceList });
+    }
   }, [experienceList]);
 
   const onSubmit = values => {

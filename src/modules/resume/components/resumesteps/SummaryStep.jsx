@@ -118,11 +118,7 @@ const SummaryStep = () => {
                 onClick={handleAiGeneration}
               >
                 <Sparkles className="w-3 h-3 mr-1" />
-                {isGenerating
-                  ? "Writing..."
-                  : watchedSummary?.trim()
-                    ? "Refine AI"
-                    : "Generate AI"}
+                {isGenerating ? "Writing..." : watchedSummary?.trim() ? "Refine AI" : "Generate AI"}
               </Button>
             </div>
           </CardHeader>
@@ -190,7 +186,7 @@ const SummaryStep = () => {
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="p-3 md:p-6 bg-white/50 min-h-[150px]">
+          <CardContent className="p-3 md:p-6 bg-white/50 min-h-37.5">
             {watchedSummary ? (
               <p className="text-xs md:text-sm text-slate-600 leading-relaxed italic border-l-4 border-indigo-100 pl-4">
                 {watchedSummary}
@@ -229,4 +225,3 @@ const SummaryStep = () => {
 };
 
 export default React.memo(SummaryStep);
-
