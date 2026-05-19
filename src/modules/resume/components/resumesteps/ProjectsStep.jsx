@@ -47,7 +47,9 @@ const ProjectsStep = () => {
   });
 
   useEffect(() => {
-    updateForm({ projects: projectList });
+    if (projectList.length > 0) {
+      updateForm({ projects: projectList });
+    }
   }, [projectList]);
 
   const onSubmit = values => {
@@ -115,7 +117,9 @@ const ProjectsStep = () => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Project Title</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Project Title
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Portfolio Site"
@@ -134,7 +138,9 @@ const ProjectsStep = () => {
                     name="roleOrType"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Your Role</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          Your Role
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Lead"
@@ -152,7 +158,9 @@ const ProjectsStep = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          Date
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type={"month"}
@@ -171,7 +179,9 @@ const ProjectsStep = () => {
                   name="technologiesOrTopics"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Tech Stack</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Tech Stack
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. React, Tailwind"
@@ -189,7 +199,9 @@ const ProjectsStep = () => {
                   name="link"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Project Link</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Project Link
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="https://github.com/..."
@@ -288,7 +300,9 @@ const ProjectsStep = () => {
                   >
                     <div className="flex justify-between items-start">
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">{project.title}</h4>
+                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                          {project.title}
+                        </h4>
                         <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">
                           {project.roleOrType}
                         </div>
@@ -353,4 +367,3 @@ const ProjectsStep = () => {
 };
 
 export default React.memo(ProjectsStep);
-

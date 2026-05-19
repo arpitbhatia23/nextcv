@@ -50,7 +50,9 @@ const CertificateStep = () => {
   });
 
   useEffect(() => {
-    updateForm({ certificates: certList });
+    if (certList.length > 0) {
+      updateForm({ certificates: certList });
+    }
   }, [certList]);
 
   const onSubmit = values => {
@@ -242,10 +244,14 @@ const CertificateStep = () => {
                   >
                     <div className="flex justify-between items-start">
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">{cert.title}</h4>
+                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                          {cert.title}
+                        </h4>
                         <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">
                           {cert.organization}
-                          {cert.year && <span className="text-slate-400 ml-1 font-normal">({cert.year})</span>}
+                          {cert.year && (
+                            <span className="text-slate-400 ml-1 font-normal">({cert.year})</span>
+                          )}
                         </div>
                         {cert.credentialUrl && (
                           <a
@@ -310,4 +316,3 @@ const CertificateStep = () => {
 };
 
 export default React.memo(CertificateStep);
-
