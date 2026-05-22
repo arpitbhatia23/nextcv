@@ -1,45 +1,48 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+const authRoutes = ["/", "/adminlogin", "/about-us", "/contact", "/blogs", "/ats-resume-checker"];
+
 export async function proxy(req) {
-  const token = await getToken({ req });
   const { pathname } = req.nextUrl;
 
-  // 1. Bypass for Cron Jobs or internal APIs
+  // 1. Bypass cron/internal APIs before token check
   if (pathname.startsWith("/api/cron-job")) {
     return NextResponse.next();
   }
 
-  // 2. Handle Gone/Deprecated routes
+  // 2. Gone route before token check
   if (pathname === "/privacyPolicy") {
     return new NextResponse(null, { status: 410 });
   }
 
-  // 3. Define Public Routes (Where logged-in users shouldn't hang out)
-  const authRoutes = ["/", "/adminlogin", "/about-us", "/contact", "/blogs", "/ats-resume-checker"];
+  const needsAuthCheck = pathname.startsWith("/dashboard") || authRoutes.includes(pathname);
 
-  // Redirect signed-in users away from landing/auth pages to dashboard
+  if (!needsAuthCheck) {
+    return NextResponse.next();
+  }
+
+  // 3. Only call getToken when actually needed
+  const token = await getToken({ req });
+
   if (token && authRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
-  // 4. Protect Dashboard
   if (!token && pathname.startsWith("/dashboard")) {
-    // if (process.env.NODE_ENV == "production") return;
-
     return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();
 }
 
-// Ensure the matcher covers all relevant paths
 export const config = {
   matcher: [
     "/",
     "/adminlogin",
     "/dashboard/:path*",
-    "/api/:path*",
+    "/api/cron-job/:path*",
+    "/privacyPolicy",
     "/about-us",
     "/contact",
     "/blogs",
