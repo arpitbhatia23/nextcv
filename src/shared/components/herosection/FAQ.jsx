@@ -7,7 +7,19 @@ import Link from "next/link";
 
 const faqs = [
   {
-    question: "How do I make my resume ATS-friendly for Indian companies?",
+    question: "Is NextCV ATS friendly?",
+    answer: "Yes, absolutely! NextCV is built specifically to generate 100% ATS-friendly resumes. Our templates use single-column layouts and standard fonts, ensuring they are easily parsed by ATS software used by top Indian companies.",
+  },
+  {
+    question: "Which resume format works for TCS?",
+    answer: "For TCS (especially TCS NQT), the reverse-chronological format works best. Ensure you highlight your BTech/MCA project details clearly, include specific keywords from the job description, and avoid using complex graphics. NextCV has pre-built templates tested for TCS.",
+  },
+  {
+    question: "Which resume format works for Infosys?",
+    answer: "Infosys recruiters prefer clean, text-based resumes that clearly state your technical skills (like Java, Python, SQL) and academic achievements. Our ATS-friendly templates are perfectly aligned with Infosys screening standards.",
+  },
+  {
+    question: "How can freshers make ATS resumes?",
     answer: (
       <>
         To make an{" "}
@@ -17,59 +29,45 @@ const faqs = [
         >
           ATS-friendly resume in India
         </Link>
-        , use a single-column layout, standard fonts (Arial, Calibri), and clear section headings.
-        Ensure you include relevant keywords for roles at companies like TCS, Infosys, and Tech
-        Mahindra. NextCV automatically handles these formatting rules for you.
+        , use a single-column layout, standard fonts (Arial, Calibri), and clear section headings. Ensure you include relevant keywords for roles you are applying for. NextCV automatically handles these formatting rules for you.
       </>
     ),
   },
   {
-    question: "What is the best resume format for freshers in India 2026?",
+    question: "Is NextCV free?",
     answer: (
       <>
-        The{" "}
+        NextCV offers a highly affordable one-time pricing starting at just ₹49 per resume, providing you with professional, ATS-optimized templates that drastically improve your interview chances as the{" "}
         <Link
-          href="/blogs/best-resume-format-for-freshers-in-india-2026"
+          href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription"
           className="text-indigo-600 hover:underline"
         >
-          best resume format for freshers in 2026
-        </Link>{" "}
-        is the reverse-chronological format. It highlights your recent internships, projects, and
-        education first. For Indian graduates, including a 'Technical Skills' section with keywords
-        like Java, Python, or React is crucial to pass recruiter screenings.
+          best resume maker for freshers without a subscription
+        </Link>
+        .
       </>
     ),
   },
   {
-    question: "How do companies like TCS, Accenture, and LTIMindtree screen resumes?",
-    answer:
-      "Large Indian MNCs use Applicant Tracking Systems (ATS) to filter thousands of applications. They look for specific keywords matching the job description (e.g., 'TCS NQT', 'Full Stack Developer', 'Aptitude'). Using an ATS-friendly resume builder like NextCV ensures your resume is readable by these systems, increasing your interview chances.",
+    question: "What ATS score is considered good?",
+    answer: "An ATS score above 80% is generally considered excellent for Indian IT companies. This means your resume has a strong keyword match with the job description and is perfectly formatted for the tracking system.",
   },
   {
-    question: "Can I use Canva or infographic resumes for Indian jobs?",
-    answer:
-      "While infographic resumes look good, they often fail ATS scans because the text is embedded in images or complex layouts. For campus placements and off-campus drives in India, a clean text-based resume is always safer and more effective at getting you past the first round.",
+    question: "Can I create resumes for campus placements?",
+    answer: "Yes! NextCV is designed specifically with campus placements in mind. Whether you are aiming for Day 1 companies or off-campus drives, our fresher-focused templates help you highlight your projects and internships effectively.",
   },
   {
-    question: "How long should a fresher resume be for 2026 placements?",
-    answer:
-      "For freshers, a 1-page resume is ideal. It forces you to be concise and highlights your most important achievements without overwhelming recruiters who spend only 6 seconds scanning each CV.",
+    question: "Which resume format works for software engineers?",
+    answer: "Software engineers should use a format that highlights their 'Technical Skills' at the top, followed by 'Projects' with GitHub links, and then 'Education'. Ensure your tech stack (e.g., React, Node.js, AWS) is easily scannable.",
   },
   {
-    question: "How to write a professional summary for freshers with no experience?",
-    answer:
-      "Focus on your passion for technology, your key projects, and what you aim to achieve. For example: 'Enthusiastic Computer Science graduate with strong foundations in React and Node.js. Developed a full-stack e-commerce project and seeking to leverage technical skills at a forward-thinking Indian tech firm.'",
+    question: "Does NextCV support Indian resume formats?",
+    answer: "Yes. Our platform is exclusively tailored for the Indian hiring ecosystem. We avoid the flashy, multi-column designs popular in Western markets that often fail in India, and instead focus on clean, high-conversion layouts preferred by Indian recruiters.",
   },
   {
-    question: "Should I include internships or freelance work in my resume?",
-    answer:
-      "Absolutely! For freshers, internships, freelance projects, and even college society roles are vital 'experience' substitutes. They demonstrate practical application of your skills and professional work ethic to Indian recruiters.",
-  },
-  {
-    question: "Can NextCV improve my ATS score for IT roles?",
-    answer:
-      "Yes! NextCV is built specifically for the Indian job market. Our templates are tested against various ATS platforms to ensure high readability and keyword density for roles in Bangalore, Hyderabad, Pune, and beyond.",
-  },
+    question: "How do I download my resume?",
+    answer: "Once you have completed filling in your details and selected a template, you can instantly download your resume in a text-searchable PDF format, which is the gold standard for submitting job applications.",
+  }
 ];
 
 const FAQ = () => {

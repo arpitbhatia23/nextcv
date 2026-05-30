@@ -1,7 +1,7 @@
 import React, { cache } from "react";
 import Link from "next/link";
 import Logo2 from "../Logo2";
-import { SaasHuntBadge } from "../Saashunt";
+// import { SaasHuntBadge } from "../Saashunt";
 import { FaTwitter, FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { GetYear } from "./getyear";
 
@@ -137,10 +137,10 @@ export const Footer = () => {
           <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
             <GetYear />
           </div>
-
+{/* 
           <div className="order-1 md:order-2 grayscale hover:grayscale-0 transition-all duration-300">
             <SaasHuntBadge />
-          </div>
+          </div> */}
 
           <div className="flex items-center gap-2 text-sm text-slate-100 order-3 md:order-3">
             <span>

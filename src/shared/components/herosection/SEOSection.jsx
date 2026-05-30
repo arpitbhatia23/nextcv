@@ -113,6 +113,77 @@ const SEOSection = () => {
           </div>
         </div>
 
+        {/* New SEO Driven Sections */}
+        <div className="mt-20 space-y-20">
+          {/* Section 1: ATS-Friendly Resume Builder for Indian Companies */}
+          <div>
+            <h2 className="text-xl sm:text-3xl font-bold text-slate-900 mb-6">
+              ATS-Friendly Resume Builder for Indian Companies
+            </h2>
+            <p className="text-slate-600 mb-6 text-sm sm:text-lg">
+              NextCV is optimized for the strict Applicant Tracking Systems used by India's top IT and consulting firms. Our templates ensure you pass the initial screening at companies like <strong>TCS, Infosys, Wipro, HCL, Cognizant, and Capgemini</strong>. We automatically format your resume to meet their ATS requirements.
+            </p>
+          </div>
+
+          {/* Section 2: Resume Templates for Freshers */}
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <h2 className="text-xl sm:text-3xl font-bold text-slate-900 mb-6">
+              Resume Templates for Freshers
+            </h2>
+            <p className="text-slate-600 mb-6 text-sm sm:text-lg">
+              Whether you are applying for off-campus placements or university drives, our templates are categorized by degree to highlight what matters most:
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {['BTech', 'BCA', 'MCA', 'MBA', 'BCom', 'MCom'].map((degree) => (
+                <div key={degree} className="flex items-center gap-2 p-3 bg-indigo-50/50 rounded-lg border border-indigo-100 text-indigo-700 font-medium">
+                  <CheckCircle2 className="w-5 h-5 text-indigo-500" />
+                  {degree} Resume Format
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Section 3 & 4 Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4">
+                Why Recruiters Reject Resumes
+              </h2>
+              <ul className="space-y-4">
+                <li className="flex gap-3 text-sm sm:text-lg text-slate-700">
+                  <AlertCircle className="w-6 h-6 text-red-500 shrink-0" />
+                  <span><strong>ATS Parsing Issues:</strong> Using complex layouts that the system can't read.</span>
+                </li>
+                <li className="flex gap-3 text-sm sm:text-lg text-slate-700">
+                  <AlertCircle className="w-6 h-6 text-red-500 shrink-0" />
+                  <span><strong>Formatting Mistakes:</strong> Incorrect margins, illegible fonts, or missing contact info.</span>
+                </li>
+                <li className="flex gap-3 text-sm sm:text-lg text-slate-700">
+                  <AlertCircle className="w-6 h-6 text-red-500 shrink-0" />
+                  <span><strong>Keyword Mismatch:</strong> Failing to include exact skills mentioned in the job description.</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4">
+                Resume Formats for Indian Hiring
+              </h2>
+              <p className="text-slate-600 mb-4 text-sm sm:text-lg">
+                Indian recruiters prefer clean, readable documents. NextCV follows the strict guidelines required for maximum ATS compatibility:
+              </p>
+              <ul className="space-y-3">
+                {['Single-column layout', '100% ATS-friendly text', 'No complex tables', 'No graphics or icons'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm sm:text-lg text-slate-700">
+                    <CheckCircle2 className="w-5 h-5 text-green-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div className="mt-20 text-center bg-indigo-50 rounded-3xl p-4 sm:p-12 border border-indigo-100">
           <Zap className="w-5 sm:w-10 h-5 sm:h-10 text-indigo-600 mx-auto mb-4" />
           <h3 className="text-lg sm:text-2xl font-bold text-slate-900 mb-4">

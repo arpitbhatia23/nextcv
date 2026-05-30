@@ -39,8 +39,18 @@ const PageContent = () => {
     {
       icon: <DollarSign className="w-6 h-6 text-green-400" />,
       title: "Pricing starts at ₹49 per Resume",
-      description:
-        "Professional results at a fraction of the cost. The most affordable resume maker online India with one-time payment.",
+      description: (
+        <>
+          Professional results at a fraction of the cost. The most{" "}
+          <Link
+            href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription"
+            className="text-indigo-400 hover:underline"
+          >
+            affordable resume maker in India
+          </Link>{" "}
+          with one-time payment.
+        </>
+      ),
       className: "bg-slate-900 border-slate-800",
     },
     {

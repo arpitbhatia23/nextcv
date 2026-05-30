@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Check, ShieldCheck, Zap, Download, HelpCircle } from "lucide-react";
 
 export const metadata = {
-  title: "Resume Price in India (2026) – Free vs Paid + Actual Cost Breakdown",
+  title: "Resume Price in India (2026) – Free vs Paid Resume Builders",
   description:
     "Wondering how much a resume costs in India? Compare free vs paid resume builders, pricing, and what you actually get. See NextCV plans starting at ₹49.",
   keywords:
@@ -29,33 +29,35 @@ export default function PricingPage() {
   const faqs = [
     {
       question: "How much does a resume cost in India?",
-      answer:
-        "A professional resume in India can cost anywhere from ₹500 for a basic freelancer service to ₹10,000 for executive agency packages. NextCV provides professional AI-powered resume templates starting at just ₹49.",
+      answer: "A professional resume in India can cost anywhere from ₹500 for a basic freelancer service to ₹10,000 for executive agency packages. NextCV provides professional AI-powered resume templates starting at just ₹49.",
     },
     {
-      question: "Is a resume builder free or paid?",
-      answer:
-        "Most quality resume builders have a cost associated with high-quality PDF downloads. While some offer 'free' previews, NextCV offers transparent one-time template-based pricing starting at ₹49.",
+      question: "Is it worth paying for a resume builder?",
+      answer: "Yes, especially if they provide ATS optimization, professional templates, and AI writing assistance. These features significantly increase your chances of getting an interview, making the small investment worth it.",
     },
     {
-      question: "What is the cheapest way to create a resume?",
-      answer:
-        "The cheapest way is using Word or Google Docs, but these often fail ATS checks. A professional yet affordable tool like NextCV (starting at ₹49) ensures your resume is ATS-optimized and professionally designed.",
+      question: "How much do professional resume writers charge?",
+      answer: "Professional resume writers in India typically charge between ₹1,000 to ₹5,000 depending on your experience level. NextCV offers agency-level quality through AI for a fraction of that cost.",
     },
     {
-      question: "Are paid resume builders worth it?",
-      answer:
-        "Yes, especially if they provide ATS optimization, professional templates, and AI writing assistance. These features significantly increase your chances of getting an interview, making the small investment worth it.",
+      question: "Can I create a resume for free?",
+      answer: "Yes, you can create a basic resume using Word or Google Docs for free. However, if you want an ATS-friendly, professional layout with AI assistance, premium tools like NextCV offer exceptional value starting at just ₹49.",
     },
     {
-      question: "Can I download my resume for free?",
-      answer:
-        "NextCV allows you to build and preview your resume for free. To download the high-quality, watermark-free PDF ready for job applications, pricing starts at a nominal ₹49 one-time fee.",
+      question: "What is the difference between free and paid resume builders?",
+      answer: "Free builders often have basic templates, hidden watermarks, or lack ATS optimization. Paid resume builders offer premium designs, AI content generation, keyword optimization, and high-quality PDF downloads without watermarks.",
     },
     {
-      question: "Is NextCV free or paid?",
-      answer:
-        "NextCV follows a 'Pay per Template' model. You can create your profile for free, but downloading the final professional PDF costs between ₹49 and ₹999 depending on the template. No monthly subscriptions.",
+      question: "What is the cheapest resume builder?",
+      answer: "NextCV is one of the most affordable professional resume builders in India, offering premium ATS-friendly templates starting at just ₹49 with no hidden monthly subscriptions.",
+    },
+    {
+      question: "How much does an ATS-friendly resume cost?",
+      answer: "While some agencies charge ₹2,000+ for an ATS-optimized resume, you can build a 100% ATS-friendly resume on NextCV starting at just ₹49 using our pre-tested templates.",
+    },
+    {
+      question: "Should freshers pay for resume writing services?",
+      answer: "Freshers don't need expensive ₹3,000 writing services. An affordable resume builder that provides professional templates and AI bullet points (like NextCV at ₹49) is the perfect, cost-effective solution for campus placements.",
     },
   ];
 
@@ -239,7 +241,7 @@ export default function PricingPage() {
             </li>
             <li>
               <strong>No Hidden Subscriptions:</strong> Many "free" builders are actually
-              subscription traps. One-time payment models are more transparent and honest.
+              subscription traps. One-time payment models are more transparent and honest. Choose a <Link href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription" className="text-indigo-600 hover:underline">resume builder with no hidden subscriptions</Link> to save money.
             </li>
           </ul>
 
@@ -282,30 +284,65 @@ export default function PricingPage() {
             <li>Better initial salary offers due to professional branding.</li>
           </ul>
 
+          {/* Professional Resume Pricing Section */}
+          <h2 className="text-3xl font-bold text-slate-900 mt-16">
+            Professional Resume Writing Cost in India
+          </h2>
+          <p>
+            If you're comparing tools versus hiring a human writer, here is the standard professional resume cost breakdown in the Indian market:
+          </p>
+          <div className="overflow-x-auto my-8">
+            <table className="min-w-full border-collapse border border-slate-200 bg-white">
+              <thead className="bg-slate-50">
+                <tr>
+                  <th className="border border-slate-200 px-6 py-3 text-left text-sm font-semibold text-slate-900">Service Type</th>
+                  <th className="border border-slate-200 px-6 py-3 text-left text-sm font-semibold text-slate-900">Average Cost</th>
+                  <th className="border border-slate-200 px-6 py-3 text-left text-sm font-semibold text-slate-900">Turnaround Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">NextCV Premium Builder</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm font-bold text-indigo-600">₹49 - ₹99</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">Instant</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">Freelance Resume Writer</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm font-bold text-slate-900">₹1,000 - ₹3,000</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">3 - 5 Days</td>
+                </tr>
+                <tr>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">Professional Agency</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm font-bold text-slate-900">₹4,000 - ₹10,000+</td>
+                  <td className="border border-slate-200 px-6 py-4 text-sm text-slate-700">1 - 2 Weeks</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           {/* Bilingual Hindi Section */}
-          <div className="mt-16 bg-slate-900 text-white p-8 rounded-2xl not-prose">
-            <h2 className="text-2xl font-bold mb-4">
-              Resume banane ka kitna paisa lagta hai? (Hindi Guide)
+          <div className="mt-16 bg-slate-900 text-white p-8 rounded-2xl not-prose shadow-xl">
+            <h2 className="text-2xl font-bold mb-6">
+              Resume Banane Mein Kitna Paisa Lagta Hai?
             </h2>
-            <div className="space-y-4 text-slate-300">
-              <p>
-                Agar aap soch rahe hain ki <strong>resume banane me kitna paisa lagta hai</strong>,
-                toh yeh market rates hain:
+            <div className="space-y-6 text-slate-300">
+              <p className="text-lg">
+                Agar aap search kar rahe hain ki ek professional <strong>resume banane me kitna paisa lagta hai</strong>, toh yahan clear cost breakdown hai:
               </p>
-              <ul className="list-disc pl-5 space-y-2">
-                <li>Professional writers aapse ₹1000 se ₹3000 tak charge kar sakte hain.</li>
-                <li>
-                  NextCV par aap wahi professional quality ka resume sirf <strong>₹49</strong> se
-                  shuruat me bana sakte hain.
-                </li>
-                <li>
-                  Isme aapko AI suggestions aur ATS friendly templates milte hain jo aapke interview
-                  ke chances badhate hain.
-                </li>
-              </ul>
-              <p className="font-bold text-white">
-                Ab har koi apna professional CV saste me bana sakta hai!
-              </p>
+              <div className="space-y-4">
+                <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+                  <span className="font-medium">Free Resume Builder (Word/Docs)</span>
+                  <span className="text-xl font-bold text-slate-400">₹0</span>
+                </div>
+                <div className="bg-indigo-900/50 p-4 rounded-xl border border-indigo-700 flex justify-between items-center">
+                  <span className="font-medium text-indigo-100">Premium Resume Builder (NextCV)</span>
+                  <span className="text-xl font-bold text-indigo-400">₹49 – ₹99</span>
+                </div>
+                <div className="bg-slate-800/50 p-4 rounded-xl border border-slate-700 flex justify-between items-center">
+                  <span className="font-medium">Professional Resume Writing Service</span>
+                  <span className="text-xl font-bold text-slate-400">₹500 – ₹5000+</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
