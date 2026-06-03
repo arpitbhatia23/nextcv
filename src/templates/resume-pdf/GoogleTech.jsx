@@ -6,15 +6,15 @@ import { splitToBullets } from "@/shared/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
+    padding: 30,
     fontSize: 10.5,
     fontFamily: "Helvetica",
     backgroundColor: "#fff",
     color: "#202124", // Google Dark Grey
-    lineHeight: 1.4,
+    lineHeight: 1.2,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 15,
     borderBottomWidth: 1,
     borderBottomColor: "#dadce0", // Light grey divider
     paddingBottom: 10,
@@ -267,8 +267,12 @@ const GoogleTech = ({ data }) => {
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

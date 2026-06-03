@@ -1,11 +1,10 @@
 export const splitToBullets = desc => {
-  // Normalize input into array of lines
   let lines = [];
 
   if (Array.isArray(desc)) {
     lines = desc;
   } else if (typeof desc === "string") {
-    lines = desc.split("/n");
+    lines = desc.split("\n"); // not "/n"
   } else {
     return [];
   }
@@ -14,19 +13,13 @@ export const splitToBullets = desc => {
     .flatMap(line => {
       const trimmed = String(line).trim();
       if (!trimmed) return [];
-      // Remove bullet symbol if exists
-      const clean = trimmed.replace(/•/g, "");
-      console.log(clean);
-      // Split by semicolon if present
-      if (clean.includes(".")) {
-        return clean
-          .split(".")
-          .map(b => b.trim())
-          .filter(Boolean);
-      }
-      console.log([clean].length);
 
-      return [clean];
+      const clean = trimmed.replace(/•/g, "").trim();
+
+      return clean
+        .split(/\.(?=\s+[A-Z])/g) // split sentence dot, not 7.12
+        .map(b => b.trim())
+        .filter(Boolean);
     })
     .filter(Boolean);
 };
