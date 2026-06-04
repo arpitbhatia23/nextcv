@@ -129,7 +129,7 @@ const SkillStep = () => {
 
   const { handleAiGeneration, isGenerating } = useAiGeneration({
     type: "skills",
-
+    jobDescription: formData.jobDescription,
     getPayload: () => ({
       role: formData.jobRole,
     }),
@@ -164,7 +164,9 @@ const SkillStep = () => {
     <div className="py-4 md:py-8">
       <div className="mb-4 md:mb-6">
         <h2 className="text-lg md:text-2xl font-bold text-slate-900">Skills</h2>
-        <p className="text-[10px] md:text-sm text-slate-500">Showcase your technical and soft skills</p>
+        <p className="text-[10px] md:text-sm text-slate-500">
+          Showcase your technical and soft skills
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
@@ -202,7 +204,9 @@ const SkillStep = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xs md:text-sm font-semibold">Skill Name</FormLabel>
+                        <FormLabel className="text-xs md:text-sm font-semibold">
+                          Skill Name
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="React, Node etc."
@@ -220,7 +224,9 @@ const SkillStep = () => {
                     name="level"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-xs md:text-sm font-semibold">Proficiency</FormLabel>
+                        <FormLabel className="text-xs md:text-sm font-semibold">
+                          Proficiency
+                        </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Expert"
@@ -233,7 +239,10 @@ const SkillStep = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-slate-900 text-white font-bold h-9 md:h-11 text-xs md:text-sm">
+                <Button
+                  type="submit"
+                  className="w-full bg-slate-900 text-white font-bold h-9 md:h-11 text-xs md:text-sm"
+                >
                   {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
               </form>
@@ -282,7 +291,9 @@ const SkillStep = () => {
                     className="bg-white pl-3 pr-1.5 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 md:gap-3 group hover:border-indigo-300 transition-colors"
                   >
                     <div className="flex flex-col min-w-0">
-                      <span className="font-bold text-slate-800 text-[10px] md:text-sm truncate">{skill.name}</span>
+                      <span className="font-bold text-slate-800 text-[10px] md:text-sm truncate">
+                        {skill.name}
+                      </span>
                       {skill.level && (
                         <span className="text-[8px] md:text-[9px] text-slate-500 uppercase font-black leading-none">
                           {skill.level}
@@ -338,4 +349,3 @@ const SkillStep = () => {
 };
 
 export default React.memo(SkillStep);
-

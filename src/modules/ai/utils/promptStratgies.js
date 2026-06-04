@@ -1,3 +1,57 @@
+const bulletRules = `
+Return ONLY 2-3 resume bullets.
+Each line must start with "•".
+No intro, headings, labels, markdown, JSON, quotes, or extra text.
+Use strong resume language.
+Use only provided details.
+Improve existing description professionally.
+Use ATS keywords only when relevant and truthful.
+Do not invent skills, tools, metrics, certifications, or achievements.
+`;
+
+const summaryRules = `
+Return ONLY 2-3 concise resume summary lines.
+No bullets, intro, headings, markdown, JSON, quotes, or extra text.
+Make it personalized for the target role.
+Use only provided details.
+Use ATS keywords only when relevant and truthful.
+If experience exists, focus on experience.
+If experience is weak, focus on education, skills, and projects.
+Do not invent skills, tools, metrics, certifications, or achievements.
+`;
+
+const skillRules = `
+Return ONLY skill names.
+One skill per line.
+No bullets, numbering, intro, headings, markdown, JSON, or extra text.
+Generate 6-10 relevant skills.
+Use ATS keywords only when relevant and truthful.
+Avoid duplicates and existing skills.
+Do not invent unrelated skills.
+`;
+
+const clean = value => String(value ?? "").trim();
+
+const list = value => {
+  if (Array.isArray(value)) {
+    return value.map(clean).filter(Boolean).join(", ");
+  }
+
+  return clean(value);
+};
+
+const compactFields = fields =>
+  Object.entries(fields)
+    .filter(([, value]) => clean(value))
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+
+const atsContext = (value = "") => {
+  const text = clean(value);
+
+  return text ? `ATS Keywords: ${text.slice(0, 700)}` : "";
+};
+
 const PromptStrategies = {
   education: ({
     degree = "",
@@ -5,31 +59,18 @@ const PromptStrategies = {
     startYear = "",
     endYear = "",
     grade = "",
-    description,
+    description = "",
   }) => `
-Generate 2–3 resume bullet points ONLY.
+${bulletRules}
 
-STRICT RULES:
-- Output ONLY bullet points
-- NO introduction sentence
-- NO headings or labels
-- NO explanations
-- NO markdown
-- NO JSON or arrays
-- Each line MUST start with "•"
-- If anything else is added, the response is INVALID
-- if description is add then enchance and generate built point from this 
-
-Education details:
-Degree: ${degree}
-Institution: ${institution}
-Duration: ${startYear} – ${endYear}
-Grade: ${grade}
-description:${description}
-
-Example format:
-• Completed coursework in ...
-• Achieved ...
+Education:
+${compactFields({
+  Degree: clean(degree),
+  Institution: clean(institution),
+  Duration: [clean(startYear), clean(endYear)].filter(Boolean).join(" to "),
+  Grade: clean(grade),
+  Description: clean(description),
+})}
 `,
 
   project: ({
@@ -38,139 +79,86 @@ Example format:
     features = [],
     role = "",
     description = "",
+    atsKeywords = "",
   }) => `
-Generate 2–3 resume bullet points ONLY.
+${bulletRules}
+${atsContext(atsKeywords)}
 
-STRICT RULES:
-- Output ONLY bullet points
-- NO introduction sentence
-- NO headings or labels
-- NO explanations
-- NO markdown
-- NO JSON or arrays
-- Each line MUST start with "•"
-- If anything else is added, the response is INVALID
-- if description is add then enchance and generate built point from this 
-
-Project details:
-Title: ${title}
-Tech Stack: ${technologiesOrTopics}
-Key Features: ${features}
-Role: ${role}
-description:${description}
-
-Example format:
-• Built ...
-• Implemented ...
+Project:
+${compactFields({
+  Title: clean(title),
+  Role: clean(role),
+  Tech: list(technologiesOrTopics),
+  Features: list(features),
+  Description: clean(description),
+})}
 `,
 
   experience: ({
     position = "",
     companyName = "",
     startDate = "",
-    endDate,
+    endDate = "",
     work = [],
     tools = [],
     description = "",
+    atsKeywords = "",
   }) => `
-Generate 2–3 resume bullet points ONLY.
+${bulletRules}
+Focus on impact, work done, tools used, and results.
+${atsContext(atsKeywords)}
 
-STRICT RULES:
-- Output ONLY bullet points
-- NO introduction sentence
-- NO headings or labels
-- NO explanations
-- NO markdown
-- NO JSON or arrays
-- Each line MUST start with "•"
-- If anything else is added, the response is INVALID
-- if description is add then enchance and generate built point from this 
-
-Experience details:
-Role: ${position}
-Company: ${companyName}
-Duration: ${(startDate, "-", endDate)}
-Responsibilities: ${work}
-Tools & Technologies: ${tools}
-description:${description}
-
-Example format:
-• Led ...
-• Improved ...
+Experience:
+${compactFields({
+  Role: clean(position),
+  Company: clean(companyName),
+  Duration: [clean(startDate), clean(endDate)].filter(Boolean).join(" to "),
+  Work: list(work),
+  Tools: list(tools),
+  Description: clean(description),
+})}
 `,
 
-  summary: ({ role = "", education = "", experience = "", project = "", summary }) => `
-Generate a highly personalized and professionally written resume summary in PLAIN TEXT.
+  summary: ({
+    role = "",
+    education = "",
+    experience = "",
+    projects = "",
+    skills = "",
+    summary = "",
+    atsKeywords = "",
+  }) => `
+${summaryRules}
+${atsContext(atsKeywords)}
 
-STRICT OUTPUT RULES:
-- Output ONLY 2–3 concise lines
-- NO bullet symbols
-- NO headings or labels
-- NO markdown
-- NO JSON
-- NO quotes
-- NO introductory phrases
-
-CONTENT RULES:
-
-1. If the candidate HAS professional experience:
-   - Focus primarily on professional achievements, responsibilities, and impact
-   - DO NOT mention education unless it is highly relevant
-   - Emphasize expertise and real-world contributions
-
-2. If the candidate has LITTLE or NO experience:
-   - Focus on education, technical skills, and strong projects
-   - Highlight projects that demonstrate real-world problem solving
-
-3. If there are STRONG PROJECTS:
-   - Briefly reference the most impressive or impactful project work
-   - Emphasize practical skills and technologies used
-
-4. The summary must:
-   - Clearly reflect the candidate’s professional identity
-   - Align experience, education, and projects with the target role
-   - Highlight strengths, impact, and key technologies
-   - Use confident, ATS-friendly language
-   - Maintain a polished and professional tone
-   - summary must be personalize to user 
-   - didn't make just general summary
-
-Candidate Information:
-Target Role: ${role}
-Experience: ${experience}
-Education: ${education}
-Projects: ${project}
-summary:${summary}
+Candidate:
+${compactFields({
+  TargetRole: clean(role),
+  Skills: list(skills),
+  Experience: list(experience),
+  Education: list(education),
+  Projects: list(projects),
+  Notes: clean(summary),
+})}
 `,
 
-  skills: ({ role = "" }) => `
-Generate a list of relevant resume skills.
+  skills: ({ role = "", existingSkills = [], atsKeywords = "" }) => `
+${skillRules}
 
-STRICT RULES:
-- Output ONLY skill names
-- NO explanation
-- NO headings
-- NO numbering
-- NO markdown
-- NO JSON or arrays
-- Each skill MUST be on a new line
-- Maximum 6–10 skills
-- Skills must be relevant to the given job role
-- Avoid duplicates
-- Include a mix of technical + soft skills
-- If existingSkills are provided, avoid repeating them
-
-Job Role:
-${role}
-
-
-
-Example format:
-React.js
-Node.js
-Communication
-Problem Solving
+Candidate:
+${compactFields({
+  TargetRole: clean(role),
+  ExistingSkills: list(existingSkills),
+  ATSKeywords: clean(atsKeywords).slice(0, 700),
+})}
 `,
 };
+const extractJobKeywordsPrompt = `
+Return ONLY comma-separated ATS keywords.
+No intro. No headings. No JSON.
+Extract 15-30 important skills, tools, technologies, role terms, and responsibilities.
+Do not invent anything.
 
-export { PromptStrategies };
+Job Description:
+`;
+export { PromptStrategies, extractJobKeywordsPrompt };

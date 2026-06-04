@@ -80,7 +80,11 @@ const ProjectsStep = () => {
     setIsEditing(false);
     setEditingId(null);
   };
-  const { handleAiGeneration, isGenerating } = useAiGeneration({ type: "project", form });
+  const { handleAiGeneration, isGenerating } = useAiGeneration({
+    type: "project",
+    form,
+    jobDescription: formData.jobDescription,
+  });
 
   return (
     <div className="py-4 md:py-8">

@@ -50,6 +50,9 @@ const ExperienceStep = () => {
       updateForm({ experience: experienceList });
     }
   }, [experienceList]);
+  useEffect(() => {
+    setExperienceList(formData.experience);
+  }, [formData.experience]);
 
   const onSubmit = values => {
     if (isEditing) {
@@ -80,7 +83,11 @@ const ExperienceStep = () => {
     setEditingId(null);
   };
 
-  const { handleAiGeneration, isGenerating } = useAiGeneration({ form, type: "experience" });
+  const { handleAiGeneration, isGenerating } = useAiGeneration({
+    form,
+    type: "experience",
+    jobDescription: formData.jobDescription,
+  });
   return (
     <div className="py-4 md:py-8">
       <div className="mb-4 md:mb-6">

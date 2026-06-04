@@ -3,14 +3,20 @@ import { apiError, apiResponse } from "@/shared";
 import { NextResponse } from "next/server";
 
 export const aiDescriptionGenerator = async ({ type, data }) => {
-  const description = ResumeGenerator[type];
+  const generator = ResumeGenerator[type];
 
-  const bullets = await description(data);
-  if (bullets.length <= 0) {
-    throw new apiError(500, "something went wrong while gerating bulets");
+  if (!generator) {
+    throw new apiError(400, "Invalid AI generation type");
   }
 
-  return NextResponse.json(new apiResponse(200, "response gen sucessfully ", bullets), {
+  const jobDescription = data?.jobDescription || "";
+  const result = await generator(data, jobDescription);
+
+  if (!result || result.trim().length <= 0) {
+    throw new apiError(500, "Something went wrong while generating content");
+  }
+
+  return NextResponse.json(new apiResponse(200, "Response generated successfully", result), {
     status: 200,
   });
 };

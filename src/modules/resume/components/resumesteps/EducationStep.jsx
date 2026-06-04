@@ -54,12 +54,18 @@ const EducationStep = () => {
       endYear: "",
       grade: "",
       description: "",
+      jobDescription: formData.jobDescription,
     },
   });
 
   useEffect(() => {
-    updateForm({ education: educationList });
+    if (educationList.length > 0) {
+      updateForm({ education: educationList });
+    }
   }, [educationList]);
+  useEffect(() => {
+    setEducationList(formData.education);
+  }, [formData.education]);
 
   const onSubmit = values => {
     if (isEditing) {
@@ -169,7 +175,9 @@ const EducationStep = () => {
                     name="startYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Start Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          Start Date
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type={"month"}
@@ -186,7 +194,9 @@ const EducationStep = () => {
                     name="endYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">End Date</FormLabel>
+                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                          End Date
+                        </FormLabel>
                         <FormControl>
                           <Input
                             type={"month"}
@@ -205,7 +215,9 @@ const EducationStep = () => {
                   name="grade"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">Grade/GPA</FormLabel>
+                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
+                        Grade/GPA
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. 8.5 CGPA"
@@ -303,8 +315,12 @@ const EducationStep = () => {
                     className="bg-white p-3 md:p-4 rounded-lg border border-slate-200 shadow-sm flex justify-between group hover:border-indigo-300 transition-colors"
                   >
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">{edu.degree}</h4>
-                      <div className="text-[10px] md:text-xs text-slate-600 font-medium truncate">{edu.institution}</div>
+                      <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                        {edu.degree}
+                      </h4>
+                      <div className="text-[10px] md:text-xs text-slate-600 font-medium truncate">
+                        {edu.institution}
+                      </div>
                       <div className="text-[9px] md:text-xs text-slate-400 mt-1">
                         {edu.startYear} - {edu.endYear || "Present"}
                       </div>
@@ -358,4 +374,3 @@ const EducationStep = () => {
 };
 
 export default React.memo(EducationStep);
-

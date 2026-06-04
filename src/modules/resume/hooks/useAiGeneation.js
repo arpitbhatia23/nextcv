@@ -4,10 +4,11 @@ import { toast } from "sonner";
 
 export const useAiGeneration = ({
   form = null,
+  jobDescription = "",
   type = "general",
   field = "description",
-  getPayload, // custom payload builder
-  onSuccess, // custom handler (for skills etc.)
+  getPayload,
+  onSuccess,
 }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -15,18 +16,17 @@ export const useAiGeneration = ({
     try {
       let payloadData = {};
 
-      // ✅ If custom payload provided (skills case)
       if (getPayload) {
         payloadData = getPayload();
-        console.log(payloadData);
-      }
-      // ✅ Default form-based payload
-      else if (form) {
+      } else if (form) {
         const formData = form.getValues();
 
         const isValid = Object.entries(formData)
           .filter(([key]) => key !== field)
-          .some(([, val]) => val && String(val).trim() !== "");
+          .some(([, val]) => {
+            if (Array.isArray(val)) return val.length > 0;
+            return val && String(val).trim() !== "";
+          });
 
         if (!isValid) {
           toast(`Please fill required fields before generating ${type}`);
@@ -43,28 +43,35 @@ export const useAiGeneration = ({
 
       const res = await axios.post("/api/gen/description", {
         type,
-        data: payloadData,
+        data: {
+          ...payloadData,
+          jobDescription: jobDescription || payloadData.jobDescription || "",
+        },
       });
 
       const result = res.data?.data;
+
+      console.log(result);
 
       if (!result) {
         toast("No response from AI");
         return;
       }
 
-      // ✅ Custom handler (skills etc.)
       if (onSuccess) {
         onSuccess(result);
-      }
-      // ✅ Default form handler
-      else if (form) {
-        form.setValue(field, String(result));
+      } else if (form) {
+        form.setValue(field, String(result), {
+          shouldDirty: true,
+          shouldValidate: true,
+        });
       }
 
       toast("✨ AI content generated!");
     } catch (err) {
-      toast(err.message || "Something went wrong while generating 😓");
+      toast(
+        err?.response?.data?.message || err.message || "Something went wrong while generating 😓"
+      );
     } finally {
       setIsGenerating(false);
     }
