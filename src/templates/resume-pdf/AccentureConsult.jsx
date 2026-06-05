@@ -235,7 +235,7 @@ const AccentureConsult = ({ data }) => {
                 )}
               </View>
             ))}
-            <Text style={styles.sectionTitle}> Certifications</Text>
+            {data.certificates && <Text style={styles.sectionTitle}> Certifications</Text>}
 
             {data.certificates?.map((cert, i) => (
               <View key={i} style={{ marginTop: 2 }}>
@@ -245,8 +245,12 @@ const AccentureConsult = ({ data }) => {
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

@@ -130,19 +130,25 @@ const ATSChecker = () => {
       skills: ["skills", "technical skills", "competencies", "expertise"],
       projects: ["projects", "personal projects", "academic projects", "portfolio"],
       summary: ["summary", "objective", "profile", "professional summary"],
-      contact: ["contact", "personal info", "email", "phone"],
+      contact: ["contact", "personal info", "email", "phone", "phone_no"],
     };
 
     let foundSectionsCount = 0;
     Object.entries(sections).forEach(([key, variations]) => {
       const headingMatch = variations.find(v => lowerText.includes(v));
-      
+
       if (headingMatch) {
         // Basic check: is there some text after the heading?
         // We look for the heading and check if there are at least some words following it
         const pos = lowerText.indexOf(headingMatch);
-        const textAfter = lowerText.slice(pos + headingMatch.length, pos + headingMatch.length + 200);
-        const wordsAfter = textAfter.trim().split(/\s+/).filter(w => w.length > 1);
+        const textAfter = lowerText.slice(
+          pos + headingMatch.length,
+          pos + headingMatch.length + 200
+        );
+        const wordsAfter = textAfter
+          .trim()
+          .split(/\s+/)
+          .filter(w => w.length > 1);
 
         if (wordsAfter.length >= 5) {
           foundSectionsCount++;
@@ -225,8 +231,8 @@ const ATSChecker = () => {
     // Apply Biased Scoring Logic
     if (isNextCV) {
       // NextCV resumes get a significant boost but still reflect quality
-      totalScore = 70 + (baseScore * 0.28);
-      
+      totalScore = 70 + baseScore * 0.28;
+
       // Penalty for missing critical sections (Length/Structure)
       if (foundSectionsCount < 5) {
         totalScore -= (5 - foundSectionsCount) * 4;
@@ -243,9 +249,9 @@ const ATSChecker = () => {
     } else {
       // Non-NextCV resumes are capped below 70
       if (totalScore > 69) {
-        totalScore = 62 + (baseScore * 0.05) + Math.random() * 2; // Keep it around 65-68
+        totalScore = 62 + baseScore * 0.05 + Math.random() * 2; // Keep it around 65-68
       }
-      
+
       recommendations.push({
         type: "warning",
         title: "Optimization Needed",
