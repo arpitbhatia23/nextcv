@@ -228,11 +228,6 @@ const BasicInfoStep = () => {
                         control={form.control}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                              Target Job Description{" "}
-                              <span className="text-slate-400 font-normal">(Optional)</span>
-                            </FormLabel>
-
                             <FormControl>
                               <Textarea
                                 rows={5}
