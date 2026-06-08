@@ -87,6 +87,190 @@ export default async function sitemap() {
     },
   ];
 
+  // SEO Landing Pages
+  const seoPages = [
+    {
+      url: `${baseUrl}/ats-resume-best-practices`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/ats-friendly-resume-meaning`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/ats-friendly-resume-tips`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/ats-friendly-resume-format-india`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/ats-resume-optimization`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/common-ats-resume-mistakes`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/ats-friendly-resume-checklist`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/what-is-ats-friendly-resume`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-format-india`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/fresher-resume-format-india`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/best-resume-format-for-freshers-india-2026`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/indian-resume-format`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-format-for-bca-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-format-for-mca-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/tcs-resume-format-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/infosys-resume-format-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/wipro-resume-format-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/accenture-resume-format-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/hcl-resume-format-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/tech-mahindra-resume-format`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/best-resume-builder-india-2026`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/how-to-make-resume-ats-friendly-2026`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/career-objective-for-resume-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-vs-cv-in-india`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/non-it-resume-for-freshers`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-for-mnc-company`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/best-resume-format-for-it-jobs-in-india-2026`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/cv-format-for-ai-screening`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/latest-resume-format-2026`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/resume-builder-price-in-india`,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      lastModified: new Date(),
+    }
+  ];
+
   // Dynamic blog pages
   const blogPages = blogs.map(blog => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
@@ -96,5 +280,5 @@ export default async function sitemap() {
   }));
 
   // Return all sitemap entries
-  return [...pages, ...blogPages];
+  return [...pages, ...seoPages, ...blogPages];
 }

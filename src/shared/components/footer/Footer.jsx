@@ -132,6 +132,43 @@ export const Footer = () => {
           </div>
         </div>
 
+                {/* SEO Links Block */}
+        <div className="pt-8 pb-8 border-t border-slate-900">
+          <h3 className="text-slate-100 font-semibold mb-4 text-sm uppercase tracking-wider">Popular Career & Resume Guides</h3>
+          <div className="flex flex-wrap gap-x-4 gap-y-3">
+            <Link href="/ats-resume-best-practices" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Resume Best Practices 2026</Link>
+            <Link href="/ats-friendly-resume-meaning" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Friendly Resume Meaning</Link>
+            <Link href="/ats-friendly-resume-tips" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Friendly Resume Tips 2026</Link>
+            <Link href="/ats-friendly-resume-format-india" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Friendly Resume Format India 2026</Link>
+            <Link href="/ats-resume-optimization" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Resume Optimization 2026</Link>
+            <Link href="/common-ats-resume-mistakes" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Common ATS Resume Mistakes</Link>
+            <Link href="/ats-friendly-resume-checklist" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">ATS Friendly Resume Checklist</Link>
+            <Link href="/what-is-ats-friendly-resume" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">What Is ATS Friendly Resume</Link>
+            <Link href="/resume-format-india" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume Format India 2026</Link>
+            <Link href="/fresher-resume-format-india" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Fresher Resume Format India 2026</Link>
+            <Link href="/best-resume-format-for-freshers-india-2026" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Best Resume Format For Freshers India 2026</Link>
+            <Link href="/indian-resume-format" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Indian Resume Format</Link>
+            <Link href="/resume-format-for-bca-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume Format For BCA Freshers</Link>
+            <Link href="/resume-format-for-mca-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume Format For MCA Freshers</Link>
+            <Link href="/tcs-resume-format-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">TCS Resume Format For Freshers</Link>
+            <Link href="/infosys-resume-format-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Infosys Resume Format For Freshers</Link>
+            <Link href="/wipro-resume-format-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Wipro Resume Format For Freshers</Link>
+            <Link href="/accenture-resume-format-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Accenture Resume Format For Freshers</Link>
+            <Link href="/hcl-resume-format-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">HCL Resume Format For Freshers</Link>
+            <Link href="/tech-mahindra-resume-format" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Tech Mahindra Resume Format</Link>
+            <Link href="/best-resume-builder-india-2026" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Best Resume Builder India 2026</Link>
+            <Link href="/how-to-make-resume-ats-friendly-2026" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">How to Make Resume ATS Friendly 2026</Link>
+            <Link href="/career-objective-for-resume-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Career Objective for Resume for Freshers</Link>
+            <Link href="/resume-vs-cv-in-india" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume vs CV in India</Link>
+            <Link href="/non-it-resume-for-freshers" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Non IT Resume for Freshers</Link>
+            <Link href="/resume-for-mnc-company" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume for MNC Company</Link>
+            <Link href="/best-resume-format-for-it-jobs-in-india-2026" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Best Resume Format for IT Jobs in India 2026</Link>
+            <Link href="/cv-format-for-ai-screening" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">CV Format for AI Screening</Link>
+            <Link href="/latest-resume-format-2026" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Latest Resume Format 2026</Link>
+            <Link href="/resume-builder-price-in-india" className="text-xs text-slate-100 hover:text-indigo-400 transition-colors">Resume Builder Price in India</Link>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
