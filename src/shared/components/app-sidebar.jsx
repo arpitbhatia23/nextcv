@@ -74,7 +74,7 @@ export function AppSidebar({ ...props }) {
       className="bg-slate-50/50 backdrop-blur-xl border-r border-slate-200/60"
       {...props}
     >
-      <SidebarHeader className="p-6">
+      <SidebarHeader className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>

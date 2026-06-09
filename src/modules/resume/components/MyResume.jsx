@@ -38,7 +38,14 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import PDFPreview from "./pdfPreview";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 
-const ResumeCard = ({ resume, onPreview, onDownload, onEdit, onDelete, getTemplateDisplayName }) => (
+const ResumeCard = ({
+  resume,
+  onPreview,
+  onDownload,
+  onEdit,
+  onDelete,
+  getTemplateDisplayName,
+}) => (
   <Card className="group hover:shadow-xl transition-all duration-300 border border-slate-200 hover:border-indigo-400 bg-white rounded-xl overflow-hidden">
     <CardContent className="p-0">
       <div
@@ -46,19 +53,19 @@ const ResumeCard = ({ resume, onPreview, onDownload, onEdit, onDelete, getTempla
         onClick={() => onPreview(resume)}
       >
         <FileText
-          className="w-16 h-16 text-slate-300 group-hover:text-indigo-400 transition-colors"
+          className="w-10 h-10 text-slate-300 group-hover:text-indigo-400 transition-colors"
           strokeWidth={1.5}
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-          <span className="bg-white/90 text-indigo-700 px-4 py-2 rounded-full font-medium text-sm shadow-sm backdrop-blur-sm">
+          <span className="bg-white/90 text-indigo-700 px-4 py-2 rounded-md font-medium text-sm shadow-sm backdrop-blur-sm">
             Quick Preview
           </span>
         </div>
       </div>
-      <div className="p-5">
+      <div className="p-4">
         <div className="flex items-start justify-between mb-2">
           <div className="flex-1 min-w-0 pr-3">
-            <h2 className="font-bold text-lg text-slate-900 truncate" title={resume.name}>
+            <h2 className="font-bold text-sm text-slate-900 truncate" title={resume.name}>
               {resume.name || "Untitled Resume"}
             </h2>
             <p className="text-xs text-slate-500 truncate">
@@ -259,10 +266,9 @@ const MyResume = () => {
     setOriginalAmount,
   });
 
-
   if (loading) {
     return (
-      <div className="container mx-auto p-6 md:p-10 max-w-7xl">
+      <div className=" mx-auto p-6  ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {[...Array(8)].map((_, i) => (
             <Card key={i} className="animate-pulse border-slate-100 shadow-none">
@@ -283,18 +289,18 @@ const MyResume = () => {
   }
 
   return (
-    <div className="mx-auto p-6 md:p-10 max-w-7xl min-h-screen bg-slate-50">
+    <div className="mx-auto p-6  max-w-6xl min-h-screen bg-slate-50">
       <div
         className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4"
         id="tour-my-resumes-header"
       >
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 mb-2">My Resumes</h1>
+          <h1 className="text-xl font-bold text-slate-900 mb-2">My Resumes</h1>
           <p className="text-slate-500">Manage your resume collection. View, edit, or download.</p>
         </div>
         <Button
           onClick={() => route.push("/dashboard/builder")}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 rounded-xl px-6 h-11"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 rounded-lg px-6 h-10"
           id="tour-create-new-button"
         >
           <Plus className="mr-2 h-4 w-4" /> Create New Resume
@@ -304,7 +310,7 @@ const MyResume = () => {
       {/* PDF Modal */}
       {isModelOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-6xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+          <div className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
             <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-white z-10">
               <h3 className="font-bold text-slate-900">Resume Preview</h3>
               <Button
@@ -467,9 +473,9 @@ const MyResume = () => {
               id="tour-resume-list"
             >
               {paidResumes.map(resume => (
-                <ResumeCard 
-                  key={resume?.resumedata._id} 
-                  resume={resume?.resumedata} 
+                <ResumeCard
+                  key={resume?.resumedata._id}
+                  resume={resume?.resumedata}
                   onPreview={handleViewResume}
                   onDownload={handleDownload}
                   onEdit={handleEdit}
@@ -496,9 +502,9 @@ const MyResume = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {draftResumes.map(resume => (
-                <ResumeCard 
-                  key={resume?.resumedata._id} 
-                  resume={resume?.resumedata} 
+                <ResumeCard
+                  key={resume?.resumedata._id}
+                  resume={resume?.resumedata}
                   onPreview={handleViewResume}
                   onDownload={handleDownload}
                   onEdit={handleEdit}

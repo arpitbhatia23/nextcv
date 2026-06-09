@@ -99,15 +99,15 @@ const SummaryStep = () => {
   return (
     <div className="py-4 md:py-8">
       <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Professional Summary</h2>
+        <h2 className="text-lg md:text-xl font-bold text-slate-900">Professional Summary</h2>
         <p className="text-[10px] md:text-sm text-slate-500">
           Generate or refine a short summary based on your full resume details
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start">
-        <Card className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <CardHeader className="border-b bg-slate-50/50 p-3 md:p-4 rounded-t-xl flex flex-row justify-between items-center gap-2">
+        <Card className="bg-white rounded-lg md:rounded-xl py-0 shadow-sm border border-slate-200 overflow-hidden">
+          <CardHeader className="border-b bg-slate-50/50 p-3 gap-0 pb-0 rounded-t-xl flex flex-row justify-between items-center">
             <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
               Your Summary
             </CardTitle>
@@ -125,7 +125,7 @@ const SummaryStep = () => {
             </Button>
           </CardHeader>
 
-          <CardContent className="p-3 md:p-6">
+          <CardContent className="p-3 md:p-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -183,8 +183,8 @@ const SummaryStep = () => {
           </CardFooter>
         </Card>
 
-        <Card className="bg-slate-50 rounded-lg md:rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          <CardHeader className="border-b bg-white p-3 md:p-4">
+        <Card className="bg-slate-50 rounded-lg md:rounded-xl py-0 border border-slate-200 shadow-sm overflow-hidden">
+          <CardHeader className="border-b bg-white p-3 gap-0 pb-0">
             <CardTitle className="text-sm md:text-lg font-bold text-slate-800 flex items-center gap-2">
               <BrainCircuit className="w-4 h-4 text-indigo-500" />
               Live Preview
@@ -212,7 +212,7 @@ const SummaryStep = () => {
         <Button
           variant="outline"
           onClick={() => router.push("/dashboard/builder/certificate")}
-          className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 md:h-11 px-4 md:px-6 text-xs md:text-sm font-bold"
+          className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 text-xs md:text-sm font-bold"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Previous
@@ -221,7 +221,7 @@ const SummaryStep = () => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={isGenerating}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 px-4 text-xs md:text-sm font-bold"
         >
           Final Review
           <ArrowRight className="w-4 h-4 ml-2" />

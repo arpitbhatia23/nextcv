@@ -89,16 +89,16 @@ const ProjectsStep = () => {
   return (
     <div className="py-4 md:py-8">
       <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Projects</h2>
+        <h2 className="text-lg md:text-xl font-bold text-slate-900">Projects</h2>
         <p className="text-[10px] md:text-sm text-slate-500">Highlight your best work</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          className="bg-white rounded-lg md:rounded-xl shadow-sm border py-0 border-slate-200 overflow-hidden"
           id="tour-projects-form"
         >
-          <CardHeader className="border-b bg-slate-50/50 p-3 md:p-4 rounded-t-xl flex flex-row justify-between items-center gap-2">
+          <CardHeader className="border-b bg-slate-50/50  p-3 gap-0 pb-0  rounded-t-xl flex flex-row justify-between items-center ">
             <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
               {isEditing ? "Edit Project" : "Add Project"}
             </CardTitle>
@@ -113,7 +113,7 @@ const ProjectsStep = () => {
               </Button>
             )}
           </CardHeader>
-          <CardContent className={"p-3 md:p-6"}>
+          <CardContent className={"p-3 md:p-4"}>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -304,7 +304,7 @@ const ProjectsStep = () => {
                   >
                     <div className="flex justify-between items-start">
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                        <h4 className="font-semibold text-slate-800 text-xs md:text-sm truncate">
                           {project.title}
                         </h4>
                         <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">
@@ -352,13 +352,13 @@ const ProjectsStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/experience")}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 md:h-11 px-4 md:px-6 text-xs md:text-sm font-bold"
+              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 text-xs md:text-sm font-bold"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
             <Button
               onClick={() => router.push("/dashboard/builder/certificate")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 px-4 text-xs md:text-sm font-bold"
               id="tour-next-button"
             >
               Certificates Info <ArrowRight className="w-4 h-4 ml-2" />

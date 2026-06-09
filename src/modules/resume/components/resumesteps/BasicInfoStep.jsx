@@ -81,8 +81,6 @@ const BasicInfoStep = () => {
     }
   }, [formData, form]);
 
-  const watchedValues = useWatch({ control: form.control });
-
   const handlesave = values => {
     setIsLoading(true);
 
@@ -96,14 +94,14 @@ const BasicInfoStep = () => {
       <div className="grid gap-2 md:gap-8 items-start">
         <div className="space-y-4 md:space-y-6" id="tour-resume-form">
           <div className="mb-2">
-            <h2 className="text-lg md:text-2xl font-bold text-slate-900">Basic Details</h2>
-            <p className="text-[10px] md:text-sm text-slate-500 font-medium">
+            <h2 className="text-lg md:text-xl font-bold text-slate-900">Basic Details</h2>
+            <p className="text-[10px] md:text-xs text-slate-500 font-medium">
               Start with your contact information and target role
             </p>
           </div>
 
-          <Card className="border border-slate-200 shadow-sm bg-white rounded-lg md:rounded-xl overflow-hidden">
-            <CardContent className="p-3 md:p-6">
+          <Card className="border border-slate-200 shadow-sm bg-white rounded-sm md:rounded-lg overflow-hidden">
+            <CardContent className="p-3 md:p-4">
               <Form {...form}>
                 <form className="space-y-4 md:space-y-5" onSubmit={form.handleSubmit(handlesave)}>
                   <div className="grid md:grid-cols-2 gap-4 md:gap-5">
@@ -341,7 +339,7 @@ const BasicInfoStep = () => {
                     <Button
                       type="submit"
                       disabled={isloading}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+                      className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-10 px-4 md:px-6 text-xs md:text-sm font-semibold"
                     >
                       {isloading ? "Saving..." : "Next"}
                       <ArrowRight className="w-4 h-4 ml-2" />

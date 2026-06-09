@@ -193,18 +193,18 @@ const FinalStep = () => {
   );
 
   return (
-    <div className="py-4 md:py-8">
+    <div className="py-4">
       <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Review & Download</h2>
+        <h2 className="text-lg md:text-xl font-bold text-slate-900">Review & Download</h2>
         <p className="text-[10px] md:text-sm text-slate-500">
           Perfect your resume and choose your signature style
         </p>
       </div>
 
       {/* Mobile Layout */}
-      <div className="w-full flex flex-col gap-4 lg:hidden pb-10">
+      <div className="w-full flex flex-col gap-2 lg:hidden pb-5">
         <div className="space-y-3">
-          <label className="text-xs font-bold text-slate-700 flex items-center gap-2 uppercase tracking-wide">
+          <label className="text-xs font-semibold text-slate-700 flex items-center gap-2 uppercase tracking-wide">
             <LayoutTemplate className="w-3.5 h-3.5 text-indigo-500" />
             Choose Resume Pack
           </label>
@@ -214,7 +214,7 @@ const FinalStep = () => {
               <button
                 key={tier}
                 onClick={() => setActiveTier(tier)}
-                className={`shrink-0 rounded-full border px-4 py-2 text-[10px] font-black uppercase transition-all ${
+                className={`shrink-0 rounded-xl border px-4 py-2 text-[10px] font-black uppercase transition-all ${
                   activeTier === tier
                     ? "bg-indigo-600 text-white border-indigo-600 shadow-md"
                     : "bg-white text-slate-500 border-slate-200"
@@ -354,7 +354,7 @@ const FinalStep = () => {
       {/* Desktop Layout */}
       <div className="hidden lg:flex gap-6 h-[70vh] min-h-150">
         {/* Left: Template Selector */}
-        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
           <div className="p-4 border-b border-slate-100 bg-slate-50/30">
             <h3 className="font-bold text-slate-800 flex items-center gap-2 text-sm uppercase tracking-wider">
               <LayoutTemplate className="w-4 h-4 text-indigo-500" />
@@ -402,7 +402,7 @@ const FinalStep = () => {
         </div>
 
         {/* Center: Preview */}
-        <div className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-2xl shadow-inner overflow-hidden">
+        <div className="flex-1 flex flex-col bg-slate-50 border border-slate-200 rounded-xl shadow-inner overflow-hidden">
           <div className="p-3 bg-white border-b border-slate-200 flex justify-between items-center px-6">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
               A4 Studio Preview
@@ -421,9 +421,9 @@ const FinalStep = () => {
         </div>
 
         {/* Right: Checkout */}
-        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden h-fit">
+        <div className="w-80 flex flex-col bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden h-fit">
           <div className="p-5 border-b border-slate-50 bg-linear-to-br from-indigo-50/50 to-white">
-            <h3 className="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-slate-900 tracking-tight flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-indigo-500" />
               Complete Build
             </h3>
@@ -449,10 +449,10 @@ const FinalStep = () => {
               )}
 
               <div className="pt-3 border-t border-slate-200 flex justify-between items-center">
-                <span className="text-sm font-black text-slate-800 uppercase">Grand Total</span>
+                <span className="text-sm font-semibold text-slate-800 uppercase">Grand Total</span>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-slate-300 line-through">₹{basePrice}</span>
-                  <span className="text-xl font-black text-slate-900 tracking-tighter">
+                  <span className="text-xl font-semibold text-slate-900 tracking-tighter">
                     ₹{amount}
                   </span>
                 </div>
@@ -460,7 +460,7 @@ const FinalStep = () => {
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">
                 Discount Rewards
               </label>
 
@@ -478,7 +478,7 @@ const FinalStep = () => {
                     onClick={() => debounceCoupon(couponCode)}
                     disabled={!couponCode.trim() || isSubmit}
                     size="sm"
-                    className="bg-slate-900 text-white hover:bg-slate-800 px-4 font-bold h-10"
+                    className="bg-slate-900 text-white hover:bg-slate-800 px-4 font-semibold h-10"
                   >
                     Apply
                   </Button>
@@ -503,19 +503,13 @@ const FinalStep = () => {
 
           <div className="p-5 border-t border-slate-50 bg-slate-50/30">
             <Button
-              className="w-full bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white shadow-xl shadow-indigo-200 py-7 text-sm font-black uppercase tracking-wider transition-all hover:-translate-y-0.5 active:translate-y-0"
+              className="w-full bg-linear-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white shadow-xl shadow-indigo-200 py-6 text-sm font-black uppercase tracking-wider transition-all hover:-translate-y-0.5 active:translate-y-0"
               onClick={debouncePayment}
               disabled={isSubmit || (couponCode && !applied)}
             >
               <Download className="mr-2 h-5 w-5" />
               Download Resume
             </Button>
-
-            <div className="mt-4 flex items-center justify-center gap-3 opacity-40 grayscale">
-              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
-              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
-              <div className="w-8 h-4 bg-slate-400 rounded-xs" />
-            </div>
           </div>
         </div>
       </div>

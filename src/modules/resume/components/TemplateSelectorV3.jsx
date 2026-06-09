@@ -40,7 +40,9 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
   };
 
   return (
-    <div className={`space-y-8 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 p-4 md:p-6 lg:p-8 ${isPending ? "pointer-events-none opacity-80" : ""}`}>
+    <div
+      className={`space-y-8 md:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700 p-4 md:p-6 lg:p-8 ${isPending ? "pointer-events-none opacity-80" : ""}`}
+    >
       {/* Premium Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="space-y-3">
@@ -48,16 +50,16 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
             <Zap className="w-3 h-3 fill-indigo-600" />
             <span>Step 01 — Design Strategy</span>
           </div>
-          <h2 className="text-xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+          <h2 className="text-lg md:text-xl font-black text-slate-900 tracking-tight leading-tight">
             Select your professional <span className="text-indigo-600">canvas.</span>
           </h2>
-          <p className="text-slate-500 text-sm md:text-base max-w-xl leading-relaxed">
+          <p className="text-slate-500 text-xs md:text-sm max-w-xl leading-3.5">
             Choose from our recruiter-vetted, ATS-optimized templates designed to maximize your
             callback rate.
           </p>
         </div>
 
-        <div className="hidden lg:flex items-center gap-4 bg-white border border-slate-100 px-6 py-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="hidden lg:flex items-center gap-4 bg-white border border-slate-100 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex -space-x-3">
             {[1, 2, 3, 4].map(i => (
               <div
@@ -194,16 +196,16 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
       {/* Floating Action Bar (Mobile Responsive) */}
       {selectedTemplate && (
-        <div className="fixed bottom-6 left-0 right-0 z-50 animate-in fade-in slide-in-from-bottom-10 duration-500 px-4">
-          <div className="max-w-xl mx-auto bg-slate-900/95 backdrop-blur-xl text-white p-3 md:p-4 rounded-4xlshadow-2xl flex items-center justify-between border border-white/20 ring-4 ring-slate-900/20">
+        <div className="fixed bottom-6 left-0 right-0 z-50 animate-in fade-in slide-in-from-bottom-10 duration-500 px-2">
+          <div className="max-w-lg mx-auto bg-slate-900/95 backdrop-blur-xl text-white p-3 md:p-4 rounded-xl shadow-2xl flex items-center justify-between border border-white/20 ring-4 ring-slate-900/20">
             <div className="flex items-center gap-4 pl-2">
-              <div className="w-12 h-14 bg-white/10 rounded-2xl overflow-hidden shrink-0 border border-white/10 p-1">
+              <div className="w-10 h-12 bg-white/10 rounded-sm overflow-hidden shrink-0 border border-white/10 p-1">
                 {templates.find(t => t.key === selectedTemplate)?.image && (
                   <Image
                     src={templates.find(t => t.key === selectedTemplate).image}
                     width={48}
                     height={56}
-                    className="object-cover w-full h-full rounded-xl"
+                    className="object-cover w-full h-full rounded-sm"
                     alt="Selected"
                   />
                 )}
@@ -212,14 +214,14 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 <p className="text-[10px] text-indigo-400 font-black uppercase tracking-widest">
                   Design Locked
                 </p>
-                <h5 className="font-black text-sm uppercase tracking-tight">
+                <h5 className="font-semibold text-sm uppercase tracking-tight">
                   {templates.find(t => t.key === selectedTemplate)?.label}
                 </h5>
               </div>
             </div>
             <Button
               onClick={() => handleSelect(selectedTemplate)}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-full font-black text-sm px-8 h-14 shadow-lg shadow-indigo-600/30 group transition-all hover:scale-105 active:scale-95"
+              className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-md font-semibold text-sm px-8 h-10 shadow-lg shadow-indigo-600/30 group transition-all hover:scale-105 active:scale-95"
             >
               START BUILDING{" "}
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />

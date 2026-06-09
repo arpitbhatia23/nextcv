@@ -99,19 +99,19 @@ const EducationStep = () => {
   const { handleAiGeneration, isGenerating } = useAiGeneration({ form, type: "education" });
   return (
     <div className="py-4 md:py-8">
-      <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Education</h2>
+      <div className="mb-2 md:mb-4">
+        <h2 className="text-lg md:text-xl font-bold text-slate-900">Education</h2>
         <p className="text-[10px] md:text-sm text-slate-500">Add your academic background</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
+          className="bg-white rounded-xl  py-0 shadow-sm border border-slate-200 overflow-hidden"
           id="tour-education-form"
         >
-          <CardHeader className="border-b bg-slate-50/50 p-3 md:p-4 rounded-t-xl flex flex-row justify-between items-center">
+          <CardHeader className="border-b  p-3 gap-0 pb-0 rounded-t-xl flex flex-row justify-between items-center">
             <div>
-              <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
+              <CardTitle className="text-sm  md:text-lg font-semibold text-slate-800">
                 {isEditing ? "Edit Education" : "Add Education"}
               </CardTitle>
             </div>
@@ -120,13 +120,13 @@ const EducationStep = () => {
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-7 text-[10px] md:text-xs text-slate-500 hover:text-slate-700"
+                className="h-6 text-[10px] md:text-xs text-slate-500 hover:text-slate-700"
               >
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent className="p-3 md:p-6">
+          <CardContent className="p-3 md:p-4  px-2">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -351,17 +351,17 @@ const EducationStep = () => {
 
           <Tips section={"education"} />
 
-          <div className="flex justify-between items-center pt-4">
+          <div className="flex justify-between items-center pt-3">
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/basicInfo")}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 md:h-11 px-4 md:px-6 text-xs md:text-sm font-bold"
+              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 md:px-4 text-xs md:text-sm font-semibold"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
             <Button
               onClick={() => router.push("/dashboard/builder/skills")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10  px-4 md:px-4 text-xs md:text-sm font-semibold"
               id="tour-next-button"
             >
               Skills Info <ArrowRight className="w-4 h-4 ml-2" />
