@@ -163,16 +163,16 @@ const SkillStep = () => {
   return (
     <div className="py-4 md:py-8">
       <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-900">Skills</h2>
-        <p className="text-[10px] md:text-sm text-slate-500">
+        <h2 className="text-lg md:text-xl font-bold text-slate-900">Skills</h2>
+        <p className="text-[10px] md:text-xs text-slate-500">
           Showcase your technical and soft skills
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
-        <Card className="bg-white rounded-lg md:rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <CardHeader className="border-b bg-slate-50/50 p-3 md:p-4 rounded-t-xl flex justify-between items-center gap-2">
+        <Card className="bg-white rounded-lg py-0 md:rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+          <CardHeader className="border-b p-3   pb-0 rounded-t-xl flex justify-between items-center gap-0">
             <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
               {isEditing ? "Edit Skill" : "Add Skill"}
             </CardTitle>
@@ -211,7 +211,7 @@ const SkillStep = () => {
                           <Input
                             placeholder="React, Node etc."
                             {...field}
-                            className="text-xs md:text-sm h-9 md:h-11 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
+                            className="text-xs md:text-sm h-9 md:h-10 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
                           />
                         </FormControl>
                         <FormMessage className="text-[10px]" />
@@ -231,7 +231,7 @@ const SkillStep = () => {
                           <Input
                             placeholder="e.g. Expert"
                             {...field}
-                            className="text-xs md:text-sm h-9 md:h-11 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
+                            className="text-xs md:text-sm h-9 md:h-10 bg-slate-50 border-slate-200 focus:bg-white placeholder:text-[10px]"
                           />
                         </FormControl>
                       </FormItem>
@@ -241,32 +241,20 @@ const SkillStep = () => {
 
                 <Button
                   type="submit"
-                  className="w-full bg-slate-900 text-white font-bold h-9 md:h-11 text-xs md:text-sm"
+                  className="w-full bg-slate-900 text-white font-bold h-9 md:h-10 text-xs md:text-sm"
                 >
                   {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
               </form>
             </Form>
           </CardContent>
-
-          <CardFooter className="p-0">
-            <div className="bg-blue-50/50 p-3 md:p-4 w-full border-t border-blue-100">
-              <h3 className="text-[10px] md:text-sm font-bold text-blue-900 mb-2 flex items-center gap-2 uppercase tracking-tight">
-                <Sparkles className="w-3 md:w-4 h-3 md:h-4 text-blue-600" /> Tips
-              </h3>
-              <ul className="text-[10px] md:text-sm text-blue-800/80 space-y-1 pl-4 list-disc font-medium">
-                <li>Comma separated list works! (React, Next.js)</li>
-                <li>Balance hard skills with soft skills.</li>
-              </ul>
-            </div>
-          </CardFooter>
         </Card>
 
         {/* List Section */}
         <div className="space-y-6">
           <div className="bg-slate-50 rounded-xl border border-slate-200 p-4 md:p-5">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-[10px] md:text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+              <h3 className="text-[10px] md:text-sm font-semibold text-slate-500 uppercase tracking-widest flex items-center gap-2">
                 <Wrench className="w-4 h-4 text-indigo-500" /> Added Skills
               </h3>
               <Button
@@ -288,10 +276,10 @@ const SkillStep = () => {
                 {skillList.map(skill => (
                   <div
                     key={skill.id}
-                    className="bg-white pl-3 pr-1.5 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-2 md:gap-3 group hover:border-indigo-300 transition-colors"
+                    className="bg-white pl-3 pr-1.5 py-1.5 rounded-lg border border-slate-200 shadow-sm flex items-center gap-2 md:gap-3 group hover:border-indigo-300 transition-colors"
                   >
                     <div className="flex flex-col min-w-0">
-                      <span className="font-bold text-slate-800 text-[10px] md:text-sm truncate">
+                      <span className="font-semibold text-slate-800 text-[10px] md:text-sm truncate">
                         {skill.name}
                       </span>
                       {skill.level && (
@@ -331,13 +319,13 @@ const SkillStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/education")}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 md:h-11 px-4 md:px-6 text-xs md:text-sm font-bold"
+              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4  text-xs md:text-sm font-bold"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
             <Button
               onClick={handleNext}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 md:h-11 px-6 md:px-8 text-xs md:text-sm font-bold"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10  px-4 text-xs md:text-sm font-bold"
             >
               Experience Info <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

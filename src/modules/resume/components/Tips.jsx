@@ -27,12 +27,12 @@ export function Tips({ section }) {
   };
 
   return (
-    <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4 shadow-sm hover:shadow-md transition">
-      <h3 className="mb-3 text-xl font-semibold text-gray-800 flex items-center gap-2">💡 Tips</h3>
+    <div className="mt-4 rounded-lg border border-gray-200 bg-gray-50 p-4 shadow-sm hover:shadow-md transition">
+      <h3 className="mb-3 text-sm font-semibold text-gray-800 flex items-center gap-2">💡 Tips</h3>
 
       <ul className="space-y-2">
         {tips[section]?.map((tip, index) => (
-          <li key={index} className="text-xl font-medium text-gray-600 flex items-start gap-2">
+          <li key={index} className="text-sm font-medium text-gray-600 flex items-start gap-2">
             <span>👉</span>
             <span>{tip}</span>
           </li>

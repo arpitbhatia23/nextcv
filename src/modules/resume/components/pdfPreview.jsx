@@ -3,8 +3,6 @@ import { WatermarkLayer } from "@/modules/payment/components/WatermarkLayer";
 import React, { useState } from "react";
 import { Document, Page } from "react-pdf";
 
-
-
 const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
   const [numPages, setNumPages] = useState(null);
 
@@ -34,7 +32,7 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
             <div key={idx} className={isMobile ? "mb-2 relative" : "mb-4 relative"}>
               <Page
                 pageNumber={idx + 1}
-                width={isMobile ? 280 : 600}
+                width={isMobile ? 280 : 400}
                 className="bg-white shadow-md max-w-full"
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
@@ -46,7 +44,7 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
       ) : (
         <div
           className={`bg-white animate-pulse rounded-sm shadow-sm border ${
-            isMobile ? "h-60 w-full" : "h-200 w-150"
+            isMobile ? "h-60 w-full" : "h-200 w-100"
           }`}
         />
       )}
