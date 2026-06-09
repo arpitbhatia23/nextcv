@@ -29,7 +29,7 @@ export default function AIResumeIndiaPage() {
           <div className="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
             <Trophy className="w-4 h-4" /> Rated #1 for Indian Freshers
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+          <h1 className="text-lg sm:text-xl sm: lg: md: font-extrabold -900 mb-6 tracking-tight">
             Best AI Resume Builder in <span className="text-indigo-600 underline">India</span>
           </h1>
           <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto italic">

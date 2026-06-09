@@ -123,10 +123,10 @@ const Blog = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <h1 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight">
             Latest Insights & News
           </h1>
-          <h2 className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <h2 className="text-sm text-slate-600 max-w-2xl mx-auto">
             Expert tips on resume writing, career development, and job market trends to help you
             land your dream job.
           </h2>
@@ -154,7 +154,7 @@ const Blog = () => {
               <button
                 key={i}
                 onClick={() => handleCategoryClick(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   cat === category
                     ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
                     : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 hover:border-slate-300"
@@ -169,7 +169,7 @@ const Blog = () => {
                 <select
                   onChange={e => handleCategoryClick(e.target.value)}
                   value={extraCategories.includes(category) ? category : ""}
-                  className={`appearance-none pl-4 pr-10 py-2 rounded-full text-sm font-medium border transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                  className={`appearance-none pl-4 pr-10 py-2 rounded-lg text-sm font-medium border transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                     extraCategories.includes(category)
                       ? "bg-indigo-50 text-indigo-700 border-indigo-200"
                       : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
@@ -226,7 +226,7 @@ const Blog = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-3xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
                     {featuredPost.title}
                   </h3>
 

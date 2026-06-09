@@ -55,7 +55,7 @@ function AnimatedCounter({ to, className }) {
     return controls.stop;
   }, [to]);
 
-  return <span className={`text-xl sm:text-5xl font-bold ${className}`}>{display}</span>;
+  return <span className={`text-sm sm:text-lg font-bold ${className}`}>{display}</span>;
 }
 
 export default function TestimonialCarousel() {
@@ -92,10 +92,10 @@ export default function TestimonialCarousel() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">
               Stop Guessing. <span className="text-indigo-600">Start Getting Interviews.</span>
             </h2>
-            <p className="text-xs sm:text-lg text-slate-600">
+            <p className="text-xs sm:text-sm text-slate-600">
               Join thousands of professionals who improved their career with Next CV.
             </p>
           </div>
@@ -119,12 +119,12 @@ export default function TestimonialCarousel() {
 
                   <div className="flex items-center gap-4 mt-auto">
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${item.color}`}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm ${item.color}`}
                     >
                       {item.initials}
                     </div>
                     <div>
-                      <span className="font-bold text-slate-900 text-sm">{item.name}</span>
+                      <span className="font-bold text-slate-900 text-xs">{item.name}</span>
                       <p className="text-slate-500 text-xs">{item.title}</p>
                     </div>
                   </div>
@@ -134,11 +134,11 @@ export default function TestimonialCarousel() {
           </div>
 
           {/* Stats Grid */}
-          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-3">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="text-center p-8 bg-white rounded-3xl border border-slate-100 shadow-sm"
+                className="text-center p-4 bg-white rounded-xl border border-slate-100 shadow-sm"
               >
                 <AnimatedCounter to={stat.number} className={stat.color} />
                 <p className="text-slate-500 font-medium mt-2 uppercase tracking-wide text-sm">
@@ -152,8 +152,8 @@ export default function TestimonialCarousel() {
           <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full" />
             <div className="relative z-10">
-              <h3 className="text-lg sm:text-2xl font-bold mb-2">🔥 Limited Time Offer</h3>
-              <p className="text-slate-300 mb-0 text-xs sm:text-lg">
+              <h3 className="text-xs sm:text-sm font-bold mb-2">🔥 Limited Time Offer</h3>
+              <p className="text-slate-300 mb-0 text-xs ">
                 Get your professional ATS resume today for just Starting from
                 <span className="text-white font-bold ">₹49</span>. No hidden fees.
               </p>

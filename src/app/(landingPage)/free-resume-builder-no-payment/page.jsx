@@ -18,7 +18,7 @@ export default function FreeResumePage() {
       {/* Hero */}
       <section className="relative pt-24 pb-12 px-6 lg:px-8 text-center bg-slate-50">
         <div className="mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+          <h1 className="text-lg sm:text-xl sm: lg: md: font-extrabold -900 mb-6 tracking-tight">
             Free Resume Builder <br />
             <span className="text-indigo-600">Without Payment & PDF Download</span>
           </h1>

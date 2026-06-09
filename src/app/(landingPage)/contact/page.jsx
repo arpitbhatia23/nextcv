@@ -46,10 +46,10 @@ export default function ContactPage() {
               <MessageSquare className="w-4 h-4" />
               We're here to help
             </div>
-            <h1 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-0 sm:mb-6 transition-all">
+            <h1 className="text-lg sm:text-xl  font-extrabold -900 mb-0 sm:mb-6 transition-all">
               Let's build your <span className="text-indigo-600">career together</span>
             </h1>
-            <p className="text-sm sm:text-lg text-slate-600 max-w-lg md:max-w-2xl mx-auto mt-4 sm:mt-0">
+            <p className="text-sm  text-slate-600 max-w-lg md:max-w-2xl mx-auto mt-4 sm:mt-0">
               Have questions about our <span className="font-semibold">AI Resume Builder</span>?
               Need help with your template? We typically reply within 24 hours.
             </p>
@@ -63,14 +63,14 @@ export default function ContactPage() {
               <div className="flex justify-center mb-2">
                 <Clock className="w-6 h-6 text-indigo-500" />
               </div>
-              <div className="text-xl sm:text-2xl font-bold text-slate-900">24h</div>
+              <div className="text-sm sm:text-lg font-semibold text-slate-900">24h</div>
               <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
                 Reply Time
               </div>
             </div>
             <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
               <div className="flex justify-center mb-2 text-indigo-500 font-bold">₹</div>
-              <div className="text-xl sm:text-2xl font-bold text-slate-900">100</div>
+              <div className="text-lg sm:text-xl font-bold text-slate-900">100</div>
               <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
                 Fixed Price
               </div>
@@ -84,8 +84,10 @@ export default function ContactPage() {
             {/* Left: Contact Form */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-10 shadow-sm border border-slate-100">
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Send us a message</h2>
-                <p className="text-sm sm:text-base text-slate-500 mb-8">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2">
+                  Send us a message
+                </h2>
+                <p className="text-sm sm:text-sm text-slate-500 mb-8">
                   Fill out the form below and we'll get back to you as soon as possible.
                 </p>
 
@@ -99,7 +101,7 @@ export default function ContactPage() {
               {/* Email Card */}
               <div className="bg-indigo-600 rounded-3xl p-5 sm:p-8 text-white shadow-lg shadow-indigo-600/20">
                 <Mail className="w-8 h-8 mb-4 opacity-80" />
-                <h3 className="text-lg sm:text-xl font-bold mb-2">Email Support</h3>
+                <h3 className="text-sm sm:text-lg font-bold mb-2">Email Support</h3>
                 <p className="text-indigo-100 mb-6 text-xs sm:text-sm">
                   Prefer email? reaching out directly is always faster for technical support.
                 </p>

@@ -59,13 +59,13 @@ const ATSCheckerPage = () => {
             <CheckCircle2 className="w-4 h-4" />
             <span>Updates for 2026 Hiring Season</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+          <h1 className="text-lg sm:text-xl  font-bold tracking-tight  mb-6">
             ATS-Friendly Resume Checker for <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
               Freshers in India 2026
             </span>
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
+          <p className="text-sm text-slate-600 max-w-2xl mx-auto mb-10">
             Ever wondered <strong>why ATS rejects resumes in India and how to fix it</strong>?
             Upload your resume and get an instant ATS score analysis tailored for Indian recruitment
             standards in 2026.
@@ -84,9 +84,9 @@ const ATSCheckerPage = () => {
               <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
                 <Briefcase className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800">Crack the Code for MNCs</h2>
+              <h2 className="text-lg font-bold text-slate-800">Crack the Code for MNCs</h2>
             </div>
-            <p className="text-slate-600 mb-4">
+            <p className="text-slate-600 mb-4 text-sm">
               Top Indian companies have specific criteria for screening resumes. Our tool checks
               against common patterns used by:
             </p>
@@ -94,13 +94,13 @@ const ATSCheckerPage = () => {
               {["TCS", "Infosys", "Wipro", "HCL Technologies", "Accenture", "Tech Mahindra"].map(
                 (company, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 text-sm" />
                     {company}
                   </li>
                 )
               )}
             </ul>
-            <p className="text-sm text-slate-500 mt-6 italic">
+            <p className="text-xs text-slate-500 mt-6 italic">
               * Note: We are not affiliated with these companies. Scoring is based on general
               industry standards.
             </p>
@@ -112,16 +112,16 @@ const ATSCheckerPage = () => {
               <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
                 <Search className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800">Why Scores Matter for Freshers?</h2>
+              <h2 className="text-lg font-bold text-slate-800">Why Scores Matter for Freshers?</h2>
             </div>
-            <p className="text-slate-600 mb-4">
+            <p className="text-slate-600 mb-4 text-sm">
               For campus placements and off-campus drives, ATS scores are critical because of the
               volume of applicants.
             </p>
             <ul className="space-y-3">
               <li className="flex gap-3">
                 <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
-                <span className="text-slate-700">
+                <span className="text-slate-700 text-sm">
                   <strong>B.Tech/CSE:</strong> Highlights project keywords and technical stacks.
                 </span>
               </li>
@@ -144,7 +144,7 @@ const ATSCheckerPage = () => {
 
         {/* FAQs */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+          <h2 className="text-lg font-bold text-slate-900 mb-8 text-center">
             Frequently Asked Questions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -182,7 +182,7 @@ const ATSCheckerPage = () => {
                 key={i}
                 className="bg-white p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow"
               >
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
+                <h3 className="text-sm font-bold text-slate-900 mb-2">{faq.q}</h3>
                 <p className="text-slate-600">{faq.a}</p>
               </div>
             ))}

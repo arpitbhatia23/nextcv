@@ -54,14 +54,14 @@ export default function AboutPage() {
               Built by Students, For Students
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+            <h1 className="text-lg font-extrabold -900 mb-6 tracking-tight">
               We make professional resumes <br />
               <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-violet-600">
                 affordable for everyone.
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-10">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed mb-10">
               NextCV is India's most affordable{" "}
               <span className="font-semibold text-slate-800">AI Resume Builder</span>. We help
               freshers and students create ATS-friendly resumes without expensive monthly
@@ -75,8 +75,8 @@ export default function AboutPage() {
           <div className="max-w-5xl mx-auto">
             <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 flex flex-col md:flex-row gap-12 items-center">
               <div className="flex-1 space-y-6">
-                <h2 className="text-3xl font-bold text-slate-900">Why we built NextCV?</h2>
-                <div className="space-y-4 text-slate-600 leading-relaxed">
+                <h2 className="text-lg font-bold text-slate-900">Why we built NextCV?</h2>
+                <div className="space-y-4 text-slate-600 text-sm leading-relaxed">
                   <p>
                     We're BCA students who faced a common problem:{" "}
                     <span className="font-semibold text-slate-800">
@@ -90,8 +90,8 @@ export default function AboutPage() {
                     the price of a coffee.
                   </p>
                   <p>
-                    So we built NextCV with a simple promise:{" "}
-                    Starting from <b className="text-indigo-600">₹49, one time. No hidden fees.</b>
+                    So we built NextCV with a simple promise: Starting from{" "}
+                    <b className="text-indigo-600">₹49, one time. No hidden fees.</b>
                   </p>
                 </div>
               </div>
@@ -99,17 +99,19 @@ export default function AboutPage() {
               {/* Stats/Visual */}
               <div className="flex-1 w-full">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-indigo-50 p-6 rounded-2xl text-center">
-                    <div className="text-3xl font-bold text-indigo-600 mb-1">₹49</div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wider font-bold">One time</div>
+                  <div className="bg-indigo-50 p-4 rounded-xl text-center">
+                    <div className="text-lg font-bold text-indigo-600 mb-1">₹49</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wider font-bold">
+                      One time
+                    </div>
                   </div>
                   <div className="bg-emerald-50 p-6 rounded-2xl text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-1">100%</div>
-                    <div className="text-sm text-emerald-800 font-medium">ATS Friendly</div>
+                    <div className="text-lg font-bold text-emerald-600 mb-1">100%</div>
+                    <div className="text-xs text-emerald-800 font-medium">ATS Friendly</div>
                   </div>
                   <div className="bg-amber-50 p-6 rounded-2xl text-center col-span-2">
-                    <div className="text-3xl font-bold text-amber-600 mb-1">Student First</div>
-                    <div className="text-sm text-amber-800 font-medium">
+                    <div className="text-lg font-bold text-amber-600 mb-1">Student First</div>
+                    <div className="text-xs text-amber-800 font-medium">
                       Designed for Indian Job Market
                     </div>
                   </div>
@@ -123,8 +125,8 @@ export default function AboutPage() {
         <section className="py-24 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Mission</h2>
-              <p className="text-slate-600 max-w-2xl mx-auto">
+              <h2 className="text-xl font-bold text-slate-900 mb-4">Our Mission</h2>
+              <p className="text-slate-600 max-w-2xl  text-sm mx-auto">
                 To democratize career opportunities by making professional resume tools accessible
                 to every student in India.
               </p>
@@ -156,11 +158,11 @@ export default function AboutPage() {
                   className="bg-slate-50 rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300 border border-slate-100 hover:shadow-lg"
                 >
                   <div
-                    className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center mb-6 shadow-md`}
+                    className={`w-8 h-8 rounded-lg ${item.bg} flex items-center justify-center mb-6 shadow-md`}
                   >
                     {item.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">{item.title}</h3>
                   <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -171,7 +173,7 @@ export default function AboutPage() {
         {/* Founders */}
         <section className="py-20 px-6 bg-slate-900 text-white rounded-t-[3rem]">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-12">Meet the Team</h2>
+            <h2 className="text-xl font-bold mb-12">Meet the Team</h2>
 
             <div className="grid md:grid-cols-2 gap-12">
               {/* Aurpit */}
@@ -179,7 +181,7 @@ export default function AboutPage() {
                 <div className="w-20 h-20 bg-indigo-500 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-bold shadow-lg shadow-indigo-500/20">
                   A
                 </div>
-                <h3 className="text-xl font-bold mb-1">Aurpit</h3>
+                <h3 className="text-lg font-bold mb-1">Aurpit</h3>
                 <p className="text-indigo-300 text-sm mb-4">Co-Founder & Developer</p>
                 <p className="text-slate-400 text-sm leading-relaxed">
                   Full-stack developer passionate about building tools that solve real problems.
@@ -191,7 +193,7 @@ export default function AboutPage() {
                 <div className="w-20 h-20 bg-emerald-500 rounded-full mx-auto mb-6 flex items-center justify-center text-2xl font-bold shadow-lg shadow-emerald-500/20">
                   T
                 </div>
-                <h3 className="text-xl font-bold mb-1">Tamanna</h3>
+                <h3 className="text-lg font-bold mb-1">Tamanna</h3>
                 <p className="text-emerald-300 text-sm mb-4">Co-Founder & Developer</p>
                 <p className="text-slate-400 text-sm leading-relaxed">
                   Obsessed with user experience and making technology accessible to everyone.

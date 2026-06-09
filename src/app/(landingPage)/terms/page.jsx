@@ -34,7 +34,7 @@ const page = () => {
         }}
       />
       <main className="max-w-5xl mx-auto px-6 py-24 text-gray-800 ">
-        <h1 className="text-4xl font-bold mb-6 text-center">Terms & Conditions</h1>
+        <h1 className="text-lg sm:text-xl sm: lg: font-bold mb-6">Terms & Conditions</h1>
 
         <section className="space-y-6">
           <p>

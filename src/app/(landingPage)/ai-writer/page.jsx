@@ -27,20 +27,20 @@ export default function AIWriterPage() {
             <Sparkles className="w-4 h-4 mr-2" />
             Powered by Gemini AI
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-6">
+          <h1 className="text-lg sm:text-xl sm: lg: font-bold tracking-tight -900 sm: mb-6">
             Write Your Resume <br />{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
               at the Speed of AI
             </span>
           </h1>
-          <p className="text-lg leading-8 text-slate-600 mb-10">
+          <p className="text-sm leading-8 text-slate-600 mb-10">
             Stop staring at a blank cursor. Let our intelligent AI write professional summaries and
             impactful bullet points for you in seconds.
           </p>
           <div className="flex items-center justify-center gap-x-6">
             <Link
               href="/dashboard/resume/new"
-              className="rounded-full bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-lg hover:bg-slate-800 hover:scale-105 transition-all flex items-center"
+              className="rounded-lg bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-lg hover:bg-slate-800 hover:scale-105 transition-all flex items-center"
             >
               Try AI Writer Now <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
@@ -52,15 +52,15 @@ export default function AIWriterPage() {
       <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6">How It Works</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-6">How It Works</h2>
             <div className="space-y-8">
               <div className="flex gap-4">
                 <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
                   <span className="font-bold text-indigo-600">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Enter Your Job Title</h3>
-                  <p className="text-slate-600">
+                  <h3 className="font-semibold text-sm">Enter Your Job Title</h3>
+                  <p className="text-slate-600 text-sm">
                     Simply tell the AI what role you want to apply for (e.g., "Software Engineer").
                   </p>
                 </div>
@@ -70,8 +70,8 @@ export default function AIWriterPage() {
                   <span className="font-bold text-purple-600">2</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">Detailed Suggestions</h3>
-                  <p className="text-slate-600">
+                  <h3 className="font-semibold text-sm">Detailed Suggestions</h3>
+                  <p className="text-slate-600 text-sm">
                     Our AI analyzes thousands of successful resumes to generate relevant skills and
                     achievements.
                   </p>
@@ -139,11 +139,12 @@ export default function AIWriterPage() {
       <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate prose-indigo">
         <h2>Why Use an AI Resume Writer in India?</h2>
         <p>
-          The Indian job market is unique, with recruiters at MNCs like TCS and Wipro 
-          receiving thousands of applications daily. An <strong>AI Resume Builder India</strong>-focused tool 
-          helps you navigate these challenges. Writer's block is real, and staring at a blank screen 
-          wondering how to phrase "I answered calls" into a professional achievement can be paralyzing. 
-          An <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
+          The Indian job market is unique, with recruiters at MNCs like TCS and Wipro receiving
+          thousands of applications daily. An <strong>AI Resume Builder India</strong>-focused tool
+          helps you navigate these challenges. Writer's block is real, and staring at a blank screen
+          wondering how to phrase "I answered calls" into a professional achievement can be
+          paralyzing. An <strong>AI Resume Writer</strong> solves this by acting as your personal
+          career coach.
         </p>
 
         <h3>Professional Summaries in Seconds</h3>

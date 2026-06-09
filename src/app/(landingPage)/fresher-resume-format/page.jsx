@@ -86,10 +86,10 @@ export default function FresherResumeFormatPage() {
               <FileText className="w-4 h-4" />
               ATS-Optimized Guides
             </div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+            <h1 className="text-lg sm:text-xl sm: lg: sm: lg: font-extrabold -900 mb-6 leading-tight">
               The Ultimate <span className="text-indigo-600">Fresher Resume Format</span> to Land Your First Job
             </h1>
-            <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto">
+            <p className="text-sm sm:text-sm text-slate-600 max-w-3xl mx-auto">
               Landing your first job in India’s competitive market starts with the right <strong>fresher resume format</strong>. 
               Whether you are an IT graduate looking for the perfect <strong>TCS resume format for freshers</strong> or a business major, 
               having an <strong>ATS friendly resume</strong> is non-negotiable. Learn the top ATS resume best practices 2026 to beat the bots.
@@ -132,7 +132,7 @@ export default function FresherResumeFormatPage() {
           <section className="bg-indigo-50 p-8 rounded-3xl border border-indigo-100">
             <h2 className="text-2xl font-bold mb-4 text-indigo-950">Fresher Resume Example (TCS/Infosys Ready)</h2>
             <div className="bg-white p-6 rounded-xl border border-indigo-200 font-mono text-sm text-slate-700 shadow-sm">
-              <p className="font-bold text-lg mb-1 text-slate-900">Rahul Sharma</p>
+              <p className="font-bold text-sm mb-1 text-slate-900">Rahul Sharma</p>
               <p className="mb-4 text-slate-500">Mumbai, India | +91 98765 43210 | rahul.sharma@email.com</p>
               
               <p className="font-bold text-slate-900 mb-1 border-b pb-1">Objective</p>
@@ -201,7 +201,7 @@ export default function FresherResumeFormatPage() {
           {/* CTA Section */}
           <section className="bg-indigo-600 rounded-3xl p-10 text-center text-white shadow-xl shadow-indigo-600/20">
             <h2 className="text-3xl font-bold mb-4">Build Your Perfect First Resume Today</h2>
-            <p className="text-indigo-100 mb-8 max-w-2xl mx-auto text-lg">
+            <p className="text-indigo-100 mb-8 max-w-2xl mx-auto text-sm">
               Stop worrying about common ATS resume mistakes. Use NextCV's intelligent builder to generate a professional, ATS-optimized fresher resume in minutes.
             </p>
             <Link 

@@ -15,10 +15,10 @@ const ATSFeatureSection = () => {
               <Zap className="w-4 h-4" />
               <span>New Free Tool</span>
             </div>
-            <h2 className="text-xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6 leading-tight">
               Is Your Resume <span className="text-indigo-600">ATS-Friendly?</span>
             </h2>
-            <p className="text-xs sm:text-lg text-slate-600 mb-8 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 mb-8 leading-relaxed">
               Wondering{" "}
               <strong>
                 <Link
@@ -44,7 +44,7 @@ const ATSFeatureSection = () => {
               </strong>
               .
             </p>
-            <div className="text-xs sm:text-lg space-y-4 mb-8">
+            <div className="text-xs sm:text-sm space-y-4 mb-8">
               {[
                 "Instant score analysis",
                 "Keyword gap detection",
@@ -59,7 +59,7 @@ const ATSFeatureSection = () => {
             </div>
             <Link
               href="/ats-resume-checker"
-              className="inline-flex items-center justify-center p-2 sm:px-8 py-3.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
+              className="inline-flex items-center justify-center p-2 sm:px-8 py-3 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
             >
               Check My Resume Score
               <FileSearch className="ml-2 w-5 h-5" />

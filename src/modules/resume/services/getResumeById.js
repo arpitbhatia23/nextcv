@@ -8,9 +8,7 @@ export const getResumeById = async ({ id }) => {
     throw new apiError(400, "invalid resume id");
   }
   const cacheKey = `resumebyID:${id}`;
-  console.time("redis");
   const cached = await redis.get(cacheKey);
-  console.timeEnd("redis");
   if (cached) {
     return JSON.parse(cached);
   }

@@ -52,11 +52,11 @@ export default function TemplatesPage() {
             <Layout className="w-4 h-4 mr-2" />
             Recruiter Approved Formats
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-6">
+          <h1 className="text-lg sm:text-xl font-bold tracking-tight  mb-6">
             Best Resume Format for <br />
             <span className="text-indigo-600">Freshers in India 2026</span>
           </h1>
-          <p className="text-lg leading-8 text-slate-600 mb-10">
+          <p className="text-sm leading-8 text-slate-600 mb-10">
             Don't get lost in the pile. Use our{" "}
             <strong>free ATS-optimized resume template India</strong>
             designed to help you pass automated screenings and impress hiring managers in the 2026
@@ -83,31 +83,43 @@ export default function TemplatesPage() {
       <section className="py-12 px-6 lg:px-8 max-w-5xl mx-auto">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
           <div className="p-6 bg-indigo-50 border-b border-slate-200">
-            <h2 className="text-xl font-bold text-slate-900">Which Resume Template is Right for You?</h2>
+            <h2 className="text-lg font-semibold text-slate-900">
+              Which Resume Template is Right for You?
+            </h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-slate-200">
               <thead className="bg-slate-50">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Type</th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">Best For</th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-900">
+                    Best For
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 bg-white">
                 <tr>
-                  <td className="px-6 py-4 text-sm font-medium text-slate-900">ATS Resume Format</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                    ATS Resume Format
+                  </td>
                   <td className="px-6 py-4 text-sm text-slate-600">Freshers, IT jobs, MNCs</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 text-sm font-medium text-slate-900">Professional Resume Format</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                    Professional Resume Format
+                  </td>
                   <td className="px-6 py-4 text-sm text-slate-600">Experienced candidates</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 text-sm font-medium text-slate-900">Fresher Resume Format</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                    Fresher Resume Format
+                  </td>
                   <td className="px-6 py-4 text-sm text-slate-600">First job, campus placement</td>
                 </tr>
                 <tr>
-                  <td className="px-6 py-4 text-sm font-medium text-slate-900">Single-column Template</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                    Single-column Template
+                  </td>
                   <td className="px-6 py-4 text-sm text-slate-600">ATS screening</td>
                 </tr>
                 <tr>
@@ -123,7 +135,7 @@ export default function TemplatesPage() {
       {/* Templates Grid */}
       <section id="templates" className="py-20 px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Explore Our Collection</h2>
+          <h2 className="text-lg font-bold text-slate-900 mb-4">Explore Our Collection</h2>
           <p className="text-slate-600">
             From creative designs for designers to clean corporate formats for executives.
           </p>
@@ -180,10 +192,10 @@ export default function TemplatesPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-indigo-600">Why NextCV?</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <p className="mt-2 text-sm  tracking-tight text-slate-900 sm:text-4xl">
               More than just a pretty document
             </p>
-            <p className="mt-6 text-lg leading-8 text-slate-600">
+            <p className="mt-6 text-sm leading-8 text-slate-600">
               Our templates are engineered to parse correctly by Applicant Tracking Systems while
               looking stunning to human eyes.
             </p>
@@ -236,10 +248,18 @@ export default function TemplatesPage() {
         <h2>Best Resume Format for Freshers in India 2026</h2>
         <p>
           In today's competitive job market, your resume is often the only chance you get to make a
-          first impression. The best resume format for freshers in India 2026 is the reverse-chronological, 
-          single-column format. Recruiters at top Indian MNCs spend an average of just 6-7 seconds scanning a resume. 
-          A well-structured resume template organizes your education, technical skills, and projects in a way that highlights your strengths immediately. 
-          Using an <Link href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription" className="text-indigo-600 hover:underline">affordable resume builder with no monthly subscriptions</Link> is the easiest way to get started.
+          first impression. The best resume format for freshers in India 2026 is the
+          reverse-chronological, single-column format. Recruiters at top Indian MNCs spend an
+          average of just 6-7 seconds scanning a resume. A well-structured resume template organizes
+          your education, technical skills, and projects in a way that highlights your strengths
+          immediately. Using an{" "}
+          <Link
+            href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription"
+            className="text-indigo-600 hover:underline"
+          >
+            affordable resume builder with no monthly subscriptions
+          </Link>{" "}
+          is the easiest way to get started.
         </p>
 
         <h2>ATS-Friendly Resume Templates for Indian Jobs</h2>
@@ -265,32 +285,45 @@ export default function TemplatesPage() {
 
         <h2>Professional Resume Format India 2026</h2>
         <p>
-          For experienced candidates, a professional resume format is vital. It focuses on career progression, 
-          leadership, and quantified achievements. Whether you're in banking, law, or corporate management, 
-          these templates rely on standard fonts and conservative layouts to project authority and competence.
+          For experienced candidates, a professional resume format is vital. It focuses on career
+          progression, leadership, and quantified achievements. Whether you're in banking, law, or
+          corporate management, these templates rely on standard fonts and conservative layouts to
+          project authority and competence.
         </p>
 
         <h2>Resume Templates for TCS, Infosys, Wipro & HCL</h2>
         <p>
-          Indian IT giants like <strong>TCS, Infosys, Wipro, and HCL</strong> have specific screening criteria. 
-          They look for clear mentions of your technical stack (Java, Python, React), academic percentages, 
-          and final year projects. Our customized ATS-friendly templates are designed specifically to pass 
-          through the screening systems of these mass recruiters during campus placements and off-campus drives.
+          Indian IT giants like <strong>TCS, Infosys, Wipro, and HCL</strong> have specific
+          screening criteria. They look for clear mentions of your technical stack (Java, Python,
+          React), academic percentages, and final year projects. Our customized ATS-friendly
+          templates are designed specifically to pass through the screening systems of these mass
+          recruiters during campus placements and off-campus drives.
         </p>
 
         <h2>Single-Column vs Modern Resume Templates</h2>
         <p>
-          Not sure which layout to pick? 
-          <strong>Single-column templates</strong> are the safest bet for engineering and IT roles because they have a 100% success rate with ATS parsers. 
-          <strong>Modern, multi-column templates</strong> are better suited for designers, marketers, and creative roles where you need to show a bit of flair and visual hierarchy, provided you apply directly via email or networking.
+          Not sure which layout to pick?
+          <strong>Single-column templates</strong> are the safest bet for engineering and IT roles
+          because they have a 100% success rate with ATS parsers.
+          <strong>Modern, multi-column templates</strong> are better suited for designers,
+          marketers, and creative roles where you need to show a bit of flair and visual hierarchy,
+          provided you apply directly via email or networking.
         </p>
 
         <h2>Which Resume Template Should Freshers Use?</h2>
         <p>
-          If you are a fresher aiming for campus placements or entry-level corporate jobs, stick to the 
-          <strong>ATS-Friendly Fresher Format</strong>. It places your Education and Projects at the top, 
-          proving your competence even without formal work experience. Stop struggling with Word formatting 
-          and start applying with the <Link href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription" className="text-indigo-600 hover:underline">best resume maker for freshers in India</Link> today!
+          If you are a fresher aiming for campus placements or entry-level corporate jobs, stick to
+          the
+          <strong>ATS-Friendly Fresher Format</strong>. It places your Education and Projects at the
+          top, proving your competence even without formal work experience. Stop struggling with
+          Word formatting and start applying with the{" "}
+          <Link
+            href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription"
+            className="text-indigo-600 hover:underline"
+          >
+            best resume maker for freshers in India
+          </Link>{" "}
+          today!
         </p>
       </section>
     </main>

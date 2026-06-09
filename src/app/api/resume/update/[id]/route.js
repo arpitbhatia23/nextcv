@@ -11,6 +11,7 @@ const handler = async (req, { params }) => {
     throw new apiError(400, "Resume ID is required");
   }
   await dbConnect();
+
   const updateData = await req.json();
   const updatedResume = await updateResume({ id, updateData });
   // Update only the provided fields

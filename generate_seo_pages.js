@@ -1,28 +1,28 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const plan1Path = path.join(__dirname, 'seo_content_plan.json');
-const plan2Path = path.join(__dirname, 'seo_content_plan_2.json');
-const targetDir = path.join(__dirname, 'src', 'app', '(landingPage)');
+const plan1Path = path.join(__dirname, "seo_content_plan.json");
+const plan2Path = path.join(__dirname, "seo_content_plan_2.json");
+const targetDir = path.join(__dirname, "src", "app", "(landingPage)");
 
 if (!fs.existsSync(plan1Path) || !fs.existsSync(plan2Path)) {
   console.error("One or both seo_content_plan files not found!");
   process.exit(1);
 }
 
-const plan1 = JSON.parse(fs.readFileSync(plan1Path, 'utf8'));
-const plan2 = JSON.parse(fs.readFileSync(plan2Path, 'utf8'));
+const plan1 = JSON.parse(fs.readFileSync(plan1Path, "utf8"));
+const plan2 = JSON.parse(fs.readFileSync(plan2Path, "utf8"));
 const plan = [...plan1, ...plan2];
 
 // Helper to convert outline H2/H3 into engaging HTML structure
 function generateContentFromOutline(outline) {
-  let content = '';
+  let content = "";
   let inSection = false;
 
   outline.forEach((item, idx) => {
-    if (item.startsWith('H1:')) {
+    if (item.startsWith("H1:")) {
       // Handled in hero
-    } else if (item.startsWith('H2:')) {
+    } else if (item.startsWith("H2:")) {
       if (inSection) {
         content += `</div></section>\n`;
       }
@@ -30,47 +30,47 @@ function generateContentFromOutline(outline) {
       const isEven = idx % 2 === 0;
       content += `
           <section className="bg-white p-8 sm:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 mt-10 hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-2 h-full ${isEven ? 'bg-indigo-500' : 'bg-emerald-500'}"></div>
+            <div className="absolute top-0 left-0 w-2 h-full ${isEven ? "bg-indigo-500" : "bg-emerald-500"}"></div>
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
-              <span className="${isEven ? 'bg-indigo-100 text-indigo-600' : 'bg-emerald-100 text-emerald-600'} p-2 rounded-xl">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+              <span className="${isEven ? "bg-indigo-100 text-indigo-600" : "bg-emerald-100 text-emerald-600"} p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
-              ${item.replace('H2:', '').trim()}
+              ${item.replace("H2:", "").trim()}
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
-              Explore the core principles of <strong>${item.replace('H2:', '').trim()}</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
+              Explore the core principles of <strong>${item.replace("H2:", "").trim()}</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
       `;
-    } else if (item.startsWith('H3:')) {
+    } else if (item.startsWith("H3:")) {
       content += `
               <div className="relative">
-                <div className="absolute -left-[3.25rem] sm:-left-[3.75rem] top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
-                <h3 className="text-xl font-bold mb-2 text-indigo-950 flex items-center gap-2">
+                <div className="absolute -left-13 sm:-left-15 top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
+                <h3 className="text-lg font-bold mb-2 text-indigo-950 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-indigo-500" />
-                  ${item.replace('H3:', '').trim()}
+                  ${item.replace("H3:", "").trim()}
                 </h3>
                 <p className="text-slate-600 leading-relaxed">
-                  Implementing ${item.replace('H3:', '').trim().toLowerCase()} strategically improves formatting and boosts ATS parsability for this section.
+                  Implementing ${item.replace("H3:", "").trim().toLowerCase()} strategically improves formatting and boosts ATS parsability for this section.
                 </p>
               </div>
       `;
     }
   });
-  
+
   if (inSection) {
     content += `</div></section>\n`;
   }
-  
+
   return content;
 }
 
-plan.forEach((page) => {
+plan.forEach(page => {
   const pageDir = path.join(targetDir, page.slug);
-  
+
   if (!fs.existsSync(pageDir)) {
     fs.mkdirSync(pageDir, { recursive: true });
   }
@@ -85,40 +85,55 @@ plan.forEach((page) => {
       name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer
-      }
-    }))
+        text: faq.answer,
+      },
+    })),
   };
 
-  const internalLinksUI = (page.internalLinks && page.internalLinks.length > 0) ? `
+  const internalLinksUI =
+    page.internalLinks && page.internalLinks.length > 0
+      ? `
           <section className="bg-slate-900 text-white p-8 rounded-3xl shadow-xl mt-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 relative z-10">
+            <h2 className="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
               <BookOpen className="w-6 h-6 text-indigo-400" />
               Related Resources
             </h2>
             <ul className="grid sm:grid-cols-2 gap-4 relative z-10">
-              ${page.internalLinks.map(link => `<li>
+              ${page.internalLinks
+                .map(
+                  link => `<li>
                 <Link href="${link}" className="flex items-center gap-2 p-4 rounded-xl bg-slate-800 hover:bg-indigo-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                   <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:text-white" />
-                  <span className="font-medium capitalize text-sm">${link.replace('/', '').replace(/-/g, ' ') || 'Home'}</span>
+                  <span className="font-medium capitalize text-sm">${link.replace("/", "").replace(/-/g, " ") || "Home"}</span>
                 </Link>
-              </li>`).join('\n              ')}
+              </li>`
+                )
+                .join("\n              ")}
             </ul>
-          </section>` : '';
+          </section>`
+      : "";
 
-  const faqsUI = faqs.map(faq => `
+  const faqsUI = faqs
+    .map(
+      faq => `
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   ${faq.question}
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
                   ${faq.answer}
                 </p>
-              </div>`).join('\n');
+              </div>`
+    )
+    .join("\n");
 
-  const h1Text = page.outline.find(o => o.startsWith('H1:'))?.replace('H1:', '').trim() || page.title;
+  const h1Text =
+    page.outline
+      .find(o => o.startsWith("H1:"))
+      ?.replace("H1:", "")
+      .trim() || page.title;
 
   const jsxContent = `import React from "react";
 import Link from "next/link";
@@ -156,10 +171,10 @@ export default function SEOPage() {
                 <Award className="w-4 h-4" />
                 Expert Career Guide
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-sm sm:text-lg font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]">
                 ${h1Text}
               </h1>
-              <p className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-slate-600 mb-10 leading-relaxed max-w-2xl">
                 ${page.metaDescription}
               </p>
               
@@ -215,8 +230,8 @@ export default function SEOPage() {
 
             {/* FAQs */}
             <section className="bg-white p-8 sm:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 mt-16 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-0"></div>
-              <h2 className="text-3xl font-extrabold mb-8 text-slate-900 relative z-10 flex items-center gap-3">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full z-0"></div>
+              <h2 className="text-lg  mb-8 text-slate-900 relative z-10 flex items-center gap-3">
                 <div className="p-3 bg-indigo-100 text-indigo-600 rounded-xl">
                   <FileText className="w-6 h-6" />
                 </div>
@@ -236,7 +251,7 @@ export default function SEOPage() {
                 <div className="absolute top-0 right-0 opacity-10 transform translate-x-1/3 -translate-y-1/3">
                   <Zap className="w-48 h-48" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 relative z-10">Build an ATS-Friendly Resume in 5 Mins</h3>
+                <h3 className="text-lg font-bold mb-4 relative z-10">Build an ATS-Friendly Resume in 5 Mins</h3>
                 <p className="text-indigo-100 mb-6 text-sm leading-relaxed relative z-10">
                   Stop worrying about formatting. Use our AI builder to automatically pass HR screening and get hired faster.
                 </p>
@@ -259,8 +274,8 @@ export default function SEOPage() {
 }
 `;
 
-  fs.writeFileSync(path.join(pageDir, 'page.jsx'), jsxContent, 'utf8');
+  fs.writeFileSync(path.join(pageDir, "page.jsx"), jsxContent, "utf8");
   console.log("Generated engaging page: " + page.slug);
 });
 
-console.log('All 30 pages successfully upgraded to new UI!');
+console.log("All 30 pages successfully upgraded to new UI!");

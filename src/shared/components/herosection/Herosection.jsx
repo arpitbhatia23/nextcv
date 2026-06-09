@@ -40,7 +40,7 @@ function Herosection() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-2xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]">
+        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]">
           Build a Free ATS-Friendly Resume <br />
           <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
             That Gets Interviews Faster
@@ -48,7 +48,7 @@ function Herosection() {
         </h1>
 
         {/* Subhead */}
-        <p className="text-sm sm:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-sm sm:text-lg text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
           Build an ATS-friendly resume in minutes with AI. Designed for IT freshers and engineering
           students in India.
           <span className="text-xs font-medium text-blue-600 mt-2 block">
@@ -61,7 +61,7 @@ function Herosection() {
           // initial={{ opacity: 0, y: 10 }}
           // animate={{ opacity: 1, y: 0 }}
           // transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-8 flex justify-center"
+          className="mb-4 flex justify-center"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 text-sm sm:text-xl bg-green-50 border border-green-200 rounded-full text-green-700 shadow-sm hover:shadow-md transition-all duration-300">
             <Ticket className="w-5 h-5 fill-green-700/20" />
@@ -76,7 +76,7 @@ function Herosection() {
         <SigninButton />
 
         {/* Trust/Social Proof */}
-        <div className="mt-20 pt-10 border-t border-slate-100">
+        <div className="mt-8 pt-10 border-t border-slate-100">
           <p className="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-2">
             Inspired by resume formats used at top tech companies
           </p>

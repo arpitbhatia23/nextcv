@@ -103,10 +103,10 @@ export default function SEOPage() {
                 <Award className="w-4 h-4" />
                 Expert Career Guide
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-sm sm:text-lg font-bold tracking-tight text-slate-900 mb-6 max-w-4xl mx-auto leading-[1.1]">
                 Resume vs CV in India: Understanding the Key Differences
               </h1>
-              <p className="text-lg sm:text-xl text-slate-600 mb-10 leading-relaxed max-w-2xl">
+              <p className="text-sm sm:text-base text-slate-600 mb-10 leading-relaxed max-w-2xl">
                 What is the difference between a CV and a Resume in India? Discover which document you should submit for Indian corporate job applications in 2026.
               </p>
               
@@ -163,13 +163,13 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-emerald-100 text-emerald-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               Are CV and Resume Used Interchangeably in India?
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>Are CV and Resume Used Interchangeably in India?</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
@@ -180,20 +180,20 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               The Definition of a Resume
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>The Definition of a Resume</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
       
               <div className="relative">
-                <div className="absolute -left-[3.25rem] sm:-left-[3.75rem] top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
-                <h3 className="text-xl font-bold mb-2 text-indigo-950 flex items-center gap-2">
+                <div className="absolute -left-13 sm:-left-15 top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
+                <h3 className="text-lg font-bold mb-2 text-indigo-950 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-indigo-500" />
                   Length, Focus, and Purpose
                 </h3>
@@ -208,20 +208,20 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               The Definition of a CV (Curriculum Vitae)
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>The Definition of a CV (Curriculum Vitae)</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
       
               <div className="relative">
-                <div className="absolute -left-[3.25rem] sm:-left-[3.75rem] top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
-                <h3 className="text-xl font-bold mb-2 text-indigo-950 flex items-center gap-2">
+                <div className="absolute -left-13 sm:-left-15 top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
+                <h3 className="text-lg font-bold mb-2 text-indigo-950 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-indigo-500" />
                   Detailed Academic and Research Focus
                 </h3>
@@ -236,20 +236,20 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               When to Use a Resume in India
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>When to Use a Resume in India</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
       
               <div className="relative">
-                <div className="absolute -left-[3.25rem] sm:-left-[3.75rem] top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
-                <h3 className="text-xl font-bold mb-2 text-indigo-950 flex items-center gap-2">
+                <div className="absolute -left-13 sm:-left-15 top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
+                <h3 className="text-lg font-bold mb-2 text-indigo-950 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-indigo-500" />
                   Corporate Roles (IT, MNCs, Startups)
                 </h3>
@@ -264,20 +264,20 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               When to Use a CV in India
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>When to Use a CV in India</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
       
               <div className="relative">
-                <div className="absolute -left-[3.25rem] sm:-left-[3.75rem] top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
-                <h3 className="text-xl font-bold mb-2 text-indigo-950 flex items-center gap-2">
+                <div className="absolute -left-13 sm:-left-15 top-1 bg-white border-2 border-slate-200 rounded-full w-4 h-4"></div>
+                <h3 className="text-lg font-bold mb-2 text-indigo-950 flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5 text-indigo-500" />
                   Academia, Fellowships, and Research
                 </h3>
@@ -292,13 +292,13 @@ export default function SEOPage() {
             <div className="absolute -right-10 -top-10 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Star className="w-48 h-48" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold mb-5 text-slate-900 flex items-center gap-3 relative z-10">
+            <h2 className="text-lg sm:text-xl  mb-5 text-slate-900 flex items-center gap-3 relative z-10">
               <span className="bg-indigo-100 text-indigo-600 p-2 rounded-xl">
                 <Zap className="w-6 h-6" />
               </span>
               Frequently Asked Questions
             </h2>
-            <p className="text-slate-600 mb-6 text-lg leading-relaxed relative z-10">
+            <p className="text-slate-600 mb-6 text-sm leading-relaxed relative z-10">
               Explore the core principles of <strong>Frequently Asked Questions</strong>. Understanding these concepts is critical for freshers aiming to build a high-converting, ATS-friendly resume.
             </p>
             <div className="pl-4 sm:pl-12 border-l border-slate-100 relative z-10 space-y-6">
@@ -308,8 +308,8 @@ export default function SEOPage() {
 
             {/* FAQs */}
             <section className="bg-white p-8 sm:p-10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 mt-16 relative overflow-hidden">
-               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -z-0"></div>
-              <h2 className="text-3xl font-extrabold mb-8 text-slate-900 relative z-10 flex items-center gap-3">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full z-0"></div>
+              <h2 className="text-lg  mb-8 text-slate-900 relative z-10 flex items-center gap-3">
                 <div className="p-3 bg-indigo-100 text-indigo-600 rounded-xl">
                   <FileText className="w-6 h-6" />
                 </div>
@@ -318,8 +318,8 @@ export default function SEOPage() {
               <div className="space-y-4 relative z-10">
                 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   Is a CV and resume the same in India?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -328,8 +328,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   Should freshers use a CV or a resume?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -338,8 +338,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   When should I submit a CV?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -348,8 +348,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   What does CV stand for?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -358,8 +358,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   Why do Indian recruiters ask for a CV when they mean a resume?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -368,8 +368,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   Does NextCV build resumes or CVs?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -378,8 +378,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   Are ATS systems better at reading resumes or CVs?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -388,8 +388,8 @@ export default function SEOPage() {
               </div>
 
               <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 hover:border-indigo-200 transition-colors">
-                <h3 className="font-bold text-slate-900 text-lg flex items-start gap-3">
-                  <span className="text-indigo-500 font-black text-2xl leading-none">Q.</span>
+                <h3 className="font-bold text-slate-900 text-sm flex items-start gap-3">
+                  <span className="text-indigo-500 font-black text-lg leading-none">Q.</span>
                   What is a Biodata?
                 </h3>
                 <p className="text-slate-600 mt-3 ml-8 leading-relaxed">
@@ -408,7 +408,7 @@ export default function SEOPage() {
                 <div className="absolute top-0 right-0 opacity-10 transform translate-x-1/3 -translate-y-1/3">
                   <Zap className="w-48 h-48" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 relative z-10">Build an ATS-Friendly Resume in 5 Mins</h3>
+                <h3 className="text-lg font-bold mb-4 relative z-10">Build an ATS-Friendly Resume in 5 Mins</h3>
                 <p className="text-indigo-100 mb-6 text-sm leading-relaxed relative z-10">
                   Stop worrying about formatting. Use our AI builder to automatically pass HR screening and get hired faster.
                 </p>
@@ -424,7 +424,7 @@ export default function SEOPage() {
               
           <section className="bg-slate-900 text-white p-8 rounded-3xl shadow-xl mt-12 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 relative z-10">
+            <h2 className="text-lg font-bold mb-6 flex items-center gap-2 relative z-10">
               <BookOpen className="w-6 h-6 text-indigo-400" />
               Related Resources
             </h2>

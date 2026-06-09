@@ -72,17 +72,17 @@ export default function ExamplesPage() {
         {/* Hero Section */}
         <section className="relative px-6 py-20 lg:px-8 bg-white border-b border-slate-100">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-6">
+            <h1 className="text-lg sm:text-xl  font-bold tracking-tight  sm: mb-6">
               Resume Examples for <span className="text-indigo-600">Every Career Path</span>
             </h1>
-            <p className="text-lg leading-8 text-slate-600 mb-10">
+            <p className="text-sm leading-8 text-slate-600 mb-10">
               Stuck on what to write? Browse our library of ATS-optimized resume examples tailored
               for the Indian job market to find inspiration for your next role.
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
                 href="/dashboard/resume/new"
-                className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all flex items-center"
+                className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all flex items-center"
               >
                 Create Your Resume <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
@@ -96,14 +96,14 @@ export default function ExamplesPage() {
             {categories.map(cat => (
               <div
                 key={cat.id}
-                className="bg-white rounded-2xl p-8 border border-slate-200 hover:border-indigo-100 hover:shadow-lg transition-all"
+                className="bg-white rounded-xl p-8 border border-slate-200 hover:border-indigo-100 hover:shadow-lg transition-all"
               >
                 <div
                   className={`w-12 h-12 rounded-lg ${cat.color} flex items-center justify-center mb-6`}
                 >
                   <cat.icon className="w-6 h-6" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">{cat.name}</h2>
+                <h2 className="text-lg font-bold text-slate-900 mb-4">{cat.name}</h2>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {cat.roles.map(role => (
                     <li key={role}>
@@ -125,10 +125,10 @@ export default function ExamplesPage() {
         {/* CTA Section */}
         <section className="bg-slate-900 py-16 sm:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-sm font-bold tracking-tight text-white sm:text-lg">
               Don't just copy. Create.
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-slate-300">
+            <p className="mx-auto mt-6 max-w-xl text-xs leading-8 text-slate-300">
               Found an example you like? Use our AI writer to create a personalized version for your
               unique experience in seconds.
             </p>
