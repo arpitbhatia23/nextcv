@@ -1,122 +1,44 @@
-"use client";
-import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
-import { Card, CardContent, CardTitle } from "@/shared/components/ui/card";
-import { templates } from "@/shared/utils/template";
-import { pdf } from "@react-pdf/renderer";
-import axios from "axios";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState, Suspense } from "react";
-import { Document, Page } from "react-pdf";
-import { toast } from "sonner";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
+import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { notFound, redirect } from "next/navigation";
+import { authOptions } from "@/modules/auth";
+import DownloadPageContent from "@/modules/resume/components/DownloadResume";
+import Resume from "@/modules/resume/models/resume.model";
+import { dbConnect } from "@/shared";
 
-function DownloadPageContent() {
-  const [resumeData, setResumeData] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const searchParams = useSearchParams();
-  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const resumeId = searchParams.get("resumeId");
+export default async function Page({ searchParams }) {
+  const session = await getServerSession(authOptions);
 
-  useEffect(() => {
-    const fetchResumeData = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`/api/resume/getResumeById/${resumeId}`);
-        if (res.data.success) {
-          setResumeData(res.data.data);
-        } else {
-          toast(res.data.message || "something went wrong");
-        }
-      } catch (err) {
-        toast(err.message || "something went wrong");
-      }
-      setLoading(false);
-    };
-    fetchResumeData();
-  }, [resumeId]);
+  if (!session) {
+    redirect("/login");
+  }
 
-  const pdfDataReady = resumeData && resumeData.ResumeType;
+  const { resumeId } = await searchParams;
 
-  const { pdfUrl } = useResumeGen(
-    pdfDataReady
-      ? {
-          formData: resumeData,
-          selectedTemplate: resumeData.ResumeType,
-        }
-      : {}
-  );
+  if (!resumeId) {
+    notFound();
+  }
 
-  const handleDownload = () => {
-    if (!pdfUrl) return;
-    const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.download = "resume.pdf";
-    link.click();
-  };
+  await dbConnect();
 
-  return (
-    <>
-      <div className="min-h-screen bg-linear-to-br from-purple-50 to-blue-50 flex flex-col items-center justify-center px-2 py-8">
-        <Card className="w-full max-w-3xl rounded-xl shadow-lg bg-white/30">
-          <CardTitle className="text-center text-2xl font-bold mt-4 mb-2 text-blue-700">
-            Resume Preview & Download
-          </CardTitle>
-          <CardContent className="flex flex-col md:flex-row gap-6 items-center justify-center">
-            <div className="w-full md:w-2/3 flex justify-center">
-              {loading ? (
-                <div className="text-gray-500 text-lg py-12">Loading...</div>
-              ) : pdfUrl ? (
-                <div className="border rounded shadow overflow-auto bg-gray-400 max-h-[80vh]">
-                  <Document
-                    file={pdfUrl}
-                    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                    loading={<div className="p-8">Loading PDF...</div>}
-                  >
-                    {Array.from(new Array(numPages), (el, idx) => (
-                      <Page
-                        key={`page_${idx + 1}`}
-                        pageNumber={idx + 1}
-                        width={450}
-                        className="mx-auto "
-                      />
-                    ))}
-                  </Document>
-                </div>
-              ) : (
-                <div className="text-gray-500 text-lg py-12">No preview available.</div>
-              )}
-            </div>
-            <div className="w-full md:w-1/3 flex flex-col items-center gap-4">
-              <button
-                onClick={handleDownload}
-                disabled={!pdfUrl}
-                className="w-full bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold py-3 px-6 rounded-lg shadow hover:from-blue-600 hover:to-purple-600 transition disabled:opacity-50"
-              >
-                Download PDF
-              </button>
-              <div className="text-xs text-gray-400 text-center">
-                Your resume is ready! Click the button to download.
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <FeedbackModal
-          isOpen={isFeedbackOpen}
-          onClose={() => setIsFeedbackOpen(false)}
-          resumeId={resumeId}
-        />
-      </div>
-    </>
-  );
-}
+  const resume = await Resume.findById(resumeId).lean();
 
-export default function page() {
+  if (!resume) {
+    notFound();
+  }
+
+  const isAdmin = session.user.role === "admin";
+
+  const isPaid =
+    resume.isPaid === true || resume.status === "paid" || resume.paymentStatus === "paid";
+
+  if (!isAdmin && !isPaid) {
+    notFound();
+  }
+
   return (
     <Suspense>
-      <DownloadPageContent />
+      <DownloadPageContent resumeId={resumeId} />
     </Suspense>
   );
 }
