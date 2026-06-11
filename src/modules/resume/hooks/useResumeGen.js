@@ -1,20 +1,33 @@
 "use client";
-import { pdfGenerator } from "@/shared/lib/pdfGenerator";
+
 import { useEffect, useState } from "react";
 
 export const useResumeGen = ({ formData, selectedTemplate }) => {
   const [pdfUrl, setPdfUrl] = useState("");
+
   useEffect(() => {
-    if (!formData && !selectedTemplate) return;
-    const pdfGen = new pdfGenerator(formData, selectedTemplate);
+    if (!formData || !selectedTemplate) return;
+
     let isMounted = true;
-    pdfGen.createPdf().then(url => {
-      if (isMounted) setPdfUrl(url);
-    });
+    let pdfGen;
+
+    const generate = async () => {
+      const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
+
+      pdfGen = new pdfGenerator(formData, selectedTemplate);
+
+      const url = await pdfGen.createPdf();
+
+      if (isMounted) {
+        setPdfUrl(url);
+      }
+    };
+
+    generate();
 
     return () => {
       isMounted = false;
-      pdfGen.cleanUp();
+      pdfGen?.cleanUp?.();
     };
   }, [formData, selectedTemplate]);
 

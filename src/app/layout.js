@@ -1,6 +1,5 @@
 import { Geist } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/shared/components/ui/sonner";
 import CookieBanner from "@/shared/components/cookies";
 
 const geistSans = Geist({
@@ -14,13 +13,6 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 5,
 };
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-//   display: "swap",
-//   preload: true,
-// });
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
@@ -38,7 +30,6 @@ export default function RootLayout({ children }) {
         <main className="">
           {children}
           <CookieBanner />
-          <Toaster />
         </main>
         <script
           type="application/ld+json"

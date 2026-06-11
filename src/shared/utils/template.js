@@ -1,8 +1,6 @@
 import { templatesMetadata } from "./template-metadata";
 
-export const templates = templatesMetadata;
-
-export const getTemplateComponent = async (key) => {
+export const getTemplateComponent = async key => {
   switch (key) {
     case "classicTemplate":
       return (await import("../../templates/resume-pdf/classic")).default;

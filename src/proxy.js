@@ -6,16 +6,6 @@ const authRoutes = ["/", "/adminlogin", "/about-us", "/contact", "/blogs", "/ats
 export async function proxy(req) {
   const { pathname } = req.nextUrl;
 
-  // 1. Bypass cron/internal APIs before token check
-  if (pathname.startsWith("/api/cron-job")) {
-    return NextResponse.next();
-  }
-
-  // 2. Gone route before token check
-  if (pathname === "/privacyPolicy") {
-    return new NextResponse(null, { status: 410 });
-  }
-
   const needsAuthCheck = pathname.startsWith("/dashboard") || authRoutes.includes(pathname);
 
   if (!needsAuthCheck) {
@@ -37,15 +27,5 @@ export async function proxy(req) {
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/adminlogin",
-    "/dashboard/:path*",
-    "/api/cron-job/:path*",
-    "/privacyPolicy",
-    "/about-us",
-    "/contact",
-    "/blogs",
-    "/ats-resume-checker",
-  ],
+  matcher: ["/adminlogin", "/dashboard/:path*", "/"],
 };
