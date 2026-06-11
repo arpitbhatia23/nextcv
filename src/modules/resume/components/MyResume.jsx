@@ -23,21 +23,20 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/shared/components/ui/dropdown-menu";
-import { Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Input } from "../../../shared/components/ui/input";
-import { pdfGenerator } from "@/shared/lib/pdfGenerator";
 import { toast } from "sonner";
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
 import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
-import PDFPreview from "./pdfPreview";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
-
+import dynamic from "next/dynamic";
+const PDFPreview = dynamic(() => import("./pdfPreview"), {
+  ssr: false,
+  loading: () => <div className="text-sm text-slate-400">Loading preview...</div>,
+});
 const ResumeCard = ({
   resume,
   onPreview,
@@ -169,20 +168,9 @@ const MyResume = () => {
     return templateNames[templateKey] || templateKey;
   };
 
-  // const formatDate = (dateString) => {
-  //   const date = new Date(dateString);
-  //   const now = new Date();
-  //   const diffTime = Math.abs(now - date);
-  //   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  //   if (diffDays === 1) return "Edited 1 day ago";
-  //   if (diffDays < 30) return `Edited ${diffDays} days ago`;
-  //   if (diffDays < 365) return `Edited ${Math.ceil(diffDays / 30)} months ago`;
-  //   return `Edited ${Math.ceil(diffDays / 365)} years ago`;
-  // };
-
   const handleDownload = async resume => {
     if (resume.status === "paid") {
+      const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
       const pdfGen = new pdfGenerator(resume);
       await pdfGen.downloadPdf();
     } else {
@@ -229,7 +217,7 @@ const MyResume = () => {
   };
 
   const handleViewResume = async resumeData => {
-    console.log(resumeData);
+    const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
     const pdfGen = new pdfGenerator(resumeData);
     const url = await pdfGen.createPdf();
 

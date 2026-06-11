@@ -5,6 +5,7 @@ import AuthProvider from "@/context/authprovider";
 
 import { InitUser } from "@/modules/auth/components/initUser";
 import { requiredAuth } from "@/shared";
+import { Toaster } from "@/shared/components/ui/sonner";
 export const metadata = {
   title: "Dashboard - NextCV",
   description: "Manage your resumes and create new ones with AI assistance",
@@ -42,6 +43,7 @@ export default async function RootLayout({ children }) {
             <SidebarInset>
               <SiteHeader />
               {children}
+              <Toaster />
             </SidebarInset>
           </SidebarProvider>
         </AuthProvider>

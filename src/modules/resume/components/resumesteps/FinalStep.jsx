@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { templates } from "@/shared/utils/template";
 import { useDebouncedCallback } from "use-debounce";
 import useResumeStore from "@/store/useResumeStore";
 import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
@@ -27,8 +26,12 @@ import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
-import PDFPreview from "../pdfPreview";
-
+import { templatesMetadata } from "@/shared/utils/template-metadata";
+import dynamic from "next/dynamic";
+const PDFPreview = dynamic(() => import("../pdfPreview"), {
+  ssr: false,
+  loading: () => <div className="text-xs text-slate-400">Loading preview...</div>,
+});
 const TIERS = ["Basic", "Standard", "Premium", "Elite"];
 
 const FinalStep = () => {
@@ -45,6 +48,7 @@ const FinalStep = () => {
   const [applied, setApplied] = useState(false);
   const [draftId, setDraftId] = useState(null);
   const [discount, setDiscount] = useState(null);
+  const templates = templatesMetadata;
 
   const templateWithPricing = useMemo(() => {
     return templates.map(template => {
@@ -191,7 +195,6 @@ const FinalStep = () => {
       )}
     </div>
   );
-
   return (
     <div className="py-4">
       <div className="mb-4 md:mb-6">

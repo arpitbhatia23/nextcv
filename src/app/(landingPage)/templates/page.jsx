@@ -1,9 +1,7 @@
-import { templates } from "@/shared/utils/template";
-
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Layout, Zap, Award, Edit } from "lucide-react";
 import TemplateImage from "@/shared/components/TemplateImage";
-
+import { templatesMetadata } from "@/shared/utils/template-metadata";
 export const metadata = {
   title: "Best Resume Format for Freshers in India 2026 | ATS Templates",
   description:
@@ -16,7 +14,7 @@ export const metadata = {
 };
 
 export const revalidate = 3600;
-
+const templates = templatesMetadata;
 export default function TemplatesPage() {
   const jsonLdSchema = {
     "@context": "https://schema.org",

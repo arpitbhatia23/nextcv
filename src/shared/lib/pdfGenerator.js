@@ -1,5 +1,3 @@
-import { templates, getTemplateComponent } from "@/shared/utils/template";
-import { pdf } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -10,6 +8,10 @@ export class pdfGenerator {
     this.url = null;
   }
   async createPdf() {
+    const [{ getTemplateComponent }, { pdf }] = await Promise.all([
+      import("@/shared/utils/template"),
+      import("@react-pdf/renderer"),
+    ]);
     // if (!this.selectedTemplate || this.resumeData?.ResumeType) return;
     const TemplateComponent = await getTemplateComponent(
       this?.selectedTemplate || this.resumeData?.ResumeType

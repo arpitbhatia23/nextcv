@@ -1,18 +1,20 @@
 "use client";
 import React, { useEffect, useTransition } from "react";
 import { CheckCircle2, LayoutTemplate, Sparkles, ArrowRight, Zap } from "lucide-react";
-import { templates } from "@/shared/utils/template";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import useResumeStore from "@/store/useResumeStore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/shared/components/ui/button";
+import { templatesMetadata } from "@/shared/utils/template-metadata";
 
 const getTierStyles = {
   premium: "bg-amber-50 text-amber-700 border-amber-100",
   elite: "bg-purple-50 text-purple-700 border-purple-100",
   standard: "bg-blue-50 text-blue-700 border-blue-100",
 };
+
+const templates = templatesMetadata;
 
 const TemplateSelectorV3 = ({ onSelect, next }) => {
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
