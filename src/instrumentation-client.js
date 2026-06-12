@@ -5,9 +5,13 @@
 import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: process.env.sentry_dns,
+
   tracesSampleRate: 0,
   enableLogs: false,
   sendDefaultPii: false,
+
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 0,
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
