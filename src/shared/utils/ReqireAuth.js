@@ -1,6 +1,6 @@
 import "server-only";
 
-import { authOptions } from "@/modules/auth/services/options";
+import authOptions from "@/modules/auth/services/options";
 import { getServerSession } from "next-auth";
 import apiError from "./apiError";
 
