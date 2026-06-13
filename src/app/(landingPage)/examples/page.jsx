@@ -81,7 +81,7 @@ export default function ExamplesPage() {
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
-                href="/dashboard/resume/new"
+                href="/start"
                 className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all flex items-center"
               >
                 Create Your Resume <ArrowRight className="ml-2 w-4 h-4" />
@@ -134,7 +134,7 @@ export default function ExamplesPage() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/dashboard/resume/new"
+                href="/start"
                 className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Get Started for Free

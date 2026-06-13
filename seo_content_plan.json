@@ -104,7 +104,7 @@
       {"question": "What file format is best for ATS?", "answer": "A text-based PDF is usually best. If the job application specifically asks for a Word document (.docx), provide that instead."},
       {"question": "Can I use italics or bold text?", "answer": "Yes, standard formatting like bold and italics are fine and help human recruiters scan the document, but avoid underlining words."}
     ],
-    "internalLinks": ["/ats-resume-optimization-2026", "/ats-friendly-resume-checklist"],
+    "internalLinks": ["/ats-friendly-resume-checklist", "/ats-friendly-resume-checklist"],
     "schema": ["Article", "FAQPage"],
     "priority": "Medium"
   },
@@ -139,7 +139,7 @@
       {"question": "What skills should Indian freshers include?", "answer": "Include hard technical skills, programming languages, and soft skills like communication, problem-solving, and adaptability."},
       {"question": "Do I need a 'Declaration' section at the bottom?", "answer": "No, the declaration section is outdated and no longer required for modern ATS friendly resumes in India."}
     ],
-    "internalLinks": ["/resume-format-india-2026", "/fresher-resume-format-india"],
+    "internalLinks": ["/indian-resume-format", "/fresher-resume-format-india"],
     "schema": ["Article", "FAQPage"],
     "priority": "High"
   },
@@ -246,7 +246,7 @@
       {"question": "Are hyperlinks ATS friendly?", "answer": "Standard hyperlinks (like mailto or simple URLs) are fine, but ensure the text itself is readable even if the link is broken."},
       {"question": "Where can I get a free ATS resume checker?", "answer": "NextCV provides a free, built-in ATS resume checker with actionable feedback to improve your score."}
     ],
-    "internalLinks": ["/common-ats-resume-mistakes", "/ats-resume-optimization-2026"],
+    "internalLinks": ["/common-ats-resume-mistakes", "/ats-friendly-resume-checklist"],
     "schema": ["Article", "FAQPage"],
     "priority": "Medium"
   },
@@ -421,7 +421,7 @@
       {"question": "Is CGPA or Percentage preferred?", "answer": "Include whichever your university officially uses. If both are available, use the one that looks stronger, or mention both if required by the company."},
       {"question": "Where can I find an authentic Indian resume template?", "answer": "NextCV provides templates that are heavily researched and optimized specifically for the Indian corporate recruitment landscape."}
     ],
-    "internalLinks": ["/resume-format-india-2026", "/tcs-resume-format-for-freshers"],
+    "internalLinks": ["/indian-resume-format", "/tcs-resume-format-for-freshers"],
     "schema": ["Article", "FAQPage"],
     "priority": "High"
   },

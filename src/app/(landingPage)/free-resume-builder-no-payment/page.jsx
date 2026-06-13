@@ -28,7 +28,7 @@ export default function FreeResumePage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/dashboard/resume/new"
+              href="/start"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg hover:shadow-indigo-500/30"
             >
               Start Building For Free
@@ -115,7 +115,7 @@ export default function FreeResumePage() {
             Get a professional, ATS-ready resume starting for just ₹49 today.
           </p>
           <Link
-            href="/dashboard/resume/new"
+            href="/start"
             className="bg-white text-indigo-900 hover:bg-indigo-50 font-bold py-4 px-10 rounded-full transition-all text-lg"
           >
             Upgrade to Professional Resume

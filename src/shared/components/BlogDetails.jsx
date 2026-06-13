@@ -420,7 +420,7 @@ const BlogDetails = ({ slug, initialData }) => {
                   Create a professional resume in minutes with our AI-powered builder.
                 </p>
                 <Link
-                  href="/dashboard"
+                  href="/start"
                   className="block w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all"
                 >
                   Get Started Free

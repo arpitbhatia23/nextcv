@@ -37,7 +37,7 @@ export default function AIResumeIndiaPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/dashboard/resume/new"
+              href="/start"
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-xl transition-all shadow-lg hover:shadow-indigo-500/30"
             >
               Start Building Now
@@ -111,7 +111,7 @@ export default function AIResumeIndiaPage() {
             Indian corporate culture and recruitment standards.
           </p>
           <Link
-            href="/dashboard/resume/new"
+            href="/start"
             className="text-white hover:text-indigo-300 font-bold border-b-2 border-indigo-500 transition-colors"
           >
             Create My AI Resume Now →
@@ -140,7 +140,7 @@ export default function AIResumeIndiaPage() {
         </p>
         <div className="mt-16 flex flex-col items-center text-center">
           <Link
-            href="/dashboard/resume/new"
+            href="/start"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-5 px-12 rounded-2xl transition-all shadow-xl hover:shadow-indigo-500/50 text-xl"
           >
             Get Hired Faster with NextCV AI

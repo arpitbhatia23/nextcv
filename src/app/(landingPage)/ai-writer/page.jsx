@@ -39,7 +39,7 @@ export default function AIWriterPage() {
           </p>
           <div className="flex items-center justify-center gap-x-6">
             <Link
-              href="/dashboard/resume/new"
+              href="/start"
               className="rounded-lg bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-lg hover:bg-slate-800 hover:scale-105 transition-all flex items-center"
             >
               Try AI Writer Now <ArrowRight className="ml-2 w-4 h-4" />

@@ -7,10 +7,12 @@ export default function cloudflareLoader({ src, width, quality }) {
 
   if (src.includes("cdn.sanity.io")) {
     return src;
-  }
+  } 
+  const safeWidth = Math.min(width || 768, 1280);
+
 
   const params = [
-    `width=${width}`,
+    `width=${safeWidth}`,
     `quality=${quality || 75}`,
     "format=auto",
     "fit=scale-down",

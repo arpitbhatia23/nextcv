@@ -62,7 +62,7 @@ export default function TemplatesPage() {
           </p>
           <div className="flex items-center justify-center gap-x-6">
             <Link
-              href="/dashboard/resume/new"
+              href="/start"
               className="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all flex items-center"
             >
               Build Your Resume Now <ArrowRight className="ml-2 w-4 h-4" />

@@ -145,7 +145,7 @@ export default function PricingPage() {
                 </ul>
 
                 <Link
-                  href="/dashboard/resume/new"
+                  href="/start"
                   className="w-full block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl text-center transition-all shadow-lg hover:shadow-indigo-500/30"
                 >
                   Create My Resume Now

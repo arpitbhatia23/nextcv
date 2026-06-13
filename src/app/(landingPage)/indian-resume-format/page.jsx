@@ -408,7 +408,7 @@ export default function SEOPage() {
             </h2>
             <ul className="grid sm:grid-cols-2 gap-4 relative z-10">
               <li>
-                <Link href="/resume-format-india-2026" className="flex items-center gap-2 p-4 rounded-xl bg-slate-800 hover:bg-indigo-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Link href="/indian-resume-format" className="flex items-center gap-2 p-4 rounded-xl bg-slate-800 hover:bg-indigo-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                   <ArrowRight className="w-4 h-4 text-indigo-400 group-hover:text-white" />
                   <span className="font-medium capitalize text-sm">resume format india 2026</span>
                 </Link>
