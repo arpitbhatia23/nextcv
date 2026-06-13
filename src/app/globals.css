@@ -144,3 +144,28 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #cbd5e1;
 }
+@layer base {
+  main a:not(.no-global-link) {
+    @apply font-medium underline underline-offset-2 decoration-current;
+  }
+
+  main a.text-indigo-400:not(.no-global-link) {
+    @apply !text-indigo-700 hover:!text-indigo-900;
+  }
+
+  main p.text-slate-400 {
+    @apply !text-slate-600;
+  }
+
+  section.bg-black a.text-indigo-400:not(.no-global-link),
+  section.bg-slate-950 a.text-indigo-400:not(.no-global-link),
+  section.bg-slate-900 a.text-indigo-400:not(.no-global-link) {
+    @apply !text-indigo-300 hover:!text-indigo-200;
+  }
+
+  section.bg-black p.text-slate-400,
+  section.bg-slate-950 p.text-slate-400,
+  section.bg-slate-900 p.text-slate-400 {
+    @apply !text-slate-300;
+  }
+}

@@ -36,9 +36,9 @@ const testimonials = [
 ];
 
 const stats = [
-  { number: 1200, title: "Happy Users", color: "text-indigo-600" },
-  { number: 97, title: "Success Rate (%)", color: "text-emerald-600" },
-  { number: 4.9, title: "Average Rating", color: "text-red-500" },
+  { number: 1200, title: "Happy Users", color: "text-indigo-800" },
+  { number: 97, title: "Success Rate (%)", color: "text-emerald-800" },
+  { number: 4.9, title: "Average Rating", color: "text-red-800" },
 ];
 
 function AnimatedCounter({ to, className }) {
