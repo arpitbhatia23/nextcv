@@ -146,7 +146,7 @@
 }
 @layer base {
   main a:not(.no-global-link) {
-    @apply font-medium underline underline-offset-2 decoration-current;
+    @apply font-medium;
   }
 
   main a.text-indigo-400:not(.no-global-link) {
