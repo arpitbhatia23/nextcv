@@ -17,14 +17,6 @@ export default function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-white pt-24 pb-20 lg:pt-32 lg:pb-28">
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
-        {/* Top badge
-        <div className="mb-8 inline-flex cursor-default items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1.5 text-sm font-medium text-indigo-700">
-          <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500" />
-          </span>
-          New: AI Resume Analysis Feature
-        </div> */}
         {/* Same text sizes */}
         <h1 className="mx-auto mb-6 max-w-4xl text-xl leading-[1.1] font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
           Build a Free ATS-Friendly Resume
@@ -71,9 +63,7 @@ export default function HeroSection() {
                   alt={logo.alt}
                   width={140}
                   height={75}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
+                  prioity
                   sizes="(max-width: 640px) 84px, 112px"
                   className="max-h-9 w-auto max-w-full object-contain grayscale"
                 />
