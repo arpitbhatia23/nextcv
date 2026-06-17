@@ -78,7 +78,7 @@ export function AppSidebar({ ...props }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/start" className="flex items-center justify-center mt-6 p-6">
+              <a href="/" className="flex items-center justify-center mt-6 p-6">
                 <Logo2 size={60} />
               </a>
             </SidebarMenuButton>

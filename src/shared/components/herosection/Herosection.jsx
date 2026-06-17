@@ -55,7 +55,7 @@ export default function HeroSection() {
             only.
           </p>
 
-          <div className="grid grid-cols-4 place-items-center gap-x-5 gap-y-8 opacity-60 sm:grid-cols-8 sm:gap-x-7">
+          <div className="grid grid-cols-8 place-items-center gap-x-3 gap-y-4 opacity-60 sm:grid-cols-8 sm:gap-x-7">
             {mncLogos.map(logo => (
               <div key={logo.src} className="flex h-14 w-full max-w-28 items-center justify-center">
                 <Image
@@ -63,9 +63,9 @@ export default function HeroSection() {
                   alt={logo.alt}
                   width={140}
                   height={75}
-                  prioity
+                  priority
                   sizes="(max-width: 640px) 84px, 112px"
-                  className="max-h-9 w-auto max-w-full object-contain grayscale"
+                  className="max-h-16 w-auto max-w-full object-contain grayscale"
                 />
               </div>
             ))}

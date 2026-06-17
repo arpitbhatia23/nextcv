@@ -15,7 +15,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { client, urlFor } from "@/sanity";
+import { urlFor } from "@/sanity";
 import { PortableText } from "next-sanity";
 import Loading from "@/app/loading";
 import Link from "next/link";
@@ -281,7 +281,7 @@ const BlogDetails = ({ slug, initialData }) => {
           <div className="relative w-full min-h-100 md:min-h-125 rounded-3xl overflow-hidden shadow-2xl shadow-indigo-100 mb-16 group">
             {blog.mainImage && (
               <Image
-                src={urlFor(blog.mainImage).width(1600).format('webp').auto('format').url()}
+                src={urlFor(blog.mainImage).width(1600).format("webp").auto("format").url()}
                 alt={blog.title}
                 fill
                 className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -383,7 +383,11 @@ const BlogDetails = ({ slug, initialData }) => {
                   <div className="relative w-16 h-16 rounded-2xl overflow-hidden ring-4 ring-indigo-500/30">
                     {blog.author?.image ? (
                       <Image
-                        src={urlFor(blog.author.image).width(128).format('webp').auto('format').url()}
+                        src={urlFor(blog.author.image)
+                          .width(128)
+                          .format("webp")
+                          .auto("format")
+                          .url()}
                         alt={blog.author.name}
                         fill
                         className="object-cover"
@@ -420,7 +424,7 @@ const BlogDetails = ({ slug, initialData }) => {
                   Create a professional resume in minutes with our AI-powered builder.
                 </p>
                 <Link
-                  href="/start"
+                  href="/"
                   className="block w-full py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all"
                 >
                   Get Started Free
@@ -456,7 +460,7 @@ const BlogDetails = ({ slug, initialData }) => {
                   <div className="relative aspect-video rounded-2xl overflow-hidden mb-6">
                     {post.mainImage && (
                       <Image
-                        src={urlFor(post.mainImage).width(600).format('webp').auto('format').url()}
+                        src={urlFor(post.mainImage).width(600).format("webp").auto("format").url()}
                         alt={post.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

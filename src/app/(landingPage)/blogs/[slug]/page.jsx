@@ -1,102 +1,231 @@
-// ✅ 1. Imports
+import { cache } from "react";
+import { notFound } from "next/navigation";
+
 import { client } from "@/sanity";
 import BlogDetails from "@/shared/components/BlogDetails";
-import { cache } from "react";
 
-// ✅ 2. ISR (VERY IMPORTANT)
-export const revalidate = 3600; // 1 hour
+export const revalidate = 3600;
+export const dynamicParams = true;
+export const runtime = "nodejs";
 
-// ✅ 3. Cached Blog Fetch (SHARED)
-const getBlog = cache(async slug => {
-  console.log(slug);
-  const query = `*[_type == "post" && slug.current == $slug][0]{
+const BLOG_QUERY = `
+  *[
+    _type == "post" &&
+    slug.current == $slug
+  ][0] {
+    _id,
     title,
     body,
-    mainImage { asset->{url} },
     publishedAt,
     _createdAt,
     _updatedAt,
-    author->{name, image},
-  }`;
 
-  return await client.fetch(query, { slug });
-});
+    mainImage {
+      alt,
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      }
+    },
 
-// ✅ 4. Cached Related Posts
-const getRelatedPosts = cache(async slug => {
-  const query = `*[_type == "post" && slug.current != $slug][0...3]{
+    author->{
+      name,
+      bio,
+      image {
+        asset->{
+          _id,
+          url
+        }
+      }
+    }
+  }
+`;
+
+const RELATED_POSTS_QUERY = `
+  *[
+    _type == "post" &&
+    defined(slug.current) &&
+    slug.current != $slug
+  ]
+  | order(coalesce(publishedAt, _createdAt) desc)
+  [0...3] {
+    _id,
     title,
     slug,
-    mainImage { asset->{url} },
+    publishedAt,
     _createdAt,
-    author->{name}
-  }`;
 
-  return await client.fetch(query, { slug });
+    mainImage {
+      alt,
+      asset->{
+        _id,
+        url
+      }
+    },
+
+    author->{
+      name
+    }
+  }
+`;
+
+/**
+ * React cache prevents duplicate calls to this function during the
+ * same server-rendering pass, including generateMetadata + Page.
+ *
+ * next.revalidate provides persistent Next.js data caching.
+ */
+const getBlog = cache(async slug => {
+  return client.fetch(
+    BLOG_QUERY,
+    { slug },
+    {
+      next: {
+        revalidate: 3600,
+        tags: [`blog:${slug}`, "blogs"],
+      },
+    }
+  );
 });
 
-// ✅ 4.5 Static Params (Fixes CPU Usage and improves TTFB)
-export async function generateStaticParams() {
-  const query = `*[_type == "post"]{ "slug": slug.current }`;
-  const slugs = await client.fetch(query);
-  
-  return slugs.map((post) => ({
-    slug: post.slug,
-  }));
+const getRelatedPosts = cache(async slug => {
+  return client.fetch(
+    RELATED_POSTS_QUERY,
+    { slug },
+    {
+      next: {
+        revalidate: 3600,
+        tags: ["blogs"],
+      },
+    }
+  );
+});
+
+function portableTextToPlainText(blocks = []) {
+  return blocks
+    .filter(block => block?._type === "block")
+    .flatMap(block => block.children || [])
+    .map(child => child?.text || "")
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-// 🧠 5. Dynamic Metadata (NOW OPTIMIZED)
+function createDescription(blog) {
+  const bodyText = portableTextToPlainText(blog?.body);
+
+  if (!bodyText) {
+    return "Create an ATS-friendly professional resume with NextCV.";
+  }
+
+  return bodyText.length > 157 ? `${bodyText.slice(0, 157).trim()}...` : bodyText;
+}
+
+export async function generateStaticParams() {
+  const posts = await client.fetch(
+    `
+      *[
+        _type == "post" &&
+        defined(slug.current)
+      ] {
+        "slug": slug.current
+      }
+    `,
+    {},
+    {
+      next: {
+        revalidate: 3600,
+        tags: ["blog-slugs"],
+      },
+    }
+  );
+
+  return posts
+    .filter(post => post?.slug)
+    .map(post => ({
+      slug: post.slug,
+    }));
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  console.log(slug);
+  const blog = await getBlog(slug);
 
-  const data = await getBlog(slug); // ✅ cached
-
-  if (!data) {
+  if (!blog) {
     return {
-      title: "Article Not Found",
-      description: "The requested blog post could not be located.",
+      title: "Article Not Found | NextCV",
+      description: "The requested NextCV article could not be found.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
-  const description =
-    data.body?.[0]?.children?.[0]?.text ||
-    "Read this expert blog on logistics, shipping, and supply chain.";
+  const description = createDescription(blog);
 
-  const imageUrl = data.mainImage?.asset?.url || "https://placehold.co/1200x600/000/fff?text=Blog";
+  const imageUrl = blog.mainImage?.asset?.url || "https://www.nextcv.in/opengraph-image.png";
+
+  const canonicalUrl = `https://www.nextcv.in/blogs/${slug}`;
 
   return {
-    title: data.title,
+    title: blog.title,
     description,
+
     alternates: {
-      canonical: `https://www.nextcv.in/blogs/${slug}`,
+      canonical: canonicalUrl,
     },
-    keywords: ["resume builder", "CV maker", "AI resume", "job application", "professional resume"],
+
+    keywords: [
+      "resume builder",
+      "CV maker",
+      "AI resume builder",
+      "ATS-friendly resume",
+      "professional resume",
+    ],
+
     openGraph: {
-      title: data.title,
+      title: blog.title,
       description,
+      url: canonicalUrl,
+      siteName: "NextCV",
+      type: "article",
+      publishedTime: blog.publishedAt || blog._createdAt,
+      modifiedTime: blog._updatedAt || blog.publishedAt || blog._createdAt,
       images: [
         {
           url: imageUrl,
           width: 1200,
-          height: 600,
-          alt: data.title,
+          height: 630,
+          alt: blog.mainImage?.alt || blog.title,
         },
       ],
-      type: "article",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description,
+      images: [imageUrl],
     },
   };
 }
 
-// 🧾 6. Page Component (OPTIMIZED)
 export default async function BlogDetailsPage({ params }) {
   const { slug } = await params;
 
-  // ✅ Parallel + cached
   const [blogData, relatedPosts] = await Promise.all([getBlog(slug), getRelatedPosts(slug)]);
 
-  // 🧠 Breadcrumb JSON-LD
-  const BreadcrumbListjson = {
+  if (!blogData) {
+    notFound();
+  }
+
+  const canonicalUrl = `https://www.nextcv.in/blogs/${slug}`;
+
+  const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -115,59 +244,64 @@ export default async function BlogDetailsPage({ params }) {
       {
         "@type": "ListItem",
         position: 3,
-        name: blogData?.title,
-        item: `https://www.nextcv.in/blogs/${slug}`,
+        name: blogData.title,
+        item: canonicalUrl,
       },
     ],
   };
 
-  // 🧠 Blog Schema
-  const jsonLdSchema = blogData
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: blogData.title,
-        image: blogData.mainImage?.asset?.url || "https://www.nextcv.in/opengraph-image.png",
-        datePublished: blogData.publishedAt || blogData._createdAt,
-        dateModified: blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
-        author: {
-          "@type": "Person",
-          name: blogData.author?.name || "NextCV Team",
-          image: blogData.author?.image?.asset?.url || "",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "NextCV",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://www.nextcv.in/opengraph-image.png",
-          },
-        },
-        description: blogData.body?.[0]?.children?.[0]?.text || blogData.title,
-      }
-    : null;
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blogData.title,
+    description: createDescription(blogData),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+    image: blogData.mainImage?.asset?.url || "https://www.nextcv.in/opengraph-image.png",
+    datePublished: blogData.publishedAt || blogData._createdAt,
+    dateModified: blogData._updatedAt || blogData.publishedAt || blogData._createdAt,
+    author: {
+      "@type": "Person",
+      name: blogData.author?.name || "NextCV Team",
+      ...(blogData.author?.image?.asset?.url
+        ? {
+            image: blogData.author.image.asset.url,
+          }
+        : {}),
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "NextCV",
+      url: "https://www.nextcv.in",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.nextcv.in/opengraph-image.png",
+      },
+    },
+  };
+
+  const safeBlogSchema = JSON.stringify(blogSchema).replace(/</g, "\\u003c");
+
+  const safeBreadcrumbSchema = JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c");
 
   return (
     <>
-      {/* ✅ Blog Schema */}
-      {jsonLdSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(jsonLdSchema),
-          }}
-        />
-      )}
-
-      {/* ✅ Breadcrumb Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(BreadcrumbListjson),
+          __html: safeBlogSchema,
         }}
       />
 
-      {/* ✅ Client Component */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: safeBreadcrumbSchema,
+        }}
+      />
+
       <BlogDetails slug={slug} initialData={blogData} relatedPosts={relatedPosts} />
     </>
   );
