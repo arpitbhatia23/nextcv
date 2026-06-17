@@ -108,7 +108,7 @@ export default function ExamplesPage() {
                   {cat.roles.map(role => (
                     <li key={role}>
                       <Link
-                        href={`/dashboard/resume/new?role=${encodeURIComponent(role)}`}
+                        href={`/dashboard/builder}`}
                         className="flex items-center text-slate-600 hover:text-indigo-600 group transition-colors p-2 rounded-md hover:bg-slate-50"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-indigo-500 mr-2 transition-colors"></span>

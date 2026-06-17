@@ -160,7 +160,7 @@ export default function TemplatesPage() {
 
                 <div className="absolute bottom-4 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
                   <Link
-                    href={`/dashboard/resume/new?template=${template.key}`}
+                    href={`/dashboard/builder`}
                     className="block w-full text-center bg-indigo-600 text-white font-medium py-3 rounded-lg shadow-lg hover:bg-indigo-700"
                   >
                     Use This Template
