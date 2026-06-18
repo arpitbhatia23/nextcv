@@ -14,11 +14,11 @@ function SigninButton() {
   };
   return (
     <>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm sm:text-lg">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs sm:text-lg">
         <button
           onClick={() => signIn("google", { callbackUrl: "/dashboard/builder" })}
           aria-label="Create Your Resume"
-          className="w-full sm:w-auto px-2 sm:px-8 py-4 bg-slate-900 text-white font-bold rounded-lg text-sm hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-slate-300 flex items-center justify-center gap-2 group"
+          className="w-full sm:w-auto px-2 sm:px-8 py-3 bg-slate-900 text-white font-bold rounded-lg text-xs hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-200 hover:shadow-2xl hover:shadow-slate-300 flex items-center justify-center gap-2 group"
         >
           Create Your Resume
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -27,7 +27,7 @@ function SigninButton() {
         <button
           aria-label="View Templates"
           onClick={() => scrollTo("Templates")}
-          className="w-full sm:w-auto px-8 py-4 bg-white border border-slate-200 text-slate-700 font-semibold rounded-lg text-sm hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
+          className="w-full sm:w-auto px-8 py-3 bg-white border border-slate-200 text-slate-700 font-semibold rounded-lg text-sm hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           View Templates
         </button>

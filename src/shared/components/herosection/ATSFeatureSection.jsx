@@ -1,129 +1,162 @@
 import Link from "next/link";
-// import { m } from "framer-motion";
-import { FileSearch, CheckCircle2, Zap } from "lucide-react";
+import {
+  FileSearch,
+  CheckCircle2,
+  Zap,
+  SearchCheck,
+  TextSearch,
+  LayoutTemplate,
+  Lightbulb,
+  ArrowRight,
+} from "lucide-react";
+
+const features = [
+  {
+    title: "Instant score analysis",
+    description: "Get an immediate ATS compatibility score for your resume.",
+    icon: SearchCheck,
+  },
+  {
+    title: "Keyword gap detection",
+    description: "Identify important job keywords missing from your resume.",
+    icon: TextSearch,
+  },
+  {
+    title: "Formatting check",
+    description: "Detect formatting and structure issues that may affect ATS parsing.",
+    icon: LayoutTemplate,
+  },
+  {
+    title: "Improvement tips",
+    description: "Receive practical suggestions to strengthen your resume.",
+    icon: Lightbulb,
+  },
+];
 
 const ATSFeatureSection = () => {
   return (
-    <section className="py-24 bg-slate-50 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-slate-200 to-transparent" />
+    <section className="relative overflow-hidden bg-slate-50 py-24">
+      {/* Top divider */}
+      <div className="absolute left-0 top-0 h-px w-full bg-linear-to-r from-transparent via-slate-300 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            {" "}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium mb-6">
-              <Zap className="w-4 h-4" />
-              <span>New Free Tool</span>
-            </div>
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-6 leading-tight">
-              Is Your Resume <span className="text-indigo-600">ATS-Friendly?</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mb-8 leading-relaxed">
-              Wondering{" "}
-              <strong>
-                <Link
-                  href="/blogs/why-90-of-indian-resumes-fail-ats-in-2025-and-how-to-fix-yours-in-10-minutes"
-                  className="text-indigo-600 hover:underline"
-                >
-                  why ATS rejects resumes in India
-                </Link>
-              </strong>{" "}
-              and how to fix it? Over 75% of resumes are filtered out by Applicant Tracking Systems
-              before a human ever sees them. Our
-              <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat the
-              bots with keyword-optimized,{" "}
-              <strong>professional resume format for India freshers 2026</strong>. Get your resume
-              index-ready for top companies with the best{" "}
-              <strong>
-                <Link
-                  href="/blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026"
-                  className="text-indigo-600 hover:underline"
-                >
-                  AI-powered resume builder for Indian fresh graduates
-                </Link>
-              </strong>
-              .
-            </p>
-            <div className="text-xs sm:text-sm space-y-4 mb-8">
-              {[
-                "Instant score analysis",
-                "Keyword gap detection",
-                "Formatting & structure check",
-                "Personalized improvement tips",
-              ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
-                  <span className="text-slate-700 font-medium">{item}</span>
+      {/* Background decoration */}
+      <div className="absolute -left-32 top-10 h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
+      <div className="absolute -right-32 bottom-0 h-72 w-72 rounded-full bg-purple-200/30 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Heading content */}
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700">
+            <Zap className="h-4 w-4" />
+            <span>New Free Tool</span>
+          </div>
+
+          <h2 className="mb-6 text-lg font-bold leading-tight text-slate-900 sm:text-xl">
+            Is Your Resume <span className="text-indigo-600">ATS-Friendly?</span>
+          </h2>
+
+          <p className="text-xs leading-relaxed text-slate-600 sm:text-sm">
+            Wondering{" "}
+            <strong>
+              <Link
+                href="/blogs/why-90-of-indian-resumes-fail-ats-in-2025-and-how-to-fix-yours-in-10-minutes"
+                className="text-indigo-600 hover:underline"
+              >
+                why ATS rejects resumes in India
+              </Link>
+            </strong>{" "}
+            and how to fix it? Over 75% of resumes are filtered out by Applicant Tracking Systems
+            before a human ever sees them. Our{" "}
+            <strong>ATS-friendly resume builder for freshers in India</strong> helps you beat the
+            bots with keyword-optimized,{" "}
+            <strong>professional resume formats for Indian freshers in 2026</strong>. Get your
+            resume ready for top companies with an{" "}
+            <strong>
+              <Link
+                href="/blogs/best-ai-resume-builder-free-online-the-complete-resume-and-cv-guide-for-job-seekers-2026"
+                className="text-indigo-600 hover:underline"
+              >
+                AI-powered resume builder for Indian fresh graduates
+              </Link>
+            </strong>
+            .
+          </p>
+        </div>
+
+        {/* Feature cards */}
+        <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map(feature => {
+            const Icon = feature.icon;
+
+            return (
+              <div
+                key={feature.title}
+                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-200 hover:shadow-lg"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                  <Icon className="h-5 w-5" />
                 </div>
-              ))}
+
+                <h3 className="text-xs font-semibold text-slate-900 sm:text-sm">{feature.title}</h3>
+
+                <p className="mt-2 text-xs leading-relaxed text-slate-500">{feature.description}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* CTA section */}
+        <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-indigo-100 bg-white p-6 shadow-sm sm:p-8">
+          <div className="flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
+            <div>
+              <div className="mb-2 flex items-center justify-center gap-2 sm:justify-start">
+                <CheckCircle2 className="h-5 w-5 text-green-500" />
+
+                <p className="text-xs font-semibold text-slate-900 sm:text-sm">
+                  Free ATS resume analysis
+                </p>
+              </div>
+
+              <p className="text-xs leading-relaxed text-slate-500 sm:text-sm">
+                Upload your resume and receive actionable suggestions in seconds. No signup
+                required.
+              </p>
             </div>
+
             <Link
               href="/ats-resume-checker"
-              className="inline-flex items-center justify-center p-2 sm:px-8 py-3 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-200"
+              className="inline-flex shrink-0 items-center justify-center rounded-xl bg-indigo-600 p-2 py-3 text-sm font-semibold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-indigo-200 sm:px-8"
             >
               Check My Resume Score
-              <FileSearch className="ml-2 w-5 h-5" />
+              <FileSearch className="ml-2 h-5 w-5" />
             </Link>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute -inset-4 bg-linear-to-r from-indigo-500 to-purple-500 rounded-2xl opacity-20 blur-sm  md:blur-2xl" />
-            <div className="relative bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8">
-              {/* Mockup of the score display */}
-              <div className="flex flex-col items-center w-full max-w-xs mx-auto">
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 mb-6">
-                  <svg viewBox="0 0 160 160" className="w-full h-full transform -rotate-90">
-                    <circle
-                      className="text-slate-100"
-                      strokeWidth="6"
-                      stroke="currentColor"
-                      fill="transparent"
-                      r="70"
-                      cx="80"
-                      cy="80"
-                    />
-                    <circle
-                      className="text-green-500 transition-all duration-1000"
-                      strokeWidth="6"
-                      strokeDasharray={2 * Math.PI * 70}
-                      strokeDashoffset={2 * Math.PI * 70 * (1 - 0.85)}
-                      strokeLinecap="round"
-                      stroke="currentColor"
-                      fill="transparent"
-                      r="70"
-                      cx="80"
-                      cy="80"
-                    />
-                  </svg>
+        {/* Bottom trust points */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-slate-500 sm:text-sm">
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            No signup required
+          </span>
 
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-2xl sm:text-4xl font-bold text-slate-800">85</span>
-                    <span className="text-[10px] sm:text-xs uppercase text-slate-400 font-semibold">
-                      Score
-                    </span>
-                  </div>
-                </div>
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            Instant analysis
+          </span>
 
-                <div className="w-full space-y-3">
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-indigo-500 w-[75%] rounded-full transition-all duration-700" />
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600 font-medium">Keywords</span>
-                    <span className="text-indigo-600 font-bold">Good</span>
-                  </div>
+          <span className="flex items-center gap-2">
+            <CheckCircle2 className="h-4 w-4 text-green-500" />
+            Free to use
+          </span>
 
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-green-500 w-full rounded-full transition-all duration-700" />
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-slate-600 font-medium">Formatting</span>
-                    <span className="text-green-600 font-bold">Perfect</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Link
+            href="/ats-resume-checker"
+            className="flex items-center gap-1 font-medium text-indigo-600 hover:underline"
+          >
+            Start checking
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

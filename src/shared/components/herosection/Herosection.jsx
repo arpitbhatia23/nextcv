@@ -6,8 +6,8 @@ const mncLogos = [
   { src: "/logos/TCS.NS_BIG.svg", alt: "TCS company logo" },
   { src: "/logos/INFY_BIG.svg", alt: "Infosys company logo" },
   { src: "/logos/WIT.svg", alt: "Wipro company logo" },
-  { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech company logo" },
-  { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree company logo" },
+  // { src: "/logos/HCLTECH.NS_BIG.svg", alt: "HCL Tech company logo" },
+  // { src: "/logos/LTIM.NS_BIG.svg", alt: "LTIMindtree company logo" },
   { src: "/logos/TECHM.NS_BIG.svg", alt: "Tech Mahindra company logo" },
   { src: "/logos/google_BIG.svg", alt: "Google company logo" },
   { src: "/logos/deloitte.png", alt: "Deloitte company logo" },
@@ -15,7 +15,7 @@ const mncLogos = [
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white pt-24 pb-20 lg:pt-32 lg:pb-28">
+    <section className="relative overflow-hidden bg-white pt-40 pb-20 lg:pt-32 lg:pb-28">
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
         {/* Same text sizes */}
         <h1 className="mx-auto mb-6 max-w-4xl text-xl leading-[1.1] font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
@@ -35,10 +35,10 @@ export default function HeroSection() {
         </p>
         {/* Coupon */}
         <div className="mb-4 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-700 sm:text-xl">
+          <div className="inline-flex items-center gap-2 rounded-md border border-green-200 bg-green-50 px-4 py-2 text-sm text-green-700 sm:text-xl">
             <Ticket aria-hidden="true" className="h-5 w-5 shrink-0" strokeWidth={2} />
 
-            <span className="text-sm font-medium sm:text-base">
+            <span className="text-xs font-medium sm:text-base">
               Use code <strong>FIRST20</strong> for <strong>20% off</strong>
             </span>
           </div>
@@ -55,17 +55,17 @@ export default function HeroSection() {
             only.
           </p>
 
-          <div className="grid grid-cols-8 place-items-center gap-x-3 gap-y-4 opacity-60 sm:grid-cols-8 sm:gap-x-7">
+          <div className="grid w-full grid-cols-6 items-center gap-1 opacity-60 grayscale transition-all hover:grayscale-0 sm:gap-6">
             {mncLogos.map(logo => (
-              <div key={logo.src} className="flex h-14 w-full max-w-28 items-center justify-center">
+              <div key={logo.src} className="flex min-w-0 items-center justify-center">
                 <Image
                   src={logo.src}
                   alt={logo.alt}
-                  width={140}
+                  width={240}
                   height={75}
+                  sizes="(max-width: 640px) 14vw, 112px"
                   priority
-                  sizes="(max-width: 640px) 84px, 112px"
-                  className="max-h-16 w-auto max-w-full object-contain grayscale"
+                  className="h-10 w-full max-w-17.5 object-contain sm:h-16 sm:max-w-28"
                 />
               </div>
             ))}
