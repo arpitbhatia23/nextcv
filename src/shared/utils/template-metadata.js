@@ -189,4 +189,9 @@ export const templatesMetadata = [
     label: "Creative Teal",
     image: "/creativeteal.webp",
   },
+  {
+    key: "NavyEdge",
+    label: "Navy Edge",
+    image: "/NavyEdge.webp",
+  },
 ];

@@ -244,16 +244,17 @@ const AcademicTeacher = ({ data }) => {
             </Text>
           </View>
         )}
-        <Text style={{ 
-  fontSize: 1, 
-  color: "#fff", 
-  opacity: 0.01, // Optional: makes it even more "hidden"
-  position: "absolute", 
-  bottom: 0 
-}}>
-  NextCV Resume Optimized
-</Text>
-
+        <Text
+          style={{
+            fontSize: 1,
+            color: "#fff",
+            opacity: 0.01, // Optional: makes it even more "hidden"
+            position: "absolute",
+            bottom: 0,
+          }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

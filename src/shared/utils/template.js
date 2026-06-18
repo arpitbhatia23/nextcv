@@ -1,5 +1,3 @@
-import { templatesMetadata } from "./template-metadata";
-
 export const getTemplateComponent = async key => {
   switch (key) {
     case "classicTemplate":
@@ -78,6 +76,8 @@ export const getTemplateComponent = async key => {
       return (await import("../../templates/resume-pdf/MarketingCreative")).default;
     case "ClinicalTrial":
       return (await import("../../templates/resume-pdf/ClinicalTrial")).default;
+    case "NavyEdge":
+      return (await import("../../templates/resume-pdf/NavyEdge")).default;
     default:
       return (await import("../../templates/resume-pdf/classic")).default;
   }

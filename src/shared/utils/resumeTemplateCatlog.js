@@ -279,6 +279,15 @@ const resumeTemplateCatalog = [
         tag: "High Success Rate",
       },
       {
+        templateName: "NavyEdge",
+        style: "Top Tech Firms",
+        priceOriginal: 799,
+        priceDiscounted: 399,
+        savings: 400,
+        discountPercent: 50,
+        tag: "High Success Rate",
+      },
+      {
         templateName: "MicrosoftCorp",
         style: "Top Tech Firms",
         priceOriginal: 799,
