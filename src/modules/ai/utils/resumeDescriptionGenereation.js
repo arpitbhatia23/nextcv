@@ -15,7 +15,7 @@ export const getCached = async key => {
   }
 };
 
-export const setCached = async (key, value, ttl = 60 * 60 * 24 * 30) => {
+export const setCached = async (key, value, ttl = 60 * 60 * 24 * 2) => {
   try {
     if (!key || value == null) return;
 
