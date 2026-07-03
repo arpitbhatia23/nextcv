@@ -7,6 +7,18 @@ import Link from "next/link";
 
 const faqs = [
   {
+    question: "Is it NextCV or NestCV?",
+    answer: "NextCV is our official brand name. Occasionally users might misspell it as NestCV, but NextCV is the ultimate platform for building ATS-friendly resumes for Indian freshers."
+  },
+  {
+    question: "What is NextCV?",
+    answer: "NextCV is an online resume builder specially designed for Indian freshers. We provide ATS-ready templates that help you pass screening at top companies like TCS, Infosys, and Wipro."
+  },
+  {
+    question: "Can freshers use NextCV for ATS resumes?",
+    answer: "Absolutely! NextCV is tailored for Indian freshers, providing simple, single-column formats that work flawlessly with Applicant Tracking Systems (ATS)."
+  },
+  {
     question: "Is NextCV ATS friendly?",
     answer:
       "Yes, absolutely! NextCV is built specifically to generate 100% ATS-friendly resumes. Our templates use single-column layouts and standard fonts, ensuring they are easily parsed by ATS software used by top Indian companies.",

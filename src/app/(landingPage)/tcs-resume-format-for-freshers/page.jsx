@@ -1,642 +1,132 @@
-import React from "react";
-import Link from "next/link";
-import {
-  FileText,
-  Download,
-  Zap,
-  CheckCircle2,
-  ArrowRight,
-  BookOpen,
-  Award,
-  ShieldCheck,
-  Clock3,
-} from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = {
-  title: "TCS Resume Format for Freshers (NQT Ready 2026) | NextCV",
-  description: "Download the exact TCS resume format for freshers. Learn how to pass the TCS ATS, highlight your NQT scores, and format your CV for Tata Consultancy Services.",
-  keywords: ["tcs resume format for freshers","resume for tcs freshers","tcs nqt resume format","sample resume for tcs freshers","tcs cv format for freshers","tcs ats resume checker"],
+  title: "TCS Resume Format for Freshers 2026 | ATS-Friendly Template",
+  description: "Build an ATS-friendly TCS resume format for freshers. Use ready-made resume templates for TCS NQT, BCA, B.Tech, IT and fresher job applications.",
   alternates: {
     canonical: "https://www.nextcv.in/tcs-resume-format-for-freshers",
   },
 };
 
-export const revalidate = 86400;
+export default function Page() {
+  const faqs = [{"q": "How to make a resume for TCS freshers?", "a": "Use a simple, ATS-friendly template focusing on education, programming skills, and relevant projects."}, {"q": "Is TCS resume format different from others?", "a": "TCS often looks for specific technical proficiencies and problem-solving skills, so highlighting these is key."}, {"q": "What should I write in TCS NQT resume?", "a": "Include your NQT score prominently, along with academic achievements and technical skills."}, {"q": "Does TCS use ATS?", "a": "Yes, TCS receives thousands of applications and uses ATS to filter resumes, making ATS-friendliness crucial."}];
+  
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
 
-export default function SEOPage() {
-  const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the TCS resume format for freshers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The TCS format is a highly structured, single-page, ATS-friendly resume that clearly displays your academic percentages, technical skills, and college projects."
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.nextcv.in/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "TCS Resume Format for Freshers (2026)",
+        "item": "https://www.nextcv.in/tcs-resume-format-for-freshers"
       }
-    },
-    {
-      "@type": "Question",
-      "name": "Does TCS use an ATS for screening resumes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, TCS uses advanced Applicant Tracking Systems to filter massive volumes of applications, so standard formatting is essential."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I include my TCS NQT score on the resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, if you have a strong National Qualifier Test (NQT) score, feature it prominently near the top of your resume."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is it mandatory to mention 10th and 12th marks for TCS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, TCS has strict academic criteria (often 60% and above throughout), so clearly listing these marks is critical."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What technical skills does TCS prefer?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "TCS values strong foundations in C, C++, Java, SQL, and an understanding of software engineering principles."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can a non-IT student apply to TCS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, TCS hires graduates from various streams for different roles. Highlight analytical skills, communication, and any basic IT knowledge."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I include a photo for a TCS application?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, a photo is not required and can interfere with the ATS parsing of your document."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I check if my resume passes the TCS ATS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can use NextCV's ATS Checker, which is modeled to simulate enterprise-grade ATS screening similar to what TCS uses."
-      }
-    }
-  ]
-};
+    ]
+  };
 
   return (
-    <>
+    <div className="max-w-5xl mx-auto px-4 py-12 bg-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-indigo-200">
-        {/* Hero */}
-        <section className="relative overflow-hidden border-b border-slate-200 bg-white pb-14 pt-28 sm:pb-20 sm:pt-32">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(224,231,255,0.85),transparent_42%)]" />
-
-          <div className="absolute -left-24 top-24 h-64 w-64 rounded-full bg-blue-100/50 blur-3xl" />
-
-          <div className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-6 lg:px-8">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1.5 text-xs font-bold text-indigo-700 shadow-sm">
-              <Award aria-hidden="true" className="h-4 w-4" />
-              Expert Career Guide
-            </div>
-
-            <h1 className="mx-auto max-w-3xl text-xl font-bold leading-snug tracking-tight text-slate-900">
-              {"The Perfect TCS Resume Format for Freshers"}
-            </h1>
-
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"Download the exact TCS resume format for freshers. Learn how to pass the TCS ATS, highlight your NQT scores, and format your CV for Tata Consultancy Services."}
-            </p>
-
-            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link
-                href="/"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-md shadow-indigo-600/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-lg sm:w-auto"
-              >
-                <Download aria-hidden="true" className="h-4 w-4" />
-                Create Free Resume
-              </Link>
-
-              <Link
-                href="/ats-resume-checker"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-700 transition-colors hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 sm:w-auto"
-              >
-                <ShieldCheck aria-hidden="true" className="h-4 w-4" />
-                Check ATS Score
-              </Link>
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
-                Free to start
-              </span>
-
-              <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
-                Ready in minutes
-              </span>
-
-              <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
-                ATS-friendly formats
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* Page content */}
-        <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
-          {/* Main article */}
-          <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Understanding the TCS Recruitment Process (NQT)"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Understanding the TCS Recruitment Process (NQT)"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">TCS Resume Format for Freshers (2026)</h1>
+      <p className="text-lg text-gray-700 mb-8">Build an ATS-friendly TCS resume format for freshers. Use ready-made resume templates for TCS NQT, BCA, B.Tech, IT and fresher job applications.</p>
       
-            </div>
-          </section>
+      <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
+        <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
+        <p className="mb-4 text-gray-700">Use NextCV to create a resume that passes screening tools used by top Indian companies.</p>
+        <Link href="/login" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition">Create Resume Free</Link>
+      </div>
+
+      <div className="prose max-w-none text-gray-800">
         
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"What TCS Looks for in a Fresher Resume"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"What TCS Looks for in a Fresher Resume"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
-
-            <span>{"Consistent Academic Records"}</span>
-          </h3>
-
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply consistent academic records carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
-
-            <span>{"Core Programming Languages"}</span>
-          </h3>
-
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply core programming languages carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Best TCS Resume Format for Freshers</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Structuring Your TCS Resume"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Structuring Your TCS Resume"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
-
-            <span>{"Highlighting 10th, 12th, and Degree Marks"}</span>
-          </h3>
-
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply highlighting 10th, 12th, and degree marks carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
-
-            <span>{"Where to Put Your TCS NQT Score"}</span>
-          </h3>
-
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply where to put your tcs nqt score carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">TCS NQT Resume Format</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Beating the TCS ATS Resume Checker"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Beating the TCS ATS Resume Checker"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">What to Include in a TCS Fresher Resume</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
-
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"TCS Resume Example"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"TCS Resume Example"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">TCS Resume Format for BCA and B.Tech Students</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Skills to Add in TCS Resume</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
+        
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Project Examples for TCS Resume</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
+        
+        <h2 className="text-2xl font-semibold mt-8 mb-4">TCS Resume Mistakes to Avoid</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
+        
+      </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
-
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
-
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-6 space-y-4">
       
-        </div>
+      <section className="mt-16">
+        <h2 className="text-3xl font-bold mb-6 text-center">Explore Our Free ATS Templates</h2>
+        <Templates />
       </section>
     
 
-            
-            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
-              <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
-
-              <div className="relative z-10 mb-6 flex items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
-                </div>
-
-                <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
-                  Frequently Asked Questions
-                </h2>
-              </div>
-
-              <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"What is the TCS resume format for freshers?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"The TCS format is a highly structured, single-page, ATS-friendly resume that clearly displays your academic percentages, technical skills, and college projects."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"Does TCS use an ATS for screening resumes?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, TCS uses advanced Applicant Tracking Systems to filter massive volumes of applications, so standard formatting is essential."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"Should I include my TCS NQT score on the resume?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, if you have a strong National Qualifier Test (NQT) score, feature it prominently near the top of your resume."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"Is it mandatory to mention 10th and 12th marks for TCS?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, TCS has strict academic criteria (often 60% and above throughout), so clearly listing these marks is critical."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"What technical skills does TCS prefer?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"TCS values strong foundations in C, C++, Java, SQL, and an understanding of software engineering principles."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"Can a non-IT student apply to TCS?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, TCS hires graduates from various streams for different roles. Highlight analytical skills, communication, and any basic IT knowledge."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"Should I include a photo for a TCS application?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"No, a photo is not required and can interfere with the ATS parsing of your document."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
-
-            <span>{"How can I check if my resume passes the TCS ATS?"}</span>
-          </h3>
-
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"You can use NextCV's ATS Checker, which is modeled to simulate enterprise-grade ATS screening similar to what TCS uses."}
-          </p>
-        </article>
-      
-              </div>
-            </section>
-            
-          </div>
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-4">
-            <div className="space-y-6 lg:sticky lg:top-24">
-              <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-indigo-600 to-indigo-800 p-5 text-white shadow-lg shadow-indigo-900/15 sm:p-6">
-                <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-
-                <div className="relative z-10">
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
-                  </div>
-
-                  <h2 className="text-lg font-bold leading-snug">
-                    Build an ATS-Friendly Resume in Minutes
-                  </h2>
-
-                  <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
-                  </p>
-
-                  <Link
-                    href="/"
-                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
-                  >
-                    Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
-                  </Link>
-                </div>
-              </div>
-
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
+      <section className="mt-16">
+        <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
+        <div className="space-y-6">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="bg-gray-50 p-6 rounded-lg border border-gray-100">
+              <h3 className="text-lg font-semibold mb-2 text-gray-900">{faq.q}</h3>
+              <p className="text-gray-700">{faq.a}</p>
             </div>
-
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
-
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/infosys-resume-format-for-freshers"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Infosys Resume Format For Freshers"}
-                  </span>
-
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/ats-friendly-resume-format-india"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Ats Friendly Resume Format India"}
-                  </span>
-
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
+          ))}
         </div>
+      </section>
+
+      <section className="mt-16 border-t pt-8">
+        <h2 className="text-2xl font-bold mb-4 text-gray-900">Related Guides</h2>
+        <div className="mt-6 mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Link href="/templates" className="text-blue-600 hover:underline">Explore Templates</Link>
+          <Link href="/ats-resume-checker" className="text-blue-600 hover:underline">ATS Resume Checker</Link>
+          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">TCS Resume Format</Link>
+          <Link href="/infosys-resume-format-for-freshers" className="text-blue-600 hover:underline">Infosys Resume Format</Link>
+          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">Wipro Resume Format</Link>
+          <Link href="/ats-friendly-resume-format-india" className="text-blue-600 hover:underline">ATS Resume Format Guide</Link>
+          <Link href="/fresher-resume-format-india" className="text-blue-600 hover:underline">Fresher Resume Format</Link>
+        </div>
+      </section>
       
-            </div>
-          </aside>
-        </main>
+      <div className="mt-12 text-center">
+        <Link href="/login" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg">Build Your Resume Now</Link>
       </div>
-    </>
+    </div>
   );
 }

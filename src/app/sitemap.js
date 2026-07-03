@@ -69,6 +69,13 @@ export default async function sitemap() {
     { path: "/cv-format-for-ai-screening", priority: 0.8, changeFrequency: "monthly" },
     { path: "/latest-resume-format-2026", priority: 0.8, changeFrequency: "monthly" },
     { path: "/resume-builder-price-in-india", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/resume-builder-price-india", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/resume-vs-cv-india", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/ats-resume-checker", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/cognizant-resume-format-for-freshers", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/tech-mahindra-resume-format-for-freshers", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/ltimindtree-resume-format-for-freshers", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/mnc-resume-format-for-freshers", priority: 0.85, changeFrequency: "monthly" },
   ].map(page => ({
     url: `${baseUrl}${page.path}`,
     lastModified: staticLastModified,

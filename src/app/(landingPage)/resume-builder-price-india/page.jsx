@@ -5,15 +5,15 @@ import dynamic from 'next/dynamic';
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = {
-  title: "Free ATS Resume Checker India 2026 | Check Resume Score Online",
-  description: "Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro, Accenture and more.",
+  title: "Resume Banane Me Kitna Paisa Lagta Hai? India Pricing Guide",
+  description: "India me resume banane ka cost samjhein. Free resume builder, paid resume templates, ATS resume download pricing aur fresher resume cost compare karein.",
   alternates: {
-    canonical: "https://www.nextcv.in/ats-resume-checker",
+    canonical: "https://www.nextcv.in/resume-builder-price-india",
   },
 };
 
 export default function Page() {
-  const faqs = [{"q": "How can I check my ATS resume score for free?", "a": "You can use NextCV's ATS resume checker to evaluate your resume format and keyword density."}, {"q": "What is a good ATS score?", "a": "A score above 80% is generally considered good and indicates high compatibility with ATS systems."}, {"q": "Does the checker work for TCS and Infosys?", "a": "Yes, the checker is designed to evaluate resumes based on common ATS criteria used by major IT companies."}, {"q": "Why is my ATS score low?", "a": "A low score could be due to missing keywords, complex formatting, or incorrect file types."}];
+  const faqs = [{"q": "Is NextCV free?", "a": "You can build your resume for free. Downloading premium ATS templates starts at \u20b949."}, {"q": "Can I find completely free resume builders?", "a": "Yes, but they often have watermarks or lack true ATS optimization."}, {"q": "Is it worth paying for a resume builder?", "a": "Yes, a professional, ATS-friendly resume significantly increases your chances of getting shortlisted."}, {"q": "What are the payment options?", "a": "We accept UPI, Credit/Debit cards, and Net Banking."}];
   
   const faqSchema = {
     "@context": "https://schema.org",
@@ -41,8 +41,8 @@ export default function Page() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Free ATS Resume Checker Online (2026)",
-        "item": "https://www.nextcv.in/ats-resume-checker"
+        "name": "Resume Banane Me Kitna Paisa Lagta Hai? (2026 Guide)",
+        "item": "https://www.nextcv.in/resume-builder-price-india"
       }
     ]
   };
@@ -58,8 +58,8 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Free ATS Resume Checker Online (2026)</h1>
-      <p className="text-lg text-gray-700 mb-8">Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro, Accenture and more.</p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Resume Banane Me Kitna Paisa Lagta Hai? (2026 Guide)</h1>
+      <p className="text-lg text-gray-700 mb-8">India me resume banane ka cost samjhein. Free resume builder, paid resume templates, ATS resume download pricing aur fresher resume cost compare karein.</p>
       
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
         <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
@@ -69,16 +69,19 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Free ATS Resume Checker for Indian Freshers</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Cost of Making a Resume in India</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Check Resume Score Before Applying</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Free vs Paid Resume Builders</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Resume Checker for TCS, Infosys, Wipro and Accenture</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Why Choose NextCV?</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Common ATS Resume Mistakes</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Resume Download Pricing</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
+        
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Value of a Professional Resume</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
       </div>

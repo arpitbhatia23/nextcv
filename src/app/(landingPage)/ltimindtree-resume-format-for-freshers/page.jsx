@@ -5,15 +5,15 @@ import dynamic from 'next/dynamic';
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = {
-  title: "Free ATS Resume Checker India 2026 | Check Resume Score Online",
-  description: "Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro, Accenture and more.",
+  title: "LTIMindtree Resume Format for Freshers 2026 | ATS Template",
+  description: "Build a clean ATS-friendly LTIMindtree resume format for freshers applying to IT, support, analyst and trainee roles.",
   alternates: {
-    canonical: "https://www.nextcv.in/ats-resume-checker",
+    canonical: "https://www.nextcv.in/ltimindtree-resume-format-for-freshers",
   },
 };
 
 export default function Page() {
-  const faqs = [{"q": "How can I check my ATS resume score for free?", "a": "You can use NextCV's ATS resume checker to evaluate your resume format and keyword density."}, {"q": "What is a good ATS score?", "a": "A score above 80% is generally considered good and indicates high compatibility with ATS systems."}, {"q": "Does the checker work for TCS and Infosys?", "a": "Yes, the checker is designed to evaluate resumes based on common ATS criteria used by major IT companies."}, {"q": "Why is my ATS score low?", "a": "A low score could be due to missing keywords, complex formatting, or incorrect file types."}];
+  const faqs = [{"q": "How to make an ATS friendly resume for LTIMindtree?", "a": "Use standard headings, avoid complex formatting, and include keywords from the job description."}, {"q": "What roles does LTIMindtree hire freshers for?", "a": "They hire for various roles including software engineers, analysts, and support staff."}, {"q": "Can I use NextCV for LTIMindtree?", "a": "Yes, NextCV provides ATS-friendly templates suitable for LTIMindtree."}, {"q": "How many pages should the resume be?", "a": "One page is standard and recommended for freshers."}];
   
   const faqSchema = {
     "@context": "https://schema.org",
@@ -41,8 +41,8 @@ export default function Page() {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "Free ATS Resume Checker Online (2026)",
-        "item": "https://www.nextcv.in/ats-resume-checker"
+        "name": "LTIMindtree Resume Format for Freshers (2026)",
+        "item": "https://www.nextcv.in/ltimindtree-resume-format-for-freshers"
       }
     ]
   };
@@ -58,8 +58,8 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Free ATS Resume Checker Online (2026)</h1>
-      <p className="text-lg text-gray-700 mb-8">Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro, Accenture and more.</p>
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">LTIMindtree Resume Format for Freshers (2026)</h1>
+      <p className="text-lg text-gray-700 mb-8">Build a clean ATS-friendly LTIMindtree resume format for freshers applying to IT, support, analyst and trainee roles.</p>
       
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
         <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
@@ -69,21 +69,29 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Free ATS Resume Checker for Indian Freshers</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Best LTIMindtree Resume Format</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Check Resume Score Before Applying</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">What to Include</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Resume Checker for TCS, Infosys, Wipro and Accenture</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">LTIMindtree Resume for IT Freshers</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Common ATS Resume Mistakes</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Key Skills</h2>
+        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
+        
+        <h2 className="text-2xl font-semibold mt-8 mb-4">LTIMindtree ATS Guide</h2>
         <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
         
       </div>
 
       
+      <section className="mt-16">
+        <h2 className="text-3xl font-bold mb-6 text-center">Explore Our Free ATS Templates</h2>
+        <Templates />
+      </section>
+    
 
       <section className="mt-16">
         <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
