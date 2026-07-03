@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { AlertCircle } from "lucide-react";
 
-export const metadata = {
-  title: "Free Resume Builder Without Payment (PDF Download Guide 2026)",
-  description:
-    "Looking for a free resume builder without payment and PDF download? Learn how to create an ATS-friendly resume for free and when to upgrade for premium features.",
-  keywords:
-    "free resume builder without payment pdf, create cv online free download, how do i create a resume for free, best ai resume builder free, free resume maker india, download resume pdf free",
-  alternates: {
-    canonical: `https://www.nextcv.in/free-resume-builder-no-payment`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Free Resume Builder Without Payment | PDF Download Guide 2026",
+  description: "Learn how to create a resume online without payment and compare free resume builders, paid templates and PDF download options.",
+  path: "/free-resume-builder-no-payment",
+});
 
 export default function FreeResumePage() {
   return (

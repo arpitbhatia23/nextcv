@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "Resume Format India 2026: ATS Templates for Freshers | NextCV",
   description: "Explore ATS-friendly resume formats for Indian freshers. Choose templates for IT, BCA, B.Tech, MBA, TCS, Infosys, Wipro and more.",
-  alternates: {
-    canonical: "https://www.nextcv.in/templates",
-  },
-};
+  path: "/templates",
+});
 
 export default function Page() {
   const faqs = [{"q": "Which is the best resume format for freshers in India?", "a": "The reverse-chronological format is generally the best for freshers, prioritizing education and projects."}, {"q": "Are these templates ATS-friendly?", "a": "Yes, all our templates are designed to be easily readable by Applicant Tracking Systems."}, {"q": "Can I download the resume for free?", "a": "You can create your resume for free, and download it starting from \u20b949."}, {"q": "Do these templates work for IT jobs?", "a": "Absolutely, we have specialized templates highlighting technical skills and projects ideal for IT freshers."}];

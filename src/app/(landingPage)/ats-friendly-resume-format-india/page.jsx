@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "ATS Friendly Resume Format India 2026 | Freshers Guide",
   description: "Learn the best ATS-friendly resume format for Indian freshers. See structure, skills, projects and formatting tips to pass resume screening systems.",
-  alternates: {
-    canonical: "https://www.nextcv.in/ats-friendly-resume-format-india",
-  },
-};
+  path: "/ats-friendly-resume-format-india",
+});
 
 export default function Page() {
   const faqs = [{"q": "What does ATS friendly mean?", "a": "It means the resume is formatted in a way that software (Applicant Tracking Systems) can easily read and parse the text."}, {"q": "Is single column better for ATS?", "a": "Yes, single-column formats are generally safer and more reliably parsed by most ATS software."}, {"q": "Can I use colors in an ATS resume?", "a": "Minimal color is okay, but avoid complex designs or background graphics."}, {"q": "Which font is best for ATS?", "a": "Standard fonts like Arial, Calibri, or Times New Roman are safe choices."}];

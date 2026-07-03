@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "TCS Resume Format for Freshers 2026 | ATS-Friendly Template",
-  description: "Build an ATS-friendly TCS resume format for freshers. Use ready-made resume templates for TCS NQT, BCA, B.Tech, IT and fresher job applications.",
-  alternates: {
-    canonical: "https://www.nextcv.in/tcs-resume-format-for-freshers",
-  },
-};
+  description: "Build an ATS-friendly TCS resume format for freshers. Use ready-made templates for TCS NQT, BCA, B.Tech, IT and fresher job applications.",
+  path: "/tcs-resume-format-for-freshers",
+});
 
 export default function Page() {
   const faqs = [{"q": "How to make a resume for TCS freshers?", "a": "Use a simple, ATS-friendly template focusing on education, programming skills, and relevant projects."}, {"q": "Is TCS resume format different from others?", "a": "TCS often looks for specific technical proficiencies and problem-solving skills, so highlighting these is key."}, {"q": "What should I write in TCS NQT resume?", "a": "Include your NQT score prominently, along with academic achievements and technical skills."}, {"q": "Does TCS use ATS?", "a": "Yes, TCS receives thousands of applications and uses ATS to filter resumes, making ATS-friendliness crucial."}];

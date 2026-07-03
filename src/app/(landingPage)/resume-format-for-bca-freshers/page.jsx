@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Resume Format for BCA Freshers (ATS-Friendly Templates) | NextCV",
-  description: "Get the perfect resume format for BCA freshers. Showcase your programming skills, projects, and land top IT jobs with our ATS-optimized BCA templates.",
-  keywords: ["resume format for bca freshers","bca fresher resume template","bca resume format for freshers pdf","resume for bca student with no experience","bca graduate resume","technical skills for bca fresher resume"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-format-for-bca-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume Format for BCA Freshers | ATS-Friendly Templates",
+  description: "Create a professional BCA fresher resume with ATS-friendly format, skills, projects, education, certifications and template examples.",
+  path: "/resume-format-for-bca-freshers",
+});
 
 export const revalidate = 86400;
 

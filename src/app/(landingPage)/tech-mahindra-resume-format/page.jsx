@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Tech Mahindra Resume Format for Freshers (2026) | NextCV",
-  description: "Download the approved Tech Mahindra resume format. Learn exactly what skills and sections to include to get hired at Tech Mahindra in 2026.",
-  keywords: ["tech mahindra resume format","tech mahindra resume format for freshers","resume for tech mahindra","tech mahindra cv format","ats id tech mahindra","tech mahindra fresher resume"],
-  alternates: {
-    canonical: "https://www.nextcv.in/tech-mahindra-resume-format",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Tech Mahindra Resume Format for Freshers 2026 | NextCV",
+  description: "Create an ATS-friendly Tech Mahindra resume format for freshers applying to IT, support, analyst and trainee roles.",
+  path: "/tech-mahindra-resume-format",
+});
 
 export const revalidate = 86400;
 

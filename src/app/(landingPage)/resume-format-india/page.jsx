@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Best Resume Format in India 2026 (Free Templates & Examples)",
-  description: "Discover the latest resume format for India in 2026. Download professional, standard, and ATS-friendly templates used by top Indian MNCs.",
-  keywords: ["resume format india 2026","best resume format india 2026","professional resume format india","standard resume format india 2026","latest resume format 2026 india","resume format in india"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-format-india",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Best Resume Format in India 2026 | Free Templates & Examples",
+  description: "Find the best resume format in India for freshers and job seekers. Explore ATS-friendly templates, examples, sections and formatting tips.",
+  path: "/resume-format-india",
+});
 
 export const revalidate = 86400;
 

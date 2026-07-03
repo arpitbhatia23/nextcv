@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Best Career Objectives for Resume for Freshers (Examples) | NextCV",
-  description: "Looking for the perfect career objective for a resume for freshers? Get top examples for IT, engineering, and management students to land your first job.",
-  keywords: ["career objective for resume","give a career objective for resume","career objective in resume","my career objective in resume","give me career objective for resume","best career objective for fresher"],
-  alternates: {
-    canonical: "https://www.nextcv.in/career-objective-for-resume-for-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Career Objective for Resume for Freshers | Examples 2026",
+  description: "Find the best career objective examples for fresher resumes in India, including IT, BCA, B.Tech, MBA, commerce and non-IT roles.",
+  path: "/career-objective-for-resume-for-freshers",
+});
 
 export const revalidate = 86400;
 

@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "Infosys Resume Format for Freshers 2026 | ATS-Friendly Template",
-  description: "Create an ATS-friendly Infosys resume format for freshers. Use ready-made resume templates for BCA, B.Tech, IT and non-IT freshers applying to Infosys jobs.",
-  alternates: {
-    canonical: "https://www.nextcv.in/infosys-resume-format-for-freshers",
-  },
-};
+  description: "Create an ATS-friendly Infosys resume format for freshers. Use clean templates for BCA, B.Tech, IT and non-IT fresher applications.",
+  path: "/infosys-resume-format-for-freshers",
+});
 
 export default function Page() {
   const faqs = [{"q": "What is the best resume format for Infosys?", "a": "A clear, structured format highlighting technical skills, internships, and relevant projects."}, {"q": "Can BCA students apply for Infosys?", "a": "Yes, Infosys frequently hires BCA graduates for various technical roles."}, {"q": "Should I add a photo to my Infosys resume?", "a": "It is generally not required and often advised against to ensure ATS compatibility."}, {"q": "How to clear Infosys ATS screening?", "a": "Use relevant keywords from the job description and maintain a clean, single-column format."}];

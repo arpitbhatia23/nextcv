@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Accenture Resume Format for Freshers (ATS Approved) | NextCV",
-  description: "Secure your role with the perfect Accenture resume format for freshers. Learn how to beat the Accenture ATS and highlight your tech and consulting skills.",
-  keywords: ["accenture resume format for freshers","accenture resume template","accenture ats resume checker","accenture resume builder","resume for accenture freshers","accenture fresher cv"],
-  alternates: {
-    canonical: "https://www.nextcv.in/accenture-resume-format-for-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Accenture Resume Format for Freshers 2026 | ATS Approved",
+  description: "Build an ATS-friendly Accenture resume format for freshers with professional sections for skills, projects, education and certifications.",
+  path: "/accenture-resume-format-for-freshers",
+});
 
 export const revalidate = 86400;
 

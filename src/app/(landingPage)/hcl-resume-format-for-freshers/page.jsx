@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "HCL Resume Format for Freshers (2026 Guidelines) | NextCV",
-  description: "Create a standout resume for HCL Technologies. Download the HCL resume format for freshers and learn how to optimize for their specific ATS tools.",
-  keywords: ["hcl resume format for freshers","hcl resume format","resume for hcl freshers","hcl ats tool","hcl technologies resume format","hcl cv template"],
-  alternates: {
-    canonical: "https://www.nextcv.in/hcl-resume-format-for-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "HCL Resume Format for Freshers 2026 | NextCV",
+  description: "Build an ATS-friendly HCL resume format for freshers with clean resume sections for skills, education, projects and certifications.",
+  path: "/hcl-resume-format-for-freshers",
+});
 
 export const revalidate = 86400;
 

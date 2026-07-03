@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "How to Build a Resume for MNC Companies in 2026 | NextCV",
-  description: "Learn how to build the perfect resume for MNC companies. Discover the formatting rules, ATS requirements, and skills needed to land a multinational job.",
-  keywords: ["resume for mnc company","mnc resume","mnc company resume","resume building for multinational companies","best resume format for indian companies","how to make resume for mnc"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-for-mnc-company",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume for MNC Company 2026 | ATS-Friendly Format for Freshers",
+  description: "Learn how to build a resume for MNC companies like TCS, Infosys, Wipro, Accenture, Cognizant, Capgemini and HCL.",
+  path: "/resume-for-mnc-company",
+});
 
 export const revalidate = 86400;
 

@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { Check, Star, Trophy } from "lucide-react";
 
-export const metadata = {
-  title: "Best AI Resume Builder India (Free vs Paid) – NextCV vs Others",
-  description:
-    "Find the best AI resume builder in India for 2026. Compare feature sets, ATS optimization, and pricing. Learn why NextCV is the top choice for Indian freshers.",
-  keywords:
-    "best ai resume builder india, top resume builder 2026, free vs paid resume builders, ai powered cv maker india, ats optimized resume builder",
-  alternates: {
-    canonical: `https://www.nextcv.in/best-ai-resume-builder-india`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Best AI Resume Builder India 2026 | Free vs Paid Comparison",
+  description: "Compare the best AI resume builders in India for freshers. See features, ATS support, pricing, templates and resume download options.",
+  path: "/best-ai-resume-builder-india",
+});
 
 export default function AIResumeIndiaPage() {
   const comparisonData = [

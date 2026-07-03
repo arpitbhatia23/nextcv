@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Professional Indian Resume Format & Templates (2026 Update)",
-  description: "Download the standard Indian resume format. Learn the specific requirements, sections, and cultural expectations for job applications in India.",
-  keywords: ["indian resume format","indian resume templates","best indian resume format","resume format indian","indian professional resume format","sample resume india"],
-  alternates: {
-    canonical: "https://www.nextcv.in/indian-resume-format",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Indian Resume Format 2026 | Professional Templates",
+  description: "Explore professional Indian resume formats with ATS-friendly sections, examples and templates for freshers and job seekers.",
+  path: "/indian-resume-format",
+});
 
 export const revalidate = 86400;
 

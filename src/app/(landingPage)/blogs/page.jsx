@@ -1,20 +1,12 @@
 import Blog from "@/shared/components/Blog";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { client } from "@/sanity";
 
-export const metadata = {
-  title: "Free ATS-Optimized Resume Templates & Career Guides India 2026 | NextCV",
-  description:
-    "Explore ATS-friendly resume formats, fresher resume examples, career guides, and free resume templates for Indian job seekers.",
-  keywords: [
-    "best resume maker for freshers in India 2026",
-    "free resume maker for IT freshers India",
-    "IT resume sample India 2026",
-    "CV format for Indian internships 2026",
-  ],
-  alternates: {
-    canonical: "https://www.nextcv.in/blogs",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "ATS Resume Templates & Career Guides India 2026 | NextCV",
+  description: "Read resume writing guides, ATS tips, career advice and template resources for Indian freshers and job seekers.",
+  path: "/blogs",
+});
 
 export const revalidate = 3600;
 

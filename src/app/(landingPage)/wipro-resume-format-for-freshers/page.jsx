@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "Wipro Resume Format for Freshers 2026 | ATS-Friendly Template",
-  description: "Create an ATS-friendly Wipro resume format for freshers. Use clean resume templates for IT, BCA, B.Tech and non-IT fresher roles.",
-  alternates: {
-    canonical: "https://www.nextcv.in/wipro-resume-format-for-freshers",
-  },
-};
+  description: "Create an ATS-friendly Wipro resume format for freshers with clean sections for skills, projects, education and certifications.",
+  path: "/wipro-resume-format-for-freshers",
+});
 
 export default function Page() {
   const faqs = [{"q": "How to create a resume for Wipro?", "a": "Focus on clear formatting, strong objective statement, and highlight your technical proficiencies."}, {"q": "Is NextCV suitable for Wipro applications?", "a": "Yes, our templates are optimized for ATS systems like those used by Wipro."}, {"q": "What skills does Wipro look for?", "a": "Java, Python, communication skills, and problem-solving abilities are highly valued."}, {"q": "How long should a fresher resume be?", "a": "A fresher resume should ideally be one page long, keeping information concise and relevant."}];

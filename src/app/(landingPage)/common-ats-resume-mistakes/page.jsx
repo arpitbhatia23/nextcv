@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "7 Common ATS Resume Mistakes & How to Fix Them | NextCV",
-  description: "Avoid these common ATS resume mistakes that lead to automatic rejections. Learn how to fix formatting, keywords, and layout issues.",
-  keywords: ["common ats resume mistakes","common ats resume mistakes to avoid","common mistakes in ats resumes","ats resume rejection rate","ats formatting mistakes","common ats resume mistakes and fixes"],
-  alternates: {
-    canonical: "https://www.nextcv.in/common-ats-resume-mistakes",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Common ATS Resume Mistakes | 7 Fixes for 2026",
+  description: "Avoid common ATS resume mistakes like tables, graphics, missing keywords, wrong file type, poor headings and unreadable formatting.",
+  path: "/common-ats-resume-mistakes",
+});
 
 export const revalidate = 86400;
 

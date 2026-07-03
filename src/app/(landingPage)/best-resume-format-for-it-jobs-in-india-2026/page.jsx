@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Best Resume Format for IT Jobs in India (2026 Tech Guide)",
-  description: "Download the best resume format for IT jobs in India. Tailor your resume for software engineering roles with top technical keywords and ATS templates.",
-  keywords: ["best resume format for it jobs in india 2026","it resume format 2026","technical resume format 2026","software engineer resume keywords ats 2026","it resume template","resume template ats friendly for tech"],
-  alternates: {
-    canonical: "https://www.nextcv.in/best-resume-format-for-it-jobs-in-india-2026",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Best Resume Format for IT Jobs in India 2026 | Tech Guide",
+  description: "Learn the best resume format for IT jobs in India with ATS-friendly sections for skills, projects, experience, education and certifications.",
+  path: "/best-resume-format-for-it-jobs-in-india-2026",
+});
 
 export const revalidate = 86400;
 

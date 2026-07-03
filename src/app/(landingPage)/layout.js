@@ -2,18 +2,19 @@ import Nav from "@/shared/components/ui/navbar";
 import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
-  title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
   metadataBase: new URL("https://www.nextcv.in"),
+  applicationName: "NextCV",
+  title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
   description:
     "Create an ATS-friendly resume for Indian fresher jobs in minutes. Choose templates for TCS, Infosys, Wipro and more. Start free, download from ₹49.",
-
   authors: [{ name: "NextCV" }],
+  creator: "NextCV",
+  publisher: "NextCV",
   robots: "index, follow",
   keywords: [
     "ats friendly resume builder india",
     "ai resume builder india",
     "resume builder india free",
-
     "online resume builder india",
     "resume templates india",
     "latest resume format india",
@@ -38,25 +39,14 @@ export const metadata = {
     "best ats friendly resume builder india",
     "resume builder for campus placement",
   ],
-  // ⚡ Fix for Open Graph / Twitter images
-
   openGraph: {
-    title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
-    description:
-      "Create an ATS-friendly resume for Indian fresher jobs in minutes. Choose templates for TCS, Infosys, Wipro and more. Start free, download from ₹49.",
-    url: "/", // optional, relative to metadataBase
+    siteName: "NextCV",
+    locale: "en_IN",
     type: "website",
-    images: ["/opengraph-image.png"], // relative path will resolve correctly
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
-    description:
-      "Create an ATS-friendly resume for Indian fresher jobs in minutes. Choose templates for TCS, Infosys, Wipro and more. Start free, download from ₹49.",
-    images: ["/opengraph-image.png"], // relative path
-  },
-  alternates: {
-    canonical: "https://www.nextcv.in", // Sets the canonical URL
+    creator: "@aurpitaurpit",
   },
 };
 export default function LandingLayout({ children }) {

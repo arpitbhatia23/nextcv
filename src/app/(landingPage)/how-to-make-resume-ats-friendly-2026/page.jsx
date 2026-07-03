@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "How to Make Your Resume ATS Friendly in 2026 | NextCV",
-  description: "Learn step-by-step how to make your resume ATS friendly in 2026. Discover the exact best practices, formatting rules, and keyword strategies you need.",
-  keywords: ["how to make resume ats friendly 2025 2026","make cv ats friendly","how to make cv ats friendly best practices","how to make a resume ats friendly 2026","build ats friendly resume","create ats friendly resume"],
-  alternates: {
-    canonical: "https://www.nextcv.in/how-to-make-resume-ats-friendly-2026",
-  },
-};
+  description: "Learn how to make your resume ATS-friendly with the right format, keywords, sections, file type and common mistakes to avoid.",
+  path: "/how-to-make-resume-ats-friendly-2026",
+});
 
 export const revalidate = 86400;
 

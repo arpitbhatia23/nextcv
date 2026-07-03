@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "Free ATS Resume Checker India 2026 | Check Resume Score Online",
-  description: "Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro, Accenture and more.",
-  alternates: {
-    canonical: "https://www.nextcv.in/ats-resume-checker",
-  },
-};
+  description: "Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro and more.",
+  path: "/ats-resume-checker",
+});
 
 export default function Page() {
   const faqs = [{"q": "How can I check my ATS resume score for free?", "a": "You can use NextCV's ATS resume checker to evaluate your resume format and keyword density."}, {"q": "What is a good ATS score?", "a": "A score above 80% is generally considered good and indicates high compatibility with ATS systems."}, {"q": "Does the checker work for TCS and Infosys?", "a": "Yes, the checker is designed to evaluate resumes based on common ATS criteria used by major IT companies."}, {"q": "Why is my ATS score low?", "a": "A low score could be due to missing keywords, complex formatting, or incorrect file types."}];

@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Herosection from "@/shared/components/herosection/Herosection";
 import ATSFeatureSection from "@/shared/components/herosection/ATSFeatureSection";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
@@ -12,6 +13,12 @@ const FAQ = dynamic(() => import("@/shared/components/herosection/FAQ"));
 const SEOKeywordCloud = dynamic(() => import("@/shared/components/herosection/SEOKeywordCloud"));
 
 export const revalidate = 3600; // Cache for 1 hour
+
+export const metadata = createSeoMetadata({
+  title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
+  description: "Create an ATS-friendly resume for Indian fresher jobs in minutes. Choose templates for TCS, Infosys, Wipro and more. Start free, download from ₹49.",
+  path: "",
+});
 
 export default function Home() {
   return (

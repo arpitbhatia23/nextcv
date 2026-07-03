@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Latest Resume Format 2026: Trends & Free Templates | NextCV",
-  description: "Explore the latest resume format trends for 2026. Discover what Indian recruiters expect from freshers and experienced professionals this year.",
-  keywords: ["latest resume format 2026","current resume format 2026 india freshers experienced","new resume 2026","latest resume format guidelines 2026","current best resume format 2026","resume trends 2026"],
-  alternates: {
-    canonical: "https://www.nextcv.in/latest-resume-format-2026",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Latest Resume Format 2026 | Trends, Examples & Templates",
+  description: "Explore the latest resume format for 2026 with ATS-friendly structure, modern sections, examples and free resume templates.",
+  path: "/latest-resume-format-2026",
+});
 
 export const revalidate = 86400;
 

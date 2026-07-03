@@ -1,20 +1,11 @@
 import { CheckCircle2, Users, Heart, Zap } from "lucide-react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 
-export const metadata = {
-  title: "About NextCV - The Best AI Resume Builder for Freshers in India",
-  description:
-    "NextCV is an ATS-friendly resume builder designed by students for students. Create professional resumes for the Indian job market starting for just ₹49.",
-  keywords: [
-    "About NextCV",
-    "Resume Builder India",
-    "Fresher Resume",
-    "ATS Resume Builder",
-    "Student CV Maker",
-  ],
-  alternates: {
-    canonical: `https://www.nextcv.in/about-us`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "About NextCV | AI Resume Builder for Freshers in India",
+  description: "Learn about NextCV, an AI-powered ATS resume builder helping Indian freshers create professional resumes for job applications.",
+  path: "/about-us",
+});
 
 export const revalidate = 86400; // 1 day
 

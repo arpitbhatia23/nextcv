@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Non IT Resume for Freshers (BCom, BBA, BA Templates) | NextCV",
-  description: "Download the perfect non-IT resume for freshers. Tailor your BCom, BBA, or BA resume to highlight communication, analytics, and business acumen.",
-  keywords: ["non it resume for freshers","non it resumes for freshers","resume format for freshers in non it sector","best resume format for bba freshers","resume for bcom freshers","bcom fresher resume format"],
-  alternates: {
-    canonical: "https://www.nextcv.in/non-it-resume-for-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Non-IT Resume for Freshers | BCom, BBA, BA Templates",
+  description: "Create a non-IT fresher resume for BCom, BBA, BA, sales, support, HR, operations and business roles with ATS-friendly templates.",
+  path: "/non-it-resume-for-freshers",
+});
 
 export const revalidate = 86400;
 

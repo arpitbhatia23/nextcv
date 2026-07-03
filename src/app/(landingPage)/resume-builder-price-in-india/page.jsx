@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Resume Builder Price in India 2026: Cost & Value Analysis",
-  description: "How much does a resume builder cost in India? Find out the price of professional resume writing services, paid builders, and free ATS alternatives.",
-  keywords: ["resume builder cost","how much does a professional resume cost","resume writing cost in india","resume kitne ka banta hai","resume fees","resume builder price"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-builder-price-in-india",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume Builder Price in India 2026 | Cost & Value Guide",
+  description: "Understand resume builder cost in India, free vs paid resume options, ATS resume pricing and when a paid template is worth it.",
+  path: "/resume-builder-price-in-india",
+});
 
 export const revalidate = 86400;
 

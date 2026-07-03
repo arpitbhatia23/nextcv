@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Best Resume Format for Freshers in India (2026 Guide) | NextCV",
-  description: "Find the best resume format for freshers in India. Get expert advice, examples, and access the top resume builder to land your first job faster.",
-  keywords: ["best resume format for freshers india 2026","best resume format for freshers in india","best resume format for freshers and experienced in india","best resume template for freshers 2026","perfect resume template for freshers","best resume builder for freshers india"],
-  alternates: {
-    canonical: "https://www.nextcv.in/best-resume-format-for-freshers-india-2026",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Best Resume Format for Freshers in India 2026 | NextCV",
+  description: "See the best resume format for Indian freshers in 2026 with ATS-friendly sections, examples, skills, projects and free resume templates.",
+  path: "/best-resume-format-for-freshers-india-2026",
+});
 
 export const revalidate = 86400;
 

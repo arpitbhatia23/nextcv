@@ -1,16 +1,15 @@
 import React from 'react';
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
-export const metadata = {
-  title: "Fresher Resume Format India 2026 | ATS-Friendly Examples",
+export const metadata = createSeoMetadata({
+  title: "Fresher Resume Format India 2026 | Free ATS Templates",
   description: "Create an ATS-friendly fresher resume for Indian jobs. Best format for BCA, B.Tech, MBA, commerce, IT and non-IT freshers.",
-  alternates: {
-    canonical: "https://www.nextcv.in/fresher-resume-format-india",
-  },
-};
+  path: "/fresher-resume-format-india",
+});
 
 export default function Page() {
   const faqs = [{"q": "What is the standard fresher resume format in India?", "a": "A reverse-chronological format focusing on education, skills, and academic projects is standard."}, {"q": "Should freshers include an objective statement?", "a": "Yes, a concise objective statement tailored to the job can be beneficial."}, {"q": "How to list projects on a fresher resume?", "a": "Include the project title, technologies used, your role, and the outcome."}, {"q": "Is a 2-page resume okay for freshers?", "a": "Usually, 1 page is preferred unless you have extensive projects or internships."}];

@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Resume vs CV in India: What's the Difference in 2026? | NextCV",
-  description: "What is the difference between a CV and a Resume in India? Discover which document you should submit for Indian corporate job applications in 2026.",
-  keywords: ["cv vs resume in india","is cv and resume same in india","difference between cv and resume in india","resume vs cv in india job applications","india cv and resume used interchangeably","cv aur resume mein kya difference hai"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-vs-cv-in-india",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume vs CV in India 2026 | Difference, Meaning & Examples",
+  description: "Understand the difference between resume and CV in India. Learn which one freshers should use for jobs, internships and campus placements.",
+  path: "/resume-vs-cv-in-india",
+});
 
 export const revalidate = 86400;
 

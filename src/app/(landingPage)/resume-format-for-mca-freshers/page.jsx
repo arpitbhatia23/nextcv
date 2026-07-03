@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Top Resume Format for MCA Freshers (2026 Templates) | NextCV",
-  description: "Download the ultimate resume format for MCA freshers. Highlight your advanced technical skills, major projects, and secure top software engineering roles.",
-  keywords: ["resume format for mca freshers","mca fresher resume format","resume for mca freshers software developer","mca resume format pdf","mca student resume template","best resume for mca freshers"],
-  alternates: {
-    canonical: "https://www.nextcv.in/resume-format-for-mca-freshers",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume Format for MCA Freshers 2026 | ATS Templates",
+  description: "Build an ATS-friendly MCA fresher resume with clean sections for technical skills, projects, education, internships and certifications.",
+  path: "/resume-format-for-mca-freshers",
+});
 
 export const revalidate = 86400;
 

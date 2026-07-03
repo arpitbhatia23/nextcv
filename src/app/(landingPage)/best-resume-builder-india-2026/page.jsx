@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "Best Resume Builder in India 2026 (Free for Freshers) | NextCV",
-  description: "Looking for the best resume builder in India for 2026? NextCV is a free resume maker specifically designed to help Indian freshers pass ATS screening instantly.",
-  keywords: ["best resume builder india 2026","free resume maker for freshers","online resume maker for indian freshers","best resume maker in india","fresher resume builder","resume maker for fresher"],
-  alternates: {
-    canonical: "https://www.nextcv.in/best-resume-builder-india-2026",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Best Resume Builder in India 2026 | Free for Freshers",
+  description: "Find the best resume builder in India for freshers. Create ATS-friendly resumes with templates, AI writing help and PDF download options.",
+  path: "/best-resume-builder-india-2026",
+});
 
 export const revalidate = 86400;
 

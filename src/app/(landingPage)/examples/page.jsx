@@ -1,47 +1,12 @@
 import Link from "next/link";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { ArrowRight, Code, Megaphone, TrendingUp, GraduationCap } from "lucide-react";
 
-export const metadata = {
+export const metadata = createSeoMetadata({
   title: "Resume Examples for Every Industry | NextCV India",
-  description:
-    "Browse professionally written resume examples for Engineering, Marketing, Sales, and more. Get inspired and build your own winning CV.",
-  keywords:
-    "resume examples, cv samples, software engineer resume, marketing resume sample, sales resume format, fresher resume examples india",
-  alternates: {
-    canonical: `https://www.nextcv.in/examples`,
-  },
-};
-
-const categories = [
-  {
-    id: "tech",
-    name: "Technology & Engineering",
-    icon: Code,
-    color: "bg-blue-100 text-blue-600",
-    roles: ["Software Engineer", "Data Scientist", "Product Manager", "DevOps Engineer"],
-  },
-  {
-    id: "marketing",
-    name: "Marketing & Creative",
-    icon: Megaphone,
-    color: "bg-pink-100 text-pink-600",
-    roles: ["Digital Marketer", "Content Writer", "Graphic Designer", "Social Media Manager"],
-  },
-  {
-    id: "business",
-    name: "Business & Management",
-    icon: TrendingUp,
-    color: "bg-amber-100 text-amber-600",
-    roles: ["Business Analyst", "Project Manager", "Sales Executive", "HR Manager"],
-  },
-  {
-    id: "fresher",
-    name: "Students & Freshers",
-    icon: GraduationCap,
-    color: "bg-emerald-100 text-emerald-600",
-    roles: ["Computer Science Graduate", "MBA Intern", "B.Com Fresher", "Engineering Intern"],
-  },
-];
+  description: "Explore resume examples for IT, non-IT, BCA, B.Tech, MBA, commerce, freshers and experienced job seekers in India.",
+  path: "/examples",
+});
 
 export default function ExamplesPage() {
   const jsonLdSchema = {

@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { ArrowRight, Sparkles, Wand2, RefreshCcw } from "lucide-react";
 
-export const metadata = {
-  title: "AI Resume Writer | Generate CV Points with AI",
-  description:
-    "Beat writer's block with our AI resume writer. Generate professional summaries and experience bullet points instantly personalized for your role.",
-  keywords:
-    "ai resume builder india, ai cv, best ats ai resume builder, free ats resume builder websites, ai resume writer, free ai cv maker, chatgpt for resume, automated resume writing, resume bullet points generator",
-  alternates: {
-    canonical: `https://www.nextcv.in/ai-writer`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "AI Resume Writer India | Generate Resume Points with AI",
+  description: "Use NextCV AI Resume Writer to generate professional resume points, summaries, skills and project descriptions for Indian fresher jobs.",
+  path: "/ai-writer",
+});
 
 export default function AIWriterPage() {
   return (

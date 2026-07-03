@@ -1,15 +1,12 @@
 import ContactForm from "@/modules/contact/components/ContactForm";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { Mail, MessageSquare, MapPin, Clock } from "lucide-react";
 
-export const metadata = {
-  title: "Contact NextCV - Resume Support & Enquiries",
-  description:
-    "Get in touch with the NextCV team. We support students and job seekers with 24/7 assistance for their resume building needs.",
-  keywords: ["Contact NextCV", "Resume Support", "CV Builder Help", "NextCV Email"],
-  alternates: {
-    canonical: `https://www.nextcv.in/contact`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Contact NextCV | Resume Support & Enquiries",
+  description: "Contact NextCV for resume builder support, account questions, payment help, template issues and general enquiries.",
+  path: "/contact",
+});
 
 export const revalidate = 86400;
 

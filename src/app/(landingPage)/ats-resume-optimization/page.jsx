@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "ATS Resume Optimization 2026: Master Keywords & Formatting",
-  description: "Learn advanced ATS resume optimization techniques for 2026. Discover how to identify and inject the perfect keywords to boost your ATS score instantly.",
-  keywords: ["ats resume optimization 2026","how to optimize resume for ats 2026","ats optimization best practices","ats resume keywords best practices","optimize resume for ats","ats resume keyword optimization"],
-  alternates: {
-    canonical: "https://www.nextcv.in/ats-resume-optimization",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "ATS Resume Optimization 2026 | Keywords & Formatting Guide",
+  description: "Optimize your resume for ATS systems with better keywords, clean formatting, correct sections and job-specific resume improvements.",
+  path: "/ats-resume-optimization",
+});
 
 export const revalidate = 86400;
 

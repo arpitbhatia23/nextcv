@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "What Is an ATS Friendly Resume? Complete Guide 2026 | NextCV",
-  description: "What is an ATS friendly resume and why do you need one? Learn how Applicant Tracking Systems work and how to optimize your resume for them.",
-  keywords: ["what is ats friendly resume","what is meant by ats friendly resume","what is an ats resume","what is ats friendly cv","what is ats format","define ats friendly resume"],
-  alternates: {
-    canonical: "https://www.nextcv.in/what-is-ats-friendly-resume",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "What Is an ATS Friendly Resume? Complete Guide 2026",
+  description: "Learn what an ATS-friendly resume is, how ATS software reads resumes and how to create a resume that passes automated screening.",
+  path: "/what-is-ats-friendly-resume",
+});
 
 export const revalidate = 86400;
 

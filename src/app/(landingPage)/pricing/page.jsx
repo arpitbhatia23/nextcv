@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import { Check, ShieldCheck, Zap, Download, HelpCircle } from "lucide-react";
 
-export const metadata = {
-  title: "Resume Price in India (2026) – Free vs Paid Resume Builders",
-  description:
-    "Wondering how much a resume costs in India? Compare free vs paid resume builders, pricing, and what you actually get. See NextCV plans starting at ₹49.",
-  keywords:
-    "resume price, resume builder price, resume builder cost, resume charges, cv rates, resume builder pricing, resume banane ka kitna paisa lagta hai, cv cost, cv-resume subscription, resume fees, resume pricing, resume maker price, resume making price, cv fee, resume builder india pricing, how much resume cost, pay for resume, resume payment",
-  alternates: {
-    canonical: `https://www.nextcv.in/pricing`,
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "Resume Price in India 2026 | Free vs Paid Resume Builders",
+  description: "Compare resume builder pricing in India. Understand free resume tools, paid ATS templates, PDF downloads and NextCV resume pricing.",
+  path: "/pricing",
+});
 
 export const revalidate = 3600;
 

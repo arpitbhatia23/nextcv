@@ -1,4 +1,5 @@
 import React from "react";
+import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import {
   FileText,
@@ -12,14 +13,11 @@ import {
   Clock3,
 } from "lucide-react";
 
-export const metadata = {
-  title: "CV Format for AI Screening: Pass the Bots in 2026 | NextCV",
-  description: "Learn how to format your CV for AI screening. Discover the exact structure, keyword density, and layout rules needed to pass advanced AI resume bots.",
-  keywords: ["cv format for ai screening","ai readable cv template","cv format for ai screening software","how to format resume for ai","resume optimized for ai bots","next level ai resume"],
-  alternates: {
-    canonical: "https://www.nextcv.in/cv-format-for-ai-screening",
-  },
-};
+export const metadata = createSeoMetadata({
+  title: "CV Format for AI Screening 2026 | Pass Resume Bots",
+  description: "Create a CV format that works with AI screening systems using clean structure, readable sections, keywords and ATS-friendly formatting.",
+  path: "/cv-format-for-ai-screening",
+});
 
 export const revalidate = 86400;
 
