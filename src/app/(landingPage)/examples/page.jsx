@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { ArrowRight, Code, Megaphone, TrendingUp, GraduationCap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const metadata = createSeoMetadata({
   title: "Resume Examples for Every Industry | NextCV India",
-  description: "Explore resume examples for IT, non-IT, BCA, B.Tech, MBA, commerce, freshers and experienced job seekers in India.",
+  description:
+    "Explore resume examples for IT, non-IT, BCA, B.Tech, MBA, commerce, freshers and experienced job seekers in India.",
   path: "/examples",
 });
 
@@ -55,7 +56,7 @@ export default function ExamplesPage() {
           </div>
         </section>
 
-        {/* Categories Grid */}
+        {/* Categories Grid
         <section className="py-20 px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {categories.map(cat => (
@@ -85,7 +86,7 @@ export default function ExamplesPage() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* CTA Section */}
         <section className="bg-slate-900 py-16 sm:py-24">
