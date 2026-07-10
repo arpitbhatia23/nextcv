@@ -3,7 +3,7 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { ArrowRight, Sparkles, Wand2, RefreshCcw } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Writer India | Generate Resume Points with AI",
+  title: "AI Resume Writer: Generate Summaries and Job Bullets",
   description: "Use NextCV AI Resume Writer to generate professional resume points, summaries, skills and project descriptions for Indian fresher jobs.",
   path: "/ai-writer",
 });
@@ -24,9 +24,10 @@ export default function AIWriterPage() {
             Powered by Gemini AI
           </div>
           <h1 className="text-lg sm:text-xl sm: lg: font-bold tracking-tight -900 sm: mb-6">
-            Write Your Resume <br />{" "}
+            Free AI Resume Writer and
+            <br />{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
-              at the Speed of AI
+              Description Generator
             </span>
           </h1>
           <p className="text-sm leading-8 text-slate-600 mb-10">
@@ -173,8 +174,34 @@ export default function AIWriterPage() {
           Absolutely not. AI is a tool to help you articulate <em>your</em> actual experiences
           better. You still control the content. You select the suggestions that match your history
           and edit them to reflect the truth. It simply does the heavy lifting of phrasing and
-          formatting, allowing you to focus on the substance of your career.
+          formatting, allowing you to focus on the substance of your career. Build your <Link href="/" className="text-indigo-600 hover:underline">resume builder</Link> today, explore <Link href="/templates" className="text-indigo-600 hover:underline">templates</Link>, or check out our <Link href="/examples" className="text-indigo-600 hover:underline">examples</Link>.
         </p>
+
+        <h3>Examples of What the Tool Generates</h3>
+        <h4>Professional Summaries</h4>
+        <p>"Dedicated software engineer with 2+ years of experience in full-stack development, specializing in React and Node.js. Proven ability to deliver scalable solutions and optimize database performance."</p>
+        
+        <h4>Experience Bullets</h4>
+        <p>Instead of "Made APIs," get: "Designed and implemented RESTful APIs using Express, improving data retrieval efficiency by 30%."</p>
+        
+        <h4>Project Descriptions</h4>
+        <p>"Built a responsive e-commerce application using Next.js and MongoDB, featuring a secure checkout process and real-time inventory tracking."</p>
+
+        <h2>Frequently Asked Questions</h2>
+        <div className="space-y-4 not-prose mb-8">
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+            <h4 className="font-bold text-slate-900">What exactly does the AI generate?</h4>
+            <p className="text-sm text-slate-600">The tool creates optimized professional summaries, bullet points for work experience, project descriptions, and relevant skills based on your job title.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+            <h4 className="font-bold text-slate-900">Does this guarantee I will get an interview?</h4>
+            <p className="text-sm text-slate-600">No tool can guarantee interviews. However, using our AI writer ensures your resume is professionally phrased, ATS-friendly, and clearly highlights your achievements, which significantly improves your chances.</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
+            <h4 className="font-bold text-slate-900">Is the AI content unique?</h4>
+            <p className="text-sm text-slate-600">Yes, the AI generates context-specific suggestions tailored to the job role you input. You can always edit and personalize the output to match your exact experience.</p>
+          </div>
+        </div>
       </section>
     </main>
   );

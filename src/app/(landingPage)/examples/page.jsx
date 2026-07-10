@@ -3,9 +3,9 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Examples for Every Industry | NextCV India",
+  title: "Resume Examples for Freshers in India 2026 | NextCV",
   description:
-    "Explore resume examples for IT, non-IT, BCA, B.Tech, MBA, commerce, freshers and experienced job seekers in India.",
+    "Explore professional resume examples for Indian job seekers. Find examples for freshers, experienced roles, and specific job positions.",
   path: "/examples",
 });
 
@@ -39,11 +39,11 @@ export default function ExamplesPage() {
         <section className="relative px-6 py-20 lg:px-8 bg-white border-b border-slate-100">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-lg sm:text-xl  font-bold tracking-tight  sm: mb-6">
-              Resume Examples for <span className="text-indigo-600">Every Career Path</span>
+              Professional Resume Examples for <span className="text-indigo-600">Indian Job Seekers</span>
             </h1>
             <p className="text-sm leading-8 text-slate-600 mb-10">
               Stuck on what to write? Browse our library of ATS-optimized resume examples tailored
-              for the Indian job market to find inspiration for your next role.
+              for the Indian job market. Whether you are a fresher or experienced, select an example that matches your role. See our <Link href="/templates" className="text-indigo-600 hover:underline">templates</Link> or <Link href="/pricing" className="text-indigo-600 hover:underline">pricing</Link>.
             </p>
             <div className="flex items-center justify-center gap-x-6">
               <Link
@@ -118,6 +118,16 @@ export default function ExamplesPage() {
             others describe similar roles, structure their achievements, and list their technical
             skills can provide the necessary blueprint for your own document.
           </p>
+
+          <h3>How to Select the Right Example</h3>
+          <p>
+            When choosing a resume example to follow, look for one that aligns with your experience level and industry:
+          </p>
+          <ul>
+            <li><strong>Fresher Resumes:</strong> Focus on education, academic projects, and internships. Great for recent graduates.</li>
+            <li><strong>Experienced Professional Resumes:</strong> Highlight quantifiable achievements, career progression, and leadership skills.</li>
+            <li><strong>Role-Specific Resumes:</strong> Choose examples tailored to IT, Marketing, Sales, or Finance to see the exact keywords recruiters expect.</li>
+          </ul>
 
           <h3>Tailoring Your Resume to Each Job</h3>
           <p>

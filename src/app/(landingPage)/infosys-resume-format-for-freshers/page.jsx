@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = createSeoMetadata({
-  title: "Infosys Resume Format for Freshers 2026 | ATS-Friendly Template",
+  title: "Infosys Resume Format for Freshers 2026 + Free Template",
   description:
     "Create an ATS-friendly Infosys resume format for freshers. Use clean templates for BCA, B.Tech, IT and non-IT fresher applications.",
   path: "/infosys-resume-format-for-freshers",
@@ -76,7 +76,7 @@ export default function Page() {
       />
 
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-        Infosys Resume Format for Freshers (2026)
+        Infosys Resume Format and Template for Freshers
       </h1>
       <p className="text-lg text-gray-700 mb-8">
         Create an ATS-friendly Infosys resume format for freshers. Use ready-made resume templates
@@ -97,52 +97,45 @@ export default function Page() {
       </div>
 
       <div className="prose max-w-none text-gray-800">
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Best Infosys Resume Format for Freshers
-        </h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+        <p className="mb-4 text-sm text-gray-500 italic">
+          Disclaimer: This guide is intended for informational purposes only. The resume format and template provided are independent recommendations and are not officially approved by, endorsed by, or affiliated with Infosys.
         </p>
-
         <h2 className="text-2xl font-semibold mt-8 mb-4">
-          What to Include in an Infosys Fresher Resume
+          Recommended One-Page Structure
         </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          When applying for roles like Systems Engineer at Infosys, a one-page resume is highly recommended. It should contain Contact Information, a Summary, Education, Skills, Projects, and Certifications. Keep it clean and avoid complex graphics for better ATS parsing.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Infosys Resume Format for BCA and B.Tech Students
+          Realistic Text Example
+        </h2>
+        <div className="bg-gray-50 p-4 border rounded-md">
+          <p><strong>Rahul Sharma</strong><br/>
+          New Delhi, India | rahul.sharma@email.com | +91 9876543210<br/>
+          LinkedIn: linkedin.com/in/rahulsharma | GitHub: github.com/rahulsharma</p>
+          <p><strong>Professional Summary</strong><br/>
+          Motivated Computer Science graduate with strong programming skills in Python and SQL. Eager to contribute to a dynamic team at Infosys as a Systems Engineer.</p>
+          <p><strong>Education</strong><br/>
+          B.Tech in Computer Science, XYZ University | 2026 | CGPA: 8.5</p>
+          <p><strong>Technical Skills</strong><br/>
+          Languages: Python, Java, SQL<br/>
+          Tools/Frameworks: Django, Git, MySQL</p>
+          <p><strong>Academic Projects</strong><br/>
+          <em>Library Management System:</em> Built a Python-based system using Django and MySQL to track book inventory, reducing manual data entry by 50%.</p>
+          <p><strong>Certifications</strong><br/>
+          AWS Certified Cloud Practitioner (2025)</p>
+        </div>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">
+          ATS Formatting Recommendations
         </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          To clear the Infosys ATS screening, strictly stick to standard fonts like Arial or Calibri. Avoid using tables, multiple columns, and headers/footers for important text. Make sure your headings precisely match standard terms (e.g., "Education", "Projects").
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Skills to Add in Infosys Resume</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Project Examples for Infosys Resume</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Common Mistakes in Infosys Resume</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+        <p className="mt-8 font-bold text-lg">
+          Ready to build? Customize a <Link href="/templates" className="text-blue-600 hover:underline">NextCV template</Link> now. You can also explore our guides for <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">Wipro</Link> and <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">TCS</Link>.
         </p>
       </div>
 

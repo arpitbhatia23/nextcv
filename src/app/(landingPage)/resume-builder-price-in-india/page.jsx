@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Builder Price in India 2026 | Cost & Value Guide",
-  description: "Understand resume builder cost in India, free vs paid resume options, ATS resume pricing and when a paid template is worth it.",
+  title: "Resume Making Charges in India 2026: Price & Options",
+  description: "Understand resume making charges in India. Compare free tools, pay-per-download platforms, subscriptions and professional resume writers.",
   path: "/resume-builder-price-in-india",
 });
 
@@ -116,11 +116,11 @@ export default function SEOPage() {
             </div>
 
             <h1 className="mx-auto max-w-3xl text-xl font-bold leading-snug tracking-tight text-slate-900">
-              {"Understanding Resume Builder Costs and Pricing in India"}
+              {"How Much Does It Cost to Make a Resume in India?"}
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"How much does a resume builder cost in India? Find out the price of professional resume writing services, paid builders, and free ATS alternatives."}
+              {"Explore general informational questions about resume-making costs in India. For our specific pricing, please check the "} <Link href="/pricing" className="text-indigo-600 hover:underline">NextCV pricing page</Link>.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -184,16 +184,11 @@ export default function SEOPage() {
 
             <div className="min-w-0">
               <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The Hidden Costs of Job Hunting"}
+                {"Typical Resume-Making Options in India"}
               </h2>
 
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The Hidden Costs of Job Hunting"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
+                When you ask "resume banane me kitna paisa lagta hai?", the answer depends on the method you choose. Here is a breakdown of the typical options available in India, ranging from free DIY tools to premium agency services. Let's compare free builders, pay-per-download tools, subscriptions, and professional writers.
               </p>
             </div>
           </div>
@@ -235,12 +230,10 @@ export default function SEOPage() {
               aria-hidden="true"
               className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
             />
-
-            <span>{"Free Online Builders (Pros & Cons)"}</span>
+            <span>{"Free Online Builders & Pay-Per-Download"}</span>
           </h3>
-
           <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply free online builders (pros & cons) carefully to improve clarity, ATS readability and the overall presentation of your resume."}
+            {"Free online builders allow you to create basic resumes, but often lack ATS optimization or charge a hidden fee. Pay-per-download tools like NextCV offer transparent pricing where you only pay for the final ATS-optimized PDF without ongoing subscriptions."}
           </p>
         </div>
       
@@ -291,12 +284,7 @@ export default function SEOPage() {
               </h2>
 
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Are Paid Resumes Worth the Investment?"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
+                If you are a fresher looking for a quick and ATS-friendly solution, a pay-per-download tool like NextCV is a great investment. For highly experienced candidates targeting executive roles, professional writers might provide the nuance required. Check <Link href="/pricing" className="text-indigo-600 hover:underline">NextCV's pricing</Link> to see our affordable options.
               </p>
             </div>
           </div>
@@ -316,16 +304,11 @@ export default function SEOPage() {
 
             <div className="min-w-0">
               <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Why NextCV Offers Top-Tier Templates for Free"}
+                {"Resume Making Charges Summary"}
               </h2>
 
               <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Why NextCV Offers Top-Tier Templates for Free"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
+                In summary, resume making charges vary widely. Free tools are good for simple needs, pay-per-download ranges from ₹49 to ₹300, subscriptions can cost ₹500 to ₹1500 per month, and professional writers charge upwards of ₹2000.
               </p>
             </div>
           </div>
@@ -403,12 +386,10 @@ export default function SEOPage() {
             <span className="shrink-0 font-black text-indigo-600">
               Q.
             </span>
-
-            <span>{"Resume banane me kitna paisa lagta hai?"}</span>
+            <span>{"Resume banane ka kitna paisa lagta hai?"}</span>
           </h3>
-
           <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Using an AI builder like NextCV is free. Local cyber cafes might charge ₹50-₹100 for basic typing, but those often fail ATS checks."}
+            {"Using an AI builder like NextCV is free to start. Local cyber cafes might charge ₹50-₹100 for basic typing, but those often fail ATS checks. Many online platforms charge anywhere from ₹49 to ₹2000 depending on the service level."}
           </p>
         </article>
       
@@ -417,12 +398,10 @@ export default function SEOPage() {
             <span className="shrink-0 font-black text-indigo-600">
               Q.
             </span>
-
             <span>{"Why do some resume builders charge a subscription?"}</span>
           </h3>
-
           <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Many builders lure users in for free and then demand a monthly subscription fee (like $3-$5) just to download the final PDF."}
+            {"Many builders lure users in for free and then demand a monthly subscription fee (like ₹500 - ₹1500) just to download the final PDF. It's often better to look for a transparent pay-per-download model."}
           </p>
         </article>
       

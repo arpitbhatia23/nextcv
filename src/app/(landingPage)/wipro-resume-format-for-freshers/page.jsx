@@ -97,41 +97,40 @@ export default function Page() {
       </div>
 
       <div className="prose max-w-none text-gray-800">
+        <p className="mb-4 text-sm text-gray-500 italic">
+          Disclaimer: This guide is intended for informational purposes only. The resume format and template provided are independent recommendations and are not officially approved by, endorsed by, or affiliated with Wipro.
+        </p>
+
         <h2 className="text-2xl font-semibold mt-8 mb-4">Best Wipro Resume Format for Freshers</h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          When applying for roles like Project Engineer or Trainee at Wipro, your resume must be clean, structured, and easy for Applicant Tracking Systems (ATS) to parse. Wipro receives thousands of applications, so highlighting your technical skills and academic projects clearly is essential.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Key Sections for Wipro Resume</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Sample Structure for Wipro</h2>
+        <p className="mb-4">Here is a clearly labeled sample structure that works well for Wipro applications:</p>
+        <ul>
+          <li><strong>Contact Information:</strong> Phone, Email, LinkedIn, and GitHub (for developers).</li>
+          <li><strong>Objective:</strong> A brief 2-line summary of your goals and technical strengths.</li>
+          <li><strong>Education:</strong> Degrees in reverse-chronological order with CGPA or percentage.</li>
+          <li><strong>Technical Skills:</strong> Grouped by programming languages, tools, and databases.</li>
+          <li><strong>Academic Projects:</strong> Your final year or major projects, detailing the tech stack used.</li>
+          <li><strong>Certifications:</strong> Any relevant certifications (e.g., Java, AWS, Python).</li>
+          <li><strong>Declaration:</strong> A standard declaration stating the information is true.</li>
+        </ul>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Detailing Education, Skills, and Projects</h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          <strong>Education:</strong> Wipro often has strict academic criteria (e.g., 60% and above). Ensure your 10th, 12th, and degree scores are clearly visible.
+          <br /><br />
+          <strong>Skills:</strong> Highlight skills that align with the job description. If you are applying for a Java developer role, Java and Spring Boot should be prominent.
+          <br /><br />
+          <strong>Projects:</strong> Don't just list the project name. Explain <em>what</em> you built, <em>how</em> you built it (tech stack), and <em>what</em> problem it solved.
+          <br /><br />
+          <strong>Declaration:</strong> In India, adding a brief declaration with your name and date at the bottom adds a professional touch, especially for fresher applications.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Wipro Resume Format for B.Tech and IT Freshers
-        </h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Essential Skills for Wipro Jobs</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Resume Mistakes to Avoid</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+        <p className="mt-8 font-bold text-lg">
+          Ready to build? Customize a <Link href="/templates" className="text-blue-600 hover:underline">NextCV template</Link> now. You can also explore our guides for <Link href="/infosys-resume-format-for-freshers" className="text-blue-600 hover:underline">Infosys</Link> and <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">TCS</Link>.
         </p>
       </div>
 

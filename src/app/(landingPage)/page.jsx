@@ -15,8 +15,8 @@ const SEOKeywordCloud = dynamic(() => import("@/shared/components/herosection/SE
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
-  description: "Create an ATS-friendly resume for Indian fresher jobs in minutes. Choose templates for TCS, Infosys, Wipro and more. Start free, download from ₹49.",
+  title: "AI Resume Builder India \u2013 Create an ATS Resume | NextCV",
+  description: "Create an ATS-friendly resume for Indian fresher jobs in minutes. Our AI Resume Builder helps you stand out. Choose templates for TCS, Infosys, Wipro and more.",
   path: "",
 });
 

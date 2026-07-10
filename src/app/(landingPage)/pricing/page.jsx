@@ -3,8 +3,8 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { Check, ShieldCheck, Zap, Download, HelpCircle } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Price in India 2026 | Free vs Paid Resume Builders",
-  description: "Compare resume builder pricing in India. Understand free resume tools, paid ATS templates, PDF downloads and NextCV resume pricing.",
+  title: "Resume Builder Pricing India \u2013 Download from \u20B949",
+  description: "Check our transparent resume making charges in India. Create an ATS resume for free and pay per resume download starting from \u20B949 with no subscriptions.",
   path: "/pricing",
 });
 
@@ -94,12 +94,10 @@ export default function PricingPage() {
               Pricing Options
             </h2>
             <h1 className="text-lg sm:text-xl font-bold -900 mb-6">
-              Affordable <span className="text-indigo-600">Resume Price</span> with No
-              Subscriptions.
+              Affordable <span className="text-indigo-600">Resume Builder Pricing</span> in India
             </h1>
             <p className="text-sm text-slate-600 mb-10 max-w-2xl mx-auto">
-              Transparent resume charges that fit your budget. Pay only when you are ready to
-              download.
+              Transparent resume charges that fit your budget. Pay per resume only when you are ready to download, rather than being locked into monthly subscriptions. Explore our <Link href="/templates" className="text-indigo-600 hover:underline">templates</Link> and <Link href="/examples" className="text-indigo-600 hover:underline">examples</Link> first.
             </p>
           </div>
         </section>
@@ -245,14 +243,8 @@ export default function PricingPage() {
             </li>
             <li>
               <strong>No Hidden Subscriptions:</strong> Many "free" builders are actually
-              subscription traps. One-time payment models are more transparent and honest. Choose a{" "}
-              <Link
-                href="/blogs/best-resume-maker-for-freshers-in-india-inr100-only-no-subscription"
-                className="text-indigo-600 hover:underline"
-              >
-                resume builder with no hidden subscriptions
-              </Link>{" "}
-              to save money.
+              subscription traps. We use a transparent pay-per-resume model, which is more honest. 
+              Check our <Link href="/examples" className="text-indigo-600 hover:underline">professional examples</Link> to see the quality you get.
             </li>
           </ul>
 

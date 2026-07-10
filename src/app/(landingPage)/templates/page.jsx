@@ -6,9 +6,9 @@ import dynamic from "next/dynamic";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = createSeoMetadata({
-  title: "Resume Format India 2026: ATS Templates for Freshers | NextCV",
+  title: "ATS Resume Templates for Freshers in India | NextCV",
   description:
-    "Explore ATS-friendly resume formats for Indian freshers. Choose templates for IT, BCA, B.Tech, MBA, TCS, Infosys, Wipro and more.",
+    "Explore ATS-friendly resume templates for Indian job seekers. Find specialized formats for freshers, experienced professionals, and MNC applications.",
   path: "/templates",
 });
 
@@ -76,11 +76,10 @@ export default function Page() {
       />
 
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-        Best Resume Format for Freshers in India (2026)
+        ATS-Friendly Resume Templates for Indian Job Seekers
       </h1>
       <p className="text-lg text-gray-700 mb-8">
-        Explore ATS-friendly resume formats for Indian freshers. Choose templates for IT, BCA,
-        B.Tech, MBA, TCS, Infosys, Wipro and more.
+        Browse our collection of ATS-friendly resume templates designed specifically for the Indian job market. Whether you're a fresher or an experienced professional, these templates are tested to pass automated screening systems. Check our <Link href="/examples" className="text-blue-600 hover:underline">resume examples</Link> for inspiration or review our <Link href="/pricing" className="text-blue-600 hover:underline">affordable pricing</Link>.
       </p>
 
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
@@ -98,49 +97,20 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Best Resume Format for Freshers in India
+          Resume Templates for Freshers
         </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          If you are just graduating or looking for your first job, a reverse-chronological format focusing on education, internships, and academic projects works best. Our fresher templates highlight potential over extensive work history.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS-Friendly Resume Templates</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Templates for Experienced Candidates</h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          For professionals with several years of experience, these templates place your work history and measurable achievements front and center, allowing recruiters to quickly grasp the value you bring to the table.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Resume Format for IT Freshers</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">MNC Resume Applications</h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Resume Format for BCA and B.Tech Students
-        </h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Single Column ATS Resume Templates</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Company Resume Formats</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          Applying to top IT and non-IT MNCs requires a clean, structured, and highly readable format. These templates avoid flashy graphics and focus on substance, perfectly aligning with strict corporate ATS requirements.
         </p>
       </div>
 

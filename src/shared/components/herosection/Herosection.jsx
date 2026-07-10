@@ -19,18 +19,17 @@ export default function HeroSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
         {/* Same text sizes */}
         <h1 className="mx-auto mb-6 max-w-4xl text-xl leading-[1.1] font-bold tracking-tight text-slate-900 sm:text-2xl lg:text-3xl">
-          Build a Free ATS-Friendly Resume
+          Build an ATS-Friendly Resume
           <br />
           <span className="bg-linear-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
-            That Gets Interviews Faster
+            with AI
           </span>
         </h1>
         {/* Same text sizes */}
         <p className="mx-auto mb-10 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-lg">
-          Build an ATS-friendly resume in minutes with AI. Designed for IT freshers and engineering
-          students in India.
+          The ultimate AI resume builder for the Indian job market. Designed specifically for freshers and experienced professionals. Check our <a href="/templates" className="text-blue-600 hover:underline">Templates</a>, see <a href="/examples" className="text-blue-600 hover:underline">Examples</a>, or view our <a href="/pricing" className="text-blue-600 hover:underline">Pricing</a>.
           <span className="mt-2 block text-xs font-medium text-blue-600">
-            ✨ Starting at ₹49 • No subscriptions • Instant download
+            ✨ Fast • ATS-Optimized • Professional
           </span>
         </p>
         {/* Coupon */}
