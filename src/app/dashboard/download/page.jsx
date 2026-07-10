@@ -10,7 +10,7 @@ export default async function Page({ searchParams }) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/login");
+    redirect("/");
   }
 
   const { resumeId } = await searchParams;

@@ -316,6 +316,42 @@ export const Footer = () => {
             >
               Resume Builder Price in India
             </Link>
+            <Link
+              href="/resume-builder-price-india "
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Resume Builder Price in India
+            </Link>
+            <Link
+              href="/mnc-resume-format-for-freshers"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              MNC Resume Format For Freshers
+            </Link>
+            <Link
+              href="/ltimindtree-resume-format-for-freshers"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Ltimindtree Resume Format For Freshers
+            </Link>
+            <Link
+              href="/resume-vs-cv-india"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Resume Vs Cv India
+            </Link>
+            <Link
+              href="/cognizant-resume-format-for-freshers"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Cognizant Resume Format For Freshers
+            </Link>
+            <Link
+              href="/tech-mahindra-resume-format-for-freshers"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Tech mahindra resume format for freshers
+            </Link>
           </div>
         </div>
 

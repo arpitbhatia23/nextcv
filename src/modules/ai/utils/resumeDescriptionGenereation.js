@@ -4,6 +4,9 @@ import { extractJobKeywordsPrompt, PromptStrategies } from "./promptStratgies.js
 import { groq, groq_model } from "./aiConfig.js";
 import { redis } from "@/shared/utils/Redis.js";
 
+const FAST_MODEL = "openai/gpt-oss-20b";
+const SMART_MODEL = "openai/gpt-oss-120b";
+
 export const hash = value => crypto.createHash("sha256").update(String(value)).digest("hex");
 
 export const getCached = async key => {
@@ -17,7 +20,8 @@ export const getCached = async key => {
 
 export const setCached = async (key, value, ttl = 60 * 60 * 24 * 2) => {
   try {
-    if (!key || value == null) return;
+    // Don't cache empty AI responses
+    if (!key || !String(value ?? "").trim()) return;
 
     await redis.set(key, String(value), "EX", ttl);
   } catch (error) {
@@ -33,13 +37,16 @@ const generateFromPrompt = async (prompt, options = {}) => {
       throw new Error("Prompt is required");
     }
 
-    const cacheKey = `gen:${hash(`${options.model || groq_model}:${toonPrompt}`)}`;
+    const model = options.model || groq_model || FAST_MODEL;
+
+    const cacheKey = `gen:${hash(`${model}:${options.maxCompletionTokens ?? 500}:${toonPrompt}`)}`;
+
     const cached = await getCached(cacheKey);
-    console.log(cacheKey);
+
     if (cached) return cached;
 
     const response = await groq.chat.completions.create({
-      model: options.model || groq_model,
+      model,
       messages: [
         {
           role: "user",
@@ -47,15 +54,29 @@ const generateFromPrompt = async (prompt, options = {}) => {
         },
       ],
       temperature: options.temperature ?? 0.3,
-      max_tokens: options.max_tokens ?? 120,
-      ...(options.reasoningEffort && {
-        reasoning_effort: options.reasoningEffort,
-      }),
+
+      // Reasoning and visible output share this limit
+      max_completion_tokens: options.maxCompletionTokens ?? 500,
+
+      reasoning_effort: options.reasoningEffort ?? "low",
+      include_reasoning: false,
     });
 
-    console.log("generation usage:", response.usage);
+    const choice = response.choices?.[0];
+    const result = choice?.message?.content?.trim() || "";
 
-    const result = response.choices[0]?.message?.content?.trim() || "";
+    console.log("Generation usage:", response.usage);
+
+    if (!result) {
+      console.error("Groq returned empty content:", {
+        model,
+        finishReason: choice?.finish_reason,
+        message: choice?.message,
+        usage: response.usage,
+      });
+
+      return "";
+    }
 
     await setCached(cacheKey, result);
 
@@ -71,14 +92,16 @@ const extractJobKeywords = async jobDescription => {
 
   if (!text) return "";
 
-  const cacheKey = `ats:${hash(text)}`;
+  // Include model and prompt version to avoid stale results
+  const cacheKey = `ats:v2:${hash(`${FAST_MODEL}:${extractJobKeywordsPrompt}:${text}`)}`;
+
   const cached = await getCached(cacheKey);
 
   if (cached) return cached;
 
   try {
     const response = await groq.chat.completions.create({
-      model: "meta-llama/llama-4-scout-17b-16e-instruct",
+      model: FAST_MODEL,
       messages: [
         {
           role: "system",
@@ -89,13 +112,26 @@ const extractJobKeywords = async jobDescription => {
           content: text.slice(0, 2500),
         },
       ],
-      max_tokens: 100,
       temperature: 0.1,
+      max_completion_tokens: 500,
+      reasoning_effort: "low",
+      include_reasoning: false,
     });
+
+    const choice = response.choices?.[0];
+    const keywords = choice?.message?.content?.trim() || "";
 
     console.log("ATS keyword usage:", response.usage);
 
-    const keywords = response.choices[0]?.message?.content?.trim() || "";
+    if (!keywords) {
+      console.error("Empty keyword response:", {
+        finishReason: choice?.finish_reason,
+        message: choice?.message,
+        usage: response.usage,
+      });
+
+      return "";
+    }
 
     await setCached(cacheKey, keywords);
 
@@ -107,11 +143,10 @@ const extractJobKeywords = async jobDescription => {
 };
 
 export const ResumeGenerator = {
-  education: async data => {
-    return generateFromPrompt(PromptStrategies.education(data), {
-      max_tokens: 100,
-    });
-  },
+  education: data =>
+    generateFromPrompt(PromptStrategies.education(data), {
+      maxCompletionTokens: 400,
+    }),
 
   project: async (data, jobDescription = "") => {
     const atsKeywords = await extractJobKeywords(jobDescription);
@@ -122,7 +157,7 @@ export const ResumeGenerator = {
         atsKeywords,
       }),
       {
-        max_tokens: 120,
+        maxCompletionTokens: 500,
       }
     );
   },
@@ -136,21 +171,21 @@ export const ResumeGenerator = {
         atsKeywords,
       }),
       {
-        max_tokens: 120,
+        maxCompletionTokens: 500,
       }
     );
   },
 
   skills: async (data, jobDescription = "") => {
     const atsKeywords = await extractJobKeywords(jobDescription);
-    console.log("ats keyword", atsKeywords);
+
     return generateFromPrompt(
       PromptStrategies.skills({
         ...data,
         atsKeywords,
       }),
       {
-        max_tokens: 80,
+        maxCompletionTokens: 400,
       }
     );
   },
@@ -162,16 +197,17 @@ export const ResumeGenerator = {
       PromptStrategies.summary({
         role: data.jobRole,
         skills: data.skills,
-        education: data.education?.map(e => e.description).join("\n"),
-        experience: data.experience?.map(e => e.description).join("\n"),
-        projects: data.projects?.map(p => p.description).join("\n"),
+        education: data.education?.map(item => item.description).join("\n"),
+        experience: data.experience?.map(item => item.description).join("\n"),
+        projects: data.projects?.map(item => item.description).join("\n"),
         summary: data.summary,
         atsKeywords,
       }),
       {
-        model: "qwen/qwen3-32b",
-        max_tokens: 140,
-        reasoningEffort: "none",
+        // Use FAST_MODEL initially to conserve free-tier tokens
+        model: FAST_MODEL,
+        maxCompletionTokens: 600,
+        reasoningEffort: "low",
       }
     );
   },

@@ -259,7 +259,7 @@ export default function Page() {
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
         <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
         <p className="mb-4">Use NextCV to create a resume that passes screening tools used by top Indian companies.</p>
-        <Link href="/login" className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition">Create Resume Free</Link>
+        <Link href="/" className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition">Create Resume Free</Link>
       </div>
 
       <div className="prose max-w-none">
@@ -294,7 +294,7 @@ export default function Page() {
       </section>
       
       <div className="mt-12 text-center">
-        <Link href="/login" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition">Build Your Resume Now</Link>
+        <Link href="/" className="bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition">Build Your Resume Now</Link>
       </div>
     </div>
   );

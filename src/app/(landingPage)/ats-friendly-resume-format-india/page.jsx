@@ -1,49 +1,67 @@
-import React from 'react';
+import React from "react";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import Link from "next/link";
+import dynamic from "next/dynamic";
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = createSeoMetadata({
   title: "ATS Friendly Resume Format India 2026 | Freshers Guide",
-  description: "Learn the best ATS-friendly resume format for Indian freshers. See structure, skills, projects and formatting tips to pass resume screening systems.",
+  description:
+    "Learn the best ATS-friendly resume format for Indian freshers. See structure, skills, projects and formatting tips to pass resume screening systems.",
   path: "/ats-friendly-resume-format-india",
 });
 
 export default function Page() {
-  const faqs = [{"q": "What does ATS friendly mean?", "a": "It means the resume is formatted in a way that software (Applicant Tracking Systems) can easily read and parse the text."}, {"q": "Is single column better for ATS?", "a": "Yes, single-column formats are generally safer and more reliably parsed by most ATS software."}, {"q": "Can I use colors in an ATS resume?", "a": "Minimal color is okay, but avoid complex designs or background graphics."}, {"q": "Which font is best for ATS?", "a": "Standard fonts like Arial, Calibri, or Times New Roman are safe choices."}];
-  
+  const faqs = [
+    {
+      q: "What does ATS friendly mean?",
+      a: "It means the resume is formatted in a way that software (Applicant Tracking Systems) can easily read and parse the text.",
+    },
+    {
+      q: "Is single column better for ATS?",
+      a: "Yes, single-column formats are generally safer and more reliably parsed by most ATS software.",
+    },
+    {
+      q: "Can I use colors in an ATS resume?",
+      a: "Minimal color is okay, but avoid complex designs or background graphics.",
+    },
+    {
+      q: "Which font is best for ATS?",
+      a: "Standard fonts like Arial, Calibri, or Times New Roman are safe choices.",
+    },
+  ];
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    mainEntity: faqs.map(faq => ({
       "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
+      name: faq.q,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.a
-      }
-    }))
+        text: faq.a,
+      },
+    })),
   };
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.nextcv.in/"
+        position: 1,
+        name: "Home",
+        item: "https://www.nextcv.in/",
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "ATS Friendly Resume Format in India (2026)",
-        "item": "https://www.nextcv.in/ats-friendly-resume-format-india"
-      }
-    ]
+        position: 2,
+        name: "ATS Friendly Resume Format in India (2026)",
+        item: "https://www.nextcv.in/ats-friendly-resume-format-india",
+      },
+    ],
   };
 
   return (
@@ -57,35 +75,63 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">ATS Friendly Resume Format in India (2026)</h1>
-      <p className="text-lg text-gray-700 mb-8">Learn the best ATS-friendly resume format for Indian freshers. See structure, skills, projects and formatting tips to pass resume screening systems.</p>
-      
+      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+        ATS Friendly Resume Format in India (2026)
+      </h1>
+      <p className="text-lg text-gray-700 mb-8">
+        Learn the best ATS-friendly resume format for Indian freshers. See structure, skills,
+        projects and formatting tips to pass resume screening systems.
+      </p>
+
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
         <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
-        <p className="mb-4 text-gray-700">Use NextCV to create a resume that passes screening tools used by top Indian companies.</p>
-        <Link href="/login" className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition">Create Resume Free</Link>
+        <p className="mb-4 text-gray-700">
+          Use NextCV to create a resume that passes screening tools used by top Indian companies.
+        </p>
+        <Link
+          href="/"
+          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition"
+        >
+          Create Resume Free
+        </Link>
       </div>
 
       <div className="prose max-w-none text-gray-800">
-        
         <h2 className="text-2xl font-semibold mt-8 mb-4">What is an ATS Friendly Resume?</h2>
-        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
-        
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Best ATS Format for Indian Freshers</h2>
-        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
-        
-        <h2 className="text-2xl font-semibold mt-8 mb-4">How to Write ATS Friendly Skills</h2>
-        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
-        
-        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Resume Formatting Tips</h2>
-        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
-        
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Mistakes to Avoid</h2>
-        <p className="mb-4">This section is designed to guide Indian freshers in creating an optimal resume for 2026. Make sure to include relevant skills, internships, and educational background correctly structured for Applicant Tracking Systems (ATS).</p>
-        
-      </div>
+        <p className="mb-4">
+          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
+          Make sure to include relevant skills, internships, and educational background correctly
+          structured for Applicant Tracking Systems (ATS).
+        </p>
 
-      
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Best ATS Format for Indian Freshers</h2>
+        <p className="mb-4">
+          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
+          Make sure to include relevant skills, internships, and educational background correctly
+          structured for Applicant Tracking Systems (ATS).
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">How to Write ATS Friendly Skills</h2>
+        <p className="mb-4">
+          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
+          Make sure to include relevant skills, internships, and educational background correctly
+          structured for Applicant Tracking Systems (ATS).
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Resume Formatting Tips</h2>
+        <p className="mb-4">
+          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
+          Make sure to include relevant skills, internships, and educational background correctly
+          structured for Applicant Tracking Systems (ATS).
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Mistakes to Avoid</h2>
+        <p className="mb-4">
+          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
+          Make sure to include relevant skills, internships, and educational background correctly
+          structured for Applicant Tracking Systems (ATS).
+        </p>
+      </div>
 
       <section className="mt-16">
         <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
@@ -102,18 +148,40 @@ export default function Page() {
       <section className="mt-16 border-t pt-8">
         <h2 className="text-2xl font-bold mb-4 text-gray-900">Related Guides</h2>
         <div className="mt-6 mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link href="/templates" className="text-blue-600 hover:underline">Explore Templates</Link>
-          <Link href="/ats-resume-checker" className="text-blue-600 hover:underline">ATS Resume Checker</Link>
-          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">TCS Resume Format</Link>
-          <Link href="/infosys-resume-format-for-freshers" className="text-blue-600 hover:underline">Infosys Resume Format</Link>
-          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">Wipro Resume Format</Link>
-          <Link href="/ats-friendly-resume-format-india" className="text-blue-600 hover:underline">ATS Resume Format Guide</Link>
-          <Link href="/fresher-resume-format-india" className="text-blue-600 hover:underline">Fresher Resume Format</Link>
+          <Link href="/templates" className="text-blue-600 hover:underline">
+            Explore Templates
+          </Link>
+          <Link href="/ats-resume-checker" className="text-blue-600 hover:underline">
+            ATS Resume Checker
+          </Link>
+          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">
+            TCS Resume Format
+          </Link>
+          <Link
+            href="/infosys-resume-format-for-freshers"
+            className="text-blue-600 hover:underline"
+          >
+            Infosys Resume Format
+          </Link>
+          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">
+            Wipro Resume Format
+          </Link>
+          <Link href="/ats-friendly-resume-format-india" className="text-blue-600 hover:underline">
+            ATS Resume Format Guide
+          </Link>
+          <Link href="/fresher-resume-format-india" className="text-blue-600 hover:underline">
+            Fresher Resume Format
+          </Link>
         </div>
       </section>
-      
+
       <div className="mt-12 text-center">
-        <Link href="/login" className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg">Build Your Resume Now</Link>
+        <Link
+          href="/"
+          className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg"
+        >
+          Build Your Resume Now
+        </Link>
       </div>
     </div>
   );
