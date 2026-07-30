@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
 import { apiError } from "@/shared";
 import Resume from "@/modules/resume/models/resume.model";
+import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
 export const PaymentStatus = async ({ merchantOrderId, userId }) => {
   const response = await client.getOrderStatus(merchantOrderId);
   if (response.state === "COMPLETED") {
@@ -30,27 +31,52 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
       { returnDocument: "after" }
     );
     console.log(payment);
-    const updateResume = await Resume.findByIdAndUpdate(
-      payment.resumeId,
-      {
-        $set: {
-          status: "paid",
+    if (payment.productType === "resume") {
+      const updateResume = await Resume.findByIdAndUpdate(
+        payment.resumeId,
+        {
+          $set: {
+            status: "paid",
+          },
         },
-      },
-      { returnDocument: "after" }
-    );
-    await User.findByIdAndUpdate(userId, {
-      $push: {
-        payments: payment._id,
-      },
-    });
-    if (!updateResume) {
-      throw new apiError(500, "something went wrong while updateins resume status");
+        { returnDocument: "after" }
+      );
+      if (!updateResume) {
+        throw new apiError(500, "something went wrong while updateins resume status");
+      }
+      await User.findByIdAndUpdate(userId, {
+        $push: {
+          payments: payment._id,
+        },
+      });
+      return NextResponse.redirect(
+        `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`
+      );
     }
+    if (payment.productType === "cover-letter") {
+      const updatedCoverLetter = await CoverLetter.findByIdAndUpdate(
+        payment.coverletterId,
+        {
+          $set: {
+            status: "paid",
+          },
+        },
+        { returnDocument: "after" }
+      );
 
-    return NextResponse.redirect(
-      `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`
-    );
+      if (!updatedCoverLetter) {
+        throw new apiError(500, "something went wrong while updateins resume status");
+      }
+      await User.findByIdAndUpdate(userId, {
+        $push: {
+          payments: payment._id,
+        },
+      });
+
+      return NextResponse.redirect(
+        `${process.env.BASE_URL}/dashboard/download?coverLetterId=${updatedCoverLetter._id}`
+      );
+    }
   } else {
     return NextResponse.redirect(`${process.env.BASE_URL}/payement/fails?status=fail`);
   }

@@ -5,7 +5,7 @@ import { authOptions } from "@/modules/auth";
 import DownloadPageContent from "@/modules/resume/components/DownloadResume";
 import Resume from "@/modules/resume/models/resume.model";
 import { dbConnect } from "@/shared";
-
+import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
 export default async function Page({ searchParams }) {
   const session = await getServerSession(authOptions);
 
@@ -13,24 +13,47 @@ export default async function Page({ searchParams }) {
     redirect("/");
   }
 
-  const { resumeId } = await searchParams;
-
-  if (!resumeId) {
+  const { resumeId, coverLetterId } = await searchParams;
+  console.log(resumeId, coverLetterId);
+  if (!resumeId && !coverLetterId) {
     notFound();
   }
 
   await dbConnect();
 
-  const resume = await Resume.findById(resumeId).lean();
+  const isAdmin = session.user.role === "admin";
 
-  if (!resume) {
+  if (resumeId) {
+    const resume = await Resume.findById(resumeId).lean();
+
+    if (!resume) {
+      notFound();
+    }
+
+    const isPaid =
+      resume.isPaid === true || resume.status === "paid" || resume.paymentStatus === "paid";
+
+    if (!isAdmin && !isPaid) {
+      notFound();
+    }
+
+    return (
+      <Suspense>
+        <DownloadPageContent resumeId={resumeId} />
+      </Suspense>
+    );
+  }
+
+  const coverLetter = await CoverLetter.findById(coverLetterId).lean();
+
+  if (!coverLetter) {
     notFound();
   }
 
-  const isAdmin = session.user.role === "admin";
-
   const isPaid =
-    resume.isPaid === true || resume.status === "paid" || resume.paymentStatus === "paid";
+    coverLetter.isPaid === true ||
+    coverLetter.status === "paid" ||
+    coverLetter.paymentStatus === "paid";
 
   if (!isAdmin && !isPaid) {
     notFound();
@@ -38,7 +61,7 @@ export default async function Page({ searchParams }) {
 
   return (
     <Suspense>
-      <DownloadPageContent resumeId={resumeId} />
+      <DownloadPageContent coverLetterId={coverLetterId} />
     </Suspense>
   );
 }

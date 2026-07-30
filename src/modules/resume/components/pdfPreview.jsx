@@ -7,10 +7,11 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
   const [numPages, setNumPages] = useState(null);
 
   const isMobile = variant === "mobile";
+  const iscoverLetter = variant === "cover-letter";
 
   return (
     <div
-      className={`relative flex justify-center ${isMobile ? "p-4" : "p-6 md:p-8"} overflow-auto`}
+      className={`relative flex justify-center ${isMobile ? "p-4" : iscoverLetter ? "p-2 " : "p-6 md:p-8"} overflow-auto`}
       onContextMenu={e => e.preventDefault()}
     >
       {pdfUrl ? (
@@ -29,10 +30,15 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
           }
         >
           {Array.from({ length: numPages || 0 }).map((_, idx) => (
-            <div key={idx} className={isMobile ? "mb-2 relative" : "mb-4 relative"}>
+            <div
+              key={idx}
+              className={
+                isMobile ? "mb-2 relative" : iscoverLetter ? "mb-2 relative" : "mb-4 relative"
+              }
+            >
               <Page
                 pageNumber={idx + 1}
-                width={isMobile ? 280 : 400}
+                width={isMobile ? 280 : iscoverLetter ? 420 : 400}
                 className="bg-white shadow-md max-w-full"
                 renderAnnotationLayer={false}
                 renderTextLayer={false}
@@ -43,10 +49,14 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
         </Document>
       ) : (
         <div
-          className={`bg-white animate-pulse rounded-sm shadow-sm border ${
-            isMobile ? "h-60 w-full" : "h-200 w-100"
+          className={`bg-white animate-pulse rounded-sm shadow-sm border flex items-center justify-center ${
+            isMobile ? "h-60 w-full" : iscoverLetter ? "h-145 w-140" : "h-200 w-100"
           }`}
-        />
+        >
+          <p className="text-sm text-slate-400 animate-pulse">
+            {iscoverLetter ? "Loading cover letter preview..." : "Loading resume preview..."}
+          </p>
+        </div>
       )}
     </div>
   );

@@ -10,7 +10,6 @@ import {
   Plus,
   X,
   BadgePercent,
-  Edit2,
   FileText,
   PenLine,
 } from "lucide-react";
@@ -31,7 +30,7 @@ import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
-const PDFPreview = dynamic(() => import("./pdfPreview"), {
+const PDFPreview = dynamic(() => import("@/modules/resume/components/pdfPreview"), {
   ssr: false,
   loading: () => <div className="text-sm text-[#6B7280]">Loading preview...</div>,
 });
@@ -70,19 +69,12 @@ const PostmarkBadge = ({ status }) => {
   );
 };
 
-const ResumeCard = ({
-  resume,
-  onPreview,
-  onDownload,
-  onEdit,
-  onDelete,
-  getTemplateDisplayName,
-}) => (
+const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
   <Card
     className="group relative border rounded-none shadow-none transition-all duration-300 hover:-translate-y-1"
     style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
   >
-    <PostmarkBadge status={resume.status} />
+    <PostmarkBadge status={coverLetter?.status} />
     <CardContent className="p-0">
       {/* Torn-edge letter strip */}
       <div
@@ -95,7 +87,7 @@ const ResumeCard = ({
       <div
         className="p-6 flex items-center justify-center h-40 relative overflow-hidden cursor-pointer"
         style={{ backgroundColor: "#F7F7F5" }}
-        onClick={() => onPreview(resume)}
+        onClick={() => onPreview(coverLetter)}
       >
         <FileText
           className="w-9 h-9 transition-colors"
@@ -114,18 +106,13 @@ const ResumeCard = ({
 
       <div className="px-5 py-4 border-t" style={{ borderColor: "#E4E2DC" }}>
         <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <h2
-              className="text-sm font-semibold truncate"
-              style={{ color: "#1C2333" }}
-              title={resume.name}
-            >
-              {resume.name || "Untitled Resume"}
-            </h2>
-            <p className="text-xs truncate mt-0.5" style={{ color: "#6B7280" }}>
-              {getTemplateDisplayName(resume.ResumeType)}
-            </p>
-          </div>
+          <h2
+            className="text-sm font-semibold truncate flex-1"
+            style={{ color: "#1C2333" }}
+            title={coverLetter?.name}
+          >
+            {coverLetter?.name || "Untitled Cover Letter"}
+          </h2>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
@@ -138,17 +125,13 @@ const ResumeCard = ({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48 rounded-none">
-              <DropdownMenuItem onClick={() => onDownload(resume)}>
+              <DropdownMenuItem onClick={() => onDownload(coverLetter)}>
                 <Download className="mr-2 h-4 w-4" />
                 Download PDF
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onEdit(resume?._id)}>
-                <Edit2 className="mr-2 h-4 w-4" />
-                Edit Resume
-              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                onClick={() => onDelete(resume._id)}
+                // onClick={() => onDelete(coverLetter._id)}
                 className="text-red-600 focus:text-red-600 focus:bg-red-50"
               >
                 <Trash2 className="mr-2 h-4 w-4" />
@@ -158,17 +141,9 @@ const ResumeCard = ({
           </DropdownMenu>
         </div>
 
-        <div
-          className="mt-3 flex items-center justify-between font-mono text-[10px] tracking-wide"
-          style={{ color: "#6B7280" }}
-        >
-          <span>REF · {(resume?._id || "0000").toString().slice(-6).toUpperCase()}</span>
-          <span>
-            {new Date(resume.updatedAt || resume.createdAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
+        <div className="mt-3 font-mono text-[10px] tracking-wide" style={{ color: "#6B7280" }}>
+          {/* ref line kept for a letterhead feel; date logic left as-is upstream */}
+          REF · {(coverLetter?._id || "0000").toString().slice(-6).toUpperCase()}
         </div>
       </div>
     </CardContent>
@@ -196,14 +171,14 @@ const EmptyState = ({ icon: Icon, title, body, action }) => (
   </div>
 );
 
-const MyResume = () => {
-  const [resumes, setResumes] = useState([]);
+const MyCoverLetter = () => {
+  const [coverLetters, setCoverLetters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isModelOpen, setIsModelOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
   const [paid, setPaid] = useState(null);
   const [paymentModal, setPaymentModal] = useState(false);
-  const [resumeData, setResumeData] = useState(null);
+  const [coverLetterData, setCoverLetterData] = useState(null);
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(100);
@@ -214,37 +189,33 @@ const MyResume = () => {
   const route = useRouter();
 
   useEffect(() => {
-    const fetchResume = async () => {
+    const fetchCoverLetter = async () => {
       setLoading(true);
-      const res = await axios.get("/api/resume/getAllResume");
-      setResumes(res.data.data);
+      const res = await axios.get("/api/cover-letter/getAllCoverLetter");
+      console.log(res.data.data);
+      const data = res.data.data;
+      console.log(data);
+      setCoverLetters({
+        paid: data.paid || [],
+        draft: data.draft || [],
+      });
+
       setLoading(false);
     };
-    fetchResume();
+    fetchCoverLetter();
   }, []);
 
-  const paidResumes = resumes.paid;
-  const draftResumes = resumes.draft;
-
-  const getTemplateDisplayName = templateKey => {
-    const templateNames = {
-      modernTemplate: "Modern",
-      classicTemplate: "Classic",
-      MinimalistTemplate: "Minimalist",
-      MordenBluesidebar: "Modern Blue Sidebar",
-      ModernFullStack: "Modern Full Stack",
-    };
-    return templateNames[templateKey] || templateKey;
-  };
-
-  const handleDownload = async resume => {
-    if (resume.status === "paid") {
+  const paidCoverLetters = coverLetters.paid;
+  const draftCoverLetters = coverLetters.draft;
+  console.log(paidCoverLetters, draftCoverLetters);
+  const handleDownload = async coverLetter => {
+    if (coverLetter.status === "paid") {
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
-      const pdfGen = new pdfGenerator(resume, resume.ResumeType, { type: "resume" });
+      const pdfGen = new pdfGenerator(coverLetter);
       await pdfGen.downloadPdf();
     } else {
       setPaymentModal(true);
-      setResumeData(resume);
+      setCoverLetterData(coverLetter);
       // Reset payment modal state when opening
       setAmount(originalAmount);
       setApplied(false);
@@ -266,32 +237,30 @@ const MyResume = () => {
     setDiscount,
   });
 
-  const handleDelete = async resumeId => {
+  const handleDelete = async coverLetterId => {
     try {
-      const res = await axios.delete(`/api/resume/deleteById?id=${resumeId}`);
+      const res = await axios.delete(`/api/coverLetter/deleteById?id=${coverLetterId}`);
       if (res.data.success) {
-        setResumes(prev => ({
+        setCoverLetters(prev => ({
           ...prev,
-          paid: prev.paid?.filter(resume => resume.resumedata._id !== resumeId),
-          draft: prev.draft?.filter(resume => resume.resumedata._id !== resumeId),
+          paid: prev.paid?.filter(coverLetter => coverLetter.coverletterdata._id !== coverLetterId),
+          draft: prev.draft?.filter(
+            coverLetter => coverLetter.coverletterdata._id !== coverLetterId
+          ),
         }));
       }
     } catch (error) {
-      toast.error(error.message || "something went wrong while deleting resume");
+      toast.error(error.message || "something went wrong while deleting cover letter");
     }
   };
 
-  const handleEdit = resumeId => {
-    route.push(`/dashboard/resume/${resumeId}`);
-  };
-
-  const handleViewResume = async resumeData => {
+  const handleViewCoverLetter = async coverLetterData => {
     const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
-    const pdfGen = new pdfGenerator(resumeData, resumeData.ResumeType, { type: "resume" });
+    const pdfGen = new pdfGenerator(coverLetterData, "classic", { type: "cover-letter" });
     const url = await pdfGen.createPdf();
-
+    console.log(coverLetterData);
     setPdfUrl(url);
-    if (resumeData.status === "paid") {
+    if (coverLetterData.status === "paid") {
       setPaid(true);
     }
     setIsModelOpen(true);
@@ -300,7 +269,7 @@ const MyResume = () => {
   const isMobile = useIsMobile();
 
   const paymentFormData = {
-    draftId: resumeData?._id,
+    draftId: coverLetterData?._id,
   };
 
   const { handelPayment, isRedirecting } = usePayment({
@@ -308,14 +277,14 @@ const MyResume = () => {
     originalAmount,
     formData: paymentFormData,
     applied,
-    selectedTemplate: resumeData?.ResumeType,
+    selectedTemplate: coverLetterData?.CoverLetterType,
     setIsSubmit,
-    draftId: resumeData?._id,
+    draftId: coverLetterData?._id,
     couponCode,
   });
 
   const { basePrice } = usePricing({
-    selectedTemplate: resumeData?.ResumeType,
+    selectedTemplate: coverLetterData?.CoverLetterType,
     applied,
     originalAmount,
     discount: couponDiscount,
@@ -358,7 +327,7 @@ const MyResume = () => {
         <div
           className="pb-6 mb-10 border-b-2 flex flex-col md:flex-row md:items-end justify-between gap-4"
           style={{ borderColor: "#1C2333" }}
-          id="tour-my-resumes-header"
+          id="tour-my-cover-letters-header"
         >
           <div>
             <div
@@ -368,32 +337,33 @@ const MyResume = () => {
               CORRESPONDENCE ARCHIVE
             </div>
             <h1 className="font-display text-3xl font-medium" style={{ color: "#1C2333" }}>
-              My Resumes
+              My Cover Letters
             </h1>
             <p className="mt-2 text-sm" style={{ color: "#6B7280" }}>
-              Every resume you've drafted or unlocked, kept on file. Preview, edit, or download.
+              Every letter you've drafted or unlocked, kept on file. Preview, download, or start a
+              new one.
             </p>
           </div>
           <Button
-            onClick={() => route.push("/dashboard/builder")}
+            onClick={() => route.push("/dashboard/cover-letter")}
             className="rounded-none h-11 px-6 text-white shadow-none"
             style={{ backgroundColor: "#1C2333" }}
             id="tour-create-new-button"
           >
-            <Plus className="mr-2 h-4 w-4" /> Create New Resume
+            <Plus className="mr-2 h-4 w-4" /> Create New Cover Letter
           </Button>
         </div>
 
         {/* PDF Modal */}
         {isModelOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2333]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="relative w-full max-w-5xl h-[90vh] bg-white rounded-none shadow-2xl overflow-hidden flex flex-col">
+            <div className="relative w-full max-w-9xl h-[90vh] bg-white rounded-none shadow-2xl overflow-hidden flex flex-col">
               <div
                 className="flex items-center justify-between p-4 border-b bg-white z-10"
                 style={{ borderColor: "#E4E2DC" }}
               >
                 <h3 className="font-display text-base font-medium" style={{ color: "#1C2333" }}>
-                  Resume Preview
+                  Cover Letter Preview
                 </h3>
                 <Button
                   variant="ghost"
@@ -438,7 +408,7 @@ const MyResume = () => {
                   size="sm"
                   onClick={() => {
                     setPaymentModal(false);
-                    setResumeData(null);
+                    setCoverLetterData(null);
                   }}
                   className="h-8 w-8 p-0 rounded-none"
                 >
@@ -533,88 +503,89 @@ const MyResume = () => {
           </div>
         )}
 
-        <Tabs defaultValue="My-Resume" className="w-full" id="tour-resume-tabs">
+        <Tabs defaultValue="My-CoverLetter" className="w-full" id="tour-coverletter-tabs">
           <div className="border-b mb-10" style={{ borderColor: "#E4E2DC" }}>
             <TabsList className="bg-transparent h-auto p-0 space-x-10 rounded-none">
               <TabsTrigger
-                value="My-Resume"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-mono text-xs tracking-widest shadow-none transition-all"
+                value="My-CoverLetter"
+                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-mono text-xs tracking-widest shadow-none transition-all data-[state=active]:shadow-none"
                 style={{ color: "#6B7280" }}
               >
-                UNLOCKED ({paidResumes?.length || 0})
+                <span className="data-[state=active]:text-[#1C2333]">
+                  UNLOCKED ({paidCoverLetters?.length || 0})
+                </span>
               </TabsTrigger>
               <TabsTrigger
-                value="Draft-Resume"
+                value="Draft-CoverLetter"
                 className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-mono text-xs tracking-widest shadow-none transition-all"
                 style={{ color: "#6B7280" }}
               >
-                DRAFTS ({draftResumes?.length || 0})
+                DRAFTS ({draftCoverLetters?.length || 0})
               </TabsTrigger>
             </TabsList>
           </div>
 
           <style>{`
-            [data-state="active"][value="My-Resume"],
-            [data-state="active"][value="Draft-Resume"] {
+            [data-state="active"][value="My-CoverLetter"],
+            [data-state="active"][value="Draft-CoverLetter"] {
               border-color: #1C2333 !important;
               color: #1C2333 !important;
             }
           `}</style>
 
-          <TabsContent value="My-Resume" className="outline-none">
-            {!paidResumes || paidResumes.length === 0 ? (
+          <TabsContent value="My-CoverLetter" className="outline-none">
+            {!paidCoverLetters || paidCoverLetters.length === 0 ? (
               <EmptyState
                 icon={FileText}
-                title="No unlocked resumes"
-                body="Once you complete a payment for a resume draft, it will appear here for unlimited downloads."
+                title="No unlocked cover letters yet"
+                body="Once you complete a payment for a draft, it lands here and stays available for unlimited downloads."
               />
             ) : (
               <div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 pt-2"
-                id="tour-resume-list"
+                id="tour-coverletter-list"
               >
-                {paidResumes.map(resume => (
-                  <ResumeCard
-                    key={resume?.resumedata._id}
-                    resume={resume?.resumedata}
-                    onPreview={handleViewResume}
-                    onDownload={handleDownload}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    getTemplateDisplayName={getTemplateDisplayName}
-                  />
-                ))}
+                {paidCoverLetters.map(coverLetter => {
+                  console.log(coverLetter);
+                  return (
+                    <CoverLetterCard
+                      key={coverLetter?._id}
+                      coverLetter={coverLetter}
+                      onPreview={() => handleViewCoverLetter(coverLetter)}
+                      onDownload={handleDownload}
+                      onDelete={handleDelete}
+                    />
+                  );
+                })}
               </div>
             )}
           </TabsContent>
 
-          <TabsContent value="Draft-Resume" className="outline-none">
-            {!draftResumes || draftResumes.length === 0 ? (
+          <TabsContent value="Draft-CoverLetter" className="outline-none">
+            {!draftCoverLetters || draftCoverLetters.length === 0 ? (
               <EmptyState
                 icon={PenLine}
-                title="Start your first resume"
-                body="Create a new resume to get started. It will be saved here automatically."
+                title="Start your first cover letter"
+                body="Create one to get going — it's saved here automatically as a draft."
                 action={
                   <Button
                     onClick={() => route.push("/dashboard/builder")}
                     className="rounded-none"
                     style={{ backgroundColor: "#1C2333" }}
                   >
-                    Create New Resume
+                    Create New Cover Letter
                   </Button>
                 }
               />
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 pt-2">
-                {draftResumes.map(resume => (
-                  <ResumeCard
-                    key={resume?.resumedata._id}
-                    resume={resume?.resumedata}
-                    onPreview={handleViewResume}
+                {draftCoverLetters.map(coverLetter => (
+                  <CoverLetterCard
+                    key={coverLetter?._id}
+                    coverLetter={coverLetter}
+                    onPreview={() => handleViewCoverLetter(coverLetter)}
                     onDownload={handleDownload}
-                    onEdit={handleEdit}
                     onDelete={handleDelete}
-                    getTemplateDisplayName={getTemplateDisplayName}
                   />
                 ))}
               </div>
@@ -626,4 +597,4 @@ const MyResume = () => {
   );
 };
 
-export default MyResume;
+export default MyCoverLetter;

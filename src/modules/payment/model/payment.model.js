@@ -15,17 +15,17 @@ const paymentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "resumes",
     },
+    coverletterId: {
+      type: Schema.Types.ObjectId,
+      ref: "coverletters",
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "users",
       required: true,
     },
+    productType: { type: String, enum: ["resume", "cover-letter"], default: "resume" },
 
-    resumeId: {
-      type: Schema.Types.ObjectId,
-      ref: "resumes",
-      required: true,
-    },
     paymentMode: {
       type: String,
     },

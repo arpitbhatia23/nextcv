@@ -22,6 +22,20 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 
+/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
+   labels, and helper text — matches BasicInfoStep. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const inputClass =
+  "rounded-none border transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm";
+const inputStyle = { backgroundColor: "#F7F7F5", borderColor: "#E4E2DC", color: "#1C2333" };
+
 const EducationStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
@@ -97,22 +111,40 @@ const EducationStep = () => {
   };
 
   const { handleAiGeneration, isGenerating } = useAiGeneration({ form, type: "education" });
+
   return (
-    <div className="py-4 md:py-8">
-      <div className="mb-2 md:mb-4">
-        <h2 className="text-lg md:text-xl font-bold text-slate-900">Education</h2>
-        <p className="text-[10px] md:text-sm text-slate-500">Add your academic background</p>
+    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+      <FontImports />
+
+      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
+        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: "#B3382C" }}>
+          STEP 03 — EDUCATION
+        </div>
+        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
+          Education
+        </h2>
+        <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
+          Add your academic background
+        </p>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="bg-white rounded-xl  py-0 shadow-sm border border-slate-200 overflow-hidden"
+          className="rounded-none border shadow-none py-0 overflow-hidden"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
           id="tour-education-form"
         >
-          <CardHeader className="border-b  p-3 gap-0 pb-0 rounded-t-xl flex flex-row justify-between items-center">
+          <CardHeader
+            className="border-b p-3 gap-0 pb-0 flex flex-row justify-between items-center"
+            style={{ borderColor: "#E4E2DC" }}
+          >
             <div>
-              <CardTitle className="text-sm  md:text-lg font-semibold text-slate-800">
-                {isEditing ? "Edit Education" : "Add Education"}
+              <CardTitle
+                className="font-mono text-[10px] md:text-xs tracking-widest"
+                style={{ color: "#6B7280" }}
+              >
+                {isEditing ? "EDIT EDUCATION" : "ADD EDUCATION"}
               </CardTitle>
             </div>
             {isEditing && (
@@ -120,13 +152,14 @@ const EducationStep = () => {
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-6 text-[10px] md:text-xs text-slate-500 hover:text-slate-700"
+                className="h-6 rounded-none font-mono text-[10px] md:text-xs hover:bg-transparent"
+                style={{ color: "#6B7280" }}
               >
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent className="p-3 md:p-4  px-2">
+          <CardContent className="p-3 md:p-4 px-2">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -134,17 +167,21 @@ const EducationStep = () => {
                   name="degree"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Degree/Qualification
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        DEGREE/QUALIFICATION
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. B.Tech CS"
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -154,17 +191,21 @@ const EducationStep = () => {
                   name="institution"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Institution/School
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        INSTITUTION/SCHOOL
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. NIT Delhi"
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -175,17 +216,21 @@ const EducationStep = () => {
                     name="startYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                          Start Date
+                        <FormLabel
+                          className="font-mono text-[10px] md:text-xs tracking-widest"
+                          style={{ color: "#6B7280" }}
+                        >
+                          START DATE
                         </FormLabel>
                         <FormControl>
                           <Input
-                            type={"month"}
+                            type="month"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base"
+                            className={inputClass}
+                            style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                       </FormItem>
                     )}
                   />
@@ -194,17 +239,21 @@ const EducationStep = () => {
                     name="endYear"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                          End Date
+                        <FormLabel
+                          className="font-mono text-[10px] md:text-xs tracking-widest"
+                          style={{ color: "#6B7280" }}
+                        >
+                          END DATE
                         </FormLabel>
                         <FormControl>
                           <Input
-                            type={"month"}
+                            type="month"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base"
+                            className={inputClass}
+                            style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                       </FormItem>
                     )}
                   />
@@ -215,17 +264,21 @@ const EducationStep = () => {
                   name="grade"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Grade/GPA
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        GRADE/GPA
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. 8.5 CGPA"
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -235,23 +288,27 @@ const EducationStep = () => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold text-xs md:text-sm">
-                        Description
+                      <FormLabel
+                        className="flex justify-between items-center font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        DESCRIPTION
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="h-6 text-[10px] text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 font-bold"
+                          className="h-6 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+                          style={{ color: "#B3382C" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
-                            ? "AI Writing..."
+                            ? "AI WRITING..."
                             : form.watch("description")?.trim()
-                              ? "Refine AI"
-                              : "AI Bullet Points"}
+                              ? "REFINE AI"
+                              : "AI BULLET POINTS"}
                         </Button>
                       </FormLabel>
                       <div className="relative">
@@ -260,22 +317,29 @@ const EducationStep = () => {
                             placeholder="Brief achievements..."
                             rows={3}
                             {...field}
-                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-xs md:text-sm placeholder:text-[10px] ${
+                            className={`rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
                               isGenerating ? "opacity-50" : ""
                             }`}
+                            style={inputStyle}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
                         {isGenerating && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-                            <div className="flex items-center gap-2 text-indigo-600 text-xs font-bold animate-pulse">
-                              <Sparkles className="w-3 h-3" /> Generating...
+                          <div
+                            className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px]"
+                            style={{ backgroundColor: "rgba(255,255,255,0.5)" }}
+                          >
+                            <div
+                              className="flex items-center gap-2 font-mono text-[10px] tracking-widest animate-pulse"
+                              style={{ color: "#B3382C" }}
+                            >
+                              <Sparkles className="w-3 h-3" /> GENERATING...
                             </div>
                           </div>
                         )}
                       </div>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -283,9 +347,10 @@ const EducationStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold h-10 md:h-11 rounded-lg text-xs md:text-sm"
+                    className="w-full rounded-none text-white shadow-none h-10 md:h-11 font-mono text-xs md:text-sm tracking-widest"
+                    style={{ backgroundColor: "#B3382C" }}
                   >
-                    {isEditing ? "Update Entry" : "Save Qualification"}
+                    {isEditing ? "UPDATE ENTRY" : "SAVE QUALIFICATION"}
                   </Button>
                 </div>
               </form>
@@ -296,32 +361,51 @@ const EducationStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="bg-slate-50 rounded-xl border border-slate-200 p-4 md:p-5"
+            className="border p-4 md:p-5"
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
             id="tour-education-list"
           >
-            <h3 className="text-[10px] md:text-sm font-black text-slate-500 mb-4 flex items-center gap-2 uppercase tracking-widest">
-              <GraduationCap className="w-4 h-4 text-indigo-500" /> Academic Timeline
+            <h3
+              className="font-mono text-[10px] md:text-xs font-medium mb-4 flex items-center gap-2 uppercase tracking-widest"
+              style={{ color: "#6B7280" }}
+            >
+              <GraduationCap className="w-4 h-4" style={{ color: "#B3382C" }} /> Academic Timeline
             </h3>
 
             {educationList.length === 0 ? (
-              <div className="text-center py-8 md:py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-xs">No records added.</p>
+              <div
+                className="text-center py-8 md:py-10 border border-dashed"
+                style={{ borderColor: "#E4E2DC", backgroundColor: "#F7F7F5" }}
+              >
+                <p className="text-xs" style={{ color: "#B7B5AC" }}>
+                  No records added.
+                </p>
               </div>
             ) : (
               <div className="space-y-3">
                 {educationList.map((edu, index) => (
                   <div
                     key={edu?.id || index}
-                    className="bg-white p-3 md:p-4 rounded-lg border border-slate-200 shadow-sm flex justify-between group hover:border-indigo-300 transition-colors"
+                    className="p-3 md:p-4 border flex justify-between group transition-colors"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
                   >
                     <div className="min-w-0 flex-1">
-                      <h4 className="font-bold text-slate-800 text-xs md:text-sm truncate">
+                      <h4
+                        className="font-display font-medium text-xs md:text-sm truncate"
+                        style={{ color: "#1C2333" }}
+                      >
                         {edu.degree}
                       </h4>
-                      <div className="text-[10px] md:text-xs text-slate-600 font-medium truncate">
+                      <div
+                        className="font-mono text-[10px] md:text-xs truncate mt-0.5"
+                        style={{ color: "#6B7280" }}
+                      >
                         {edu.institution}
                       </div>
-                      <div className="text-[9px] md:text-xs text-slate-400 mt-1">
+                      <div
+                        className="font-mono text-[9px] md:text-xs mt-1"
+                        style={{ color: "#B7B5AC" }}
+                      >
                         {edu.startYear} - {edu.endYear || "Present"}
                       </div>
                     </div>
@@ -329,7 +413,8 @@ const EducationStep = () => {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-6 w-6 md:h-8 md:w-8 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
+                        className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                        style={{ color: "#B7B5AC" }}
                         onClick={() => handleEdit(edu)}
                       >
                         <Edit2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -337,7 +422,8 @@ const EducationStep = () => {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-6 w-6 md:h-8 md:w-8 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                        className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                        style={{ color: "#B7B5AC" }}
                         onClick={() => handleDelete(edu.id)}
                       >
                         <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -355,16 +441,18 @@ const EducationStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/basicInfo")}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 md:px-4 text-xs md:text-sm font-semibold"
+              className="rounded-none h-10 px-4 md:px-4 font-mono text-xs md:text-sm tracking-widest"
+              style={{ borderColor: "#E4E2DC", color: "#1C2333" }}
             >
-              <ArrowLeft className="w-4 h-4 mr-2" /> Previous
+              <ArrowLeft className="w-4 h-4 mr-2" /> PREVIOUS
             </Button>
             <Button
               onClick={() => router.push("/dashboard/builder/skills")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10  px-4 md:px-4 text-xs md:text-sm font-semibold"
+              className="rounded-none text-white shadow-none h-10 px-4 md:px-4 font-mono text-xs md:text-sm tracking-widest"
+              style={{ backgroundColor: "#B3382C" }}
               id="tour-next-button"
             >
-              Skills Info <ArrowRight className="w-4 h-4 ml-2" />
+              SKILLS INFO <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>

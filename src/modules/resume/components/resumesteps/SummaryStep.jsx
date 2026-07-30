@@ -14,6 +14,16 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/useResumeStore";
 
+/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
+   labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep / ProjectsStep / CertificateStep. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
 const schema = z.object({
   summary: z.string().min(20, {
     message: "Summary should be at least 20 characters",
@@ -97,31 +107,48 @@ const SummaryStep = () => {
   };
 
   return (
-    <div className="py-4 md:py-8">
-      <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-xl font-bold text-slate-900">Professional Summary</h2>
-        <p className="text-[10px] md:text-sm text-slate-500">
+    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+      <FontImports />
+
+      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
+        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: "#B3382C" }}>
+          STEP 08 — PROFESSIONAL SUMMARY
+        </div>
+        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
+          Professional Summary
+        </h2>
+        <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
           Generate or refine a short summary based on your full resume details
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start">
-        <Card className="bg-white rounded-lg md:rounded-xl py-0 shadow-sm border border-slate-200 overflow-hidden">
-          <CardHeader className="border-b bg-slate-50/50 p-3 gap-0 pb-0 rounded-t-xl flex flex-row justify-between items-center">
-            <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
-              Your Summary
+        <Card
+          className="rounded-none border shadow-none py-0 overflow-hidden"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+        >
+          <CardHeader
+            className="border-b p-3 gap-0 pb-0 flex flex-row justify-between items-center"
+            style={{ borderColor: "#E4E2DC" }}
+          >
+            <CardTitle
+              className="font-mono text-[10px] md:text-xs tracking-widest"
+              style={{ color: "#6B7280" }}
+            >
+              YOUR SUMMARY
             </CardTitle>
 
             <Button
               type="button"
               size="sm"
               variant="ghost"
-              className="h-7 text-[10px] md:text-xs text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 font-bold"
+              className="h-7 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+              style={{ color: "#B3382C" }}
               disabled={isGenerating}
               onClick={handleAiGeneration}
             >
               <Sparkles className="w-3 h-3 mr-1" />
-              {isGenerating ? "Writing..." : watchedSummary?.trim() ? "Refine AI" : "Generate AI"}
+              {isGenerating ? "WRITING..." : watchedSummary?.trim() ? "REFINE AI" : "GENERATE AI"}
             </Button>
           </CardHeader>
 
@@ -139,28 +166,42 @@ const SummaryStep = () => {
                             rows={8}
                             {...field}
                             disabled={isGenerating}
-                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-xs md:text-sm placeholder:text-[10px] ${
+                            className={`rounded-none border resize-none transition-all text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm ${
                               isGenerating ? "opacity-50" : ""
                             }`}
+                            style={{
+                              backgroundColor: "#F7F7F5",
+                              borderColor: "#E4E2DC",
+                              color: "#1C2333",
+                            }}
                             placeholder="Write your professional summary here or generate one with AI..."
                           />
 
                           {isGenerating && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-                              <div className="flex items-center gap-2 text-indigo-600 text-xs font-bold animate-pulse">
+                            <div
+                              className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px]"
+                              style={{ backgroundColor: "rgba(255,255,255,0.5)" }}
+                            >
+                              <div
+                                className="flex items-center gap-2 font-mono text-[10px] tracking-widest animate-pulse"
+                                style={{ color: "#B3382C" }}
+                              >
                                 <Sparkles className="w-3 h-3" />
-                                Generating...
+                                GENERATING...
                               </div>
                             </div>
                           )}
                         </div>
                       </FormControl>
 
-                      <p className="text-[10px] md:text-xs text-right text-slate-400 font-medium">
-                        {watchedSummary?.length || 0} characters
+                      <p
+                        className="font-mono text-[10px] md:text-xs text-right"
+                        style={{ color: "#B7B5AC" }}
+                      >
+                        {watchedSummary?.length || 0} CHARACTERS
                       </p>
 
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -169,12 +210,18 @@ const SummaryStep = () => {
           </CardContent>
 
           <CardFooter className="p-0">
-            <div className="bg-indigo-50/50 p-3 md:p-4 w-full border-t border-indigo-100">
-              <h3 className="text-[10px] md:text-sm font-bold text-indigo-900 mb-2 flex items-center gap-2 uppercase tracking-tight">
-                <AlignLeft className="w-3 md:w-4 h-3 md:h-4 text-indigo-600" />
+            <div className="p-3 md:p-4 w-full border-t" style={{ borderColor: "#E4E2DC" }}>
+              <h3
+                className="font-mono text-[10px] md:text-xs font-medium mb-2 flex items-center gap-2 uppercase tracking-widest"
+                style={{ color: "#6B7280" }}
+              >
+                <AlignLeft className="w-3 md:w-4 h-3 md:h-4" style={{ color: "#B3382C" }} />
                 Best Practices
               </h3>
-              <ul className="text-[10px] md:text-sm text-indigo-800/80 space-y-1 pl-4 list-disc font-medium">
+              <ul
+                className="text-[10px] md:text-sm space-y-1 pl-4 list-disc"
+                style={{ color: "#6B7280" }}
+              >
                 <li>Keep it concise: 2-3 strong lines.</li>
                 <li>Match your summary with the target job role.</li>
                 <li>Use skills, experience, and projects from your resume.</li>
@@ -183,23 +230,38 @@ const SummaryStep = () => {
           </CardFooter>
         </Card>
 
-        <Card className="bg-slate-50 rounded-lg md:rounded-xl py-0 border border-slate-200 shadow-sm overflow-hidden">
-          <CardHeader className="border-b bg-white p-3 gap-0 pb-0">
-            <CardTitle className="text-sm md:text-lg font-bold text-slate-800 flex items-center gap-2">
-              <BrainCircuit className="w-4 h-4 text-indigo-500" />
-              Live Preview
+        <Card
+          className="rounded-none border shadow-none py-0 overflow-hidden"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+        >
+          <CardHeader
+            className="border-b p-3 gap-0 pb-0"
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+          >
+            <CardTitle
+              className="font-mono text-[10px] md:text-xs tracking-widest flex items-center gap-2"
+              style={{ color: "#6B7280" }}
+            >
+              <BrainCircuit className="w-4 h-4" style={{ color: "#B3382C" }} />
+              LIVE PREVIEW
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="p-3 md:p-6 bg-white/50 min-h-37.5">
+          <CardContent className="p-3 md:p-6 min-h-37.5" style={{ backgroundColor: "#F7F7F5" }}>
             {watchedSummary ? (
-              <p className="text-xs md:text-sm text-slate-600 leading-relaxed italic border-l-4 border-indigo-100 pl-4">
+              <p
+                className="font-display text-xs md:text-sm leading-relaxed italic border-l-2 pl-4"
+                style={{ color: "#1C2333", borderColor: "#E4E2DC" }}
+              >
                 {watchedSummary}
               </p>
             ) : (
-              <div className="flex flex-col items-center justify-center py-10 text-slate-400">
-                <AlignLeft className="w-8 h-8 mb-2 opacity-20" />
-                <p className="text-[10px] md:text-xs font-medium italic">
+              <div
+                className="flex flex-col items-center justify-center py-10"
+                style={{ color: "#B7B5AC" }}
+              >
+                <AlignLeft className="w-8 h-8 mb-2 opacity-40" />
+                <p className="font-mono text-[10px] md:text-xs italic tracking-widest">
                   Your summary will appear here...
                 </p>
               </div>
@@ -212,18 +274,20 @@ const SummaryStep = () => {
         <Button
           variant="outline"
           onClick={() => router.push("/dashboard/builder/certificate")}
-          className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 text-xs md:text-sm font-bold"
+          className="rounded-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
+          style={{ borderColor: "#E4E2DC", color: "#1C2333" }}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Previous
+          PREVIOUS
         </Button>
 
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={isGenerating}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 px-4 text-xs md:text-sm font-bold"
+          className="rounded-none text-white shadow-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
+          style={{ backgroundColor: "#B3382C" }}
         >
-          Final Review
+          FINAL REVIEW
           <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
-import { Card, CardContent, CardTitle } from "@/shared/components/ui/card";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
@@ -9,22 +8,30 @@ import { toast } from "sonner";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
+import PDFPreview from "./pdfPreview";
 
-export default function DownloadPageContent({ resumeId }) {
-  const [resumeData, setResumeData] = useState(null);
-  const [numPages, setNumPages] = useState(null);
+export default function DownloadPageContent({ resumeId, coverLetterId }) {
+  const docType = resumeId ? "resume" : "coverLetter";
+  const docId = resumeId || coverLetterId;
+
+  const [docData, setDocData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   useEffect(() => {
-    const fetchResumeData = async () => {
+    const fetchDocData = async () => {
       setLoading(true);
 
       try {
-        const res = await axios.get(`/api/resume/getResumeById/${resumeId}`);
+        const endpoint =
+          docType === "resume"
+            ? `/api/resume/getResumeById/${docId}`
+            : `/api/cover-letter/getCoverLetterById/${docId}`;
+
+        const res = await axios.get(endpoint);
 
         if (res.data.success) {
-          setResumeData(res.data.data);
+          setDocData(res.data.data);
         } else {
           toast.error(res.data.message || "Something went wrong");
         }
@@ -35,16 +42,17 @@ export default function DownloadPageContent({ resumeId }) {
       setLoading(false);
     };
 
-    fetchResumeData();
-  }, [resumeId]);
+    fetchDocData();
+  }, [docId, docType]);
 
-  const pdfDataReady = resumeData && resumeData.ResumeType;
+  const pdfDataReady = docType === "resume" ? docData && docData.ResumeType : Boolean(docData);
 
   const { pdfUrl } = useResumeGen(
     pdfDataReady
       ? {
-          formData: resumeData,
-          selectedTemplate: resumeData.ResumeType,
+          formData: docData,
+          selectedTemplate: docData.ResumeType || "classic",
+          type: docType === "resume" ? "resume" : "cover-letter",
         }
       : {}
   );
@@ -54,63 +62,98 @@ export default function DownloadPageContent({ resumeId }) {
 
     const link = document.createElement("a");
     link.href = pdfUrl;
-    link.download = "resume.pdf";
+    link.download = docType === "resume" ? "resume.pdf" : "cover-letter.pdf";
     link.click();
   };
 
+  const label = docType === "resume" ? "RESUME" : "COVER LETTER";
+  const fileName = docType === "resume" ? "resume.pdf" : "cover-letter.pdf";
+  const ticketId = docId ? docId.slice(-8).toUpperCase() : "--------";
+  const status = pdfUrl ? "READY" : loading ? "PROCESSING" : "NO FILE";
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-purple-50 to-blue-50 flex flex-col items-center justify-center px-2 py-8">
-      <Card className="w-full max-w-3xl rounded-xl shadow-lg bg-white/30">
-        <CardTitle className="text-center text-2xl font-bold mt-4 mb-2 text-blue-700">
-          Resume Preview & Download
-        </CardTitle>
+    <div className="min-h-screen bg-[#FBFAF7] flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-4xl">
+        {/* Folder tab */}
+        <div className="ml-6 inline-block bg-[#D9C9A3] px-4 py-1.5 rounded-t-md">
+          <span className="font-mono text-[11px] tracking-[0.2em] text-[#23201B]">
+            {label} · CLAIM TICKET
+          </span>
+        </div>
 
-        <CardContent className="flex flex-col md:flex-row gap-6 items-center justify-center">
-          <div className="w-full md:w-2/3 flex justify-center">
-            {loading ? (
-              <div className="text-gray-500 text-lg py-12">Loading...</div>
-            ) : pdfUrl ? (
-              <div className="border rounded shadow overflow-auto bg-gray-400 max-h-[80vh]">
-                <Document
-                  file={pdfUrl}
-                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-                  loading={<div className="p-8">Loading PDF...</div>}
-                >
-                  {Array.from(new Array(numPages), (_, idx) => (
-                    <Page
-                      key={`page_${idx + 1}`}
-                      pageNumber={idx + 1}
-                      width={450}
-                      className="mx-auto"
-                    />
-                  ))}
-                </Document>
-              </div>
-            ) : (
-              <div className="text-gray-500 text-lg py-12">No preview available.</div>
-            )}
-          </div>
+        {/* Folder body */}
+        <div className="relative bg-[#D9C9A3] rounded-tr-md rounded-b-md shadow-[0_8px_24px_rgba(35,32,27,0.15)] p-5 sm:p-8">
+          {/* Header row: ticket id + stamp */}
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <h1 className="font-serif text-2xl sm:text-3xl text-[#23201B] leading-tight">
+                Your {docType === "resume" ? "resume" : "cover letter"} is ready
+              </h1>
+              <p className="font-mono text-xs text-[#5B6B63] mt-1 tracking-wide">ID · {ticketId}</p>
+            </div>
 
-          <div className="w-full md:w-1/3 flex flex-col items-center gap-4">
-            <button
-              onClick={handleDownload}
-              disabled={!pdfUrl}
-              className="w-full bg-linear-to-r from-blue-500 to-purple-500 text-white font-semibold py-3 px-6 rounded-lg shadow hover:from-blue-600 hover:to-purple-600 transition disabled:opacity-50"
+            <div
+              className={`shrink-0 border-2 rounded-sm px-3 py-1.5 -rotate-6 font-mono text-xs font-bold tracking-[0.15em] ${
+                status === "READY"
+                  ? "border-[#A6352C] text-[#A6352C]"
+                  : "border-[#5B6B63] text-[#5B6B63]"
+              }`}
             >
-              Download PDF
-            </button>
-
-            <div className="text-xs text-gray-400 text-center">
-              Your resume is ready! Click the button to download.
+              {status}
             </div>
           </div>
-        </CardContent>
-      </Card>
+
+          <div className="flex flex-col md:flex-row gap-0">
+            {/* Preview: paper sheet */}
+            <div className="w-full md:w-2/3 flex justify-center">
+              <div className="w-full bg-white rounded-sm shadow-inner overflow-auto max-h-[75vh] p-3">
+                {loading ? (
+                  <div className="font-mono text-sm text-[#5B6B63] text-center py-16">
+                    Fetching your file…
+                  </div>
+                ) : pdfUrl ? (
+                  <PDFPreview pdfUrl={pdfUrl} paid={true} variant="cover-letter" />
+                ) : (
+                  <div className="font-mono text-sm text-[#5B6B63] text-center py-16">
+                    No preview available.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Tear line */}
+            <div className="hidden md:flex items-stretch justify-center px-4">
+              <div className="border-l-2 border-dashed border-[#23201B]/25" />
+            </div>
+            <div className="md:hidden border-t-2 border-dashed border-[#23201B]/25 my-6" />
+
+            {/* Ticket stub / action */}
+            <div className="w-full md:w-1/3 flex flex-col justify-center gap-4">
+              <div className="font-mono text-[11px] text-[#5B6B63] tracking-wide">
+                FILE
+                <div className="font-sans text-sm text-[#23201B] mt-0.5">{fileName}</div>
+              </div>
+
+              <button
+                onClick={handleDownload}
+                disabled={!pdfUrl}
+                className="w-full bg-[#23201B] text-[#FBFAF7] font-mono text-sm tracking-wide py-3 px-6 rounded-sm hover:bg-[#3a352c] transition disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                DOWNLOAD PDF ↓
+              </button>
+
+              <p className="font-sans text-xs text-[#5B6B63] text-center leading-relaxed">
+                Save a copy now — this ticket won't reprint itself.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <FeedbackModal
         isOpen={isFeedbackOpen}
         onClose={() => setIsFeedbackOpen(false)}
-        resumeId={resumeId}
+        resumeId={docId}
       />
     </div>
   );
