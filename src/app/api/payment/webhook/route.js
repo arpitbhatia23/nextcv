@@ -5,6 +5,7 @@ import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
 import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
 import { client } from "@/modules/payment/phonepe/service";
+import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
 
 export async function handler(req) {
   await dbConnect(); // ✅ add await
@@ -78,11 +79,16 @@ export async function handler(req) {
   if (!payment) {
     throw new apiError(400, "payment not found");
   }
-
-  // ✅ Update Resume
-  await Resume.findByIdAndUpdate(payment.resumeId, {
-    $set: { status: "paid" },
-  });
+  if (payment.productType === "resume") {
+    await Resume.findByIdAndUpdate(payment.resumeId, {
+      $set: { status: "paid" },
+    });
+  }
+  if (payment.productType === "cover-letter") {
+    await CoverLetter.findByIdAndUpdate(payment.coverletterId, {
+      $set: { status: "paid" },
+    });
+  }
 
   // ✅ Update User (prevent duplicates)
   await User.findByIdAndUpdate(payment.userId, {

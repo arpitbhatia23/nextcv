@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState, useTransition } from "react";
-import { CheckCircle2, LayoutTemplate, Sparkles, ArrowRight, Zap } from "lucide-react";
+import { CheckCircle2, LayoutTemplate, Sparkles, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -10,11 +10,21 @@ import useResumeStore from "@/store/useResumeStore";
 import { Button } from "@/shared/components/ui/button";
 import { templatesMetadata } from "@/shared/utils/template-metadata";
 
+/* Fonts: Fraunces for the letterhead headline, IBM Plex Mono for
+   eyebrows, tier tabs, badges, and prices. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
 const tierStyles = {
-  basic: "bg-slate-50 text-slate-700 border-slate-200",
-  standard: "bg-blue-50 text-blue-700 border-blue-100",
-  premium: "bg-amber-50 text-amber-700 border-amber-100",
-  elite: "bg-purple-50 text-purple-700 border-purple-100",
+  basic: { color: "#6B7280", border: "#E4E2DC" },
+  standard: { color: "#0F6E63", border: "#0F6E63" },
+  premium: { color: "#B3382C", border: "#B3382C" },
+  elite: { color: "#8A6A2F", border: "#8A6A2F" },
 };
 
 const tierTabs = [
@@ -126,32 +136,43 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
         lg:p-8
         ${isPending ? "pointer-events-none opacity-80" : ""}
       `}
+      style={{ backgroundColor: "#F7F7F5" }}
     >
-      {/* Header */}
-      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div className="space-y-3">
-          <div className="flex w-fit items-center gap-2 rounded-full bg-indigo-50/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600 md:text-xs">
-            <Zap className="h-3 w-3 fill-indigo-600" />
+      <FontImports />
 
-            <span>Step 01 — Design Strategy</span>
+      {/* Header */}
+      <div
+        className="flex flex-col justify-between gap-6 border-b-2 pb-8 md:flex-row md:items-end"
+        style={{ borderColor: "#1C2333" }}
+      >
+        <div className="space-y-3">
+          <div className="font-mono text-[11px] tracking-widest" style={{ color: "#B3382C" }}>
+            STEP 01 — DESIGN STRATEGY
           </div>
 
-          <h2 className="text-lg font-black leading-tight tracking-tight text-slate-900 md:text-xl">
-            Select your professional <span className="text-indigo-600">canvas.</span>
+          <h2
+            className="font-display text-xl font-medium leading-tight md:text-2xl"
+            style={{ color: "#1C2333" }}
+          >
+            Select your professional canvas.
           </h2>
 
-          <p className="max-w-xl text-xs leading-5 text-slate-500 md:text-sm">
+          <p className="max-w-xl text-xs leading-5 md:text-sm" style={{ color: "#6B7280" }}>
             Choose from recruiter-vetted, ATS-optimized templates designed to improve readability
             and maximize your callback opportunities.
           </p>
         </div>
 
-        <div className="hidden items-center gap-4 rounded-xl border border-slate-100 bg-white px-4 py-3 shadow-sm transition-shadow hover:shadow-md lg:flex">
+        <div
+          className="hidden items-center gap-4 border px-4 py-3 lg:flex"
+          style={{ borderColor: "#E4E2DC", backgroundColor: "#FFFFFF" }}
+        >
           <div className="flex -space-x-3">
             {[1, 2, 3, 4].map(item => (
               <div
                 key={item}
-                className="h-10 w-10 overflow-hidden rounded-full border-2 border-white bg-slate-100"
+                className="h-10 w-10 overflow-hidden border-2 bg-slate-100"
+                style={{ borderColor: "#FFFFFF" }}
               >
                 <Image
                   src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${item + 10}`}
@@ -164,16 +185,24 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
             ))}
           </div>
 
-          <div className="text-sm font-bold leading-tight text-slate-400">
+          <div
+            className="font-mono text-[10px] leading-tight tracking-wide"
+            style={{ color: "#B7B5AC" }}
+          >
             TRUSTED BY
             <br />
-            <span className="font-black text-slate-900">12,000+ experts</span>
+            <span className="font-bold" style={{ color: "#1C2333" }}>
+              12,000+ EXPERTS
+            </span>
           </div>
         </div>
       </div>
 
       {/* Tier tabs */}
-      <div className="sticky top-0 z-30 -mx-1 bg-white/90 px-1 py-3 backdrop-blur-xl">
+      <div
+        className="sticky top-0 z-30 -mx-1 px-1 py-3 backdrop-blur-xl"
+        style={{ backgroundColor: "rgba(247,247,245,0.9)" }}
+      >
         <div
           className="flex items-center gap-2 overflow-x-auto pb-1"
           role="tablist"
@@ -190,35 +219,22 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveTier(tab.key)}
-                className={`
-                  shrink-0
-                  rounded-xl
-                  border
-                  px-4
-                  py-2
-                  text-xs
-                  font-bold
-                  transition-all
-                  duration-200
-                  md:text-sm
-                  ${
-                    isActive
-                      ? "border-indigo-600 bg-indigo-600 text-white shadow-lg shadow-indigo-600/20"
-                      : "border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-600"
-                  }
-                `}
+                className="shrink-0 rounded-none border px-4 py-2 font-mono text-xs tracking-widest transition-all duration-200"
+                style={
+                  isActive
+                    ? { borderColor: "#1C2333", backgroundColor: "#1C2333", color: "#FFFFFF" }
+                    : { borderColor: "#E4E2DC", backgroundColor: "#FFFFFF", color: "#6B7280" }
+                }
               >
-                {tab.label}
+                {tab.label.toUpperCase()}
 
                 <span
-                  className={`
-                    ml-2
-                    rounded-md
-                    px-1.5
-                    py-0.5
-                    text-[10px]
-                    ${isActive ? "bg-white/20 text-white" : "bg-slate-100 text-slate-500"}
-                  `}
+                  className="ml-2 px-1.5 py-0.5 text-[10px]"
+                  style={
+                    isActive
+                      ? { backgroundColor: "rgba(255,255,255,0.15)", color: "#FFFFFF" }
+                      : { backgroundColor: "#F7F7F5", color: "#B7B5AC" }
+                  }
                 >
                   {count}
                 </span>
@@ -230,14 +246,19 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
       {/* No templates state */}
       {filteredTemplates.length === 0 && (
-        <div className="flex min-h-64 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 text-center">
-          <div className="mb-4 rounded-full bg-white p-4 shadow-sm">
-            <LayoutTemplate className="h-8 w-8 text-slate-400" />
+        <div
+          className="flex min-h-64 flex-col items-center justify-center border px-6 text-center"
+          style={{ borderStyle: "dashed", borderColor: "#D8D6CE", backgroundColor: "#FBFBF9" }}
+        >
+          <div className="mb-4 rounded-full p-4" style={{ backgroundColor: "#FFFFFF" }}>
+            <LayoutTemplate className="h-8 w-8" style={{ color: "#C9C7BF" }} strokeWidth={1.5} />
           </div>
 
-          <h3 className="font-bold text-slate-900">No templates available</h3>
+          <h3 className="font-display font-medium" style={{ color: "#1C2333" }}>
+            No templates available
+          </h3>
 
-          <p className="mt-2 max-w-md text-sm text-slate-500">
+          <p className="mt-2 max-w-md text-sm" style={{ color: "#6B7280" }}>
             There are currently no templates available in this category.
           </p>
         </div>
@@ -260,6 +281,8 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
             const originalPrice = templateData?.price ?? 149;
 
+            const tierStyle = tierStyles[tier] || tierStyles.standard;
+
             return (
               <article
                 key={key}
@@ -280,16 +303,17 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                       relative
                       aspect-[3/4.2]
                       overflow-hidden
-                      rounded-2xl
-                      bg-white
+                      rounded-none
+                      border
                       transition-all
                       duration-500
-                      ${
-                        isSelected
-                          ? "scale-[1.02] ring-[3px] ring-indigo-600 ring-offset-4 shadow-2xl"
-                          : "ring-1 ring-slate-200 hover:-translate-y-2 hover:ring-indigo-400/50 hover:shadow-xl"
-                      }
+                      ${isSelected ? "shadow-xl" : "hover:-translate-y-1"}
                     `}
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    borderColor: isSelected ? "#1C2333" : "#E4E2DC",
+                    borderWidth: isSelected ? "2px" : "1px",
+                  }}
                 >
                   {image ? (
                     <div className="relative h-full w-full">
@@ -307,51 +331,59 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                         priority={activeTier === "standard" && index === 0}
                       />
 
-                      <div className="absolute inset-0 bg-indigo-900/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <div
+                        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        style={{ backgroundColor: "rgba(28,35,51,0.08)" }}
+                      />
 
                       <div
-                        className={`
-                            absolute
-                            bottom-3
-                            left-3
-                            rounded-lg
-                            border
-                            px-2
-                            py-0.5
-                            text-[8px]
-                            font-black
-                            uppercase
-                            tracking-widest
-                            backdrop-blur-md
-                            transition-transform
-                            duration-300
-                            group-hover:translate-x-1
-                            ${tierStyles[tier] || tierStyles.standard}
-                          `}
+                        className="absolute bottom-3 left-3 border px-2 py-0.5 font-mono text-[8px] uppercase tracking-widest backdrop-blur-md transition-transform duration-300 group-hover:translate-x-1"
+                        style={{
+                          borderColor: tierStyle.border,
+                          color: tierStyle.color,
+                          backgroundColor: "rgba(255,255,255,0.9)",
+                        }}
                       >
                         {tier}
                       </div>
                     </div>
                   ) : (
-                    <div className="flex h-full flex-col items-center justify-center gap-3 text-slate-300">
-                      <div className="rounded-full bg-slate-50 p-4">
+                    <div
+                      className="flex h-full flex-col items-center justify-center gap-3"
+                      style={{ color: "#C9C7BF" }}
+                    >
+                      <div className="rounded-full p-4" style={{ backgroundColor: "#F7F7F5" }}>
                         <LayoutTemplate className="h-8 w-8 opacity-40" />
                       </div>
 
-                      <span className="text-xs font-bold uppercase tracking-wider">No Preview</span>
+                      <span className="font-mono text-xs uppercase tracking-wider">No Preview</span>
                     </div>
                   )}
 
-                  {/* Selected icon */}
+                  {/* Selected icon — postmark style */}
                   {isSelected && (
-                    <div className="absolute right-4 top-4 z-10 animate-in rounded-full bg-indigo-600 p-2 text-white shadow-lg duration-500 zoom-in">
+                    <div
+                      className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full animate-in duration-500 zoom-in"
+                      style={{
+                        border: "1.5px dashed #1C2333",
+                        backgroundColor: "#FFFFFF",
+                        color: "#1C2333",
+                      }}
+                    >
                       <CheckCircle2 className="h-4 w-4" />
                     </div>
                   )}
 
                   {/* Badge */}
                   {badge && (
-                    <div className="absolute left-4 top-4 z-10 rounded-xl border border-indigo-50 bg-white/95 px-3 py-1.5 text-[10px] font-black uppercase tracking-tight text-indigo-600 shadow-sm backdrop-blur-md">
+                    <div
+                      className="absolute left-3 top-3 z-10 border px-3 py-1.5 font-mono text-[10px] uppercase tracking-tight backdrop-blur-md"
+                      style={{
+                        borderColor: "#E4E2DC",
+                        backgroundColor: "rgba(255,255,255,0.95)",
+                        color: "#B3382C",
+                      }}
+                    >
                       <Sparkles className="mb-0.5 mr-1 inline-block h-3 w-3" />
 
                       {badge}
@@ -359,7 +391,10 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                   )}
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-indigo-950/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
+                  <div
+                    className="absolute inset-0 flex items-center justify-center opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100"
+                    style={{ backgroundColor: "rgba(28,35,51,0.55)" }}
+                  >
                     <Button
                       type="button"
                       size="sm"
@@ -367,7 +402,8 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                         event.stopPropagation();
                         handleSelect(key);
                       }}
-                      className="scale-90 rounded-xl bg-white px-6 py-5 text-xs font-black text-indigo-600 shadow-2xl transition-transform duration-300 hover:bg-white/90 group-hover:scale-100"
+                      className="rounded-none px-6 py-5 font-mono text-xs shadow-2xl transition-transform duration-300"
+                      style={{ backgroundColor: "#FFFFFF", color: "#1C2333" }}
                     >
                       SELECT DESIGN
                     </Button>
@@ -377,31 +413,39 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 {/* Template information */}
                 <div className="mt-4 px-1">
                   <div className="flex items-center justify-between gap-2">
-                    <h4 className="truncate text-sm font-bold text-slate-900 transition-colors group-hover:text-indigo-600 md:text-base">
+                    <h4
+                      className="truncate text-sm font-semibold transition-colors md:text-base"
+                      style={{ color: "#1C2333" }}
+                    >
                       {label}
                     </h4>
 
                     {templateData?.tag && (
-                      <span className="shrink-0 rounded-md bg-indigo-50 px-2 py-0.5 text-[10px] font-black text-indigo-500/60">
+                      <span className="shrink-0 font-mono text-[10px]" style={{ color: "#B7B5AC" }}>
                         #{templateData.tag}
                       </span>
                     )}
                   </div>
 
-                  <div className="mt-2 flex items-center gap-2">
+                  <div className="mt-2 flex items-center gap-2 font-mono">
                     <div className="flex items-center gap-1">
-                      <span className="text-xs font-black text-slate-900">₹{discountedPrice}</span>
+                      <span className="text-xs font-bold" style={{ color: "#1C2333" }}>
+                        ₹{discountedPrice}
+                      </span>
 
                       {originalPrice > discountedPrice && (
-                        <span className="text-[10px] text-slate-400 line-through">
+                        <span className="text-[10px] line-through" style={{ color: "#B7B5AC" }}>
                           ₹{originalPrice}
                         </span>
                       )}
                     </div>
 
-                    <div className="h-px grow bg-slate-100" />
+                    <div className="h-px grow" style={{ backgroundColor: "#E4E2DC" }} />
 
-                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300 transition-colors group-hover:text-indigo-600">
+                    <span
+                      className="text-[10px] uppercase tracking-widest transition-colors"
+                      style={{ color: "#B7B5AC" }}
+                    >
                       Preview ↗
                     </span>
                   </div>
@@ -415,15 +459,24 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
       {/* Floating selected-template action bar */}
       {selectedTemplate && selectedTemplateData && (
         <div className="fixed bottom-6 left-0 right-0 z-50 animate-in px-2 duration-500 fade-in slide-in-from-bottom-10">
-          <div className="mx-auto flex max-w-lg items-center justify-between rounded-xl border border-white/20 bg-slate-900/95 p-3 text-white shadow-2xl ring-4 ring-slate-900/20 backdrop-blur-xl md:p-4">
+          <div
+            className="mx-auto flex max-w-lg items-center justify-between rounded-none border p-3 shadow-2xl md:p-4"
+            style={{ backgroundColor: "#1C2333", borderColor: "#1C2333" }}
+          >
             <div className="flex items-center gap-4 pl-2">
-              <div className="h-12 w-10 shrink-0 overflow-hidden rounded-sm border border-white/10 bg-white/10 p-1">
+              <div
+                className="h-12 w-10 shrink-0 overflow-hidden border p-1"
+                style={{
+                  borderColor: "rgba(255,255,255,0.15)",
+                  backgroundColor: "rgba(255,255,255,0.08)",
+                }}
+              >
                 {selectedTemplateData.image ? (
                   <Image
                     src={selectedTemplateData.image}
                     width={48}
                     height={56}
-                    className="h-full w-full rounded-sm object-cover"
+                    className="h-full w-full object-cover"
                     alt={`${selectedTemplateData.label} selected template`}
                   />
                 ) : (
@@ -434,11 +487,11 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
               </div>
 
               <div className="hidden sm:block">
-                <p className="text-[10px] font-black uppercase tracking-widest text-indigo-400">
-                  Design selected
+                <p className="font-mono text-[10px] tracking-widest" style={{ color: "#B3382C" }}>
+                  DESIGN SELECTED
                 </p>
 
-                <h5 className="text-sm font-semibold uppercase tracking-tight">
+                <h5 className="text-sm font-semibold uppercase tracking-tight text-white">
                   {selectedTemplateData.label}
                 </h5>
               </div>
@@ -448,7 +501,8 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
               type="button"
               disabled={isPending}
               onClick={() => handleSelect(selectedTemplate)}
-              className="group h-10 rounded-md bg-indigo-600 px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all hover:scale-105 hover:bg-indigo-500 active:scale-95 sm:px-8"
+              className="group h-10 rounded-none px-5 font-mono text-sm text-white shadow-lg transition-all sm:px-8"
+              style={{ backgroundColor: "#B3382C" }}
             >
               {isPending ? "LOADING..." : "START BUILDING"}
 

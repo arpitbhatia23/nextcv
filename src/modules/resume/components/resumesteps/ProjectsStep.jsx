@@ -20,6 +20,20 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 
+/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
+   labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const inputClass =
+  "rounded-none border transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm";
+const inputStyle = { backgroundColor: "#F7F7F5", borderColor: "#E4E2DC", color: "#1C2333" };
+
 const ProjectsStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
@@ -87,33 +101,51 @@ const ProjectsStep = () => {
   });
 
   return (
-    <div className="py-4 md:py-8">
-      <div className="mb-4 md:mb-6">
-        <h2 className="text-lg md:text-xl font-bold text-slate-900">Projects</h2>
-        <p className="text-[10px] md:text-sm text-slate-500">Highlight your best work</p>
+    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+      <FontImports />
+
+      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
+        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: "#B3382C" }}>
+          STEP 06 — PROJECTS
+        </div>
+        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
+          Projects
+        </h2>
+        <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
+          Highlight your best work
+        </p>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="bg-white rounded-lg md:rounded-xl shadow-sm border py-0 border-slate-200 overflow-hidden"
+          className="rounded-none border shadow-none py-0 overflow-hidden"
+          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
           id="tour-projects-form"
         >
-          <CardHeader className="border-b bg-slate-50/50  p-3 gap-0 pb-0  rounded-t-xl flex flex-row justify-between items-center ">
-            <CardTitle className="text-sm md:text-lg font-bold text-slate-800">
-              {isEditing ? "Edit Project" : "Add Project"}
+          <CardHeader
+            className="border-b p-3 gap-0 pb-0 flex flex-row justify-between items-center"
+            style={{ borderColor: "#E4E2DC" }}
+          >
+            <CardTitle
+              className="font-mono text-[10px] md:text-xs tracking-widest"
+              style={{ color: "#6B7280" }}
+            >
+              {isEditing ? "EDIT PROJECT" : "ADD PROJECT"}
             </CardTitle>
             {isEditing && (
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-7 text-[10px] md:text-xs text-slate-500 hover:text-slate-700"
+                className="h-7 rounded-none font-mono text-[10px] md:text-xs hover:bg-transparent"
+                style={{ color: "#6B7280" }}
               >
                 Cancel
               </Button>
             )}
           </CardHeader>
-          <CardContent className={"p-3 md:p-4"}>
+          <CardContent className="p-3 md:p-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -121,17 +153,21 @@ const ProjectsStep = () => {
                   name="title"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Project Title
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        PROJECT TITLE
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. Portfolio Site"
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -142,17 +178,21 @@ const ProjectsStep = () => {
                     name="roleOrType"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                          Your Role
+                        <FormLabel
+                          className="font-mono text-[10px] md:text-xs tracking-widest"
+                          style={{ color: "#6B7280" }}
+                        >
+                          YOUR ROLE
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="e.g. Lead"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                            className={inputClass}
+                            style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                       </FormItem>
                     )}
                   />
@@ -162,17 +202,21 @@ const ProjectsStep = () => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                          Date
+                        <FormLabel
+                          className="font-mono text-[10px] md:text-xs tracking-widest"
+                          style={{ color: "#6B7280" }}
+                        >
+                          DATE
                         </FormLabel>
                         <FormControl>
                           <Input
-                            type={"month"}
+                            type="month"
                             {...field}
-                            className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base"
+                            className={inputClass}
+                            style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" />
+                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                       </FormItem>
                     )}
                   />
@@ -183,17 +227,21 @@ const ProjectsStep = () => {
                   name="technologiesOrTopics"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Tech Stack
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        TECH STACK
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="e.g. React, Tailwind"
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -203,17 +251,21 @@ const ProjectsStep = () => {
                   name="link"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-semibold text-xs md:text-sm">
-                        Project Link
+                      <FormLabel
+                        className="font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        PROJECT LINK
                       </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="https://github.com/..."
                           {...field}
-                          className="bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all text-xs md:text-base placeholder:text-[10px]"
+                          className={inputClass}
+                          style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -223,23 +275,27 @@ const ProjectsStep = () => {
                   name="description"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="flex justify-between items-center text-slate-700 font-semibold text-xs md:text-sm">
-                        Description
+                      <FormLabel
+                        className="flex justify-between items-center font-mono text-[10px] md:text-xs tracking-widest"
+                        style={{ color: "#6B7280" }}
+                      >
+                        DESCRIPTION
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="h-6 text-[10px] text-indigo-600 hover:text-indigo-700 hover:bg-indigo-50 font-bold"
+                          className="h-6 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+                          style={{ color: "#B3382C" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
                           id="tour-ai-button"
                         >
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
-                            ? "AI Writing..."
+                            ? "AI WRITING..."
                             : form.watch("description")?.trim()
-                              ? "Refine AI"
-                              : "AI Generated"}
+                              ? "REFINE AI"
+                              : "AI GENERATED"}
                         </Button>
                       </FormLabel>
                       <div className="relative">
@@ -248,22 +304,29 @@ const ProjectsStep = () => {
                             placeholder="Brief records..."
                             rows={3}
                             {...field}
-                            className={`bg-slate-50 border-slate-200 focus:bg-white focus:border-indigo-500 transition-all resize-none text-xs md:text-sm placeholder:text-[10px] ${
+                            className={`rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
                               isGenerating ? "opacity-50" : ""
                             }`}
+                            style={inputStyle}
                             disabled={isGenerating}
                           />
                         </FormControl>
 
                         {isGenerating && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-[1px]">
-                            <div className="flex items-center gap-2 text-indigo-600 text-xs font-bold animate-pulse">
-                              <Sparkles className="w-3 h-3" /> Generating...
+                          <div
+                            className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px]"
+                            style={{ backgroundColor: "rgba(255,255,255,0.5)" }}
+                          >
+                            <div
+                              className="flex items-center gap-2 font-mono text-[10px] tracking-widest animate-pulse"
+                              style={{ color: "#B3382C" }}
+                            >
+                              <Sparkles className="w-3 h-3" /> GENERATING...
                             </div>
                           </div>
                         )}
                       </div>
-                      <FormMessage className="text-[10px]" />
+                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
                     </FormItem>
                   )}
                 />
@@ -271,9 +334,10 @@ const ProjectsStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold h-10 md:h-11 rounded-lg text-xs md:text-sm"
+                    className="w-full rounded-none text-white shadow-none h-10 md:h-11 font-mono text-xs md:text-sm tracking-widest"
+                    style={{ backgroundColor: "#B3382C" }}
                   >
-                    {isEditing ? "Update Project" : "Save Project"}
+                    {isEditing ? "UPDATE PROJECT" : "SAVE PROJECT"}
                   </Button>
                 </div>
               </form>
@@ -284,30 +348,46 @@ const ProjectsStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="bg-slate-50 rounded-xl border border-slate-200 p-4 md:p-5"
+            className="border p-4 md:p-5"
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
             id="tour-projects-list"
           >
-            <h3 className="text-[10px] md:text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2 mb-4">
-              <FolderKanban className="w-4 h-4 text-indigo-500" /> Portfolio Showcase
+            <h3
+              className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4"
+              style={{ color: "#6B7280" }}
+            >
+              <FolderKanban className="w-4 h-4" style={{ color: "#B3382C" }} /> Portfolio Showcase
             </h3>
 
             {projectList.length === 0 ? (
-              <div className="text-center py-8 md:py-10 border-2 border-dashed border-slate-200 rounded-lg bg-white/50">
-                <p className="text-slate-400 text-xs">No projects added yet.</p>
+              <div
+                className="text-center py-8 md:py-10 border border-dashed"
+                style={{ borderColor: "#E4E2DC", backgroundColor: "#F7F7F5" }}
+              >
+                <p className="text-xs" style={{ color: "#B7B5AC" }}>
+                  No projects added yet.
+                </p>
               </div>
             ) : (
               <div className="space-y-3">
                 {projectList.map((project, idx) => (
                   <div
                     key={idx}
-                    className="bg-white p-3 md:p-4 rounded-lg border border-slate-200 shadow-sm flex flex-col gap-2 group hover:border-indigo-300 transition-colors"
+                    className="p-3 md:p-4 border flex flex-col gap-2 group transition-colors"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
                   >
                     <div className="flex justify-between items-start">
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-semibold text-slate-800 text-xs md:text-sm truncate">
+                        <h4
+                          className="font-display font-medium text-xs md:text-sm truncate"
+                          style={{ color: "#1C2333" }}
+                        >
                           {project.title}
                         </h4>
-                        <div className="text-[10px] md:text-xs text-indigo-600 font-medium truncate">
+                        <div
+                          className="font-mono text-[10px] md:text-xs truncate mt-0.5"
+                          style={{ color: "#B3382C" }}
+                        >
                           {project.roleOrType}
                         </div>
                       </div>
@@ -315,7 +395,8 @@ const ProjectsStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          style={{ color: "#B7B5AC" }}
                           onClick={() => handleEdit(project)}
                         >
                           <Edit2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -323,7 +404,8 @@ const ProjectsStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          style={{ color: "#B7B5AC" }}
                           onClick={() => handleDelete(project.id)}
                         >
                           <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -331,12 +413,18 @@ const ProjectsStep = () => {
                       </div>
                     </div>
 
-                    <div className="text-[9px] md:text-xs text-slate-500 font-medium bg-slate-100 self-start px-2 py-0.5 md:py-1 rounded">
+                    <div
+                      className="font-mono text-[9px] md:text-xs self-start px-2 py-0.5 md:py-1"
+                      style={{ color: "#6B7280", backgroundColor: "#F7F7F5" }}
+                    >
                       {project.technologiesOrTopics}
                     </div>
 
                     {project.description && (
-                      <p className="text-[10px] md:text-xs text-slate-600 line-clamp-2 mt-1 italic border-l-2 border-slate-100 pl-2">
+                      <p
+                        className="text-[10px] md:text-xs line-clamp-2 mt-1 italic border-l-2 pl-2"
+                        style={{ color: "#6B7280", borderColor: "#E4E2DC" }}
+                      >
                         {project.description}
                       </p>
                     )}
@@ -352,16 +440,18 @@ const ProjectsStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/experience")}
-              className="border-slate-300 text-slate-600 hover:bg-slate-50 h-10 px-4 text-xs md:text-sm font-bold"
+              className="rounded-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
+              style={{ borderColor: "#E4E2DC", color: "#1C2333" }}
             >
-              <ArrowLeft className="w-4 h-4 mr-2" /> Previous
+              <ArrowLeft className="w-4 h-4 mr-2" /> PREVIOUS
             </Button>
             <Button
               onClick={() => router.push("/dashboard/builder/certificate")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/20 h-10 px-4 text-xs md:text-sm font-bold"
+              className="rounded-none text-white shadow-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
+              style={{ backgroundColor: "#B3382C" }}
               id="tour-next-button"
             >
-              Certificates Info <ArrowRight className="w-4 h-4 ml-2" />
+              CERTIFICATES INFO <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>

@@ -2,10 +2,11 @@ import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 export class pdfGenerator {
-  constructor(resumeData, selectedTemplate) {
+  constructor(resumeData, selectedTemplate, { type }) {
     this.resumeData = resumeData;
     this.selectedTemplate = selectedTemplate;
     this.url = null;
+    this.type = type;
   }
   async createPdf() {
     const [{ getTemplateComponent }, { pdf }] = await Promise.all([
@@ -13,9 +14,15 @@ export class pdfGenerator {
       import("@react-pdf/renderer"),
     ]);
     // if (!this.selectedTemplate || this.resumeData?.ResumeType) return;
+    console.log(this.type, this.selectedTemplate);
     const TemplateComponent = await getTemplateComponent(
-      this?.selectedTemplate || this.resumeData?.ResumeType
+      this?.selectedTemplate || this.resumeData?.ResumeType,
+      this.type
     );
+    if (!TemplateComponent) {
+      throw Error("template not fould");
+    }
+    console.log(this.resumeData);
     const blob = await pdf(<TemplateComponent data={this.resumeData} />).toBlob();
     const url = URL.createObjectURL(blob);
     this.url = url;

@@ -16,6 +16,8 @@ export const createPayment = async ({
   userId,
   merchantOrderId,
   resumeId,
+  coverLetterId,
+  productType = "resume",
 }) => {
   const payment = await Payment.create({
     merchantOrderId: merchantOrderId,
@@ -23,6 +25,8 @@ export const createPayment = async ({
     userId: userId,
     resumeId: resumeId,
     couponCode: couponCode || null,
+    coverletterId: coverLetterId || null,
+    productType,
     discountAmount: discountAmount ? parseFloat(discountAmount) : 0,
   });
 

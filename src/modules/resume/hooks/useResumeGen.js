@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export const useResumeGen = ({ formData, selectedTemplate }) => {
+export const useResumeGen = ({ formData, selectedTemplate, type }) => {
   const [pdfUrl, setPdfUrl] = useState("");
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useResumeGen = ({ formData, selectedTemplate }) => {
     const generate = async () => {
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
 
-      pdfGen = new pdfGenerator(formData, selectedTemplate);
+      pdfGen = new pdfGenerator(formData, selectedTemplate, { type });
 
       const url = await pdfGen.createPdf();
 

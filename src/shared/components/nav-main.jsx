@@ -12,27 +12,35 @@ import Link from "next/link";
 export function NavMain({ items }) {
   return (
     <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-2">
+      <SidebarGroupContent className="flex flex-col gap-1">
         <SidebarMenu>
           {items.map(item => (
             <SidebarMenuItem key={item.title}>
               <Link href={item?.url}>
                 <SidebarMenuButton
                   tooltip={item.title}
-                  className={
-                    "flex items-center justify-start gap-4 py-7 px-2 hover:bg-white rounded-2xl transition-all duration-300 group shadow-none hover:shadow-[0_4px_20px_-4px_rgba(99,102,241,0.1)] border border-transparent hover:border-slate-100"
-                  }
+                  className="flex items-center justify-start gap-4 py-6 px-3 rounded-none transition-all duration-200 group shadow-none border-l-2 border-transparent hover:border-l-[#1C2333]"
+                  style={{ ["--nav-hover-bg"]: "#F7F7F5" }}
                 >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 group-hover:bg-indigo-50 group-hover:scale-110 transition-all duration-300">
-                    <span className="text-slate-500 group-hover:text-indigo-600 transition-colors">
-                      {item.icon && <item.icon size={20} strokeWidth={2} />}
+                  <div
+                    className="flex items-center justify-center w-9 h-9 border transition-all duration-200"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+                  >
+                    <span className="transition-colors" style={{ color: "#6B7280" }}>
+                      {item.icon && <item.icon size={18} strokeWidth={1.75} />}
                     </span>
                   </div>
-                  <span className="text-[14px] font-semibold text-slate-600 group-hover:text-slate-900 transition-colors tracking-tight">
-                    {item.title}
+                  <span
+                    className="font-mono text-[11px] font-medium tracking-wide transition-colors"
+                    style={{ color: "#6B7280" }}
+                  >
+                    {item.title.toUpperCase()}
                   </span>
                   {item.badge && (
-                    <span className="ml-auto bg-linear-to-r from-indigo-500 to-violet-500 text-white text-[9px] font-black px-2 py-1 rounded-lg uppercase tracking-wider shadow-sm group-hover:shadow-indigo-200 transition-all">
+                    <span
+                      className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono"
+                      style={{ backgroundColor: "#B3382C" }}
+                    >
                       {item.badge}
                     </span>
                   )}
@@ -42,6 +50,14 @@ export function NavMain({ items }) {
           ))}
         </SidebarMenu>
       </SidebarGroupContent>
+      <style jsx global>{`
+        [data-sidebar="menu-button"]:hover {
+          background-color: #f7f7f5 !important;
+        }
+        [data-sidebar="menu-button"]:hover span {
+          color: #1c2333 !important;
+        }
+      `}</style>
     </SidebarGroup>
   );
 }

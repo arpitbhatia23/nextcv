@@ -21,20 +21,30 @@ import { userStore } from "@/store/user.store";
 const userData = {
   navMain: [
     {
-      title: "Dashboard",
+      title: "DASHBOARD",
       url: "/dashboard",
       icon: IconDashboard,
     },
     {
-      title: "My Resumes",
+      title: "MY RESUME",
       url: "/dashboard/my-resume",
       icon: FileText,
     },
+    // {
+    //   title: "AI Chat Resume",
+    //   url: "/dashboard/full-ai-resume",
+    //   icon: Palette,
+    //   badge: "Experimental",
+    // },
     {
-      title: "AI Chat Resume",
-      url: "/dashboard/full-ai-resume",
-      icon: Palette,
-      badge: "Experimental",
+      title: "COVER LETTER ",
+      url: "/dashboard/cover-letter",
+      icon: FileText,
+    },
+    {
+      title: " MY COVER LETTER ",
+      url: "/dashboard/my-cover-letter",
+      icon: FileText,
     },
   ],
 };
@@ -42,7 +52,7 @@ const userData = {
 const adminData = {
   navMain: [
     {
-      title: "Dashboard",
+      title: "DASHBOARD",
       url: "/dashboard",
       icon: IconDashboard,
     },
