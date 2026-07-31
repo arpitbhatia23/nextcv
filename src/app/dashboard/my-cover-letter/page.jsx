@@ -26,10 +26,10 @@ import { useRouter } from "next/navigation";
 import { Input } from "../../../shared/components/ui/input";
 import { toast } from "sonner";
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
-import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
+import { usePayment } from "@/modules/cover-letter/Hook/usePayment";
 const PDFPreview = dynamic(() => import("@/modules/resume/components/pdfPreview"), {
   ssr: false,
   loading: () => <div className="text-sm text-[#6B7280]">Loading preview...</div>,
@@ -131,7 +131,7 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                // onClick={() => onDelete(coverLetter._id)}
+                onClick={() => onDelete()}
                 className="text-red-600 focus:text-red-600 focus:bg-red-50"
               >
                 <Trash2 className="mr-2 h-4 w-4" />
@@ -192,9 +192,7 @@ const MyCoverLetter = () => {
     const fetchCoverLetter = async () => {
       setLoading(true);
       const res = await axios.get("/api/cover-letter/getAllCoverLetter");
-      console.log(res.data.data);
       const data = res.data.data;
-      console.log(data);
       setCoverLetters({
         paid: data.paid || [],
         draft: data.draft || [],
@@ -207,11 +205,10 @@ const MyCoverLetter = () => {
 
   const paidCoverLetters = coverLetters.paid;
   const draftCoverLetters = coverLetters.draft;
-  console.log(paidCoverLetters, draftCoverLetters);
   const handleDownload = async coverLetter => {
     if (coverLetter.status === "paid") {
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
-      const pdfGen = new pdfGenerator(coverLetter);
+      const pdfGen = new pdfGenerator(coverLetter, "classic", { type: "cover-letter" });
       await pdfGen.downloadPdf();
     } else {
       setPaymentModal(true);
@@ -239,14 +236,12 @@ const MyCoverLetter = () => {
 
   const handleDelete = async coverLetterId => {
     try {
-      const res = await axios.delete(`/api/coverLetter/deleteById?id=${coverLetterId}`);
+      const res = await axios.delete(`/api/cover-letter/deleteById/${coverLetterId}`);
       if (res.data.success) {
         setCoverLetters(prev => ({
           ...prev,
-          paid: prev.paid?.filter(coverLetter => coverLetter.coverletterdata._id !== coverLetterId),
-          draft: prev.draft?.filter(
-            coverLetter => coverLetter.coverletterdata._id !== coverLetterId
-          ),
+          paid: prev.paid?.filter(coverLetter => coverLetter._id !== coverLetterId),
+          draft: prev.draft?.filter(coverLetter => coverLetter._id !== coverLetterId),
         }));
       }
     } catch (error) {
@@ -258,7 +253,6 @@ const MyCoverLetter = () => {
     const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
     const pdfGen = new pdfGenerator(coverLetterData, "classic", { type: "cover-letter" });
     const url = await pdfGen.createPdf();
-    console.log(coverLetterData);
     setPdfUrl(url);
     if (coverLetterData.status === "paid") {
       setPaid(true);
@@ -272,14 +266,8 @@ const MyCoverLetter = () => {
     draftId: coverLetterData?._id,
   };
 
-  const { handelPayment, isRedirecting } = usePayment({
-    discount: couponDiscount,
-    originalAmount,
-    formData: paymentFormData,
-    applied,
-    selectedTemplate: coverLetterData?.CoverLetterType,
-    setIsSubmit,
-    draftId: coverLetterData?._id,
+  const { handelPayment, isPaymentSubmit, isRedirecting } = usePayment({
+    coverLetter: coverLetterData,
     couponCode,
   });
 
@@ -296,7 +284,7 @@ const MyCoverLetter = () => {
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
         <FontImports />
-        <div className="max-w-[1600px] mx-auto p-8">
+        <div className="max-w-400 mx-auto p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="border animate-pulse" style={{ borderColor: "#E4E2DC" }}>
@@ -322,7 +310,7 @@ const MyCoverLetter = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
       <FontImports />
-      <div className="max-w-[1600px] mx-auto p-6 md:p-10">
+      <div className="max-w-400 mx-auto p-6 md:p-10">
         {/* Letterhead */}
         <div
           className="pb-6 mb-10 border-b-2 flex flex-col md:flex-row md:items-end justify-between gap-4"
@@ -490,7 +478,7 @@ const MyCoverLetter = () => {
                   className="w-full text-white font-medium h-12 rounded-none text-base shadow-none"
                   style={{ backgroundColor: "#B3382C" }}
                   onClick={() => handelPayment()}
-                  disabled={isSubmit || isRedirecting}
+                  disabled={isPaymentSubmit || isRedirecting}
                 >
                   Pay ₹{amount} & Download
                 </Button>
@@ -546,14 +534,13 @@ const MyCoverLetter = () => {
                 id="tour-coverletter-list"
               >
                 {paidCoverLetters.map(coverLetter => {
-                  console.log(coverLetter);
                   return (
                     <CoverLetterCard
                       key={coverLetter?._id}
                       coverLetter={coverLetter}
                       onPreview={() => handleViewCoverLetter(coverLetter)}
                       onDownload={handleDownload}
-                      onDelete={handleDelete}
+                      onDelete={() => handleDelete(coverLetter._id)}
                     />
                   );
                 })}
@@ -585,7 +572,7 @@ const MyCoverLetter = () => {
                     coverLetter={coverLetter}
                     onPreview={() => handleViewCoverLetter(coverLetter)}
                     onDownload={handleDownload}
-                    onDelete={handleDelete}
+                    onDelete={() => handleDelete(coverLetter._id)}
                   />
                 ))}
               </div>

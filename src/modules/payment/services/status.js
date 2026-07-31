@@ -53,6 +53,7 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
         `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`
       );
     }
+    console.log(payment);
     if (payment.productType === "cover-letter") {
       const updatedCoverLetter = await CoverLetter.findByIdAndUpdate(
         payment.coverletterId,
@@ -65,7 +66,7 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
       );
 
       if (!updatedCoverLetter) {
-        throw new apiError(500, "something went wrong while updateins resume status");
+        throw new apiError(500, "something went wrong while updateins covverletterr status");
       }
       await User.findByIdAndUpdate(userId, {
         $push: {
