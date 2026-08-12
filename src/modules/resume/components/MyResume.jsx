@@ -327,7 +327,7 @@ const MyResume = () => {
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
         <FontImports />
-        <div className="max-w-[1600px] mx-auto p-8">
+        <div className="max-w-400 mx-auto p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="border animate-pulse" style={{ borderColor: "#E4E2DC" }}>
@@ -353,7 +353,7 @@ const MyResume = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
       <FontImports />
-      <div className="max-w-[1600px] mx-auto p-6 md:p-10">
+      <div className="max-w-400 mx-auto p-6 md:p-10">
         {/* Letterhead */}
         <div
           className="pb-6 mb-10 border-b-2 flex flex-col md:flex-row md:items-end justify-between gap-4"

@@ -9,8 +9,7 @@ export const getTranscationData = async () => {
     throw new apiError(401, "unauthroizes access");
   }
 
-  const data = await Payment.find();
-
+  const data = await Payment.find().sort({ createdAt: -1 });
   if (data.length === 0) {
     throw new apiError(404, "payment not found");
   }

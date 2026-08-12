@@ -27,31 +27,54 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 
-// Status badge config
+/* Fonts match the Correspondence Archive letterhead:
+   Fraunces for display numerals, IBM Plex Mono for labels / codes. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const INK = "#1C2333";
+const RUST = "#B3382C";
+const PAPER = "#F7F7F5";
+const LINE = "#E4E2DC";
+const MUTE = "#6B7280";
+const FAINT = "#B7B5AC";
+const GOOD = "#0F6E63";
+const GOOD_BG = "#EAF4F2";
+
+// Status badge config — restyled to the letterhead's ink / rust / good-green trio
 const STATUS_CONFIG = {
   completed: {
     label: "Completed",
-    cls: "bg-emerald-100 text-emerald-800 border-emerald-200",
+    color: GOOD,
+    bg: GOOD_BG,
+    border: "#BFE0DA",
     icon: CheckCircle2,
-    iconCls: "text-emerald-500",
   },
   success: {
     label: "Success",
-    cls: "bg-emerald-100 text-emerald-800 border-emerald-200",
+    color: GOOD,
+    bg: GOOD_BG,
+    border: "#BFE0DA",
     icon: CheckCircle2,
-    iconCls: "text-emerald-500",
   },
   failed: {
     label: "Failed",
-    cls: "bg-red-100 text-red-800 border-red-200",
+    color: RUST,
+    bg: "#FBF3F1",
+    border: "#E9C7C0",
     icon: XCircle,
-    iconCls: "text-red-500",
   },
   pending: {
     label: "Pending",
-    cls: "bg-amber-100 text-amber-800 border-amber-200",
+    color: "#8A6B1E",
+    bg: "#FBF5E6",
+    border: "#E9DAB0",
     icon: Clock,
-    iconCls: "text-amber-500",
   },
 };
 
@@ -60,21 +83,12 @@ const getStatusConfig = status => {
   return (
     STATUS_CONFIG[key] || {
       label: status || "Unknown",
-      cls: "bg-slate-100 text-slate-700 border-slate-200",
+      color: MUTE,
+      bg: "#F0EFEA",
+      border: LINE,
       icon: Clock,
-      iconCls: "text-slate-400",
     }
   );
-};
-
-const getPaymentModeColor = mode => {
-  const colors = {
-    "Bank Transfer": "bg-blue-100 text-blue-800",
-    UPI: "bg-violet-100 text-violet-800",
-    "Credit Card": "bg-indigo-100 text-indigo-800",
-    Cash: "bg-green-100 text-green-800",
-  };
-  return colors[mode] || "bg-slate-100 text-slate-700";
 };
 
 const formatCurrency = amount =>
@@ -90,6 +104,20 @@ const TX_TABS = [
   { id: "pending", label: "Pending", icon: Clock },
 ];
 
+function StatusPill({ status }) {
+  const cfg = getStatusConfig(status);
+  const Icon = cfg.icon;
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono tracking-widest border"
+      style={{ color: cfg.color, backgroundColor: cfg.bg, borderColor: cfg.border }}
+    >
+      <Icon className="h-3 w-3" />
+      <span className="hidden sm:inline">{cfg.label.toUpperCase()}</span>
+    </span>
+  );
+}
+
 const TransactionTable = React.memo(({ payments }) => {
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(payments.length / ITEMS_PER_PAGE);
@@ -104,10 +132,12 @@ const TransactionTable = React.memo(({ payments }) => {
   if (payments.length === 0) {
     return (
       <div className="text-center py-12 px-4">
-        <Search className="mx-auto mb-3 h-10 w-10 text-slate-300" />
-        <p className="text-sm sm:text-base text-slate-500 font-medium">No transactions found</p>
-        <p className="text-xs sm:text-sm text-slate-400 mt-1">
-          Try adjusting your filters or date range
+        <Search className="mx-auto mb-3 h-8 w-8" style={{ color: LINE }} strokeWidth={1.25} />
+        <p className="font-display text-base font-medium" style={{ color: INK }}>
+          No transactions found
+        </p>
+        <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: FAINT }}>
+          TRY ADJUSTING YOUR FILTERS OR DATE RANGE
         </p>
       </div>
     );
@@ -116,58 +146,77 @@ const TransactionTable = React.memo(({ payments }) => {
   return (
     <div>
       {/* Table info bar */}
-      <div className="px-4 sm:px-6 py-3 flex items-center justify-between border-b border-slate-100 bg-slate-50/60">
-        <p className="text-xs sm:text-sm text-slate-500">
-          Showing{" "}
-          <span className="font-semibold text-slate-800">
-            {start + 1}–{Math.min(start + ITEMS_PER_PAGE, payments.length)}
-          </span>{" "}
-          of <span className="font-semibold text-slate-800">{payments.length}</span> results
+      <div
+        className="px-4 sm:px-6 py-3 flex items-center justify-between border-b"
+        style={{ borderColor: LINE, backgroundColor: PAPER }}
+      >
+        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
+          SHOWING {start + 1}–{Math.min(start + ITEMS_PER_PAGE, payments.length)} OF{" "}
+          {payments.length}
         </p>
-        <p className="text-xs text-slate-400">
-          Page {page}/{totalPages}
+        <p className="font-mono text-[11px] tracking-widest" style={{ color: FAINT }}>
+          PAGE {page}/{totalPages}
         </p>
       </div>
 
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow className="bg-slate-50 hover:bg-slate-50">
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3">
-                Transaction ID
+            <TableRow style={{ backgroundColor: PAPER }} className="hover:bg-transparent">
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3"
+                style={{ color: MUTE }}
+              >
+                TRANSACTION ID
               </TableHead>
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3">
-                Date
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3"
+                style={{ color: MUTE }}
+              >
+                DATE
               </TableHead>
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3 hidden sm:table-cell">
-                Time
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3 hidden sm:table-cell"
+                style={{ color: MUTE }}
+              >
+                TIME
               </TableHead>
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3">
-                Amount
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3"
+                style={{ color: MUTE }}
+              >
+                AMOUNT
               </TableHead>
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3 hidden md:table-cell">
-                Mode
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3 hidden md:table-cell"
+                style={{ color: MUTE }}
+              >
+                MODE
               </TableHead>
-              <TableHead className="text-xs sm:text-sm font-semibold text-slate-600 py-3">
-                Status
+              <TableHead
+                className="font-mono text-[10px] tracking-widest py-3"
+                style={{ color: MUTE }}
+              >
+                STATUS
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {current.map((payment, idx) => {
-              const cfg = getStatusConfig(payment?.status);
-              const StatusIcon = cfg.icon;
               const isLast = idx === current.length - 1;
               return (
                 <React.Fragment key={payment._id}>
-                  <TableRow className="hover:bg-slate-50/80 transition-colors group">
+                  <TableRow className="transition-colors" style={{ borderColor: LINE }}>
                     <TableCell className="py-3 sm:py-4">
-                      <span className="text-xs sm:text-sm font-mono text-slate-700 truncate block max-w-[100px] sm:max-w-[160px]">
+                      <span
+                        className="font-mono text-xs truncate block max-w-25 sm:max-w-40"
+                        style={{ color: INK }}
+                      >
                         {payment?.transcationId || payment?.transactionId || "—"}
                       </span>
                     </TableCell>
                     <TableCell className="py-3 sm:py-4">
-                      <span className="text-xs sm:text-sm text-slate-600 whitespace-nowrap">
+                      <span className="font-mono text-xs whitespace-nowrap" style={{ color: MUTE }}>
                         {new Date(payment?.createdAt).toLocaleDateString("en-IN", {
                           day: "numeric",
                           month: "short",
@@ -176,7 +225,7 @@ const TransactionTable = React.memo(({ payments }) => {
                       </span>
                     </TableCell>
                     <TableCell className="py-3 sm:py-4 hidden sm:table-cell">
-                      <span className="text-xs text-slate-500">
+                      <span className="font-mono text-[11px]" style={{ color: FAINT }}>
                         {new Date(payment?.createdAt).toLocaleTimeString("en-IN", {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -186,39 +235,33 @@ const TransactionTable = React.memo(({ payments }) => {
                     </TableCell>
                     <TableCell className="py-3 sm:py-4">
                       <span
-                        className={`text-xs sm:text-sm font-bold ${
-                          payment?.status?.toLowerCase() === "failed"
-                            ? "text-red-600"
-                            : "text-emerald-700"
-                        }`}
+                        className="font-display text-sm font-semibold"
+                        style={{
+                          color: payment?.status?.toLowerCase() === "failed" ? RUST : GOOD,
+                        }}
                       >
                         {formatCurrency(payment?.amount)}
                       </span>
                     </TableCell>
                     <TableCell className="py-3 sm:py-4 hidden md:table-cell">
                       <span
-                        className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${getPaymentModeColor(
-                          payment?.paymentMode
-                        )}`}
+                        className="font-mono text-[10px] tracking-widest"
+                        style={{ color: MUTE }}
                       >
-                        {payment?.paymentMode || "—"}
+                        {(payment?.paymentMode || "—").toUpperCase()}
                       </span>
                     </TableCell>
                     <TableCell className="py-3 sm:py-4">
-                      <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full border ${cfg.cls}`}
-                      >
-                        <StatusIcon className={`h-3 w-3 ${cfg.iconCls}`} />
-                        <span className="hidden sm:inline">{cfg.label}</span>
-                      </span>
+                      <StatusPill status={payment?.status} />
                     </TableCell>
                   </TableRow>
                   {/* Visual separator between groups of 5 rows */}
                   {(idx + 1) % 5 === 0 && !isLast && (
-                    <TableRow key={`sep-${idx}`} className="h-0 p-0">
+                    <TableRow key={`sep-${idx}`} className="h-0 p-0 hover:bg-transparent">
                       <TableCell
                         colSpan={6}
-                        className="p-0 border-t-2 border-dashed border-slate-200"
+                        className="p-0"
+                        style={{ borderTop: `1px dashed ${LINE}` }}
                       />
                     </TableRow>
                   )}
@@ -231,14 +274,18 @@ const TransactionTable = React.memo(({ payments }) => {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="px-4 sm:px-6 py-3 flex items-center justify-between border-t border-slate-100 bg-white">
+        <div
+          className="px-4 sm:px-6 py-3 flex items-center justify-between border-t"
+          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+        >
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 font-mono text-[10px] tracking-widest border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ color: INK, borderColor: LINE, backgroundColor: "#FFFFFF" }}
           >
             <ChevronLeft className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Previous</span>
+            <span className="hidden sm:inline">PREV</span>
           </button>
 
           <div className="flex items-center gap-1">
@@ -249,15 +296,17 @@ const TransactionTable = React.memo(({ payments }) => {
               else if (page >= totalPages - 2) pageNum = totalPages - 4 + i;
               else pageNum = page - 2 + i;
 
+              const active = page === pageNum;
               return (
                 <button
                   key={pageNum}
                   onClick={() => setPage(pageNum)}
-                  className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-medium rounded-lg transition-colors ${
-                    page === pageNum
-                      ? "bg-indigo-600 text-white shadow-sm"
-                      : "text-slate-600 border border-slate-200 bg-white hover:bg-slate-50"
-                  }`}
+                  className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-xs transition-colors border"
+                  style={
+                    active
+                      ? { backgroundColor: INK, color: "#FFFFFF", borderColor: INK }
+                      : { color: MUTE, borderColor: LINE, backgroundColor: "#FFFFFF" }
+                  }
                 >
                   {pageNum}
                 </button>
@@ -268,9 +317,10 @@ const TransactionTable = React.memo(({ payments }) => {
           <button
             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="inline-flex items-center gap-1 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 font-mono text-[10px] tracking-widest border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ color: INK, borderColor: LINE, backgroundColor: "#FFFFFF" }}
           >
-            <span className="hidden sm:inline">Next</span>
+            <span className="hidden sm:inline">NEXT</span>
             <ChevronRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -278,6 +328,7 @@ const TransactionTable = React.memo(({ payments }) => {
     </div>
   );
 });
+TransactionTable.displayName = "TransactionTable";
 
 const AdminPaymentDashboard = () => {
   const [payments, setPayments] = useState([]);
@@ -367,15 +418,18 @@ const AdminPaymentDashboard = () => {
 
   const totals = useMemo(() => {
     // Only successful / completed payments count toward revenue
-    return successPayments.reduce((acc, p) => {
-      const amount = p.amount || 0;
-      acc.total += amount;
-      acc.successCount += 1;
-      acc.byPaymentMode[p.paymentMode] = (acc.byPaymentMode[p.paymentMode] || 0) + amount;
-      acc.count = filteredPayments.length;
-      acc.average = acc.total / (acc.successCount || 1);
-      return acc;
-    }, { total: 0, count: 0, successCount: 0, average: 0, byPaymentMode: {} });
+    return successPayments.reduce(
+      (acc, p) => {
+        const amount = p.amount || 0;
+        acc.total += amount;
+        acc.successCount += 1;
+        acc.byPaymentMode[p.paymentMode] = (acc.byPaymentMode[p.paymentMode] || 0) + amount;
+        acc.count = filteredPayments.length;
+        acc.average = acc.total / (acc.successCount || 1);
+        return acc;
+      },
+      { total: 0, count: 0, successCount: 0, average: 0, byPaymentMode: {} }
+    );
   }, [filteredPayments, successPayments]);
 
   const exportToCSV = () => {
@@ -414,152 +468,162 @@ const AdminPaymentDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600 mx-auto" />
-          <p className="mt-4 text-sm text-slate-500">Loading transactions...</p>
-        </div>
+      <div
+        style={{ backgroundColor: PAPER }}
+        className="min-h-100 flex items-center justify-center"
+      >
+        <FontImports />
+        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
+          RETRIEVING TRANSACTION LEDGER&hellip;
+        </p>
       </div>
     );
   }
 
+  const summaryCards = [
+    {
+      label: "Total Revenue",
+      sub: "Success payments only",
+      value: formatCurrency(totals.total),
+      icon: DollarSign,
+    },
+    {
+      label: "Avg. per Success",
+      sub: `${totals.successCount} paid txns`,
+      value: formatCurrency(totals.average),
+      icon: Calculator,
+    },
+    {
+      label: "All Transactions",
+      sub: "Any status",
+      value: totals.count,
+      icon: FileText,
+    },
+    {
+      label: "Success Rate",
+      sub: `${totals.successCount} succeeded`,
+      value: `${Math.round((totals.successCount / (totals.count || 1)) * 100)}%`,
+      icon: TrendingUp,
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 p-3 sm:p-4 lg:p-6">
-      <div className="max-w-7xl mx-auto space-y-4 sm:space-y-5">
-        {/* ── Header ───────────────────────────────────────── */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 sm:p-5">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-            <div>
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900">
-                Payment Transactions
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                View, filter, and export all payment records
-              </p>
+    <div style={{ backgroundColor: PAPER }} className="min-h-screen p-3 sm:p-4 lg:p-6">
+      <FontImports />
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* ── Letterhead ───────────────────────────────────── */}
+        <div
+          className="pb-5 border-b-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          style={{ borderColor: INK }}
+        >
+          <div>
+            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
+              TRANSACTION LEDGER
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={fetchPayments}
-                disabled={loading}
-                className="flex items-center gap-1.5 border border-slate-200 text-slate-700 px-3 py-2 rounded-lg hover:bg-slate-50 transition-colors text-xs sm:text-sm font-medium disabled:opacity-50"
-              >
-                <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
-                <span className="hidden sm:inline">Refresh</span>
-              </button>
-              <button
-                onClick={exportToCSV}
-                className="flex items-center gap-1.5 bg-indigo-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-xs sm:text-sm font-medium"
-              >
-                <Download className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Export CSV</span>
-                <span className="inline sm:hidden">Export</span>
-              </button>
-            </div>
+            <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+              Payment Transactions
+            </h1>
+            <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: MUTE }}>
+              VIEW, FILTER, AND EXPORT ALL PAYMENT RECORDS
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={fetchPayments}
+              disabled={loading}
+              className="flex items-center gap-1.5 border px-3 py-2 font-mono text-[10px] tracking-widest transition-colors disabled:opacity-50"
+              style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+            >
+              <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
+              <span className="hidden sm:inline">REFRESH</span>
+            </button>
+            <button
+              onClick={exportToCSV}
+              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 font-mono text-[10px] tracking-widest text-white transition-colors hover:opacity-90"
+              style={{ backgroundColor: RUST }}
+            >
+              <Download className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">EXPORT CSV</span>
+              <span className="inline sm:hidden">EXPORT</span>
+            </button>
           </div>
         </div>
 
         {/* ── Summary Cards ─────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          {[
-            {
-              label: "Total Revenue",
-              sub: "Success payments only",
-              value: formatCurrency(totals.total),
-              icon: DollarSign,
-              accent: "emerald",
-            },
-            {
-              label: "Avg. per Success",
-              sub: `${totals.successCount} paid txns`,
-              value: formatCurrency(totals.average),
-              icon: Calculator,
-              accent: "indigo",
-            },
-            {
-              label: "All Transactions",
-              sub: "Any status",
-              value: totals.count,
-              icon: FileText,
-              accent: "violet",
-            },
-            {
-              label: "Success Rate",
-              sub: `${totals.successCount} succeeded`,
-              value: `${Math.round((totals.successCount / (totals.count || 1)) * 100)}%`,
-              icon: TrendingUp,
-              accent: "sky",
-            },
-          ].map(card => {
+        <div className="grid grid-cols-2 md:grid-cols-4 border" style={{ borderColor: LINE }}>
+          {summaryCards.map((card, i) => {
             const Icon = card.icon;
-            const accentMap = {
-              indigo: "border-indigo-400 text-indigo-600 bg-indigo-50",
-              emerald: "border-emerald-400 text-emerald-700 bg-emerald-50",
-              violet: "border-violet-400 text-violet-600 bg-violet-50",
-              sky: "border-sky-400 text-sky-600 bg-sky-50",
-            };
-            const colorMap = {
-              indigo: "text-indigo-600",
-              emerald: "text-emerald-700",
-              violet: "text-violet-600",
-              sky: "text-sky-600",
-            };
             return (
               <div
                 key={card.label}
-                className={`bg-white rounded-xl shadow-sm border-l-4 p-3 sm:p-4 lg:p-5 ${accentMap[card.accent]}`}
+                className="p-4 sm:p-5"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  borderRight: i < summaryCards.length - 1 ? `1px solid ${LINE}` : "none",
+                  borderBottom: i < 2 ? `1px solid ${LINE}` : "none",
+                }}
               >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-slate-500 truncate">
-                      {card.label}
-                    </p>
-                    <p
-                      className={`text-base sm:text-lg lg:text-2xl font-bold mt-0.5 truncate ${colorMap[card.accent]}`}
-                    >
-                      {card.value}
-                    </p>
-                    {card.sub && (
-                      <p className="text-xs text-slate-400 mt-0.5 truncate">{card.sub}</p>
-                    )}
-                  </div>
-                  <Icon className={`h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0 ${colorMap[card.accent]}`} />
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+                    {card.label.toUpperCase()}
+                  </p>
+                  <Icon className="h-4 w-4 shrink-0" style={{ color: FAINT }} />
                 </div>
+                <p
+                  className="font-display text-lg sm:text-2xl font-semibold truncate"
+                  style={{ color: INK }}
+                >
+                  {card.value}
+                </p>
+                {card.sub && (
+                  <p
+                    className="font-mono text-[10px] tracking-widest mt-1 truncate"
+                    style={{ color: FAINT }}
+                  >
+                    {card.sub.toUpperCase()}
+                  </p>
+                )}
               </div>
             );
           })}
         </div>
 
         {/* ── Filters ───────────────────────────────────── */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-3 sm:p-4">
+        <div className="border p-4" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
           <div className="flex items-center gap-2 mb-3">
-            <Filter className="h-3.5 w-3.5 text-slate-400" />
-            <span className="text-xs sm:text-sm font-semibold text-slate-700">
-              Filters &amp; Search
+            <Filter className="h-3.5 w-3.5" style={{ color: FAINT }} />
+            <span className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
+              FILTERS &amp; SEARCH
             </span>
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-400 pointer-events-none" />
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
+                style={{ color: FAINT }}
+              />
               <input
                 type="text"
                 placeholder="Search by ID, mode, status…"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition"
+                className="w-full pl-9 pr-4 py-2 text-sm border outline-none transition"
+                style={{ borderColor: LINE }}
               />
             </div>
             <select
               value={dateFilter.period}
               onChange={e => setDateFilter(f => ({ ...f, period: e.target.value }))}
               aria-label="time range"
-              className="border border-slate-200 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-700 focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 outline-none transition bg-white"
+              className="border px-3 py-2 font-mono text-[11px] tracking-widest outline-none transition"
+              style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
             >
-              <option value="all">All Time</option>
-              <option value="today">Today</option>
-              <option value="thisWeek">This Week</option>
-              <option value="thisMonth">This Month</option>
-              <option value="thisYear">This Year</option>
-              <option value="custom">Custom Range</option>
+              <option value="all">ALL TIME</option>
+              <option value="today">TODAY</option>
+              <option value="thisWeek">THIS WEEK</option>
+              <option value="thisMonth">THIS MONTH</option>
+              <option value="thisYear">THIS YEAR</option>
+              <option value="custom">CUSTOM RANGE</option>
             </select>
             {dateFilter.period === "custom" && (
               <div className="flex gap-2">
@@ -567,13 +631,15 @@ const AdminPaymentDashboard = () => {
                   type="date"
                   value={dateFilter.startDate}
                   onChange={e => setDateFilter(f => ({ ...f, startDate: e.target.value }))}
-                  className="border border-slate-200 rounded-lg px-3 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-400 outline-none"
+                  className="border px-3 py-2 font-mono text-xs outline-none"
+                  style={{ borderColor: LINE, color: INK }}
                 />
                 <input
                   type="date"
                   value={dateFilter.endDate}
                   onChange={e => setDateFilter(f => ({ ...f, endDate: e.target.value }))}
-                  className="border border-slate-200 rounded-lg px-3 py-2 text-xs sm:text-sm focus:ring-2 focus:ring-indigo-400 outline-none"
+                  className="border px-3 py-2 font-mono text-xs outline-none"
+                  style={{ borderColor: LINE, color: INK }}
                 />
               </div>
             )}
@@ -581,41 +647,36 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Transaction Tabs (All / Success / Failed / Pending) ── */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="border" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
           {/* Tab bar */}
-          <div className="flex border-b border-slate-100 overflow-x-auto scrollbar-hide">
+          <div
+            className="flex border-b overflow-x-auto scrollbar-hide"
+            style={{ borderColor: LINE }}
+          >
             {TX_TABS.map(tab => {
               const Icon = tab.icon;
               const count = tabCounts[tab.id];
               const isActive = activeTxTab === tab.id;
-              const colorMap = {
-                all: "border-indigo-600 text-indigo-600 bg-indigo-50/60",
-                success: "border-emerald-600 text-emerald-700 bg-emerald-50/60",
-                failed: "border-red-600 text-red-700 bg-red-50/60",
-                pending: "border-amber-500 text-amber-700 bg-amber-50/60",
-              };
-              const badgeMap = {
-                all: "bg-indigo-100 text-indigo-700",
-                success: "bg-emerald-100 text-emerald-700",
-                failed: "bg-red-100 text-red-700",
-                pending: "bg-amber-100 text-amber-700",
-              };
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTxTab(tab.id)}
-                  className={`flex items-center gap-1.5 px-3 sm:px-5 py-3 sm:py-3.5 text-xs sm:text-sm font-medium whitespace-nowrap border-b-2 transition-all duration-200 flex-shrink-0 ${
+                  className="flex items-center gap-1.5 px-3 sm:px-5 py-3 sm:py-3.5 font-mono text-[11px] tracking-widest whitespace-nowrap border-b-2 transition-all duration-200 shrink-0"
+                  style={
                     isActive
-                      ? colorMap[tab.id]
-                      : "border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50"
-                  }`}
+                      ? { borderColor: INK, color: INK, backgroundColor: PAPER }
+                      : { borderColor: "transparent", color: MUTE }
+                  }
                 >
                   <Icon className="h-3.5 w-3.5" />
-                  {tab.label}
+                  {tab.label.toUpperCase()}
                   <span
-                    className={`ml-0.5 px-1.5 py-0.5 rounded-full text-xs font-semibold ${
-                      isActive ? badgeMap[tab.id] : "bg-slate-100 text-slate-500"
-                    }`}
+                    className="ml-0.5 px-1.5 py-0.5 text-[10px] font-mono"
+                    style={
+                      isActive
+                        ? { backgroundColor: INK, color: "#FFFFFF" }
+                        : { backgroundColor: "#F0EFEA", color: MUTE }
+                    }
                   >
                     {count}
                   </span>
@@ -625,15 +686,18 @@ const AdminPaymentDashboard = () => {
           </div>
 
           {/* Section header inside panel */}
-          <div className="px-4 sm:px-6 py-3 border-b border-slate-100 bg-white">
-            <h3 className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+          <div className="px-4 sm:px-6 py-3 border-b" style={{ borderColor: LINE }}>
+            <h3
+              className="font-mono text-[11px] tracking-widest flex items-center gap-1.5"
+              style={{ color: INK }}
+            >
               {(() => {
                 const tab = TX_TABS.find(t => t.id === activeTxTab);
                 const Icon = tab?.icon;
                 return (
                   <>
-                    {Icon && <Icon className="h-3.5 w-3.5" />}
-                    {tab?.label} Transactions
+                    {Icon && <Icon className="h-3.5 w-3.5" style={{ color: RUST }} />}
+                    {tab?.label.toUpperCase()} TRANSACTIONS
                   </>
                 );
               })()}
@@ -645,30 +709,34 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Analytics Cards ─────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Payment Mode Breakdown */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 sm:p-5">
-            <h4 className="text-xs sm:text-sm font-semibold text-slate-700 mb-3 flex items-center gap-1.5">
-              <DollarSign className="h-4 w-4 text-indigo-500" />
-              Payment Mode Breakdown
+          <div
+            className="border p-4 sm:p-5"
+            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+          >
+            <h4
+              className="font-mono text-[10px] tracking-widest mb-3 flex items-center gap-1.5 pb-3 border-b"
+              style={{ color: MUTE, borderColor: LINE }}
+            >
+              <DollarSign className="h-3.5 w-3.5" style={{ color: RUST }} />
+              PAYMENT MODE BREAKDOWN
             </h4>
-            <div className="space-y-2">
+            <div className="divide-y" style={{ borderColor: LINE }}>
               {Object.entries(totals.byPaymentMode).length === 0 ? (
-                <p className="text-xs text-slate-400 text-center py-4">No data</p>
+                <p
+                  className="font-mono text-[11px] tracking-widest text-center py-6"
+                  style={{ color: FAINT }}
+                >
+                  NO DATA
+                </p>
               ) : (
                 Object.entries(totals.byPaymentMode).map(([mode, amount]) => (
-                  <div
-                    key={mode}
-                    className="flex justify-between items-center p-2.5 sm:p-3 bg-slate-50 rounded-lg"
-                  >
-                    <span
-                      className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${getPaymentModeColor(
-                        mode
-                      )}`}
-                    >
-                      {mode}
+                  <div key={mode} className="flex justify-between items-center py-2.5">
+                    <span className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
+                      {mode?.toUpperCase()}
                     </span>
-                    <span className="text-xs sm:text-sm font-bold text-indigo-600">
+                    <span className="font-display text-sm font-semibold" style={{ color: RUST }}>
                       {formatCurrency(amount)}
                     </span>
                   </div>
@@ -678,46 +746,42 @@ const AdminPaymentDashboard = () => {
           </div>
 
           {/* Status Overview */}
-          <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 sm:p-5">
-            <h4 className="text-xs sm:text-sm font-semibold text-slate-700 mb-3 flex items-center gap-1.5">
-              <FileText className="h-4 w-4 text-emerald-600" />
-              Transaction Status Overview
+          <div
+            className="border p-4 sm:p-5"
+            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+          >
+            <h4
+              className="font-mono text-[10px] tracking-widest mb-3 flex items-center gap-1.5 pb-3 border-b"
+              style={{ color: MUTE, borderColor: LINE }}
+            >
+              <FileText className="h-3.5 w-3.5" style={{ color: RUST }} />
+              TRANSACTION STATUS OVERVIEW
             </h4>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {[
                 { key: "success", label: "Successful", count: successPayments.length },
                 { key: "failed", label: "Failed", count: failedPayments.length },
                 { key: "pending", label: "Pending", count: pendingPayments.length },
               ].map(({ key, label, count }) => {
-                const cfg = getStatusConfig(key);
-                const StatusIcon = cfg.icon;
                 const pct = filteredPayments.length
                   ? Math.round((count / filteredPayments.length) * 100)
                   : 0;
+                const barColor = key === "success" ? GOOD : key === "failed" ? RUST : "#C99A2E";
                 return (
-                  <div key={key} className="p-2.5 sm:p-3 bg-slate-50 rounded-lg">
+                  <div key={key}>
                     <div className="flex justify-between items-center mb-1.5">
+                      <StatusPill status={key} />
                       <span
-                        className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold rounded-full border ${cfg.cls}`}
+                        className="font-mono text-[11px] tracking-widest"
+                        style={{ color: MUTE }}
                       >
-                        <StatusIcon className={`h-3 w-3 ${cfg.iconCls}`} />
-                        {label}
-                      </span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-700">
-                        {count}{" "}
-                        <span className="text-xs text-slate-400 font-normal">({pct}%)</span>
+                        {count} ({pct}%)
                       </span>
                     </div>
-                    <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-1.5 w-full" style={{ backgroundColor: "#F0EFEA" }}>
                       <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          key === "success"
-                            ? "bg-emerald-500"
-                            : key === "failed"
-                            ? "bg-red-500"
-                            : "bg-amber-400"
-                        }`}
-                        style={{ width: `${pct}%` }}
+                        className="h-full transition-all duration-500"
+                        style={{ width: `${pct}%`, backgroundColor: barColor }}
                       />
                     </div>
                   </div>
@@ -728,12 +792,21 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Monthly Breakdown ─────────────────────────── */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-4 sm:p-5">
-          <h4 className="text-xs sm:text-sm font-semibold text-slate-700 mb-3 flex items-center gap-1.5">
-            <Calendar className="h-4 w-4 text-violet-600" />
-            Monthly Revenue
+        <div
+          className="border p-4 sm:p-5"
+          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+        >
+          <h4
+            className="font-mono text-[10px] tracking-widest mb-4 flex items-center gap-1.5 pb-3 border-b"
+            style={{ color: MUTE, borderColor: LINE }}
+          >
+            <Calendar className="h-3.5 w-3.5" style={{ color: RUST }} />
+            MONTHLY REVENUE
           </h4>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+          <div
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0 border"
+            style={{ borderColor: LINE }}
+          >
             {Object.entries(
               filteredPayments.reduce((acc, p) => {
                 const month = new Date(p.createdAt).toLocaleDateString("en-IN", {
@@ -745,13 +818,26 @@ const AdminPaymentDashboard = () => {
               }, {})
             )
               .sort(([a], [b]) => new Date(a) - new Date(b))
-              .map(([month, amount]) => (
+              .map(([month, amount], i, arr) => (
                 <div
                   key={month}
-                  className="p-3 bg-gradient-to-br from-violet-50 to-indigo-50 rounded-lg border border-violet-100"
+                  className="p-3"
+                  style={{
+                    borderRight:
+                      (i + 1) % 4 !== 0 && i !== arr.length - 1 ? `1px solid ${LINE}` : "none",
+                    borderTop: i >= 4 ? `1px solid ${LINE}` : "none",
+                  }}
                 >
-                  <p className="text-xs text-slate-500 font-medium truncate">{month}</p>
-                  <p className="text-sm sm:text-base font-bold text-violet-700 mt-0.5 truncate">
+                  <p
+                    className="font-mono text-[10px] tracking-widest truncate"
+                    style={{ color: MUTE }}
+                  >
+                    {month.toUpperCase()}
+                  </p>
+                  <p
+                    className="font-display text-sm sm:text-base font-semibold mt-0.5 truncate"
+                    style={{ color: INK }}
+                  >
                     {formatCurrency(amount)}
                   </p>
                 </div>
@@ -760,17 +846,26 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Summary Footer ───────────────────────────── */}
-        <div className="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-xl p-4 sm:p-5 text-white shadow-md">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 text-center">
+        <div className="p-5 sm:p-6" style={{ backgroundColor: INK }}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
             {[
               { label: "TOTAL REVENUE", value: formatCurrency(totals.total) },
               { label: "TRANSACTIONS", value: totals.count },
               { label: "AVG AMOUNT", value: formatCurrency(totals.average) },
-              { label: "SUCCESS RATE", value: `${Math.round((successPayments.length / (filteredPayments.length || 1)) * 100)}%` },
+              {
+                label: "SUCCESS RATE",
+                value: `${Math.round(
+                  (successPayments.length / (filteredPayments.length || 1)) * 100
+                )}%`,
+              },
             ].map(item => (
               <div key={item.label}>
-                <p className="text-indigo-200 text-xs font-medium tracking-wide">{item.label}</p>
-                <p className="text-base sm:text-xl font-bold mt-0.5">{item.value}</p>
+                <p className="font-mono text-[10px] tracking-widest" style={{ color: "#8B90A0" }}>
+                  {item.label}
+                </p>
+                <p className="font-display text-lg sm:text-2xl font-semibold mt-1 text-white">
+                  {item.value}
+                </p>
               </div>
             ))}
           </div>

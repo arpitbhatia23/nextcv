@@ -1,7 +1,5 @@
 "use client";
 import { memo, Suspense, useEffect, useState, useTransition } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
-import { Button } from "@/shared/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -13,7 +11,6 @@ import {
   Users,
   FileText,
   CreditCard,
-  Tag,
   TrendingUp,
   Calendar,
   Download,
@@ -23,6 +20,7 @@ import {
   Target,
   IndianRupee,
   Zap,
+  Mail,
 } from "lucide-react";
 import {
   LineChart,
@@ -40,36 +38,60 @@ import {
 import axios from "axios";
 import { exportAnalyticsCSV } from "@/shared/lib/gencsv";
 
-const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#0ea5e9"];
+/* Fonts match the Correspondence Archive letterhead:
+   Fraunces for display numerals, IBM Plex Mono for labels / codes. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
 
-function MetricCard({ title, value, icon: Icon, color = "blue" }) {
-  const colorClasses = {
-    blue: "text-indigo-600 bg-indigo-50",
-    green: "text-emerald-600 bg-emerald-50",
-    yellow: "text-amber-600 bg-amber-50",
-    purple: "text-violet-600 bg-violet-50",
-    red: "text-red-600 bg-red-50",
-  };
-  const textClasses = {
-    blue: "text-indigo-600",
-    green: "text-emerald-600",
-    yellow: "text-amber-600",
-    purple: "text-violet-600",
-    red: "text-red-600",
-  };
+const INK = "#1C2333";
+const RUST = "#B3382C";
+const PAPER = "#F7F7F5";
+const LINE = "#E4E2DC";
+const MUTE = "#6B7280";
+const FAINT = "#B7B5AC";
 
+/* Charted lines/wedges cycle through ink, rust, and three muted supporting
+   tones so multi-series charts stay legible without leaving the palette. */
+const COLORS = [INK, RUST, "#7A8471", "#8C7A66", "#5B7A8C", "#A8896F"];
+
+function MetricCard({ title, value, icon: Icon }) {
   return (
-    <Card className="border border-slate-100 shadow-sm">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-4 pt-4">
-        <CardTitle className="text-xs sm:text-sm font-medium text-slate-500">{title}</CardTitle>
-        <div className={`p-2 rounded-lg ${colorClasses[color]}`}>
-          <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-        </div>
-      </CardHeader>
-      <CardContent className="px-4 pb-4">
-        <div className={`text-xl sm:text-2xl font-bold ${textClasses[color]}`}>{value}</div>
-      </CardContent>
-    </Card>
+    <div className="border p-4" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+      <div className="flex items-center justify-between mb-3">
+        <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+          {title.toUpperCase()}
+        </p>
+        <Icon className="h-3.5 w-3.5" style={{ color: FAINT }} />
+      </div>
+      <div className="font-display text-xl sm:text-2xl font-semibold" style={{ color: INK }}>
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function CustomTooltip({ active, payload, label, prefix = "" }) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="border px-3 py-2" style={{ backgroundColor: "#FFFFFF", borderColor: INK }}>
+      {label && (
+        <p className="font-mono text-[10px] tracking-widest mb-1" style={{ color: MUTE }}>
+          {label}
+        </p>
+      )}
+      {payload.map((p, i) => (
+        <p key={i} className="font-display text-sm font-semibold" style={{ color: INK }}>
+          {p.name ? `${p.name}: ` : ""}
+          {prefix}
+          {p.value}
+        </p>
+      ))}
+    </div>
   );
 }
 
@@ -77,24 +99,32 @@ const RevenueChart = memo(({ data }) => {
   return (
     <ResponsiveContainer width="100%" height={240}>
       <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-        <XAxis dataKey="month" stroke="#94a3b8" tick={{ fontSize: 11 }} />
-        <YAxis stroke="#94a3b8" tick={{ fontSize: 11 }} />
-        <Tooltip
-          formatter={value => [`₹${value}`, "Revenue"]}
-          contentStyle={{ fontSize: 12, borderRadius: 8, border: "1px solid #e2e8f0" }}
+        <CartesianGrid strokeDasharray="3 3" stroke={LINE} vertical={false} />
+        <XAxis
+          dataKey="month"
+          stroke={FAINT}
+          tick={{ fontSize: 11, fontFamily: "'IBM Plex Mono', monospace" }}
+          tickLine={false}
         />
+        <YAxis
+          stroke={FAINT}
+          tick={{ fontSize: 11, fontFamily: "'IBM Plex Mono', monospace" }}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Tooltip content={<CustomTooltip prefix="₹" />} cursor={{ stroke: LINE }} />
         <Line
           type="monotone"
           dataKey="revenue"
-          stroke="#6366f1"
+          stroke={RUST}
           strokeWidth={2}
-          dot={{ fill: "#6366f1", strokeWidth: 2, r: 3 }}
+          dot={{ fill: RUST, strokeWidth: 0, r: 3 }}
         />
       </LineChart>
     </ResponsiveContainer>
   );
 });
+RevenueChart.displayName = "RevenueChart";
 
 const PieChartComponent = memo(({ data }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -117,48 +147,50 @@ const PieChartComponent = memo(({ data }) => {
           label={isMobile ? false : ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
           outerRadius={isMobile ? 65 : 80}
           innerRadius={isMobile ? 40 : 0}
-          paddingAngle={isMobile ? 5 : 0}
+          paddingAngle={isMobile ? 3 : 0}
           dataKey="value"
-          stroke="none"
+          stroke="#FFFFFF"
+          strokeWidth={2}
         >
           {data?.map((_, index) => (
-            <Cell
-              key={`cell-${index}`}
-              fill={COLORS[index % COLORS.length]}
-              className="hover:opacity-80 transition-opacity cursor-pointer"
-            />
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip
-          contentStyle={{
-            fontSize: 12,
-            borderRadius: 12,
-            border: "none",
-            boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
-          }}
-        />
+        <Tooltip content={<CustomTooltip />} />
         <Legend
           verticalAlign="bottom"
           height={36}
-          wrapperStyle={{ fontSize: 10, paddingTop: 10 }}
-          iconType="circle"
+          wrapperStyle={{ fontSize: 10, paddingTop: 10, fontFamily: "'IBM Plex Mono', monospace" }}
+          iconType="square"
+          iconSize={8}
         />
       </PieChart>
     </ResponsiveContainer>
   );
 });
+PieChartComponent.displayName = "PieChartComponent";
 
-function SectionHeader({ icon: Icon, title, color, onExport }) {
+function SectionHeader({ icon: Icon, title, onExport }) {
   return (
-    <div className="flex items-center justify-between mb-4 sm:mb-5">
-      <h2 className="text-base sm:text-lg lg:text-xl font-bold text-slate-800 flex items-center gap-2">
-        <Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${color}`} />
-        {title}
+    <div
+      className="flex items-center justify-between mb-5 pb-3 border-b"
+      style={{ borderColor: LINE }}
+    >
+      <h2
+        className="font-mono text-[11px] tracking-widest flex items-center gap-2"
+        style={{ color: INK }}
+      >
+        <Icon className="h-4 w-4" style={{ color: RUST }} />
+        {title.toUpperCase()}
       </h2>
-      <Button variant="outline" size="sm" onClick={onExport} className="text-xs sm:text-sm">
-        <Download className="h-3.5 w-3.5 mr-1 sm:mr-2" />
-        <span className="hidden sm:inline">Export</span>
-      </Button>
+      <button
+        onClick={onExport}
+        className="flex items-center gap-1.5 border px-3 py-1.5 font-mono text-[10px] tracking-widest transition hover:bg-[#F7F7F5]"
+        style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+      >
+        <Download className="h-3 w-3" />
+        <span className="hidden sm:inline">EXPORT</span>
+      </button>
     </div>
   );
 }
@@ -192,19 +224,26 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto" />
-          <p className="mt-3 text-xs sm:text-sm text-slate-400">Loading analytics...</p>
-        </div>
+      <div
+        className="flex items-center justify-center h-64 border"
+        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+      >
+        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
+          COMPILING LEDGER&hellip;
+        </p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center py-12">
-        <p className="text-sm sm:text-base text-red-500 font-medium">{error}</p>
+      <div
+        className="border p-10 text-center"
+        style={{ borderColor: RUST, backgroundColor: "#FBF3F1" }}
+      >
+        <p className="font-mono text-xs tracking-widest" style={{ color: RUST }}>
+          {error.toUpperCase()}
+        </p>
       </div>
     );
   }
@@ -212,36 +251,68 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* ── Today's Snapshot ── */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-indigo-600 rounded-xl p-5 text-white shadow-lg overflow-hidden relative group">
-          <Zap className="absolute -right-2 -bottom-2 h-20 w-20 text-white/10 group-hover:scale-110 transition-transform" />
-          <p className="text-xs font-bold text-white/70 uppercase mb-1">Today's Revenue</p>
-          <h3 className="text-3xl font-black flex items-center gap-1">
-            <IndianRupee className="h-6 w-6" />
+      <section className="grid grid-cols-1 md:grid-cols-3 border" style={{ borderColor: INK }}>
+        <div
+          className="p-5 relative overflow-hidden border-b md:border-b-0 md:border-r"
+          style={{ backgroundColor: INK, borderColor: INK }}
+        >
+          <Zap className="absolute -right-3 -bottom-3 h-20 w-20 text-white/5" strokeWidth={1} />
+          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: "#B7B5AC" }}>
+            TODAY&apos;S REVENUE
+          </p>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold flex items-center gap-1 text-white">
+            <IndianRupee className="h-5 w-5 sm:h-6 sm:w-6" />
             {data?.todayStats?.todayRevenue || 0}
           </h3>
-          <p className="text-[10px] mt-2 text-white/50">Updated just now</p>
+          <p className="font-mono text-[10px] mt-2" style={{ color: "#8B90A0" }}>
+            UPDATED JUST NOW
+          </p>
         </div>
-        <div className="bg-slate-900 rounded-xl p-5 text-white shadow-lg overflow-hidden relative group">
-          <Users className="absolute -right-2 -bottom-2 h-20 w-20 text-white/10 group-hover:scale-110 transition-transform" />
-          <p className="text-xs font-bold text-white/70 uppercase mb-1">Today's New Users</p>
-          <h3 className="text-3xl font-black">{data?.todayStats?.todayNewUsers || 0}</h3>
-          <p className="text-[10px] mt-2 text-white/50">Tracking acquisition</p>
+        <div
+          className="p-5 relative overflow-hidden border-b md:border-b-0 md:border-r"
+          style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
+        >
+          <Users
+            className="absolute -right-3 -bottom-3 h-20 w-20"
+            style={{ color: LINE }}
+            strokeWidth={1}
+          />
+          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: MUTE }}>
+            TODAY&apos;S NEW USERS
+          </p>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold" style={{ color: INK }}>
+            {data?.todayStats?.todayNewUsers || 0}
+          </h3>
+          <p className="font-mono text-[10px] mt-2" style={{ color: FAINT }}>
+            TRACKING ACQUISITION
+          </p>
         </div>
-        <div className="bg-emerald-500 rounded-xl p-5 text-white shadow-lg overflow-hidden relative group">
-          <Target className="absolute -right-2 -bottom-2 h-20 w-20 text-white/10 group-hover:scale-110 transition-transform" />
-          <p className="text-xs font-bold text-white/70 uppercase mb-1">Conversion Rate</p>
-          <h3 className="text-3xl font-black">{data?.paymentStats?.conversionRate || 0}%</h3>
-          <p className="text-[10px] mt-2 text-white/50">Paid vs Free users</p>
+        <div className="p-5 relative overflow-hidden" style={{ backgroundColor: "#FFFFFF" }}>
+          <Target
+            className="absolute -right-3 -bottom-3 h-20 w-20"
+            style={{ color: LINE }}
+            strokeWidth={1}
+          />
+          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: MUTE }}>
+            CONVERSION RATE
+          </p>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold" style={{ color: RUST }}>
+            {data?.paymentStats?.conversionRate || 0}%
+          </h3>
+          <p className="font-mono text-[10px] mt-2" style={{ color: FAINT }}>
+            PAID VS FREE USERS
+          </p>
         </div>
       </section>
 
       {/* ── Users ── */}
-      <section className="bg-white rounded-xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <section
+        className="border p-4 sm:p-5"
+        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+      >
         <SectionHeader
           icon={Users}
           title="User Analytics"
-          color="text-indigo-600"
           onExport={() => exportAnalyticsCSV({ data, section: "users" })}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -249,29 +320,28 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             title="Total Users"
             value={data?.userStats?.totalUsers?.toLocaleString()}
             icon={Users}
-            color="blue"
           />
           <MetricCard
             title="Active Users (Recent)"
             value={data?.userStats?.activeUsers?.toLocaleString()}
             icon={Activity}
-            color="green"
           />
           <MetricCard
             title="Admin Users"
             value={data?.userStats?.adminCount?.toLocaleString()}
             icon={Award}
-            color="purple"
           />
         </div>
       </section>
 
       {/* ── Payment ── */}
-      <section className="bg-white rounded-xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <section
+        className="border p-4 sm:p-5"
+        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+      >
         <SectionHeader
           icon={CreditCard}
           title="Payment & Revenue"
-          color="text-amber-600"
           onExport={() => exportAnalyticsCSV({ data, section: "payments" })}
         />
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
@@ -279,108 +349,108 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             title="Total Revenue"
             value={`₹${data?.paymentStats?.totalRevenue?.toLocaleString()}`}
             icon={IndianRupee}
-            color="green"
           />
           <MetricCard
             title="This Month (MRR)"
             value={`₹${data?.paymentStats?.mrr?.toLocaleString()}`}
             icon={TrendingUp}
-            color="blue"
           />
-          <MetricCard
-            title="ARPU"
-            value={`₹${data?.paymentStats?.arpu || 0}`}
-            icon={DollarSign}
-            color="yellow"
-          />
+          <MetricCard title="ARPU" value={`₹${data?.paymentStats?.arpu || 0}`} icon={DollarSign} />
           <MetricCard
             title="Avg Ticket"
             value={`₹${data?.paymentStats?.avgTransactionValue?.toFixed(2)}`}
             icon={Activity}
-            color="purple"
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="border border-slate-100 shadow-sm">
-            <CardHeader className="px-4 pt-4 pb-2">
-              <CardTitle className="text-xs sm:text-sm font-semibold text-slate-600">
-                Monthly Revenue Trend
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-2">
+          <div className="border" style={{ borderColor: LINE }}>
+            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
+              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+                MONTHLY REVENUE TREND
+              </p>
+            </div>
+            <div className="px-2 pb-2">
               <RevenueChart data={data?.paymentStats?.monthlyRevenue} />
-            </CardContent>
-          </Card>
-          <Card className="border border-slate-100 shadow-sm">
-            <CardHeader className="px-4 pt-4 pb-2">
-              <CardTitle className="text-xs sm:text-sm font-semibold text-slate-600">
-                Payment Methods
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-2">
+            </div>
+          </div>
+          <div className="border" style={{ borderColor: LINE }}>
+            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
+              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+                PAYMENT METHODS
+              </p>
+            </div>
+            <div className="px-2 pb-2">
               <PieChartComponent
                 data={data?.paymentStats?.topPaymentModes?.map(mode => ({
                   name: mode.mode,
                   value: mode.revenue,
                 }))}
               />
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ── Resumes ── */}
-      <section className="bg-white rounded-xl border border-slate-100 shadow-sm p-4 sm:p-5">
+      <section
+        className="border p-4 sm:p-5"
+        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+      >
         <SectionHeader
           icon={FileText}
           title="Content Analytics"
-          color="text-emerald-600"
           onExport={() => exportAnalyticsCSV({ data, section: "resumes" })}
         />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
           <MetricCard
             title="Total Resumes"
             value={data?.resumeStats?.totalResumes?.toLocaleString()}
             icon={FileText}
-            color="green"
           />
           <MetricCard
             title="Paid Resumes"
             value={data?.resumeStats?.paidResumes?.toLocaleString()}
             icon={DollarSign}
-            color="blue"
           />
           <MetricCard
             title="Draft Resumes"
             value={data?.resumeStats?.draftResumes?.toLocaleString()}
             icon={Calendar}
-            color="yellow"
+          />
+          <MetricCard
+            title="Top Template"
+            value={data?.resumeStats?.topTemplate || "N/A"}
+            icon={Award}
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          <Card className="border border-slate-100 shadow-sm">
-            <CardHeader className="px-4 pt-4 pb-2">
-              <CardTitle className="text-xs sm:text-sm font-semibold text-slate-600">
-                Top Job Roles
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="px-2">
+          <div className="border" style={{ borderColor: LINE }}>
+            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
+              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+                TOP JOB ROLES
+              </p>
+            </div>
+            <div className="px-2 pb-2">
               <PieChartComponent
                 data={data?.resumeStats?.topResumeTypes?.map(item => ({
                   name: item.type,
                   value: item.count,
                 }))}
               />
-            </CardContent>
-          </Card>
-          <Card className="border border-slate-100 shadow-sm col-span-1 lg:col-span-2">
-            <CardHeader className="px-4 sm:px-6 pt-5 pb-3 border-b border-slate-50">
-              <CardTitle className="text-sm sm:text-base font-bold text-slate-700 flex items-center gap-2">
-                <Target className="w-4 h-4 text-indigo-500" />
-                Top Skills in Demand
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 sm:p-6">
+            </div>
+          </div>
+
+          <div className="border lg:col-span-2" style={{ borderColor: LINE }}>
+            <div
+              className="px-4 sm:px-6 pt-5 pb-3 border-b flex items-center gap-2"
+              style={{ borderColor: LINE }}
+            >
+              <Target className="w-4 h-4" style={{ color: RUST }} />
+              <p className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
+                TOP SKILLS IN DEMAND
+              </p>
+            </div>
+            <div className="p-4 sm:p-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                 {data?.resumeStats?.topSkills?.length > 0 ? (
                   data.resumeStats.topSkills.slice(0, 10).map((skilldata, index) => {
@@ -388,40 +458,67 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                     const percentage = Math.round((skilldata.count / maxCount) * 100);
 
                     return (
-                      <div
-                        key={index}
-                        className="group/skill relative p-3 rounded-xl hover:bg-slate-50/80 transition-all duration-300 min-w-0"
-                      >
-                        <div className="flex items-center justify-between mb-2 gap-4">
-                          <div className="flex items-center gap-2 min-w-0 flex-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 group-hover/skill:scale-150 transition-transform shadow-[0_0_8px_rgba(99,102,241,0.6)] shrink-0" />
-                            <span className="text-sm font-bold text-slate-800 tracking-tight group-hover/skill:text-indigo-600 transition-colors truncate">
-                              {skilldata.skill.name || "Unknown Skill"}
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-1.5 shrink-0">
-                            <span className="text-[11px] font-black text-slate-900 bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-100">
-                              {skilldata.count}
-                            </span>
-                          </div>
+                      <div key={index} className="min-w-0">
+                        <div className="flex items-center justify-between mb-1.5 gap-4">
+                          <span className="text-sm font-medium truncate" style={{ color: INK }}>
+                            {skilldata.skill.name || "Unknown Skill"}
+                          </span>
+                          <span
+                            className="font-mono text-[10px] tracking-widest shrink-0"
+                            style={{ color: MUTE }}
+                          >
+                            {skilldata.count}
+                          </span>
                         </div>
-                        <div className="relative h-2 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200/30">
+                        <div className="h-1.5 w-full" style={{ backgroundColor: "#F0EFEA" }}>
                           <div
-                            className="absolute inset-y-0 left-0 bg-linear-to-r from-indigo-500 via-indigo-600 to-violet-600 rounded-full transition-all duration-1500ms ease-out group-hover/skill:shadow-[0_0_12px_rgba(99,102,241,0.4)]"
-                            style={{ width: `${percentage}%` }}
+                            className="h-full"
+                            style={{ width: `${percentage}%`, backgroundColor: RUST }}
                           />
                         </div>
                       </div>
                     );
                   })
                 ) : (
-                  <p className="text-xs text-slate-400 text-center py-8 col-span-2">
-                    No skill data available.
+                  <p
+                    className="font-mono text-[11px] tracking-widest text-center py-8 col-span-2"
+                    style={{ color: FAINT }}
+                  >
+                    NO SKILL DATA AVAILABLE
                   </p>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cover Letters ── */}
+      <section
+        className="border p-4 sm:p-5"
+        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+      >
+        <SectionHeader
+          icon={Mail}
+          title="Cover Letter Analytics"
+          onExport={() => exportAnalyticsCSV({ data, section: "coverLetters" })}
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <MetricCard
+            title="Total Cover Letters"
+            value={data?.coverLetterStats?.totalCoverLetters?.toLocaleString()}
+            icon={Mail}
+          />
+          <MetricCard
+            title="Paid Cover Letters"
+            value={data?.coverLetterStats?.paidCoverLetters?.toLocaleString()}
+            icon={DollarSign}
+          />
+          <MetricCard
+            title="Draft Cover Letters"
+            value={data?.coverLetterStats?.draftCoverLetters?.toLocaleString()}
+            icon={Calendar}
+          />
         </div>
       </section>
     </div>
@@ -435,23 +532,32 @@ export default function AnalyticsPage() {
   const [customEnd, setCustomEnd] = useState("");
 
   return (
-    <div className="min-h-screen bg-slate-50 py-4 sm:py-6">
+    <div style={{ backgroundColor: PAPER }} className="min-h-screen py-4 sm:py-6">
+      <FontImports />
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 sm:mb-6 gap-3 bg-white p-4 rounded-xl border border-slate-200">
+        {/* Letterhead */}
+        <div
+          className="mb-6 pb-5 border-b-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          style={{ borderColor: INK }}
+        >
           <div>
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-black text-slate-900 tracking-tight">
+            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
+              BUSINESS INTELLIGENCE
+            </div>
+            <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
               Analytics Studio
             </h1>
-            <p className={`text-xs sm:text-sm text-slate-500 ${isPending ? "animate-pulse" : ""}`}>
-              {isPending
-                ? "Updating metrics..."
-                : "Live platform metrics and business intelligence"}
+            <p
+              className="mt-1 text-xs font-mono tracking-wide"
+              style={{ color: isPending ? RUST : MUTE }}
+            >
+              {isPending ? "UPDATING METRICS…" : "LIVE PLATFORM METRICS & REPORTING"}
             </p>
           </div>
+
           <div className="flex flex-col sm:flex-row gap-2">
             {timeRange === "custom" && (
-              <div className="flex gap-2 mr-2 animate-in fade-in slide-in-from-right-4">
+              <div className="flex gap-2">
                 <input
                   type="date"
                   value={customStart}
@@ -461,7 +567,8 @@ export default function AnalyticsPage() {
                       setCustomStart(val);
                     });
                   }}
-                  className="text-xs border rounded-lg px-2 py-1.5 h-9 focus:ring-2 focus:ring-indigo-500 outline-none"
+                  className="font-mono text-xs border px-2 py-2 outline-none"
+                  style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 />
                 <input
                   type="date"
@@ -472,7 +579,8 @@ export default function AnalyticsPage() {
                       setCustomEnd(val);
                     });
                   }}
-                  className="text-xs border rounded-lg px-2 py-1.5 h-9 focus:ring-2 focus:ring-indigo-500 outline-none"
+                  className="font-mono text-xs border px-2 py-2 outline-none"
+                  style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 />
               </div>
             )}
@@ -486,18 +594,19 @@ export default function AnalyticsPage() {
               disabled={isPending}
             >
               <SelectTrigger
-                className="w-36 sm:w-44 text-xs sm:text-sm font-bold bg-slate-50 border-slate-200"
+                className="w-40 sm:w-48 font-mono text-xs tracking-widest rounded-none border"
+                style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 aria-label="Select time range"
               >
-                <SelectValue placeholder="Time range" />
+                <SelectValue placeholder="TIME RANGE" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="today">Today</SelectItem>
-                <SelectItem value="7d">Last 7 Days</SelectItem>
-                <SelectItem value="30d">Last 30 Days</SelectItem>
-                <SelectItem value="90d">Last 90 Days</SelectItem>
-                <SelectItem value="all">All Time</SelectItem>
-                <SelectItem value="custom">Custom Range</SelectItem>
+              <SelectContent className="rounded-none font-mono text-xs">
+                <SelectItem value="today">TODAY</SelectItem>
+                <SelectItem value="7d">LAST 7 DAYS</SelectItem>
+                <SelectItem value="30d">LAST 30 DAYS</SelectItem>
+                <SelectItem value="90d">LAST 90 DAYS</SelectItem>
+                <SelectItem value="all">ALL TIME</SelectItem>
+                <SelectItem value="custom">CUSTOM RANGE</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -506,8 +615,13 @@ export default function AnalyticsPage() {
         {/* Content */}
         <Suspense
           fallback={
-            <div className="flex items-center justify-center h-64">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+            <div
+              className="flex items-center justify-center h-64 border"
+              style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+            >
+              <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
+                LOADING&hellip;
+              </p>
             </div>
           }
         >
