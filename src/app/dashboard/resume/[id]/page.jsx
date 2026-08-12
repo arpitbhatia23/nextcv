@@ -1,10 +1,10 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect, useMemo, use } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
 import { Textarea } from "@/shared/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
+import { Card, CardContent } from "@/shared/components/ui/card";
 import {
   Plus,
   Minus,
@@ -14,6 +14,7 @@ import {
   GraduationCap,
   Code,
   FolderOpen,
+  BadgeCheck,
   Mail,
   Phone,
   MapPin,
@@ -28,6 +29,23 @@ import { formatDate } from "@/shared/utils/datefromater";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
+   reference codes / labels / counters. Body stays on the default sans. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const INK = "#1C2333";
+const RUST = "#B3382C";
+const LINE = "#E4E2DC";
+const MUTED = "#6B7280";
+const PAPER = "#F7F7F5";
+const FIELD = "#FBFBF9";
+
 function getChangedFields(original, edited) {
   const changed = {};
   for (const key in edited) {
@@ -37,6 +55,108 @@ function getChangedFields(original, edited) {
   }
   return changed;
 }
+
+/* ---- Local building blocks, styled to match the archive/letterhead theme ---- */
+
+const fieldClass = "rounded-none border focus-visible:ring-1";
+const fieldStyle = { backgroundColor: FIELD, borderColor: LINE };
+
+const FieldLabel = ({ icon: Icon, children }) => (
+  <Label
+    className="flex items-center gap-1.5 font-mono text-[11px] tracking-widest uppercase"
+    style={{ color: MUTED }}
+  >
+    {Icon && <Icon className="w-3.5 h-3.5" />}
+    {children}
+  </Label>
+);
+
+const SectionCard = ({ id, icon: Icon, eyebrow, title, count, children }) => (
+  <Card
+    className="border rounded-none shadow-none"
+    style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
+  >
+    <div
+      className="px-6 pt-5 pb-4 border-b flex items-center justify-between"
+      style={{ borderColor: LINE }}
+      id={id}
+    >
+      <div className="flex items-center gap-3">
+        <div
+          className="w-9 h-9 flex items-center justify-center border"
+          style={{ borderColor: LINE, backgroundColor: PAPER }}
+        >
+          <Icon className="w-4 h-4" style={{ color: RUST }} strokeWidth={1.5} />
+        </div>
+        <div>
+          {eyebrow && (
+            <div className="font-mono text-[10px] tracking-widest mb-0.5" style={{ color: MUTED }}>
+              {eyebrow}
+            </div>
+          )}
+          <h3 className="font-display text-lg font-medium" style={{ color: INK }}>
+            {title}
+          </h3>
+        </div>
+      </div>
+      {typeof count === "number" && (
+        <span className="font-mono text-[11px] tracking-widest" style={{ color: MUTED }}>
+          {String(count).padStart(2, "0")} {count === 1 ? "ENTRY" : "ENTRIES"}
+        </span>
+      )}
+    </div>
+    <CardContent className="p-6">{children}</CardContent>
+  </Card>
+);
+
+const EmptyState = ({ label }) => (
+  <div
+    className="text-center py-8 px-4 border mb-4"
+    style={{ borderStyle: "dashed", borderColor: "#D8D6CE", backgroundColor: PAPER }}
+  >
+    <p className="text-sm" style={{ color: MUTED }}>
+      Nothing on file yet — add your first {label}.
+    </p>
+  </div>
+);
+
+const AddButton = ({ onClick, label }) => (
+  <Button
+    variant="outline"
+    onClick={onClick}
+    className="w-full rounded-none border-dashed font-mono text-xs tracking-widest uppercase transition-colors"
+    style={{ borderColor: "#D8D6CE", color: MUTED }}
+  >
+    <Plus className="w-4 h-4 mr-2" />
+    {label}
+  </Button>
+);
+
+const RemoveButton = ({ onClick }) => (
+  <Button
+    variant="ghost"
+    size="sm"
+    className="rounded-none hover:bg-transparent"
+    style={{ color: MUTED }}
+    onClick={onClick}
+    onMouseEnter={e => (e.currentTarget.style.color = RUST)}
+    onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
+  >
+    <Minus className="w-4 h-4" />
+  </Button>
+);
+
+const EntryCard = ({ index, label, onRemove, children }) => (
+  <div className="border p-6 space-y-4" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+    <div className="flex justify-between items-start">
+      <h4 className="font-mono text-[11px] tracking-widest uppercase" style={{ color: RUST }}>
+        {label} · {String(index + 1).padStart(2, "0")}
+      </h4>
+      <RemoveButton onClick={onRemove} />
+    </div>
+    {children}
+  </div>
+);
 
 const Page = ({ params }) => {
   const { id } = use(params);
@@ -55,6 +175,7 @@ const Page = ({ params }) => {
     experience: [],
     education: [],
     projects: [],
+    certificates: [],
   });
   const [originalData, setOriginalData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -128,38 +249,74 @@ const Page = ({ params }) => {
     }
   };
 
+  const hasUnsavedChanges = useMemo(() => {
+    if (!originalData) return false;
+    return Object.keys(getChangedFields(originalData, editdata)).length > 0;
+  }, [originalData, editdata]);
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-indigo-600" />
+      <div
+        className="min-h-screen flex items-center justify-center"
+        style={{ backgroundColor: PAPER }}
+      >
+        <FontImports />
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-7 h-7 animate-spin" style={{ color: RUST }} />
+          <p className="font-mono text-xs tracking-widest" style={{ color: MUTED }}>
+            LOADING RECORD…
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="min-h-screen" style={{ backgroundColor: PAPER }}>
+      <FontImports />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+        {/* Letterhead */}
+        <div
+          className="pb-6 border-b-2 flex flex-col md:flex-row md:items-end justify-between gap-4"
+          style={{ borderColor: INK }}
+        >
           <div>
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-2 text-sm font-medium"
+              className="flex items-center gap-2 mb-3 text-sm font-medium transition-colors"
+              style={{ color: MUTED }}
+              onMouseEnter={e => (e.currentTarget.style.color = INK)}
+              onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
             >
               <ArrowLeft className="w-4 h-4" /> Back to Dashboard
             </button>
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight" id="tour-edit-header">
+            <div
+              className="font-mono text-[11px] tracking-widest mb-2 flex items-center gap-2"
+              style={{ color: RUST }}
+            >
+              DRAFT ON FILE
+              {hasUnsavedChanges && (
+                <span className="inline-flex items-center gap-1" style={{ color: "#B08900" }}>
+                  · UNSAVED CHANGES
+                </span>
+              )}
+            </div>
+            <h1
+              className="font-display text-3xl font-medium"
+              id="tour-edit-header"
+              style={{ color: INK }}
+            >
               Edit Resume
             </h1>
-            <p className="text-slate-500 mt-1">
-              Update your professional details to keep your resume fresh.
+            <p className="mt-2 text-sm" style={{ color: MUTED }}>
+              Update your professional details to keep your record current.
             </p>
           </div>
           <Button
             onClick={handleSave}
             disabled={saving}
-            size="lg"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-sm px-8"
+            className="rounded-none h-11 px-8 text-white shadow-none w-full md:w-auto"
+            style={{ backgroundColor: INK }}
             id="tour-save-button"
           >
             {saving ? (
@@ -172,575 +329,594 @@ const Page = ({ params }) => {
         </div>
 
         {/* Personal Information */}
-        <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-personal-info">
-            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
-              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                <User className="w-4 h-4 text-indigo-600" />
-              </div>
-              Personal Information
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-6 space-y-6">
+        <SectionCard
+          id="tour-personal-info"
+          icon={User}
+          eyebrow="SECTION 01"
+          title="Personal Information"
+        >
+          <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-slate-600">
-                  Full Name
-                </Label>
+                <FieldLabel>Full Name</FieldLabel>
                 <Input
-                  id="name"
                   value={editdata.name}
                   onChange={e => handleInputChange("name", e.target.value)}
                   placeholder="Enter your full name"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="jobRole" className="text-slate-600">
-                  Job Role
-                </Label>
+                <FieldLabel>Job Role</FieldLabel>
                 <Input
-                  id="jobRole"
                   value={editdata.jobRole}
                   onChange={e => handleInputChange("jobRole", e.target.value)}
                   placeholder="e.g., Full Stack Developer"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2 text-slate-600">
-                  <Mail className="w-3.5 h-3.5" />
-                  Email
-                </Label>
+                <FieldLabel icon={Mail}>Email</FieldLabel>
                 <Input
-                  id="email"
                   type="email"
                   value={editdata.email}
                   onChange={e => handleInputChange("email", e.target.value)}
                   placeholder="your.email@example.com"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone" className="flex items-center gap-2 text-slate-600">
-                  <Phone className="w-3.5 h-3.5" />
-                  Phone Number
-                </Label>
+                <FieldLabel icon={Phone}>Phone Number</FieldLabel>
                 <Input
-                  id="phone"
                   value={editdata.phone_no}
                   onChange={e => handleInputChange("phone_no", e.target.value)}
                   placeholder="Your phone number"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="address" className="flex items-center gap-2 text-slate-600">
-                <MapPin className="w-3.5 h-3.5" />
-                Address
-              </Label>
+              <FieldLabel icon={MapPin}>Address</FieldLabel>
               <Textarea
-                id="address"
                 value={editdata.address}
                 onChange={e => handleInputChange("address", e.target.value)}
                 placeholder="Your full address"
                 rows={2}
-                className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                className={fieldClass}
+                style={fieldStyle}
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="github" className="flex items-center gap-2 text-slate-600">
-                  <Github className="w-3.5 h-3.5" />
-                  GitHub
-                </Label>
+                <FieldLabel icon={Github}>GitHub</FieldLabel>
                 <Input
-                  id="github"
                   value={editdata.github}
                   onChange={e => handleInputChange("github", e.target.value)}
                   placeholder="GitHub profile URL"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="linkedin" className="flex items-center gap-2 text-slate-600">
-                  <Linkedin className="w-3.5 h-3.5" />
-                  LinkedIn
-                </Label>
+                <FieldLabel icon={Linkedin}>LinkedIn</FieldLabel>
                 <Input
-                  id="linkedin"
                   value={editdata.linkedin}
                   onChange={e => handleInputChange("linkedin", e.target.value)}
                   placeholder="LinkedIn profile URL"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="portfolio" className="flex items-center gap-2 text-slate-600">
-                  <Globe className="w-3.5 h-3.5" />
-                  Portfolio
-                </Label>
+                <FieldLabel icon={Globe}>Portfolio</FieldLabel>
                 <Input
-                  id="portfolio"
                   value={editdata.portfolio}
                   onChange={e => handleInputChange("portfolio", e.target.value)}
                   placeholder="Portfolio website URL"
-                  className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                  className={fieldClass}
+                  style={fieldStyle}
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="summary" className="text-slate-600">
-                Professional Summary
-              </Label>
+              <FieldLabel>Professional Summary</FieldLabel>
               <Textarea
-                id="summary"
                 value={editdata.summary}
                 onChange={e => handleInputChange("summary", e.target.value)}
                 placeholder="Brief description of your professional background and goals"
                 rows={4}
-                className="bg-slate-50 border-slate-200 focus:border-indigo-500 focus:ring-indigo-500"
+                className={fieldClass}
+                style={fieldStyle}
               />
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </SectionCard>
 
         {/* Skills */}
-        <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50" id="tour-skills-card">
-            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
-              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                <Code className="w-4 h-4 text-indigo-600" />
-              </div>
-              Skills
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-4">
-              {editdata.skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-4 bg-slate-50 p-2 rounded-lg border border-slate-100"
-                >
-                  <div className="flex-1">
-                    <Input
-                      value={skill.name}
-                      onChange={e => handleArrayItemChange("skills", index, "name", e.target.value)}
-                      placeholder="Skill name"
-                      className="bg-white border-slate-200"
-                    />
-                  </div>
-                  <div className="w-32">
-                    <Input
-                      value={skill.level}
-                      onChange={e =>
-                        handleArrayItemChange("skills", index, "level", e.target.value)
-                      }
-                      placeholder="Level"
-                      className="bg-white border-slate-200"
-                    />
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="hover:bg-red-50 hover:text-red-600 shrink-0"
-                    onClick={() => removeArrayItem("skills", index)}
-                  >
-                    <Minus className="w-4 h-4" />
-                  </Button>
-                </div>
-              ))}
-              <Button
-                variant="outline"
-                onClick={() => addArrayItem("skills", { name: "", level: "" })}
-                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
+        <SectionCard
+          id="tour-skills-card"
+          icon={Code}
+          eyebrow="SECTION 02"
+          title="Skills"
+          count={editdata.skills.length}
+        >
+          <div className="space-y-3">
+            {editdata.skills.length === 0 && <EmptyState label="skill" />}
+            {editdata.skills.map((skill, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 p-2 border"
+                style={{ backgroundColor: PAPER, borderColor: LINE }}
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Skill
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <div className="flex-1">
+                  <Input
+                    value={skill.name}
+                    onChange={e => handleArrayItemChange("skills", index, "name", e.target.value)}
+                    placeholder="Skill name"
+                    className="rounded-none border"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
+                  />
+                </div>
+                <div className="w-32">
+                  <Input
+                    value={skill.level}
+                    onChange={e => handleArrayItemChange("skills", index, "level", e.target.value)}
+                    placeholder="Level"
+                    className="rounded-none border font-mono text-xs"
+                    style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
+                  />
+                </div>
+                <RemoveButton onClick={() => removeArrayItem("skills", index)} />
+              </div>
+            ))}
+            <AddButton
+              onClick={() => addArrayItem("skills", { name: "", level: "" })}
+              label="Add Skill"
+            />
+          </div>
+        </SectionCard>
 
         {/* Experience */}
-        <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader
-            className="border-b border-slate-100 bg-slate-50/50"
-            id="tour-experience-card"
-          >
-            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
-              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                <Briefcase className="w-4 h-4 text-indigo-600" />
-              </div>
-              Experience
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-6">
-              {editdata.experience.map((exp, index) => (
-                <div
-                  key={index}
-                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white relative group"
-                >
-                  <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">Experience {index + 1}</h4>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
-                      onClick={() => removeArrayItem("experience", index)}
-                    >
-                      <Minus className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Job Title</Label>
-                      <Input
-                        value={exp.position}
-                        onChange={e =>
-                          handleArrayItemChange("experience", index, "position", e.target.value)
-                        }
-                        placeholder="Job title"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Company</Label>
-                      <Input
-                        value={exp.companyName}
-                        onChange={e =>
-                          handleArrayItemChange("experience", index, "companyName", e.target.value)
-                        }
-                        placeholder="Company name"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Start Date</Label>
-                      <Input
-                        value={formatDate(exp.startDate)}
-                        onChange={e =>
-                          handleArrayItemChange("experience", index, "startDate", e.target.value)
-                        }
-                        placeholder="Start date"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">End Date</Label>
-                      <Input
-                        value={formatDate(exp.endDate)}
-                        onChange={e =>
-                          handleArrayItemChange("experience", index, "endDate", e.target.value)
-                        }
-                        placeholder="End date"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
+        <SectionCard
+          id="tour-experience-card"
+          icon={Briefcase}
+          eyebrow="SECTION 03"
+          title="Experience"
+          count={editdata.experience.length}
+        >
+          <div className="space-y-6">
+            {editdata.experience.length === 0 && <EmptyState label="role" />}
+            {editdata.experience.map((exp, index) => (
+              <EntryCard
+                key={index}
+                index={index}
+                label="Role"
+                onRemove={() => removeArrayItem("experience", index)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Job Title</FieldLabel>
+                    <Input
+                      value={exp.position}
+                      onChange={e =>
+                        handleArrayItemChange("experience", index, "position", e.target.value)
+                      }
+                      placeholder="Job title"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-slate-600">Description</Label>
-                    <Textarea
-                      value={exp.description}
+                    <FieldLabel>Company</FieldLabel>
+                    <Input
+                      value={exp.companyName}
                       onChange={e =>
-                        handleArrayItemChange("experience", index, "description", e.target.value)
+                        handleArrayItemChange("experience", index, "companyName", e.target.value)
                       }
-                      placeholder="Describe your role and achievements"
-                      rows={3}
-                      className="bg-slate-50 border-slate-200"
+                      placeholder="Company name"
+                      className={fieldClass}
+                      style={fieldStyle}
                     />
                   </div>
                 </div>
-              ))}
-              <Button
-                variant="outline"
-                onClick={() =>
-                  addArrayItem("experience", {
-                    position: "",
-                    companyName: "",
-                    startDate: "",
-                    endDate: "",
-                    description: "",
-                  })
-                }
-                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Experience
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Start Date</FieldLabel>
+                    <Input
+                      value={formatDate(exp.startDate)}
+                      onChange={e =>
+                        handleArrayItemChange("experience", index, "startDate", e.target.value)
+                      }
+                      placeholder="Start date"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel>End Date</FieldLabel>
+                    <Input
+                      value={formatDate(exp.endDate)}
+                      onChange={e =>
+                        handleArrayItemChange("experience", index, "endDate", e.target.value)
+                      }
+                      placeholder="End date"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <FieldLabel>Description</FieldLabel>
+                  <Textarea
+                    value={exp.description}
+                    onChange={e =>
+                      handleArrayItemChange("experience", index, "description", e.target.value)
+                    }
+                    placeholder="Describe your role and achievements"
+                    rows={3}
+                    className={fieldClass}
+                    style={fieldStyle}
+                  />
+                </div>
+              </EntryCard>
+            ))}
+            <AddButton
+              onClick={() =>
+                addArrayItem("experience", {
+                  position: "",
+                  companyName: "",
+                  startDate: "",
+                  endDate: "",
+                  description: "",
+                })
+              }
+              label="Add Experience"
+            />
+          </div>
+        </SectionCard>
 
         {/* Education */}
-        <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
-            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
-              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                <GraduationCap className="w-4 h-4 text-indigo-600" />
-              </div>
-              Education
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-6">
-              {editdata.education.map((edu, index) => (
-                <div
-                  key={index}
-                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
-                >
-                  <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">Education {index + 1}</h4>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
-                      onClick={() => removeArrayItem("education", index)}
-                    >
-                      <Minus className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Degree</Label>
-                      <Input
-                        value={edu.degree}
-                        onChange={e =>
-                          handleArrayItemChange("education", index, "degree", e.target.value)
-                        }
-                        placeholder="Degree name"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Institution</Label>
-                      <Input
-                        value={edu.institution}
-                        onChange={e =>
-                          handleArrayItemChange("education", index, "institution", e.target.value)
-                        }
-                        placeholder="Institution name"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Start Year</Label>
-                      <Input
-                        value={formatDate(edu.startYear)}
-                        onChange={e =>
-                          handleArrayItemChange("education", index, "startYear", e.target.value)
-                        }
-                        placeholder="Start year"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">End Year</Label>
-                      <Input
-                        value={formatDate(edu.endYear)}
-                        onChange={e =>
-                          handleArrayItemChange("education", index, "endYear", e.target.value)
-                        }
-                        placeholder="End year"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                  </div>
+        <SectionCard
+          id="tour-education-card"
+          icon={GraduationCap}
+          eyebrow="SECTION 04"
+          title="Education"
+          count={editdata.education.length}
+        >
+          <div className="space-y-6">
+            {editdata.education.length === 0 && <EmptyState label="degree" />}
+            {editdata.education.map((edu, index) => (
+              <EntryCard
+                key={index}
+                index={index}
+                label="Degree"
+                onRemove={() => removeArrayItem("education", index)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label className="text-slate-600">Grade/Score</Label>
+                    <FieldLabel>Degree</FieldLabel>
                     <Input
-                      value={edu.grade}
+                      value={edu.degree}
                       onChange={e =>
-                        handleArrayItemChange("education", index, "grade", e.target.value)
+                        handleArrayItemChange("education", index, "degree", e.target.value)
                       }
-                      placeholder="CGPA/Percentage"
-                      className="bg-slate-50 border-slate-200"
+                      placeholder="Degree name"
+                      className={fieldClass}
+                      style={fieldStyle}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-slate-600">Description</Label>
-                    <Textarea
-                      value={edu.description}
+                    <FieldLabel>Institution</FieldLabel>
+                    <Input
+                      value={edu.institution}
                       onChange={e =>
-                        handleArrayItemChange("education", index, "description", e.target.value)
+                        handleArrayItemChange("education", index, "institution", e.target.value)
                       }
-                      placeholder="Describe your education"
-                      rows={2}
-                      className="bg-slate-50 border-slate-200"
+                      placeholder="Institution name"
+                      className={fieldClass}
+                      style={fieldStyle}
                     />
                   </div>
                 </div>
-              ))}
-              <Button
-                variant="outline"
-                onClick={() =>
-                  addArrayItem("education", {
-                    degree: "",
-                    institution: "",
-                    startYear: "",
-                    endYear: "",
-                    grade: "",
-                    description: "",
-                  })
-                }
-                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Education
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Projects */}
-        <Card className="shadow-sm border border-slate-200 bg-white">
-          <CardHeader className="border-b border-slate-100 bg-slate-50/50">
-            <CardTitle className="flex items-center gap-2 text-slate-800 text-lg">
-              <div className="p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
-                <FolderOpen className="w-4 h-4 text-indigo-600" />
-              </div>
-              Projects
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="space-y-6">
-              {editdata.projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="border border-slate-200 rounded-xl p-6 space-y-4 bg-white"
-                >
-                  <div className="flex justify-between items-start">
-                    <h4 className="font-semibold text-slate-700">Project {index + 1}</h4>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-slate-400 hover:text-red-500 hover:bg-red-50"
-                      onClick={() => removeArrayItem("projects", index)}
-                    >
-                      <Minus className="w-4 h-4" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Title</Label>
-                      <Input
-                        value={project.title}
-                        onChange={e =>
-                          handleArrayItemChange("projects", index, "title", e.target.value)
-                        }
-                        placeholder="Project title"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Role/Type</Label>
-                      <Input
-                        value={project.roleOrType}
-                        onChange={e =>
-                          handleArrayItemChange("projects", index, "roleOrType", e.target.value)
-                        }
-                        placeholder="Role or type"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Organization</Label>
-                      <Input
-                        value={project.organization}
-                        onChange={e =>
-                          handleArrayItemChange("projects", index, "organization", e.target.value)
-                        }
-                        placeholder="Organization"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label className="text-slate-600">Date</Label>
-                      <Input
-                        value={project.date}
-                        onChange={e =>
-                          handleArrayItemChange("projects", index, "date", e.target.value)
-                        }
-                        placeholder="Date"
-                        className="bg-slate-50 border-slate-200"
-                      />
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Start Year</FieldLabel>
+                    <Input
+                      value={formatDate(edu.startYear)}
+                      onChange={e =>
+                        handleArrayItemChange("education", index, "startYear", e.target.value)
+                      }
+                      placeholder="Start year"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Label className="text-slate-600">Technologies/Topics</Label>
+                    <FieldLabel>End Year</FieldLabel>
                     <Input
-                      value={project.technologiesOrTopics}
+                      value={formatDate(edu.endYear)}
+                      onChange={e =>
+                        handleArrayItemChange("education", index, "endYear", e.target.value)
+                      }
+                      placeholder="End year"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <FieldLabel>Grade/Score</FieldLabel>
+                  <Input
+                    value={edu.grade}
+                    onChange={e =>
+                      handleArrayItemChange("education", index, "grade", e.target.value)
+                    }
+                    placeholder="CGPA/Percentage"
+                    className={fieldClass}
+                    style={fieldStyle}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <FieldLabel>Description</FieldLabel>
+                  <Textarea
+                    value={edu.description}
+                    onChange={e =>
+                      handleArrayItemChange("education", index, "description", e.target.value)
+                    }
+                    placeholder="Describe your education"
+                    rows={2}
+                    className={fieldClass}
+                    style={fieldStyle}
+                  />
+                </div>
+              </EntryCard>
+            ))}
+            <AddButton
+              onClick={() =>
+                addArrayItem("education", {
+                  degree: "",
+                  institution: "",
+                  startYear: "",
+                  endYear: "",
+                  grade: "",
+                  description: "",
+                })
+              }
+              label="Add Education"
+            />
+          </div>
+        </SectionCard>
+
+        {/* Projects */}
+        <SectionCard
+          id="tour-projects-card"
+          icon={FolderOpen}
+          eyebrow="SECTION 05"
+          title="Projects"
+          count={editdata.projects.length}
+        >
+          <div className="space-y-6">
+            {editdata.projects.length === 0 && <EmptyState label="project" />}
+            {editdata.projects.map((project, index) => (
+              <EntryCard
+                key={index}
+                index={index}
+                label="Project"
+                onRemove={() => removeArrayItem("projects", index)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Title</FieldLabel>
+                    <Input
+                      value={project.title}
+                      onChange={e =>
+                        handleArrayItemChange("projects", index, "title", e.target.value)
+                      }
+                      placeholder="Project title"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel>Role/Type</FieldLabel>
+                    <Input
+                      value={project.roleOrType}
+                      onChange={e =>
+                        handleArrayItemChange("projects", index, "roleOrType", e.target.value)
+                      }
+                      placeholder="Role or type"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Organization</FieldLabel>
+                    <Input
+                      value={project.organization}
+                      onChange={e =>
+                        handleArrayItemChange("projects", index, "organization", e.target.value)
+                      }
+                      placeholder="Organization"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel>Date</FieldLabel>
+                    <Input
+                      value={project.date}
+                      onChange={e =>
+                        handleArrayItemChange("projects", index, "date", e.target.value)
+                      }
+                      placeholder="Date"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <FieldLabel>Technologies/Topics</FieldLabel>
+                  <Input
+                    value={project.technologiesOrTopics}
+                    onChange={e =>
+                      handleArrayItemChange(
+                        "projects",
+                        index,
+                        "technologiesOrTopics",
+                        e.target.value
+                      )
+                    }
+                    placeholder="Technologies or topics"
+                    className={fieldClass}
+                    style={fieldStyle}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <FieldLabel>Description</FieldLabel>
+                  <Textarea
+                    value={project.description}
+                    onChange={e =>
+                      handleArrayItemChange("projects", index, "description", e.target.value)
+                    }
+                    placeholder="Project description"
+                    rows={3}
+                    className={fieldClass}
+                    style={fieldStyle}
+                  />
+                </div>
+              </EntryCard>
+            ))}
+            <AddButton
+              onClick={() =>
+                addArrayItem("projects", {
+                  title: "",
+                  roleOrType: "",
+                  organization: "",
+                  date: "",
+                  technologiesOrTopics: "",
+                  description: "",
+                })
+              }
+              label="Add Project"
+            />
+          </div>
+        </SectionCard>
+
+        {/* Certificates */}
+        <SectionCard
+          id="tour-certificates-card"
+          icon={BadgeCheck}
+          eyebrow="SECTION 06"
+          title="Certificates"
+          count={editdata.certificates?.length || 0}
+        >
+          <div className="space-y-6">
+            {(!editdata.certificates || editdata.certificates.length === 0) && (
+              <EmptyState label="certificate" />
+            )}
+            {editdata.certificates?.map((cert, index) => (
+              <EntryCard
+                key={index}
+                index={index}
+                label="Certificate"
+                onRemove={() => removeArrayItem("certificates", index)}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Title</FieldLabel>
+                    <Input
+                      value={cert.title}
+                      onChange={e =>
+                        handleArrayItemChange("certificates", index, "title", e.target.value)
+                      }
+                      placeholder="Certificate title"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel>Issued By</FieldLabel>
+                    <Input
+                      value={cert.organization}
+                      onChange={e =>
+                        handleArrayItemChange("certificates", index, "issuedBy", e.target.value)
+                      }
+                      placeholder="Issuing organization"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <FieldLabel>Issue Date</FieldLabel>
+                    <Input
+                      value={formatDate(cert.year)}
+                      onChange={e =>
+                        handleArrayItemChange("certificates", index, "issueDate", e.target.value)
+                      }
+                      placeholder="Issue date"
+                      className={fieldClass}
+                      style={fieldStyle}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <FieldLabel>Credential URL</FieldLabel>
+                    <Input
+                      value={cert.credentialUrl}
                       onChange={e =>
                         handleArrayItemChange(
-                          "projects",
+                          "certificates",
                           index,
-                          "technologiesOrTopics",
+                          "credentialUrl",
                           e.target.value
                         )
                       }
-                      placeholder="Technologies or topics"
-                      className="bg-slate-50 border-slate-200"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label className="text-slate-600">Description</Label>
-                    <Textarea
-                      value={project.description}
-                      onChange={e =>
-                        handleArrayItemChange("projects", index, "description", e.target.value)
-                      }
-                      placeholder="Project description"
-                      rows={3}
-                      className="bg-slate-50 border-slate-200"
+                      placeholder="Link to credential"
+                      className={fieldClass}
+                      style={fieldStyle}
                     />
                   </div>
                 </div>
-              ))}
-              <Button
-                variant="outline"
-                onClick={() =>
-                  addArrayItem("projects", {
-                    title: "",
-                    roleOrType: "",
-                    organization: "",
-                    date: "",
-                    technologiesOrTopics: "",
-                    description: "",
-                  })
-                }
-                className="w-full border-dashed border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-indigo-300 hover:text-indigo-600"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Add Project
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+              </EntryCard>
+            ))}
+            <AddButton
+              onClick={() =>
+                addArrayItem("certificates", {
+                  title: "",
+                  organization: "",
+                  year: "",
+                  credentialUrl: "",
+                })
+              }
+              label="Add Certificate"
+            />
+          </div>
+        </SectionCard>
 
         {/* Footer */}
-        <div className="flex justify-end gap-4">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 pb-4">
           <Button
             variant="outline"
             onClick={() => router.back()}
-            className="border-slate-300 text-slate-700 hover:bg-slate-50"
+            className="rounded-none"
+            style={{ borderColor: LINE, color: INK }}
           >
             Cancel
           </Button>
           <Button
             onClick={handleSave}
             disabled={saving}
-            size="lg"
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-lg shadow-indigo-200 px-8"
+            className="rounded-none px-8 text-white shadow-none"
+            style={{ backgroundColor: INK }}
           >
             {saving ? (
               <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -751,32 +927,6 @@ const Page = ({ params }) => {
           </Button>
         </div>
       </div>
-      {/* <Tour
-        steps={[
-          {
-            target: "#tour-edit-header",
-            content: "Quickly update any section of your resume here.",
-            disableBeacon: true,
-          },
-          {
-            target: "#tour-personal-info",
-            content: "Update your contact details and professional summary.",
-          },
-          {
-            target: "#tour-skills-card",
-            content: "Manage your technical and soft skills.",
-          },
-          {
-            target: "#tour-experience-card",
-            content: "Update your work history and job descriptions.",
-          },
-          {
-            target: "#tour-save-button",
-            content: "Don't forget to save your changes when you're done!",
-          },
-        ]}
-        tourId="edit-resume-page"
-      /> */}
     </div>
   );
 };

@@ -24,44 +24,73 @@ const Coupons = dynamic(() => import("@/modules/coupon/components/Coupons"), {
   ssr: false,
 });
 
+/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
+   reference codes / labels / tab counters. Body stays on the default sans. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const INK = "#1C2333";
+const RUST = "#B3382C";
+const TEAL = "#0F6E63";
+const AMBER = "#B08900";
+const LINE = "#E4E2DC";
+const MUTED = "#6B7280";
+const PAPER = "#F7F7F5";
+
 const TABS = [
-  { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "analytics", label: "Analytics", icon: BarChart3 },
-  { id: "payment", label: "Payments", icon: CreditCard },
-  { id: "coupons", label: "Coupons", icon: TicketPercent },
+  { id: "overview", label: "Overview", icon: LayoutDashboard, code: "01" },
+  { id: "analytics", label: "Analytics", icon: BarChart3, code: "02" },
+  { id: "payment", label: "Payments", icon: CreditCard, code: "03" },
+  { id: "coupons", label: "Coupons", icon: TicketPercent, code: "04" },
 ];
 
-// Per-tab accent colours
+// Per-tab accent colours, kept within the letterhead palette
 const TAB_ACCENT = {
-  overview: { active: "border-indigo-600  text-indigo-600  bg-indigo-50/70" },
-  analytics: { active: "border-violet-600  text-violet-600  bg-violet-50/70" },
-  payment: { active: "border-emerald-600 text-emerald-700 bg-emerald-50/70" },
-  coupons: { active: "border-amber-500   text-amber-700   bg-amber-50/70" },
+  overview: INK,
+  analytics: "#5B4636", // sepia — reads as ink's warmer sibling
+  payment: TEAL,
+  coupons: AMBER,
 };
 
 const AdminiDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [isPending, startTransition] = useTransition();
 
-  const handleTabChange = (id) => {
+  const handleTabChange = id => {
     startTransition(() => {
       setActiveTab(id);
     });
   };
 
   return (
-    <div className="flex flex-1 flex-col min-h-screen bg-slate-50">
-      {/* ── Tab Navigation bar ─────────────────────────────────────── */}
-      <div className="sticky top-0 z-20 bg-white border-b border-slate-200 shadow-sm">
+    <div className="flex flex-1 flex-col min-h-screen" style={{ backgroundColor: PAPER }}>
+      <FontImports />
+
+      {/* ── Letterhead tab bar ─────────────────────────────────────── */}
+      <div
+        className="sticky top-0 z-20 border-b-2"
+        style={{ backgroundColor: "#FFFFFF", borderColor: INK }}
+      >
         <div className="px-2 sm:px-4 lg:px-6">
+          <div
+            className="font-mono text-[10px] tracking-widest pt-3 pb-1 px-1 sm:px-3"
+            style={{ color: RUST }}
+          >
+            ADMIN LEDGER
+          </div>
           <nav
             role="tablist"
             aria-label="Admin dashboard sections"
             className="flex overflow-x-auto scrollbar-hide"
           >
-            {TABS.map(({ id, label, icon: Icon }) => {
+            {TABS.map(({ id, label, icon: Icon, code }) => {
               const isActive = activeTab === id;
-              const accentCls = TAB_ACCENT[id].active;
+              const accent = TAB_ACCENT[id];
 
               return (
                 <button
@@ -73,22 +102,29 @@ const AdminiDashboard = () => {
                   onClick={() => handleTabChange(id)}
                   disabled={isPending}
                   className={[
-                    // base
                     "group relative flex items-center gap-2 px-3 sm:px-5 py-3.5 sm:py-4",
-                    "text-xs sm:text-sm font-semibold whitespace-nowrap select-none",
+                    "font-mono text-[11px] sm:text-xs tracking-widest uppercase whitespace-nowrap select-none",
                     "border-b-2 transition-all duration-200 shrink-0",
                     isPending ? "opacity-50 grayscale-[0.5]" : "opacity-100",
-                    // state
-                    isActive
-                      ? accentCls
-                      : "border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50",
                   ].join(" ")}
+                  style={{
+                    borderColor: isActive ? accent : "transparent",
+                    color: isActive ? accent : MUTED,
+                    backgroundColor: isActive ? PAPER : "transparent",
+                  }}
                 >
+                  <span
+                    className="font-mono text-[9px] tracking-widest opacity-60"
+                    aria-hidden="true"
+                  >
+                    {code}
+                  </span>
                   <Icon
                     className={[
                       "h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 transition-transform duration-200",
                       isActive ? "scale-110" : "group-hover:scale-105",
                     ].join(" ")}
+                    strokeWidth={1.5}
                   />
                   {/* Full label always visible — short on tiny screens */}
                   <span className="hidden xs:inline">{label}</span>
@@ -97,7 +133,10 @@ const AdminiDashboard = () => {
 
                   {/* Active dot indicator */}
                   {isActive && (
-                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-current opacity-70" />
+                    <span
+                      className="ml-1 h-1.5 w-1.5 rounded-full"
+                      style={{ backgroundColor: accent }}
+                    />
                   )}
                 </button>
               );
@@ -107,12 +146,12 @@ const AdminiDashboard = () => {
       </div>
 
       {/* ── Tab Panels — Only render active tab to optimize INP ─── */}
-      <div className="flex-1 flex flex-col min-h-[600px]">
+      <div className="flex-1 flex flex-col min-h-150">
         {activeTab === "overview" && (
-          <div 
-            id="panel-overview" 
-            role="tabpanel" 
-            aria-labelledby="tab-overview" 
+          <div
+            id="panel-overview"
+            role="tabpanel"
+            aria-labelledby="tab-overview"
             className="@container/main flex flex-1 flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300"
           >
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
@@ -128,10 +167,10 @@ const AdminiDashboard = () => {
         )}
 
         {activeTab === "analytics" && (
-          <div 
-            id="panel-analytics" 
-            role="tabpanel" 
-            aria-labelledby="tab-analytics" 
+          <div
+            id="panel-analytics"
+            role="tabpanel"
+            aria-labelledby="tab-analytics"
             className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
           >
             <AnalyticsPage />
@@ -139,10 +178,10 @@ const AdminiDashboard = () => {
         )}
 
         {activeTab === "payment" && (
-          <div 
-            id="panel-payment" 
-            role="tabpanel" 
-            aria-labelledby="tab-payment" 
+          <div
+            id="panel-payment"
+            role="tabpanel"
+            aria-labelledby="tab-payment"
             className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
           >
             <AdminPaymentDashboard />
@@ -150,10 +189,10 @@ const AdminiDashboard = () => {
         )}
 
         {activeTab === "coupons" && (
-          <div 
-            id="panel-coupons" 
-            role="tabpanel" 
-            aria-labelledby="tab-coupons" 
+          <div
+            id="panel-coupons"
+            role="tabpanel"
+            aria-labelledby="tab-coupons"
             className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
           >
             <Coupons />

@@ -6,10 +6,12 @@ import axios from "axios";
 import PDFPreview from "@/modules/resume/components/pdfPreview";
 import { formatDate } from "@/shared/utils/datefromater";
 import { Button } from "@/shared/components/ui/button";
+import { toast } from "sonner";
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
 import { useDraft } from "@/modules/cover-letter/Hook/useDraft";
 import { usePayment } from "@/modules/cover-letter/Hook/usePayment";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
+import Link from "next/link";
 
 /* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
    reference codes / labels / prices. Body stays on the default sans. */
@@ -22,7 +24,8 @@ const FontImports = () => (
 );
 
 const Page = () => {
-  const [selectedResume, setSelectedResume] = useState(1);
+  // No resume selected by default — the person must explicitly pick one.
+  const [selectedResume, setSelectedResume] = useState(null);
   const [tone, setTone] = useState("Professional");
   const [length, setLength] = useState("Medium");
   const [company, setCompany] = useState("");
@@ -30,7 +33,7 @@ const Page = () => {
   const [resumes, setResumes] = useState([]);
   const [resumesLoading, setResumesLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
-  const resume = resumes.find(r => r?.resumedata?._id === selectedResume) || resumes[0];
+  const resume = resumes.find(r => r?.resumedata?._id === selectedResume);
   const [coverLetter, setCoverLetter] = useState(null);
   const [pdfurl, setPdfurl] = useState();
   const [amount, setAmount] = useState(79);
@@ -71,8 +74,23 @@ const Page = () => {
     resume();
   }, []);
 
+  // Both a selected resume and a company name are required before we call the API.
+  const isCompanyMissing = !company.trim();
+  const isResumeMissing = !resume;
+  const canGenerate = !isResumeMissing && !isCompanyMissing && !isGenerating;
+
   const Generate_coverLetter = async () => {
     if (isGenerating) return;
+
+    if (isResumeMissing) {
+      toast.error("Select a resume before generating your cover letter.");
+      return;
+    }
+    if (isCompanyMissing) {
+      toast.error("Company name is required.");
+      return;
+    }
+
     setIsGenerating(true);
     try {
       const res = await axios.post("/api/cover-letter/gen", { data: coverletterData });
@@ -124,12 +142,14 @@ const Page = () => {
                 Cover Letter
               </h1>
             </div>
-            <button
-              className="rounded-none border px-5 py-2.5 font-mono text-xs tracking-widest transition"
-              style={{ borderColor: "#1C2333", color: "#1C2333", backgroundColor: "#FFFFFF" }}
-            >
-              MY LETTERS
-            </button>
+            <Link href={"my-cover-letter"}>
+              <button
+                className="rounded-none border px-5 py-2.5 font-mono text-xs tracking-widest transition"
+                style={{ borderColor: "#1C2333", color: "#1C2333", backgroundColor: "#FFFFFF" }}
+              >
+                MY LETTERS
+              </button>
+            </Link>
           </div>
 
           {/* Main grid: resume select (small) | job details | live preview (big) */}
@@ -139,12 +159,22 @@ const Page = () => {
               className="border p-5 lg:col-span-3"
               style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
             >
-              <h2
-                className="mb-4 font-mono text-[10px] font-medium tracking-widest"
-                style={{ color: "#6B7280" }}
-              >
-                SELECT RESUME
-              </h2>
+              <div className="mb-4 flex items-center justify-between">
+                <h2
+                  className="font-mono text-[10px] font-medium tracking-widest"
+                  style={{ color: "#6B7280" }}
+                >
+                  SELECT RESUME
+                </h2>
+                {isResumeMissing && !resumesLoading && (
+                  <span
+                    className="font-mono text-[10px] tracking-widest"
+                    style={{ color: "#B3382C" }}
+                  >
+                    REQUIRED
+                  </span>
+                )}
+              </div>
 
               <div className="space-y-3 overflow-auto">
                 {resumesLoading ? (
@@ -228,12 +258,22 @@ const Page = () => {
               className="border p-6 lg:col-span-4"
               style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
             >
-              <h2
-                className="mb-4 font-mono text-[10px] font-medium tracking-widest"
-                style={{ color: "#6B7280" }}
-              >
-                JOB DETAILS
-              </h2>
+              <div className="mb-4 flex items-center justify-between">
+                <h2
+                  className="font-mono text-[10px] font-medium tracking-widest"
+                  style={{ color: "#6B7280" }}
+                >
+                  JOB DETAILS
+                </h2>
+                {isCompanyMissing && (
+                  <span
+                    className="font-mono text-[10px] tracking-widest"
+                    style={{ color: "#B3382C" }}
+                  >
+                    COMPANY REQUIRED
+                  </span>
+                )}
+              </div>
 
               <div className="space-y-4">
                 <input
@@ -243,7 +283,7 @@ const Page = () => {
                   disabled={isGenerating}
                   className="w-full rounded-none border px-4 py-3 text-sm outline-none disabled:cursor-not-allowed disabled:text-gray-400"
                   style={{
-                    borderColor: "#E4E2DC",
+                    borderColor: isCompanyMissing ? "#B3382C" : "#E4E2DC",
                     backgroundColor: isGenerating ? "#F7F7F5" : "#FFFFFF",
                   }}
                 />
@@ -315,9 +355,18 @@ const Page = () => {
 
               <button
                 onClick={Generate_coverLetter}
-                disabled={isGenerating}
+                disabled={!canGenerate}
+                title={
+                  isResumeMissing
+                    ? "Select a resume first"
+                    : isCompanyMissing
+                      ? "Enter a company name first"
+                      : undefined
+                }
                 className="mt-8 flex w-full items-center justify-center gap-2 rounded-none py-4 font-medium text-white shadow-none transition disabled:cursor-not-allowed"
-                style={{ backgroundColor: isGenerating ? "#8a4038" : "#B3382C" }}
+                style={{
+                  backgroundColor: isGenerating ? "#8a4038" : !canGenerate ? "#C9A39D" : "#B3382C",
+                }}
               >
                 {isGenerating ? (
                   <>
@@ -331,6 +380,18 @@ const Page = () => {
                   </>
                 )}
               </button>
+              {(isResumeMissing || isCompanyMissing) && (
+                <p
+                  className="mt-2 font-mono text-[10px] tracking-widest text-center"
+                  style={{ color: "#B3382C" }}
+                >
+                  {isResumeMissing && isCompanyMissing
+                    ? "SELECT A RESUME AND ENTER A COMPANY NAME"
+                    : isResumeMissing
+                      ? "SELECT A RESUME TO CONTINUE"
+                      : "ENTER A COMPANY NAME TO CONTINUE"}
+                </p>
+              )}
             </div>
 
             {/* Live preview - wide */}

@@ -1,9 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Star, User } from "lucide-react";
-import { cn } from "@/shared/lib/utils";
+
+/* Fonts match the Correspondence Archive letterhead:
+   Fraunces for display type, IBM Plex Mono for labels / codes. */
+const FontImports = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+    .font-display { font-family: 'Fraunces', serif; }
+    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+  `}</style>
+);
+
+const INK = "#1C2333";
+const RUST = "#B3382C";
+const PAPER = "#F7F7F5";
+const LINE = "#E4E2DC";
+const MUTE = "#6B7280";
+const FAINT = "#B7B5AC";
 
 const AdminFeedbackList = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -27,68 +42,114 @@ const AdminFeedbackList = () => {
   }, []);
 
   if (loading) {
-    return <div className="p-4 text-center text-xs sm:text-sm text-slate-400">Loading feedback...</div>;
+    return (
+      <div style={{ backgroundColor: PAPER }} className="px-3 py-6 sm:px-4 lg:px-6">
+        <FontImports />
+        <div
+          className="border p-10 text-center"
+          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+        >
+          <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
+            RETRIEVING CORRESPONDENCE&hellip;
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <Card className="col-span-1 md:col-span-2 lg:col-span-3 border border-slate-100 shadow-sm">
-      <CardHeader className="px-4 sm:px-5 pt-4 sm:pt-5 pb-2 sm:pb-3">
-        <CardTitle className="text-xs sm:text-sm font-semibold text-slate-700">
-          Recent User Feedback
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="px-3 sm:px-4 pb-4">
-        <div className="space-y-2 sm:space-y-3">
-          {feedbacks.length === 0 ? (
-            <p className="text-xs sm:text-sm text-slate-400 text-center py-6">No feedback yet.</p>
-          ) : (
-            feedbacks.map(item => (
-              <div
-                key={item._id}
-                className="flex flex-col sm:flex-row gap-3 p-3 sm:p-4 border border-slate-100 rounded-xl bg-slate-50/50 hover:bg-slate-50 transition-colors"
-              >
-                <div className="flex items-start gap-2 sm:gap-3 sm:min-w-36">
-                  <div className="bg-white p-1.5 rounded-full border border-slate-200 flex-shrink-0">
-                    <User className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs sm:text-sm font-medium text-slate-800 truncate">
-                      {item.userId?.name || "Anonymous"}
-                    </p>
-                    <p className="text-xs text-slate-400">
-                      {new Date(item.createdAt).toLocaleDateString("en-IN", {
+    <div style={{ backgroundColor: PAPER }} className="px-3 py-6 sm:px-4 lg:px-6">
+      <FontImports />
+
+      {/* Letterhead */}
+      <div
+        className="mb-6 pb-5 border-b-2 flex flex-wrap items-end justify-between gap-4"
+        style={{ borderColor: INK }}
+      >
+        <div>
+          <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
+            READER CORRESPONDENCE
+          </div>
+          <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+            Recent Feedback
+          </h1>
+        </div>
+        <span className="font-mono text-[11px] tracking-widest" style={{ color: FAINT }}>
+          {feedbacks.length} {feedbacks.length === 1 ? "ENTRY" : "ENTRIES"}
+        </span>
+      </div>
+
+      {feedbacks.length === 0 ? (
+        <div
+          className="border p-10 text-center"
+          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+        >
+          <p className="font-mono text-[11px] tracking-widest" style={{ color: FAINT }}>
+            NO FEEDBACK ON FILE
+          </p>
+        </div>
+      ) : (
+        <div className="border divide-y" style={{ borderColor: LINE }}>
+          {feedbacks.map(item => (
+            <div
+              key={item._id}
+              className="flex flex-col sm:flex-row gap-4 p-4 sm:p-5 transition-colors hover:bg-[#FBFBF9]"
+              style={{ backgroundColor: "#FFFFFF" }}
+            >
+              <div className="flex items-start gap-3 sm:min-w-40">
+                <div
+                  className="flex h-8 w-8 shrink-0 items-center justify-center border"
+                  style={{ borderColor: LINE, backgroundColor: PAPER }}
+                >
+                  <User className="w-3.5 h-3.5" style={{ color: MUTE }} />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-medium truncate" style={{ color: INK }}>
+                    {item.userId?.name || "Anonymous"}
+                  </p>
+                  <p
+                    className="font-mono text-[10px] tracking-widest mt-0.5"
+                    style={{ color: FAINT }}
+                  >
+                    {new Date(item.createdAt)
+                      .toLocaleDateString("en-IN", {
                         day: "numeric",
                         month: "short",
                         year: "2-digit",
-                      })}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex-1 space-y-1.5 min-w-0">
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map(star => (
-                      <Star
-                        key={star}
-                        className={cn(
-                          "w-3 h-3 sm:w-3.5 sm:h-3.5",
-                          item.rating >= star ? "fill-yellow-400 text-yellow-400" : "text-slate-200"
-                        )}
-                      />
-                    ))}
-                  </div>
-                  {item.comment && (
-                    <p className="text-xs sm:text-sm text-slate-600 italic line-clamp-2">
-                      &ldquo;{item.comment}&rdquo;
-                    </p>
-                  )}
+                      })
+                      .toUpperCase()}
+                  </p>
                 </div>
               </div>
-            ))
-          )}
+
+              <div className="flex-1 space-y-2 min-w-0">
+                <div className="flex gap-0.5">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <Star
+                      key={star}
+                      className="w-3.5 h-3.5"
+                      style={
+                        item.rating >= star
+                          ? { fill: RUST, color: RUST }
+                          : { fill: "transparent", color: LINE }
+                      }
+                    />
+                  ))}
+                </div>
+                {item.comment && (
+                  <p
+                    className="font-display text-sm italic line-clamp-2"
+                    style={{ color: "#3F4657" }}
+                  >
+                    &ldquo;{item.comment}&rdquo;
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
-      </CardContent>
-    </Card>
+      )}
+    </div>
   );
 };
 
