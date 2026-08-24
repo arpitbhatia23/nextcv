@@ -61,11 +61,16 @@ const ProjectsStep = () => {
   });
 
   useEffect(() => {
-    if (projectList.length > 0) {
+    if (projectList?.length > 0) {
       updateForm({ projects: projectList });
     }
   }, [projectList]);
 
+  useEffect(() => {
+    setProjectList(formData.projects);
+  }, [formData.projects]);
+
+  console.log("fromdaata", formData);
   const onSubmit = values => {
     if (isEditing) {
       setProjectList(prev =>
