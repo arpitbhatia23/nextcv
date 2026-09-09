@@ -14,3 +14,26 @@ export const razorpaybuilder = async ({ amount }) => {
   console.log(request);
   return request;
 };
+export const createPayment = async ({
+  amount,
+  couponCode,
+  discountAmount,
+  userId,
+  merchantOrderId,
+  resumeId,
+  coverLetterId,
+  productType = "resume",
+}) => {
+  const payment = await Payment.create({
+    merchantOrderId: merchantOrderId,
+    amount: amount / 100,
+    userId: userId,
+    resumeId: resumeId,
+    couponCode: couponCode || null,
+    coverletterId: coverLetterId || null,
+    productType,
+    discountAmount: discountAmount ? parseFloat(discountAmount) : 0,
+  });
+
+  return payment;
+};

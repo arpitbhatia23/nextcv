@@ -63,7 +63,6 @@
     "pdf-lib": "^1.17.1",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^4.8.69",
-    "pg-sdk-node": "https://phonepe.mycloudrepo.io/public/repositories/phonepe-pg-sdk-node/releases/v2/phonepe-pg-sdk-node.tgz",
     "radix-ui": "^1.4.3",
     "rate-limiter-flexible": "^10.0.1",
     "razorpay": "^2.9.8",

@@ -34,7 +34,7 @@ export const createCoverLetterOrder = async data => {
     console.log("found draft cover letter");
   }
 
-  let originalAmount = 100;
+  let originalAmount = 79;
   let discount = 0;
   let finalAmount = originalAmount;
   let discountAmount;
@@ -53,7 +53,7 @@ export const createCoverLetterOrder = async data => {
   }
 
   finalAmount = Math.max(Math.round(finalAmount) * 100, 0);
-
+  console.log(finalAmount);
   const res = await order({
     userId,
     amount: finalAmount,

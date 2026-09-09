@@ -1,11 +1,9 @@
-import { client, createPayment } from "../phonepe/service";
 import { User } from "@/modules/auth";
 import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
 import { apiError, apiResponse } from "@/shared";
 import Resume from "@/modules/resume/models/resume.model";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
-import crypto from "crypto";
 import { razorpay } from "../razorpay/client";
 export const PaymentStatus = async ({ body, userId }) => {
   const { razorpay_payment_id, razorpay_order_id } = body;
