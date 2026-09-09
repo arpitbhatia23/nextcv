@@ -20,9 +20,20 @@ export const PaymentStatus = async ({ body, userId }) => {
     });
 
     if (isPaymentAllreadyDone) {
-      return NextResponse.redirect(
-        `${process.env.BASE_URL}/dashboard/download?resumeId=${isPaymentAllreadyDone.resumeId}`
-      );
+      console.log("oder alread updae by webhook");
+      if (isPaymentAllreadyDone.productType === "resume") {
+        return NextResponse.json(
+          new apiResponse(200, "success", {
+            redirecturl: `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`,
+          })
+        );
+      } else {
+        return NextResponse.json(
+          new apiResponse(200, "success", {
+            redirecturl: `${process.env.BASE_URL}/dashboard/download?coverLetterId=${updatedCoverLetter._id}`,
+          })
+        );
+      }
     }
 
     const payment = await Payment.findOneAndUpdate(

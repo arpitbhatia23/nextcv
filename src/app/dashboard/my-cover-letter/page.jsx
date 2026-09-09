@@ -182,7 +182,7 @@ const MyCoverLetter = () => {
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [amount, setAmount] = useState(79);
-  const [originalAmount, setOriginalAmount] = useState(100); // Store original amount
+  const [originalAmount, setOriginalAmount] = useState(79); // Store original amount
   const [isSubmit, setIsSubmit] = useState(false);
   const [discount, setDiscount] = useState(null);
 
