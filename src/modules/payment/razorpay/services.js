@@ -1,14 +1,19 @@
-import { StandardCheckoutClient, StandardCheckoutPayRequest } from "pg-sdk-node";
 import Payment from "../model/payment.model";
-import { clientId, clinetSecret, clientVersion, env } from "./client";
+import { razorpay } from "./client";
 
-export const client = StandardCheckoutClient.getInstance(
-  clientId,
-  clinetSecret,
-  clientVersion,
-  env
-);
-
+export const razorpaybuilder = async ({ amount }) => {
+  console.log({
+    key_id: process.env.RAZORPAY_CLIENT_ID,
+    key_secret: Boolean(process.env.RAZORPAY_CLIENT_SECRET),
+  });
+  const request = await razorpay.orders.create({
+    amount: amount,
+    currency: "INR",
+    receipt: `nextcv_${Date.now()}`,
+  });
+  console.log(request);
+  return request;
+};
 export const createPayment = async ({
   amount,
   couponCode,
@@ -31,14 +36,4 @@ export const createPayment = async ({
   });
 
   return payment;
-};
-
-export const phonepeBuilder = async ({ merchantOrderId, amount, redirectUrl }) => {
-  const request = StandardCheckoutPayRequest.builder()
-    .merchantOrderId(merchantOrderId)
-    .amount(Math.round(amount))
-    .redirectUrl(redirectUrl)
-    .build();
-
-  return request;
 };

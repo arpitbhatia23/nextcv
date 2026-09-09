@@ -1,10 +1,7 @@
-import { randomUUID } from "crypto";
-import { client, createPayment, phonepeBuilder } from "../phonepe/service";
+import { razorpaybuilder, createPayment } from "../razorpay/services";
 
 export const order = async ({ amount, resumeId, userId, discountAmount, couponCode }) => {
-  const merchantOrderId = randomUUID();
-  const redirectUrl = `${process.env.PHONE_PE_REDIRECT_URL}/status/?merchantId=${merchantOrderId}`;
-  console.log(resumeId);
+  const res = await razorpaybuilder({ amount });
   await createPayment({
     amount,
     couponCode,
@@ -12,11 +9,7 @@ export const order = async ({ amount, resumeId, userId, discountAmount, couponCo
     resumeId,
     discountAmount,
     userId,
-    merchantOrderId,
+    merchantOrderId: res.id,
   });
-
-  const request = await phonepeBuilder({ merchantOrderId, amount, redirectUrl });
-
-  const res = await client.pay(request);
   return res;
 };

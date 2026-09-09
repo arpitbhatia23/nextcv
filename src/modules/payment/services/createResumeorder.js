@@ -5,7 +5,6 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import { apiError, apiResponse, requiredAuth } from "@/shared";
 import { order } from "./order";
 import { NextResponse } from "next/server";
-import { createPayment } from "../phonepe/service";
 
 export const createResuemOrder = async ({ reqData }) => {
   const {
