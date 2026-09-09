@@ -24,13 +24,13 @@ export const PaymentStatus = async ({ body, userId }) => {
       if (isPaymentAllreadyDone.productType === "resume") {
         return NextResponse.json(
           new apiResponse(200, "success", {
-            redirecturl: `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`,
+            redirecturl: `${process.env.BASE_URL}/dashboard/download?resumeId=${isPaymentAllreadyDone.resumeId}`,
           })
         );
       } else {
         return NextResponse.json(
           new apiResponse(200, "success", {
-            redirecturl: `${process.env.BASE_URL}/dashboard/download?coverLetterId=${updatedCoverLetter._id}`,
+            redirecturl: `${process.env.BASE_URL}/dashboard/download?coverLetterId=${isPaymentAllreadyDone.coverletterId}`,
           })
         );
       }

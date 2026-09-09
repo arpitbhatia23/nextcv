@@ -1,12 +1,13 @@
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-
+import { validateWebhookSignature } from "razorpay";
 import Payment from "@/modules/payment/model/payment.model";
 import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
 
 import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
+import { razorpay } from "@/modules/payment/razorpay/client";
 
 export async function handler(req) {
   await dbConnect();
@@ -26,17 +27,18 @@ export async function handler(req) {
   if (!webhookSecret) {
     throw new apiError(500, "Razorpay webhook secret is not configured");
   }
-
   // Generate expected signature
-  const expectedSignature = crypto
-    .createHmac("sha256", webhookSecret)
-    .update(rawBody)
-    .digest("hex");
+  // const expectedSignature = crypto
+  //   .createHmac("sha256", webhookSecret)
+  //   .update(rawBody)
+  //   .digest("hex");
 
-  // Verify signature
-  if (signature !== expectedSignature) {
-    throw new apiError(400, "Invalid Razorpay webhook signature");
-  }
+  // // Verify signature
+  // if (signature !== expectedSignature) {
+  //   throw new apiError(400, "Invalid Razorpay webhook signature");
+  // }
+
+  validateWebhookSignature(rawBody, signature, webhookSecret);
 
   // Parse body AFTER signature verification
   const body = JSON.parse(rawBody);
