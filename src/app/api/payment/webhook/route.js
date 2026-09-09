@@ -1,75 +1,121 @@
-import { NextResponse } from "next/server";
+import crypto from "crypto";
+import { NextRequest, NextResponse } from "next/server";
 
 import Payment from "@/modules/payment/model/payment.model";
 import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
-import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
-import { razorpay } from "@/modules/payment/razorpay/client";
+
+import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
 
 export async function handler(req) {
-  await dbConnect(); // ✅ add await
+  await dbConnect();
 
-  const body = await req.json();
+  // IMPORTANT:
+  // Read the raw body only once.
+  const rawBody = await req.text();
 
   const signature = req.headers.get("x-razorpay-signature");
 
   if (!signature) {
     throw new apiError(400, "Missing Razorpay webhook signature");
   }
-  const rawBody = await req.text();
 
-  // 3. Generate expected signature
+  const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+
+  if (!webhookSecret) {
+    throw new apiError(500, "Razorpay webhook secret is not configured");
+  }
+
+  // Generate expected signature
   const expectedSignature = crypto
-    .createHmac("sha256", process.env.RAZORPAY_WEBHOOK_SECRET)
+    .createHmac("sha256", webhookSecret)
     .update(rawBody)
     .digest("hex");
 
-  // 4. Verify signature
+  // Verify signature
   if (signature !== expectedSignature) {
     throw new apiError(400, "Invalid Razorpay webhook signature");
   }
 
-  const { event } = body;
+  // Parse body AFTER signature verification
+  const body = JSON.parse(rawBody);
 
+  const event = body.event;
+
+  console.log("Razorpay webhook event:", event);
+
+  // Only process required events
   if (event !== "payment.captured" && event !== "payment.failed") {
     return NextResponse.json(new apiResponse(200, "Event ignored"));
   }
-  const paymentEntity = event.payload?.payment?.entity;
 
-  const razorpaypayment = await razorpay.payments.fetch(paymentEntity.id);
+  // Razorpay payment entity
+  const paymentEntity = body.payload?.payment?.entity;
 
-  const merchantOrderId = razorpaypayment.order_id;
-  const transactionId = razorpaypayment.id;
-  const paymentMode = razorpaypayment.method;
+  if (!paymentEntity) {
+    throw new apiError(400, "Payment entity not found");
+  }
 
-  // ❌ FAILED FLOW
-  if (razorpaypayment.status !== "captured") {
+  const merchantOrderId = paymentEntity.order_id;
+  const transactionId = paymentEntity.id;
+  const paymentMode = paymentEntity.method;
+
+  if (!merchantOrderId) {
+    throw new apiError(400, "Razorpay order ID not found");
+  }
+
+  console.log("merchantOrderId:", merchantOrderId);
+  console.log("transactionId:", transactionId);
+  console.log("payment status:", paymentEntity.status);
+
+  // ============================================
+  // FAILED PAYMENT
+  // ============================================
+
+  if (event === "payment.failed") {
     await Payment.findOneAndUpdate(
       { merchantOrderId },
       {
         $set: {
           status: "FAILED",
-          transcationId: transactionId || null, // keep your field name if schema same
+          transcationId: transactionId || null,
           paymentMode: paymentMode || null,
         },
       }
     );
 
-    return NextResponse.json(new apiResponse(200, "failed updated"));
+    return NextResponse.json(new apiResponse(200, "Payment failed updated"));
   }
 
-  console.log("merchantOrderId:", merchantOrderId);
+  // ============================================
+  // CAPTURED PAYMENT
+  // ============================================
 
-  // 🛑 Idempotency check
+  if (paymentEntity.status !== "captured") {
+    return NextResponse.json(new apiResponse(200, "Payment not captured"));
+  }
+
+  // ============================================
+  // IDEMPOTENCY
+  // ============================================
+
   if (transactionId) {
-    const existing = await Payment.findOne({ transcationId: transactionId });
-    if (existing) {
-      return NextResponse.json(new apiResponse(200, "already processed"));
+    const existingPayment = await Payment.findOne({
+      transcationId: transactionId,
+    });
+
+    if (existingPayment) {
+      console.log("Payment already processed:", transactionId);
+
+      return NextResponse.json(new apiResponse(200, "Already processed"));
     }
   }
 
-  // ✅ Update Payment
+  // ============================================
+  // UPDATE PAYMENT
+  // ============================================
+
   const payment = await Payment.findOneAndUpdate(
     { merchantOrderId },
     {
@@ -79,31 +125,61 @@ export async function handler(req) {
         paymentMode: paymentMode,
       },
     },
-    { returnDocument: "after" }
+    {
+      new: true,
+    }
   );
 
-  console.log("payment", payment);
+  console.log("Updated payment:", payment);
 
   if (!payment) {
-    throw new apiError(400, "payment not found");
+    throw new apiError(404, "Payment not found");
   }
+
+  // ============================================
+  // UPDATE RESUME
+  // ============================================
+
   if (payment.productType === "resume") {
     await Resume.findByIdAndUpdate(payment.resumeId, {
-      $set: { status: "paid" },
+      $set: {
+        status: "paid",
+      },
     });
   }
+
+  // ============================================
+  // UPDATE COVER LETTER
+  // ============================================
+
   if (payment.productType === "cover-letter") {
     await CoverLetter.findByIdAndUpdate(payment.coverletterId, {
-      $set: { status: "paid" },
+      $set: {
+        status: "paid",
+      },
     });
   }
 
-  // ✅ Update User (prevent duplicates)
+  // ============================================
+  // UPDATE USER
+  // ============================================
+
   await User.findByIdAndUpdate(payment.userId, {
-    $addToSet: { payments: payment._id },
+    $addToSet: {
+      payments: payment._id,
+    },
   });
 
-  return NextResponse.json(new apiResponse(200, "success"));
+  return NextResponse.json(new apiResponse(200, "Payment successfully processed"));
 }
 
+// Razorpay webhook
 export const POST = asyncHandler(handler);
+
+// Optional endpoint health check
+export async function GET() {
+  return NextResponse.json({
+    success: true,
+    message: "Razorpay webhook endpoint is active",
+  });
+}
