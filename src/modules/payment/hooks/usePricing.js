@@ -18,6 +18,8 @@ export const usePricing = ({
       setBasePrice(templateData.priceOriginal);
       // If no coupon applied yet, set amount = base price
       if (!applied) setAmount(templateData.priceDiscounted);
+    } else {
+      setBasePrice(100);
     }
   }, [selectedTemplate]);
 

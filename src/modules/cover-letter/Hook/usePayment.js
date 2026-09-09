@@ -33,6 +33,9 @@ export const usePayment = ({ coverLetter, couponCode, draftId }) => {
         currency: "INR",
 
         name: "NEXTCV.IN",
+        hidden: {
+          contact: true,
+        },
 
         description: "NEXTCV Transaction",
 
