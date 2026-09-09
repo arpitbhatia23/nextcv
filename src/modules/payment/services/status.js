@@ -2,15 +2,25 @@ import { client, createPayment } from "../phonepe/service";
 import { User } from "@/modules/auth";
 import { NextResponse } from "next/server";
 import Payment from "../model/payment.model";
-import { apiError } from "@/shared";
+import { apiError, apiResponse } from "@/shared";
 import Resume from "@/modules/resume/models/resume.model";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
-export const PaymentStatus = async ({ merchantOrderId, userId }) => {
-  const response = await client.getOrderStatus(merchantOrderId);
-  if (response.state === "COMPLETED") {
+import crypto from "crypto";
+import { razorpay } from "../razorpay/client";
+export const PaymentStatus = async ({ body, userId }) => {
+  const { razorpay_payment_id, razorpay_order_id } = body;
+
+  if ((!razorpay_payment_id, !razorpay_order_id)) {
+    throw new apiError(400, "razorpay payment and order id is required");
+  }
+
+  const response = await razorpay.payments.fetch(razorpay_payment_id);
+  console.log(response);
+  if (response.status === "captured") {
     const isPaymentAllreadyDone = await Payment.findOne({
-      transcationId: response?.paymentDetails[0]?.transactionId,
+      transcationId: response?.id,
     });
+
     if (isPaymentAllreadyDone) {
       return NextResponse.redirect(
         `${process.env.BASE_URL}/dashboard/download?resumeId=${isPaymentAllreadyDone.resumeId}`
@@ -19,18 +29,17 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
 
     const payment = await Payment.findOneAndUpdate(
       {
-        merchantOrderId: merchantOrderId,
+        merchantOrderId: response.order_id,
       },
       {
         $set: {
           status: "SUCCESS",
-          transcationId: response?.paymentDetails[0]?.transactionId,
-          paymentMode: response?.paymentDetails[0]?.paymentMode,
+          transcationId: response?.id,
+          paymentMode: response?.method,
         },
       },
       { returnDocument: "after" }
     );
-    console.log(payment);
     if (payment.productType === "resume") {
       const updateResume = await Resume.findByIdAndUpdate(
         payment.resumeId,
@@ -49,8 +58,11 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
           payments: payment._id,
         },
       });
-      return NextResponse.redirect(
-        `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`
+
+      return NextResponse.json(
+        new apiResponse(200, "success", {
+          redirecturl: `${process.env.BASE_URL}/dashboard/download?resumeId=${updateResume._id}`,
+        })
       );
     }
     console.log(payment);
@@ -74,11 +86,17 @@ export const PaymentStatus = async ({ merchantOrderId, userId }) => {
         },
       });
 
-      return NextResponse.redirect(
-        `${process.env.BASE_URL}/dashboard/download?coverLetterId=${updatedCoverLetter._id}`
+      return NextResponse.json(
+        new apiResponse(200, "success", {
+          redirecturl: `${process.env.BASE_URL}/dashboard/download?coverLetterId=${updatedCoverLetter._id}`,
+        })
       );
     }
   } else {
-    return NextResponse.redirect(`${process.env.BASE_URL}/payement/fails?status=fail`);
+    return NextResponse.json(
+      new apiResponse(200, "success", {
+        redirecturl: `${process.env.BASE_URL}/payement/fails?status=fail`,
+      })
+    );
   }
 };

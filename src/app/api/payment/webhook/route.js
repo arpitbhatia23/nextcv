@@ -4,34 +4,47 @@ import Payment from "@/modules/payment/model/payment.model";
 import Resume from "@/modules/resume/models/resume.model";
 import { User } from "@/modules/auth";
 import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
-import { client } from "@/modules/payment/phonepe/service";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
+import { razorpay } from "@/modules/payment/razorpay/client";
 
 export async function handler(req) {
   await dbConnect(); // ✅ add await
 
-  const rawBody = await req.text();
-  const authorization = req.headers.get("authorization");
+  const body = await req.json();
 
-  if (!authorization) {
-    throw new apiError(400, "Missing authorization header");
+  const signature = req.headers.get("x-razorpay-signature");
+
+  if (!signature) {
+    throw new apiError(400, "Missing Razorpay webhook signature");
+  }
+  const rawBody = await req.text();
+
+  // 3. Generate expected signature
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_WEBHOOK_SECRET)
+    .update(rawBody)
+    .digest("hex");
+
+  // 4. Verify signature
+  if (signature !== expectedSignature) {
+    throw new apiError(400, "Invalid Razorpay webhook signature");
   }
 
-  const callbackResponse = client.validateCallback(
-    process.env.PHONEPE_WEBHOOK_USERNAME,
-    process.env.PHONEPE_WEBHOOK_PASSWORD,
-    authorization,
-    rawBody
-  );
+  const { event } = body;
 
-  const { type, payload } = callbackResponse;
+  if (event !== "payment.captured" && event !== "payment.failed") {
+    return NextResponse.json(new apiResponse(200, "Event ignored"));
+  }
+  const paymentEntity = event.payload?.payment?.entity;
 
-  const merchantOrderId = payload.merchantOrderId;
-  const transactionId = payload.paymentDetails?.[0]?.transactionId;
-  const paymentMode = payload.paymentDetails?.[0]?.paymentMode;
+  const razorpaypayment = await razorpay.payments.fetch(paymentEntity.id);
+
+  const merchantOrderId = razorpaypayment.order_id;
+  const transactionId = razorpaypayment.id;
+  const paymentMode = razorpaypayment.method;
 
   // ❌ FAILED FLOW
-  if (type === "CHECKOUT_ORDER_FAILED") {
+  if (razorpaypayment.status !== "captured") {
     await Payment.findOneAndUpdate(
       { merchantOrderId },
       {
@@ -44,11 +57,6 @@ export async function handler(req) {
     );
 
     return NextResponse.json(new apiResponse(200, "failed updated"));
-  }
-
-  // 🎯 Only handle success
-  if (type !== "CHECKOUT_ORDER_COMPLETED") {
-    return NextResponse.json(new apiResponse(400, "order not complete"));
   }
 
   console.log("merchantOrderId:", merchantOrderId);

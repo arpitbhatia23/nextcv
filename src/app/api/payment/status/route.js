@@ -4,12 +4,11 @@ import { requiredAuth } from "@/shared";
 import { PaymentStatus } from "@/modules/payment";
 
 const handler = async req => {
-  const searchParams = req.nextUrl.searchParams;
+  const body = await req.json();
   await dbConnect();
-  const merchantOrderId = searchParams.get("merchantId");
   const session = await requiredAuth();
   const userId = session.user.id;
-  return await PaymentStatus({ merchantOrderId, userId });
+  return await PaymentStatus({ body, userId });
 };
 
 export const GET = asyncHandler(handler);
