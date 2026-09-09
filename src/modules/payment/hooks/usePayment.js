@@ -63,6 +63,9 @@ export const usePayment = ({
         currency: "INR",
 
         name: "NEXTCV.IN",
+        hidden: {
+          contact: true,
+        },
 
         description: "NEXTCV Transaction",
 

@@ -181,7 +181,7 @@ const MyCoverLetter = () => {
   const [coverLetterData, setCoverLetterData] = useState(null);
   const [applied, setApplied] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(79);
   const [originalAmount, setOriginalAmount] = useState(100); // Store original amount
   const [isSubmit, setIsSubmit] = useState(false);
   const [discount, setDiscount] = useState(null);
@@ -279,7 +279,7 @@ const MyCoverLetter = () => {
     setAmount,
     setOriginalAmount,
   });
-
+  console.log(basePrice);
   if (loading) {
     return (
       <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
@@ -422,7 +422,7 @@ const MyCoverLetter = () => {
                     ₹{originalAmount}
                   </div>
                   <div className="text-xs mt-1 font-mono" style={{ color: "#0F6E63" }}>
-                    YOU SAVED ₹{originalAmount - basePrice}
+                    YOU SAVED ₹{basePrice - amount}
                   </div>
                 </div>
 
