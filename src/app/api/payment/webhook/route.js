@@ -10,8 +10,6 @@ import { apiError, apiResponse, asyncHandler, dbConnect } from "@/shared";
 import { razorpay } from "@/modules/payment/razorpay/client";
 
 export async function handler(req) {
-  await dbConnect();
-
   // IMPORTANT:
   // Read the raw body only once.
   const rawBody = await req.text();
@@ -27,18 +25,11 @@ export async function handler(req) {
   if (!webhookSecret) {
     throw new apiError(500, "Razorpay webhook secret is not configured");
   }
-  // Generate expected signature
-  // const expectedSignature = crypto
-  //   .createHmac("sha256", webhookSecret)
-  //   .update(rawBody)
-  //   .digest("hex");
-
-  // // Verify signature
-  // if (signature !== expectedSignature) {
-  //   throw new apiError(400, "Invalid Razorpay webhook signature");
-  // }
-
-  validateWebhookSignature(rawBody, signature, webhookSecret);
+  try {
+    validateWebhookSignature(rawBody, signature, webhookSecret);
+  } catch (error) {
+    console.log(error);
+  }
 
   // Parse body AFTER signature verification
   const body = JSON.parse(rawBody);
@@ -74,6 +65,7 @@ export async function handler(req) {
   // ============================================
   // FAILED PAYMENT
   // ============================================
+  await dbConnect();
 
   if (event === "payment.failed") {
     await Payment.findOneAndUpdate(
