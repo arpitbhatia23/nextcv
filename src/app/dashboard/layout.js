@@ -13,6 +13,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await requiredAuth();
+  throw new Error("fuck you");
 
   return (
     <>

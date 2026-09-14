@@ -8,6 +8,7 @@ export const asyncHandler = handler => {
       console.log("error", error);
 
       sentry.captureException(error);
+      await sentry.flush(2000);
       return NextResponse.json(error.message || " Internal Server Error", {
         status: error.status || 500,
       });

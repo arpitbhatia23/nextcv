@@ -1,7 +1,8 @@
 import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-  dsn: process.env.sentry_dns,
+  dsn: process.env.SENTRY_DSN,
+  debug: process.env.NODE_ENV !== "production",
 
   // Lower this for production to reduce performance overhead
   // 1.0 is 100%, 0.1 is 10%.
