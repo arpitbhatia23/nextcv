@@ -27,7 +27,20 @@ export default function HeroSection() {
         </h1>
         {/* Same text sizes */}
         <p className="mx-auto mb-10 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-lg">
-          The ultimate AI resume builder for the Indian job market. Designed specifically for freshers and experienced professionals. Check our <a href="/templates" className="text-blue-600 hover:underline">Templates</a>, see <a href="/examples" className="text-blue-600 hover:underline">Examples</a>, or view our <a href="/pricing" className="text-blue-600 hover:underline">Pricing</a>.
+          The ultimate AI resume builder for the Indian job market. Designed specifically for
+          freshers and experienced professionals. Check our{" "}
+          <a href="/templates" className="text-blue-600 hover:underline">
+            Templates
+          </a>
+          , see{" "}
+          <a href="/examples" className="text-blue-600 hover:underline">
+            Examples
+          </a>
+          , or view our{" "}
+          <a href="/pricing" className="text-blue-600 hover:underline">
+            Pricing
+          </a>
+          .
           <span className="mt-2 block text-xs font-medium text-blue-600">
             ✨ Fast • ATS-Optimized • Professional
           </span>

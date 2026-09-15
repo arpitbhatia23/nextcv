@@ -6,10 +6,28 @@ import dynamic from "next/dynamic";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = createSeoMetadata({
-  title: "Free ATS Resume Checker India 2026 | Check Resume Score Online",
+  title: "Free ATS Resume Checker India 2026 | ATS Friendly Resume Score Tool",
   description:
-    "Check your resume ATS score online for free. Find missing skills, formatting issues and ATS problems before applying to TCS, Infosys, Wipro and more.",
+    "Use our free ATS resume checker to scan your resume score, improve ATS friendly resume formatting, and fix resume format issues before applying for jobs in India.",
   path: "/ats-resume-checker",
+  keywords: [
+    "free ats resume checker",
+    "ats resume checker",
+    "resume score",
+    "ats friendly resume",
+    "ats friendly resume checker",
+    "resume builder",
+    "resume maker",
+    "resume format",
+    "resume template",
+    "best resume builder",
+    "best resume template",
+    "free resume builder",
+    "cv builder",
+    "ai resume builder",
+    "ATS resume checker India",
+    "resume score checker",
+  ],
 });
 
 export default function Page() {
@@ -76,17 +94,22 @@ export default function Page() {
       />
 
       <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-        Free ATS Resume Checker Online (2026)
+        Free ATS Resume Checker Online (2026) for Resume Score & ATS Friendly Resume Review
       </h1>
       <p className="text-lg text-gray-700 mb-8">
-        Check your resume ATS score online for free. Find missing skills, formatting issues and ATS
-        problems before applying to TCS, Infosys, Wipro, Accenture and more.
+        Use our free ATS resume checker to check your resume score, identify weak ATS friendly
+        resume sections, and improve your resume format before applying to TCS, Infosys, Wipro,
+        Accenture and other top companies in India.
       </p>
 
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
-        <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
+        <h2 className="text-xl font-semibold mb-2">
+          Build Your ATS Friendly Resume with a Free Resume Builder
+        </h2>
         <p className="mb-4 text-gray-700">
-          Use NextCV to create a resume that passes screening tools used by top Indian companies.
+          Use NextCV to create a resume that passes screening tools used by top Indian companies,
+          while improving your resume builder workflow, resume template structure and final resume
+          score.
         </p>
         <Link
           href="/"
@@ -98,35 +121,40 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Free ATS Resume Checker for Indian Freshers
+          Free ATS Resume Checker for Indian Freshers and Resume Makers
         </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Check Resume Score Before Applying</h2>
-        <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          This free ATS resume checker helps Indian freshers improve their resume format, add the
+          right keywords, and check their resume score before applying for jobs. A strong ATS
+          friendly resume should be easy to read, keyword-rich and properly formatted for recruiters
+          and ATS systems.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">
-          ATS Resume Checker for TCS, Infosys, Wipro and Accenture
+          Check Your Resume Score Before Applying to Top Companies
         </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          Your resume score depends on clarity, job-specific keywords, simple formatting, and strong
+          achievement bullets. Using the right resume template and a trusted resume builder can
+          improve your ATS friendliness and raise your chances of shortlisting.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Common ATS Resume Mistakes</h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">
+          ATS Resume Checker for TCS, Infosys, Wipro, Accenture and More
+        </h2>
         <p className="mb-4">
-          This section is designed to guide Indian freshers in creating an optimal resume for 2026.
-          Make sure to include relevant skills, internships, and educational background correctly
-          structured for Applicant Tracking Systems (ATS).
+          Companies such as TCS, Infosys, Wipro and Accenture often rely on ATS screening tools.
+          This ATS resume checker helps you review your resume format, keyword match and overall
+          resume score so you can optimize before submitting your application.
+        </p>
+
+        <h2 className="text-2xl font-semibold mt-8 mb-4">
+          Common ATS Resume Mistakes to Fix with a Better Resume Builder
+        </h2>
+        <p className="mb-4">
+          Poor resume formatting, missing keywords, long paragraphs, weak summary sections and wrong
+          file types can reduce your ATS resume checker score. Use a simple resume builder and a
+          clean resume template to keep your application readable and recruiter-friendly.
         </p>
       </div>
 

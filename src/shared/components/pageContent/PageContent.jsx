@@ -94,11 +94,12 @@ const PageContent = () => {
         <div className="mb-20 text-center max-w-3xl mx-auto">
           <h2 className="text-lg sm:text-xl font-bold text-white mb-6 tracking-tight">
             Unlock interviews with the <br />
-            <span className="text-indigo-400">best resume maker for freshers in India 2026</span>
+            <span className="text-indigo-400">best resume builder for freshers in India 2026</span>
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            Experience our ATS-friendly templates and professional resume building platform designed
-            for modern job seekers.
+            Our free resume builder helps you create an ATS friendly resume, choose the right resume
+            format, and use a professional resume template that stands out for Indian job
+            applications.
           </p>
         </div>
 

@@ -14,11 +14,14 @@ export const viewport = {
   maximumScale: 5,
 };
 
+import { DEFAULT_SEO_KEYWORDS } from "@/shared/utils/seo";
+
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
   title: "Create an ATS Resume for Freshers – Designed for TCS, Infosys & Wipro | NextCV",
   description:
     "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
+  keywords: DEFAULT_SEO_KEYWORDS,
   openGraph: {
     images: ["/opengraph-image.png"],
   },
