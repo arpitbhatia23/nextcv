@@ -15,83 +15,85 @@ import {
 
 export const metadata = createSeoMetadata({
   title: "Resume vs CV in India 2026 | Difference, Meaning & Examples",
-  description: "Understand the difference between resume and CV in India. Learn which one freshers should use for jobs, internships and campus placements.",
+  description:
+    "Understand the difference between resume and CV in India. Learn which one freshers should use for jobs, internships and campus placements.",
   path: "/resume-vs-cv-in-india",
+  keywords: ["resume vs cv in india", "cv vs resume india", "cv builder", "resume format india"],
 });
 
 export const revalidate = 86400;
 
 export default function SEOPage() {
   const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Is a CV and resume the same in India?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "In casual conversation, yes. However, technically a resume is a brief 1-2 page summary of skills, while a CV is a detailed, multi-page academic and professional record."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should freshers use a CV or a resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Freshers applying for corporate jobs (like IT, Finance, or Marketing) should strictly use a 1-page resume."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "When should I submit a CV?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Submit a CV when applying for academic positions, scientific research, fellowships, or medical roles where detailed publication history is required."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does CV stand for?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "CV stands for 'Curriculum Vitae', which is Latin for 'course of life'."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Why do Indian recruiters ask for a CV when they mean a resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It is a cultural quirk. In India, 'Send me your CV' usually just means 'Send me your resume'. Always send a 1-2 page document unless instructed otherwise."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does NextCV build resumes or CVs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "NextCV primarily builds highly optimized, concise resumes perfect for the Indian corporate and IT sectors."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are ATS systems better at reading resumes or CVs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "ATS systems can read both, but they are configured to look for specific keywords and concise skills commonly found in standard resumes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is a Biodata?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A Biodata is an outdated format focusing heavily on personal details (religion, marital status, physical traits) and should not be used for modern corporate jobs."
-      }
-    }
-  ]
-};
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is a CV and resume the same in India?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "In casual conversation, yes. However, technically a resume is a brief 1-2 page summary of skills, while a CV is a detailed, multi-page academic and professional record.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should freshers use a CV or a resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Freshers applying for corporate jobs (like IT, Finance, or Marketing) should strictly use a 1-page resume.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "When should I submit a CV?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Submit a CV when applying for academic positions, scientific research, fellowships, or medical roles where detailed publication history is required.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What does CV stand for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CV stands for 'Curriculum Vitae', which is Latin for 'course of life'.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Why do Indian recruiters ask for a CV when they mean a resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "It is a cultural quirk. In India, 'Send me your CV' usually just means 'Send me your resume'. Always send a 1-2 page document unless instructed otherwise.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does NextCV build resumes or CVs?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "NextCV primarily builds highly optimized, concise resumes perfect for the Indian corporate and IT sectors.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Are ATS systems better at reading resumes or CVs?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "ATS systems can read both, but they are configured to look for specific keywords and concise skills commonly found in standard resumes.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is a Biodata?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A Biodata is an outdated format focusing heavily on personal details (religion, marital status, physical traits) and should not be used for modern corporate jobs.",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -120,7 +122,9 @@ export default function SEOPage() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"What is the difference between a CV and a Resume in India? Discover which document you should submit for Indian corporate job applications in 2026."}
+              {
+                "What is the difference between a CV and a Resume in India? Discover which document you should submit for Indian corporate job applications in 2026."
+              }
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -143,26 +147,17 @@ export default function SEOPage() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
+                <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-emerald-500" />
                 Free to start
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
+                <Clock3 aria-hidden="true" className="h-3.5 w-3.5 text-indigo-500" />
                 Ready in minutes
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
+                <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
                 ATS-friendly formats
               </span>
             </div>
@@ -173,252 +168,242 @@ export default function SEOPage() {
         <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
           {/* Main article */}
           <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Are CV and Resume Used Interchangeably in India?"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Are CV and Resume Used Interchangeably in India?"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Are CV and Resume Used Interchangeably in India?"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Are CV and Resume Used Interchangeably in India?"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The Definition of a Resume"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The Definition of a Resume"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"The Definition of a Resume"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"The Definition of a Resume"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-            <span>{"Length, Focus, and Purpose"}</span>
-          </h3>
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply length, focus, and purpose carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                    <span>{"Length, Focus, and Purpose"}</span>
+                  </h3>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply length, focus, and purpose carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The Definition of a CV (Curriculum Vitae)"}
-              </h2>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The Definition of a CV (Curriculum Vitae)"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"The Definition of a CV (Curriculum Vitae)"}
+                  </h2>
 
-            <span>{"Detailed Academic and Research Focus"}</span>
-          </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"The Definition of a CV (Curriculum Vitae)"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply detailed academic and research focus carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                    <span>{"Detailed Academic and Research Focus"}</span>
+                  </h3>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"When to Use a Resume in India"}
-              </h2>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply detailed academic and research focus carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"When to Use a Resume in India"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <span>{"Corporate Roles (IT, MNCs, Startups)"}</span>
-          </h3>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"When to Use a Resume in India"}
+                  </h2>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply corporate roles (it, mncs, startups) carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"When to Use a Resume in India"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"When to Use a CV in India"}
-              </h2>
+                    <span>{"Corporate Roles (IT, MNCs, Startups)"}</span>
+                  </h3>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"When to Use a CV in India"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply corporate roles (it, mncs, startups) carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-            <span>{"Academia, Fellowships, and Research"}</span>
-          </h3>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply academia, fellowships, and research carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"When to Use a CV in India"}
+                  </h2>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"When to Use a CV in India"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                    <span>{"Academia, Fellowships, and Research"}</span>
+                  </h3>
 
-          <div className="mt-6 space-y-4">
-      
-        </div>
-      </section>
-    
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply academia, fellowships, and research carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-            
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
+
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Frequently Asked Questions"}
+                  </h2>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Frequently Asked Questions"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
             <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
               <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
 
               <div className="relative z-10 mb-6 flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
+                  <FileText aria-hidden="true" className="h-4 w-4" />
                 </div>
 
                 <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -427,122 +412,117 @@ export default function SEOPage() {
               </div>
 
               <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"Is a CV and resume the same in India?"}</span>
-          </h3>
+                    <span>{"Is a CV and resume the same in India?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"In casual conversation, yes. However, technically a resume is a brief 1-2 page summary of skills, while a CV is a detailed, multi-page academic and professional record."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "In casual conversation, yes. However, technically a resume is a brief 1-2 page summary of skills, while a CV is a detailed, multi-page academic and professional record."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Should freshers use a CV or a resume?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Freshers applying for corporate jobs (like IT, Finance, or Marketing) should strictly use a 1-page resume."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"Should freshers use a CV or a resume?"}</span>
+                  </h3>
 
-            <span>{"When should I submit a CV?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Freshers applying for corporate jobs (like IT, Finance, or Marketing) should strictly use a 1-page resume."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Submit a CV when applying for academic positions, scientific research, fellowships, or medical roles where detailed publication history is required."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What does CV stand for?"}</span>
-          </h3>
+                    <span>{"When should I submit a CV?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"CV stands for 'Curriculum Vitae', which is Latin for 'course of life'."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Submit a CV when applying for academic positions, scientific research, fellowships, or medical roles where detailed publication history is required."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Why do Indian recruiters ask for a CV when they mean a resume?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"It is a cultural quirk. In India, 'Send me your CV' usually just means 'Send me your resume'. Always send a 1-2 page document unless instructed otherwise."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"What does CV stand for?"}</span>
+                  </h3>
 
-            <span>{"Does NextCV build resumes or CVs?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {"CV stands for 'Curriculum Vitae', which is Latin for 'course of life'."}
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"NextCV primarily builds highly optimized, concise resumes perfect for the Indian corporate and IT sectors."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"Are ATS systems better at reading resumes or CVs?"}</span>
-          </h3>
+                    <span>{"Why do Indian recruiters ask for a CV when they mean a resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"ATS systems can read both, but they are configured to look for specific keywords and concise skills commonly found in standard resumes."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "It is a cultural quirk. In India, 'Send me your CV' usually just means 'Send me your resume'. Always send a 1-2 page document unless instructed otherwise."
+                    }
+                  </p>
+                </article>
 
-            <span>{"What is a Biodata?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"A Biodata is an outdated format focusing heavily on personal details (religion, marital status, physical traits) and should not be used for modern corporate jobs."}
-          </p>
-        </article>
-      
+                    <span>{"Does NextCV build resumes or CVs?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "NextCV primarily builds highly optimized, concise resumes perfect for the Indian corporate and IT sectors."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Are ATS systems better at reading resumes or CVs?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "ATS systems can read both, but they are configured to look for specific keywords and concise skills commonly found in standard resumes."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"What is a Biodata?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "A Biodata is an outdated format focusing heavily on personal details (religion, marital status, physical traits) and should not be used for modern corporate jobs."
+                    }
+                  </p>
+                </article>
               </div>
             </section>
-            
           </div>
 
           {/* Sidebar */}
@@ -553,10 +533,7 @@ export default function SEOPage() {
 
                 <div className="relative z-10">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
+                    <Zap aria-hidden="true" className="h-5 w-5" />
                   </div>
 
                   <h2 className="text-lg font-bold leading-snug">
@@ -564,8 +541,8 @@ export default function SEOPage() {
                   </h2>
 
                   <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
+                    Create a professional resume without worrying about formatting, structure or ATS
+                    compatibility.
                   </p>
 
                   <Link
@@ -573,64 +550,50 @@ export default function SEOPage() {
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
                   >
                     Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
 
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                    <BookOpen aria-hidden="true" className="h-4 w-4" />
+                  </div>
 
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
+                  <h2 className="text-lg font-bold">Related Resources</h2>
+                </div>
 
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Free Resume Builder"}
-                  </span>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Free Resume Builder"}</span>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/indian-resume-format"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Indian Resume Format"}
-                  </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
-        </div>
-      
+                  <li>
+                    <Link
+                      href="/indian-resume-format"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Indian Resume Format"}</span>
+
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </main>

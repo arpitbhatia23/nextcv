@@ -10,6 +10,12 @@ export const metadata = createSeoMetadata({
   description:
     "Create an ATS-friendly Infosys resume format for freshers. Use clean templates for BCA, B.Tech, IT and non-IT fresher applications.",
   path: "/infosys-resume-format-for-freshers",
+  keywords: [
+    "infosys resume format for freshers",
+    "infosys resume template",
+    "ats resume for freshers",
+    "resume format for bca freshers",
+  ],
 });
 
 export default function Page() {
@@ -98,44 +104,79 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         <p className="mb-4 text-sm text-gray-500 italic">
-          Disclaimer: This guide is intended for informational purposes only. The resume format and template provided are independent recommendations and are not officially approved by, endorsed by, or affiliated with Infosys.
+          Disclaimer: This guide is intended for informational purposes only. The resume format and
+          template provided are independent recommendations and are not officially approved by,
+          endorsed by, or affiliated with Infosys.
         </p>
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Recommended One-Page Structure
-        </h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Recommended One-Page Structure</h2>
         <p className="mb-4">
-          When applying for roles like Systems Engineer at Infosys, a one-page resume is highly recommended. It should contain Contact Information, a Summary, Education, Skills, Projects, and Certifications. Keep it clean and avoid complex graphics for better ATS parsing.
+          When applying for roles like Systems Engineer at Infosys, a one-page resume is highly
+          recommended. It should contain Contact Information, a Summary, Education, Skills,
+          Projects, and Certifications. Keep it clean and avoid complex graphics for better ATS
+          parsing.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Realistic Text Example
-        </h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Realistic Text Example</h2>
         <div className="bg-gray-50 p-4 border rounded-md">
-          <p><strong>Rahul Sharma</strong><br/>
-          New Delhi, India | rahul.sharma@email.com | +91 9876543210<br/>
-          LinkedIn: linkedin.com/in/rahulsharma | GitHub: github.com/rahulsharma</p>
-          <p><strong>Professional Summary</strong><br/>
-          Motivated Computer Science graduate with strong programming skills in Python and SQL. Eager to contribute to a dynamic team at Infosys as a Systems Engineer.</p>
-          <p><strong>Education</strong><br/>
-          B.Tech in Computer Science, XYZ University | 2026 | CGPA: 8.5</p>
-          <p><strong>Technical Skills</strong><br/>
-          Languages: Python, Java, SQL<br/>
-          Tools/Frameworks: Django, Git, MySQL</p>
-          <p><strong>Academic Projects</strong><br/>
-          <em>Library Management System:</em> Built a Python-based system using Django and MySQL to track book inventory, reducing manual data entry by 50%.</p>
-          <p><strong>Certifications</strong><br/>
-          AWS Certified Cloud Practitioner (2025)</p>
+          <p>
+            <strong>Rahul Sharma</strong>
+            <br />
+            New Delhi, India | rahul.sharma@email.com | +91 9876543210
+            <br />
+            LinkedIn: linkedin.com/in/rahulsharma | GitHub: github.com/rahulsharma
+          </p>
+          <p>
+            <strong>Professional Summary</strong>
+            <br />
+            Motivated Computer Science graduate with strong programming skills in Python and SQL.
+            Eager to contribute to a dynamic team at Infosys as a Systems Engineer.
+          </p>
+          <p>
+            <strong>Education</strong>
+            <br />
+            B.Tech in Computer Science, XYZ University | 2026 | CGPA: 8.5
+          </p>
+          <p>
+            <strong>Technical Skills</strong>
+            <br />
+            Languages: Python, Java, SQL
+            <br />
+            Tools/Frameworks: Django, Git, MySQL
+          </p>
+          <p>
+            <strong>Academic Projects</strong>
+            <br />
+            <em>Library Management System:</em> Built a Python-based system using Django and MySQL
+            to track book inventory, reducing manual data entry by 50%.
+          </p>
+          <p>
+            <strong>Certifications</strong>
+            <br />
+            AWS Certified Cloud Practitioner (2025)
+          </p>
         </div>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          ATS Formatting Recommendations
-        </h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">ATS Formatting Recommendations</h2>
         <p className="mb-4">
-          To clear the Infosys ATS screening, strictly stick to standard fonts like Arial or Calibri. Avoid using tables, multiple columns, and headers/footers for important text. Make sure your headings precisely match standard terms (e.g., "Education", "Projects").
+          To clear the Infosys ATS screening, strictly stick to standard fonts like Arial or
+          Calibri. Avoid using tables, multiple columns, and headers/footers for important text.
+          Make sure your headings precisely match standard terms (e.g., "Education", "Projects").
         </p>
 
         <p className="mt-8 font-bold text-lg">
-          Ready to build? Customize a <Link href="/templates" className="text-blue-600 hover:underline">NextCV template</Link> now. You can also explore our guides for <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">Wipro</Link> and <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">TCS</Link>.
+          Ready to build? Customize a{" "}
+          <Link href="/templates" className="text-blue-600 hover:underline">
+            NextCV template
+          </Link>{" "}
+          now. You can also explore our guides for{" "}
+          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">
+            Wipro
+          </Link>{" "}
+          and{" "}
+          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">
+            TCS
+          </Link>
+          .
         </p>
       </div>
 

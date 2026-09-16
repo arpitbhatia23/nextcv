@@ -10,6 +10,12 @@ export const metadata = createSeoMetadata({
   description:
     "Learn the best ATS-friendly resume format for Indian freshers. See structure, skills, projects and formatting tips to pass resume screening systems.",
   path: "/ats-friendly-resume-format-india",
+  keywords: [
+    "ats friendly resume format india",
+    "ats resume format",
+    "ats best resume template",
+    "ats resume for freshers",
+  ],
 });
 
 export default function Page() {

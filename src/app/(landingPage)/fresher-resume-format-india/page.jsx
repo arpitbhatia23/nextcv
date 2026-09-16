@@ -10,6 +10,12 @@ export const metadata = createSeoMetadata({
   description:
     "Create an ATS-friendly fresher resume for Indian jobs. Best format for BCA, B.Tech, MBA, commerce, IT and non-IT freshers.",
   path: "/fresher-resume-format-india",
+  keywords: [
+    "fresher resume format india",
+    "free resume builder for freshers",
+    "best resume template for freshers",
+    "ats friendly resume",
+  ],
 });
 
 export default function Page() {

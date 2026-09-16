@@ -1,213 +1,196 @@
 import React from "react";
-import { createSeoMetadata } from "@/shared/utils/seo";
-import Link from "next/link";
-import dynamic from "next/dynamic";
+import { CheckCircle2, Search, Briefcase } from "lucide-react";
+import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 
-const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
-
-export const metadata = createSeoMetadata({
-  title: "Free ATS Resume Checker India 2026 | ATS Friendly Resume Score Tool",
+export const metadata = {
+  title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
   description:
-    "Use our free ATS resume checker to scan your resume score, improve ATS friendly resume formatting, and fix resume format issues before applying for jobs in India.",
-  path: "/ats-resume-checker",
+    "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
   keywords: [
-    "free ats resume checker",
-    "ats resume checker",
-    "resume score",
-    "ats friendly resume",
-    "ats friendly resume checker",
-    "resume builder",
-    "resume maker",
-    "resume format",
-    "resume template",
-    "best resume builder",
-    "best resume template",
-    "free resume builder",
-    "cv builder",
-    "ai resume builder",
-    "ATS resume checker India",
-    "resume score checker",
+    "free ats resume checker for freshers in india",
+    "check if my resume is ats friendly free",
+    "ats score checker online india",
+    "resume ats score free tool 2026",
+    "free ats resume scan for freshers",
+    "how to check resume ats score online",
+    "best ats checker for indian jobs",
+    "ats resume checker for campus placements",
+    "free resume scanner for it jobs india",
+    "ats friendly resume test online",
+    "nextcv ats checker free",
+    "best free ats checker in india",
+    "ats checker vs resume builder",
+    "free alternative to paid ats resume scan",
+    "is ats resume checker accurate",
+    "ats resume for tcs freshers",
+    "ats score required for infosys",
+    "how to make resume ats friendly for wipro",
+    "ats resume format for hcl technologies",
+    "ats check for accenture india",
+    "ats resume checker for btech cse",
+    "ats resume score for mba freshers",
+    "ats friendly resume for mechanical engineer fresher",
+    "campus placement resume ats check",
+    "tcs resume builder",
+    "accenture resume builder",
+    "ltimindtree resume format",
+    "ats resume india",
+    "best ats friendly resume builder india",
+    "resume builder for campus placement",
+    "check if my resume is ats friendly",
   ],
-});
+  alternates: {
+    canonical: `https://www.nextcv.in/ats-resume-checker`,
+  },
+};
 
-export default function Page() {
-  const faqs = [
-    {
-      q: "How can I check my ATS resume score for free?",
-      a: "You can use NextCV's ATS resume checker to evaluate your resume format and keyword density.",
-    },
-    {
-      q: "What is a good ATS score?",
-      a: "A score above 80% is generally considered good and indicates high compatibility with ATS systems.",
-    },
-    {
-      q: "Does the checker work for TCS and Infosys?",
-      a: "Yes, the checker is designed to evaluate resumes based on common ATS criteria used by major IT companies.",
-    },
-    {
-      q: "Why is my ATS score low?",
-      a: "A low score could be due to missing keywords, complex formatting, or incorrect file types.",
-    },
-  ];
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map(faq => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://www.nextcv.in/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Free ATS Resume Checker Online (2026)",
-        item: "https://www.nextcv.in/ats-resume-checker",
-      },
-    ],
-  };
-
+const ATSCheckerPage = () => {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12 bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+    <div className="bg-slate-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-12 lg:pt-40 lg:pb-20 overflow-hidden bg-white">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-indigo-50/50 rounded-full blur-3xl opacity-60" />
+          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-50/50 rounded-full blur-3xl opacity-60" />
+        </div>
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-        Free ATS Resume Checker Online (2026) for Resume Score & ATS Friendly Resume Review
-      </h1>
-      <p className="text-lg text-gray-700 mb-8">
-        Use our free ATS resume checker to check your resume score, identify weak ATS friendly
-        resume sections, and improve your resume format before applying to TCS, Infosys, Wipro,
-        Accenture and other top companies in India.
-      </p>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-700 text-sm font-medium mb-6 border border-green-100">
+            <CheckCircle2 className="w-4 h-4" />
+            <span>Updates for 2026 Hiring Season</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 mb-6">
+            ATS-Friendly Resume Checker for <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-blue-600">
+              Freshers in India 2026
+            </span>
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
+            Ever wondered <strong>why ATS rejects resumes in India and how to fix it</strong>?
+            Upload your resume and get an instant ATS score analysis tailored for Indian recruitment
+            standards in 2026.
+          </p>
 
-      <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
-        <h2 className="text-xl font-semibold mb-2">
-          Build Your ATS Friendly Resume with a Free Resume Builder
-        </h2>
-        <p className="mb-4 text-gray-700">
-          Use NextCV to create a resume that passes screening tools used by top Indian companies,
-          while improving your resume builder workflow, resume template structure and final resume
-          score.
-        </p>
-        <Link
-          href="/"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition"
-        >
-          Create Resume Free
-        </Link>
-      </div>
+          <ATSChecker />
+        </div>
+      </section>
 
-      <div className="prose max-w-none text-gray-800">
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Free ATS Resume Checker for Indian Freshers and Resume Makers
-        </h2>
-        <p className="mb-4">
-          This free ATS resume checker helps Indian freshers improve their resume format, add the
-          right keywords, and check their resume score before applying for jobs. A strong ATS
-          friendly resume should be easy to read, keyword-rich and properly formatted for recruiters
-          and ATS systems.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Check Your Resume Score Before Applying to Top Companies
-        </h2>
-        <p className="mb-4">
-          Your resume score depends on clarity, job-specific keywords, simple formatting, and strong
-          achievement bullets. Using the right resume template and a trusted resume builder can
-          improve your ATS friendliness and raise your chances of shortlisting.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          ATS Resume Checker for TCS, Infosys, Wipro, Accenture and More
-        </h2>
-        <p className="mb-4">
-          Companies such as TCS, Infosys, Wipro and Accenture often rely on ATS screening tools.
-          This ATS resume checker helps you review your resume format, keyword match and overall
-          resume score so you can optimize before submitting your application.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Common ATS Resume Mistakes to Fix with a Better Resume Builder
-        </h2>
-        <p className="mb-4">
-          Poor resume formatting, missing keywords, long paragraphs, weak summary sections and wrong
-          file types can reduce your ATS resume checker score. Use a simple resume builder and a
-          clean resume template to keep your application readable and recruiter-friendly.
-        </p>
-      </div>
-
-      <section className="mt-16">
-        <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
-        <div className="space-y-6">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900">{faq.q}</h3>
-              <p className="text-gray-700">{faq.a}</p>
+      {/* SEO Content Section */}
+      <section className="py-16 px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Company Specifics */}
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-indigo-100 rounded-lg text-indigo-600">
+                <Briefcase className="w-6 h-6" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">Crack the Code for MNCs</h2>
             </div>
-          ))}
+            <p className="text-slate-600 mb-4">
+              Top Indian companies have specific criteria for screening resumes. Our tool checks
+              against common patterns used by:
+            </p>
+            <ul className="grid grid-cols-2 gap-3 text-slate-700 font-medium">
+              {["TCS", "Infosys", "Wipro", "HCL Technologies", "Accenture", "Tech Mahindra"].map(
+                (company, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                    {company}
+                  </li>
+                )
+              )}
+            </ul>
+            <p className="text-sm text-slate-500 mt-6 italic">
+              * Note: We are not affiliated with these companies. Scoring is based on general
+              industry standards.
+            </p>
+          </div>
+
+          {/* Student Focused */}
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-blue-100 rounded-lg text-blue-600">
+                <Search className="w-6 h-6" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-800">Why Scores Matter for Freshers?</h2>
+            </div>
+            <p className="text-slate-600 mb-4">
+              For campus placements and off-campus drives, ATS scores are critical because of the
+              volume of applicants.
+            </p>
+            <ul className="space-y-3">
+              <li className="flex gap-3">
+                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                <span className="text-slate-700">
+                  <strong>B.Tech/CSE:</strong> Highlights project keywords and technical stacks.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                <span className="text-slate-700">
+                  <strong>MBA Freshers:</strong> Focuses on leadership and soft skill terminology.
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                <span className="text-slate-700">
+                  <strong>Mechanical/Civil:</strong> Ensures core engineering competencies are
+                  visible.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* FAQs */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
+            Frequently Asked Questions
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                q: "Why is my resume not getting shortlisted?",
+                a: "It's likely due to low ATS compatibility. If your resume uses complex formatting, graphics, or lacks specific keywords found in the job description, the ATS may reject it before a human sees it.",
+              },
+              {
+                q: "How to increase ATS score of resume?",
+                a: "Use standard headings (Experience, Education), standard fonts, and ensure your file is text-readable (not an image). Include relevant keywords from the job description.",
+              },
+              {
+                q: "Is NextCV ATS checker accurate?",
+                a: "We simulate the parsing logic used by major ATS platforms to give you a realistic estimate of how well your resume will be read.",
+              },
+              {
+                q: "Is this tool free for freshers?",
+                a: "Yes, our ATS resume checker is completely free for freshers and experienced professionals in India.",
+              },
+              {
+                q: "What is a good ATS score for TCS or Accenture?",
+                a: "A score above 80 is generally considered good for MNCs. However, ensure that your 'Technical Skills' section includes the specific keywords mentioned in the job description to rank higher in their system.",
+              },
+              {
+                q: "Is it better to use a free ATS resume builder or manual formatting?",
+                a: "Manual formatting can be risky if you aren't familiar with ATS parsing logic. Using a specialized tool like NextCV ensures that your resume is machine-readable while maintaining a professional look for human recruiters at firms like LTIMindtree.",
+              },
+              {
+                q: "Does this checker work for campus placements in India?",
+                a: "Yes, it is specifically optimized for the 2026 campus recruitment cycle. It checks for common student-specific keywords and formats used in engineering and MBA placements across India.",
+              },
+            ].map((faq, i) => (
+              <div
+                key={i}
+                className="bg-white p-6 rounded-xl border border-slate-100 hover:shadow-md transition-shadow"
+              >
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
+                <p className="text-slate-600">{faq.a}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-
-      <section className="mt-16 border-t pt-8">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900">Related Guides</h2>
-        <div className="mt-6 mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link href="/templates" className="text-blue-600 hover:underline">
-            Explore Templates
-          </Link>
-          <Link href="/ats-resume-checker" className="text-blue-600 hover:underline">
-            ATS Resume Checker
-          </Link>
-          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">
-            TCS Resume Format
-          </Link>
-          <Link
-            href="/infosys-resume-format-for-freshers"
-            className="text-blue-600 hover:underline"
-          >
-            Infosys Resume Format
-          </Link>
-          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">
-            Wipro Resume Format
-          </Link>
-          <Link href="/ats-friendly-resume-format-india" className="text-blue-600 hover:underline">
-            ATS Resume Format Guide
-          </Link>
-          <Link href="/fresher-resume-format-india" className="text-blue-600 hover:underline">
-            Fresher Resume Format
-          </Link>
-        </div>
-      </section>
-
-      <div className="mt-12 text-center">
-        <Link
-          href="/"
-          className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg"
-        >
-          Build Your Resume Now
-        </Link>
-      </div>
     </div>
   );
-}
+};
+
+export default ATSCheckerPage;

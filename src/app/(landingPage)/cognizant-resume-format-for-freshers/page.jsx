@@ -8,6 +8,12 @@ export const metadata = {
   title: "Cognizant Resume Format for Freshers 2026 | ATS-Friendly Template",
   description:
     "Build an ATS-friendly Cognizant resume format for freshers. Use professional templates for BCA, B.Tech, IT and fresher job applications.",
+  keywords: [
+    "cognizant resume format for freshers",
+    "cognizant resume template",
+    "ats resume for freshers",
+    "resume format for bca freshers",
+  ],
   alternates: {
     canonical: "https://www.nextcv.in/cognizant-resume-format-for-freshers",
   },

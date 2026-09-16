@@ -8,6 +8,12 @@ export const metadata = {
   title: "Tech Mahindra Resume Format for Freshers 2026 | ATS Template",
   description:
     "Create an ATS-friendly Tech Mahindra resume format for freshers with clean sections for skills, projects, education and certifications.",
+  keywords: [
+    "tech mahindra resume format for freshers",
+    "tech mahindra resume template",
+    "ats resume for freshers",
+    "resume format for it jobs",
+  ],
   alternates: {
     canonical: "https://www.nextcv.in/tech-mahindra-resume-format-for-freshers",
   },

@@ -15,83 +15,90 @@ import {
 
 export const metadata = createSeoMetadata({
   title: "Career Objective for Resume for Freshers | Examples 2026",
-  description: "Find the best career objective examples for fresher resumes in India, including IT, BCA, B.Tech, MBA, commerce and non-IT roles.",
+  description:
+    "Find the best career objective examples for fresher resumes in India, including IT, BCA, B.Tech, MBA, commerce and non-IT roles.",
   path: "/career-objective-for-resume-for-freshers",
+  keywords: [
+    "career objective for resume for freshers",
+    "fresher resume objective",
+    "resume objective examples",
+    "resume for freshers",
+  ],
 });
 
 export const revalidate = 86400;
 
 export default function SEOPage() {
   const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is a career objective in a resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It is a short 2-3 sentence paragraph at the top of your resume explaining your skills, your career goals, and the value you can bring to the company."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should freshers include a career objective?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, freshers should use an objective to clearly state their direction and highlight their strongest academic or technical skills."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is a good career objective for a software engineer fresher?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "E.g., 'Highly motivated Computer Science graduate with strong skills in Java and Python. Seeking to leverage analytical abilities as a software engineer at a forward-thinking tech company.'"
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How long should a career objective be?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It should be concise, ideally between 2 to 3 sentences. Avoid long, rambling paragraphs."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I customize my objective for every job?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes! A generic objective looks lazy. Mention the specific role you are applying for and align your skills with their requirements."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is a 'Summary' different from an 'Objective'?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, a summary highlights past experience, while an objective focuses on future goals and potential. Freshers usually use objectives."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are common mistakes in a career objective?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Being too self-focused ('I want a job that pays well') instead of company-focused ('I want to contribute to the team's success')."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I automatically generate an objective?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "NextCV's AI tools can help generate the perfect, keyword-optimized career objective based on your target role."
-      }
-    }
-  ]
-};
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is a career objective in a resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "It is a short 2-3 sentence paragraph at the top of your resume explaining your skills, your career goals, and the value you can bring to the company.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should freshers include a career objective?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, freshers should use an objective to clearly state their direction and highlight their strongest academic or technical skills.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is a good career objective for a software engineer fresher?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "E.g., 'Highly motivated Computer Science graduate with strong skills in Java and Python. Seeking to leverage analytical abilities as a software engineer at a forward-thinking tech company.'",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long should a career objective be?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "It should be concise, ideally between 2 to 3 sentences. Avoid long, rambling paragraphs.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should I customize my objective for every job?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes! A generic objective looks lazy. Mention the specific role you are applying for and align your skills with their requirements.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is a 'Summary' different from an 'Objective'?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, a summary highlights past experience, while an objective focuses on future goals and potential. Freshers usually use objectives.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What are common mistakes in a career objective?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Being too self-focused ('I want a job that pays well') instead of company-focused ('I want to contribute to the team's success').",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I automatically generate an objective?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "NextCV's AI tools can help generate the perfect, keyword-optimized career objective based on your target role.",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -120,7 +127,9 @@ export default function SEOPage() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"Looking for the perfect career objective for a resume for freshers? Get top examples for IT, engineering, and management students to land your first job."}
+              {
+                "Looking for the perfect career objective for a resume for freshers? Get top examples for IT, engineering, and management students to land your first job."
+              }
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -143,26 +152,17 @@ export default function SEOPage() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
+                <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-emerald-500" />
                 Free to start
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
+                <Clock3 aria-hidden="true" className="h-3.5 w-3.5 text-indigo-500" />
                 Ready in minutes
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
+                <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
                 ATS-friendly formats
               </span>
             </div>
@@ -173,224 +173,222 @@ export default function SEOPage() {
         <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
           {/* Main article */}
           <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Is an Objective Statement Still Relevant in 2026?"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Is an Objective Statement Still Relevant in 2026?"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Is an Objective Statement Still Relevant in 2026?"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Is an Objective Statement Still Relevant in 2026?"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"How to Write an Impactful Career Objective"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"How to Write an Impactful Career Objective"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"How to Write an Impactful Career Objective"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"How to Write an Impactful Career Objective"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-            <span>{"Focus on the Company's Needs"}</span>
-          </h3>
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply focus on the company's needs carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                    <span>{"Focus on the Company's Needs"}</span>
+                  </h3>
 
-            <span>{"Mention Specific Skills"}</span>
-          </h3>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply focus on the company's needs carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply mention specific skills carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Keep It Under 3 Sentences"}</span>
-          </h3>
+                    <span>{"Mention Specific Skills"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply keep it under 3 sentences carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply mention specific skills carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Top Examples of Career Objectives"}
-              </h2>
+                    <span>{"Keep It Under 3 Sentences"}</span>
+                  </h3>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Top Examples of Career Objectives"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply keep it under 3 sentences carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-            <span>{"IT / Software Engineering Freshers"}</span>
-          </h3>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply it / software engineering freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Top Examples of Career Objectives"}
+                  </h2>
 
-            <span>{"BCA / MCA Freshers"}</span>
-          </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Top Examples of Career Objectives"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply bca / mca freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Non-IT / Business Management Freshers"}</span>
-          </h3>
+                    <span>{"IT / Software Engineering Freshers"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply non-it / business management freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply it / software engineering freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
+                    <span>{"BCA / MCA Freshers"}</span>
+                  </h3>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply bca / mca freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <div className="mt-6 space-y-4">
-      
-        </div>
-      </section>
-    
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            
+                    <span>{"Non-IT / Business Management Freshers"}</span>
+                  </h3>
+
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply non-it / business management freshers carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
+
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Frequently Asked Questions"}
+                  </h2>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Frequently Asked Questions"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
             <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
               <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
 
               <div className="relative z-10 mb-6 flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
+                  <FileText aria-hidden="true" className="h-4 w-4" />
                 </div>
 
                 <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -399,122 +397,121 @@ export default function SEOPage() {
               </div>
 
               <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What is a career objective in a resume?"}</span>
-          </h3>
+                    <span>{"What is a career objective in a resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"It is a short 2-3 sentence paragraph at the top of your resume explaining your skills, your career goals, and the value you can bring to the company."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "It is a short 2-3 sentence paragraph at the top of your resume explaining your skills, your career goals, and the value you can bring to the company."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Should freshers include a career objective?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, freshers should use an objective to clearly state their direction and highlight their strongest academic or technical skills."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"Should freshers include a career objective?"}</span>
+                  </h3>
 
-            <span>{"What is a good career objective for a software engineer fresher?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes, freshers should use an objective to clearly state their direction and highlight their strongest academic or technical skills."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"E.g., 'Highly motivated Computer Science graduate with strong skills in Java and Python. Seeking to leverage analytical abilities as a software engineer at a forward-thinking tech company.'"}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"How long should a career objective be?"}</span>
-          </h3>
+                    <span>
+                      {"What is a good career objective for a software engineer fresher?"}
+                    </span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"It should be concise, ideally between 2 to 3 sentences. Avoid long, rambling paragraphs."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "E.g., 'Highly motivated Computer Science graduate with strong skills in Java and Python. Seeking to leverage analytical abilities as a software engineer at a forward-thinking tech company.'"
+                    }
+                  </p>
+                </article>
 
-            <span>{"Should I customize my objective for every job?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes! A generic objective looks lazy. Mention the specific role you are applying for and align your skills with their requirements."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"How long should a career objective be?"}</span>
+                  </h3>
 
-            <span>{"Is a 'Summary' different from an 'Objective'?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "It should be concise, ideally between 2 to 3 sentences. Avoid long, rambling paragraphs."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, a summary highlights past experience, while an objective focuses on future goals and potential. Freshers usually use objectives."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What are common mistakes in a career objective?"}</span>
-          </h3>
+                    <span>{"Should I customize my objective for every job?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Being too self-focused ('I want a job that pays well') instead of company-focused ('I want to contribute to the team's success')."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes! A generic objective looks lazy. Mention the specific role you are applying for and align your skills with their requirements."
+                    }
+                  </p>
+                </article>
 
-            <span>{"How can I automatically generate an objective?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"NextCV's AI tools can help generate the perfect, keyword-optimized career objective based on your target role."}
-          </p>
-        </article>
-      
+                    <span>{"Is a 'Summary' different from an 'Objective'?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes, a summary highlights past experience, while an objective focuses on future goals and potential. Freshers usually use objectives."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"What are common mistakes in a career objective?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Being too self-focused ('I want a job that pays well') instead of company-focused ('I want to contribute to the team's success')."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"How can I automatically generate an objective?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "NextCV's AI tools can help generate the perfect, keyword-optimized career objective based on your target role."
+                    }
+                  </p>
+                </article>
               </div>
             </section>
-            
           </div>
 
           {/* Sidebar */}
@@ -525,10 +522,7 @@ export default function SEOPage() {
 
                 <div className="relative z-10">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
+                    <Zap aria-hidden="true" className="h-5 w-5" />
                   </div>
 
                   <h2 className="text-lg font-bold leading-snug">
@@ -536,8 +530,8 @@ export default function SEOPage() {
                   </h2>
 
                   <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
+                    Create a professional resume without worrying about formatting, structure or ATS
+                    compatibility.
                   </p>
 
                   <Link
@@ -545,64 +539,50 @@ export default function SEOPage() {
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
                   >
                     Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
 
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                    <BookOpen aria-hidden="true" className="h-4 w-4" />
+                  </div>
 
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
+                  <h2 className="text-lg font-bold">Related Resources</h2>
+                </div>
 
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Free Resume Builder"}
-                  </span>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Free Resume Builder"}</span>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/fresher-resume-format-india"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Fresher Resume Format India"}
-                  </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
-        </div>
-      
+                  <li>
+                    <Link
+                      href="/fresher-resume-format-india"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Fresher Resume Format India"}</span>
+
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </main>

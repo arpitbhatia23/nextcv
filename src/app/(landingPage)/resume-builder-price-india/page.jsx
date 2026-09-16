@@ -8,6 +8,12 @@ export const metadata = {
   title: "Resume Banane Me Kitna Paisa Lagta Hai? India Pricing Guide",
   description:
     "India me resume banane ka cost samjhein. Free resume builder, paid resume templates, ATS resume download pricing aur fresher resume cost compare karein.",
+  keywords: [
+    "resume builder price india",
+    "resume builder pricing india",
+    "free resume builder",
+    "ats resume pricing",
+  ],
   alternates: {
     canonical: "https://www.nextcv.in/resume-builder-price-india",
   },

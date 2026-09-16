@@ -15,83 +15,90 @@ import {
 
 export const metadata = createSeoMetadata({
   title: "Latest Resume Format 2026 | Trends, Examples & Templates",
-  description: "Explore the latest resume format for 2026 with ATS-friendly structure, modern sections, examples and free resume templates.",
+  description:
+    "Explore the latest resume format for 2026 with ATS-friendly structure, modern sections, examples and free resume templates.",
   path: "/latest-resume-format-2026",
+  keywords: [
+    "latest resume format 2026",
+    "resume format",
+    "best resume template 2026",
+    "ats friendly resume",
+  ],
 });
 
 export const revalidate = 86400;
 
 export default function SEOPage() {
   const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the latest resume format for 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The latest trend is a hyper-minimalist, single-column, ATS-optimized hybrid format that heavily relies on metrics and data-driven achievements."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are 2-page resumes acceptable in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "For freshers, 1 page remains the strict standard. For mid-level professionals, 2 pages are acceptable if the experience warrants it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What should I remove from my 2026 resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Remove objective statements that lack value, 'references available upon request', and outdated personal details like full home addresses."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How important are soft skills in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Extremely important, especially adaptability and emotional intelligence, but they must be demonstrated through project examples, not just listed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the 'Biodata' still used in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, the traditional biodata format is entirely obsolete in the modern corporate and IT job sectors in India."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I update my old resume to the 2026 format?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Strip away graphics, reorganize your skills to the top, quantify your past projects, and use an ATS-friendly builder like NextCV."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What fonts are trending for resumes in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Clean, sans-serif fonts like Roboto, Inter, and standard choices like Calibri remain the best options for readability and parsing."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Where can I download the latest 2026 resume template?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "NextCV offers a library of frequently updated templates that meet all current 2026 global and Indian recruiting standards."
-      }
-    }
-  ]
-};
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the latest resume format for 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The latest trend is a hyper-minimalist, single-column, ATS-optimized hybrid format that heavily relies on metrics and data-driven achievements.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Are 2-page resumes acceptable in 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "For freshers, 1 page remains the strict standard. For mid-level professionals, 2 pages are acceptable if the experience warrants it.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What should I remove from my 2026 resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Remove objective statements that lack value, 'references available upon request', and outdated personal details like full home addresses.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How important are soft skills in 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Extremely important, especially adaptability and emotional intelligence, but they must be demonstrated through project examples, not just listed.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is the 'Biodata' still used in 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No, the traditional biodata format is entirely obsolete in the modern corporate and IT job sectors in India.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I update my old resume to the 2026 format?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Strip away graphics, reorganize your skills to the top, quantify your past projects, and use an ATS-friendly builder like NextCV.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What fonts are trending for resumes in 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Clean, sans-serif fonts like Roboto, Inter, and standard choices like Calibri remain the best options for readability and parsing.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Where can I download the latest 2026 resume template?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "NextCV offers a library of frequently updated templates that meet all current 2026 global and Indian recruiting standards.",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -120,7 +127,9 @@ export default function SEOPage() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"Explore the latest resume format trends for 2026. Discover what Indian recruiters expect from freshers and experienced professionals this year."}
+              {
+                "Explore the latest resume format trends for 2026. Discover what Indian recruiters expect from freshers and experienced professionals this year."
+              }
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -143,26 +152,17 @@ export default function SEOPage() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
+                <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-emerald-500" />
                 Free to start
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
+                <Clock3 aria-hidden="true" className="h-3.5 w-3.5 text-indigo-500" />
                 Ready in minutes
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
+                <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
                 ATS-friendly formats
               </span>
             </div>
@@ -173,208 +173,198 @@ export default function SEOPage() {
         <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
           {/* Main article */}
           <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"How Resume Standards Have Changed in 2026"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"How Resume Standards Have Changed in 2026"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"How Resume Standards Have Changed in 2026"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"How Resume Standards Have Changed in 2026"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The Dominance of the ATS-Optimized Hybrid Format"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The Dominance of the ATS-Optimized Hybrid Format"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"The Dominance of the ATS-Optimized Hybrid Format"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"The Dominance of the ATS-Optimized Hybrid Format"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Key Resume Trends for 2026"}
-              </h2>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Key Resume Trends for 2026"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Key Resume Trends for 2026"}
+                  </h2>
 
-            <span>{"Hard Data and Quantifiable Metrics"}</span>
-          </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Key Resume Trends for 2026"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply hard data and quantifiable metrics carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Leaner, Shorter Summaries"}</span>
-          </h3>
+                    <span>{"Hard Data and Quantifiable Metrics"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply leaner, shorter summaries carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply hard data and quantifiable metrics carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-            <span>{"Emphasis on Continuous Learning"}</span>
-          </h3>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply emphasis on continuous learning carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                    <span>{"Leaner, Shorter Summaries"}</span>
+                  </h3>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply leaner, shorter summaries carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Adapting the Latest Format for Indian Companies"}
-              </h2>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Adapting the Latest Format for Indian Companies"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                    <span>{"Emphasis on Continuous Learning"}</span>
+                  </h3>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply emphasis on continuous learning carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Adapting the Latest Format for Indian Companies"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-        </div>
-      </section>
-    
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Adapting the Latest Format for Indian Companies"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-            
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
+
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Frequently Asked Questions"}
+                  </h2>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Frequently Asked Questions"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
             <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
               <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
 
               <div className="relative z-10 mb-6 flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
+                  <FileText aria-hidden="true" className="h-4 w-4" />
                 </div>
 
                 <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -383,122 +373,119 @@ export default function SEOPage() {
               </div>
 
               <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What is the latest resume format for 2026?"}</span>
-          </h3>
+                    <span>{"What is the latest resume format for 2026?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"The latest trend is a hyper-minimalist, single-column, ATS-optimized hybrid format that heavily relies on metrics and data-driven achievements."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "The latest trend is a hyper-minimalist, single-column, ATS-optimized hybrid format that heavily relies on metrics and data-driven achievements."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Are 2-page resumes acceptable in 2026?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"For freshers, 1 page remains the strict standard. For mid-level professionals, 2 pages are acceptable if the experience warrants it."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"Are 2-page resumes acceptable in 2026?"}</span>
+                  </h3>
 
-            <span>{"What should I remove from my 2026 resume?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "For freshers, 1 page remains the strict standard. For mid-level professionals, 2 pages are acceptable if the experience warrants it."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Remove objective statements that lack value, 'references available upon request', and outdated personal details like full home addresses."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"How important are soft skills in 2026?"}</span>
-          </h3>
+                    <span>{"What should I remove from my 2026 resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Extremely important, especially adaptability and emotional intelligence, but they must be demonstrated through project examples, not just listed."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Remove objective statements that lack value, 'references available upon request', and outdated personal details like full home addresses."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Is the 'Biodata' still used in 2026?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"No, the traditional biodata format is entirely obsolete in the modern corporate and IT job sectors in India."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"How important are soft skills in 2026?"}</span>
+                  </h3>
 
-            <span>{"How can I update my old resume to the 2026 format?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Extremely important, especially adaptability and emotional intelligence, but they must be demonstrated through project examples, not just listed."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Strip away graphics, reorganize your skills to the top, quantify your past projects, and use an ATS-friendly builder like NextCV."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What fonts are trending for resumes in 2026?"}</span>
-          </h3>
+                    <span>{"Is the 'Biodata' still used in 2026?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Clean, sans-serif fonts like Roboto, Inter, and standard choices like Calibri remain the best options for readability and parsing."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "No, the traditional biodata format is entirely obsolete in the modern corporate and IT job sectors in India."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Where can I download the latest 2026 resume template?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"NextCV offers a library of frequently updated templates that meet all current 2026 global and Indian recruiting standards."}
-          </p>
-        </article>
-      
+                    <span>{"How can I update my old resume to the 2026 format?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Strip away graphics, reorganize your skills to the top, quantify your past projects, and use an ATS-friendly builder like NextCV."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"What fonts are trending for resumes in 2026?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Clean, sans-serif fonts like Roboto, Inter, and standard choices like Calibri remain the best options for readability and parsing."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Where can I download the latest 2026 resume template?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "NextCV offers a library of frequently updated templates that meet all current 2026 global and Indian recruiting standards."
+                    }
+                  </p>
+                </article>
               </div>
             </section>
-            
           </div>
 
           {/* Sidebar */}
@@ -509,10 +496,7 @@ export default function SEOPage() {
 
                 <div className="relative z-10">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
+                    <Zap aria-hidden="true" className="h-5 w-5" />
                   </div>
 
                   <h2 className="text-lg font-bold leading-snug">
@@ -520,8 +504,8 @@ export default function SEOPage() {
                   </h2>
 
                   <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
+                    Create a professional resume without worrying about formatting, structure or ATS
+                    compatibility.
                   </p>
 
                   <Link
@@ -529,64 +513,50 @@ export default function SEOPage() {
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
                   >
                     Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
 
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                    <BookOpen aria-hidden="true" className="h-4 w-4" />
+                  </div>
 
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
+                  <h2 className="text-lg font-bold">Related Resources</h2>
+                </div>
 
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Free Resume Builder"}
-                  </span>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Free Resume Builder"}</span>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/resume-format-india"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Resume Format India"}
-                  </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
-        </div>
-      
+                  <li>
+                    <Link
+                      href="/resume-format-india"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Resume Format India"}</span>
+
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </main>

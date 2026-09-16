@@ -3,9 +3,17 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { ArrowRight, Sparkles, Wand2, RefreshCcw } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Writer: Generate Summaries and Job Bullets",
-  description: "Use NextCV AI Resume Writer to generate professional resume points, summaries, skills and project descriptions for Indian fresher jobs.",
+  title: "AI Resume Writer for Freshers | NextCV",
+  description:
+    "Use NextCV's AI resume writer to create professional summaries, achievement bullets, skills, and project descriptions for Indian job applications.",
   path: "/ai-writer",
+  keywords: [
+    "ai resume writer",
+    "ai resume maker",
+    "ai resume builder",
+    "ai resume builder free",
+    "resume maker ai",
+  ],
 });
 
 export default function AIWriterPage() {
@@ -136,12 +144,11 @@ export default function AIWriterPage() {
       <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate prose-indigo">
         <h2>Why Use an AI Resume Writer in India?</h2>
         <p>
-          The Indian job market is unique, with recruiters at MNCs like TCS and Wipro receiving
-          thousands of applications daily. An <strong>AI Resume Builder India</strong>-focused tool
-          helps you navigate these challenges. Writer's block is real, and staring at a blank screen
-          wondering how to phrase "I answered calls" into a professional achievement can be
-          paralyzing. An <strong>AI Resume Writer</strong> solves this by acting as your personal
-          career coach.
+          The Indian job market is competitive, with recruiters at MNCs like TCS and Wipro receiving
+          thousands of applications daily. An AI resume builder helps you navigate these challenges.
+          Writer's block is real, and staring at a blank screen wondering how to phrase "I answered
+          calls" into a professional achievement can be paralyzing. An{" "}
+          <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
         </p>
 
         <h3>Professional Summaries in Seconds</h3>
@@ -174,32 +181,66 @@ export default function AIWriterPage() {
           Absolutely not. AI is a tool to help you articulate <em>your</em> actual experiences
           better. You still control the content. You select the suggestions that match your history
           and edit them to reflect the truth. It simply does the heavy lifting of phrasing and
-          formatting, allowing you to focus on the substance of your career. Build your <Link href="/" className="text-indigo-600 hover:underline">resume builder</Link> today, explore <Link href="/templates" className="text-indigo-600 hover:underline">templates</Link>, or check out our <Link href="/examples" className="text-indigo-600 hover:underline">examples</Link>.
+          formatting, allowing you to focus on the substance of your career. Build your{" "}
+          <Link href="/" className="text-indigo-600 hover:underline">
+            resume builder
+          </Link>{" "}
+          today, explore{" "}
+          <Link href="/templates" className="text-indigo-600 hover:underline">
+            templates
+          </Link>
+          , or check out our{" "}
+          <Link href="/examples" className="text-indigo-600 hover:underline">
+            examples
+          </Link>
+          .
         </p>
 
         <h3>Examples of What the Tool Generates</h3>
         <h4>Professional Summaries</h4>
-        <p>"Dedicated software engineer with 2+ years of experience in full-stack development, specializing in React and Node.js. Proven ability to deliver scalable solutions and optimize database performance."</p>
-        
+        <p>
+          "Dedicated software engineer with 2+ years of experience in full-stack development,
+          specializing in React and Node.js. Proven ability to deliver scalable solutions and
+          optimize database performance."
+        </p>
+
         <h4>Experience Bullets</h4>
-        <p>Instead of "Made APIs," get: "Designed and implemented RESTful APIs using Express, improving data retrieval efficiency by 30%."</p>
-        
+        <p>
+          Instead of "Made APIs," get: "Designed and implemented RESTful APIs using Express,
+          improving data retrieval efficiency by 30%."
+        </p>
+
         <h4>Project Descriptions</h4>
-        <p>"Built a responsive e-commerce application using Next.js and MongoDB, featuring a secure checkout process and real-time inventory tracking."</p>
+        <p>
+          "Built a responsive e-commerce application using Next.js and MongoDB, featuring a secure
+          checkout process and real-time inventory tracking."
+        </p>
 
         <h2>Frequently Asked Questions</h2>
         <div className="space-y-4 not-prose mb-8">
           <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
             <h4 className="font-bold text-slate-900">What exactly does the AI generate?</h4>
-            <p className="text-sm text-slate-600">The tool creates optimized professional summaries, bullet points for work experience, project descriptions, and relevant skills based on your job title.</p>
+            <p className="text-sm text-slate-600">
+              The tool creates optimized professional summaries, bullet points for work experience,
+              project descriptions, and relevant skills based on your job title.
+            </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-            <h4 className="font-bold text-slate-900">Does this guarantee I will get an interview?</h4>
-            <p className="text-sm text-slate-600">No tool can guarantee interviews. However, using our AI writer ensures your resume is professionally phrased, ATS-friendly, and clearly highlights your achievements, which significantly improves your chances.</p>
+            <h4 className="font-bold text-slate-900">
+              Does this guarantee I will get an interview?
+            </h4>
+            <p className="text-sm text-slate-600">
+              No tool can guarantee interviews. However, using our AI writer ensures your resume is
+              professionally phrased, ATS-friendly, and clearly highlights your achievements, which
+              significantly improves your chances.
+            </p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
             <h4 className="font-bold text-slate-900">Is the AI content unique?</h4>
-            <p className="text-sm text-slate-600">Yes, the AI generates context-specific suggestions tailored to the job role you input. You can always edit and personalize the output to match your exact experience.</p>
+            <p className="text-sm text-slate-600">
+              Yes, the AI generates context-specific suggestions tailored to the job role you input.
+              You can always edit and personalize the output to match your exact experience.
+            </p>
           </div>
         </div>
       </section>

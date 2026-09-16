@@ -8,6 +8,12 @@ export const metadata = {
   title: "MNC Resume Format for Freshers 2026 | ATS-Friendly Template",
   description:
     "Create a professional MNC resume format for freshers applying to TCS, Infosys, Wipro, Accenture, Cognizant, Capgemini and more.",
+  keywords: [
+    "mnc resume format for freshers",
+    "resume for mnc company",
+    "ats resume for freshers",
+    "best resume template for freshers",
+  ],
   alternates: {
     canonical: "https://www.nextcv.in/mnc-resume-format-for-freshers",
   },

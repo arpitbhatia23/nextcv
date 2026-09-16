@@ -32,10 +32,14 @@ export async function POST(req) {
 
     return NextResponse.json(analysis);
   } catch (error) {
-    console.log(error);
+    if (error.code === "UNREADABLE_PDF") {
+      return NextResponse.json({ error: error.message }, { status: 422 });
+    }
+
+    console.error("ATS resume analysis failed:", error);
     return NextResponse.json(
       {
-        error: error.message || "Failed to analyze resume. Please try again.",
+        error: "Failed to analyze resume. Please try again.",
       },
       { status: 500 }
     );

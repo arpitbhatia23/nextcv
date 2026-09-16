@@ -1,26 +1,10 @@
 export const DEFAULT_SEO_KEYWORDS = [
   "free resume builder",
-  "resume maker",
-  "resume builder",
-  "resume format",
-  "resume template",
   "ATS friendly resume",
-  "ats friendly resume",
-  "best resume builder",
-  "best resume template",
-  "cv builder",
-  "free cv builder",
   "ai resume builder",
-  "ai resume maker",
-  "resume maker online free",
-  "resume builder online free",
-  "resume maker free",
-  "canva resume",
-  "resume ground",
   "resume builder for freshers",
-  "resume builder in india",
-  "best resume template for freshers",
-  "resume maker for fresher",
+  "resume builder India",
+  "resume templates for freshers",
 ];
 
 export function createSeoMetadata({

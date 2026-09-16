@@ -4,8 +4,15 @@ import { Check, Star, Trophy } from "lucide-react";
 
 export const metadata = createSeoMetadata({
   title: "Best AI Resume Builder India 2026 | Free vs Paid Comparison",
-  description: "Compare the best AI resume builders in India for freshers. See features, ATS support, pricing, templates and resume download options.",
+  description:
+    "Compare the best AI resume builders in India for freshers. See features, ATS support, pricing, templates and resume download options.",
   path: "/best-ai-resume-builder-india",
+  keywords: [
+    "best ai resume builder india",
+    "ai resume builder",
+    "ai resume builder free",
+    "best resume builder india",
+  ],
 });
 
 export default function AIResumeIndiaPage() {

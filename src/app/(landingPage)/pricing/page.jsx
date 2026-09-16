@@ -3,9 +3,16 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { Check, ShieldCheck, Zap, Download, HelpCircle } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Builder Pricing India \u2013 Download from \u20B949",
-  description: "Check our transparent resume making charges in India. Create an ATS resume for free and pay per resume download starting from \u20B949 with no subscriptions.",
+  title: "Resume Builder Pricing in India | From \u20B949 | NextCV",
+  description:
+    "See NextCV's transparent resume builder pricing in India. Create an ATS-friendly resume for free and pay once per download from \u20B949, with no subscription.",
   path: "/pricing",
+  keywords: [
+    "resume builder pricing india",
+    "resume builder price india",
+    "best resume builder india",
+    "ats resume builder",
+  ],
 });
 
 export const revalidate = 3600;
@@ -97,7 +104,16 @@ export default function PricingPage() {
               Affordable <span className="text-indigo-600">Resume Builder Pricing</span> in India
             </h1>
             <p className="text-sm text-slate-600 mb-10 max-w-2xl mx-auto">
-              Transparent resume charges that fit your budget. Pay per resume only when you are ready to download, rather than being locked into monthly subscriptions. Explore our <Link href="/templates" className="text-indigo-600 hover:underline">templates</Link> and <Link href="/examples" className="text-indigo-600 hover:underline">examples</Link> first.
+              Transparent resume charges that fit your budget. Pay per resume only when you are
+              ready to download, rather than being locked into monthly subscriptions. Explore our{" "}
+              <Link href="/templates" className="text-indigo-600 hover:underline">
+                templates
+              </Link>{" "}
+              and{" "}
+              <Link href="/examples" className="text-indigo-600 hover:underline">
+                examples
+              </Link>{" "}
+              first.
             </p>
           </div>
         </section>
@@ -243,8 +259,12 @@ export default function PricingPage() {
             </li>
             <li>
               <strong>No Hidden Subscriptions:</strong> Many "free" builders are actually
-              subscription traps. We use a transparent pay-per-resume model, which is more honest. 
-              Check our <Link href="/examples" className="text-indigo-600 hover:underline">professional examples</Link> to see the quality you get.
+              subscription traps. We use a transparent pay-per-resume model, which is more honest.
+              Check our{" "}
+              <Link href="/examples" className="text-indigo-600 hover:underline">
+                professional examples
+              </Link>{" "}
+              to see the quality you get.
             </li>
           </ul>
 

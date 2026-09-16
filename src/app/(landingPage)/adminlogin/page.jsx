@@ -3,6 +3,10 @@ export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
   title: "Admin Login | NextCV",
   description: "Admin login portal for NextCV.",
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     images: ["/opengraph-image.png"],
   },

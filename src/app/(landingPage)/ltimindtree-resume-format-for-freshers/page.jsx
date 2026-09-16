@@ -8,6 +8,12 @@ export const metadata = {
   title: "LTIMindtree Resume Format for Freshers 2026 | ATS Template",
   description:
     "Build a clean ATS-friendly LTIMindtree resume format for freshers applying to IT, support, analyst and trainee roles.",
+  keywords: [
+    "ltimindtree resume format for freshers",
+    "ltimindtree resume template",
+    "ats resume for freshers",
+    "resume format for it jobs",
+  ],
   alternates: {
     canonical: "https://www.nextcv.in/ltimindtree-resume-format-for-freshers",
   },

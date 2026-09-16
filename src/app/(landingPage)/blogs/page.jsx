@@ -4,8 +4,15 @@ import { client } from "@/sanity";
 
 export const metadata = createSeoMetadata({
   title: "ATS Resume Templates & Career Guides India 2026 | NextCV",
-  description: "Read resume writing guides, ATS tips, career advice and template resources for Indian freshers and job seekers.",
+  description:
+    "Read resume writing guides, ATS tips, career advice and template resources for Indian freshers and job seekers.",
   path: "/blogs",
+  keywords: [
+    "resume writing guides",
+    "ats resume tips",
+    "career advice for freshers",
+    "resume templates",
+  ],
 });
 
 export const revalidate = 3600;

@@ -4,8 +4,10 @@ import { Mail, MessageSquare, MapPin, Clock } from "lucide-react";
 
 export const metadata = createSeoMetadata({
   title: "Contact NextCV | Resume Support & Enquiries",
-  description: "Contact NextCV for resume builder support, account questions, payment help, template issues and general enquiries.",
+  description:
+    "Contact NextCV for resume builder support, account questions, payment help, template issues and general enquiries.",
   path: "/contact",
+  keywords: ["contact nextcv", "resume builder support", "nextcv help"],
 });
 
 export const revalidate = 86400;

@@ -3,8 +3,10 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 
 export const metadata = createSeoMetadata({
   title: "About NextCV | AI Resume Builder for Freshers in India",
-  description: "Learn about NextCV, an AI-powered ATS resume builder helping Indian freshers create professional resumes for job applications.",
+  description:
+    "Learn about NextCV, an AI-powered ATS resume builder helping Indian freshers create professional resumes for job applications.",
   path: "/about-us",
+  keywords: ["nextcv", "ai resume builder india", "resume builder for freshers"],
 });
 
 export const revalidate = 86400; // 1 day

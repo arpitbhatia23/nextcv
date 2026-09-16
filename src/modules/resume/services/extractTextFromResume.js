@@ -41,21 +41,63 @@ async function extractTextFromDOCX(arrayBuffer) {
 /* ----------------------------- PDF TEXT ------------------------------ */
 
 async function extractTextFromPDF(arrayBuffer) {
-  const pdfParseModule = await import("pdf-parse/lib/pdf-parse.js");
-  const pdfParse = pdfParseModule.default || pdfParseModule;
-
   const buffer = Buffer.from(arrayBuffer);
-  const result = await pdfParse(buffer);
 
-  return result.text || "";
+  try {
+    const pdfParseModule = await import("pdf-parse/lib/pdf-parse.js");
+    const pdfParse = pdfParseModule.default || pdfParseModule;
+    const result = await pdfParse(buffer);
+
+    return result.text || "";
+  } catch (primaryError) {
+    try {
+      return await extractTextFromPDFWithPdfJs(arrayBuffer);
+    } catch (fallbackError) {
+      console.log(fallbackError);
+      const error = new Error(
+        "This PDF could not be read. Please export it again as a text-based PDF and try again."
+      );
+      error.cause = fallbackError;
+      error.code = "UNREADABLE_PDF";
+      error.primaryCause = primaryError;
+      throw error;
+    }
+  }
+}
+
+async function extractTextFromPDFWithPdfJs(arrayBuffer) {
+  const pdfjsModule = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  const pdfjs = pdfjsModule.default || pdfjsModule;
+  const document = await pdfjs.getDocument({
+    data: new Uint8Array(arrayBuffer),
+    stopAtErrors: false,
+    useWorkerFetch: false,
+    isEvalSupported: false,
+  }).promise;
+  const pages = [];
+
+  for (let pageNumber = 1; pageNumber <= document.numPages; pageNumber++) {
+    const page = await document.getPage(pageNumber);
+    const content = await page.getTextContent();
+    pages.push(content.items.map(item => item.str || "").join(" "));
+  }
+
+  return pages.join("\n");
 }
 
 /* ----------------------------- PDF LINKS ----------------------------- */
 
 async function extractLinksFromPDF(arrayBuffer) {
-  const pdfDoc = await PDFDocument.load(arrayBuffer, {
-    ignoreEncryption: true,
-  });
+  let pdfDoc;
+
+  try {
+    pdfDoc = await PDFDocument.load(arrayBuffer, {
+      ignoreEncryption: true,
+      throwOnInvalidObject: false,
+    });
+  } catch {
+    return [];
+  }
 
   const links = [];
 

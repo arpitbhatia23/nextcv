@@ -15,83 +15,90 @@ import {
 
 export const metadata = createSeoMetadata({
   title: "Indian Resume Format 2026 | Professional Templates",
-  description: "Explore professional Indian resume formats with ATS-friendly sections, examples and templates for freshers and job seekers.",
+  description:
+    "Explore professional Indian resume formats with ATS-friendly sections, examples and templates for freshers and job seekers.",
   path: "/indian-resume-format",
+  keywords: [
+    "indian resume format",
+    "resume format india",
+    "resume templates for freshers",
+    "ats friendly resume",
+  ],
 });
 
 export const revalidate = 86400;
 
 export default function SEOPage() {
   const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is an Indian resume format?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An Indian resume format traditionally included extensive personal details, but modern formats align with global ATS standards, focusing strictly on skills and experience."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is a 'Declaration' required on an Indian resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, adding a 'Declaration that the information is true' is an obsolete practice and should be removed from modern resumes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I include my father's name on an Indian resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No, family details are unnecessary and waste space on professional resumes today."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the acceptable length for an Indian resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "One page for freshers, and up to two pages for experienced professionals."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do Indian companies require a photo on the resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Unless applying for a customer-facing role like hospitality, do not include a photo to ensure ATS compliance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I format phone numbers for Indian resumes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use the standard format with the country code: +91 XXXXX XXXXX."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is CGPA or Percentage preferred?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Include whichever your university officially uses. If both are available, use the one that looks stronger, or mention both if required by the company."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Where can I find an authentic Indian resume template?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "NextCV provides templates that are heavily researched and optimized specifically for the Indian corporate recruitment landscape."
-      }
-    }
-  ]
-};
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is an Indian resume format?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "An Indian resume format traditionally included extensive personal details, but modern formats align with global ATS standards, focusing strictly on skills and experience.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is a 'Declaration' required on an Indian resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No, adding a 'Declaration that the information is true' is an obsolete practice and should be removed from modern resumes.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should I include my father's name on an Indian resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No, family details are unnecessary and waste space on professional resumes today.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the acceptable length for an Indian resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "One page for freshers, and up to two pages for experienced professionals.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do Indian companies require a photo on the resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Unless applying for a customer-facing role like hospitality, do not include a photo to ensure ATS compliance.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I format phone numbers for Indian resumes?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Use the standard format with the country code: +91 XXXXX XXXXX.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is CGPA or Percentage preferred?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Include whichever your university officially uses. If both are available, use the one that looks stronger, or mention both if required by the company.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Where can I find an authentic Indian resume template?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "NextCV provides templates that are heavily researched and optimized specifically for the Indian corporate recruitment landscape.",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -120,7 +127,9 @@ export default function SEOPage() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"Download the standard Indian resume format. Learn the specific requirements, sections, and cultural expectations for job applications in India."}
+              {
+                "Download the standard Indian resume format. Learn the specific requirements, sections, and cultural expectations for job applications in India."
+              }
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -143,26 +152,17 @@ export default function SEOPage() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
+                <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-emerald-500" />
                 Free to start
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
+                <Clock3 aria-hidden="true" className="h-3.5 w-3.5 text-indigo-500" />
                 Ready in minutes
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
+                <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
                 ATS-friendly formats
               </span>
             </div>
@@ -173,222 +173,208 @@ export default function SEOPage() {
         <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
           {/* Main article */}
           <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Cultural Nuances in the Indian Job Market"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Cultural Nuances in the Indian Job Market"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Cultural Nuances in the Indian Job Market"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Cultural Nuances in the Indian Job Market"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Core Components of the Indian Resume"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Core Components of the Indian Resume"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Core Components of the Indian Resume"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Core Components of the Indian Resume"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"What to Exclude from an Indian Resume Today"}
-              </h2>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"What to Exclude from an Indian Resume Today"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"What to Exclude from an Indian Resume Today"}
+                  </h2>
 
-            <span>{"The Death of the 'Declaration'"}</span>
-          </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"What to Exclude from an Indian Resume Today"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply the death of the 'declaration' carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Omitting Personal Details"}</span>
-          </h3>
+                    <span>{"The Death of the 'Declaration'"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply omitting personal details carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply the death of the 'declaration' carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"IT vs Non-IT Indian Resume Formats"}
-              </h2>
+                    <span>{"Omitting Personal Details"}</span>
+                  </h3>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"IT vs Non-IT Indian Resume Formats"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply omitting personal details carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"How to Adapt International Formats for India"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"IT vs Non-IT Indian Resume Formats"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"How to Adapt International Formats for India"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"IT vs Non-IT Indian Resume Formats"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"How to Adapt International Formats for India"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-        </div>
-      </section>
-    
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"How to Adapt International Formats for India"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-            
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
+
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Frequently Asked Questions"}
+                  </h2>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Frequently Asked Questions"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
             <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
               <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
 
               <div className="relative z-10 mb-6 flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
+                  <FileText aria-hidden="true" className="h-4 w-4" />
                 </div>
 
                 <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -397,122 +383,115 @@ export default function SEOPage() {
               </div>
 
               <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What is an Indian resume format?"}</span>
-          </h3>
+                    <span>{"What is an Indian resume format?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"An Indian resume format traditionally included extensive personal details, but modern formats align with global ATS standards, focusing strictly on skills and experience."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "An Indian resume format traditionally included extensive personal details, but modern formats align with global ATS standards, focusing strictly on skills and experience."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Is a 'Declaration' required on an Indian resume?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"No, adding a 'Declaration that the information is true' is an obsolete practice and should be removed from modern resumes."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"Is a 'Declaration' required on an Indian resume?"}</span>
+                  </h3>
 
-            <span>{"Should I include my father's name on an Indian resume?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "No, adding a 'Declaration that the information is true' is an obsolete practice and should be removed from modern resumes."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"No, family details are unnecessary and waste space on professional resumes today."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"What is the acceptable length for an Indian resume?"}</span>
-          </h3>
+                    <span>{"Should I include my father's name on an Indian resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"One page for freshers, and up to two pages for experienced professionals."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "No, family details are unnecessary and waste space on professional resumes today."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Do Indian companies require a photo on the resume?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Unless applying for a customer-facing role like hospitality, do not include a photo to ensure ATS compliance."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"What is the acceptable length for an Indian resume?"}</span>
+                  </h3>
 
-            <span>{"How do I format phone numbers for Indian resumes?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {"One page for freshers, and up to two pages for experienced professionals."}
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Use the standard format with the country code: +91 XXXXX XXXXX."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"Is CGPA or Percentage preferred?"}</span>
-          </h3>
+                    <span>{"Do Indian companies require a photo on the resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Include whichever your university officially uses. If both are available, use the one that looks stronger, or mention both if required by the company."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Unless applying for a customer-facing role like hospitality, do not include a photo to ensure ATS compliance."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Where can I find an authentic Indian resume template?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"NextCV provides templates that are heavily researched and optimized specifically for the Indian corporate recruitment landscape."}
-          </p>
-        </article>
-      
+                    <span>{"How do I format phone numbers for Indian resumes?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {"Use the standard format with the country code: +91 XXXXX XXXXX."}
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Is CGPA or Percentage preferred?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Include whichever your university officially uses. If both are available, use the one that looks stronger, or mention both if required by the company."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Where can I find an authentic Indian resume template?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "NextCV provides templates that are heavily researched and optimized specifically for the Indian corporate recruitment landscape."
+                    }
+                  </p>
+                </article>
               </div>
             </section>
-            
           </div>
 
           {/* Sidebar */}
@@ -523,10 +502,7 @@ export default function SEOPage() {
 
                 <div className="relative z-10">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
+                    <Zap aria-hidden="true" className="h-5 w-5" />
                   </div>
 
                   <h2 className="text-lg font-bold leading-snug">
@@ -534,8 +510,8 @@ export default function SEOPage() {
                   </h2>
 
                   <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
+                    Create a professional resume without worrying about formatting, structure or ATS
+                    compatibility.
                   </p>
 
                   <Link
@@ -543,64 +519,50 @@ export default function SEOPage() {
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
                   >
                     Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
 
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                    <BookOpen aria-hidden="true" className="h-4 w-4" />
+                  </div>
 
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
+                  <h2 className="text-lg font-bold">Related Resources</h2>
+                </div>
 
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/indian-resume-format"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Indian Resume Format"}
-                  </span>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/indian-resume-format"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Indian Resume Format"}</span>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/tcs-resume-format-for-freshers"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Tcs Resume Format For Freshers"}
-                  </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
-        </div>
-      
+                  <li>
+                    <Link
+                      href="/tcs-resume-format-for-freshers"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Tcs Resume Format For Freshers"}</span>
+
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </main>

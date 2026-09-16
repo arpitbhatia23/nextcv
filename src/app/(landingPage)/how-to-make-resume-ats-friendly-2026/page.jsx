@@ -15,83 +15,90 @@ import {
 
 export const metadata = createSeoMetadata({
   title: "How to Make Your Resume ATS Friendly in 2026 | NextCV",
-  description: "Learn how to make your resume ATS-friendly with the right format, keywords, sections, file type and common mistakes to avoid.",
+  description:
+    "Learn how to make your resume ATS-friendly with the right format, keywords, sections, file type and common mistakes to avoid.",
   path: "/how-to-make-resume-ats-friendly-2026",
+  keywords: [
+    "how to make resume ats friendly",
+    "ats friendly resume",
+    "ats resume tips",
+    "ats resume formatting",
+  ],
 });
 
 export const revalidate = 86400;
 
 export default function SEOPage() {
   const jsonLdSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How to make a resume ATS friendly in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "To make it ATS friendly, stick to standard fonts, single-column layouts, clear headings, exact keyword matches, and save as a PDF."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I know what keywords to include?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Read the job description thoroughly. Look for required skills, tools, and certifications, and include those exact words in your resume."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use columns in an ATS resume?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It is highly recommended to avoid columns. Single-column layouts ensure that older and newer ATS parsers read your content chronologically."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are italics and bold text okay?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, basic formatting like bold and italics are perfectly fine and help human recruiters scan your resume quickly."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How can I check if my resume is readable?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Copy all text from your PDF and paste it into Notepad. If the text appears out of order or is missing words, your resume is not ATS friendly."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does file size matter for ATS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, keep the file size reasonable (under 1-2MB). Massive files usually indicate unnecessary embedded graphics."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Should I write out acronyms?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, use both the spelled-out version and the acronym, e.g., 'Master of Business Administration (MBA)'."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Where can I build an ATS friendly resume quickly?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Use NextCV's specialized ATS builder to generate a perfectly formatted resume without any hassle."
-      }
-    }
-  ]
-};
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How to make a resume ATS friendly in 2026?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "To make it ATS friendly, stick to standard fonts, single-column layouts, clear headings, exact keyword matches, and save as a PDF.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I know what keywords to include?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Read the job description thoroughly. Look for required skills, tools, and certifications, and include those exact words in your resume.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I use columns in an ATS resume?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "It is highly recommended to avoid columns. Single-column layouts ensure that older and newer ATS parsers read your content chronologically.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Are italics and bold text okay?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, basic formatting like bold and italics are perfectly fine and help human recruiters scan your resume quickly.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I check if my resume is readable?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Copy all text from your PDF and paste it into Notepad. If the text appears out of order or is missing words, your resume is not ATS friendly.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Does file size matter for ATS?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, keep the file size reasonable (under 1-2MB). Massive files usually indicate unnecessary embedded graphics.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Should I write out acronyms?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, use both the spelled-out version and the acronym, e.g., 'Master of Business Administration (MBA)'.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Where can I build an ATS friendly resume quickly?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Use NextCV's specialized ATS builder to generate a perfectly formatted resume without any hassle.",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -120,7 +127,9 @@ export default function SEOPage() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600">
-              {"Learn step-by-step how to make your resume ATS friendly in 2026. Discover the exact best practices, formatting rules, and keyword strategies you need."}
+              {
+                "Learn step-by-step how to make your resume ATS friendly in 2026. Discover the exact best practices, formatting rules, and keyword strategies you need."
+              }
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -143,26 +152,17 @@ export default function SEOPage() {
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-emerald-500"
-                />
+                <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-emerald-500" />
                 Free to start
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <Clock3
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-indigo-500"
-                />
+                <Clock3 aria-hidden="true" className="h-3.5 w-3.5 text-indigo-500" />
                 Ready in minutes
               </span>
 
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 text-blue-500"
-                />
+                <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
                 ATS-friendly formats
               </span>
             </div>
@@ -173,209 +173,205 @@ export default function SEOPage() {
         <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-10 lg:px-8">
           {/* Main article */}
           <div className="space-y-8 lg:col-span-8">
-            
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The 5-Step Formula for ATS Compliance"}
-              </h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"The 5-Step Formula for ATS Compliance"}
+                  </h2>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The 5-Step Formula for ATS Compliance"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"The 5-Step Formula for ATS Compliance"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="mt-6 space-y-4">
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+              <div className="mt-6 space-y-4">
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Step 1: Strip Out Complex Formatting"}</span>
-          </h3>
+                    <span>{"Step 1: Strip Out Complex Formatting"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply step 1: strip out complex formatting carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply step 1: strip out complex formatting carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-            <span>{"Step 2: Use Industry-Standard Section Headers"}</span>
-          </h3>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply step 2: use industry-standard section headers carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                    <span>{"Step 2: Use Industry-Standard Section Headers"}</span>
+                  </h3>
 
-            <span>{"Step 3: Integrate Job Description Keywords"}</span>
-          </h3>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply step 2: use industry-standard section headers carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply step 3: integrate job description keywords carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-            <span>{"Step 4: Avoid Graphics, Tables, and Columns"}</span>
-          </h3>
+                    <span>{"Step 3: Integrate Job Description Keywords"}</span>
+                  </h3>
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply step 4: avoid graphics, tables, and columns carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-        <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
-          <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
-            <CheckCircle2
-              aria-hidden="true"
-              className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
-            />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply step 3: integrate job description keywords carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-            <span>{"Step 5: Save in the Correct Format"}</span>
-          </h3>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-          <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
-            {"Apply step 5: save in the correct format carefully to improve clarity, ATS readability and the overall presentation of your resume."}
-          </p>
-        </div>
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                    <span>{"Step 4: Avoid Graphics, Tables, and Columns"}</span>
+                  </h3>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply step 4: avoid graphics, tables, and columns carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Using AI to Boost Your ATS Score"}
-              </h2>
+                <div className="rounded-xl border border-slate-100 bg-slate-50 p-4 sm:p-5">
+                  <h3 className="flex items-start gap-2 text-base font-bold leading-snug text-slate-900 sm:text-lg">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500"
+                    />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Using AI to Boost Your ATS Score"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                    <span>{"Step 5: Save in the Correct Format"}</span>
+                  </h3>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
+                  <p className="mt-2 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Apply step 5: save in the correct format carefully to improve clarity, ATS readability and the overall presentation of your resume."
+                    }
+                  </p>
+                </div>
+              </div>
+            </section>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"The 'Plain Text' Test"}
-              </h2>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"The 'Plain Text' Test"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Using AI to Boost Your ATS Score"}
+                  </h2>
 
-          <div className="mt-6 space-y-4">
-      
-            </div>
-          </section>
-        
-        <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Using AI to Boost Your ATS Score"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
 
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-              <Zap aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="mt-6 space-y-4"></div>
+            </section>
 
-            <div className="min-w-0">
-              <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
-                {"Frequently Asked Questions"}
-              </h2>
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-indigo-500 to-blue-500" />
 
-              <p className="mt-3 text-sm leading-7 text-slate-600">
-                Explore the essential principles of{" "}
-                <strong className="font-semibold text-slate-800">
-                  {"Frequently Asked Questions"}
-                </strong>
-                . These concepts can help freshers create a clearer,
-                ATS-friendly and recruiter-focused resume.
-              </p>
-            </div>
-          </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
 
-          <div className="mt-6 space-y-4">
-      
-        </div>
-      </section>
-    
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"The 'Plain Text' Test"}
+                  </h2>
 
-            
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"The 'Plain Text' Test"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
+            <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md sm:p-8">
+              <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-emerald-500 to-teal-500" />
+
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                  <Zap aria-hidden="true" className="h-4 w-4" />
+                </div>
+
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug text-slate-900 sm:text-xl">
+                    {"Frequently Asked Questions"}
+                  </h2>
+
+                  <p className="mt-3 text-sm leading-7 text-slate-600">
+                    Explore the essential principles of{" "}
+                    <strong className="font-semibold text-slate-800">
+                      {"Frequently Asked Questions"}
+                    </strong>
+                    . These concepts can help freshers create a clearer, ATS-friendly and
+                    recruiter-focused resume.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-4"></div>
+            </section>
+
             <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
               <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-indigo-50" />
 
               <div className="relative z-10 mb-6 flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
-                  <FileText
-                    aria-hidden="true"
-                    className="h-4 w-4"
-                  />
+                  <FileText aria-hidden="true" className="h-4 w-4" />
                 </div>
 
                 <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -384,122 +380,119 @@ export default function SEOPage() {
               </div>
 
               <div className="relative z-10 space-y-3">
-                
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"How to make a resume ATS friendly in 2026?"}</span>
-          </h3>
+                    <span>{"How to make a resume ATS friendly in 2026?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"To make it ATS friendly, stick to standard fonts, single-column layouts, clear headings, exact keyword matches, and save as a PDF."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "To make it ATS friendly, stick to standard fonts, single-column layouts, clear headings, exact keyword matches, and save as a PDF."
+                    }
+                  </p>
+                </article>
 
-            <span>{"How do I know what keywords to include?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Read the job description thoroughly. Look for required skills, tools, and certifications, and include those exact words in your resume."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"How do I know what keywords to include?"}</span>
+                  </h3>
 
-            <span>{"Can I use columns in an ATS resume?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Read the job description thoroughly. Look for required skills, tools, and certifications, and include those exact words in your resume."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"It is highly recommended to avoid columns. Single-column layouts ensure that older and newer ATS parsers read your content chronologically."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"Are italics and bold text okay?"}</span>
-          </h3>
+                    <span>{"Can I use columns in an ATS resume?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, basic formatting like bold and italics are perfectly fine and help human recruiters scan your resume quickly."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "It is highly recommended to avoid columns. Single-column layouts ensure that older and newer ATS parsers read your content chronologically."
+                    }
+                  </p>
+                </article>
 
-            <span>{"How can I check if my resume is readable?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Copy all text from your PDF and paste it into Notepad. If the text appears out of order or is missing words, your resume is not ATS friendly."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                    <span>{"Are italics and bold text okay?"}</span>
+                  </h3>
 
-            <span>{"Does file size matter for ATS?"}</span>
-          </h3>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes, basic formatting like bold and italics are perfectly fine and help human recruiters scan your resume quickly."
+                    }
+                  </p>
+                </article>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, keep the file size reasonable (under 1-2MB). Massive files usually indicate unnecessary embedded graphics."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-            <span>{"Should I write out acronyms?"}</span>
-          </h3>
+                    <span>{"How can I check if my resume is readable?"}</span>
+                  </h3>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Yes, use both the spelled-out version and the acronym, e.g., 'Master of Business Administration (MBA)'."}
-          </p>
-        </article>
-      
-        <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
-          <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
-            <span className="shrink-0 font-black text-indigo-600">
-              Q.
-            </span>
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Copy all text from your PDF and paste it into Notepad. If the text appears out of order or is missing words, your resume is not ATS friendly."
+                    }
+                  </p>
+                </article>
 
-            <span>{"Where can I build an ATS friendly resume quickly?"}</span>
-          </h3>
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
 
-          <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
-            {"Use NextCV's specialized ATS builder to generate a perfectly formatted resume without any hassle."}
-          </p>
-        </article>
-      
+                    <span>{"Does file size matter for ATS?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes, keep the file size reasonable (under 1-2MB). Massive files usually indicate unnecessary embedded graphics."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Should I write out acronyms?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Yes, use both the spelled-out version and the acronym, e.g., 'Master of Business Administration (MBA)'."
+                    }
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-indigo-200 sm:p-5">
+                  <h3 className="flex items-start gap-3 text-sm font-bold leading-6 text-slate-900">
+                    <span className="shrink-0 font-black text-indigo-600">Q.</span>
+
+                    <span>{"Where can I build an ATS friendly resume quickly?"}</span>
+                  </h3>
+
+                  <p className="mt-3 pl-7 text-sm leading-7 text-slate-600">
+                    {
+                      "Use NextCV's specialized ATS builder to generate a perfectly formatted resume without any hassle."
+                    }
+                  </p>
+                </article>
               </div>
             </section>
-            
           </div>
 
           {/* Sidebar */}
@@ -510,10 +503,7 @@ export default function SEOPage() {
 
                 <div className="relative z-10">
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                    <Zap
-                      aria-hidden="true"
-                      className="h-5 w-5"
-                    />
+                    <Zap aria-hidden="true" className="h-5 w-5" />
                   </div>
 
                   <h2 className="text-lg font-bold leading-snug">
@@ -521,8 +511,8 @@ export default function SEOPage() {
                   </h2>
 
                   <p className="mt-3 text-sm leading-7 text-indigo-100">
-                    Create a professional resume without worrying about
-                    formatting, structure or ATS compatibility.
+                    Create a professional resume without worrying about formatting, structure or ATS
+                    compatibility.
                   </p>
 
                   <Link
@@ -530,64 +520,50 @@ export default function SEOPage() {
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-700 transition-colors hover:bg-indigo-50"
                   >
                     Start Building Now
-
-                    <ArrowRight
-                      aria-hidden="true"
-                      className="h-4 w-4"
-                    />
+                    <ArrowRight aria-hidden="true" className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
 
-              
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-              <BookOpen aria-hidden="true" className="h-4 w-4" />
-            </div>
+              <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-5 text-white shadow-sm sm:p-6">
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
+                    <BookOpen aria-hidden="true" className="h-4 w-4" />
+                  </div>
 
-            <h2 className="text-lg font-bold">
-              Related Resources
-            </h2>
-          </div>
+                  <h2 className="text-lg font-bold">Related Resources</h2>
+                </div>
 
-          <ul className="space-y-2">
-            
-              <li>
-                <Link
-                  href="/"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"Free Resume Builder"}
-                  </span>
+                <ul className="space-y-2">
+                  <li>
+                    <Link
+                      href="/"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"Free Resume Builder"}</span>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-              <li>
-                <Link
-                  href="/what-is-ats-friendly-resume"
-                  className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
-                >
-                  <span className="min-w-0 capitalize">
-                    {"What Is Ats Friendly Resume"}
-                  </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
 
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
-                  />
-                </Link>
-              </li>
-            
-          </ul>
-        </div>
-      
+                  <li>
+                    <Link
+                      href="/what-is-ats-friendly-resume"
+                      className="group flex items-center justify-between gap-3 rounded-xl border border-slate-700 bg-slate-800/70 p-3 text-sm font-medium text-slate-200 transition-colors hover:border-indigo-500 hover:bg-indigo-600 hover:text-white"
+                    >
+                      <span className="min-w-0 capitalize">{"What Is Ats Friendly Resume"}</span>
+
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </aside>
         </main>

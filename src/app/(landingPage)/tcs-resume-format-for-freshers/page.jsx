@@ -10,6 +10,12 @@ export const metadata = createSeoMetadata({
   description:
     "Build an ATS-friendly TCS resume format for freshers. Use ready-made templates for TCS NQT, BCA, B.Tech, IT and fresher job applications.",
   path: "/tcs-resume-format-for-freshers",
+  keywords: [
+    "tcs resume format for freshers",
+    "tcs nqt resume format",
+    "ats resume for freshers",
+    "tcs resume template",
+  ],
 });
 
 export default function Page() {
@@ -98,40 +104,85 @@ export default function Page() {
 
       <div className="prose max-w-none text-gray-800">
         <p className="mb-4 text-sm text-gray-500 italic">
-          Disclaimer: This guide is intended for informational purposes only. The resume format and template provided are independent recommendations and are not officially approved by, endorsed by, or affiliated with TCS.
+          Disclaimer: This guide is intended for informational purposes only. The resume format and
+          template provided are independent recommendations and are not officially approved by,
+          endorsed by, or affiliated with TCS.
         </p>
         <h2 className="text-2xl font-semibold mt-8 mb-4">ATS-Compatible Section Structure</h2>
         <p className="mb-4">
-          TCS receives an enormous volume of applications, particularly through the TCS NQT route. Your resume needs to be machine-readable. We recommend a single-column layout containing Contact Details, Education, Technical Skills, Projects, and Certifications.
+          TCS receives an enormous volume of applications, particularly through the TCS NQT route.
+          Your resume needs to be machine-readable. We recommend a single-column layout containing
+          Contact Details, Education, Technical Skills, Projects, and Certifications.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">Realistic TCS Resume Example</h2>
         <div className="bg-gray-50 p-4 border rounded-md">
-          <p><strong>Priya Patel</strong><br/>
-          Mumbai, India | priya.patel@email.com | +91 9876543210<br/>
-          LinkedIn: linkedin.com/in/priyapatel | GitHub: github.com/priyapatel</p>
-          <p><strong>Education</strong><br/>
-          B.Tech in Information Technology, ABC College | 2026 | CGPA: 9.0</p>
-          <p><strong>Technical Skills</strong><br/>
-          Languages: Java, C++, JavaScript<br/>
-          Technologies: React, Node.js, Git</p>
-          <p><strong>Academic Projects</strong><br/>
-          <em>Weather Forecast Application:</em> Developed a web application using React and a public weather API. Implemented state management using Redux, improving load times.</p>
-          <p><strong>Achievements</strong><br/>
-          TCS NQT Score: 85% (Cognitive Skills), 90% (Programming Logic)</p>
+          <p>
+            <strong>Priya Patel</strong>
+            <br />
+            Mumbai, India | priya.patel@email.com | +91 9876543210
+            <br />
+            LinkedIn: linkedin.com/in/priyapatel | GitHub: github.com/priyapatel
+          </p>
+          <p>
+            <strong>Education</strong>
+            <br />
+            B.Tech in Information Technology, ABC College | 2026 | CGPA: 9.0
+          </p>
+          <p>
+            <strong>Technical Skills</strong>
+            <br />
+            Languages: Java, C++, JavaScript
+            <br />
+            Technologies: React, Node.js, Git
+          </p>
+          <p>
+            <strong>Academic Projects</strong>
+            <br />
+            <em>Weather Forecast Application:</em> Developed a web application using React and a
+            public weather API. Implemented state management using Redux, improving load times.
+          </p>
+          <p>
+            <strong>Achievements</strong>
+            <br />
+            TCS NQT Score: 85% (Cognitive Skills), 90% (Programming Logic)
+          </p>
         </div>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">
           Presenting Projects, Skills, and Education
         </h2>
         <p className="mb-4">
-          <strong>Projects:</strong> Describe what you contributed individually. Use bullet points and action verbs. Mention the technologies used clearly.<br/><br/>
-          <strong>Technical Skills:</strong> Don't exaggerate. TCS interviewers will dive deep into the skills you list. Categorize them logically.<br/><br/>
-          <strong>Education:</strong> For freshers, education is your primary asset. List it near the top in reverse-chronological order. Include your NQT score if you are applying through that route.
+          <strong>Projects:</strong> Describe what you contributed individually. Use bullet points
+          and action verbs. Mention the technologies used clearly.
+          <br />
+          <br />
+          <strong>Technical Skills:</strong> Don't exaggerate. TCS interviewers will dive deep into
+          the skills you list. Categorize them logically.
+          <br />
+          <br />
+          <strong>Education:</strong> For freshers, education is your primary asset. List it near
+          the top in reverse-chronological order. Include your NQT score if you are applying through
+          that route.
         </p>
 
         <p className="mt-8 font-bold text-lg">
-          Ready to build? Customize a <Link href="/templates" className="text-blue-600 hover:underline">NextCV template</Link> now. You can also explore our guides for <Link href="/infosys-resume-format-for-freshers" className="text-blue-600 hover:underline">Infosys</Link> and <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">Wipro</Link>.
+          Ready to build? Customize a{" "}
+          <Link href="/templates" className="text-blue-600 hover:underline">
+            NextCV template
+          </Link>{" "}
+          now. You can also explore our guides for{" "}
+          <Link
+            href="/infosys-resume-format-for-freshers"
+            className="text-blue-600 hover:underline"
+          >
+            Infosys
+          </Link>{" "}
+          and{" "}
+          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">
+            Wipro
+          </Link>
+          .
         </p>
       </div>
 

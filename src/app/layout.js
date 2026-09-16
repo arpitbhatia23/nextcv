@@ -14,16 +14,29 @@ export const viewport = {
   maximumScale: 5,
 };
 
-import { DEFAULT_SEO_KEYWORDS } from "@/shared/utils/seo";
-
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title: "Create an ATS Resume for Freshers – Designed for TCS, Infosys & Wipro | NextCV",
+  title: {
+    default: "Free ATS Resume Builder for Indian Freshers | NextCV",
+    template: "%s | NextCV",
+  },
   description:
-    "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
-  keywords: DEFAULT_SEO_KEYWORDS,
+    "Create an ATS-friendly resume for Indian freshers with professional templates and simple online editing.",
+  alternates: {
+    canonical: "https://www.nextcv.in/",
+  },
   openGraph: {
-    images: ["/opengraph-image.png"],
+    siteName: "NextCV",
+    locale: "en_IN",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "NextCV ATS resume builder",
+      },
+    ],
   },
 };
 export default function RootLayout({ children }) {
@@ -40,10 +53,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Create an ATS Resume for Freshers – Designed for TCS, Infosys & Wipro | NextCV",
+              name: "NextCV",
               url: "https://www.nextcv.in",
               description:
-                "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
+                "Create an ATS-friendly resume for Indian freshers with professional templates and simple online editing.",
             }),
           }}
         />
@@ -54,11 +67,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Create an ATS Resume for Freshers – Designed for TCS, Infosys & Wipro | NextCV",
+              name: "NextCV",
               url: "https://www.nextcv.in",
               logo: "https://www.nextcv.in/opengraph-image.png",
-              description:
-                "Free resume maker for IT freshers in India. Create ATS-friendly resumes for engineering freshers and software developer jobs in 2026 with NextCV.",
+              description: "Online ATS resume builder for Indian freshers.",
               sameAs: [
                 "https://www.facebook.com/nextcv",
                 "https://www.twitter.com/nextcv",

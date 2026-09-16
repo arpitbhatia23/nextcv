@@ -8,6 +8,7 @@ export const metadata = {
   title: "CV vs Resume in India: Difference, Meaning and Examples",
   description:
     "Understand the difference between CV and resume in India. Learn which one freshers should use for jobs, internships and campus placements.",
+  keywords: ["resume vs cv in india", "cv vs resume india", "cv builder", "resume format india"],
   alternates: {
     canonical: "https://www.nextcv.in/resume-vs-cv-india",
   },

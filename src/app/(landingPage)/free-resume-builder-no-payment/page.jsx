@@ -4,8 +4,15 @@ import { AlertCircle } from "lucide-react";
 
 export const metadata = createSeoMetadata({
   title: "Free Resume Builder Without Payment | PDF Download Guide 2026",
-  description: "Learn how to create a resume online without payment and compare free resume builders, paid templates and PDF download options.",
+  description:
+    "Learn how to create a resume online without payment and compare free resume builders, paid templates and PDF download options.",
   path: "/free-resume-builder-no-payment",
+  keywords: [
+    "free resume builder without payment",
+    "free resume builder and download",
+    "online resume maker free",
+    "free resume maker online",
+  ],
 });
 
 export default function FreeResumePage() {

@@ -8,8 +8,16 @@ const Templates = dynamic(() => import("@/shared/components/templateslanding/Tem
 export const metadata = createSeoMetadata({
   title: "ATS Resume Templates for Freshers in India | NextCV",
   description:
-    "Explore ATS-friendly resume templates for Indian job seekers. Find specialized formats for freshers, experienced professionals, and MNC applications.",
+    "Explore ATS-friendly resume templates for Indian job seekers, including free resume templates for freshers, experienced professionals, and MNC applications.",
   path: "/templates",
+  keywords: [
+    "resume templates",
+    "resume template",
+    "free resume templates",
+    "best resume template",
+    "best resume template for freshers",
+    "ats best resume template",
+  ],
 });
 
 export default function Page() {
@@ -58,7 +66,7 @@ export default function Page() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Best Resume Format for Freshers in India (2026)",
+        name: "ATS Resume Templates for Freshers in India",
         item: "https://www.nextcv.in/templates",
       },
     ],
@@ -79,13 +87,24 @@ export default function Page() {
         ATS-Friendly Resume Templates for Indian Job Seekers
       </h1>
       <p className="text-lg text-gray-700 mb-8">
-        Browse our collection of ATS-friendly resume templates designed specifically for the Indian job market. Whether you're a fresher or an experienced professional, these templates are tested to pass automated screening systems. Check our <Link href="/examples" className="text-blue-600 hover:underline">resume examples</Link> for inspiration or review our <Link href="/pricing" className="text-blue-600 hover:underline">affordable pricing</Link>.
+        Browse our collection of ATS-friendly resume templates designed for the Indian job market.
+        Whether you're a fresher or an experienced professional, these templates use clear layouts
+        that are easy for screening systems and recruiters to read. Check our{" "}
+        <Link href="/examples" className="text-blue-600 hover:underline">
+          resume examples
+        </Link>{" "}
+        for inspiration or review our{" "}
+        <Link href="/pricing" className="text-blue-600 hover:underline">
+          affordable pricing
+        </Link>
+        .
       </p>
 
       <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
         <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
         <p className="mb-4 text-gray-700">
-          Use NextCV to create a resume that passes screening tools used by top Indian companies.
+          Use NextCV to create an ATS-friendly resume for job applications at leading Indian
+          companies.
         </p>
         <Link
           href="/"
@@ -96,21 +115,25 @@ export default function Page() {
       </div>
 
       <div className="prose max-w-none text-gray-800">
-        <h2 className="text-2xl font-semibold mt-8 mb-4">
-          Resume Templates for Freshers
-        </h2>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Resume Templates for Freshers</h2>
         <p className="mb-4">
-          If you are just graduating or looking for your first job, a reverse-chronological format focusing on education, internships, and academic projects works best. Our fresher templates highlight potential over extensive work history.
+          If you are just graduating or looking for your first job, a reverse-chronological format
+          focusing on education, internships, and academic projects works best. Our resume templates
+          for freshers highlight potential over extensive work history.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">Templates for Experienced Candidates</h2>
         <p className="mb-4">
-          For professionals with several years of experience, these templates place your work history and measurable achievements front and center, allowing recruiters to quickly grasp the value you bring to the table.
+          For professionals with several years of experience, these templates place your work
+          history and measurable achievements front and center, allowing recruiters to quickly grasp
+          the value you bring to the table.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8 mb-4">MNC Resume Applications</h2>
         <p className="mb-4">
-          Applying to top IT and non-IT MNCs requires a clean, structured, and highly readable format. These templates avoid flashy graphics and focus on substance, perfectly aligning with strict corporate ATS requirements.
+          Applying to top IT and non-IT MNCs requires a clean, structured, and highly readable
+          format. These templates avoid flashy graphics and focus on substance, perfectly aligning
+          with strict corporate ATS requirements.
         </p>
       </div>
 
