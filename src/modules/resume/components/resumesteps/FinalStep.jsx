@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/shared/components/ui/card";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
@@ -27,6 +27,7 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import { templatesMetadata } from "@/shared/utils/template-metadata";
+import posthog from "@/shared/utils/posthog";
 import dynamic from "next/dynamic";
 const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ssr: false,
@@ -71,6 +72,13 @@ const FinalStep = () => {
   const [draftId, setDraftId] = useState(null);
   const [discount, setDiscount] = useState(null);
   const templates = templatesMetadata;
+
+  useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "review",
+      step_number: 9,
+    });
+  }, []);
 
   const templateWithPricing = useMemo(() => {
     return templates.map(template => {
@@ -130,14 +138,26 @@ const FinalStep = () => {
   });
 
   const debouncePayment = useDebouncedCallback(() => {
+    posthog.capture("payment_started", {
+      step: "review",
+      step_number: 9,
+    });
     handelPayment();
   }, 1000);
 
   const debounceDraft = useDebouncedCallback(() => {
+    posthog.capture("resume_save_as_draft", {
+      step: "review",
+      step_number: 9,
+    });
     handleSaveDraft();
   }, 1000);
 
   const debounceCoupon = useDebouncedCallback(coupon => {
+    posthog.capture("coupon_applied", {
+      step: "review",
+      step_number: 9,
+    });
     handleCoupon(coupon);
   }, 1000);
 

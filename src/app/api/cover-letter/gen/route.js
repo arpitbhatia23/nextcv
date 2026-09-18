@@ -1,4 +1,5 @@
-import { groq } from "@/modules/ai/utils/aiConfig";
+import crypto from "crypto";
+import { groq, posthog } from "@/modules/ai/utils/aiConfig";
 import { getCached, hash, setCached } from "@/modules/ai/utils/resumeDescriptionGenereation";
 import { apiResponse, asyncHandler } from "@/shared";
 import { encode } from "@toon-format/toon";
@@ -90,6 +91,7 @@ Structure:
 `;
 
   const encodedPrompt = encode(prompt.trim());
+  const traceId = crypto.randomUUID();
 
   const completion = await groq.chat.completions.create({
     model,
@@ -107,7 +109,14 @@ Structure:
         content: encodedPrompt,
       },
     ],
+    posthogTraceId: traceId,
+    posthogProperties: {
+      $ai_session_id: `process-${process.pid}`,
+      $ai_provider: "groq",
+    },
   });
+
+  await posthog.flush();
 
   const result = completion.choices[0].message.content;
 

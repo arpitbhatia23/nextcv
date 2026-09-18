@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { encode } from "@toon-format/toon";
 import { extractJobKeywordsPrompt, PromptStrategies } from "./promptStratgies.js";
-import { groq, groq_model } from "./aiConfig.js";
+import { groq, groq_model, posthog } from "./aiConfig.js";
 import { redis } from "@/shared/utils/Redis.js";
 
 const FAST_MODEL = "openai/gpt-oss-20b";
@@ -60,7 +60,14 @@ const generateFromPrompt = async (prompt, options = {}) => {
 
       reasoning_effort: options.reasoningEffort ?? "low",
       include_reasoning: false,
+      posthogTraceId: options.traceId ?? crypto.randomUUID(),
+      posthogProperties: {
+        $ai_session_id: `process-${process.pid}`,
+        $ai_provider: "groq",
+      },
     });
+
+    await posthog.flush();
 
     const choice = response.choices?.[0];
     const result = choice?.message?.content?.trim() || "";
@@ -87,7 +94,7 @@ const generateFromPrompt = async (prompt, options = {}) => {
   }
 };
 
-const extractJobKeywords = async jobDescription => {
+const extractJobKeywords = async (jobDescription, traceId = crypto.randomUUID()) => {
   const text = jobDescription?.trim();
 
   if (!text) return "";
@@ -116,7 +123,14 @@ const extractJobKeywords = async jobDescription => {
       max_completion_tokens: 500,
       reasoning_effort: "low",
       include_reasoning: false,
+      posthogTraceId: traceId,
+      posthogProperties: {
+        $ai_session_id: `process-${process.pid}`,
+        $ai_provider: "groq",
+      },
     });
+
+    await posthog.flush();
 
     const choice = response.choices?.[0];
     const keywords = choice?.message?.content?.trim() || "";
@@ -149,7 +163,8 @@ export const ResumeGenerator = {
     }),
 
   project: async (data, jobDescription = "") => {
-    const atsKeywords = await extractJobKeywords(jobDescription);
+    const traceId = crypto.randomUUID();
+    const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
       PromptStrategies.project({
@@ -158,12 +173,14 @@ export const ResumeGenerator = {
       }),
       {
         maxCompletionTokens: 500,
+        traceId,
       }
     );
   },
 
   experience: async (data, jobDescription = "") => {
-    const atsKeywords = await extractJobKeywords(jobDescription);
+    const traceId = crypto.randomUUID();
+    const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
       PromptStrategies.experience({
@@ -172,12 +189,14 @@ export const ResumeGenerator = {
       }),
       {
         maxCompletionTokens: 500,
+        traceId,
       }
     );
   },
 
   skills: async (data, jobDescription = "") => {
-    const atsKeywords = await extractJobKeywords(jobDescription);
+    const traceId = crypto.randomUUID();
+    const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
       PromptStrategies.skills({
@@ -186,12 +205,14 @@ export const ResumeGenerator = {
       }),
       {
         maxCompletionTokens: 400,
+        traceId,
       }
     );
   },
 
   summary: async data => {
-    const atsKeywords = await extractJobKeywords(data.jobDescription);
+    const traceId = crypto.randomUUID();
+    const atsKeywords = await extractJobKeywords(data.jobDescription, traceId);
 
     return generateFromPrompt(
       PromptStrategies.summary({
@@ -208,6 +229,7 @@ export const ResumeGenerator = {
         model: FAST_MODEL,
         maxCompletionTokens: 600,
         reasoningEffort: "low",
+        traceId,
       }
     );
   },

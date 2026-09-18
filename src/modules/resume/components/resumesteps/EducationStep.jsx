@@ -21,7 +21,7 @@ import { Tips } from "../Tips";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
-
+import posthog from "@/shared/utils/posthog";
 /* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
    labels, and helper text — matches BasicInfoStep. */
 const FontImports = () => (
@@ -48,6 +48,10 @@ const EducationStep = () => {
 
   // OPTIMIZATION: Prefetch next step on mount
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "education",
+      step_number: 3,
+    });
     router.prefetch("/dashboard/builder/skills");
   }, [router]);
 
@@ -91,6 +95,7 @@ const EducationStep = () => {
     } else {
       setEducationList(prev => [...prev, { ...values, id: Date.now() }]);
     }
+
     form.reset();
   };
 
@@ -447,7 +452,13 @@ const EducationStep = () => {
               <ArrowLeft className="w-4 h-4 mr-2" /> PREVIOUS
             </Button>
             <Button
-              onClick={() => router.push("/dashboard/builder/skills")}
+              onClick={() => {
+                posthog.capture("builder_step_complete", {
+                  step: "education",
+                  step_number: 3,
+                });
+                router.push("/dashboard/builder/skills");
+              }}
               className="rounded-none text-white shadow-none h-10 px-4 md:px-4 font-mono text-xs md:text-sm tracking-widest"
               style={{ backgroundColor: "#B3382C" }}
               id="tour-next-button"

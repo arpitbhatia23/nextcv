@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/useResumeStore";
+import posthog from "@/shared/utils/posthog";
 
 /* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
    labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep / ProjectsStep / CertificateStep. */
@@ -38,6 +39,10 @@ const SummaryStep = () => {
   const router = useRouter();
 
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "summary",
+      step_number: 8,
+    });
     router.prefetch("/dashboard/builder/review");
   }, [router]);
 
@@ -102,7 +107,10 @@ const SummaryStep = () => {
     updateForm({
       summary: values.summary,
     });
-
+    posthog.capture("builder_step_complete", {
+      step: "summary",
+      step_number: 8,
+    });
     router.push("/dashboard/builder/review");
   };
 

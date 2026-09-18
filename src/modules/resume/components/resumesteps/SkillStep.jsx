@@ -20,7 +20,7 @@ import { Tips } from "../Tips";
 import { useAiGeneration } from "../../hooks/useAiGeneation";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/useResumeStore";
-
+import posthog from "@/shared/utils/posthog";
 /* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
    labels, and helper text — matches BasicInfoStep / EducationStep. */
 const FontImports = () => (
@@ -45,6 +45,10 @@ const SkillStep = () => {
 
   // OPTIMIZATION: Prefetch next step on mount
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "skill",
+      step_number: 4,
+    });
     router.prefetch("/dashboard/builder/experience");
   }, [router]);
 
@@ -171,6 +175,10 @@ const SkillStep = () => {
       toast("Please add at least 4 skills to continue.");
       return;
     }
+    posthog.capture("builder_step_complete", {
+      step: "skill",
+      step_number: 4,
+    });
     router.push("/dashboard/builder/experience");
   };
 

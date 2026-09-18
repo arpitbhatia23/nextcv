@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
-
 export const useCoupon = ({
   setIsSubmit,
   originalAmount,

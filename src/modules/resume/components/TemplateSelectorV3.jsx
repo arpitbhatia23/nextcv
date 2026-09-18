@@ -9,6 +9,7 @@ import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import useResumeStore from "@/store/useResumeStore";
 import { Button } from "@/shared/components/ui/button";
 import { templatesMetadata } from "@/shared/utils/template-metadata";
+import posthog from "@/shared/utils/posthog";
 
 /* Fonts: Fraunces for the letterhead headline, IBM Plex Mono for
    eyebrows, tier tabs, badges, and prices. */
@@ -59,6 +60,10 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "template_selection",
+      step_number: 1,
+    });
     router.prefetch("/dashboard/builder/basicInfo");
   }, [router]);
 
@@ -104,7 +109,13 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
     if (!templateKey || isPending) {
       return;
     }
-
+    const template = templatesWithData.find(item => item.key === templateKey);
+    posthog.capture("builder_template_selected", {
+      template: templateKey,
+      template_name: template?.label,
+      tier: template?.tier,
+      price: template?.templateData?.priceDiscounted ?? 49,
+    });
     startTransition(() => {
       setSelectedTemplate(templateKey);
 

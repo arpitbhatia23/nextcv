@@ -7,7 +7,7 @@ import { InitUser } from "@/modules/auth/components/initUser";
 import { requiredAuth } from "@/shared";
 import { Toaster } from "@/shared/components/ui/sonner";
 export const metadata = {
-  title: "Dashboard - NextCV",
+  title: "Dashboard ",
   description: "Manage your resumes and create new ones with AI assistance",
 };
 

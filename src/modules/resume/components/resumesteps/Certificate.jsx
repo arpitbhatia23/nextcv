@@ -12,13 +12,13 @@ import {
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Tips } from "../Tips";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
-
+import posthog from "@/shared/utils/posthog";
 /* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
    labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep / ProjectsStep. */
 const FontImports = () => (
@@ -43,6 +43,10 @@ const CertificateStep = () => {
 
   // OPTIMIZATION: Prefetch next step on mount
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "certifications",
+      step_number: 7,
+    });
     router.prefetch("/dashboard/builder/summary");
   }, [router]);
 
@@ -360,6 +364,10 @@ const CertificateStep = () => {
             </Button>
             <Button
               onClick={() => {
+                posthog.capture("builder_step_complete", {
+                  step: "certifications",
+                  step_number: 7,
+                });
                 router.push("/dashboard/builder/summary");
               }}
               className="rounded-none text-white shadow-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useRazorpay } from "react-razorpay";
 import { toast } from "sonner";
+import posthog from "@/shared/utils/posthog";
 
 export const usePayment = ({
   discount,
@@ -74,7 +75,10 @@ export const usePayment = ({
         handler: async response => {
           try {
             // Payment completed in Razorpay
-
+            posthog.capture("payment_verifcation", {
+              step: "review",
+              step_number: 9,
+            });
             const { data } = await axios.post("/api/payment/status", {
               razorpay_payment_id: response.razorpay_payment_id,
 
@@ -85,6 +89,10 @@ export const usePayment = ({
 
             if (data.success) {
               toast.success("Payment Successful!");
+              posthog.capture("payment_success", {
+                step: "review",
+                step_number: 9,
+              });
               clearDraft();
               window.location.href = data.data.redirecturl;
               return;
@@ -94,6 +102,10 @@ export const usePayment = ({
 
             toast.error(data.message || "Payment verification failed");
           } catch (error) {
+            posthog.capture("payment_failed", {
+              step: "review",
+              step_number: 9,
+            });
             console.error("Payment verification failed:", error?.response?.data || error?.message);
 
             toast.error("Payment verification failed");
@@ -106,7 +118,10 @@ export const usePayment = ({
       razorpay.open();
     } catch (error) {
       console.error(error);
-
+      posthog.capture("payment_failed", {
+        step: "review",
+        step_number: 9,
+      });
       toast.error(error?.message || "Payment initialization failed");
     } finally {
       setIsSubmit(false);

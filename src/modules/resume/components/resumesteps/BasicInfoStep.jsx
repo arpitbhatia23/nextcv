@@ -24,6 +24,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/shared/components/ui/collapsible";
+import posthog from "@/shared/utils/posthog";
 
 /* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
    labels, and helper text. */
@@ -61,6 +62,10 @@ const BasicInfoStep = () => {
   const router = useRouter();
 
   useEffect(() => {
+    posthog.capture("builder_step_viewed", {
+      step: "basic_info",
+      step_number: 2,
+    });
     router.prefetch("/dashboard/builder/education");
   }, [router]);
 
@@ -99,7 +104,10 @@ const BasicInfoStep = () => {
     setIsLoading(true);
 
     updateForm(values);
-
+    posthog.capture("builder_step_complete", {
+      step: "basic_info",
+      step_number: 2,
+    });
     router.push("/dashboard/builder/education");
   };
 
