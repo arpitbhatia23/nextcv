@@ -78,7 +78,7 @@ const ProcessWorks = () => {
           {/* </div> */}
 
           <div className="mt-8 flex flex-col items-center">
-            <p className="text-lg sm:text-xl font-black text-slate-900">10k+</p>
+            <p className="text-lg sm:text-xl font-black text-slate-900">1k+</p>
             <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mt-1">
               Successful Resumes Created
             </p>

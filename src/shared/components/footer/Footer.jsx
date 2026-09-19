@@ -54,7 +54,7 @@ const footerLinks = [
 ];
 
 const stats = [
-  { value: "10K+", label: "Resumes Built" },
+  { value: "1k+", label: "Resumes Built" },
   { value: "95%", label: "Success Rate" },
   { value: "< 5m", label: "Time to Build" },
   { value: "Free", label: "To Start" },

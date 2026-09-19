@@ -133,7 +133,7 @@ export default async function SeoPage({ params }) {
             {page.sections.length > 0 ? (
               page.sections.map((section, index) => (
                 <section
-                  key={section}
+                  key={section.title}
                   className="group border border-[#E4E2DC] bg-white p-5 transition-colors hover:border-[#B3382C] sm:p-7"
                 >
                   <div className="flex gap-5">
@@ -142,12 +142,10 @@ export default async function SeoPage({ params }) {
                     </span>
                     <div>
                       <h2 className="seo-display text-2xl leading-tight text-[#1C2333] sm:text-3xl">
-                        {section}
+                        {section.title}
                       </h2>
                       <p className="mt-4 max-w-2xl text-sm leading-7 text-[#6B7280]">
-                        This section is designed to guide Indian freshers in creating an optimal
-                        resume for 2026. Make sure to include relevant skills, internships, and
-                        educational background correctly structured for Applicant Tracking Systems.
+                       {section.content}
                       </p>
                     </div>
                   </div>

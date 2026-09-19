@@ -11,12 +11,30 @@
       "ats resume for freshers"
     ],
     "sections": [
-      "What Is an ATS-Friendly Resume?",
-      "Best ATS Resume Format for Indian Freshers",
-      "How to Structure an ATS Resume",
-      "How to Write ATS-Friendly Skills and Projects",
-      "ATS Resume Formatting Tips",
-      "Common ATS Resume Mistakes"
+      {
+        "title": "What Is an ATS-Friendly Resume?",
+        "content": "An ATS-friendly resume is a resume whose text, headings, dates, skills, and other important details can be read in a predictable order by applicant tracking software. Use standard section names, selectable text, readable fonts, consistent dates, and a simple layout. ATS compatibility does not guarantee an interview; the resume still needs relevant, truthful content that matches the job."
+      },
+      {
+        "title": "Best ATS Resume Format for Indian Freshers",
+        "content": "For a fresher, a simple single-column or otherwise clearly ordered layout can work well. Put contact information at the top, followed by a concise summary or objective, skills, projects or experience, education, and relevant certifications. Keep spacing and typography consistent and make sure the exported file preserves selectable text."
+      },
+      {
+        "title": "How to Structure an ATS Resume",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "How to Write ATS-Friendly Skills and Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "ATS Resume Formatting Tips",
+        "content": "For a fresher, a simple single-column or otherwise clearly ordered layout can work well. Put contact information at the top, followed by a concise summary or objective, skills, projects or experience, education, and relevant certifications. Keep spacing and typography consistent and make sure the exported file preserves selectable text."
+      },
+      {
+        "title": "Common ATS Resume Mistakes",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -50,12 +68,30 @@
       "resume format for it jobs"
     ],
     "sections": [
-      "Best Cognizant Resume Format for Freshers",
-      "What to Include in a Cognizant Resume",
-      "Technical Skills for Cognizant Roles",
-      "Projects and Internships to Highlight",
-      "How to Tailor Your Resume to a Cognizant Job Description",
-      "Cognizant Resume Formatting Tips"
+      {
+        "title": "Best Cognizant Resume Format for Freshers",
+        "content": "For a Cognizant application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Cognizant role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "What to Include in a Cognizant Resume",
+        "content": "For a Cognizant application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Cognizant role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical Skills for Cognizant Roles",
+        "content": "List skills that are directly relevant to Cognizant and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects and Internships to Highlight",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor Your Resume to a Cognizant Job Description",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Cognizant Resume Formatting Tips",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -89,12 +125,30 @@
       "ats friendly resume"
     ],
     "sections": [
-      "Best Fresher Resume Format in India",
-      "Resume Structure for College Freshers",
-      "Resume for B.Tech and Engineering Freshers",
-      "Resume for BCA, MCA and IT Freshers",
-      "Resume for MBA and Commerce Freshers",
-      "Projects, Internships and Certifications"
+      {
+        "title": "Best Fresher Resume Format in India",
+        "content": "This section explains best fresher resume format in india in the context of “Fresher Resume Format India 2026 | Free ATS Templates.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume Structure for College Freshers",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Resume for B.Tech and Engineering Freshers",
+        "content": "B.Tech and engineering freshers should connect their technical specialization to the target role through skills, projects, internships, coursework, and measurable achievements. Avoid listing every technology studied; prioritize the tools and concepts that are relevant to the vacancy and provide evidence through practical work."
+      },
+      {
+        "title": "Resume for BCA, MCA and IT Freshers",
+        "content": "BCA candidates should emphasize programming, web or software development, databases, tools, and practical projects that match the target role. Place strong technical evidence where recruiters can find it quickly, and explain projects in terms of your contribution and results. Relevant internships, freelance work, certifications, and academic achievements can strengthen the profile."
+      },
+      {
+        "title": "Resume for MBA and Commerce Freshers",
+        "content": "Non-IT freshers should tailor the resume around the target function rather than trying to imitate a technical resume. For commerce, management, sales, HR, support, and operations roles, emphasize relevant communication, analysis, Excel, customer service, accounting, coordination, or business skills and support them with internships, projects, case studies, or achievements."
+      },
+      {
+        "title": "Projects, Internships and Certifications",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -128,12 +182,30 @@
       "resume format for it jobs"
     ],
     "sections": [
-      "Best LTIMindtree Resume Format",
-      "Sections to Include in an LTIMindtree Resume",
-      "Technical Skills for IT and Analyst Roles",
-      "Projects and Internship Examples",
-      "How to Match the LTIMindtree Job Description",
-      "LTIMindtree ATS-Friendly Formatting Tips"
+      {
+        "title": "Best LTIMindtree Resume Format",
+        "content": "For a LTIMindtree application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the LTIMindtree role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Sections to Include in an LTIMindtree Resume",
+        "content": "For a LTIMindtree application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the LTIMindtree role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical Skills for IT and Analyst Roles",
+        "content": "List skills that are directly relevant to LTIMindtree and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects and Internship Examples",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Match the LTIMindtree Job Description",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "LTIMindtree ATS-Friendly Formatting Tips",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -167,12 +239,30 @@
       "resume format for it jobs"
     ],
     "sections": [
-      "What MNC Recruiters Look for in Fresher Resumes",
-      "Best ATS-Friendly MNC Resume Structure",
-      "Technical Skills and Soft Skills for MNC Jobs",
-      "Projects, Internships and Certifications",
-      "How to Tailor a Resume for Different MNC Roles",
-      "MNC Resume Formatting Checklist"
+      {
+        "title": "What MNC Recruiters Look for in Fresher Resumes",
+        "content": "For an MNC application, use a professional structure that makes role-relevant skills and evidence easy to verify. Highlight the technologies, business skills, projects, internships, certifications, and achievements that match the specific vacancy. Requirements vary by employer and role, so use the current job description as the source of truth for eligibility and keywords."
+      },
+      {
+        "title": "Best ATS-Friendly MNC Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Technical Skills and Soft Skills for MNC Jobs",
+        "content": "List skills that are directly relevant to MNC and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects, Internships and Certifications",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor a Resume for Different MNC Roles",
+        "content": "For an MNC application, use a professional structure that makes role-relevant skills and evidence easy to verify. Highlight the technologies, business skills, projects, internships, certifications, and achievements that match the specific vacancy. Requirements vary by employer and role, so use the current job description as the source of truth for eligibility and keywords."
+      },
+      {
+        "title": "MNC Resume Formatting Checklist",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -206,12 +296,30 @@
       "ats resume pricing"
     ],
     "sections": [
-      "Resume Banane Ka Average Cost in India",
-      "Free vs Paid Resume Builders",
-      "Resume Templates and Download Charges",
-      "Pay-Per-Download vs Subscription Pricing",
-      "Professional Resume Writing vs DIY Builders",
-      "Why Choose NextCV?"
+      {
+        "title": "Resume Banane Ka Average Cost in India",
+        "content": "Resume creation can range from free self-service tools to paid templates, subscriptions, and professional writing services. The total cost depends on whether you need only formatting, repeated downloads, AI writing assistance, customization, or human editing. When comparing options, check the full cost of the features you actually need, including download or renewal charges."
+      },
+      {
+        "title": "Free vs Paid Resume Builders",
+        "content": "Free and paid resume builders can differ in templates, editing tools, AI assistance, exports, support, and access to premium designs. Compare the actual features included in the current plan rather than judging a service only by its headline price. Check whether PDF downloads, editable templates, watermarks, and repeated exports are included before paying."
+      },
+      {
+        "title": "Resume Templates and Download Charges",
+        "content": "Resume creation can range from free self-service tools to paid templates, subscriptions, and professional writing services. The total cost depends on whether you need only formatting, repeated downloads, AI writing assistance, customization, or human editing. When comparing options, check the full cost of the features you actually need, including download or renewal charges."
+      },
+      {
+        "title": "Pay-Per-Download vs Subscription Pricing",
+        "content": "Resume creation can range from free self-service tools to paid templates, subscriptions, and professional writing services. The total cost depends on whether you need only formatting, repeated downloads, AI writing assistance, customization, or human editing. When comparing options, check the full cost of the features you actually need, including download or renewal charges."
+      },
+      {
+        "title": "Professional Resume Writing vs DIY Builders",
+        "content": "Professional resume writers can provide human editing, role-specific positioning, rewriting, and feedback, while DIY builders mainly provide templates and editing tools. A professional service may be useful when you need substantial rewriting or career-specific guidance; a builder may be sufficient when your content is already accurate and you mainly need structure, formatting, and export."
+      },
+      {
+        "title": "Why Choose NextCV?",
+        "content": "This section explains why choose nextcv? in the context of “Resume Banane Me Kitna Paisa Lagta Hai? India Pricing Guide.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -245,12 +353,30 @@
       "resume format india"
     ],
     "sections": [
-      "What Is a Resume?",
-      "What Is a CV?",
-      "Resume vs CV: Key Differences",
-      "Which Document Should Freshers Use in India?",
-      "Resume and CV Examples",
-      "When to Use a CV for Academic or Research Roles"
+      {
+        "title": "What Is a Resume?",
+        "content": "A resume is a concise, job-focused document that summarizes the qualifications most relevant to a particular opportunity. It normally includes contact details, a summary or objective, skills, experience or projects, education, and selected certifications or achievements. The goal is to make relevant evidence easy to find rather than to document every activity from your career."
+      },
+      {
+        "title": "What Is a CV?",
+        "content": "A CV can refer to a more detailed record of academic or professional experience, particularly for research, teaching, academic, or specialized applications. It may include education, research, publications, conferences, teaching, awards, and other detailed achievements. In India, employers sometimes use 'CV' and 'resume' interchangeably, so always follow the specific application instructions."
+      },
+      {
+        "title": "Resume vs CV: Key Differences",
+        "content": "In everyday Indian recruitment, the terms CV and resume are often used interchangeably, but the documents can differ in scope. A resume is usually concise and tailored to a particular job, while an academic CV can contain more detailed education, research, publications, teaching, and achievements. Use the document type requested by the employer or institution and tailor the content to the purpose."
+      },
+      {
+        "title": "Which Document Should Freshers Use in India?",
+        "content": "This section explains which document should freshers use in india? in the context of “CV vs Resume in India: Difference, Meaning and Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume and CV Examples",
+        "content": "Examples are most useful when they show how a resume section can be written for a real target role. Use the examples as patterns rather than copying them verbatim. Replace generic claims with your own technologies, responsibilities, achievements, and results, and make sure every statement can be supported if a recruiter asks about it."
+      },
+      {
+        "title": "When to Use a CV for Academic or Research Roles",
+        "content": "This section explains when to use a cv for academic or research roles in the context of “CV vs Resume in India: Difference, Meaning and Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -284,12 +410,30 @@
       "resume format for it jobs"
     ],
     "sections": [
-      "Best Tech Mahindra Resume Format",
-      "Important Sections for Tech Mahindra Applications",
-      "Technical Skills to Highlight",
-      "Projects and Internship Examples",
-      "How to Tailor Your Resume to the Role",
-      "Tech Mahindra Resume Mistakes to Avoid"
+      {
+        "title": "Best Tech Mahindra Resume Format",
+        "content": "For a Tech Mahindra application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Tech Mahindra role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Important Sections for Tech Mahindra Applications",
+        "content": "For a Tech Mahindra application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Tech Mahindra role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical Skills to Highlight",
+        "content": "List skills that are directly relevant to Tech Mahindra and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects and Internship Examples",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor Your Resume to the Role",
+        "content": "For a Tech Mahindra application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Tech Mahindra role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Tech Mahindra Resume Mistakes to Avoid",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -323,13 +467,34 @@
       "tcs resume template"
     ],
     "sections": [
-      "Best TCS Resume Format for Freshers",
-      "TCS NQT Resume Structure",
-      "What to Include in a TCS Fresher Resume",
-      "Resume Format for BCA and B.Tech Candidates",
-      "Technical Skills and Programming Languages",
-      "Project Examples for TCS Applications",
-      "TCS Resume Mistakes to Avoid"
+      {
+        "title": "Best TCS Resume Format for Freshers",
+        "content": "For a TCS application, keep the resume concise and align it with the exact role or hiring process. Present education, programming or technical skills, projects, internships, certifications, and verified achievements clearly. For TCS NQT or other recruitment routes, follow the current eligibility and application instructions rather than assuming that one resume format fits every opening."
+      },
+      {
+        "title": "TCS NQT Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "What to Include in a TCS Fresher Resume",
+        "content": "For a TCS application, keep the resume concise and align it with the exact role or hiring process. Present education, programming or technical skills, projects, internships, certifications, and verified achievements clearly. For TCS NQT or other recruitment routes, follow the current eligibility and application instructions rather than assuming that one resume format fits every opening."
+      },
+      {
+        "title": "Resume Format for BCA and B.Tech Candidates",
+        "content": "BCA candidates should emphasize programming, web or software development, databases, tools, and practical projects that match the target role. Place strong technical evidence where recruiters can find it quickly, and explain projects in terms of your contribution and results. Relevant internships, freelance work, certifications, and academic achievements can strengthen the profile."
+      },
+      {
+        "title": "Technical Skills and Programming Languages",
+        "content": "List skills that are directly relevant to TCS and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Project Examples for TCS Applications",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "TCS Resume Mistakes to Avoid",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -363,13 +528,34 @@
       "resume format for bca freshers"
     ],
     "sections": [
-      "Best Infosys Resume Format for Freshers",
-      "What to Include in an Infosys Fresher Resume",
-      "Infosys Resume for BCA and B.Tech Students",
-      "Technical Skills to Highlight",
-      "Projects, Internships and Certifications",
-      "How to Tailor a Resume to Infosys Roles",
-      "Common Infosys Resume Mistakes"
+      {
+        "title": "Best Infosys Resume Format for Freshers",
+        "content": "For a Infosys application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Infosys role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "What to Include in an Infosys Fresher Resume",
+        "content": "For a Infosys application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Infosys role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Infosys Resume for BCA and B.Tech Students",
+        "content": "BCA candidates should emphasize programming, web or software development, databases, tools, and practical projects that match the target role. Place strong technical evidence where recruiters can find it quickly, and explain projects in terms of your contribution and results. Relevant internships, freelance work, certifications, and academic achievements can strengthen the profile."
+      },
+      {
+        "title": "Technical Skills to Highlight",
+        "content": "List skills that are directly relevant to Infosys and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects, Internships and Certifications",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor a Resume to Infosys Roles",
+        "content": "For a Infosys application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Infosys role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Common Infosys Resume Mistakes",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -403,12 +589,30 @@
       "resume format for it jobs"
     ],
     "sections": [
-      "Best Wipro Resume Format for Freshers",
-      "Key Sections for a Wipro Resume",
-      "Technical and Professional Skills",
-      "Projects and Internship Experience",
-      "How to Tailor Your Resume for Wipro Roles",
-      "Wipro Resume Mistakes to Avoid"
+      {
+        "title": "Best Wipro Resume Format for Freshers",
+        "content": "For a Wipro application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Wipro role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Key Sections for a Wipro Resume",
+        "content": "For a Wipro application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Wipro role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical and Professional Skills",
+        "content": "Choose a small set of professional skills that are relevant to the role, such as communication, teamwork, problem solving, ownership, or time management. Avoid generic skill lists with no evidence. Whenever possible, demonstrate a soft skill through a project result, internship responsibility, customer interaction, leadership activity, or measurable achievement."
+      },
+      {
+        "title": "Projects and Internship Experience",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor Your Resume for Wipro Roles",
+        "content": "For a Wipro application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Wipro role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Wipro Resume Mistakes to Avoid",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -430,7 +634,6 @@
       }
     ]
   },
-
   {
     "slug": "accenture-resume-format-for-freshers",
     "title": "Accenture Resume Format for Freshers 2026 | ATS Approved",
@@ -443,12 +646,30 @@
       "ats resume for accenture"
     ],
     "sections": [
-      "Best Accenture Resume Format for Freshers",
-      "Essential Sections for an Accenture Resume",
-      "Technical Skills and Role-Specific Keywords",
-      "Projects and Internship Experience",
-      "How to Tailor Your Resume to an Accenture Job Description",
-      "Accenture Resume Formatting Checklist"
+      {
+        "title": "Best Accenture Resume Format for Freshers",
+        "content": "For a Accenture application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Accenture role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Essential Sections for an Accenture Resume",
+        "content": "For a Accenture application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Accenture role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical Skills and Role-Specific Keywords",
+        "content": "List skills that are directly relevant to Accenture and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects and Internship Experience",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor Your Resume to an Accenture Job Description",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Accenture Resume Formatting Checklist",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -482,12 +703,30 @@
       "ats resume formatting checklist"
     ],
     "sections": [
-      "ATS Resume Structure Checklist",
-      "Formatting and Layout Checklist",
-      "Keywords and Job Description Checklist",
-      "Education, Skills and Experience Checklist",
-      "File Type and Export Checklist",
-      "Final Resume Quality Check Before Applying"
+      {
+        "title": "ATS Resume Structure Checklist",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Formatting and Layout Checklist",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Keywords and Job Description Checklist",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Education, Skills and Experience Checklist",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "File Type and Export Checklist",
+        "content": "Follow the employer's submission instructions first. If no format is specified, use a commonly accepted document format supported by the application system. For PDF, confirm that text remains selectable and that the layout did not shift during export. Use a professional filename such as Name_Role_Resume.pdf and check the final file before uploading."
+      },
+      {
+        "title": "Final Resume Quality Check Before Applying",
+        "content": "This section explains final resume quality check before applying in the context of “ATS Friendly Resume Checklist 2026 | NextCV.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -521,12 +760,30 @@
       "ats friendly resume"
     ],
     "sections": [
-      "What Does ATS-Friendly Resume Mean?",
-      "How Applicant Tracking Systems Read Resumes",
-      "ATS-Friendly Formatting Basics",
-      "Keywords and Resume Relevance",
-      "ATS Parsing Problems to Avoid",
-      "ATS-Friendly Resume Example Structure"
+      {
+        "title": "What Does ATS-Friendly Resume Mean?",
+        "content": "An ATS-friendly resume is a resume whose text, headings, dates, skills, and other important details can be read in a predictable order by applicant tracking software. Use standard section names, selectable text, readable fonts, consistent dates, and a simple layout. ATS compatibility does not guarantee an interview; the resume still needs relevant, truthful content that matches the job."
+      },
+      {
+        "title": "How Applicant Tracking Systems Read Resumes",
+        "content": "Applicant tracking systems typically extract information such as contact details, job titles, dates, education, skills, and keywords from submitted resumes. Parsing quality can be affected by complex columns, images containing text, unusual headings, or text placed in decorative elements. Keep important information as normal selectable text and review the exported file before applying."
+      },
+      {
+        "title": "ATS-Friendly Formatting Basics",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      },
+      {
+        "title": "Keywords and Resume Relevance",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "ATS Parsing Problems to Avoid",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      },
+      {
+        "title": "ATS-Friendly Resume Example Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -560,13 +817,34 @@
       "how to improve ats resume"
     ],
     "sections": [
-      "Use a Simple ATS-Friendly Layout",
-      "Choose Standard Resume Headings",
-      "Match Keywords to the Job Description",
-      "Write Better Skills and Project Sections",
-      "Keep Formatting Consistent",
-      "Check File Type and Text Readability",
-      "Common ATS Mistakes to Fix"
+      {
+        "title": "Use a Simple ATS-Friendly Layout",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Choose Standard Resume Headings",
+        "content": "This section explains choose standard resume headings in the context of “ATS Friendly Resume Tips 2026 | 10 Practical Fixes.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Match Keywords to the Job Description",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Write Better Skills and Project Sections",
+        "content": "This section explains write better skills and project sections in the context of “ATS Friendly Resume Tips 2026 | 10 Practical Fixes.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Keep Formatting Consistent",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Check File Type and Text Readability",
+        "content": "Follow the employer's submission instructions first. If no format is specified, use a commonly accepted document format supported by the application system. For PDF, confirm that text remains selectable and that the layout did not shift during export. Use a professional filename such as Name_Role_Resume.pdf and check the final file before uploading."
+      },
+      {
+        "title": "Common ATS Mistakes to Fix",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -600,12 +878,30 @@
       "resume ats optimization"
     ],
     "sections": [
-      "ATS Resume Structure Best Practices",
-      "Best Practices for Resume Keywords",
-      "Formatting and Typography Best Practices",
-      "Skills, Experience and Project Best Practices",
-      "Resume File and Export Best Practices",
-      "Final ATS Resume Review"
+      {
+        "title": "ATS Resume Structure Best Practices",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Best Practices for Resume Keywords",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Formatting and Typography Best Practices",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Skills, Experience and Project Best Practices",
+        "content": "Present experience in reverse-chronological order where practical, with the most recent relevant work first. For each role, include the organization, job title, dates, responsibilities, technologies where relevant, and measurable outcomes when available. Freelance, internship, and project work can be included when it is genuine and relevant."
+      },
+      {
+        "title": "Resume File and Export Best Practices",
+        "content": "Follow the employer's submission instructions first. If no format is specified, use a commonly accepted document format supported by the application system. For PDF, confirm that text remains selectable and that the layout did not shift during export. Use a professional filename such as Name_Role_Resume.pdf and check the final file before uploading."
+      },
+      {
+        "title": "Final ATS Resume Review",
+        "content": "This section explains final ats resume review in the context of “ATS Resume Best Practices 2026 | Get Past Resume Bots.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -639,12 +935,30 @@
       "resume optimization india"
     ],
     "sections": [
-      "What Is ATS Resume Optimization?",
-      "How to Find the Right Job-Specific Keywords",
-      "Resume Formatting and Parsing Optimization",
-      "Optimizing Skills and Experience Sections",
-      "Optimizing Projects for ATS Relevance",
-      "How to Create a Targeted ATS Resume"
+      {
+        "title": "What Is ATS Resume Optimization?",
+        "content": "This section explains what is ats resume optimization? in the context of “ATS Resume Optimization 2026 | Keywords & Formatting Guide.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "How to Find the Right Job-Specific Keywords",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Resume Formatting and Parsing Optimization",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Optimizing Skills and Experience Sections",
+        "content": "Present experience in reverse-chronological order where practical, with the most recent relevant work first. For each role, include the organization, job title, dates, responsibilities, technologies where relevant, and measurable outcomes when available. Freelance, internship, and project work can be included when it is genuine and relevant."
+      },
+      {
+        "title": "Optimizing Projects for ATS Relevance",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Create a Targeted ATS Resume",
+        "content": "This section explains how to create a targeted ats resume in the context of “ATS Resume Optimization 2026 | Keywords & Formatting Guide.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -678,12 +992,30 @@
       "best ai resume maker"
     ],
     "sections": [
-      "What Is an AI Resume Builder?",
-      "Key Features to Compare in AI Resume Builders",
-      "AI Resume Writing for Freshers",
-      "ATS-Friendly Templates and Formatting",
-      "Free vs Paid AI Resume Builders",
-      "How to Choose the Right AI Resume Builder"
+      {
+        "title": "What Is an AI Resume Builder?",
+        "content": "An AI resume builder can help draft summaries, project descriptions, bullet points, and other resume content from information you provide. The useful workflow is to provide accurate source information, review every generated statement, and edit it for the target role. AI-generated content should never invent experience, qualifications, metrics, or technologies."
+      },
+      {
+        "title": "Key Features to Compare in AI Resume Builders",
+        "content": "An AI resume builder can help draft summaries, project descriptions, bullet points, and other resume content from information you provide. The useful workflow is to provide accurate source information, review every generated statement, and edit it for the target role. AI-generated content should never invent experience, qualifications, metrics, or technologies."
+      },
+      {
+        "title": "AI Resume Writing for Freshers",
+        "content": "An AI resume builder can help draft summaries, project descriptions, bullet points, and other resume content from information you provide. The useful workflow is to provide accurate source information, review every generated statement, and edit it for the target role. AI-generated content should never invent experience, qualifications, metrics, or technologies."
+      },
+      {
+        "title": "ATS-Friendly Templates and Formatting",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      },
+      {
+        "title": "Free vs Paid AI Resume Builders",
+        "content": "Free and paid resume builders can differ in templates, editing tools, AI assistance, exports, support, and access to premium designs. Compare the actual features included in the current plan rather than judging a service only by its headline price. Check whether PDF downloads, editable templates, watermarks, and repeated exports are included before paying."
+      },
+      {
+        "title": "How to Choose the Right AI Resume Builder",
+        "content": "An AI resume builder can help draft summaries, project descriptions, bullet points, and other resume content from information you provide. The useful workflow is to provide accurate source information, review every generated statement, and edit it for the target role. AI-generated content should never invent experience, qualifications, metrics, or technologies."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -717,12 +1049,30 @@
       "online resume builder india"
     ],
     "sections": [
-      "What Makes a Resume Builder Useful?",
-      "Best Features for Indian Freshers",
-      "ATS-Friendly Resume Templates",
-      "AI Resume Writing and Content Assistance",
-      "Free vs Paid Resume Builder Features",
-      "How to Choose a Resume Builder"
+      {
+        "title": "What Makes a Resume Builder Useful?",
+        "content": "Useful resume-builder features include editable templates, clear section structure, ATS-friendly formatting, PDF export, easy content editing, role-specific guidance, and transparent pricing. For AI features, also check whether you can review and edit generated text. The most important feature is not the number of templates but whether the final resume accurately represents you and works for the application process."
+      },
+      {
+        "title": "Best Features for Indian Freshers",
+        "content": "This section explains best features for indian freshers in the context of “Best Resume Builder in India 2026 | Free for Freshers.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "ATS-Friendly Resume Templates",
+        "content": "This section explains ats-friendly resume templates in the context of “Best Resume Builder in India 2026 | Free for Freshers.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "AI Resume Writing and Content Assistance",
+        "content": "An AI resume builder can help draft summaries, project descriptions, bullet points, and other resume content from information you provide. The useful workflow is to provide accurate source information, review every generated statement, and edit it for the target role. AI-generated content should never invent experience, qualifications, metrics, or technologies."
+      },
+      {
+        "title": "Free vs Paid Resume Builder Features",
+        "content": "Free and paid resume builders can differ in templates, editing tools, AI assistance, exports, support, and access to premium designs. Compare the actual features included in the current plan rather than judging a service only by its headline price. Check whether PDF downloads, editable templates, watermarks, and repeated exports are included before paying."
+      },
+      {
+        "title": "How to Choose a Resume Builder",
+        "content": "Choose a resume builder based on your actual needs: the type of job, required format, editing flexibility, export options, template quality, AI assistance, and total cost. Check the final exported document before applying. A builder should make accurate content easier to present; it should not encourage exaggerated claims or irrelevant keywords."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -756,12 +1106,30 @@
       "ats resume format freshers"
     ],
     "sections": [
-      "What Makes a Good Fresher Resume Format?",
-      "Recommended Resume Section Order",
-      "Education, Skills and Projects",
-      "Internships, Certifications and Achievements",
-      "ATS-Friendly Formatting for Freshers",
-      "One-Page Resume Layout Example"
+      {
+        "title": "What Makes a Good Fresher Resume Format?",
+        "content": "This section explains what makes a good fresher resume format? in the context of “Best Resume Format for Freshers in India 2026 | NextCV.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Recommended Resume Section Order",
+        "content": "This section explains recommended resume section order in the context of “Best Resume Format for Freshers in India 2026 | NextCV.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Education, Skills and Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Internships, Certifications and Achievements",
+        "content": "Include internships that are relevant to the target role and describe what you actually worked on. Mention the organization, role, dates, technologies or responsibilities, and meaningful outcomes. If you have no formal internship, do not invent one; relevant freelance work, open-source contributions, academic projects, or practical training can be presented in the appropriate section when genuine."
+      },
+      {
+        "title": "ATS-Friendly Formatting for Freshers",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      },
+      {
+        "title": "One-Page Resume Layout Example",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -795,12 +1163,30 @@
       "ats resume for it jobs"
     ],
     "sections": [
-      "IT Resume Structure for Freshers and Experienced Candidates",
-      "Technical Skills Section for IT Roles",
-      "How to Present Development Projects",
-      "Experience and Internship Formatting",
-      "Education and Certification Sections",
-      "ATS-Friendly IT Resume Formatting"
+      {
+        "title": "IT Resume Structure for Freshers and Experienced Candidates",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Technical Skills Section for IT Roles",
+        "content": "List skills that are directly relevant to Indian jobs and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "How to Present Development Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Experience and Internship Formatting",
+        "content": "Include internships that are relevant to the target role and describe what you actually worked on. Mention the organization, role, dates, technologies or responsibilities, and meaningful outcomes. If you have no formal internship, do not invent one; relevant freelance work, open-source contributions, academic projects, or practical training can be presented in the appropriate section when genuine."
+      },
+      {
+        "title": "Education and Certification Sections",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "ATS-Friendly IT Resume Formatting",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -834,12 +1220,30 @@
       "career objective examples"
     ],
     "sections": [
-      "What Is a Career Objective?",
-      "How to Write a Fresher Career Objective",
-      "Career Objective Examples for IT Freshers",
-      "Career Objective Examples for BCA and B.Tech",
-      "Career Objective Examples for MBA and Commerce",
-      "Common Career Objective Mistakes"
+      {
+        "title": "What Is a Career Objective?",
+        "content": "A career objective is a short statement describing the role you are targeting and the relevant value or skills you bring. For a fresher, keep it specific to the target field rather than using a generic statement about seeking a challenging position. Mention a relevant skill area, career direction, and the type of opportunity you are pursuing."
+      },
+      {
+        "title": "How to Write a Fresher Career Objective",
+        "content": "A career objective is a short statement describing the role you are targeting and the relevant value or skills you bring. For a fresher, keep it specific to the target field rather than using a generic statement about seeking a challenging position. Mention a relevant skill area, career direction, and the type of opportunity you are pursuing."
+      },
+      {
+        "title": "Career Objective Examples for IT Freshers",
+        "content": "A career objective is a short statement describing the role you are targeting and the relevant value or skills you bring. For a fresher, keep it specific to the target field rather than using a generic statement about seeking a challenging position. Mention a relevant skill area, career direction, and the type of opportunity you are pursuing."
+      },
+      {
+        "title": "Career Objective Examples for BCA and B.Tech",
+        "content": "A career objective is a short statement describing the role you are targeting and the relevant value or skills you bring. For a fresher, keep it specific to the target field rather than using a generic statement about seeking a challenging position. Mention a relevant skill area, career direction, and the type of opportunity you are pursuing."
+      },
+      {
+        "title": "Career Objective Examples for MBA and Commerce",
+        "content": "A career objective is a short statement describing the role you are targeting and the relevant value or skills you bring. For a fresher, keep it specific to the target field rather than using a generic statement about seeking a challenging position. Mention a relevant skill area, career direction, and the type of opportunity you are pursuing."
+      },
+      {
+        "title": "Common Career Objective Mistakes",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -873,13 +1277,34 @@
       "ats formatting mistakes"
     ],
     "sections": [
-      "Using Complex Resume Layouts",
-      "Missing Important Job Description Keywords",
-      "Using Graphics, Icons or Images for Text",
-      "Unclear or Non-Standard Section Headings",
-      "Incorrect File Format or Unselectable Text",
-      "Inconsistent Dates and Formatting",
-      "How to Fix Common ATS Resume Problems"
+      {
+        "title": "Using Complex Resume Layouts",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Missing Important Job Description Keywords",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Using Graphics, Icons or Images for Text",
+        "content": "This section explains using graphics, icons or images for text in the context of “Common ATS Resume Mistakes | 7 Fixes for 2026.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Unclear or Non-Standard Section Headings",
+        "content": "This section explains unclear or non-standard section headings in the context of “Common ATS Resume Mistakes | 7 Fixes for 2026.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Incorrect File Format or Unselectable Text",
+        "content": "This section explains incorrect file format or unselectable text in the context of “Common ATS Resume Mistakes | 7 Fixes for 2026.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Inconsistent Dates and Formatting",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "How to Fix Common ATS Resume Problems",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -913,12 +1338,30 @@
       "resume format ai screening"
     ],
     "sections": [
-      "How AI and ATS Resume Screening Works",
-      "Best CV Structure for Machine Readability",
-      "Keywords for AI-Assisted Screening",
-      "Formatting Rules for Machine-Readable CVs",
-      "Projects, Skills and Experience for AI Screening",
-      "What to Avoid in an AI-Screened CV"
+      {
+        "title": "How AI and ATS Resume Screening Works",
+        "content": "AI-assisted screening and traditional ATS tools can help employers organize applications, extract resume information, and identify relevant qualifications. A machine-readable resume should still use clear headings, consistent dates, relevant terminology, and factual evidence of skills. Automated screening is only one part of many recruitment processes, so clarity for human reviewers matters too."
+      },
+      {
+        "title": "Best CV Structure for Machine Readability",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Keywords for AI-Assisted Screening",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Formatting Rules for Machine-Readable CVs",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "Projects, Skills and Experience for AI Screening",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "What to Avoid in an AI-Screened CV",
+        "content": "Common problems include overly complex layouts, missing role-specific keywords, unclear headings, inconsistent dates, excessive graphics, spelling errors, and unselectable text. Fix these by simplifying the structure, checking the job description, standardizing formatting, proofreading carefully, and reviewing the actual exported file rather than only the editable version."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -952,12 +1395,30 @@
       "resume builder free pdf"
     ],
     "sections": [
-      "Can You Create a Resume Without Paying?",
-      "Free Resume Builder Features to Look For",
-      "Free vs Paid Resume Templates",
-      "Free PDF Resume Download Options",
-      "ATS-Friendly Free Resume Builders",
-      "How to Choose a Free Resume Builder"
+      {
+        "title": "Can You Create a Resume Without Paying?",
+        "content": "Some resume builders let users create and edit resumes without an upfront payment, while downloads, premium templates, or advanced features may be paid. Before investing time in a platform, check its current export rules, watermark policy, template access, and whether you can download the finished resume in the format you need."
+      },
+      {
+        "title": "Free Resume Builder Features to Look For",
+        "content": "Some resume builders let users create and edit resumes without an upfront payment, while downloads, premium templates, or advanced features may be paid. Before investing time in a platform, check its current export rules, watermark policy, template access, and whether you can download the finished resume in the format you need."
+      },
+      {
+        "title": "Free vs Paid Resume Templates",
+        "content": "Free and paid resume builders can differ in templates, editing tools, AI assistance, exports, support, and access to premium designs. Compare the actual features included in the current plan rather than judging a service only by its headline price. Check whether PDF downloads, editable templates, watermarks, and repeated exports are included before paying."
+      },
+      {
+        "title": "Free PDF Resume Download Options",
+        "content": "Follow the employer's submission instructions first. If no format is specified, use a commonly accepted document format supported by the application system. For PDF, confirm that text remains selectable and that the layout did not shift during export. Use a professional filename such as Name_Role_Resume.pdf and check the final file before uploading."
+      },
+      {
+        "title": "ATS-Friendly Free Resume Builders",
+        "content": "Some resume builders let users create and edit resumes without an upfront payment, while downloads, premium templates, or advanced features may be paid. Before investing time in a platform, check its current export rules, watermark policy, template access, and whether you can download the finished resume in the format you need."
+      },
+      {
+        "title": "How to Choose a Free Resume Builder",
+        "content": "Choose a resume builder based on your actual needs: the type of job, required format, editing flexibility, export options, template quality, AI assistance, and total cost. Check the final exported document before applying. A builder should make accurate content easier to present; it should not encourage exaggerated claims or irrelevant keywords."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -991,12 +1452,30 @@
       "ats resume format fresher"
     ],
     "sections": [
-      "Fresher Resume Structure",
-      "Contact Details and Professional Summary",
-      "Skills, Projects and Internships",
-      "Education and Certifications",
-      "Achievements and Additional Sections",
-      "ATS-Friendly Formatting for a Fresher Resume"
+      {
+        "title": "Fresher Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Contact Details and Professional Summary",
+        "content": "This section explains contact details and professional summary in the context of “Fresher Resume Format 2026 | ATS Templates for India.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Skills, Projects and Internships",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Education and Certifications",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "Achievements and Additional Sections",
+        "content": "This section explains achievements and additional sections in the context of “Fresher Resume Format 2026 | ATS Templates for India.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "ATS-Friendly Formatting for a Fresher Resume",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1030,12 +1509,30 @@
       "ats resume hcl"
     ],
     "sections": [
-      "Best HCL Resume Format for Freshers",
-      "Important Sections for an HCL Resume",
-      "Technical Skills and Role-Specific Keywords",
-      "Projects, Internships and Certifications",
-      "How to Tailor Your Resume to HCL Roles",
-      "HCL Resume Formatting Tips"
+      {
+        "title": "Best HCL Resume Format for Freshers",
+        "content": "For a HCL application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the HCL role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Important Sections for an HCL Resume",
+        "content": "For a HCL application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the HCL role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "Technical Skills and Role-Specific Keywords",
+        "content": "List skills that are directly relevant to HCL and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects, Internships and Certifications",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "How to Tailor Your Resume to HCL Roles",
+        "content": "For a HCL application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the HCL role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "HCL Resume Formatting Tips",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      }
     ],
     "showTemplates": true,
     "faqs": [
@@ -1069,13 +1566,34 @@
       "how to create ats resume"
     ],
     "sections": [
-      "What Makes a Resume ATS-Friendly?",
-      "Choose the Right Resume Structure",
-      "Add Relevant Job Description Keywords",
-      "Optimize Skills, Experience and Projects",
-      "Use ATS-Friendly Fonts and Formatting",
-      "Choose the Correct File Format",
-      "Final ATS Resume Testing Checklist"
+      {
+        "title": "What Makes a Resume ATS-Friendly?",
+        "content": "This section explains what makes a resume ats-friendly? in the context of “How to Make Your Resume ATS Friendly in 2026 | NextCV.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Choose the Right Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Add Relevant Job Description Keywords",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Optimize Skills, Experience and Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Use ATS-Friendly Fonts and Formatting",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      },
+      {
+        "title": "Choose the Correct File Format",
+        "content": "This section explains choose the correct file format in the context of “How to Make Your Resume ATS Friendly in 2026 | NextCV.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Final ATS Resume Testing Checklist",
+        "content": "Use a final checklist before every application: verify contact details, target role, section headings, dates, keywords, project descriptions, education, links, spelling, and file format. Then compare the resume against the job description and remove information that is irrelevant or unsupported. A final text-selection check can also reveal export or parsing problems."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1109,12 +1627,30 @@
       "resume format for indian jobs"
     ],
     "sections": [
-      "Standard Indian Resume Structure",
-      "Resume Format for Indian Freshers",
-      "Resume Format for Experienced Candidates",
-      "Education, Skills and Experience Sections",
-      "Photo, Personal Details and Other Information",
-      "ATS-Friendly Indian Resume Formatting"
+      {
+        "title": "Standard Indian Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Resume Format for Indian Freshers",
+        "content": "This section explains resume format for indian freshers in the context of “Indian Resume Format 2026 | Professional Templates.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume Format for Experienced Candidates",
+        "content": "Present experience in reverse-chronological order where practical, with the most recent relevant work first. For each role, include the organization, job title, dates, responsibilities, technologies where relevant, and measurable outcomes when available. Freelance, internship, and project work can be included when it is genuine and relevant."
+      },
+      {
+        "title": "Education, Skills and Experience Sections",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "Photo, Personal Details and Other Information",
+        "content": "Include only personal information that is relevant to the application and requested by the employer. For most corporate roles, a professional photo is not necessary unless the application specifically asks for one. Avoid unnecessary sensitive or personal details that do not help establish your suitability for the role."
+      },
+      {
+        "title": "ATS-Friendly Indian Resume Formatting",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1148,12 +1684,30 @@
       "latest fresher resume format"
     ],
     "sections": [
-      "Latest Resume Format Trends for 2026",
-      "Modern ATS-Friendly Resume Structure",
-      "What to Include in a 2026 Resume",
-      "Skills, Projects and Achievements",
-      "One-Page Resume Trends for Freshers",
-      "Modern Design vs ATS Compatibility"
+      {
+        "title": "Latest Resume Format Trends for 2026",
+        "content": "Modern resumes generally emphasize concise, role-specific content, clear evidence of skills, measurable achievements where available, and compatibility with digital recruitment systems. A visually modern resume does not need complex graphics. Keep design secondary to readability, machine parsing, and the relevance of the information presented."
+      },
+      {
+        "title": "Modern ATS-Friendly Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "What to Include in a 2026 Resume",
+        "content": "This section explains what to include in a 2026 resume in the context of “Latest Resume Format 2026 | Trends, Examples & Templates.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Skills, Projects and Achievements",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "One-Page Resume Trends for Freshers",
+        "content": "One page is often practical for freshers and early-career candidates because it forces the resume to focus on relevant evidence. Do not remove important information simply to meet a page count, and do not add filler to use space. If you have substantial relevant experience, projects, publications, or achievements, additional length can be justified."
+      },
+      {
+        "title": "Modern Design vs ATS Compatibility",
+        "content": "Modern resumes generally emphasize concise, role-specific content, clear evidence of skills, measurable achievements where available, and compatibility with digital recruitment systems. A visually modern resume does not need complex graphics. Keep design secondary to readability, machine parsing, and the relevance of the information presented."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1187,12 +1741,30 @@
       "ba fresher resume"
     ],
     "sections": [
-      "Non-IT Fresher Resume Structure",
-      "Resume for BCom Freshers",
-      "Resume for BBA and Management Freshers",
-      "Resume for BA and General Degree Freshers",
-      "Skills for Sales, HR, Support and Operations Roles",
-      "Projects, Internships and Achievements"
+      {
+        "title": "Non-IT Fresher Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Resume for BCom Freshers",
+        "content": "Non-IT freshers should tailor the resume around the target function rather than trying to imitate a technical resume. For commerce, management, sales, HR, support, and operations roles, emphasize relevant communication, analysis, Excel, customer service, accounting, coordination, or business skills and support them with internships, projects, case studies, or achievements."
+      },
+      {
+        "title": "Resume for BBA and Management Freshers",
+        "content": "Non-IT freshers should tailor the resume around the target function rather than trying to imitate a technical resume. For commerce, management, sales, HR, support, and operations roles, emphasize relevant communication, analysis, Excel, customer service, accounting, coordination, or business skills and support them with internships, projects, case studies, or achievements."
+      },
+      {
+        "title": "Resume for BA and General Degree Freshers",
+        "content": "Non-IT freshers should tailor the resume around the target function rather than trying to imitate a technical resume. For commerce, management, sales, HR, support, and operations roles, emphasize relevant communication, analysis, Excel, customer service, accounting, coordination, or business skills and support them with internships, projects, case studies, or achievements."
+      },
+      {
+        "title": "Skills for Sales, HR, Support and Operations Roles",
+        "content": "List skills that are directly relevant to the target role and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects, Internships and Achievements",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1226,12 +1798,30 @@
       "resume writer charges india"
     ],
     "sections": [
-      "Resume Making Charges in India",
-      "Free Resume Creation Options",
-      "Paid Resume Builders and Templates",
-      "Subscription vs Pay-Per-Download Pricing",
-      "Professional Resume Writing Services",
-      "How to Choose Based on Budget and Features"
+      {
+        "title": "Resume Making Charges in India",
+        "content": "Resume creation can range from free self-service tools to paid templates, subscriptions, and professional writing services. The total cost depends on whether you need only formatting, repeated downloads, AI writing assistance, customization, or human editing. When comparing options, check the full cost of the features you actually need, including download or renewal charges."
+      },
+      {
+        "title": "Free Resume Creation Options",
+        "content": "This section explains free resume creation options in the context of “Resume Making Charges in India 2026: Price & Options.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Paid Resume Builders and Templates",
+        "content": "Free and paid resume builders can differ in templates, editing tools, AI assistance, exports, support, and access to premium designs. Compare the actual features included in the current plan rather than judging a service only by its headline price. Check whether PDF downloads, editable templates, watermarks, and repeated exports are included before paying."
+      },
+      {
+        "title": "Subscription vs Pay-Per-Download Pricing",
+        "content": "Resume creation can range from free self-service tools to paid templates, subscriptions, and professional writing services. The total cost depends on whether you need only formatting, repeated downloads, AI writing assistance, customization, or human editing. When comparing options, check the full cost of the features you actually need, including download or renewal charges."
+      },
+      {
+        "title": "Professional Resume Writing Services",
+        "content": "Professional resume writers can provide human editing, role-specific positioning, rewriting, and feedback, while DIY builders mainly provide templates and editing tools. A professional service may be useful when you need substantial rewriting or career-specific guidance; a builder may be sufficient when your content is already accurate and you mainly need structure, formatting, and export."
+      },
+      {
+        "title": "How to Choose Based on Budget and Features",
+        "content": "This section explains how to choose based on budget and features in the context of “Resume Making Charges in India 2026: Price & Options.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1265,12 +1855,30 @@
       "mnc job resume format"
     ],
     "sections": [
-      "What MNCs Expect in a Resume",
-      "MNC Resume Format for Freshers",
-      "Skills and Keywords for MNC Roles",
-      "Projects, Internships and Experience",
-      "Education and Certifications",
-      "How to Tailor Your Resume for Each MNC"
+      {
+        "title": "What MNCs Expect in a Resume",
+        "content": "For an MNC application, use a professional structure that makes role-relevant skills and evidence easy to verify. Highlight the technologies, business skills, projects, internships, certifications, and achievements that match the specific vacancy. Requirements vary by employer and role, so use the current job description as the source of truth for eligibility and keywords."
+      },
+      {
+        "title": "MNC Resume Format for Freshers",
+        "content": "For an MNC application, use a professional structure that makes role-relevant skills and evidence easy to verify. Highlight the technologies, business skills, projects, internships, certifications, and achievements that match the specific vacancy. Requirements vary by employer and role, so use the current job description as the source of truth for eligibility and keywords."
+      },
+      {
+        "title": "Skills and Keywords for MNC Roles",
+        "content": "List skills that are directly relevant to MNC and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects, Internships and Experience",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Education and Certifications",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "How to Tailor Your Resume for Each MNC",
+        "content": "For an MNC application, use a professional structure that makes role-relevant skills and evidence easy to verify. Highlight the technologies, business skills, projects, internships, certifications, and achievements that match the specific vacancy. Requirements vary by employer and role, so use the current job description as the source of truth for eligibility and keywords."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1304,12 +1912,30 @@
       "ats resume for bca"
     ],
     "sections": [
-      "Best BCA Fresher Resume Structure",
-      "Technical Skills for BCA Graduates",
-      "How to Present BCA Projects",
-      "Internships and Practical Experience",
-      "Education and Certifications",
-      "ATS-Friendly Formatting for BCA Resumes"
+      {
+        "title": "Best BCA Fresher Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Technical Skills for BCA Graduates",
+        "content": "List skills that are directly relevant to the target role and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "How to Present BCA Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Internships and Practical Experience",
+        "content": "Include internships that are relevant to the target role and describe what you actually worked on. Mention the organization, role, dates, technologies or responsibilities, and meaningful outcomes. If you have no formal internship, do not invent one; relevant freelance work, open-source contributions, academic projects, or practical training can be presented in the appropriate section when genuine."
+      },
+      {
+        "title": "Education and Certifications",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "ATS-Friendly Formatting for BCA Resumes",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1343,12 +1969,30 @@
       "ats resume for mca"
     ],
     "sections": [
-      "Best MCA Fresher Resume Structure",
-      "Technical Skills for MCA Graduates",
-      "Software and Academic Projects",
-      "Internships and Practical Experience",
-      "Education and Certifications",
-      "ATS-Friendly MCA Resume Formatting"
+      {
+        "title": "Best MCA Fresher Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Technical Skills for MCA Graduates",
+        "content": "List skills that are directly relevant to the target role and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Software and Academic Projects",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Internships and Practical Experience",
+        "content": "Include internships that are relevant to the target role and describe what you actually worked on. Mention the organization, role, dates, technologies or responsibilities, and meaningful outcomes. If you have no formal internship, do not invent one; relevant freelance work, open-source contributions, academic projects, or practical training can be presented in the appropriate section when genuine."
+      },
+      {
+        "title": "Education and Certifications",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "ATS-Friendly MCA Resume Formatting",
+        "content": "Use readable standard fonts, consistent heading styles, normal text spacing, and a clear visual hierarchy. Avoid placing critical information inside images, icons, charts, headers, footers, or decorative shapes. Before submitting, open the exported file, select and copy its text, and check that names, dates, headings, links, and bullet points appear in the expected order."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1382,12 +2026,30 @@
       "professional resume format india"
     ],
     "sections": [
-      "Standard Resume Format in India",
-      "Resume Format for Freshers",
-      "Resume Format for Experienced Professionals",
-      "Essential Resume Sections",
-      "Resume Formatting Rules",
-      "ATS-Friendly Indian Resume Example"
+      {
+        "title": "Standard Resume Format in India",
+        "content": "This section explains standard resume format in india in the context of “Best Resume Format in India 2026 | Free Templates & Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume Format for Freshers",
+        "content": "This section explains resume format for freshers in the context of “Best Resume Format in India 2026 | Free Templates & Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume Format for Experienced Professionals",
+        "content": "Present experience in reverse-chronological order where practical, with the most recent relevant work first. For each role, include the organization, job title, dates, responsibilities, technologies where relevant, and measurable outcomes when available. Freelance, internship, and project work can be included when it is genuine and relevant."
+      },
+      {
+        "title": "Essential Resume Sections",
+        "content": "A focused resume normally includes contact information, a summary or objective when useful, relevant skills, experience or projects, education, and selected certifications or achievements. Add sections only when they provide evidence relevant to the target role. Remove empty or generic sections that add length without useful information."
+      },
+      {
+        "title": "Resume Formatting Rules",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "ATS-Friendly Indian Resume Example",
+        "content": "This section explains ats-friendly indian resume example in the context of “Best Resume Format in India 2026 | Free Templates & Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1421,12 +2083,30 @@
       "resume or cv for jobs"
     ],
     "sections": [
-      "What Is a Resume?",
-      "What Is a CV?",
-      "Resume vs CV: Main Differences",
-      "Which One Should Indian Freshers Use?",
-      "Resume vs CV for Corporate Jobs",
-      "Resume vs CV for Academic Applications"
+      {
+        "title": "What Is a Resume?",
+        "content": "A resume is a concise, job-focused document that summarizes the qualifications most relevant to a particular opportunity. It normally includes contact details, a summary or objective, skills, experience or projects, education, and selected certifications or achievements. The goal is to make relevant evidence easy to find rather than to document every activity from your career."
+      },
+      {
+        "title": "What Is a CV?",
+        "content": "A CV can refer to a more detailed record of academic or professional experience, particularly for research, teaching, academic, or specialized applications. It may include education, research, publications, conferences, teaching, awards, and other detailed achievements. In India, employers sometimes use 'CV' and 'resume' interchangeably, so always follow the specific application instructions."
+      },
+      {
+        "title": "Resume vs CV: Main Differences",
+        "content": "In everyday Indian recruitment, the terms CV and resume are often used interchangeably, but the documents can differ in scope. A resume is usually concise and tailored to a particular job, while an academic CV can contain more detailed education, research, publications, teaching, and achievements. Use the document type requested by the employer or institution and tailor the content to the purpose."
+      },
+      {
+        "title": "Which One Should Indian Freshers Use?",
+        "content": "This section explains which one should indian freshers use? in the context of “Resume vs CV in India 2026 | Difference, Meaning & Examples.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      },
+      {
+        "title": "Resume vs CV for Corporate Jobs",
+        "content": "In everyday Indian recruitment, the terms CV and resume are often used interchangeably, but the documents can differ in scope. A resume is usually concise and tailored to a particular job, while an academic CV can contain more detailed education, research, publications, teaching, and achievements. Use the document type requested by the employer or institution and tailor the content to the purpose."
+      },
+      {
+        "title": "Resume vs CV for Academic Applications",
+        "content": "In everyday Indian recruitment, the terms CV and resume are often used interchangeably, but the documents can differ in scope. A resume is usually concise and tailored to a particular job, while an academic CV can contain more detailed education, research, publications, teaching, and achievements. Use the document type requested by the employer or institution and tailor the content to the purpose."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1460,12 +2140,30 @@
       "resume for tech mahindra"
     ],
     "sections": [
-      "Tech Mahindra Resume Structure",
-      "Skills for IT, Support and Analyst Roles",
-      "Projects and Internship Experience",
-      "Education and Certifications",
-      "How to Tailor the Resume to the Job",
-      "ATS-Friendly Tech Mahindra Resume Tips"
+      {
+        "title": "Tech Mahindra Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Skills for IT, Support and Analyst Roles",
+        "content": "List skills that are directly relevant to Tech Mahindra and that you can genuinely discuss in an interview. Group related technologies or abilities where useful, and prioritize the requirements that appear in the job description. Support important technical skills with a project, internship, freelance assignment, certification, or other concrete evidence rather than creating a long keyword-only list."
+      },
+      {
+        "title": "Projects and Internship Experience",
+        "content": "Projects are especially useful when professional experience is limited because they show how you applied your skills. For each relevant project, state the problem or purpose, technologies used, your specific contribution, and a concrete result when available. Keep descriptions concise and focus on decisions, features, scale, performance, or outcomes that are relevant to the job."
+      },
+      {
+        "title": "Education and Certifications",
+        "content": "List your degree or qualification, institution, location when useful, and completion year. Freshers can include relevant coursework, academic projects, or a strong academic achievement when it supports the target role. Keep education concise once you have substantial professional experience, and do not include unnecessary school-level details unless the application specifically asks for them."
+      },
+      {
+        "title": "How to Tailor the Resume to the Job",
+        "content": "For a Tech Mahindra application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Tech Mahindra role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      },
+      {
+        "title": "ATS-Friendly Tech Mahindra Resume Tips",
+        "content": "For a Tech Mahindra application, use a clean, ATS-readable resume and tailor it to the specific vacancy. Prioritize the skills, qualifications, projects, internships, and achievements that are explicitly relevant to the Tech Mahindra role you are targeting. Eligibility, hiring processes, and preferred skills can differ by job, so verify the current job description before applying."
+      }
     ],
     "showTemplates": false,
     "faqs": [
@@ -1499,12 +2197,30 @@
       "ats resume guide"
     ],
     "sections": [
-      "What Is an ATS-Friendly Resume?",
-      "How Applicant Tracking Systems Read Resumes",
-      "ATS-Friendly Resume Structure",
-      "Keywords and Job Matching",
-      "Formatting Elements to Avoid",
-      "How to Check ATS Compatibility"
+      {
+        "title": "What Is an ATS-Friendly Resume?",
+        "content": "An ATS-friendly resume is a resume whose text, headings, dates, skills, and other important details can be read in a predictable order by applicant tracking software. Use standard section names, selectable text, readable fonts, consistent dates, and a simple layout. ATS compatibility does not guarantee an interview; the resume still needs relevant, truthful content that matches the job."
+      },
+      {
+        "title": "How Applicant Tracking Systems Read Resumes",
+        "content": "Applicant tracking systems typically extract information such as contact details, job titles, dates, education, skills, and keywords from submitted resumes. Parsing quality can be affected by complex columns, images containing text, unusual headings, or text placed in decorative elements. Keep important information as normal selectable text and review the exported file before applying."
+      },
+      {
+        "title": "ATS-Friendly Resume Structure",
+        "content": "Organize the document in a logical order so the reader can move from your identity and target role to evidence of your skills. For freshers, a practical structure is contact details, summary or objective, technical/professional skills, projects or internships, education, certifications, and relevant achievements. Adjust the order when the target job clearly prioritizes another qualification."
+      },
+      {
+        "title": "Keywords and Job Matching",
+        "content": "Read the target job description and identify recurring skills, technologies, qualifications, responsibilities, and role-specific terminology. Use relevant terms naturally in the summary, skills, projects, and experience sections when they truthfully match your background. Do not copy the job description or add keywords for tools you have never used."
+      },
+      {
+        "title": "Formatting Elements to Avoid",
+        "content": "Keep formatting consistent throughout the resume: use the same date style, heading hierarchy, bullet style, spacing, and alignment. Use design elements only when they improve readability without hiding information from parsing software. The final document should look clean at normal zoom and remain easy to scan quickly."
+      },
+      {
+        "title": "How to Check ATS Compatibility",
+        "content": "This section explains how to check ats compatibility in the context of “What Is an ATS Friendly Resume? Complete Guide 2026.” Focus on practical guidance that a job seeker can apply immediately: identify the information the employer needs, present it clearly, keep claims accurate, and remove details that are not relevant to the target opportunity. Use the current job description and application instructions as the final reference for role-specific requirements."
+      }
     ],
     "showTemplates": false,
     "faqs": [
