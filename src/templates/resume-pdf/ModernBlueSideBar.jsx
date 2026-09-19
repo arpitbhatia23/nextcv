@@ -347,7 +347,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                       </>
                     )}
                   </View>
-                  {edu.description && (
+                  {/* {edu.description && (
                     <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.expBullets}>
@@ -355,7 +355,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                         </View>
                       ))}
                     </View>
-                  )}
+                  )} */}
                 </View>
               ))}
             </View>
@@ -499,9 +499,11 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
           )}
         </View>
       </View>
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

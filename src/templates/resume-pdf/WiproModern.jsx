@@ -161,7 +161,7 @@ const WiproModern = ({ data }) => {
                   <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
                   <Text style={{ fontSize: 9 }}>{edu.institution}</Text>
                   <Text style={{ fontSize: 8, color: "#666" }}>{formatDate(edu.endYear)}</Text>
-                  {edu.description && (
+                  {/* {edu.description && (
                     <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
@@ -170,7 +170,7 @@ const WiproModern = ({ data }) => {
                         </View>
                       ))}
                     </View>
-                  )}
+                  )} */}
                 </View>
               ))}
             </View>
@@ -259,8 +259,12 @@ const WiproModern = ({ data }) => {
             </View>
           )}
         </View>
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

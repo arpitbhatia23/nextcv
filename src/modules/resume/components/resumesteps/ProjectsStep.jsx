@@ -118,7 +118,7 @@ const ProjectsStep = () => {
           STEP 06 — PROJECTS
         </div>
         <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
-          Projects
+          Projects (optional)
         </h2>
         <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
           Highlight your best work

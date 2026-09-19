@@ -126,7 +126,7 @@ const EducationStep = () => {
           STEP 03 — EDUCATION
         </div>
         <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
-          Education
+          Education (optional)
         </h2>
         <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
           Add your academic background

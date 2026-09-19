@@ -166,7 +166,7 @@ const MicrosoftCorp = ({ data }) => {
                   <Text style={styles.eduDate}>
                     {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
-                  {edu.description && (
+                  {/* {edu.description && (
                     <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletPoint}>
@@ -175,7 +175,7 @@ const MicrosoftCorp = ({ data }) => {
                         </View>
                       ))}
                     </View>
-                  )}
+                  )} */}
                 </View>
               ))}
             </View>
@@ -270,8 +270,12 @@ const MicrosoftCorp = ({ data }) => {
             </View>
           )}
         </View>
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

@@ -203,7 +203,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
             TRUSTED BY
             <br />
             <span className="font-bold" style={{ color: "#1C2333" }}>
-              12,000+ EXPERTS
+              12,00+ EXPERTS
             </span>
           </div>
         </div>
