@@ -53,7 +53,7 @@ async function extractTextFromPDF(arrayBuffer) {
     try {
       return await extractTextFromPDFWithPdfJs(arrayBuffer);
     } catch (fallbackError) {
-      console.log(fallbackError);
+      console.log(fallbackError, "");
       const error = new Error(
         "This PDF could not be read. Please export it again as a text-based PDF and try again."
       );

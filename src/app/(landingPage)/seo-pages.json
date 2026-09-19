@@ -430,69 +430,7 @@
       }
     ]
   },
-  {
-    "slug": "ats-resume-checker",
-    "pageType": "checker",
-    "title": "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
-    "description": "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
-    "h1": "ATS-Friendly Resume Checker for Freshers in India 2026",
-    "keywords": [
-      "free ats resume checker for freshers in india",
-      "check if my resume is ats friendly free",
-      "ats score checker online india",
-      "resume ats score free tool 2026",
-      "free ats resume scan for freshers",
-      "ats resume checker for campus placements",
-      "nextcv ats checker free",
-      "best free ats checker in india",
-      "ats checker vs resume builder",
-      "free alternative to paid ats resume scan",
-      "is ats resume checker accurate",
-      "ats resume for tcs freshers",
-      "ats score required for infosys",
-      "how to make resume ats friendly for wipro",
-      "ats resume format for hcl technologies",
-      "ats check for accenture india",
-      "ats resume checker for btech cse",
-      "ats resume score for mba freshers",
-      "ats friendly resume for mechanical engineer fresher",
-      "campus placement resume ats check",
-      "tcs resume builder",
-      "accenture resume builder",
-      "ltimindtree resume format",
-      "ats resume india",
-      "best ats friendly resume builder india",
-      "resume builder for campus placement",
-      "check if my resume is ats friendly"
-    ],
-    "sections": [
-      "How the NextCV ATS Resume Checker Works",
-      "What an ATS Resume Checker Looks For",
-      "Resume Formatting and Parsing Checks",
-      "Keyword and Job Description Matching",
-      "Common Reasons an ATS Score Drops",
-      "How to Improve Your Resume Before Applying"
-    ],
-    "showTemplates": false,
-    "faqs": [
-      {
-        "q": "What does an ATS resume checker check?",
-        "a": "An ATS checker may examine factors such as formatting, headings, keywords, sections, readability, contact information, and how well the resume matches a target role."
-      },
-      {
-        "q": "Is an ATS resume score accurate?",
-        "a": "An ATS score is an estimate based on the rules and checks used by the specific tool. Different systems can evaluate the same resume differently."
-      },
-      {
-        "q": "What is a good ATS score?",
-        "a": "There is no universal ATS score threshold because different tools and employers use different systems and evaluation criteria."
-      },
-      {
-        "q": "Can an ATS checker guarantee an interview?",
-        "a": "No. ATS checking can help identify formatting and relevance issues, but hiring decisions also depend on qualifications, experience, competition, recruiter review, and the specific employer."
-      }
-    ]
-  },
+
   {
     "slug": "accenture-resume-format-for-freshers",
     "title": "Accenture Resume Format for Freshers 2026 | ATS Approved",

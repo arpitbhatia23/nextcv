@@ -1,5 +1,4 @@
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import seoPages from "../seo-pages.json";
