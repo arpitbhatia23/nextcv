@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FileText,
   User,
@@ -12,6 +12,7 @@ import {
   Award,
   CheckCircle,
 } from "lucide-react";
+import useResumeStore from "@/store/useResumeStore";
 
 const stepsConfig = [
   { key: "template", label: "Template", icon: FileText },
@@ -46,6 +47,19 @@ const WHITE = "#FFFFFF";
 export default function StepNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const formData = useResumeStore(state => state.formData);
+  const selectedTemplate = useResumeStore(state => state.selectedTemplate);
+  const [saveStatus, setSaveStatus] = useState("saved");
+
+  useEffect(() => {
+    const savingTimer = setTimeout(() => setSaveStatus("saving"), 0);
+    const savedTimer = setTimeout(() => setSaveStatus("saved"), 350);
+
+    return () => {
+      clearTimeout(savingTimer);
+      clearTimeout(savedTimer);
+    };
+  }, [formData, selectedTemplate]);
 
   // 🔍 Find current step index
   const currentStep = useMemo(() => {
@@ -57,7 +71,7 @@ export default function StepNav() {
   }, [currentStep]);
 
   const handleNavigation = index => {
-    if (stepsConfig[index].key == "template") {
+    if (stepsConfig[index].key === "template") {
       router.push("/dashboard/builder/");
     } else if (index <= currentStep) {
       router.push(`/dashboard/builder/${stepsConfig[index].key}`);
@@ -77,8 +91,16 @@ export default function StepNav() {
             Resume Builder
           </h2>
 
-          <div className="font-mono text-[10px] tracking-widest" style={{ color: MUTED }}>
-            STEP {currentStep + 1} OF {stepsConfig.length}
+          <div className="flex items-center gap-4">
+            <div
+              className="font-mono text-[10px] tracking-widest"
+              style={{ color: saveStatus === "saving" ? MUTED : "#3F7A5C" }}
+            >
+              {saveStatus === "saving" ? "SAVING LOCALLY..." : "SAVED LOCALLY"}
+            </div>
+            <div className="font-mono text-[10px] tracking-widest" style={{ color: MUTED }}>
+              STEP {currentStep + 1} OF {stepsConfig.length}
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, use } from "react";
+import { useState, useEffect, use } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import { Label } from "@/shared/components/ui/label";
@@ -180,6 +180,7 @@ const Page = ({ params }) => {
   const [originalData, setOriginalData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [saveStatus, setSaveStatus] = useState("saved");
 
   const fetchResumeById = async () => {
     setLoading(true);
@@ -187,6 +188,7 @@ const Page = ({ params }) => {
       const res = await axios.get(`/api/resume/getResumeById/${id}`);
       setEditdata(res.data.data);
       setOriginalData(res.data.data);
+      setSaveStatus("saved");
     } catch (error) {
       console.error(error?.message || "Failed to fetch resume");
     } finally {
@@ -229,30 +231,45 @@ const Page = ({ params }) => {
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async ({ silent = false } = {}) => {
     if (!originalData) return;
     setSaving(true);
+    setSaveStatus("saving");
     try {
       const changedFields = getChangedFields(originalData, editdata);
       if (Object.keys(changedFields).length === 0) {
-        toast.info("No changes to save.");
+        setSaveStatus("saved");
+        if (!silent) toast.info("No changes to save.");
         setSaving(false);
         return;
       }
       await axios.patch(`/api/resume/update/${id}`, changedFields);
-      toast.success("Resume saved successfully!");
+      setSaveStatus("saved");
+      if (!silent) toast.success("Resume saved successfully!");
       setOriginalData(editdata); // update originalData to new state
     } catch (error) {
-      toast.error(error.message || "Error saving resume. Please try again.");
+      setSaveStatus("error");
+      if (!silent) toast.error(error.message || "Error saving resume. Please try again.");
     } finally {
       setSaving(false);
     }
   };
 
-  const hasUnsavedChanges = useMemo(() => {
-    if (!originalData) return false;
-    return Object.keys(getChangedFields(originalData, editdata)).length > 0;
-  }, [originalData, editdata]);
+  useEffect(() => {
+    if (!originalData) return;
+
+    const changedFields = getChangedFields(originalData, editdata);
+    if (Object.keys(changedFields).length === 0) {
+      setSaveStatus("saved");
+      return;
+    }
+
+    setSaveStatus("unsaved");
+    const timer = setTimeout(() => handleSave({ silent: true }), 1200);
+
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editdata, originalData]);
 
   if (loading) {
     return (
@@ -295,11 +312,24 @@ const Page = ({ params }) => {
               style={{ color: RUST }}
             >
               DRAFT ON FILE
-              {hasUnsavedChanges && (
-                <span className="inline-flex items-center gap-1" style={{ color: "#B08900" }}>
-                  · UNSAVED CHANGES
-                </span>
-              )}
+              <span
+                className="inline-flex items-center gap-1"
+                style={{
+                  color:
+                    saveStatus === "error"
+                      ? RUST
+                      : saveStatus === "saving"
+                        ? MUTED
+                        : saveStatus === "unsaved"
+                          ? "#B08900"
+                          : "#3F7A5C",
+                }}
+              >
+                · {saveStatus === "saving" && "SAVING..."}
+                {saveStatus === "unsaved" && "UNSAVED CHANGES"}
+                {saveStatus === "error" && "SAVE FAILED"}
+                {saveStatus === "saved" && "SAVED"}
+              </span>
             </div>
             <h1
               className="font-display text-3xl font-medium"

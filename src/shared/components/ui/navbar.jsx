@@ -41,7 +41,7 @@ export default function Nav() {
       <div className="flex items-center justify-between max-w-7xl mx-auto px-6 lg:px-8">
         {/* Logo */}
         <div className="text-2xl font-bold flex items-center">
-          <Logo2 color="#0f172a" size={80} />
+          <Logo2 />
         </div>
 
         {/* Desktop Menu */}

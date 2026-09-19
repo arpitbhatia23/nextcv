@@ -175,7 +175,12 @@ pages = [
   }
 ]
 
+with open(os.path.join(base_dir, "seo-pages.json"), encoding="utf-8") as f:
+    dynamic_seo_slugs = {page["slug"] for page in json.load(f)}
+
 for page in pages:
+  if page["path"] in dynamic_seo_slugs:
+    continue
     page_dir = os.path.join(base_dir, page["path"])
     os.makedirs(page_dir, exist_ok=True)
     

@@ -29,6 +29,7 @@ export async function handler(req) {
     validateWebhookSignature(rawBody, signature, webhookSecret);
   } catch (error) {
     console.log(error);
+    throw new apiError(400, "webhook signature validation failed");
   }
 
   // Parse body AFTER signature verification
