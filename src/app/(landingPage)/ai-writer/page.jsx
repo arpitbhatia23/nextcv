@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { ArrowRight, Sparkles, Wand2, RefreshCcw } from "lucide-react";
+import { ArrowRight, Sparkles, Wand2, CheckCircle2, Bot, Zap, ShieldCheck, FileText, Cpu, HelpCircle } from "lucide-react";
+import AIPlayground from "./AIPlayground";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Writer for Freshers | NextCV",
+  title: "AI Resume Writer for Freshers in India | NextCV",
   description:
     "Use NextCV's AI resume writer to create professional summaries, achievement bullets, skills, and project descriptions for Indian job applications.",
   path: "/ai-writer",
@@ -18,229 +19,221 @@ export const metadata = createSeoMetadata({
 
 export default function AIWriterPage() {
   return (
-    <main className="bg-slate-50 text-slate-900 font-sans">
-      {/* Hero Section */}
-      <section className="relative px-6 py-24 lg:px-8 bg-white overflow-hidden border-b border-slate-100">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-          <div className="absolute top-20 right-10 md:right-32 w-72 h-72 bg-purple-200 rounded-full blur-[100px] opacity-30 animate-pulse"></div>
-          <div className="absolute bottom-10 left-10 md:left-32 w-72 h-72 bg-indigo-200 rounded-full blur-[100px] opacity-30"></div>
-        </div>
+    <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
+      {/* Background Ambient Glows */}
+      <div className="pointer-events-none absolute inset-0 -z-0">
+        <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+        <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+      </div>
 
-        <div className="relative mx-auto max-w-3xl text-center z-10">
-          <div className="inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-purple-600 ring-1 ring-inset ring-purple-100 bg-purple-50 mb-6">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Powered by Gemini AI
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+            <Sparkles className="w-4 h-4 text-indigo-600" />
+            Powered by Gemini AI 2.5 Flash
           </div>
-          <h1 className="text-lg sm:text-xl sm: lg: font-bold tracking-tight -900 sm: mb-6">
-            Free AI Resume Writer and
-            <br />{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-purple-600">
-              Description Generator
+
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
+            AI Resume Writer &{" "}
+            <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+              Bullet Generator
             </span>
           </h1>
-          <p className="text-sm leading-8 text-slate-600 mb-10">
-            Stop staring at a blank cursor. Let our intelligent AI write professional summaries and
-            impactful bullet points for you in seconds.
+
+          <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
+            Eliminate writer's block instantly. NextCV's intelligent AI crafts high-impact summaries, quantified work achievements, and ATS skill keywords tailored to Indian job roles.
           </p>
-          <div className="flex items-center justify-center gap-x-6">
+
+          <div className="pt-2 flex flex-wrap justify-center gap-4">
             <Link
               href="/"
-              className="rounded-lg bg-slate-900 px-8 py-4 text-sm font-semibold text-white shadow-lg hover:bg-slate-800 hover:scale-105 transition-all flex items-center"
+              className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
             >
-              Try AI Writer Now <ArrowRight className="ml-2 w-4 h-4" />
+              Start Writing With AI <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/templates"
+              className="px-8 py-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-all"
+            >
+              Browse Resume Templates
             </Link>
           </div>
         </div>
+
+        {/* Live Interactive AI Playground */}
+        <div className="mt-16 max-w-5xl mx-auto">
+          <AIPlayground />
+        </div>
       </section>
 
-      {/* Demo / How it works */}
-      <section className="py-24 px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 mb-6">How It Works</h2>
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
-                  <span className="font-bold text-indigo-600">1</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm">Enter Your Job Title</h3>
-                  <p className="text-slate-600 text-sm">
-                    Simply tell the AI what role you want to apply for (e.g., "Software Engineer").
-                  </p>
-                </div>
+      {/* How It Works */}
+      <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative border-t border-slate-100">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div className="inline-flex items-center gap-2 text-indigo-600 text-sm font-semibold">
+            <Cpu className="w-4 h-4 text-indigo-600" /> Three Simple Steps
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">How The AI Writer Works</h2>
+          <p className="text-slate-600 text-sm sm:text-base">
+            From zero to an ATS-optimized resume in under 3 minutes.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            {
+              step: "01",
+              title: "Enter Your Job Title",
+              desc: "Provide your target role (e.g., Software Engineer, Data Analyst, Product Manager) and key tools you use.",
+            },
+            {
+              step: "02",
+              title: "AI Generates Bullet Points",
+              desc: "Gemini AI analyzes top MNC job descriptions to draft quantified achievements with strong action verbs.",
+            },
+            {
+              step: "03",
+              title: "One-Click Resume Insert",
+              desc: "Review suggestions, customize metric numbers, and insert directly into your ATS template.",
+            },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="bg-white border border-slate-200 p-8 rounded-3xl relative overflow-hidden group hover:border-indigo-300 transition-all shadow-sm"
+            >
+              <div className="text-4xl font-extrabold text-indigo-100 group-hover:text-indigo-200 transition-colors mb-4 font-mono">
+                {item.step}
               </div>
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center shrink-0">
-                  <span className="font-bold text-purple-600">2</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm">Detailed Suggestions</h3>
-                  <p className="text-slate-600 text-sm">
-                    Our AI analyzes thousands of successful resumes to generate relevant skills and
-                    achievements.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center shrink-0">
-                  <span className="font-bold text-pink-600">3</span>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-lg">One-Click Add</h3>
-                  <p className="text-slate-600">
-                    Review the suggestions and add them to your resume with a single click. Edit as
-                    needed.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Feature Highlights Grid */}
+      <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+        <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">Why Use AI Resume Writing?</h2>
+            <p className="text-slate-600 text-sm sm:text-base">
+              Supercharge your job application response rate with intelligent keyword matching.
+            </p>
           </div>
 
-          {/* Visual Representation of AI Generation */}
-          <div className="relative">
-            <div className="absolute -inset-1 bg-linear-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-20"></div>
-            <div className="relative bg-white rounded-2xl border border-slate-200 shadow-xl p-8">
-              <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                <div className="w-8 h-8 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                  <Sparkles className="w-5 h-5 text-white" />
-                </div>
-                <div className="font-semibold text-slate-900">NextCV AI Assistant</div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                <Wand2 className="w-5 h-5" />
               </div>
+              <h3 className="text-base font-bold text-slate-900">Action Verb Enhancement</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Replaces passive statements like "helped with coding" with high-impact phrases like "Spearheaded microservice development, reducing latency by 35%."
+              </p>
+            </div>
 
-              <div className="space-y-4">
-                <div className="bg-slate-50 p-4 rounded-lg border border-slate-100 animate-pulse">
-                  <div className="h-4 bg-slate-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-slate-200 rounded w-1/2"></div>
-                </div>
-                <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-100 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-2">
-                    <Wand2 className="w-4 h-4 text-indigo-400" />
-                  </div>
-                  <p className="text-sm text-indigo-900 mb-2 font-medium">Suggestion:</p>
-                  <p className="text-sm text-slate-700">
-                    "Developed scalable REST APIs using Node.js and Express, reducing server
-                    response time by 40%."
-                  </p>
-                </div>
-                <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
-                  <p className="text-sm text-indigo-900 mb-2 font-medium">Suggestion:</p>
-                  <p className="text-sm text-slate-700">
-                    "Collaborated with cross-functional teams to deploy microservices architecture
-                    on AWS."
-                  </p>
-                </div>
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                <ShieldCheck className="w-5 h-5" />
               </div>
+              <h3 className="text-base font-bold text-slate-900">ATS Keyword Optimization</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Automatically includes high-ranking recruiter keywords specific to Indian tech & corporate giants like TCS, Infosys, Wipro, and Accenture.
+              </p>
+            </div>
 
-              <button className="w-full mt-6 bg-slate-900 text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                <RefreshCcw className="w-4 h-4" /> Generate More
-              </button>
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Zero Grammar Errors</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Ensures flawless spelling, professional tone, active voice, and consistent tense throughout your entire resume document.
+              </p>
+            </div>
+
+            <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-3 shadow-xs">
+              <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-100 flex items-center justify-center text-pink-600">
+                <FileText className="w-5 h-5" />
+              </div>
+              <h3 className="text-base font-bold text-slate-900">Contextual Customization</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                You maintain total control. The AI offers smart suggestions, while you tailor metric figures and specific project names to your background.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SEO Content */}
-      <section className="py-20 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate prose-indigo">
-        <h2>Why Use an AI Resume Writer in India?</h2>
-        <p>
-          The Indian job market is competitive, with recruiters at MNCs like TCS and Wipro receiving
-          thousands of applications daily. An AI resume builder helps you navigate these challenges.
-          Writer's block is real, and staring at a blank screen wondering how to phrase "I answered
-          calls" into a professional achievement can be paralyzing. An{" "}
-          <strong>AI Resume Writer</strong> solves this by acting as your personal career coach.
-        </p>
+      {/* SEO Text Section */}
+      <section className="py-16 px-6 max-w-4xl mx-auto text-slate-700 space-y-6 z-10 relative">
+        <div className="space-y-3">
+          <h2 className="text-2xl font-bold text-[#071644]">Why AI Resume Writers Are Essential for Freshers in India</h2>
+          <p className="text-sm sm:text-base leading-relaxed text-slate-600">
+            The Indian job market is immensely competitive. Recruiters receive hundreds of resumes for single openings at MNCs and startups. An AI resume builder acts as your automated career coach, transforming basic project descriptions into compelling achievement bullets that capture HR attention.
+          </p>
+        </div>
 
-        <h3>Professional Summaries in Seconds</h3>
-        <p>
-          The summary section is the first thing recruiters read. It needs to be punchy, relevant,
-          and keyword-rich. Instead of spending hours crafting the perfect 3 sentences, let NextCV
-          AI analyze your job title and generate a compelling professional summary that highlights
-          your years of experience and key strengths.
-        </p>
+        <div className="space-y-3">
+          <h3 className="text-lg font-bold text-slate-900">Overcoming Resume Writer's Block</h3>
+          <p className="text-sm sm:text-base leading-relaxed text-slate-600">
+            Many students struggle to express their technical skills in formal English. Instead of spending hours pondering how to frame a final-year project, NextCV AI provides instant suggestions tailored to your degree and tech stack.
+          </p>
+        </div>
+      </section>
 
-        <h3>Optimizing for Keywords</h3>
-        <p>
-          Applicant Tracking Systems look for specific keywords in your resume. If you are applying
-          for a "Project Manager" role, your resume needs words like "Agile," "Budget Management,"
-          and "Stakeholder Communication." Our AI is trained on thousands of job descriptions to
-          understand exactly what keywords correspond to your target role, ensuring you don't miss
-          out on these critical terms.
-        </p>
+      {/* FAQ Section */}
+      <section className="py-20 px-6 max-w-5xl mx-auto z-10 relative border-t border-slate-100">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#071644] flex items-center justify-center gap-2">
+            <HelpCircle className="w-6 h-6 text-indigo-600" /> Frequently Asked Questions
+          </h2>
+          <p className="text-slate-600 text-sm">Everything you need to know about NextCV's AI Writer.</p>
+        </div>
 
-        <h3>Improving Grammar and Tone</h3>
-        <p>
-          Even small grammatical errors can lead to rejection. AI helps maintain a consistent,
-          professional tone throughout your document. It ensures you use strong action verbs (like
-          "Spearheaded," "Orchestrated," "Delivered") instead of passive language, making your
-          contributions sound more impactful.
-        </p>
+        <div className="grid md:grid-cols-2 gap-6">
+          {[
+            {
+              q: "What does the AI Writer generate?",
+              a: "It generates professional summaries, work experience bullet points, key technical skills, and project descriptions optimized for your target job title.",
+            },
+            {
+              q: "Is the AI output unique?",
+              a: "Yes! Content is generated dynamically based on your role and tech choices. You can easily edit and add your exact metric numbers.",
+            },
+            {
+              q: "Does this cost extra on NextCV?",
+              a: "No! Access to our AI Writer features is included in our simple ₹399 one-time payment with no subscription trap.",
+            },
+            {
+              q: "Is using AI on a resume allowed?",
+              a: "Absolutely. Recruiters encourage clear, professional language. AI is a tool to help express your genuine experiences effectively.",
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-2">
+              <h4 className="font-bold text-slate-900 text-base">{item.q}</h4>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        <h3>Is AI Cheating?</h3>
-        <p>
-          Absolutely not. AI is a tool to help you articulate <em>your</em> actual experiences
-          better. You still control the content. You select the suggestions that match your history
-          and edit them to reflect the truth. It simply does the heavy lifting of phrasing and
-          formatting, allowing you to focus on the substance of your career. Build your{" "}
-          <Link href="/" className="text-indigo-600 hover:underline">
-            resume builder
-          </Link>{" "}
-          today, explore{" "}
-          <Link href="/templates" className="text-indigo-600 hover:underline">
-            templates
-          </Link>
-          , or check out our{" "}
-          <Link href="/examples" className="text-indigo-600 hover:underline">
-            examples
-          </Link>
-          .
-        </p>
-
-        <h3>Examples of What the Tool Generates</h3>
-        <h4>Professional Summaries</h4>
-        <p>
-          "Dedicated software engineer with 2+ years of experience in full-stack development,
-          specializing in React and Node.js. Proven ability to deliver scalable solutions and
-          optimize database performance."
-        </p>
-
-        <h4>Experience Bullets</h4>
-        <p>
-          Instead of "Made APIs," get: "Designed and implemented RESTful APIs using Express,
-          improving data retrieval efficiency by 30%."
-        </p>
-
-        <h4>Project Descriptions</h4>
-        <p>
-          "Built a responsive e-commerce application using Next.js and MongoDB, featuring a secure
-          checkout process and real-time inventory tracking."
-        </p>
-
-        <h2>Frequently Asked Questions</h2>
-        <div className="space-y-4 not-prose mb-8">
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-            <h4 className="font-bold text-slate-900">What exactly does the AI generate?</h4>
-            <p className="text-sm text-slate-600">
-              The tool creates optimized professional summaries, bullet points for work experience,
-              project descriptions, and relevant skills based on your job title.
-            </p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-            <h4 className="font-bold text-slate-900">
-              Does this guarantee I will get an interview?
-            </h4>
-            <p className="text-sm text-slate-600">
-              No tool can guarantee interviews. However, using our AI writer ensures your resume is
-              professionally phrased, ATS-friendly, and clearly highlights your achievements, which
-              significantly improves your chances.
-            </p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-200">
-            <h4 className="font-bold text-slate-900">Is the AI content unique?</h4>
-            <p className="text-sm text-slate-600">
-              Yes, the AI generates context-specific suggestions tailored to the job role you input.
-              You can always edit and personalize the output to match your exact experience.
-            </p>
+      {/* Final CTA Banner */}
+      <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+        <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
+          <h2 className="text-2xl sm:text-4xl font-extrabold">
+            Write Your ATS Resume With AI Today
+          </h2>
+          <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+            Build a high-impact, professional resume in under 5 minutes for just ₹399.
+          </p>
+          <div>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+            >
+              Try AI Writer Now <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

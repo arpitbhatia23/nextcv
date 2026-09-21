@@ -4,13 +4,13 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import seoPages from "../seo-pages.json";
 
 const relatedGuides = [
-  ["/templates", "Explore Templates"],
-  ["/ats-resume-checker", "ATS Resume Checker"],
-  ["/tcs-resume-format-for-freshers", "TCS Resume Format"],
+  ["/templates", "Explore Resume Templates (₹49 - ₹399)"],
+  ["/ats-resume-checker", "Free ATS Resume Checker"],
+  ["/tcs-resume-format-for-freshers", "TCS Resume Format Guide"],
   ["/infosys-resume-format-for-freshers", "Infosys Resume Format"],
   ["/wipro-resume-format-for-freshers", "Wipro Resume Format"],
-  ["/ats-friendly-resume-format-india", "ATS Resume Format Guide"],
-  ["/fresher-resume-format-india", "Fresher Resume Format"],
+  ["/ats-friendly-resume-format-india", "ATS Resume Format India"],
+  ["/fresher-resume-format-india", "Fresher Resume Guide"],
 ];
 
 const getPage = slug => seoPages.find(page => page.slug === slug);
@@ -40,10 +40,11 @@ export default async function SeoPage({ params }) {
   const { slug } = await params;
   const page = getPage(slug);
   if (!page) notFound();
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: page.faqs.map(faq => ({
+    mainEntity: (page.faqs || []).map(faq => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: {
@@ -73,7 +74,7 @@ export default async function SeoPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] text-[#1C2333]">
+    <div className="relative min-h-screen bg-white text-[#071644] selection:bg-indigo-100 selection:text-indigo-700">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -83,112 +84,137 @@ export default async function SeoPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-        .seo-display { font-family: 'Fraunces', Georgia, serif; }
-        .seo-body { font-family: 'IBM Plex Mono', monospace; }
-      `}</style>
+      {/* Hero Background glow */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-120 bg-linear-to-b from-[#eef2ff]/80 via-[#f5f7ff]/40 to-transparent" />
 
-      <header className="relative overflow-hidden border-b border-[#E4E2DC] bg-[#1C2333] text-white">
-        <div className="absolute -right-24 -top-32 h-80 w-80 rounded-full border border-[#B3382C]/30" />
-        <div className="absolute right-8 top-12 h-36 w-36 rounded-full border border-[#B3382C]/20" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:px-12 ">
-          <div className="mb-12 flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#B3382C] pt-30">
-            <span>NextCV / Career Field Guide</span>
-            <span>{String(page.sections.length || 1).padStart(2, "0")} sections</span>
+      {/* Hero Header */}
+      <header className="relative  pb-10 sm:pt-16 sm:pb-14 border-b border-slate-100 ">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
+          {/* Breadcrumbs & Badge */}
+          <div className="mb-6 flex flex-wrap items-center gap-3 text-xs font-semibold">
+            <Link
+              href="/"
+              className="text-[#365184] hover:text-indigo-600 transition-colors flex items-center gap-1.5"
+            >
+              <span>Home</span>
+            </Link>
+            <span className="text-slate-300">/</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f2f3ff] px-3 py-1 text-[#3730d8] border border-[#e4e7ff]">
+              Career Field Guide
+            </span>
+            <span className="ml-auto hidden sm:inline-block text-[#365184]">
+              {String(page.sections?.length || 0)} Core Sections
+            </span>
           </div>
+
           <div className="max-w-4xl">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-[#B7B5AC]">
-              Practical resume intelligence · 2026 edition
-            </p>
-            <h1 className="seo-display max-w-4xl text-4xl leading-[1.06] text-white sm:text-6xl lg:text-7xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#071644] leading-tight sm:leading-tight">
               {page.h1}
             </h1>
-            <p className="seo-body mt-7 max-w-2xl text-base leading-7 text-[#D6D8D4] sm:text-lg">
+            <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#365184] max-w-3xl">
               {page.description}
             </p>
           </div>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+
+          {/* Quick Stats & Action bar */}
+          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6 border-t border-slate-200/60">
             <Link
-              href="/"
-              className="seo-body inline-flex items-center justify-center bg-[#B3382C] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#922D25]"
+              href="/templates"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg"
             >
-              Build your resume <span className="ml-3 text-lg leading-none">→</span>
+              Build Your Resume Now
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
             </Link>
-            <span className="seo-body text-xs text-[#B7B5AC]">
-              Free to start · ATS-ready formats
-            </span>
+
+            <div className="flex items-center gap-4 text-xs font-medium text-[#365184]">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                Pay-Per-Resume (₹49 - ₹399)
+              </span>
+              <span>•</span>
+              <span>ATS Score 95+ Tested</span>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="seo-body mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 sm:py-12 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-12">
+      {/* Main Content Layout */}
+      <main className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8">
+        {/* Main Article Body */}
         <article className="min-w-0">
-          <div className="mb-8 flex items-center justify-between border-b border-[#E4E2DC] pb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#6B7280]">
-            <span className="text-[#B3382C]">Read the guide</span>
-            <span>{page.faqs.length ? `${page.faqs.length} FAQs` : "Quick reference"}</span>
+          <div className="mb-8 flex items-center justify-between border-b border-slate-200 pb-4">
+            <h2 className="text-lg font-bold text-[#071644]">Step-by-Step Guide</h2>
+            <span className="text-xs font-medium text-[#365184] bg-slate-100 px-2.5 py-1 rounded-full">
+              {page.faqs?.length ? `${page.faqs.length} FAQs Included` : "Detailed Walkthrough"}
+            </span>
           </div>
 
-          <div className="space-y-4">
-            {page.sections.length > 0 ? (
+          {/* Sections List */}
+          <div className="space-y-6">
+            {page.sections && page.sections.length > 0 ? (
               page.sections.map((section, index) => (
                 <section
-                  key={section.title}
-                  className="group border border-[#E4E2DC] bg-white p-5 transition-colors hover:border-[#B3382C] sm:p-7"
+                  key={section.title || index}
+                  className="group rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-200 hover:border-indigo-300 hover:shadow-md"
                 >
-                  <div className="flex gap-5">
-                    <span className="seo-display shrink-0 text-3xl text-[#B3382C]">
+                  <div className="flex items-start gap-4 sm:gap-6">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 font-extrabold text-base border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                       {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h2 className="seo-display text-2xl leading-tight text-[#1C2333] sm:text-3xl">
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#071644] leading-tight">
                         {section.title}
-                      </h2>
-                      <p className="mt-4 max-w-2xl text-sm leading-7 text-[#6B7280]">
-                       {section.content}
+                      </h3>
+                      <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#365184]">
+                        {section.content}
                       </p>
                     </div>
                   </div>
                 </section>
               ))
             ) : (
-              <section className="border border-[#E4E2DC] bg-white p-6 sm:p-8">
-                <p className="text-sm leading-7 text-[#6B7280]">
+              <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+                <p className="text-sm sm:text-base leading-relaxed text-[#365184]">
                   Use this guide to shape a clear, relevant, ATS-readable resume for your next
-                  application.
+                  application. NextCV provides battle-tested templates ranging from ₹49 to ₹399 with
+                  no recurring monthly subscriptions.
                 </p>
               </section>
             )}
           </div>
 
-          {/* {page.showTemplates && (
-            <section className="mt-12 border-y border-[#E4E2DC] py-10">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-[#B3382C]">
-                Next step
-              </p>
-              <h2 className="seo-display mb-6 text-3xl text-[#1C2333]">
-                Explore ATS-ready templates
-              </h2>
-              <Templates />
-            </section>
-          )} */}
+          {/* FAQ Section */}
+          {page.faqs && page.faqs.length > 0 && (
+            <section className="mt-14 pt-10 border-t border-slate-200">
+              <div className="mb-6">
+                <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
+                  Got Questions?
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071644] mt-1">
+                  Frequently Asked Questions
+                </h2>
+              </div>
 
-          {page.faqs.length > 0 && (
-            <section className="mt-12">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-[#B3382C]">
-                Common questions
-              </p>
-              <h2 className="seo-display mb-6 text-3xl text-[#1C2333]">Before you apply</h2>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {page.faqs.map(faq => (
-                  <details key={faq.q} className="group border border-[#E4E2DC] bg-white p-5">
-                    <summary className="cursor-pointer list-none pr-5 text-sm font-bold leading-6 text-[#1C2333]">
-                      {faq.q}
-                      <span className="float-right text-[#B3382C] transition-transform group-open:rotate-45">
+              <div className="space-y-4">
+                {page.faqs.map((faq, idx) => (
+                  <details
+                    key={faq.q || idx}
+                    className="group rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 transition-all hover:border-indigo-200"
+                  >
+                    <summary className="cursor-pointer list-none text-base font-bold text-[#071644] flex items-center justify-between gap-4">
+                      <span>{faq.q}</span>
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 font-medium text-lg transition-transform group-open:rotate-45 group-open:bg-indigo-100 group-open:text-indigo-600">
                         +
                       </span>
                     </summary>
-                    <p className="mt-4 border-t border-[#E4E2DC] pt-4 text-sm leading-6 text-[#6B7280]">
+                    <p className="mt-4 border-t border-slate-100 pt-4 text-sm sm:text-base leading-relaxed text-[#365184]">
                       {faq.a}
                     </p>
                   </details>
@@ -196,46 +222,79 @@ export default async function SeoPage({ params }) {
               </div>
             </section>
           )}
+
+          {/* Bottom Call to Action Card */}
+          <div className="mt-14 rounded-3xl bg-linear-to-br from-[#071644] via-[#0d2259] to-[#152e75] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
+                ATS Optimization Ready
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+                Turn This Guide Into a Winning Resume
+              </h3>
+              <p className="mt-3 text-sm sm:text-base text-indigo-100/90 leading-relaxed">
+                Choose from our wide collection of professional templates starting at just ₹49 to
+                ₹399. Instant PDF download with 100% ATS score compatibility.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/templates"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 transition-colors"
+                >
+                  Browse Resume Templates
+                </Link>
+                <Link
+                  href="/ats-resume-checker"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
+                >
+                  Check Existing ATS Score
+                </Link>
+              </div>
+            </div>
+          </div>
         </article>
 
-        <aside className="lg:pt-14">
-          <div className="sticky top-24 border border-[#E4E2DC] bg-white p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#B3382C]">
-              Keep exploring
-            </p>
-            <h2 className="seo-display mt-3 text-2xl text-[#1C2333]">Related guides</h2>
-            <nav className="mt-5 space-y-1" aria-label="Related guides">
+        {/* Sidebar */}
+        <aside className="space-y-6">
+          {/* Related Guides Card */}
+          <div className="sticky top-24 rounded-3xl border border-slate-200 bg-slate-50/80 p-6 backdrop-blur-xs">
+            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              Resources & Tools
+            </div>
+            <h3 className="text-xl font-bold text-[#071644] mb-4">Related Guides</h3>
+            <nav className="space-y-2" aria-label="Related guides">
               {relatedGuides.map(([href, label]) => (
                 <Link
                   key={href}
                   href={href}
-                  className="flex items-center justify-between border-b border-[#E4E2DC] py-3 text-sm font-semibold text-[#6B7280] transition-colors hover:text-[#B3382C]"
+                  className="group flex items-center justify-between rounded-xl bg-white border border-slate-200/80 px-4 py-3 text-sm font-semibold text-[#071644] transition-all hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-600"
                 >
-                  {label}
-                  <span aria-hidden="true">↗</span>
+                  <span className="line-clamp-1">{label}</span>
+                  <span className="text-slate-400 group-hover:text-indigo-600 transition-colors">
+                    ↗
+                  </span>
                 </Link>
               ))}
             </nav>
+
+            <div className="mt-6 pt-6 border-t border-slate-200 text-center">
+              <p className="text-xs font-medium text-[#365184]">
+                Pay per resume template. No subscription lock-in.
+              </p>
+              <p className="mt-1 text-xs font-bold text-indigo-600">₹49 to ₹399 One-Time Payment</p>
+            </div>
           </div>
         </aside>
       </main>
-
-      <footer className="border-t border-[#E4E2DC] bg-white">
-        <div className="seo-body mx-auto flex max-w-7xl flex-col gap-5 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
-          <div>
-            <p className="seo-display text-2xl text-[#1C2333]">Ready to make it official?</p>
-            <p className="mt-1 text-sm text-[#6B7280]">
-              Turn the advice into an ATS-friendly resume.
-            </p>
-          </div>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center bg-[#1C2333] px-6 py-3 text-sm font-bold text-white hover:bg-[#B3382C]"
-          >
-            Start building <span className="ml-3">→</span>
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 }

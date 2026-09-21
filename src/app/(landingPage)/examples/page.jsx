@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, Sparkles, Target, Zap } from "lucide-react";
+import ExamplesGallery from "./ExamplesGallery";
 
 export const metadata = createSeoMetadata({
   title: "Resume Examples for Freshers in India 2026 | NextCV",
   description:
-    "Explore professional resume examples for Indian job seekers. Find examples for freshers, experienced roles, and specific job positions.",
+    "Explore professional ATS resume examples for Indian job seekers. Find recruiter-approved resume samples for freshers, developers, data analysts, and MNC roles.",
   path: "/examples",
   keywords: [
     "resume examples",
@@ -32,6 +33,7 @@ export default function ExamplesPage() {
       url: "https://www.nextcv.in",
     },
   };
+
   return (
     <>
       <script
@@ -40,168 +42,131 @@ export default function ExamplesPage() {
           __html: JSON.stringify(jsonLdSchema),
         }}
       />
-      <main className="bg-slate-50 text-slate-900 font-sans">
+      <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
+        {/* Background Ambient Glows */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+        </div>
+
         {/* Hero Section */}
-        <section className="relative px-6 py-20 lg:px-8 bg-white border-b border-slate-100">
-          <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-lg sm:text-xl  font-bold tracking-tight  sm: mb-6">
+        <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+              <BookOpen className="w-4 h-4 text-indigo-600" />
+              Recruiter-Approved Resume Samples 2026
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
               Professional Resume Examples for{" "}
-              <span className="text-indigo-600">Indian Job Seekers</span>
+              <span className="block bg-linear-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+                Indian Job Seekers
+              </span>
             </h1>
-            <p className="text-sm leading-8 text-slate-600 mb-10">
-              Stuck on what to write? Browse our library of ATS-optimized resume examples tailored
-              for the Indian job market. Whether you are a fresher or experienced, select an example
-              that matches your role. See our{" "}
-              <Link href="/templates" className="text-indigo-600 hover:underline">
-                templates
-              </Link>{" "}
-              or{" "}
-              <Link href="/pricing" className="text-indigo-600 hover:underline">
-                pricing
-              </Link>
-              .
+
+            <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
+              Unsure what to write? Explore our interactive library of ATS-optimized resume examples
+              tailored for Indian IT MNCs, startups, and campus placements.
             </p>
-            <div className="flex items-center justify-center gap-x-6">
+
+            <div className="pt-2 flex flex-wrap justify-center gap-4">
               <Link
                 href="/"
-                className="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition-all flex items-center"
+                className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
               >
-                Create Your Resume <ArrowRight className="ml-2 w-4 h-4" />
+                Create Your Custom Resume <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
+
+          {/* Interactive Examples Gallery Component */}
+          <div className="mt-16 max-w-7xl mx-auto">
+            <ExamplesGallery />
+          </div>
         </section>
 
-        {/* Categories Grid
-        <section className="py-20 px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {categories.map(cat => (
-              <div
-                key={cat.id}
-                className="bg-white rounded-xl p-8 border border-slate-200 hover:border-indigo-100 hover:shadow-lg transition-all"
-              >
-                <div
-                  className={`w-12 h-12 rounded-lg ${cat.color} flex items-center justify-center mb-6`}
-                >
-                  <cat.icon className="w-6 h-6" />
+        {/* Pro Tips Section */}
+        <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
+                How To Use These Resume Examples
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base">
+                Follow these three essential strategies to transform template inspiration into job
+                interview invites.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                  <Target className="w-5 h-5" />
                 </div>
-                <h2 className="text-lg font-bold text-slate-900 mb-4">{cat.name}</h2>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {cat.roles.map(role => (
-                    <li key={role}>
-                      <Link
-                        href={`/dashboard/builder`}
-                        className="flex items-center text-slate-600 hover:text-indigo-600 group transition-colors p-2 rounded-md hover:bg-slate-50"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-indigo-500 mr-2 transition-colors"></span>
-                        {role}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="text-base font-bold text-slate-900">1. Align Keywords</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Extract key technical skills and tools from your desired job posting and integrate
+                  them into your summary and skills sections.
+                </p>
               </div>
-            ))}
-          </div>
-        </section> */}
 
-        {/* CTA Section */}
-        <section className="bg-slate-900 py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-            <h2 className="text-sm font-bold tracking-tight text-white sm:text-lg">
-              Don't just copy. Create.
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-xs leading-8 text-slate-300">
-              Found an example you like? Use our AI writer to create a personalized version for your
-              unique experience in seconds.
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link
-                href="/"
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                Get Started for Free
-              </Link>
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">2. Quantify Achievements</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Replace general duties with hard numbers (e.g., "Increased page speed by 40%",
+                  "Built app used by 5,000+ students").
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">3. Use NextCV AI Builder</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Avoid manual formatting issues in Word. Use NextCV to generate a clean, 100%
+                  ATS-ready PDF instantly for ₹399.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* SEO Content Section */}
-        <section className="py-24 px-6 lg:px-8 max-w-3xl mx-auto prose prose-slate">
-          <h2>How Resume Examples Can Fast-Track Your Job Search</h2>
-          <p>
-            Writing a resume starting with a blank white page is daunting. That's why successful job
-            seekers often start by reviewing **resume examples** from their industry. Seeing how
-            others describe similar roles, structure their achievements, and list their technical
-            skills can provide the necessary blueprint for your own document.
-          </p>
+        {/* SEO Text Content */}
+        <section className="py-16 px-6 max-w-4xl mx-auto text-slate-600 space-y-6 z-10 relative">
+          <div className="space-y-3">
+            <h2 className="text-2xl font-bold text-[#071644]">
+              Fast-Track Your Job Search With ATS Examples
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-slate-600">
+              Starting with a blank page is intimidating. Reviewing industry-tested resume samples
+              helps you visualize how successful candidates structure work experience, academic
+              projects, and technical skills for recruiters at TCS, Infosys, Wipro, and Accenture.
+            </p>
+          </div>
+        </section>
 
-          <h3>How to Select the Right Example</h3>
-          <p>
-            When choosing a resume example to follow, look for one that aligns with your experience
-            level and industry:
-          </p>
-          <ul>
-            <li>
-              <strong>Fresher Resumes:</strong> Focus on education, academic projects, and
-              internships. Great for recent graduates.
-            </li>
-            <li>
-              <strong>Experienced Professional Resumes:</strong> Highlight quantifiable
-              achievements, career progression, and leadership skills.
-            </li>
-            <li>
-              <strong>Role-Specific Resumes:</strong> Choose examples tailored to IT, Marketing,
-              Sales, or Finance to see the exact keywords recruiters expect.
-            </li>
-          </ul>
-
-          <h3>Tailoring Your Resume to Each Job</h3>
-          <p>
-            One of the biggest mistakes candidates make is sending the same generic resume to every
-            job opening. By looking at role-specific examples, you can learn how to:
-          </p>
-          <ul>
-            <li>
-              <strong>Prioritize Keywords:</strong> A Marketing Manager resume needs different
-              keywords (SEO, ROI, Campaign Strategy) compared to a Sales Manager (Revenue Growth,
-              Lead Generation, CRM).
-            </li>
-            <li>
-              <strong>Quantify Achievements:</strong> Notice how great examples use numbers. Instead
-              of "Managed a team," a strong example says "Led a team of 15 to achieve 20% YoY
-              revenue growth."
-            </li>
-            <li>
-              <strong>Structure for Impact:</strong> Tech roles often put skills at the top, while
-              executive roles prioritize professional summary and leadership experience.
-            </li>
-          </ul>
-
-          <h3>Common Resume Mistakes to Avoid</h3>
-          <p>While examples are great for inspiration, avoid copying them word-for-word.</p>
-          <ul>
-            <li>
-              <strong>Buzzword Stuffing:</strong> Don't just list every skill you find in an example
-              unless you actually possess it.
-            </li>
-            <li>
-              <strong>Formatting Errors:</strong> Make sure the format you choose is consistent.
-              Using NextCV ensures your formatting stays perfect automatically.
-            </li>
-            <li>
-              <strong>Relevance:</strong> Ensure the example you are following matches your
-              experience level. A fresher using a Senior Director's resume structure will look out
-              of place.
-            </li>
-          </ul>
-
-          <h3>Conclusion</h3>
-          <p>
-            Whether you are a fresher looking for your first break in the IT industry or a seasoned
-            marketing professional aiming for a leadership role, our collection of resume examples
-            provides the guidance you need. Combine these insights with NextCV's AI-powered builder
-            to create a resume that truly represents your potential.
-          </p>
+        {/* CTA Banner */}
+        <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+          <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
+            <h2 className="text-2xl sm:text-4xl font-extrabold">
+              Build Your Personalized Resume Now
+            </h2>
+            <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+              Turn template inspiration into your own ATS resume in under 5 minutes for just ₹399.
+            </p>
+            <div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+              >
+                Create My Resume Now <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
     </>

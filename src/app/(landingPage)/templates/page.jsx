@@ -2,13 +2,14 @@ import React from "react";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { ArrowRight, CheckCircle2, Sparkles, Layout, ShieldCheck, FileCheck, HelpCircle } from "lucide-react";
 
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 
 export const metadata = createSeoMetadata({
   title: "ATS Resume Templates for Freshers in India | NextCV",
   description:
-    "Explore ATS-friendly resume templates for Indian job seekers, including free resume templates for freshers, experienced professionals, and MNC applications.",
+    "Explore ATS-friendly resume templates for Indian job seekers. Create professional resumes for freshers and experienced roles with pay-per-resume pricing from ₹49 to ₹399.",
   path: "/templates",
   keywords: [
     "resume templates",
@@ -20,30 +21,30 @@ export const metadata = createSeoMetadata({
   ],
 });
 
-export default function Page() {
+export default function TemplatesPage() {
   const faqs = [
     {
       q: "Which is the best resume format for freshers in India?",
-      a: "The reverse-chronological format is generally the best for freshers, prioritizing education and projects.",
+      a: "The reverse-chronological format is best for freshers in India, placing education, tech stack, and academic projects at the top.",
     },
     {
-      q: "Are these templates ATS-friendly?",
-      a: "Yes, all our templates are designed to be easily readable by Applicant Tracking Systems.",
+      q: "Are all NextCV templates ATS-friendly?",
+      a: "Yes, 100% of our templates are tested against major Applicant Tracking Systems (Workday, Taleo, Greenhouse, Darwinbox) used by MNCs.",
     },
     {
-      q: "Can I download the resume for free?",
-      a: "You can create your resume for free, and download it starting from \u20b949.",
+      q: "How much does it cost to download a resume?",
+      a: "You can create and preview your resume for free, and download high-resolution PDFs with pay-per-resume pricing ranging from ₹49 to ₹399 depending on the template selected. No subscription traps!",
     },
     {
-      q: "Do these templates work for IT jobs?",
-      a: "Absolutely, we have specialized templates highlighting technical skills and projects ideal for IT freshers.",
+      q: "Do these templates work for IT & Software jobs?",
+      a: "Absolutely! We have dedicated templates designed specifically to highlight programming languages, frameworks, GitHub links, and hackathons.",
     },
   ];
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: {
@@ -73,7 +74,7 @@ export default function Page() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12 bg-white">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -83,115 +84,173 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-        ATS-Friendly Resume Templates for Indian Job Seekers
-      </h1>
-      <p className="text-lg text-gray-700 mb-8">
-        Browse our collection of ATS-friendly resume templates designed for the Indian job market.
-        Whether you're a fresher or an experienced professional, these templates use clear layouts
-        that are easy for screening systems and recruiters to read. Check our{" "}
-        <Link href="/examples" className="text-blue-600 hover:underline">
-          resume examples
-        </Link>{" "}
-        for inspiration or review our{" "}
-        <Link href="/pricing" className="text-blue-600 hover:underline">
-          affordable pricing
-        </Link>
-        .
-      </p>
+      <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
+        {/* Background Ambient Glows */}
+        <div className="pointer-events-none absolute inset-0 -z-0">
+          <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+        </div>
 
-      <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-12">
-        <h2 className="text-xl font-semibold mb-2">Build Your ATS-Friendly Resume Now</h2>
-        <p className="mb-4 text-gray-700">
-          Use NextCV to create an ATS-friendly resume for job applications at leading Indian
-          companies.
-        </p>
-        <Link
-          href="/"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition"
-        >
-          Create Resume Free
-        </Link>
-      </div>
-
-      <div className="prose max-w-none text-gray-800">
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Resume Templates for Freshers</h2>
-        <p className="mb-4">
-          If you are just graduating or looking for your first job, a reverse-chronological format
-          focusing on education, internships, and academic projects works best. Our resume templates
-          for freshers highlight potential over extensive work history.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">Templates for Experienced Candidates</h2>
-        <p className="mb-4">
-          For professionals with several years of experience, these templates place your work
-          history and measurable achievements front and center, allowing recruiters to quickly grasp
-          the value you bring to the table.
-        </p>
-
-        <h2 className="text-2xl font-semibold mt-8 mb-4">MNC Resume Applications</h2>
-        <p className="mb-4">
-          Applying to top IT and non-IT MNCs requires a clean, structured, and highly readable
-          format. These templates avoid flashy graphics and focus on substance, perfectly aligning
-          with strict corporate ATS requirements.
-        </p>
-      </div>
-
-      <section className="mt-16">
-        <h2 className="text-3xl font-bold mb-6 text-center">Explore Our Free ATS Templates</h2>
-        <Templates />
-      </section>
-
-      <section className="mt-16">
-        <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
-        <div className="space-y-6">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-              <h3 className="text-lg font-semibold mb-2 text-gray-900">{faq.q}</h3>
-              <p className="text-gray-700">{faq.a}</p>
+        {/* Hero Header */}
+        <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10 text-center">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+              <Layout className="w-4 h-4 text-indigo-600" />
+              Recruiter-Tested ATS Templates 2026
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="mt-16 border-t pt-8">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900">Related Guides</h2>
-        <div className="mt-6 mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link href="/templates" className="text-blue-600 hover:underline">
-            Explore Templates
-          </Link>
-          <Link href="/ats-resume-checker" className="text-blue-600 hover:underline">
-            ATS Resume Checker
-          </Link>
-          <Link href="/tcs-resume-format-for-freshers" className="text-blue-600 hover:underline">
-            TCS Resume Format
-          </Link>
-          <Link
-            href="/infosys-resume-format-for-freshers"
-            className="text-blue-600 hover:underline"
-          >
-            Infosys Resume Format
-          </Link>
-          <Link href="/wipro-resume-format-for-freshers" className="text-blue-600 hover:underline">
-            Wipro Resume Format
-          </Link>
-          <Link href="/ats-friendly-resume-format-india" className="text-blue-600 hover:underline">
-            ATS Resume Format Guide
-          </Link>
-          <Link href="/fresher-resume-format-india" className="text-blue-600 hover:underline">
-            Fresher Resume Format
-          </Link>
-        </div>
-      </section>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
+              ATS-Friendly Resume Templates for{" "}
+              <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+                Indian Job Seekers
+              </span>
+            </h1>
 
-      <div className="mt-12 text-center">
-        <Link
-          href="/"
-          className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-blue-700 transition shadow-lg"
-        >
-          Build Your Resume Now
-        </Link>
-      </div>
-    </div>
+            <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
+              Designed specifically for campus placements, IT freshers, and experienced professionals in India. Pay per resume ranging from{" "}
+              <span className="font-bold text-indigo-600">₹49 to ₹399</span> depending on template.
+            </p>
+
+            <div className="pt-2 flex flex-wrap justify-center gap-4">
+              <Link
+                href="/"
+                className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
+              >
+                Build Resume Free <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Dynamic Templates Component */}
+        <section className="py-12 px-6 max-w-7xl mx-auto z-10 relative">
+          <div className="bg-white border border-slate-200 p-6 sm:p-10 rounded-3xl shadow-sm space-y-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-[#071644]">Explore ATS Resume Designs</h2>
+                <p className="text-xs sm:text-sm text-slate-500">Pick a template to start editing in our AI builder</p>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" /> 100% Recruiter Approved
+              </div>
+            </div>
+
+            <Templates />
+          </div>
+        </section>
+
+        {/* Feature Matrix Section */}
+        <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
+            <div className="text-center max-w-3xl mx-auto space-y-3">
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
+                Why NextCV Templates Outperform MS Word
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base">
+                Generic docx files fail ATS parsers. Our templates are engineered for automated recruitment algorithms.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+                  <FileCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">Clean Structure</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  No complex tables or graphic elements that confuse ATS parsers. Perfect text hierarchy for Workday & Darwinbox.
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">AI Content Generator</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Generates quantified bullet points directly inside the template layout, saving hours of typing.
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
+                <div className="w-10 h-10 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">Pay-Per-Resume (₹49 – ₹399)</h3>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  Download high-resolution PDF documents with single pay-per-resume pricing based on template. Zero subscriptions!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs Section */}
+        <section className="py-20 px-6 max-w-5xl mx-auto z-10 relative">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#071644] flex items-center justify-center gap-2">
+              <HelpCircle className="w-6 h-6 text-indigo-600" /> Frequently Asked Questions
+            </h2>
+            <p className="text-slate-600 text-sm">Got questions about our templates? We've got answers.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {faqs.map((faq, idx) => (
+              <div key={idx} className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-2">
+                <h3 className="text-base font-bold text-slate-900">{faq.q}</h3>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Related Guides Links */}
+        <section className="py-16 px-6 max-w-7xl mx-auto z-10 relative border-t border-slate-100">
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-[#071644]">Popular ATS Resume Guides</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-xs">
+              {[
+                { label: "TCS Resume Format", href: "/tcs-resume-format-for-freshers" },
+                { label: "Infosys Resume Format", href: "/infosys-resume-format-for-freshers" },
+                { label: "Wipro Resume Format", href: "/wipro-resume-format-for-freshers" },
+                { label: "ATS Resume Guide", href: "/ats-friendly-resume-format-india" },
+                { label: "Fresher Resume Format", href: "/fresher-resume-format-india" },
+                { label: "Resume Examples", href: "/examples" },
+                { label: "Pricing Details", href: "/pricing" },
+              ].map((link, idx) => (
+                <Link
+                  key={idx}
+                  href={link.href}
+                  className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 hover:text-indigo-600 hover:border-indigo-300 transition-all flex items-center justify-between"
+                >
+                  <span>{link.label}</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Footer CTA */}
+        <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
+          <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
+            <h2 className="text-2xl sm:text-4xl font-extrabold">
+              Select A Template & Build Your Resume
+            </h2>
+            <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+              Create an ATS-friendly resume starting from ₹49 to ₹399 depending on your selected template.
+            </p>
+            <div>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+              >
+                Build Resume Now <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
