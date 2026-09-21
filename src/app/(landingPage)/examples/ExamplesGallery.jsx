@@ -125,7 +125,7 @@ const EXAMPLES_DATA = [
       "Performance marketer experienced in Google Ads, Meta Ads Manager, SEO strategy, and conversion rate optimization (CRO).",
     skills: ["Google Ads", "SEO", "Meta Ads", "Google Analytics 4", "Copywriting", "HubSpot"],
     bullets: [
-      "Scaled paid acquisition ad campaigns from ₹50K to ₹500K monthly budget maintaining 3.2x ROAS.",
+      "Scaled paid acquisition ad campaigns from ₹1k to ₹500K monthly budget maintaining 3.2x ROAS.",
       "Increased organic website traffic by 140% in 6 months through targeted long-tail SEO content strategy.",
       "A/B tested email subject lines and landing page CTAs, increasing email conversion rates by 22%.",
     ],

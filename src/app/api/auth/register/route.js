@@ -6,6 +6,9 @@ import { NextResponse } from "next/server";
 const handler = async req => {
   await dbConnect();
   const data = await req.json();
+  return NextResponse.json(new apiResponse(201, "user fucked sucessfull"), {
+    status: 200,
+  });
   await register(data);
   return NextResponse.json(new apiResponse(201, "user register sucessfull"), {
     status: 200,

@@ -74,8 +74,10 @@ export default function AboutPage() {
 
             <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
               NextCV is India's most accessible{" "}
-              <span className="font-semibold text-slate-900">AI Resume Builder</span>. Built to eliminate expensive monthly subscriptions with a flexible pay-per-resume model ranging from{" "}
-              <span className="font-bold text-indigo-600">₹49 to ₹399</span> per resume depending on template.
+              <span className="font-semibold text-slate-900">AI Resume Builder</span>. Built to
+              eliminate expensive monthly subscriptions with a flexible pay-per-resume model ranging
+              from <span className="font-bold text-indigo-600">₹49 to ₹399</span> per resume
+              depending on template.
             </p>
 
             <div className="pt-2 flex flex-wrap justify-center gap-4">
@@ -111,7 +113,7 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-2xl text-center hover:border-violet-300 transition-colors">
-              <div className="text-3xl sm:text-4xl font-extrabold text-violet-600">50K+</div>
+              <div className="text-3xl sm:text-4xl font-extrabold text-violet-600">1k+</div>
               <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-2">
                 Resumes Generated
               </div>
@@ -139,17 +141,26 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
                   <p>
-                    We started as BCA students in India who experienced the frustrating job hunt firsthand:{" "}
-                    <span className="font-semibold text-slate-900">existing resume builders are exorbitantly expensive</span>.
-                    Most popular platforms charge recurring fees of ₹500 to ₹1,200 every single month — a heavy burden for students and freshers.
+                    We started as BCA students in India who experienced the frustrating job hunt
+                    firsthand:{" "}
+                    <span className="font-semibold text-slate-900">
+                      existing resume builders are exorbitantly expensive
+                    </span>
+                    . Most popular platforms charge recurring fees of ₹500 to ₹1,200 every single
+                    month — a heavy burden for students and freshers.
                   </p>
                   <p>
                     We believed job seekers deserved better: a clean, intelligent, and{" "}
-                    <span className="font-semibold text-slate-900">ATS-optimized resume generator</span> for the price of a coffee.
+                    <span className="font-semibold text-slate-900">
+                      ATS-optimized resume generator
+                    </span>{" "}
+                    for the price of a coffee.
                   </p>
                   <p>
-                    That promise birthed NextCV: Premium AI features, recruiter-tested templates, and full customization starting from{" "}
-                    <span className="font-bold text-indigo-600">₹49 up to ₹399 per resume</span> depending on the template selected.
+                    That promise birthed NextCV: Premium AI features, recruiter-tested templates,
+                    and full customization starting from{" "}
+                    <span className="font-bold text-indigo-600">₹49 up to ₹399 per resume</span>{" "}
+                    depending on the template selected.
                   </p>
                 </div>
               </div>
@@ -174,9 +185,13 @@ export default function AboutPage() {
                   <div className="flex justify-between items-center p-4 rounded-xl bg-indigo-50 border border-indigo-200 shadow-xs">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-indigo-600" />
-                      <span className="text-sm font-bold text-[#071644]">NextCV Template Catalog</span>
+                      <span className="text-sm font-bold text-[#071644]">
+                        NextCV Template Catalog
+                      </span>
                     </div>
-                    <span className="text-base font-extrabold text-indigo-600">₹49 – ₹399 / RESUME</span>
+                    <span className="text-base font-extrabold text-indigo-600">
+                      ₹49 – ₹399 / RESUME
+                    </span>
                   </div>
                 </div>
 
@@ -204,7 +219,8 @@ export default function AboutPage() {
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">Our Core Mission</h2>
             <p className="text-slate-600 text-sm sm:text-base">
-              Democratizing career opportunities across India by placing world-class AI career tools in the hands of every student.
+              Democratizing career opportunities across India by placing world-class AI career tools
+              in the hands of every student.
             </p>
           </div>
 
@@ -233,7 +249,9 @@ export default function AboutPage() {
                 key={i}
                 className="bg-white border border-slate-200 p-8 rounded-2xl hover:border-indigo-300 hover:shadow-md transition-all duration-300"
               >
-                <div className={`w-12 h-12 rounded-xl ${item.bg} border flex items-center justify-center mb-6`}>
+                <div
+                  className={`w-12 h-12 rounded-xl ${item.bg} border flex items-center justify-center mb-6`}
+                >
                   {item.icon}
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 mb-2">{item.title}</h3>
@@ -250,7 +268,9 @@ export default function AboutPage() {
               <Rocket className="w-4 h-4 text-indigo-600" /> The Team
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">Meet the Founders</h2>
-            <p className="text-slate-600 text-sm">The builders behind NextCV committed to empowering Indian job seekers.</p>
+            <p className="text-slate-600 text-sm">
+              The builders behind NextCV committed to empowering Indian job seekers.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -265,12 +285,19 @@ export default function AboutPage() {
                 <Code2 className="w-4 h-4" /> Co-Founder & Lead Developer
               </p>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Full-stack engineer passionate about scalable architecture, AI prompt engineering, and building tools that empower students across Tier-1, Tier-2, and Tier-3 cities.
+                Full-stack engineer passionate about scalable architecture, AI prompt engineering,
+                and building tools that empower students across Tier-1, Tier-2, and Tier-3 cities.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">Next.js</span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">AI Systems</span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">Full Stack</span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  Next.js
+                </span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  AI Systems
+                </span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  Full Stack
+                </span>
               </div>
             </div>
 
@@ -285,12 +312,19 @@ export default function AboutPage() {
                 <Palette className="w-4 h-4" /> Co-Founder & Product Lead
               </p>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Product and UX strategist dedicated to crafting seamless document design, intuitive recruiter-approved layouts, and accessible interfaces.
+                Product and UX strategist dedicated to crafting seamless document design, intuitive
+                recruiter-approved layouts, and accessible interfaces.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">Product Design</span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">UX Architecture</span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">ATS Research</span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  Product Design
+                </span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  UX Architecture
+                </span>
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                  ATS Research
+                </span>
               </div>
             </div>
           </div>
@@ -303,7 +337,8 @@ export default function AboutPage() {
               Ready to create an ATS resume that gets interviews?
             </h2>
             <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-              Join thousands of Indian job seekers who crafted winning resumes on NextCV starting from just ₹49 to ₹399 per resume.
+              Join thousands of Indian job seekers who crafted winning resumes on NextCV starting
+              from just ₹49 to ₹399 per resume.
             </p>
             <div className="pt-2">
               <Link
