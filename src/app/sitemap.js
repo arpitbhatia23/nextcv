@@ -1,8 +1,7 @@
 // app/sitemap.js
-import { client } from "@/sanity";
 import seoPages from "./(landingPage)/seo-pages.json";
 import careerPages from "./(landingPage)/career-pages.json";
-
+import { client } from "@/sanity";
 export default async function sitemap() {
   const baseUrl = "https://www.nextcv.in";
 
@@ -42,7 +41,7 @@ export default async function sitemap() {
   }));
 
   const careerPage = careerPages.map(page => ({
-    url: `${baseUrl}/${page.slug}`,
+    url: `${baseUrl}/career/${page.slug}`,
     lastModified: staticLastModified,
     changeFrequency: "monthly",
     priority: 0.85,
@@ -54,6 +53,8 @@ export default async function sitemap() {
     changeFrequency: "weekly",
     priority: 0.75,
   }));
+
+  console.log(careerPage);
 
   return [...staticPages, ...careerPage, ...dynamicSeoPages, ...blogPages];
 }
