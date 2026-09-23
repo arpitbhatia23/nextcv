@@ -30,9 +30,9 @@ export default function AIWriterPage() {
   return (
     <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
       {/* Background Ambient Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-0">
-        <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-        <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute left-[28%] -top-20 h-112.5 w-q50 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+        <div className="absolute right-0 top-60 h-100 w-125rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
       </div>
 
       {/* Hero Section */}
@@ -45,7 +45,7 @@ export default function AIWriterPage() {
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
             AI Resume Writer &{" "}
-            <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
               Bullet Generator
             </span>
           </h1>
