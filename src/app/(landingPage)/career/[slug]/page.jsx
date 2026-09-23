@@ -17,34 +17,6 @@ const sans = Inter({
   variable: "--font-sans",
 });
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const page = getPage(slug);
-
-  if (!page) return {};
-
-  return createSeoMetadata({
-    title: page.title,
-    description:
-      "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
-    path: `/career/${page.slug}`,
-    keywords: [
-      "career guide",
-      "career advice",
-      "career guidance",
-      "job search tips",
-      "career development",
-      "career growth",
-      "job interview tips",
-      "resume tips",
-      "job application tips",
-      "career tips for freshers",
-      "career guide for freshers",
-      "how to get a job",
-    ],
-  });
-}
-
 export async function generateStaticParams() {
   return careerPages.map(c => ({
     slug: c.slug,
@@ -63,10 +35,26 @@ export async function generateMetadata({ params }) {
 
   if (!career) return {};
 
-  return {
-    title: `${career.title} | NextCV`,
-    description: career.content?.replace(/[#*_`]/g, "")?.slice(0, 155),
-  };
+  return createSeoMetadata({
+    title: career.title,
+    description:
+      "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
+    path: `/career/${career.slug}`,
+    keywords: [
+      "career guide",
+      "career advice",
+      "career guidance",
+      "job search tips",
+      "career development",
+      "career growth",
+      "job interview tips",
+      "resume tips",
+      "job application tips",
+      "career tips for freshers",
+      "career guide for freshers",
+      "how to get a job",
+    ],
+  });
 }
 
 /* -------------------------------------------------------------------------- */
