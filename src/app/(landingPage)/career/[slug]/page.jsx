@@ -3,6 +3,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Source_Serif_4, Inter } from "next/font/google";
 import careerPages from "../../career-pages.json";
+import { signIn } from "next-auth/react";
 const serif = Source_Serif_4({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
@@ -240,13 +241,15 @@ export default async function CareerPage({ params }) {
               >
                 Turn what you just read into an ATS-friendly resume in under 5 minutes.
               </p>
-              <Link
-                href="/resume-builder"
+              <button
+                onClick={() => {
+                  signIn("google", { callbackUrl: "/dashboard/builder" });
+                }}
                 className="mt-6 inline-block rounded-md bg-indigo-600 px-7 py-3.5 text-sm font-medium text-white transition hover:bg-indigo-700"
                 style={{ fontFamily: "var(--font-sans)" }}
               >
                 Build my resume
-              </Link>
+              </button>
             </div>
           </div>
         </div>
