@@ -5,6 +5,12 @@
       "source": "aaron-he-zhu/seo-geo-claude-skills",
       "sourceType": "github",
       "computedHash": "a96cff5d3ee54067702265eecd7db7ebfd8db55e99e59f923b63baa8e1f40a3e"
+    },
+    "security-audit": {
+      "source": "cloudflare/security-audit-skill",
+      "sourceType": "github",
+      "skillPath": "skills/security-audit/SKILL.md",
+      "computedHash": "98b97aad2873b3b9a8e064007c25e7827b493ba27fda8bfbdb41dab586767973"
     }
   }
 }

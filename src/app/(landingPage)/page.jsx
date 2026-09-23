@@ -2,6 +2,8 @@ import dynamic from "next/dynamic";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import Herosection from "@/shared/components/herosection/Herosection";
 import ATSFeatureSection from "@/shared/components/herosection/ATSFeatureSection";
+import Link from "next/link";
+import careerPages from "@/app/(landingPage)/career-pages.json";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
 const SEOSection = dynamic(() => import("@/shared/components/herosection/SEOSection"));
 const PageContent = dynamic(() => import("@/shared/components/pageContent/PageContent"));

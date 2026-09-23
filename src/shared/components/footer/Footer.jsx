@@ -352,6 +352,12 @@ export const Footer = () => {
             >
               Tech mahindra resume format for freshers
             </Link>
+            <Link
+              href="/fresher-resume-format"
+              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
+            >
+              Fresher resume format
+            </Link>
           </div>
         </div>
 
