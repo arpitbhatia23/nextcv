@@ -1,7 +1,7 @@
 // app/sitemap.js
 import { client } from "@/sanity";
 import seoPages from "./(landingPage)/seo-pages.json";
-import careerPages from "../../career-pages.json";
+import careerPages from "./(landingPage)/career-pages.json";
 
 export default async function sitemap() {
   const baseUrl = "https://www.nextcv.in";
