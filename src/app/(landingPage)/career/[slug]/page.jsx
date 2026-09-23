@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
     title: page.title,
     description:
       "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
-    path: `/${page.slug}`,
+    path: `/career/${page.slug}`,
     keywords: [
       "career guide",
       "career advice",
