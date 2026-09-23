@@ -26,7 +26,7 @@ export default async function sitemap() {
     { path: "/examples", priority: 0.8, changeFrequency: "weekly" },
     { path: "/pricing", priority: 0.9, changeFrequency: "monthly" },
     { path: "/templates", priority: 1.0, changeFrequency: "weekly" },
-    { path: "/ats-resume-checker", priority: 0.85, changeFrequency: "monthly" },
+    { path: "/ats-resume-checker", priority: 0.9, changeFrequency: "monthly" },
   ].map(page => ({
     url: `${baseUrl}${page.path}`,
     lastModified: staticLastModified,
@@ -38,21 +38,21 @@ export default async function sitemap() {
     url: `${baseUrl}/${page.slug}`,
     lastModified: staticLastModified,
     changeFrequency: "monthly",
-    priority: 0.85,
+    priority: 0.7,
   }));
 
   const careerPage = careerPages.map(page => ({
-    url: `${baseUrl}/career${page.slug}`,
+    url: `${baseUrl}/career/${page.slug}`,
     lastModified: staticLastModified,
     changeFrequency: "monthly",
-    priority: 0.85,
+    priority: 0.9,
   }));
 
   const blogPages = (blogs || []).map(blog => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
     lastModified: new Date(blog._updatedAt),
     changeFrequency: "weekly",
-    priority: 0.75,
+    priority: 0.5,
   }));
 
   return [...staticPages, ...careerPage, ...dynamicSeoPages, ...blogPages];

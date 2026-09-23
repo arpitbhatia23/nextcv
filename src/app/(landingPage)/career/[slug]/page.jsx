@@ -599,7 +599,7 @@ export default async function CareerPage({ params }) {
         }}
       >
         <Link
-          href="/resume-builder"
+          href="/"
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition active:scale-[0.98]"
         >
           Build my resume

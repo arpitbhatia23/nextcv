@@ -17,7 +17,7 @@ export const ReminderEmail = async (email, name) => {
     <p>It takes less than <b>2 minutes</b> to generate a clean ATS-friendly resume.</p>
 
     <p>
-      <a href="https://nextcv.in/resume-builder"
+      <a href="https://nextcv.in/"
          style="background:#4f46e5;color:white;padding:12px 20px;text-decoration:none;border-radius:6px;">
          Finish My Resume
       </a>
