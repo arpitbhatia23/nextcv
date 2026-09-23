@@ -1,6 +1,27 @@
 import Link from "next/link";
 import careerPages from "../career-pages.json";
+import { createSeoMetadata } from "@/shared/utils/seo";
 
+export const metadata = createSeoMetadata({
+  title: "Career Guide | NextCV",
+  description:
+    "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
+  path: "/career",
+  keywords: [
+    "career guide",
+    "career advice",
+    "career guidance",
+    "job search tips",
+    "career development",
+    "career growth",
+    "job interview tips",
+    "resume tips",
+    "job application tips",
+    "career tips for freshers",
+    "career guide for freshers",
+    "how to get a job",
+  ],
+});
 const ITEMS_PER_PAGE = 9;
 
 function slugify(value = "") {

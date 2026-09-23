@@ -1,5 +1,14 @@
 import React from "react";
-import { CheckCircle2, Search, Briefcase, ShieldCheck, Sparkles, ArrowRight, Zap, FileText } from "lucide-react";
+import {
+  CheckCircle2,
+  Search,
+  Briefcase,
+  ShieldCheck,
+  Sparkles,
+  ArrowRight,
+  Zap,
+  FileText,
+} from "lucide-react";
 import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 import Link from "next/link";
 
@@ -30,9 +39,9 @@ export default function ATSCheckerPage() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
       {/* Background Ambient Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-0">
-        <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-        <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute left-[28%] -top-20 h-112.5 w-125 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+        <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
       </div>
 
       {/* Hero Section */}
@@ -45,14 +54,18 @@ export default function ATSCheckerPage() {
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
             ATS-Friendly Resume Checker for{" "}
-            <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
               Freshers in India 2026
             </span>
           </h1>
 
           <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
-            Ever wondered <strong className="text-slate-900">why ATS rejects resumes in India and how to fix it</strong>?
-            Upload your resume and get an instant ATS score analysis tailored for Indian recruitment standards.
+            Ever wondered{" "}
+            <strong className="text-slate-900">
+              why ATS rejects resumes in India and how to fix it
+            </strong>
+            ? Upload your resume and get an instant ATS score analysis tailored for Indian
+            recruitment standards.
           </p>
 
           <div className="pt-2">
@@ -70,15 +83,21 @@ export default function ATSCheckerPage() {
               <div className="p-2.5 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600">
                 <Briefcase className="w-6 h-6" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">Crack the Code for Indian MNCs</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">
+                Crack the Code for Indian MNCs
+              </h2>
             </div>
             <p className="text-slate-600 text-sm leading-relaxed">
-              Top Indian IT recruiters use automated screening algorithms. Our checker scans against standard patterns used by:
+              Top Indian IT recruiters use automated screening algorithms. Our checker scans against
+              standard patterns used by:
             </p>
             <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-slate-700 font-semibold text-xs sm:text-sm pt-2">
               {["TCS Digital", "Infosys", "Wipro", "HCL Tech", "Accenture", "Tech Mahindra"].map(
                 (company, i) => (
-                  <li key={i} className="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl shadow-xs">
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl shadow-xs"
+                  >
                     <span className="w-2 h-2 rounded-full bg-indigo-600" />
                     <span>{company}</span>
                   </li>
@@ -86,7 +105,8 @@ export default function ATSCheckerPage() {
               )}
             </ul>
             <p className="text-xs text-slate-400 pt-2 italic">
-              * Note: Scoring is based on general recruiter parsing rules across Indian IT & corporate standards.
+              * Note: Scoring is based on general recruiter parsing rules across Indian IT &
+              corporate standards.
             </p>
           </div>
 
@@ -96,28 +116,34 @@ export default function ATSCheckerPage() {
               <div className="p-2.5 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600">
                 <Search className="w-6 h-6" />
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">Why ATS Scores Matter For Freshers?</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">
+                Why ATS Scores Matter For Freshers?
+              </h2>
             </div>
             <p className="text-slate-600 text-sm leading-relaxed">
-              In high-volume campus drives, a low ATS parsing score means automatic rejection before any recruiter reads your application.
+              In high-volume campus drives, a low ATS parsing score means automatic rejection before
+              any recruiter reads your application.
             </p>
             <ul className="space-y-3 text-xs sm:text-sm text-slate-700 pt-2">
               <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-900">B.Tech / CSE / BCA:</strong> Scans technical stack keywords, framework lists, and GitHub project metrics.
+                  <strong className="text-slate-900">B.Tech / CSE / BCA:</strong> Scans technical
+                  stack keywords, framework lists, and GitHub project metrics.
                 </span>
               </li>
               <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-900">MBA / Business Freshers:</strong> Scans for project leadership, Agile terms, and KPI achievements.
+                  <strong className="text-slate-900">MBA / Business Freshers:</strong> Scans for
+                  project leadership, Agile terms, and KPI achievements.
                 </span>
               </li>
               <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-900">Core Engineering:</strong> Validates domain certifications, CAD software, and site experience terms.
+                  <strong className="text-slate-900">Core Engineering:</strong> Validates domain
+                  certifications, CAD software, and site experience terms.
                 </span>
               </li>
             </ul>
@@ -128,8 +154,12 @@ export default function ATSCheckerPage() {
       {/* FAQs Section */}
       <section className="py-20 px-6 max-w-5xl mx-auto z-10 relative border-t border-slate-100">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">Frequently Asked Questions</h2>
-          <p className="text-slate-600 text-sm">Everything you need to know about ATS scoring for Indian jobs.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-slate-600 text-sm">
+            Everything you need to know about ATS scoring for Indian jobs.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -169,7 +199,8 @@ export default function ATSCheckerPage() {
             Build A High-Scoring ATS Resume Today
           </h2>
           <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-            Choose from our recruiter-approved templates starting at ₹49 to ₹399 per resume with zero subscriptions.
+            Choose from our recruiter-approved templates starting at ₹49 to ₹399 per resume with
+            zero subscriptions.
           </p>
           <div>
             <Link

@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { ArrowRight, Sparkles, Wand2, CheckCircle2, Bot, Zap, ShieldCheck, FileText, Cpu, HelpCircle } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  Wand2,
+  CheckCircle2,
+  ShieldCheck,
+  FileText,
+  Cpu,
+  HelpCircle,
+} from "lucide-react";
 import AIPlayground from "./AIPlayground";
 
 export const metadata = createSeoMetadata({
@@ -42,7 +51,9 @@ export default function AIWriterPage() {
           </h1>
 
           <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
-            Eliminate writer's block instantly. NextCV's intelligent AI crafts high-impact summaries, quantified work achievements, and ATS skill keywords tailored to Indian job roles.
+            Eliminate writer's block instantly. NextCV's intelligent AI crafts high-impact
+            summaries, quantified work achievements, and ATS skill keywords tailored to Indian job
+            roles.
           </p>
 
           <div className="pt-2 flex flex-wrap justify-center gap-4">
@@ -115,7 +126,9 @@ export default function AIWriterPage() {
       <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
         <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">Why Use AI Resume Writing?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
+              Why Use AI Resume Writing?
+            </h2>
             <p className="text-slate-600 text-sm sm:text-base">
               Supercharge your job application response rate with intelligent keyword matching.
             </p>
@@ -128,7 +141,8 @@ export default function AIWriterPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900">Action Verb Enhancement</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Replaces passive statements like "helped with coding" with high-impact phrases like "Spearheaded microservice development, reducing latency by 35%."
+                Replaces passive statements like "helped with coding" with high-impact phrases like
+                "Spearheaded microservice development, reducing latency by 35%."
               </p>
             </div>
 
@@ -138,7 +152,8 @@ export default function AIWriterPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900">ATS Keyword Optimization</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Automatically includes high-ranking recruiter keywords specific to Indian tech & corporate giants like TCS, Infosys, Wipro, and Accenture.
+                Automatically includes high-ranking recruiter keywords specific to Indian tech &
+                corporate giants like TCS, Infosys, Wipro, and Accenture.
               </p>
             </div>
 
@@ -148,7 +163,8 @@ export default function AIWriterPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900">Zero Grammar Errors</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Ensures flawless spelling, professional tone, active voice, and consistent tense throughout your entire resume document.
+                Ensures flawless spelling, professional tone, active voice, and consistent tense
+                throughout your entire resume document.
               </p>
             </div>
 
@@ -158,7 +174,8 @@ export default function AIWriterPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900">Contextual Customization</h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                You maintain total control. The AI offers smart suggestions, while you tailor metric figures and specific project names to your background.
+                You maintain total control. The AI offers smart suggestions, while you tailor metric
+                figures and specific project names to your background.
               </p>
             </div>
           </div>
@@ -168,16 +185,23 @@ export default function AIWriterPage() {
       {/* SEO Text Section */}
       <section className="py-16 px-6 max-w-4xl mx-auto text-slate-700 space-y-6 z-10 relative">
         <div className="space-y-3">
-          <h2 className="text-2xl font-bold text-[#071644]">Why AI Resume Writers Are Essential for Freshers in India</h2>
+          <h2 className="text-2xl font-bold text-[#071644]">
+            Why AI Resume Writers Are Essential for Freshers in India
+          </h2>
           <p className="text-sm sm:text-base leading-relaxed text-slate-600">
-            The Indian job market is immensely competitive. Recruiters receive hundreds of resumes for single openings at MNCs and startups. An AI resume builder acts as your automated career coach, transforming basic project descriptions into compelling achievement bullets that capture HR attention.
+            The Indian job market is immensely competitive. Recruiters receive hundreds of resumes
+            for single openings at MNCs and startups. An AI resume builder acts as your automated
+            career coach, transforming basic project descriptions into compelling achievement
+            bullets that capture HR attention.
           </p>
         </div>
 
         <div className="space-y-3">
           <h3 className="text-lg font-bold text-slate-900">Overcoming Resume Writer's Block</h3>
           <p className="text-sm sm:text-base leading-relaxed text-slate-600">
-            Many students struggle to express their technical skills in formal English. Instead of spending hours pondering how to frame a final-year project, NextCV AI provides instant suggestions tailored to your degree and tech stack.
+            Many students struggle to express their technical skills in formal English. Instead of
+            spending hours pondering how to frame a final-year project, NextCV AI provides instant
+            suggestions tailored to your degree and tech stack.
           </p>
         </div>
       </section>
@@ -188,7 +212,9 @@ export default function AIWriterPage() {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#071644] flex items-center justify-center gap-2">
             <HelpCircle className="w-6 h-6 text-indigo-600" /> Frequently Asked Questions
           </h2>
-          <p className="text-slate-600 text-sm">Everything you need to know about NextCV's AI Writer.</p>
+          <p className="text-slate-600 text-sm">
+            Everything you need to know about NextCV's AI Writer.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -210,7 +236,10 @@ export default function AIWriterPage() {
               a: "Absolutely. Recruiters encourage clear, professional language. AI is a tool to help express your genuine experiences effectively.",
             },
           ].map((item, idx) => (
-            <div key={idx} className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-2">
+            <div
+              key={idx}
+              className="bg-slate-50 border border-slate-200 p-6 rounded-2xl space-y-2"
+            >
               <h4 className="font-bold text-slate-900 text-base">{item.q}</h4>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{item.a}</p>
             </div>

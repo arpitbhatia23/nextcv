@@ -3,6 +3,7 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Source_Serif_4, Inter } from "next/font/google";
 import careerPages from "../../career-pages.json";
+import { createSeoMetadata } from "@/shared/utils/seo";
 
 const serif = Source_Serif_4({
   subsets: ["latin"],
@@ -16,9 +17,33 @@ const sans = Inter({
   variable: "--font-sans",
 });
 
-/* -------------------------------------------------------------------------- */
-/* Static generation                                                         */
-/* -------------------------------------------------------------------------- */
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const page = getPage(slug);
+
+  if (!page) return {};
+
+  return createSeoMetadata({
+    title: page.title,
+    description:
+      "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
+    path: `/${page.slug}`,
+    keywords: [
+      "career guide",
+      "career advice",
+      "career guidance",
+      "job search tips",
+      "career development",
+      "career growth",
+      "job interview tips",
+      "resume tips",
+      "job application tips",
+      "career tips for freshers",
+      "career guide for freshers",
+      "how to get a job",
+    ],
+  });
+}
 
 export async function generateStaticParams() {
   return careerPages.map(c => ({
