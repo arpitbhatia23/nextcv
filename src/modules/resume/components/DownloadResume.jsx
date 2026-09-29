@@ -9,7 +9,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import PDFPreview from "./pdfPreview";
 import { Share2 } from "lucide-react";
-import { ShareResumeModal } from "@/modules/shared-resume";
+import ShareResumeModal from "@/modules/shared-resume/components/ShareResumeModal";
 
 export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const docType = resumeId ? "resume" : "coverLetter";
