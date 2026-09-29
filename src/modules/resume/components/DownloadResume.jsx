@@ -3,12 +3,13 @@
 import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Document, Page } from "react-pdf";
 import { toast } from "sonner";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import PDFPreview from "./pdfPreview";
+import { Share2 } from "lucide-react";
+import { ShareResumeModal } from "@/modules/shared-resume";
 
 export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const docType = resumeId ? "resume" : "coverLetter";
@@ -17,6 +18,7 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const [docData, setDocData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   useEffect(() => {
     const fetchDocData = async () => {
@@ -142,6 +144,17 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
                 DOWNLOAD PDF ↓
               </button>
 
+              {docType === "resume" && (
+                <button
+                  onClick={() => setIsShareOpen(true)}
+                  disabled={!docData}
+                  className="w-full border border-[#23201B] bg-transparent text-[#23201B] font-mono text-sm tracking-wide py-2.5 px-6 rounded-sm hover:bg-[#23201B] hover:text-[#FBFAF7] transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <Share2 className="w-4 h-4" />
+                  SHARE RESUME LINK ↗
+                </button>
+              )}
+
               <p className="font-sans text-xs text-[#5B6B63] text-center leading-relaxed">
                 Save a copy now — this ticket won't reprint itself.
               </p>
@@ -154,6 +167,12 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
         isOpen={isFeedbackOpen}
         onClose={() => setIsFeedbackOpen(false)}
         resumeId={docId}
+      />
+
+      <ShareResumeModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        resume={docData}
       />
     </div>
   );

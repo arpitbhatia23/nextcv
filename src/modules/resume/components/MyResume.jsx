@@ -1,26 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
-import { Card, CardContent } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
-import {
-  Download,
-  Trash2,
-  MoreVertical,
-  Plus,
-  X,
-  BadgePercent,
-  Edit2,
-  FileText,
-  PenLine,
-} from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from "@/shared/components/ui/dropdown-menu";
+import { Plus, X, BadgePercent, FileText, PenLine, Share2 } from "lucide-react";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -31,11 +13,16 @@ import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
+
 const PDFPreview = dynamic(() => import("./pdfPreview"), {
   ssr: false,
   loading: () => <div className="text-sm text-[#6B7280]">Loading preview...</div>,
 });
-
+const ShareResumeModal = dynamic(
+  () => import("@/modules/shared-resume/components/ShareResumeModal")
+);
+const EmptyState = dynamic(() => import("./empty"));
+const ResumeCard = dynamic(() => import("./resumeCard"));
 /* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
    reference codes / dates / counters. Body stays on the default sans. */
 const FontImports = () => (
@@ -44,156 +31,6 @@ const FontImports = () => (
     .font-display { font-family: 'Fraunces', serif; }
     .font-mono { font-family: 'IBM Plex Mono', monospace; }
   `}</style>
-);
-
-const PostmarkBadge = ({ status }) => {
-  const isPaid = status === "paid";
-  const label = isPaid ? "UNLOCKED" : "DRAFT";
-  const ring = isPaid ? "#0F6E63" : "#B3382C";
-  return (
-    <div
-      className="absolute -top-3 -right-3 w-16 h-16 rounded-full flex items-center justify-center rotate-6 select-none"
-      style={{
-        border: `1.5px dashed ${ring}`,
-        color: ring,
-        backgroundColor: "#FFFFFF",
-      }}
-    >
-      <div className="text-center leading-none">
-        <div className="font-mono text-[8px] tracking-wider">{label}</div>
-        <div className="w-6 h-px mx-auto my-0.5" style={{ backgroundColor: ring }} />
-        <div className="font-mono text-[7px] tracking-wider opacity-70">
-          {isPaid ? "PAID" : "PENDING"}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ResumeCard = ({
-  resume,
-  onPreview,
-  onDownload,
-  onEdit,
-  onDelete,
-  getTemplateDisplayName,
-}) => (
-  <Card
-    className="group relative border rounded-none shadow-none transition-all duration-300 hover:-translate-y-1"
-    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
-  >
-    <PostmarkBadge status={resume.status} />
-    <CardContent className="p-0">
-      {/* Torn-edge letter strip */}
-      <div
-        className="h-2 w-full"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, #E4E2DC 0, #E4E2DC 4px, transparent 4px, transparent 8px)",
-        }}
-      />
-      <div
-        className="p-6 flex items-center justify-center h-40 relative overflow-hidden cursor-pointer"
-        style={{ backgroundColor: "#F7F7F5" }}
-        onClick={() => onPreview(resume)}
-      >
-        <FileText
-          className="w-9 h-9 transition-colors"
-          style={{ color: "#C9C7BF" }}
-          strokeWidth={1.25}
-        />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[#1C2333]/5">
-          <span
-            className="px-4 py-2 text-xs font-mono tracking-wide border"
-            style={{ backgroundColor: "#FFFFFF", borderColor: "#1C2333", color: "#1C2333" }}
-          >
-            OPEN PREVIEW
-          </span>
-        </div>
-      </div>
-
-      <div className="px-5 py-4 border-t" style={{ borderColor: "#E4E2DC" }}>
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex-1 min-w-0">
-            <h2
-              className="text-sm font-semibold truncate"
-              style={{ color: "#1C2333" }}
-              title={resume.name}
-            >
-              {resume.name || "Untitled Resume"}
-            </h2>
-            <p className="text-xs truncate mt-0.5" style={{ color: "#6B7280" }}>
-              {getTemplateDisplayName(resume.ResumeType)}
-            </p>
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-7 w-7 -mr-2 rounded-none"
-                style={{ color: "#6B7280" }}
-              >
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 rounded-none">
-              <DropdownMenuItem onClick={() => onDownload(resume)}>
-                <Download className="mr-2 h-4 w-4" />
-                Download PDF
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onEdit(resume?._id)}>
-                <Edit2 className="mr-2 h-4 w-4" />
-                Edit Resume
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={() => onDelete(resume._id)}
-                className="text-red-600 focus:text-red-600 focus:bg-red-50"
-              >
-                <Trash2 className="mr-2 h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
-        <div
-          className="mt-3 flex items-center justify-between font-mono text-[10px] tracking-wide"
-          style={{ color: "#6B7280" }}
-        >
-          <span>REF · {(resume?._id || "0000").toString().slice(-6).toUpperCase()}</span>
-          <span>
-            {new Date(resume.updatedAt || resume.createdAt).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-        </div>
-      </div>
-    </CardContent>
-  </Card>
-);
-
-const EmptyState = ({ icon: Icon, title, body, action }) => (
-  <div
-    className="text-center py-24 border"
-    style={{ borderStyle: "dashed", borderColor: "#D8D6CE", backgroundColor: "#FBFBF9" }}
-  >
-    <div
-      className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-      style={{ backgroundColor: "#F0EFEA", color: "#B7B5AC" }}
-    >
-      <Icon className="w-7 h-7" strokeWidth={1.5} />
-    </div>
-    <h3 className="font-display text-lg font-medium mb-2" style={{ color: "#1C2333" }}>
-      {title}
-    </h3>
-    <p className="text-sm max-w-sm mx-auto mb-6" style={{ color: "#6B7280" }}>
-      {body}
-    </p>
-    {action}
-  </div>
 );
 
 const MyResume = () => {
@@ -210,6 +47,7 @@ const MyResume = () => {
   const [originalAmount, setOriginalAmount] = useState(100); // Store original amount
   const [isSubmit, setIsSubmit] = useState(false);
   const [discount, setDiscount] = useState(null);
+  const [sharingResume, setSharingResume] = useState(null);
 
   const route = useRouter();
 
@@ -395,18 +233,31 @@ const MyResume = () => {
                 <h3 className="font-display text-base font-medium" style={{ color: "#1C2333" }}>
                   Resume Preview
                 </h3>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => {
-                    setPdfUrl("");
-                    setPaid(false);
-                    setIsModelOpen(false);
-                  }}
-                  className="rounded-none"
-                >
-                  <X className="w-5 h-5" style={{ color: "#6B7280" }} />
-                </Button>
+                <div className="flex items-center gap-2">
+                  {paid && resumeData && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSharingResume(resumeData)}
+                      className="rounded-none font-mono text-xs flex items-center gap-1.5 border-[#1C2333] text-[#1C2333] hover:bg-[#1C2333]/5"
+                    >
+                      <Share2 className="w-3.5 h-3.5 text-indigo-600" />
+                      <span>Share Link</span>
+                    </Button>
+                  )}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      setPdfUrl("");
+                      setPaid(false);
+                      setIsModelOpen(false);
+                    }}
+                    className="rounded-none"
+                  >
+                    <X className="w-5 h-5" style={{ color: "#6B7280" }} />
+                  </Button>
+                </div>
               </div>
 
               <div
@@ -581,6 +432,7 @@ const MyResume = () => {
                     onDownload={handleDownload}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
+                    onShare={resumeToShare => setSharingResume(resumeToShare)}
                     getTemplateDisplayName={getTemplateDisplayName}
                   />
                 ))}
@@ -622,6 +474,12 @@ const MyResume = () => {
           </TabsContent>
         </Tabs>
       </div>
+
+      <ShareResumeModal
+        isOpen={Boolean(sharingResume)}
+        onClose={() => setSharingResume(null)}
+        resume={sharingResume}
+      />
     </div>
   );
 };
