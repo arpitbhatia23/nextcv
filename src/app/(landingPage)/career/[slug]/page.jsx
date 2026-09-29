@@ -37,8 +37,7 @@ export async function generateMetadata({ params }) {
 
   return createSeoMetadata({
     title: career.title,
-    description:
-      "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
+    description: `${career.content.split(/\s+/).slice(0, 50).join(" ")} Learn practical resume, interview, and job-search tips with NextCV.`,
     path: `/career/${career.slug}`,
     keywords: [
       "career guide",

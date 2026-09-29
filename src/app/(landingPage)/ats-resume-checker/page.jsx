@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  CheckCircle2,
-  Search,
-  Briefcase,
-  ShieldCheck,
-  Sparkles,
-  ArrowRight,
-  Zap,
-  FileText,
-} from "lucide-react";
+import { CheckCircle2, Search, Briefcase, ArrowRight } from "lucide-react";
 import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 import Link from "next/link";
 

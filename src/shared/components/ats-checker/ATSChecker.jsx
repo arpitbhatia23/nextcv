@@ -2,7 +2,16 @@
 
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { UploadCloud, FileText, X, Loader2, AlertCircle, CheckCircle2, Search, FileCheck2, Sparkles } from "lucide-react";
+import {
+  UploadCloud,
+  FileText,
+  X,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+  Search,
+  Sparkles,
+} from "lucide-react";
 import ScoreDisplay from "./ScoreDisplay";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,7 +23,7 @@ export default function ATSChecker() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
-  const analyzeFile = async (uploadedFile) => {
+  const analyzeFile = async uploadedFile => {
     setAnalyzing(true);
     setError(null);
     setResult(null);
@@ -42,7 +51,7 @@ export default function ATSChecker() {
     }
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = useCallback(acceptedFiles => {
     const uploadedFile = acceptedFiles[0];
 
     if (!uploadedFile) return;
@@ -67,7 +76,7 @@ export default function ATSChecker() {
     multiple: false,
   });
 
-  const removeFile = (e) => {
+  const removeFile = e => {
     e.stopPropagation();
     setFile(null);
     setResult(null);
@@ -125,7 +134,9 @@ export default function ATSChecker() {
                 <p className="font-bold text-[#071644] text-sm sm:text-base truncate max-w-50 sm:max-w-xs">
                   {file.name}
                 </p>
-                <p className="text-xs text-indigo-600 font-medium">{(file.size / 1024).toFixed(2)} KB</p>
+                <p className="text-xs text-indigo-600 font-medium">
+                  {(file.size / 1024).toFixed(2)} KB
+                </p>
               </div>
             </div>
 

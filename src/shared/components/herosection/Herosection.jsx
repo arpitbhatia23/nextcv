@@ -39,9 +39,7 @@ function Herosection() {
       {/* =========================================================
           BACKGROUND
       ========================================================== */}
-
       <div className="pointer-events-none absolute inset-0">
-        {/* very subtle top glow */}
         <div
           className="
             absolute
@@ -56,7 +54,6 @@ function Herosection() {
           "
         />
 
-        {/* right glow */}
         <div
           className="
             absolute
@@ -71,7 +68,6 @@ function Herosection() {
           "
         />
 
-        {/* bottom glow */}
         <div
           className="
             absolute
@@ -90,7 +86,6 @@ function Herosection() {
       {/* =========================================================
           HERO
       ========================================================== */}
-
       <div
         className="
           relative
@@ -116,7 +111,6 @@ function Herosection() {
           {/* =====================================================
               LEFT CONTENT
           ====================================================== */}
-
           <div
             className="
               relative
@@ -126,7 +120,6 @@ function Herosection() {
             "
           >
             {/* Badge */}
-
             <div
               className="
                 mb-5.5
@@ -145,12 +138,10 @@ function Herosection() {
               "
             >
               <Sparkles className="h-3.75 w-3.75" />
-
-              <span>AI-Powered Resume Builder</span>
+              <span>AI-Powered Career & Resume Builder</span>
             </div>
 
             {/* Heading */}
-
             <h1
               className="
                 max-w-xl
@@ -163,9 +154,7 @@ function Herosection() {
                 lg:text-4xl
               "
             >
-              Build an ATS-Friendly
-              <br />
-              Resume for Your Next Job
+              Build Your Career. Start With a Better
               <span
                 className="
                   block
@@ -176,12 +165,11 @@ function Herosection() {
                   text-transparent
                 "
               >
-                with AI
+                Resume
               </span>
             </h1>
 
             {/* Description */}
-
             <p
               className="
                 mt-5
@@ -191,12 +179,11 @@ function Herosection() {
                 text-[#365184]
               "
             >
-              Create a professional resume in minutes with AI-powered writing and ATS-friendly
-              templates — built for freshers and experienced professionals in India.
+              Build a professional resume with AI, improve your profile, and take the next step
+              toward your career goals.
             </p>
 
             {/* Benefits */}
-
             <div
               className="
                 mt-6.25
@@ -208,8 +195,7 @@ function Herosection() {
                 sm:gap-x-7.5
               "
             >
-              {/* ATS */}
-
+              {/* Career */}
               <div className="flex items-start gap-2.25">
                 <span
                   className="
@@ -235,14 +221,13 @@ function Herosection() {
                     text-[#0d234f]
                   "
                 >
-                  ATS-friendly
+                  Career-focused
                   <br />
-                  formatting
+                  resume
                 </span>
               </div>
 
               {/* AI */}
-
               <div className="flex items-start gap-2.25">
                 <span
                   className="
@@ -275,7 +260,6 @@ function Herosection() {
               </div>
 
               {/* Templates */}
-
               <div className="flex items-start gap-2.25">
                 <span
                   className="
@@ -311,18 +295,20 @@ function Herosection() {
             {/* =================================================
                 PRIMARY CTA
             ================================================== */}
-
             <div className="mt-6.75">
               <Button
-                className={"w-full bg-indigo-600 p-3 px-8 font-semibold sm:w-auto"}
-                onClick={() => signIn("google", { callbackUrl: "/dashboard/builder" })}
+                className="w-full bg-indigo-600 p-3 px-8 font-semibold sm:w-auto"
+                onClick={() =>
+                  signIn("google", {
+                    callbackUrl: "/dashboard/builder",
+                  })
+                }
               >
-                Build My Resume With AI <ArrowRight />{" "}
+                Build My Resume <ArrowRight />
               </Button>
             </div>
 
             {/* Trust */}
-
             <div
               className="
                 mt-4
@@ -357,9 +343,8 @@ function Herosection() {
             </div>
 
             {/* =================================================
-                CREATE → OPTIMIZE → DOWNLOAD
+                BUILD → IMPROVE → APPLY
             ================================================== */}
-
             <div
               className="
                 mt-8.5
@@ -370,19 +355,18 @@ function Herosection() {
                 text-[13px]
               "
             >
-              <span className="font-medium text-[#071644]">Create</span>
+              <span className="font-medium text-[#071644]">Build</span>
 
               <ArrowRight className="h-3.5 w-3.5 text-[#526b9d]" />
 
-              <span className="font-medium text-[#071644]">Optimize</span>
+              <span className="font-medium text-[#071644]">Improve</span>
 
               <ArrowRight className="h-3.5 w-3.5 text-[#526b9d]" />
 
-              <span className="font-medium text-[#071644]">Download</span>
+              <span className="font-medium text-[#071644]">Apply</span>
             </div>
 
             {/* Step indicators */}
-
             <div
               className="
                 mt-3.25
@@ -391,6 +375,7 @@ function Herosection() {
                 gap-3.75
               "
             >
+              {/* Step 1 */}
               <div className="flex items-center gap-2">
                 <span
                   className="
@@ -411,11 +396,12 @@ function Herosection() {
                   1
                 </span>
 
-                <span className="text-[10px] text-[#526b9d]">Choose a template</span>
+                <span className="text-[10px] text-[#526b9d]">Build your profile</span>
               </div>
 
               <ArrowRight className="h-3.25 w-3.25 text-[#9ba9c4]" />
 
+              {/* Step 2 */}
               <div className="flex items-center gap-2">
                 <span
                   className="
@@ -436,11 +422,12 @@ function Herosection() {
                   2
                 </span>
 
-                <span className="text-[10px] text-[#526b9d]">Add your details</span>
+                <span className="text-[10px] text-[#526b9d]">Improve with AI</span>
               </div>
 
               <ArrowRight className="h-3.25 w-3.25 text-[#9ba9c4]" />
 
+              {/* Step 3 */}
               <div className="flex items-center gap-2">
                 <span
                   className="
@@ -461,7 +448,7 @@ function Herosection() {
                   3
                 </span>
 
-                <span className="text-[10px] text-[#526b9d]">Get your ATS-friendly resume</span>
+                <span className="text-[10px] text-[#526b9d]">Create your resume</span>
               </div>
             </div>
           </div>
@@ -471,26 +458,36 @@ function Herosection() {
           ====================================================== */}
           <div
             className="
-    relative
-    flex
-    h-105
-    w-full
-    items-center
-    justify-center
-    overflow-visible
-    sm:h-125
-    lg:-ml-1.25
-    lg:h-137.5
-    lg:justify-end
-  "
+              relative
+              flex
+              h-105
+              w-full
+              items-center
+              justify-center
+              overflow-visible
+              sm:h-125
+              lg:-ml-1.25
+              lg:h-137.5
+              lg:justify-end
+            "
           >
-            {/* =================================================
-      LARGE BLURRED BLUE / GRAY BACKGROUND BLOB
-  ================================================== */}
+            {/* LARGE BLURRED BLUE / GRAY BACKGROUND BLOB */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 600 600"
-              className="pointer-events-none absolute -right-60 top-1/2 z-0 h-200 w-6xl -translate-y-1/2 blur-md hidden sm:block"
+              className="
+                pointer-events-none
+                absolute
+                -right-60
+                top-1/2
+                z-0
+                h-200
+                w-6xl
+                -translate-y-1/2
+                blur-md
+                hidden
+                sm:block
+              "
               style={{
                 opacity: 0.48,
               }}
@@ -501,47 +498,41 @@ function Herosection() {
                 stroke="hsl(215, 15%, 45%)"
                 strokeWidth="2"
                 transform="matrix(
-        0.6518737537615832,
-        -0.5469870263554935,
-        0.5469870263554935,
-        0.6518737537615832,
-        -34.899750220507826,
-        268.84045505243995
-      )"
+                  0.6518737537615832,
+                  -0.5469870263554935,
+                  0.5469870263554935,
+                  0.6518737537615832,
+                  -34.899750220507826,
+                  268.84045505243995
+                )"
               />
             </svg>
 
-            {/* =================================================
-      SECOND SOFT GRAY / BLUE GLOW
-      Helps the color appear around the dashboard
-  ================================================== */}
+            {/* SECOND SOFT GRAY / BLUE GLOW */}
             <div
               className="
-      pointer-events-none
-      absolute
-      right-5
-      top-1/2
-      z-0
-      h-120
-      w-155
-      -translate-y-1/2
-      rounded-full
-      bg-slate-400/20
-      blur-[70px]
-    "
+                pointer-events-none
+                absolute
+                right-5
+                top-1/2
+                z-0
+                h-120
+                w-155
+                -translate-y-1/2
+                rounded-full
+                bg-slate-400/20
+                blur-[70px]
+              "
             />
 
-            {/* =================================================
-      DASHBOARD
-  ================================================== */}
+            {/* DASHBOARD */}
             <div
               className="
-      relative
-      z-10
-      overflow-hidden
-      rounded-md
-     
-    "
+                relative
+                z-10
+                overflow-hidden
+                rounded-md
+              "
             >
               <Image
                 src="/herosection.png"
@@ -550,46 +541,44 @@ function Herosection() {
                 height={1200}
                 priority
                 className="
-        h-120
-        w-full
-        max-w-3xl
-        aspect-video
-        object-contain
-      "
+                  h-120
+                  w-full
+                  max-w-3xl
+                  aspect-video
+                  object-contain
+                "
               />
             </div>
 
-            {/* =================================================
-      AI SUGGESTION CARD
-  ================================================== */}
+            {/* AI SUGGESTION CARD */}
             <div
               className="
-      absolute
-      right-0
-      top-11.25
-      z-20
-      flex
-      items-center
-      gap-2.25
-      rounded-[12px]
-      border
-      border-[#e4e6ff]
-      bg-white
-      px-4
-      py-3
-      shadow-[0_12px_30px_-12px_rgba(67,56,244,0.28)]
-    "
+                absolute
+                right-0
+                top-11.25
+                z-20
+                flex
+                items-center
+                gap-2.25
+                rounded-[12px]
+                border
+                border-[#e4e6ff]
+                bg-white
+                px-4
+                py-3
+                shadow-[0_12px_30px_-12px_rgba(67,56,244,0.28)]
+              "
             >
               <div
                 className="
-        flex
-        h-8
-        w-8
-        items-center
-        justify-center
-        rounded-xl
-        bg-[#f0efff]
-      "
+                  flex
+                  h-8
+                  w-8
+                  items-center
+                  justify-center
+                  rounded-xl
+                  bg-[#f0efff]
+                "
               >
                 <Sparkles className="h-4 w-4 text-[#4338f4]" />
               </div>
@@ -607,7 +596,6 @@ function Herosection() {
       {/* =========================================================
           TRUST SECTION
       ========================================================== */}
-
       <section
         className="
           relative
@@ -628,8 +616,7 @@ function Herosection() {
             lg:px-0
           "
         >
-          {/* heading */}
-
+          {/* Heading */}
           <div className="text-center">
             <h2
               className="
@@ -639,7 +626,7 @@ function Herosection() {
                 text-[#071644]
               "
             >
-              Trusted by 1,200+ job seekers
+              Built for Students and Job Seekers
             </h2>
 
             <p
@@ -649,17 +636,16 @@ function Herosection() {
                 text-[#304b7b]
               "
             >
+              AI-powered tools
+              <span className="mx-2.5 text-[#a5afc1]">•</span>
               Professional templates
               <span className="mx-2.5 text-[#a5afc1]">•</span>
-              AI resume writing
-              <span className="mx-2.5 text-[#a5afc1]">•</span>
-              ATS-friendly formatting
+              Career resources
             </p>
 
             {/* View templates */}
-
             <a
-              href="/templates"
+              href="/career"
               className="
                 mt-4
                 inline-flex
@@ -679,7 +665,7 @@ function Herosection() {
                 hover:bg-[#f7f7ff]
               "
             >
-              View Templates
+              Explore Career Guides
               <ArrowRight className="h-3.25 w-3.25" />
             </a>
           </div>
@@ -687,13 +673,13 @@ function Herosection() {
           {/* =====================================================
               COMPANY LOGOS
           ====================================================== */}
-
           <div
             className="
               mt-6.75
-              flex justify-between
-              grayscale hover:grayscale-0
-
+              flex
+              justify-between
+              grayscale
+              hover:grayscale-0
             "
           >
             {mncLogos.map((logo, index) => (
@@ -701,7 +687,8 @@ function Herosection() {
                 key={`${logo.alt}-${index}`}
                 className="
                   flex
-                  h-4 sm:h-7
+                  h-4
+                  sm:h-7
                   items-stretch
                   justify-center
                 "
@@ -722,8 +709,7 @@ function Herosection() {
             ))}
           </div>
 
-          {/* disclaimer */}
-
+          {/* Disclaimer */}
           <p
             className="
               mt-4.25
@@ -732,8 +718,8 @@ function Herosection() {
               text-[#9ba7bb]
             "
           >
-            Resume formats inspired by modern hiring standards. Clean, professional layouts designed
-            for ATS readability.
+            Professional resume formats and practical career resources designed for today&apos;s job
+            seekers.
           </p>
         </div>
       </section>

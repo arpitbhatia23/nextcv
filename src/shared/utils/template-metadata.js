@@ -6,7 +6,7 @@ export const templatesMetadata = [
   },
   {
     key: "MordenBluesidebar",
-    label: "Modern Blue Sidebar",
+    label: "Modern Blue",
     image: "/ModernSideBar.webp",
   },
   {
@@ -16,12 +16,12 @@ export const templatesMetadata = [
   },
   {
     key: "TcsDigital",
-    label: "TCS Digital",
+    label: "Digital Professional",
     image: "/tcs.webp",
   },
   {
     key: "InfosysSystem",
-    label: "Infosys System",
+    label: "Structured Professional",
     image: "/infosys.webp",
   },
   {
@@ -31,57 +31,57 @@ export const templatesMetadata = [
   },
   {
     key: "WiproModern",
-    label: "Wipro Modern",
+    label: "Modern Professional",
     image: "/wipro.webp",
   },
   {
     key: "AmazonOperations",
-    label: "Amazon Operations",
+    label: "Operations Professional",
     image: "/amazon.webp",
   },
   {
     key: "AccentureConsult",
-    label: "Accenture Consult",
+    label: "Consulting Professional",
     image: "/accenture.webp",
   },
   {
     key: "HclTech",
-    label: "HCL Tech",
+    label: "Tech Professional",
     image: "/hcl.webp",
   },
   {
     key: "IbmClassic",
-    label: "IBM Classic",
+    label: "Professional Classic",
     image: "/ibm.webp",
   },
   {
     key: "DeloitteAudit",
-    label: "Deloitte Audit",
+    label: "Corporate Professional",
     image: "/deloitte.webp",
   },
   {
     key: "OracleDb",
-    label: "Oracle DB",
+    label: "Technical Professional",
     image: "/oracle.webp",
   },
   {
     key: "MahindraRise",
-    label: "Mahindra Rise",
+    label: "Executive Professional",
     image: "/mahindra.webp",
   },
   {
     key: "MedicalNurse",
-    label: "Medical Nurse",
+    label: "Healthcare Professional",
     image: "/medical.webp",
   },
   {
     key: "ClinicalTrial",
-    label: "Clinical Trial",
+    label: "Clinical Research",
     image: "/clinincal.webp",
   },
   {
     key: "AcademicTeacher",
-    label: "Academic Teacher",
+    label: "Academic Professional",
     image: "/teacher.webp",
   },
   {
@@ -91,7 +91,7 @@ export const templatesMetadata = [
   },
   {
     key: "SalesGrowth",
-    label: "Sales Growth",
+    label: "Sales Professional",
     image: "/sales.webp",
   },
   {
@@ -101,7 +101,7 @@ export const templatesMetadata = [
   },
   {
     key: "SapEnterprise",
-    label: "SAP Enterprise",
+    label: "Enterprise Professional",
     image: "/sap.webp",
   },
   {
@@ -116,47 +116,47 @@ export const templatesMetadata = [
   },
   {
     key: "AppleCreative",
-    label: "Apple Creative",
+    label: "Creative Professional",
     image: "/applecreative.webp",
   },
   {
     key: "SidebarLeft",
-    label: "Sidebar Left",
+    label: "Left Sidebar",
     image: "/sidebarleft.webp",
   },
   {
     key: "GoogleTech",
-    label: "Google Tech",
+    label: "Tech Modern",
     image: "/googletech.webp",
   },
   {
     key: "MicrosoftCorp",
-    label: "Microsoft Corp",
+    label: "Corporate Modern",
     image: "/microsoft.webp",
   },
   {
     key: "MetaSocial",
-    label: "Meta Social",
+    label: "Social Media",
     image: "/metasocial.webp",
   },
   {
     key: "JpmorganChase",
-    label: "JPMorgan Chase",
+    label: "Finance Professional",
     image: "/jpmorgan.webp",
   },
   {
     key: "GoldmanFinance",
-    label: "Goldman Finance",
+    label: "Finance Executive",
     image: "/goldman.webp",
   },
   {
     key: "CapgeminiFlow",
-    label: "Capgemini Flow",
+    label: "Professional Flow",
     image: "/capgenine.webp",
   },
   {
     key: "CiscoNet",
-    label: "Cisco Net",
+    label: "Technical Modern",
     image: "/cisco.webp",
   },
   {
@@ -176,12 +176,12 @@ export const templatesMetadata = [
   },
   {
     key: "InfographicLite",
-    label: "Infographic Lite",
+    label: "Infographic",
     image: "/infografhic.webp",
   },
   {
     key: "NetflixCulture",
-    label: "Netflix Culture",
+    label: "Creative Culture",
     image: "/netflix.webp",
   },
   {

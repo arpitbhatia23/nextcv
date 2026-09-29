@@ -17,7 +17,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Classic Professional",
-      description: "Timeless elegance. Perfect for corporate and traditional industries.",
+      description: "Timeless and structured. Suitable for corporate and traditional roles.",
       isATS: true,
     },
     {
@@ -25,7 +25,7 @@ const Templates = () => {
       width: 351,
       height: 451,
       title: "Clean Minimalist",
-      description: "Focus purely on content. Ideal for creative and tech roles.",
+      description: "Simple and content-focused design for modern professional roles.",
       isATS: true,
     },
     {
@@ -33,7 +33,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Modern Edge",
-      description: "Contemporary layout with subtle accents to stand out.",
+      description: "Contemporary layout with subtle accents for a modern professional look.",
       isATS: true,
     },
     {
@@ -41,16 +41,15 @@ const Templates = () => {
       width: 351,
       height: 451,
       title: "Sidebar Executive",
-      description: "High information density with a structured sidebar layout.",
+      description: "Structured sidebar layout designed for information-rich resumes.",
       isATS: true,
     },
-
     {
       img: "/professionalclean.webp",
       width: 446,
       height: 587,
       title: "Professional Clean",
-      description: "Polished and structured for corporate roles.",
+      description: "Polished and organized design for a clean professional presentation.",
       isATS: true,
     },
     {
@@ -58,7 +57,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Creative Teal",
-      description: "Vibrant and expressive for creative fields.",
+      description: "Expressive design with a modern visual style for creative professionals.",
       isATS: true,
     },
     {
@@ -66,7 +65,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Executive Gray",
-      description: "Commanding and authoritative for leadership roles.",
+      description: "Refined and authoritative layout for experienced professionals.",
       isATS: true,
     },
     {
@@ -74,7 +73,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Tech Dark",
-      description: "Sleek and modern for technology professionals.",
+      description: "Sleek, modern layout suited to technology and digital roles.",
       isATS: true,
     },
     {
@@ -82,7 +81,7 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Compact Modern",
-      description: "Efficient use of space for experienced candidates.",
+      description: "Space-efficient layout for candidates with detailed experience.",
       isATS: true,
     },
     {
@@ -90,241 +89,241 @@ const Templates = () => {
       width: 446,
       height: 587,
       title: "Bold Header",
-      description: "Make a strong first impression with a bold header.",
+      description: "Strong visual hierarchy with a prominent professional header.",
       isATS: true,
     },
     {
       img: "/sidebarleft.webp",
       width: 446,
       height: 587,
-      title: "Sidebar Left",
-      description: "Classic sidebar layout for easy scanning.",
+      title: "Left Sidebar",
+      description: "Classic sidebar layout for clear organization and easy scanning.",
       isATS: true,
     },
     {
       img: "/infografhic.webp",
       width: 446,
       height: 587,
-      title: "Infographic Lite",
-      description: "Visual flair with timeline and skill bars.",
+      title: "Infographic",
+      description: "Visual layout with timelines and structured skill presentation.",
       isATS: true,
     },
 
-    // Batch 1: Tech Giants
+    // Tech & Digital
     {
       img: "/googletech.webp",
       width: 446,
       height: 587,
-      title: "Google Tech",
-      description: "Clean, colorful, and data-driven design.",
+      title: "Tech Modern",
+      description: "Clean and contemporary layout for technology professionals.",
       isATS: true,
     },
     {
       img: "/microsoft.webp",
       width: 446,
       height: 587,
-      title: "Microsoft Corp",
-      description: "Professional, structured, and business-ready.",
+      title: "Corporate Modern",
+      description: "Structured and polished design for corporate professionals.",
       isATS: true,
     },
     {
       img: "/amazon.webp",
       width: 446,
       height: 587,
-      title: "Amazon Ops",
-      description: "Leadership principles in a concise layout.",
+      title: "Operations Professional",
+      description: "Concise and structured format for operations and business roles.",
       isATS: true,
     },
     {
       img: "/applecreative.webp",
       width: 446,
       height: 587,
-      title: "Apple Creative",
-      description: "Minimalist elegance for design-focused roles.",
+      title: "Creative Professional",
+      description: "Minimal and refined design for creative and design-focused roles.",
       isATS: true,
     },
     {
       img: "/metasocial.webp",
       width: 446,
       height: 587,
-      title: "Meta Social",
-      description: "Modern, connected, and impact-oriented.",
+      title: "Social Media",
+      description: "Modern layout suited to marketing, social media, and digital roles.",
       isATS: true,
     },
 
-    // Batch 2: Indian MNCs
+    // Indian Professional
     {
       img: "/tcs.webp",
       width: 446,
       height: 587,
-      title: "TCS Digital",
-      description: "Structured excellence for IT professionals.",
+      title: "Digital Professional",
+      description: "Structured resume design for IT and digital professionals.",
       isATS: true,
     },
     {
       img: "/infosys.webp",
       width: 446,
       height: 587,
-      title: "Infosys System",
-      description: "Detailed and organized technical resume.",
+      title: "Structured Professional",
+      description: "Detailed and organized layout for technical and professional roles.",
       isATS: true,
     },
     {
       img: "/wipro.webp",
       width: 446,
       height: 587,
-      title: "Wipro Modern",
-      description: "Fresh perspective with solid foundations.",
+      title: "Modern Professional",
+      description: "Fresh and structured design for early-career professionals.",
       isATS: true,
     },
     {
       img: "/hcl.webp",
       width: 446,
       height: 587,
-      title: "HCL Tech",
-      description: "Innovation-focused and results-driven.",
+      title: "Technology Professional",
+      description: "Modern and results-focused layout for technology roles.",
       isATS: true,
     },
     {
       img: "/mahindra.webp",
       width: 446,
       height: 587,
-      title: "Mahindra Rise",
-      description: "Bold and aspirational leadership format.",
+      title: "Executive Professional",
+      description: "Bold and polished format for leadership and business roles.",
       isATS: true,
     },
 
-    // Batch 3: Global Corporate
+    // Global Corporate
     {
       img: "/ibm.webp",
       width: 446,
       height: 587,
-      title: "IBM Classic",
-      description: "Heritage meets modern technology.",
+      title: "Professional Classic",
+      description: "Traditional professional structure with a modern presentation.",
       isATS: true,
     },
     {
       img: "/accenture.webp",
       width: 446,
       height: 587,
-      title: "Accenture Consult",
-      description: "High-performance consulting layout.",
+      title: "Consulting Professional",
+      description: "Structured layout suited to consulting and business roles.",
       isATS: true,
     },
     {
       img: "/deloitte.webp",
       width: 446,
       height: 587,
-      title: "Deloitte Audit",
-      description: "Precision, clarity, and professional rigor.",
+      title: "Corporate Professional",
+      description: "Precise and organized design for corporate professionals.",
       isATS: true,
     },
     {
       img: "/capgenine.webp",
       width: 446,
       height: 587,
-      title: "Capgemini Flow",
-      description: "Smooth flow for agile professionals.",
+      title: "Professional Flow",
+      description: "Balanced layout with a smooth visual hierarchy.",
       isATS: true,
     },
     {
       img: "/cisco.webp",
       width: 446,
       height: 587,
-      title: "Cisco Net",
-      description: "Networked brilliance in a clean grid.",
+      title: "Technical Grid",
+      description: "Clean grid-based structure for technical professionals.",
       isATS: true,
     },
 
-    // Batch 4: Finance & Enterprise
+    // Finance & Enterprise
     {
       img: "/oracle.webp",
       width: 446,
       height: 587,
-      title: "Oracle DB",
-      description: "Solid, reliable, and enterprise-grade.",
+      title: "Technical Enterprise",
+      description: "Structured and reliable layout for enterprise technology roles.",
       isATS: true,
     },
     {
       img: "/sap.webp",
       width: 446,
       height: 587,
-      title: "SAP Enterprise",
-      description: "Process-oriented and integrated design.",
+      title: "Enterprise Professional",
+      description: "Organized design suited to enterprise and business professionals.",
       isATS: true,
     },
     {
       img: "/goldman.webp",
       width: 446,
       height: 587,
-      title: "Goldman Finance",
-      description: "Elite financial standard format.",
+      title: "Finance Professional",
+      description: "Refined and structured format for finance and analytical roles.",
       isATS: true,
     },
     {
       img: "/jpmorgan.webp",
       width: 446,
       height: 587,
-      title: "JPMorgan Chase",
-      description: "Global banking prestige layout.",
+      title: "Finance Executive",
+      description: "Professional layout for banking, finance, and business roles.",
       isATS: true,
     },
     {
       img: "/netflix.webp",
       width: 446,
       height: 587,
-      title: "Netflix Culture",
-      description: "Bold culture fit for high performers.",
+      title: "Creative Culture",
+      description: "Bold and expressive layout for modern creative professionals.",
       isATS: true,
     },
 
-    // Batch 5: Role-Specific
+    // Role-Specific
     {
       img: "/medical.webp",
       width: 446,
       height: 587,
-      title: "Medical / Nurse",
-      description: "Clean, clinical focus for healthcare.",
+      title: "Healthcare Professional",
+      description: "Clean and structured design for healthcare professionals.",
       isATS: true,
     },
     {
       img: "/teacher.webp",
       width: 446,
       height: 587,
-      title: "Academic / Teacher",
-      description: "Education & Philosophy focused layout.",
+      title: "Academic Professional",
+      description: "Professional layout suited to education and academic roles.",
       isATS: true,
     },
     {
       img: "/sales.webp",
       width: 446,
       height: 587,
-      title: "Sales / Business",
-      description: "Metrics & Achievement highlighting design.",
+      title: "Sales Professional",
+      description: "Achievement-focused design for sales and business professionals.",
       isATS: true,
     },
     {
       img: "/legal.webp",
       width: 446,
       height: 587,
-      title: "Legal / Attorney",
-      description: "Text-heavy, conservative professional style.",
+      title: "Legal Professional",
+      description: "Conservative and structured format for legal professionals.",
       isATS: true,
     },
     {
       img: "/modern.webp",
       width: 446,
       height: 587,
-      title: "Marketing / Creative",
-      description: "Portfolio & Brand focused layout.",
+      title: "Marketing Creative",
+      description: "Modern visual layout for marketing and creative professionals.",
       isATS: true,
     },
     {
       img: "/classic.webp",
       width: 446,
       height: 587,
-      title: "Clinical Trial / Research",
-      description: "Research & Protocol focused layout.",
+      title: "Research Professional",
+      description: "Structured format suited to research and clinical roles.",
       isATS: true,
     },
   ];
@@ -332,18 +331,18 @@ const Templates = () => {
   const features = [
     {
       icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
-      title: "ATS Optimized",
-      description: "Guaranteed to pass formatting checks.",
+      title: "ATS-Friendly",
+      description: "Structured layouts designed for readable resumes.",
     },
     {
       icon: <Smartphone className="w-6 h-6 text-indigo-600" />,
       title: "Mobile Ready",
-      description: "Looks perfect on any device.",
+      description: "Looks great across desktop and mobile devices.",
     },
     {
       icon: <Palette className="w-6 h-6 text-purple-600" />,
       title: "Customizable",
-      description: "Change colors and fonts easily.",
+      description: "Adjust colors and fonts to match your style.",
     },
   ];
 
@@ -355,8 +354,10 @@ const Templates = () => {
           <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">
             Professional Templates for <span className="text-indigo-600">Every Career Path</span>
           </h2>
+
           <p className="text-xs sm:text-sm text-slate-600">
-            Choose from our collection of ATS-optimized designs. proven to get results.
+            Choose from professional resume designs built for different industries, roles, and
+            career stages.
           </p>
         </div>
 
@@ -376,7 +377,7 @@ const Templates = () => {
                 </div>
               </div>
 
-              {/* Image Container with Inner Shadow */}
+              {/* Image Container */}
               <div className="relative aspect-3/4 overflow-hidden bg-slate-100 group-hover:bg-slate-50 transition-colors">
                 <Image
                   src={img}
@@ -388,14 +389,13 @@ const Templates = () => {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
 
-                {/* Subtle Gradient Overlay */}
                 <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-white/90 to-transparent pointer-events-none" />
 
                 {/* Badge */}
                 {isATS && (
                   <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-slate-800 text-[10px] uppercase tracking-wider font-bold px-3 py-1.5 rounded-full shadow-sm border border-slate-100 flex items-center gap-1.5 z-10 transition-transform group-hover:scale-105">
                     <ShieldCheck className="w-3 h-3 text-emerald-500" />
-                    ATS Verified
+                    ATS Friendly
                   </div>
                 )}
 
@@ -410,6 +410,7 @@ const Templates = () => {
               {/* Content */}
               <div className="p-6 flex flex-col grow">
                 <h3 className="text-xs sm:text-sm font-bold text-slate-900 mb-2">{title}</h3>
+
                 <p className="text-xs text-slate-500 mb-6 grow leading-relaxed">{description}</p>
 
                 <Button
@@ -430,15 +431,20 @@ const Templates = () => {
               <h3 className="text-sm sm:text-lg font-bold text-slate-900 mb-1">
                 Why choose our templates?
               </h3>
-              <p className="text-slate-500 text-xs ">Built for professional's, optimized by AI.</p>
+
+              <p className="text-slate-500 text-xs">
+                Built for professionals, designed for clarity.
+              </p>
             </div>
 
             <div className="flex flex-wrap justify-center gap-6 sm:gap-12">
               {features.map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="p-2 bg-slate-50 rounded-lg">{feature.icon}</div>
+
                   <div className="text-left">
-                    <h4 className="font-semibold  text-slate-900 text-sm">{feature.title}</h4>
+                    <h4 className="font-semibold text-slate-900 text-sm">{feature.title}</h4>
+
                     <p className="text-xs text-slate-500 hidden sm:block">{feature.description}</p>
                   </div>
                 </div>
@@ -448,7 +454,7 @@ const Templates = () => {
             <Button
               onClick={handleTemplateSelection}
               variant="outline"
-              className=" whitespace-nowrap border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800"
+              className="whitespace-nowrap border-indigo-200 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800"
             >
               View All
             </Button>
