@@ -2,7 +2,7 @@ import { requiredAuth } from "@/shared/utils/ReqireAuth";
 import DashboardRouter from "./DashboardRouter";
 
 export const metadata = {
-  title: "Dashboard | Nextcv",
+  title: "Dashboard ",
   description: "Dashboard for managing your account and viewing activity.",
 };
 

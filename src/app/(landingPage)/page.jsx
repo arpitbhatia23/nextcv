@@ -5,6 +5,12 @@ import ATSFeatureSection from "@/shared/components/herosection/ATSFeatureSection
 import Link from "next/link";
 import careerPages from "@/app/(landingPage)/career-pages.json";
 const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
+const ResumeSharingSection = dynamic(
+  () => import("@/shared/components/herosection/ResumeSharingSection")
+);
+const CoverLetterSection = dynamic(
+  () => import("@/shared/components/herosection/CoverLetterSection")
+);
 const SEOSection = dynamic(() => import("@/shared/components/herosection/SEOSection"));
 const PageContent = dynamic(() => import("@/shared/components/pageContent/PageContent"));
 const HowitWork = dynamic(() => import("@/shared/components/herosection/HowitWork"));
@@ -17,13 +23,15 @@ const SEOKeywordCloud = dynamic(() => import("@/shared/components/herosection/SE
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "Free ATS Resume Builder for Indian Freshers | NextCV",
+  title: "Free ATS Resume Builder & AI Cover Letter for Indian Freshers | NextCV",
   description:
-    "Create an ATS-friendly resume with NextCV's free online resume builder. Choose a professional template, add your experience, and prepare for Indian job applications.",
+    "Create an ATS-friendly resume and tailored AI cover letter with NextCV. Choose professional templates, share verified live resume links for Premium & Elite tiers, and prepare for Indian job applications.",
   path: "",
   keywords: [
     "resume builder",
     "ats friendly resume",
+    "resume sharing link",
+    "ai cover letter builder",
     "free resume builder",
     "ai resume builder",
     "resume templates for freshers",
@@ -36,6 +44,8 @@ export default function Home() {
     <>
       <Herosection />
       <ATSFeatureSection />
+      <ResumeSharingSection />
+      <CoverLetterSection />
 
       <PageContent />
       <SEOSection />
