@@ -40,8 +40,8 @@ const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
   phone: z.string().min(1, { message: "Phone number is required" }),
   email: z.string().email({ message: "Invalid email address" }),
-  address: z.string().min(1, { message: "Address is required" }),
-  jobRole: z.string().min(1, { message: "Job role is required" }),
+  address: z.string().min(3, { message: "Address is required" }),
+  jobRole: z.string().optional(),
 
   linkedin: z.string().optional(),
   github: z.string().optional(),

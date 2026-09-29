@@ -5,14 +5,7 @@ import { NextResponse } from "next/server";
 import { redis } from "@/shared/utils/Redis";
 
 export const saveResumeAsDraft = async ({ data, userId }) => {
-  const requiredFields = [
-    data.name,
-    data.email,
-    data.phone,
-    data.address,
-    data.jobRole,
-    data.summary,
-  ];
+  const requiredFields = [data.name, data.email, data.phone, data.address, data.summary];
   if (requiredFields.some(f => !f || f.trim() === "")) {
     throw new apiError(400, "All required fields must be filled");
   }

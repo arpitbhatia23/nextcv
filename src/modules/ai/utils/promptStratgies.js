@@ -158,6 +158,7 @@ Return ONLY comma-separated ATS keywords.
 No intro. No headings. No JSON.
 Extract 15-30 important skills, tools, technologies, role terms, and responsibilities.
 Do not invent anything.
+If role not exit then gen softskilks
 
 Job Description:
 `;
