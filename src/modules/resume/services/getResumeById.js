@@ -16,7 +16,6 @@ export const getResumeById = async ({ id }) => {
   await dbConnect();
 
   const resumeData = await Resume.findById(id);
-
   if (!resumeData) {
     throw new apiError(404, "resume not found");
   }

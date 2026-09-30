@@ -6,12 +6,8 @@ import { getResumeById } from "@/modules/resume";
 
 const handler = async (req, { params }) => {
   const { id } = await params;
-  console.time("auth");
   await requiredAuth();
-  console.timeEnd("auth");
-  console.time("function");
   const resumeData = await getResumeById({ id });
-  console.timeEnd("function");
   return NextResponse.json(new apiResponse(200, "resume found sucessfull", resumeData), {
     status: 200,
   });
