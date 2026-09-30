@@ -8,8 +8,14 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
 import PDFPreview from "./pdfPreview";
-import { Share2 } from "lucide-react";
+import { LayoutDashboard, Share2 } from "lucide-react";
 import ShareResumeModal from "@/modules/shared-resume/components/ShareResumeModal";
+import dynamic from "next/dynamic";
+import { getTemplateByName } from "@/modules/resume/services/templateMap";
+
+const SharePortfolioModal = dynamic(
+  () => import("@/modules/portfolio/components/SharePortfolioModal")
+);
 
 export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const docType = resumeId ? "resume" : "coverLetter";
@@ -19,6 +25,7 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const [loading, setLoading] = useState(true);
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isPortfolioOpen, setIsPortfolioOpen] = useState(false);
 
   useEffect(() => {
     const fetchDocData = async () => {
@@ -72,6 +79,13 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
   const fileName = docType === "resume" ? "resume.pdf" : "cover-letter.pdf";
   const ticketId = docId ? docId.slice(-8).toUpperCase() : "--------";
   const status = pdfUrl ? "READY" : loading ? "PROCESSING" : "NO FILE";
+
+  // Determine tier for conditional buttons (only relevant for resumes)
+  const templateTier = docData?.ResumeType
+    ? getTemplateByName(docData.ResumeType)?.tier?.toLowerCase()
+    : null;
+  const isPremiumOrElite = templateTier === "premium" || templateTier === "elite";
+  const isElite = templateTier === "elite";
 
   return (
     <div className="min-h-screen bg-[#FBFAF7] flex items-center justify-center px-4 py-10">
@@ -130,12 +144,13 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
             <div className="md:hidden border-t-2 border-dashed border-[#23201B]/25 my-6" />
 
             {/* Ticket stub / action */}
-            <div className="w-full md:w-1/3 flex flex-col justify-center gap-4">
+            <div className="w-full md:w-1/3 flex flex-col justify-center gap-3">
               <div className="font-mono text-[11px] text-[#5B6B63] tracking-wide">
                 FILE
                 <div className="font-sans text-sm text-[#23201B] mt-0.5">{fileName}</div>
               </div>
 
+              {/* Download PDF — always visible */}
               <button
                 onClick={handleDownload}
                 disabled={!pdfUrl}
@@ -144,7 +159,8 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
                 DOWNLOAD PDF ↓
               </button>
 
-              {docType === "resume" && (
+              {/* Share Resume Link — Premium & Elite only (resume type only) */}
+              {docType === "resume" && isPremiumOrElite && (
                 <button
                   onClick={() => setIsShareOpen(true)}
                   disabled={!docData}
@@ -152,6 +168,18 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
                 >
                   <Share2 className="w-4 h-4" />
                   SHARE RESUME LINK ↗
+                </button>
+              )}
+
+              {/* Share Portfolio — Elite only */}
+              {docType === "resume" && isElite && (
+                <button
+                  onClick={() => setIsPortfolioOpen(true)}
+                  disabled={!docData}
+                  className="w-full border border-indigo-700 bg-indigo-50 text-indigo-800 font-mono text-sm tracking-wide py-2.5 px-6 rounded-sm hover:bg-indigo-700 hover:text-white transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  SHARE PORTFOLIO ↗
                 </button>
               )}
 
@@ -172,6 +200,12 @@ export default function DownloadPageContent({ resumeId, coverLetterId }) {
       <ShareResumeModal
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
+        resume={docData}
+      />
+
+      <SharePortfolioModal
+        isOpen={isPortfolioOpen}
+        onClose={() => setIsPortfolioOpen(false)}
         resume={docData}
       />
     </div>

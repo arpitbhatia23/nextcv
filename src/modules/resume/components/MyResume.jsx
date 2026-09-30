@@ -21,6 +21,9 @@ const PDFPreview = dynamic(() => import("./pdfPreview"), {
 const ShareResumeModal = dynamic(
   () => import("@/modules/shared-resume/components/ShareResumeModal")
 );
+const SharePortfolioModal = dynamic(
+  () => import("@/modules/portfolio/components/SharePortfolioModal")
+);
 const EmptyState = dynamic(() => import("./empty"));
 const ResumeCard = dynamic(() => import("./resumeCard"));
 /* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
@@ -48,6 +51,7 @@ const MyResume = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [discount, setDiscount] = useState(null);
   const [sharingResume, setSharingResume] = useState(null);
+  const [portfolioResume, setPortfolioResume] = useState(null);
 
   const route = useRouter();
 
@@ -432,6 +436,7 @@ const MyResume = () => {
                     onDownload={handleDownload}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
+                    onSharePortfolio={resume => setPortfolioResume(resume)}
                     onShare={resumeToShare => setSharingResume(resumeToShare)}
                     getTemplateDisplayName={getTemplateDisplayName}
                   />
@@ -479,6 +484,11 @@ const MyResume = () => {
         isOpen={Boolean(sharingResume)}
         onClose={() => setSharingResume(null)}
         resume={sharingResume}
+      />
+      <SharePortfolioModal
+        isOpen={Boolean(portfolioResume)}
+        onClose={() => setPortfolioResume(false)}
+        resume={portfolioResume}
       />
     </div>
   );
