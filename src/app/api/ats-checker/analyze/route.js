@@ -8,6 +8,7 @@ export async function POST(req) {
   try {
     const formData = await req?.formData();
     const file = formData.get("file");
+    const jobDescription = formData.get("jobDescription") || "";
 
     if (!file) {
       return NextResponse.json({ error: "File is required." }, { status: 400 });
@@ -28,7 +29,7 @@ export async function POST(req) {
       );
     }
 
-    const analysis = calculateATSScore(text.fullText);
+    const analysis = calculateATSScore(text.fullText, jobDescription);
 
     return NextResponse.json(analysis);
   } catch (error) {
