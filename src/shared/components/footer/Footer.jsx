@@ -13,7 +13,6 @@ const footerGroups = [
       { label: "AI Writer", href: "/ai-writer" },
       { label: "Cover letter", href: "/dashboard/cover-letter" },
       { label: "Templates", href: "/templates" },
-      { label: "Resume portfolio", href: "/p" },
     ],
   },
   {
