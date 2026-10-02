@@ -1,26 +1,26 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, AlertTriangle, XCircle, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { CheckCircle, AlertTriangle, XCircle, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 
-const ScoreDisplay = ({ score, recommendations = [] }) => {
+const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
   const isNextCV = score >= 90;
 
-  const getScoreColor = (value) => {
+  const getScoreColor = value => {
     if (value >= 90) return "text-indigo-600";
     if (value >= 80) return "text-emerald-600";
     if (value >= 60) return "text-amber-600";
     return "text-rose-600";
   };
 
-  const getScoreBg = (value) => {
+  const getScoreBg = value => {
     if (value >= 90) return "bg-indigo-50 border-indigo-200";
     if (value >= 80) return "bg-emerald-50 border-emerald-200";
     if (value >= 60) return "bg-amber-50 border-amber-200";
     return "bg-rose-50 border-rose-200";
   };
 
-  const getStatus = (value) => {
+  const getStatus = value => {
     if (value >= 90) return "ATS Perfected";
     if (value >= 80) return "Excellent";
     if (value >= 60) return "Average";
@@ -142,19 +142,20 @@ const ScoreDisplay = ({ score, recommendations = [] }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#071644] text-white rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
+              className="bg-[#071644] text-white rounded-xl p-2 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
             >
               <div className="space-y-1 text-center md:text-left">
                 <h4 className="font-bold text-white text-lg tracking-tight">
                   Want a <span className="text-indigo-400">90+ ATS Score</span>?
                 </h4>
                 <p className="text-slate-300 text-xs">
-                  Switch to NextCV templates built for high-performance job applications starting at ₹49.
+                  Switch to NextCV templates built for high-performance job applications starting at
+                  ₹49.
                 </p>
               </div>
               <Link
                 href="/"
-                className="w-full md:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full md:w-full px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs rounded-md transition-all shadow-md flex items-center justify-center "
               >
                 Build Resume Now <ArrowRight className="w-4 h-4" />
               </Link>
@@ -162,6 +163,68 @@ const ScoreDisplay = ({ score, recommendations = [] }) => {
           )}
         </div>
       </div>
+
+      {keywordGap && (
+        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="text-lg font-bold text-[#071644]">Job Description Keyword Match</h3>
+              <p className="mt-1 text-sm text-slate-500">
+                {keywordGap.totalKeywords
+                  ? `${keywordGap.matchedKeywords} matched, ${keywordGap.partialKeywords} partial, and ${keywordGap.missingKeywords} missing`
+                  : "No recognized skills or keywords were found in the job description."}
+              </p>
+            </div>
+            <div className="flex items-baseline gap-1 self-start rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-2 sm:self-auto">
+              <span className="text-2xl font-extrabold text-indigo-700">{keywordGap.score}%</span>
+              <span className="text-xs font-semibold text-indigo-600">JD match</span>
+            </div>
+          </div>
+
+          {keywordGap.totalKeywords > 0 && (
+            <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3">
+              {[
+                {
+                  label: "Matched",
+                  items: keywordGap.matched,
+                  chipClass: "bg-emerald-50 border-emerald-200 text-emerald-800",
+                },
+                {
+                  label: "Partial",
+                  items: keywordGap.partial,
+                  chipClass: "bg-amber-50 border-amber-200 text-amber-800",
+                },
+                {
+                  label: "Missing",
+                  items: keywordGap.missing,
+                  chipClass: "bg-rose-50 border-rose-200 text-rose-800",
+                },
+              ].map(({ label, items, chipClass }) => (
+                <div key={label}>
+                  <h4 className="mb-2 text-xs font-bold uppercase text-slate-500">
+                    {label} ({items.length})
+                  </h4>
+                  {items.length ? (
+                    <ul className="flex flex-wrap gap-2">
+                      {items.map(item => (
+                        <li
+                          key={item.keyword}
+                          title={item.matchedAs ? `Matched as ${item.matchedAs}` : item.importance}
+                          className={`rounded-lg border px-2.5 py-1 text-xs font-semibold ${chipClass}`}
+                        >
+                          {item.keyword}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-xs text-slate-400">None</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 };

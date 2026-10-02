@@ -1,8 +1,16 @@
-export function calculateATSScore(text) {
+import keywordDatabase from "../data/keywordData.json";
+export function calculateATSScore(text, jobDescription = "") {
   const recommendations = [];
 
   const normalizedText = normalizeResumeText(text);
   const lowerText = normalizedText.toLowerCase();
+
+  // JD keyword-gap analysis runs ONLY when a job description is provided.
+  const hasJobDescription = Boolean(typeof jobDescription === "string" && jobDescription.trim());
+
+  const jdKeywordGap = hasJobDescription
+    ? analyzeJDKeywordGap(normalizedText, jobDescription)
+    : null;
 
   const isNextCV = lowerText.includes("nextcv");
 
@@ -91,6 +99,7 @@ export function calculateATSScore(text) {
 
   const sections = {
     summary: ["summary", "objective", "profile", "career objective", "professional summary"],
+
     education: [
       "education",
       "academic",
@@ -100,8 +109,11 @@ export function calculateATSScore(text) {
       "university",
       "college",
     ],
+
     skills: ["skills", "technical skills", "technologies", "tools", "core skills"],
+
     projects: ["projects", "project", "academic project", "personal project"],
+
     experience: [
       "experience",
       "work experience",
@@ -132,6 +144,7 @@ export function calculateATSScore(text) {
         message:
           "Add Internship, Training, Freelance, or Experience section if applicable. Projects help, but experience/training improves ATS strength.",
       });
+
       return;
     }
 
@@ -271,15 +284,21 @@ export function calculateATSScore(text) {
   /* ---------------------------- STRICT HARD CAPS ---------------------------- */
 
   const hasCriticalLengthIssue = wordCount < 120;
+
   const hasVeryShortResume = wordCount >= 120 && wordCount < 220;
+
   const hasShortResume = wordCount >= 220 && wordCount < 280;
 
   const hasMissingContact = !hasEmail || !hasPhone;
 
   const hasExperienceSection = foundSectionMap.experience;
+
   const hasProjectsSection = foundSectionMap.projects;
+
   const hasSkillsSection = foundSectionMap.skills;
+
   const hasEducationSection = foundSectionMap.education;
+
   const hasSummarySection = foundSectionMap.summary;
 
   const hasMissingExperienceAndProjects = !hasExperienceSection && !hasProjectsSection;
@@ -363,14 +382,305 @@ export function calculateATSScore(text) {
     baseScore: Math.round(baseScore),
   };
 
-  return {
+  const result = {
     score,
     grade: getGrade(score),
     summary: getScoreSummary(score),
     recommendations: cleanRecommendations(score, recommendations, checks),
     checks,
   };
+
+  // Do not change the existing response shape when no JD is supplied.
+  if (hasJobDescription) {
+    result.jdMatchScore = jdKeywordGap.score;
+    result.keywordGap = jdKeywordGap;
+  }
+
+  return result;
 }
+
+/* ============================================================================
+   JD KEYWORD GAP ANALYSIS
+
+   Runs only when calculateATSScore(text, jobDescription)
+   receives a JD.
+
+   The existing generic ATS keyword scoring remains unchanged.
+============================================================================ */
+
+function normalizeKeyword(value = "") {
+  return String(value)
+    .toLowerCase()
+    .replace(/[()[\]{}]/g, " ")
+    .replace(/[._/-]/g, " ")
+    .replace(/[^a-z0-9+# ]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function escapeRegex(value = "") {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildKeywordDictionary() {
+  const dictionary = new Map();
+
+  // canonical_index contains the canonical job keywords from the JSON database.
+  Object.entries(keywordDatabase.canonical_index || {}).forEach(([normalizedKeyword, data]) => {
+    const canonical = data?.canonical_name || normalizedKeyword;
+
+    dictionary.set(normalizeKeyword(canonical), {
+      canonical,
+      category: data?.category || "skill",
+      jobFamily: data?.job_family || null,
+    });
+  });
+
+  // Add aliases such as:
+  // ReactJS -> React
+  // TS -> TypeScript
+  // K8s -> Kubernetes
+  Object.entries(keywordDatabase.aliases || {}).forEach(([canonical, aliases]) => {
+    const canonicalData = keywordDatabase.canonical_index?.[normalizeKeyword(canonical)] || {};
+
+    const canonicalEntry = {
+      canonical,
+      category: canonicalData.category || "skill",
+      jobFamily: canonicalData.job_family || null,
+    };
+
+    dictionary.set(normalizeKeyword(canonical), canonicalEntry);
+
+    (Array.isArray(aliases) ? aliases : []).forEach(alias => {
+      const normalizedAlias = normalizeKeyword(alias);
+
+      if (normalizedAlias) {
+        dictionary.set(normalizedAlias, {
+          ...canonicalEntry,
+          alias: true,
+        });
+      }
+    });
+  });
+
+  return dictionary;
+}
+
+const JD_KEYWORD_DICTIONARY = buildKeywordDictionary();
+
+function keywordExistsInText(keyword, text) {
+  const normalizedKeyword = normalizeKeyword(keyword);
+
+  const normalizedText = normalizeKeyword(text);
+
+  if (!normalizedKeyword || !normalizedText) {
+    return false;
+  }
+
+  const pattern = new RegExp(`(^|\\s)${escapeRegex(normalizedKeyword)}(?=$|\\s)`, "i");
+
+  return pattern.test(normalizedText);
+}
+
+function getKeywordAliases(canonical) {
+  const aliases = keywordDatabase.aliases?.[canonical];
+
+  return [canonical, ...(Array.isArray(aliases) ? aliases : [])];
+}
+
+function findResumeKeywordMatch(canonical, resumeText) {
+  const possibleMatches = getKeywordAliases(canonical);
+
+  for (const candidate of possibleMatches) {
+    if (keywordExistsInText(candidate, resumeText)) {
+      return candidate;
+    }
+  }
+
+  return null;
+}
+
+function getRequirementWeight(jdText, keyword) {
+  const normalizedJD = String(jdText).toLowerCase();
+
+  const normalizedKeyword = String(keyword).toLowerCase();
+
+  const keywordIndex = normalizedJD.indexOf(normalizedKeyword);
+
+  if (keywordIndex === -1) {
+    return 1;
+  }
+
+  // Look around the keyword to determine
+  // whether the JD explicitly presents it
+  // as required, preferred, or optional.
+  const contextStart = Math.max(0, keywordIndex - 140);
+
+  const contextEnd = Math.min(normalizedJD.length, keywordIndex + normalizedKeyword.length + 140);
+
+  const context = normalizedJD.slice(contextStart, contextEnd);
+
+  if (
+    /\b(required|required skill|required skills|must have|must-have|must|required to|essential|mandatory|minimum requirement|you must|need to have|strong experience in|proficient in|proficiency in)\b/i.test(
+      context
+    )
+  ) {
+    return 3;
+  }
+
+  if (
+    /\b(preferred|preferred skill|preferred skills|preferably|should have|good to have|experience with|experience in|familiar with)\b/i.test(
+      context
+    )
+  ) {
+    return 2;
+  }
+
+  if (
+    /\b(nice to have|nice-to-have|bonus|plus|added advantage|additional advantage|optional)\b/i.test(
+      context
+    )
+  ) {
+    return 1;
+  }
+
+  return 1;
+}
+
+function extractJDKeywords(jdText = "") {
+  const rawJD = normalizeResumeText(jdText);
+
+  const normalizedJD = normalizeKeyword(rawJD);
+
+  if (!normalizedJD) {
+    return [];
+  }
+
+  const found = new Map();
+
+  JD_KEYWORD_DICTIONARY.forEach((data, dictionaryKeyword) => {
+    if (!dictionaryKeyword) {
+      return;
+    }
+
+    const pattern = new RegExp(`(^|\\s)${escapeRegex(dictionaryKeyword)}(?=$|\\s)`, "i");
+
+    if (!pattern.test(normalizedJD)) {
+      return;
+    }
+
+    const canonical = data.canonical;
+
+    if (!found.has(canonical)) {
+      found.set(canonical, {
+        keyword: canonical,
+        category: data.category,
+        jobFamily: data.jobFamily,
+        weight: getRequirementWeight(rawJD, canonical),
+      });
+    } else {
+      // If an alias/canonical form occurs
+      // in a stronger requirement context,
+      // keep the higher weight.
+      const existing = found.get(canonical);
+
+      existing.weight = Math.max(existing.weight, getRequirementWeight(rawJD, canonical));
+    }
+  });
+
+  return [...found.values()];
+}
+
+function analyzeJDKeywordGap(resumeText = "", jdText = "") {
+  const jdKeywords = extractJDKeywords(jdText);
+
+  if (!jdKeywords.length) {
+    return {
+      score: 0,
+      totalKeywords: 0,
+      matchedKeywords: 0,
+      partialKeywords: 0,
+      missingKeywords: 0,
+      matched: [],
+      partial: [],
+      missing: [],
+    };
+  }
+
+  const normalizedResume = normalizeKeyword(resumeText);
+
+  const matched = [];
+  const partial = [];
+  const missing = [];
+
+  for (const item of jdKeywords) {
+    const matchedAs = findResumeKeywordMatch(item.keyword, normalizedResume);
+
+    if (matchedAs) {
+      matched.push({
+        keyword: item.keyword,
+        matchedAs,
+        category: item.category,
+        jobFamily: item.jobFamily,
+        weight: item.weight,
+      });
+
+      continue;
+    }
+
+    // A simple partial match is useful
+    // for multi-word skills.
+    //
+    // Example:
+    // "Redux Toolkit" in JD
+    // while "Redux" appears in resume.
+    const keywordTokens = normalizeKeyword(item.keyword).split(" ").filter(Boolean);
+
+    const matchedToken = keywordTokens.find(token => keywordExistsInText(token, normalizedResume));
+
+    if (keywordTokens.length > 1 && matchedToken) {
+      partial.push({
+        keyword: item.keyword,
+        matchedAs: matchedToken,
+        category: item.category,
+        jobFamily: item.jobFamily,
+        weight: item.weight,
+      });
+
+      continue;
+    }
+
+    missing.push({
+      keyword: item.keyword,
+      category: item.category,
+      jobFamily: item.jobFamily,
+      weight: item.weight,
+      importance: item.weight === 3 ? "required" : item.weight === 2 ? "preferred" : "nice_to_have",
+    });
+  }
+
+  const totalWeight = jdKeywords.reduce((sum, item) => sum + item.weight, 0);
+
+  // Full match = 100% of keyword weight.
+  // Partial match = 50% of keyword weight.
+  const earnedWeight =
+    matched.reduce((sum, item) => sum + item.weight, 0) +
+    partial.reduce((sum, item) => sum + item.weight * 0.5, 0);
+
+  const score = totalWeight ? Math.round((earnedWeight / totalWeight) * 100) : 0;
+
+  return {
+    score,
+    totalKeywords: jdKeywords.length,
+    matchedKeywords: matched.length,
+    partialKeywords: partial.length,
+    missingKeywords: missing.length,
+    matched,
+    partial,
+    missing,
+  };
+}
+
 function normalizeResumeText(text = "") {
   return String(text)
     .replace(/\u0000/g, " ")
@@ -390,7 +700,9 @@ function extractIndianPhone(text = "") {
 
   const match = normalizedText.match(phoneRegex);
 
-  if (!match) return null;
+  if (!match) {
+    return null;
+  }
 
   let digits = match[1].replace(/\D/g, "");
 
@@ -410,10 +722,22 @@ function extractIndianPhone(text = "") {
 }
 
 function getGrade(score) {
-  if (score >= 90) return "Outstanding";
-  if (score >= 80) return "Excellent";
-  if (score >= 70) return "Good";
-  if (score >= 60) return "Average";
+  if (score >= 90) {
+    return "Outstanding";
+  }
+
+  if (score >= 80) {
+    return "Excellent";
+  }
+
+  if (score >= 70) {
+    return "Good";
+  }
+
+  if (score >= 60) {
+    return "Average";
+  }
+
   return "Needs Work";
 }
 
@@ -443,6 +767,7 @@ function cleanRecommendations(score, recommendations, checks) {
   if (checks.hasEmail && checks.hasPhone) {
     finalRecommendations = finalRecommendations.filter(rec => {
       const title = rec.title?.toLowerCase() || "";
+
       return !title.includes("contact information");
     });
   }

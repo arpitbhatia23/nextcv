@@ -8,6 +8,7 @@ const withBundle = withBundleAnalyzer({
 
 const nextConfig = {
   reactStrictMode: true,
+  serverExternalPackages: ["pdf-parse", "pdfjs-dist"],
 
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,
