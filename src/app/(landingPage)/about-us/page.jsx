@@ -6,7 +6,6 @@ import {
   Heart,
   Sparkles,
   ShieldCheck,
-  Target,
   Rocket,
   ArrowRight,
   Code2,
@@ -52,9 +51,9 @@ export default function AboutPage() {
       />
       <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
         {/* Background Ambient Glows */}
-        <div className="pointer-events-none absolute inset-0 -z-0">
-          <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-          <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-indigo-100 opacity-50 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-indigo-100 opacity-50 blur-[110px]" />
         </div>
 
         {/* Hero Section */}
@@ -67,7 +66,7 @@ export default function AboutPage() {
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
               We make professional ATS resumes{" "}
-              <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-indigo-600 to-indigo-700 bg-clip-text text-transparent">
                 affordable for everyone.
               </span>
             </h1>
@@ -96,35 +95,16 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Quick Metrics Bar */}
-          <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-2xl text-center hover:border-indigo-300 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#3730d8]">₹49 – ₹399</div>
-              <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-2">
-                Pay Per Resume
-              </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-2xl text-center hover:border-emerald-300 transition-colors">
-              <div className="text-3xl sm:text-4xl font-extrabold text-emerald-600">100%</div>
-              <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-2">
-                ATS Friendly
-              </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-2xl text-center hover:border-violet-300 transition-colors">
-              <div className="text-3xl sm:text-4xl font-extrabold text-violet-600">1k+</div>
-              <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-2">
-                Resumes Generated
-              </div>
-            </div>
-
-            <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-2xl text-center hover:border-pink-300 transition-colors">
-              <div className="text-3xl sm:text-4xl font-extrabold text-pink-600">4.9 ★</div>
-              <div className="text-xs uppercase tracking-wider font-semibold text-slate-500 mt-2">
-                Student Rating
-              </div>
-            </div>
+          <div className="mx-auto mt-12 flex max-w-5xl flex-wrap items-center justify-center gap-x-8 gap-y-3 border-y border-border py-5 text-sm text-muted-foreground">
+            <span>Build and edit for free</span>
+            <span aria-hidden="true" className="text-border-strong">
+              ·
+            </span>
+            <span>₹49–₹399 one-time download plans</span>
+            <span aria-hidden="true" className="text-border-strong">
+              ·
+            </span>
+            <span>No monthly subscription</span>
           </div>
         </section>
 
@@ -142,23 +122,18 @@ export default function AboutPage() {
                 <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
                   <p>
                     We started as BCA students in India who experienced the frustrating job hunt
-                    firsthand:{" "}
-                    <span className="font-semibold text-slate-900">
-                      existing resume builders are exorbitantly expensive
-                    </span>
-                    . Most popular platforms charge recurring fees of ₹500 to ₹1,200 every single
-                    month — a heavy burden for students and freshers.
+                    firsthand: many online tools make it difficult to understand when payment is
+                    required. We wanted job seekers to be able to build first and choose a one-time
+                    download plan only when ready.
                   </p>
                   <p>
                     We believed job seekers deserved better: a clean, intelligent, and{" "}
-                    <span className="font-semibold text-slate-900">
-                      ATS-optimized resume generator
-                    </span>{" "}
+                    <span className="font-semibold text-slate-900">readable resume builder</span>{" "}
                     for the price of a coffee.
                   </p>
                   <p>
-                    That promise birthed NextCV: Premium AI features, recruiter-tested templates,
-                    and full customization starting from{" "}
+                    That promise birthed NextCV: AI writing assistance, resume formats, and
+                    customization starting from{" "}
                     <span className="font-bold text-indigo-600">₹49 up to ₹399 per resume</span>{" "}
                     depending on the template selected.
                   </p>
@@ -169,7 +144,7 @@ export default function AboutPage() {
               <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                   <span className="text-xs uppercase tracking-wider font-semibold text-slate-500">
-                    NextCV vs Traditional Builders
+                    NextCV plan model
                   </span>
                   <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold border border-emerald-100">
                     Pay Per Resume
@@ -178,19 +153,17 @@ export default function AboutPage() {
 
                 <div className="space-y-4">
                   <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <span className="text-sm font-medium text-slate-600">Traditional Builders</span>
-                    <span className="text-sm font-bold text-red-500">₹999 / month recurring</span>
+                    <span className="text-sm font-medium text-slate-600">Build and edit</span>
+                    <span className="text-sm font-semibold text-primary">Free</span>
                   </div>
 
                   <div className="flex justify-between items-center p-4 rounded-xl bg-indigo-50 border border-indigo-200 shadow-xs">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-indigo-600" />
-                      <span className="text-sm font-bold text-[#071644]">
-                        NextCV Template Catalog
-                      </span>
+                      <span className="text-sm font-bold text-[#071644]">Download plans</span>
                     </div>
                     <span className="text-base font-extrabold text-indigo-600">
-                      ₹49 – ₹399 / RESUME
+                      ₹49 – ₹399 once
                     </span>
                   </div>
                 </div>
@@ -206,7 +179,7 @@ export default function AboutPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Tested for MNC ATS systems (TCS, Infosys, Wipro, Accenture)</span>
+                    <span>Use clear sections and tailor content to the job</span>
                   </li>
                 </ul>
               </div>
@@ -229,14 +202,14 @@ export default function AboutPage() {
               {
                 icon: <Zap className="w-6 h-6 text-indigo-600" />,
                 bg: "bg-indigo-50 border-indigo-100",
-                title: "Lightning Fast AI",
-                desc: "Craft impactful professional summaries and experience bullet points in under 3 minutes using Gemini AI.",
+                title: "AI writing assistance",
+                desc: "Draft professional summaries and experience bullets with AI, then review and edit them.",
               },
               {
                 icon: <ShieldCheck className="w-6 h-6 text-emerald-600" />,
                 bg: "bg-emerald-50 border-emerald-100",
-                title: "100% ATS Guaranteed",
-                desc: "Our clean single & multi-column layouts are pre-screened to pass recruiter ATS algorithms flawlessly.",
+                title: "Readable resume structure",
+                desc: "Use clear sections and readable content, then review your resume against the specific job you want.",
               },
               {
                 icon: <Heart className="w-6 h-6 text-pink-600" />,
@@ -313,7 +286,7 @@ export default function AboutPage() {
               </p>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Product and UX strategist dedicated to crafting seamless document design, intuitive
-                recruiter-approved layouts, and accessible interfaces.
+                clear resume layouts, and accessible interfaces.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">

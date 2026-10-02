@@ -1,6 +1,6 @@
 import ContactForm from "@/modules/contact/components/ContactForm";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { Mail, MessageSquare, MapPin, Clock, ShieldCheck, ArrowRight } from "lucide-react";
+import { Mail, MessageSquare, MapPin, ShieldCheck, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = createSeoMetadata({
@@ -41,9 +41,9 @@ export default function ContactPage() {
       />
       <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
         {/* Background Ambient Glows */}
-        <div className="pointer-events-none absolute inset-0 -z-0">
-          <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-          <div className="absolute right-0 top-60 h-[400px] w-[500px] rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-indigo-100 opacity-50 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-indigo-100 opacity-50 blur-[110px]" />
         </div>
 
         {/* Hero Section */}
@@ -51,18 +51,19 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
               <MessageSquare className="w-4 h-4 text-indigo-600" />
-              Dedicated 24/7 Support Team
+              Contact NextCV support
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
               Let's Build Your{" "}
-              <span className="block bg-gradient-to-r from-[#4338f4] to-[#2563eb] bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-indigo-600 to-indigo-700 bg-clip-text text-transparent">
                 Career Together
               </span>
             </h1>
 
             <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
-              Have questions about our <span className="font-semibold text-slate-900">AI Resume Builder</span>, template payments (₹49 – ₹399), or ATS features? Our Indian support team typically replies within 24 hours.
+              Have questions about the resume builder, one-time plan pricing (₹49–₹399), or ATS
+              checker? Send us a message and our team will get back to you.
             </p>
           </div>
         </section>
@@ -72,12 +73,10 @@ export default function ContactPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             <div className="bg-white border border-slate-200 p-6 rounded-2xl text-center shadow-xs">
               <div className="flex justify-center mb-2">
-                <Clock className="w-6 h-6 text-indigo-600" />
+                <Mail className="w-6 h-6 text-primary" />
               </div>
-              <div className="text-2xl font-bold text-[#071644]">&lt; 24h</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">
-                Average Reply Time
-              </div>
+              <div className="text-base font-semibold text-foreground">Email support</div>
+              <div className="text-xs font-medium text-muted-foreground mt-1">help@nextcv.in</div>
             </div>
 
             <div className="bg-white border border-slate-200 p-6 rounded-2xl text-center shadow-xs">
@@ -90,11 +89,11 @@ export default function ContactPage() {
 
             <div className="bg-white border border-slate-200 p-6 rounded-2xl text-center shadow-xs col-span-2 md:col-span-1">
               <div className="flex justify-center mb-2">
-                <ShieldCheck className="w-6 h-6 text-emerald-600" />
+                <ShieldCheck className="w-6 h-6 text-primary" />
               </div>
-              <div className="text-2xl font-bold text-[#071644]">99.8%</div>
-              <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">
-                Satisfaction Rate
+              <div className="text-base font-semibold text-foreground">One-time plans</div>
+              <div className="text-xs font-medium text-muted-foreground mt-1">
+                No monthly subscription
               </div>
             </div>
           </div>
@@ -125,7 +124,8 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-xl font-bold">Direct Email Support</h3>
                 <p className="text-indigo-100 text-xs sm:text-sm leading-relaxed">
-                  Need priority assistance with your resume download or account? Reach out to us directly.
+                  Need priority assistance with your resume download or account? Reach out to us
+                  directly.
                 </p>
                 <a
                   href="mailto:help@nextcv.in"

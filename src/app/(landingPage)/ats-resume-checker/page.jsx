@@ -190,7 +190,7 @@ export default function ATSCheckerPage() {
             Build A High-Scoring ATS Resume Today
           </h2>
           <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-            Choose from our recruiter-approved templates starting at ₹49 to ₹399 per resume with
+            Choose from readable resume templates with one-time download plans from ₹49 to ₹399 and
             zero subscriptions.
           </p>
           <div>

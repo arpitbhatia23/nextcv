@@ -1,21 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { Source_Serif_4, Inter } from "next/font/google";
 import careerPages from "../../career-pages.json";
 import { createSeoMetadata } from "@/shared/utils/seo";
-
-const serif = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-serif",
-});
-
-const sans = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
-});
 
 export async function generateStaticParams() {
   return careerPages.map(c => ({
@@ -238,12 +225,7 @@ export default async function CareerPage({ params }) {
   const showToc = headings.length >= 3;
 
   return (
-    <div
-      className={`${serif.variable} ${sans.variable} min-h-screen bg-[#F8F7F3] text-[#17201C]`}
-      style={{
-        fontFamily: "var(--font-serif)",
-      }}
-    >
+    <div className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
       {/* ------------------------------------------------------------------ */}
       {/* Breadcrumb                                                         */}
       {/* ------------------------------------------------------------------ */}

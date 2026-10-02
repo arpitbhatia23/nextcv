@@ -42,7 +42,7 @@ export const metadata = {
 export default function LandingLayout({ children }) {
   return (
     <>
-      <section className={`antialiased`}>
+      <div className="landing-theme antialiased">
         {/* JSON-LD for LocalBusiness/SoftwareApplication */}
 
         <Nav />
@@ -65,7 +65,7 @@ export default function LandingLayout({ children }) {
             }),
           }}
         />
-      </section>
+      </div>
     </>
   );
 }

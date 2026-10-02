@@ -61,8 +61,13 @@ export default function PublicPortfolioViewer({ resume }) {
     .toUpperCase();
 
   /* -------------------------------------------------------
-     SHARE PORTFOLIO
+     HELPERS
   ------------------------------------------------------- */
+
+  const normalizeUrl = url => {
+    if (!url) return "";
+    return url.startsWith("http") ? url : `https://${url}`;
+  };
 
   const handleCopyLink = async () => {
     try {
@@ -83,15 +88,12 @@ export default function PublicPortfolioViewer({ resume }) {
     }
   };
 
-  /* -------------------------------------------------------
-     DOWNLOAD RESUME
-  ------------------------------------------------------- */
-
   const handleDownloadPdf = async () => {
     try {
       setDownloading(true);
 
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
+
       const pdfGen = new pdfGenerator(resume, resume?.ResumeType || "classic", {
         type: "resume",
       });
@@ -119,10 +121,6 @@ export default function PublicPortfolioViewer({ resume }) {
     }
   };
 
-  /* -------------------------------------------------------
-     DATE FORMATTER
-  ------------------------------------------------------- */
-
   const renderDateRange = (start, end) => {
     const formattedStart = formatDate(start);
     const formattedEnd = end ? formatDate(end) : "Present";
@@ -138,65 +136,127 @@ export default function PublicPortfolioViewer({ resume }) {
      SECTION HEADING
   ------------------------------------------------------- */
 
-  const SectionHeading = ({
-    icon: Icon,
-    title,
-    description,
-    count,
-    iconClass = "text-indigo-600 bg-indigo-50 border-indigo-100",
-  }) => (
-    <div className="flex items-end justify-between gap-4 pb-4 border-b border-slate-200">
-      <div className="flex items-center gap-3">
-        <div
-          className={`w-10 h-10 rounded-xl border flex items-center justify-center ${iconClass}`}
-        >
-          <Icon className="w-5 h-5" />
-        </div>
-
+  const SectionHeading = ({ eyebrow, icon: Icon, title, description, count }) => (
+    <div className="mb-8">
+      <div className="flex items-end justify-between gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">{title}</h2>
+          {eyebrow && (
+            <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#465B9E]">
+              {Icon && <Icon className="h-3.5 w-3.5" />}
+              {eyebrow}
+            </div>
+          )}
 
-          {description && <p className="text-xs sm:text-sm text-slate-500 mt-0.5">{description}</p>}
+          <h2 className="font-serif text-2xl font-semibold tracking-tight text-[#17201C] sm:text-3xl">
+            {title}
+          </h2>
+
+          {description && (
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#66706B]">{description}</p>
+          )}
         </div>
+
+        {count && (
+          <span className="hidden rounded-full border border-[#E3E2DC] bg-white px-3 py-1 text-[11px] font-medium text-[#66706B] sm:inline-flex">
+            {count}
+          </span>
+        )}
       </div>
 
-      {count && <span className="hidden sm:block text-xs font-medium text-slate-400">{count}</span>}
+      <div className="mt-6 h-px bg-[#E3E2DC]" />
     </div>
   );
 
+  /* -------------------------------------------------------
+     RETURN
+  ------------------------------------------------------- */
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900">
+    <div
+      className="
+        min-h-screen
+        bg-[#F8F7F3]
+        text-[#17201C]
+        font-sans
+        selection:bg-[#465B9E]/15
+        selection:text-[#17201C]
+      "
+    >
       {/* =====================================================
-          BACKGROUND
+          SUBTLE BACKGROUND
       ====================================================== */}
 
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-48 left-1/2 -translate-x-1/2 w-175 h-125 bg-indigo-100/50 blur-[120px] rounded-full" />
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.22]"
+          style={{
+            backgroundImage: "radial-gradient(#17201C 0.7px, transparent 0.7px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
 
-        <div className="absolute top-[40%] -right-40 w-125 h-125 bg-purple-100/40 blur-[130px] rounded-full" />
-
-        <div className="absolute bottom-0 -left-40 w-125 h-125 bg-blue-100/40 blur-[130px] rounded-full" />
+        <div
+          className="
+            absolute
+            -top-40
+            left-1/2
+            h-105
+            w-175
+            -translate-x-1/2
+            rounded-full
+            bg-[#465B9E]/4.5
+            blur-[100px]
+          "
+        />
       </div>
 
       {/* =====================================================
-          STICKY NAVIGATION
+          NAVIGATION
       ====================================================== */}
 
-      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <header
+        className="
+          sticky
+          top-0
+          z-50
+          border-b
+          border-[#E3E2DC]/90
+          bg-[#F8F7F3]/90
+          backdrop-blur-xl
+        "
+      >
+        <div className="mx-auto flex h-17 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           {/* Identity */}
 
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-indigo-600 to-violet-500 flex items-center justify-center font-bold text-white text-xs sm:text-sm shadow-sm shrink-0">
+          <div className="flex min-w-0 items-center gap-3">
+            <div
+              className="
+                flex
+                h-10
+                w-10
+                shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                border
+                border-[#E3E2DC]
+                bg-white
+                font-serif
+                text-sm
+                font-semibold
+                text-[#465B9E]
+                shadow-[0_4px_14px_rgba(23,32,28,0.05)]
+              "
+            >
               {initials}
             </div>
 
             <div className="min-w-0">
-              <span className="font-bold text-sm sm:text-base text-slate-900 truncate block">
+              <span className="block truncate text-sm font-semibold tracking-tight text-[#17201C] sm:text-[15px]">
                 {name}
               </span>
 
-              <span className="text-[11px] text-slate-500 truncate block">
+              <span className="block truncate text-[11px] text-[#66706B]">
                 {jobRole || "Professional Portfolio"}
               </span>
             </div>
@@ -205,36 +265,71 @@ export default function PublicPortfolioViewer({ resume }) {
           {/* Actions */}
 
           <div className="flex items-center gap-2">
-            {/* Share */}
-
             <button
               onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 transition-colors cursor-pointer"
+              type="button"
+              className="
+                inline-flex
+                h-10
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                border
+                border-[#E3E2DC]
+                bg-white
+                px-3
+                text-xs
+                font-semibold
+                text-[#17201C]
+                transition-all
+                hover:border-[#CFCFC8]
+                hover:bg-[#F1F0EB]
+                active:scale-[0.98]
+                sm:px-4
+              "
               title="Share portfolio"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-
-                  <span className="hidden sm:inline text-emerald-600">Copied</span>
+                  <Check className="h-3.5 w-3.5 text-[#465B9E]" />
+                  <span className="hidden sm:inline">Copied</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-3.5 h-3.5 text-slate-500" />
-
+                  <Share2 className="h-3.5 w-3.5 text-[#66706B]" />
                   <span className="hidden sm:inline">Share</span>
                 </>
               )}
             </button>
 
-            {/* Download Resume */}
-
             <button
               onClick={handleDownloadPdf}
               disabled={downloading}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm shadow-indigo-600/20 transition-all cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              type="button"
+              className="
+                inline-flex
+                h-10
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                bg-[#465B9E]
+                px-3.5
+                text-xs
+                font-semibold
+                text-white
+                shadow-[0_7px_20px_rgba(70,91,158,0.18)]
+                transition-all
+                hover:bg-[#344B93]
+                hover:-translate-y-0.5
+                active:translate-y-0
+                disabled:cursor-not-allowed
+                disabled:opacity-60
+                sm:px-4
+              "
             >
-              <Download className="w-3.5 h-3.5" />
+              <Download className="h-3.5 w-3.5" />
 
               <span>{downloading ? "Preparing..." : "Download Resume"}</span>
             </button>
@@ -246,152 +341,235 @@ export default function PublicPortfolioViewer({ resume }) {
           MAIN
       ====================================================== */}
 
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-16">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
         {/* =====================================================
             HERO
         ====================================================== */}
 
-        <section className="relative bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm overflow-hidden">
-          {/* Accent */}
+        <section className="border-b border-[#E3E2DC] pb-14 sm:pb-20">
+          <div className="max-w-4xl">
+            {/* Small label */}
 
-          <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-50 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-8 border-b border-slate-200">
-            {/* Identity */}
-
-            <div className="flex items-start sm:items-center gap-4 sm:gap-6">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-linear-to-br from-indigo-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white text-2xl sm:text-3xl font-extrabold shadow-lg shadow-indigo-600/20 shrink-0">
-                {initials}
-              </div>
-
-              <div className="space-y-1.5">
-                <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
-                  {name}
-                </h1>
-
-                <p className="text-base sm:text-xl font-semibold text-indigo-600">
-                  {jobRole || "Professional"}
-                </p>
-
-                {address && (
-                  <p className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500">
-                    <MapPin className="w-3.5 h-3.5" />
-
-                    <span>{address}</span>
-                  </p>
-                )}
-              </div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E3E2DC] bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
+              Professional Portfolio
             </div>
 
-            {/* Contact buttons */}
+            {/* Name */}
 
-            <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
+            <h1
+              className="
+                max-w-4xl
+                font-serif
+                text-[3.1rem]
+                font-semibold
+                leading-[0.98]
+                tracking-[-0.045em]
+                text-[#17201C]
+                sm:text-6xl
+                lg:text-7xl
+              "
+            >
+              {name.toUpperCase()}
+            </h1>
+
+            {/* Role */}
+
+            <p className="mt-5 max-w-2xl text-lg font-medium leading-8 text-[#465B9E] sm:text-xl">
+              {jobRole || "Professional"}
+            </p>
+
+            {/* Location */}
+
+            {address && (
+              <div className="mt-4 flex items-center gap-2 text-sm text-[#66706B]">
+                <MapPin className="h-4 w-4 text-[#465B9E]" />
+                {address}
+              </div>
+            )}
+
+            {/* Summary */}
+
+            {summary && (
+              <p className="mt-7 max-w-3xl text-base leading-8 text-[#66706B] sm:text-lg">
+                {summary}
+              </p>
+            )}
+
+            {/* Actions */}
+
+            <div className="mt-8 flex flex-wrap gap-3">
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold transition-colors"
+                  className="
+                    inline-flex
+                    min-h-11
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    bg-[#17201C]
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-white
+                    transition-all
+                    hover:bg-[#26312C]
+                    hover:-translate-y-0.5
+                  "
                 >
-                  <Mail className="w-4 h-4" />
-                  <span>Email Me</span>
+                  <Mail className="h-4 w-4" />
+                  Email Me
+                </a>
+              )}
+
+              {linkedin && (
+                <a
+                  href={normalizeUrl(linkedin)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex
+                    min-h-11
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-[#E3E2DC]
+                    bg-white
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-[#17201C]
+                    transition-all
+                    hover:border-[#465B9E]/40
+                    hover:bg-[#F1F0EB]
+                  "
+                >
+                  <Linkedin className="h-4 w-4 text-[#465B9E]" />
+                  LinkedIn
+                </a>
+              )}
+
+              {github && (
+                <a
+                  href={normalizeUrl(github)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex
+                    min-h-11
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-[#E3E2DC]
+                    bg-white
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-[#17201C]
+                    transition-all
+                    hover:bg-[#F1F0EB]
+                  "
+                >
+                  <Github className="h-4 w-4" />
+                  GitHub
+                </a>
+              )}
+
+              {websiteUrl && (
+                <a
+                  href={normalizeUrl(websiteUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex
+                    min-h-11
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-[#E3E2DC]
+                    bg-white
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-[#17201C]
+                    transition-all
+                    hover:bg-[#F1F0EB]
+                  "
+                >
+                  <Globe className="h-4 w-4 text-[#465B9E]" />
+                  Website
                 </a>
               )}
 
               {phone_no && (
                 <a
                   href={`tel:${phone_no}`}
-                  className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition-colors"
+                  className="
+                    inline-flex
+                    min-h-11
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-[#E3E2DC]
+                    bg-white
+                    px-5
+                    text-sm
+                    font-semibold
+                    text-[#17201C]
+                    transition-all
+                    hover:bg-[#F1F0EB]
+                  "
                 >
-                  <Phone className="w-4 h-4 text-emerald-600" />
-                  <span>Call</span>
-                </a>
-              )}
-
-              {linkedin && (
-                <a
-                  href={linkedin.startsWith("http") ? linkedin : `https://${linkedin}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center p-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 border border-blue-100 text-blue-700 transition-colors"
-                  title="LinkedIn Profile"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              )}
-
-              {github && (
-                <a
-                  href={github.startsWith("http") ? github : `https://${github}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 transition-colors"
-                  title="GitHub Profile"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-              )}
-
-              {websiteUrl && (
-                <a
-                  href={websiteUrl.startsWith("http") ? websiteUrl : `https://${websiteUrl}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center p-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 text-indigo-700 transition-colors"
-                  title="Personal Website"
-                >
-                  <Globe className="w-4 h-4" />
+                  <Phone className="h-4 w-4 text-[#465B9E]" />
+                  Call
                 </a>
               )}
             </div>
           </div>
 
-          {/* Summary */}
+          {/* Hero metadata */}
 
-          {summary && (
-            <div className="pt-7 space-y-3">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-                About
-              </h2>
-
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-4xl">
-                {summary}
+          <div className="mt-12 grid grid-cols-2 border-t border-[#E3E2DC] pt-6 sm:grid-cols-4">
+            <div className="border-r border-[#E3E2DC] pr-4">
+              <p className="font-serif text-2xl font-semibold text-[#17201C]">
+                {experience.length || "—"}
               </p>
-            </div>
-          )}
 
-          {/* Metrics */}
-
-          <div className="mt-8 pt-6 border-t border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-center">
-              <span className="text-xl sm:text-2xl font-extrabold text-slate-900 block">
-                {experience.length > 0 ? `${experience.length}+` : "—"}
-              </span>
-
-              <span className="text-[11px] text-slate-500 font-medium">Career Roles</span>
+              <p className="mt-1 text-xs text-[#66706B]">Career roles</p>
             </div>
 
-            <div className="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center">
-              <span className="text-xl sm:text-2xl font-extrabold text-indigo-600 block">
-                {skills.length > 0 ? skills.length : "—"}
-              </span>
+            <div className="border-r border-[#E3E2DC] px-4 sm:px-5">
+              <p className="font-serif text-2xl font-semibold text-[#17201C]">
+                {projects.length || "—"}
+              </p>
 
-              <span className="text-[11px] text-slate-500 font-medium">Core Skills</span>
+              <p className="mt-1 text-xs text-[#66706B]">Projects</p>
             </div>
 
-            <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-center">
-              <span className="text-xl sm:text-2xl font-extrabold text-slate-900 block">
-                {projects.length > 0 ? projects.length : "—"}
-              </span>
+            <div className="border-r border-[#E3E2DC] px-4 sm:px-5">
+              <p className="font-serif text-2xl font-semibold text-[#17201C]">
+                {skills.length || "—"}
+              </p>
 
-              <span className="text-[11px] text-slate-500 font-medium">Projects</span>
+              <p className="mt-1 text-xs text-[#66706B]">Skills</p>
             </div>
 
-            <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100 text-center">
-              <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 block">
-                {certificates.length > 0 ? certificates.length : "—"}
-              </span>
+            <div className="pl-4 sm:pl-5">
+              <p className="font-serif text-2xl font-semibold text-[#17201C]">
+                {certificates.length || "—"}
+              </p>
 
-              <span className="text-[11px] text-slate-500 font-medium">Certifications</span>
+              <p className="mt-1 text-xs text-[#66706B]">Certifications</p>
             </div>
           </div>
         </section>
@@ -400,16 +578,17 @@ export default function PublicPortfolioViewer({ resume }) {
             EXPERIENCE
         ====================================================== */}
 
-        {experience && experience.length > 0 && (
-          <section className="space-y-6">
+        {experience.length > 0 && (
+          <section className="mt-20">
             <SectionHeading
+              eyebrow="Experience"
               icon={Briefcase}
-              title="Work Experience"
-              description="Career experience and professional contributions"
+              title="Professional experience"
+              description="Career experience, responsibilities, and contributions."
               count={`${experience.length} ${experience.length === 1 ? "Role" : "Roles"}`}
             />
 
-            <div className="relative pl-4 sm:pl-6 space-y-7 before:absolute before:left-2 sm:before:left-2.5 before:top-3 before:bottom-3 before:w-px before:bg-slate-200">
+            <div className="space-y-5">
               {experience.map((exp, idx) => {
                 const dateRange = renderDateRange(exp.startDate, exp.endDate);
 
@@ -420,47 +599,77 @@ export default function PublicPortfolioViewer({ resume }) {
                     : [];
 
                 return (
-                  <div key={idx} className="relative group">
-                    {/* Timeline node */}
-
-                    <div className="absolute -left-5.5 sm:-left-7.5 top-5 w-3 h-3 rounded-full bg-indigo-600 ring-4 ring-[#F8FAFC] transition-transform group-hover:scale-125" />
-
-                    <div className="bg-white border border-slate-200 hover:border-indigo-200 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-all">
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                  <article
+                    key={idx}
+                    className="
+                      group
+                      relative
+                      rounded-2xl
+                      border
+                      border-[#E3E2DC]
+                      bg-white
+                      p-6
+                      transition-all
+                      duration-200
+                      hover:-translate-y-0.5
+                      hover:border-[#CFCFC8]
+                      hover:shadow-[0_14px_40px_rgba(23,32,28,0.06)]
+                      sm:p-7
+                    "
+                  >
+                    <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="font-serif text-xl font-semibold tracking-tight text-[#17201C]">
                           {exp.position || "Role Title"}
                         </h3>
 
-                        {dateRange && (
-                          <span className="text-xs font-medium text-indigo-700 flex items-center gap-1.5 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-100 w-fit">
-                            <Calendar className="w-3 h-3" />
-
-                            {dateRange}
-                          </span>
+                        {exp.companyName && (
+                          <div className="mt-2 flex items-center gap-2 text-sm font-medium text-[#66706B]">
+                            <Building className="h-4 w-4 text-[#465B9E]" />
+                            {exp.companyName}
+                          </div>
                         )}
                       </div>
 
-                      {exp.companyName && (
-                        <div className="flex items-center gap-2 text-sm font-semibold text-slate-600 mb-4">
-                          <Building className="w-4 h-4 text-slate-400" />
-
-                          <span>{exp.companyName}</span>
-                        </div>
-                      )}
-
-                      {descList.length > 0 && (
-                        <ul className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                          {descList.map((bullet, bIdx) => (
-                            <li key={bIdx} className="flex items-start gap-2.5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
-
-                              <span>{bullet}</span>
-                            </li>
-                          ))}
-                        </ul>
+                      {dateRange && (
+                        <span
+                          className="
+                            inline-flex
+                            w-fit
+                            shrink-0
+                            items-center
+                            gap-1.5
+                            rounded-full
+                            border
+                            border-[#E3E2DC]
+                            bg-[#F8F7F3]
+                            px-3
+                            py-1.5
+                            text-[11px]
+                            font-medium
+                            text-[#66706B]
+                          "
+                        >
+                          <Calendar className="h-3 w-3 text-[#465B9E]" />
+                          {dateRange}
+                        </span>
                       )}
                     </div>
-                  </div>
+
+                    {descList.length > 0 && (
+                      <ul className="mt-6 space-y-3">
+                        {descList.map((bullet, bIdx) => (
+                          <li
+                            key={bIdx}
+                            className="flex items-start gap-3 text-sm leading-7 text-[#66706B]"
+                          >
+                            <span className="mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full bg-[#465B9E]" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
                 );
               })}
             </div>
@@ -471,17 +680,17 @@ export default function PublicPortfolioViewer({ resume }) {
             PROJECTS
         ====================================================== */}
 
-        {projects && projects.length > 0 && (
-          <section className="space-y-6">
+        {projects.length > 0 && (
+          <section className="mt-20">
             <SectionHeading
+              eyebrow="Selected Work"
               icon={Layers}
-              title="Featured Projects"
-              description="Selected projects, products, and work"
+              title="Featured projects"
+              description="Selected projects, products, and work worth exploring."
               count={`${projects.length} ${projects.length === 1 ? "Project" : "Projects"}`}
-              iconClass="text-purple-600 bg-purple-50 border-purple-100"
             />
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-5 md:grid-cols-2">
               {projects.map((proj, idx) => {
                 const descList = Array.isArray(proj.description)
                   ? proj.description
@@ -497,49 +706,88 @@ export default function PublicPortfolioViewer({ resume }) {
                   : [];
 
                 return (
-                  <div
+                  <article
                     key={idx}
-                    className="bg-white hover:bg-white border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all flex flex-col justify-between shadow-sm hover:shadow-md group"
+                    className="
+                      group
+                      flex
+                      flex-col
+                      justify-between
+                      rounded-2xl
+                      border
+                      border-[#E3E2DC]
+                      bg-white
+                      p-6
+                      transition-all
+                      duration-200
+                      hover:-translate-y-1
+                      hover:border-[#CFCFC8]
+                      hover:shadow-[0_16px_45px_rgba(23,32,28,0.07)]
+                    "
                   >
                     <div>
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-purple-700 transition-colors">
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="font-serif text-xl font-semibold tracking-tight text-[#17201C] transition-colors group-hover:text-[#465B9E]">
                           {proj.title || "Project Title"}
                         </h3>
 
                         {proj.link && (
                           <a
-                            href={proj.link.startsWith("http") ? proj.link : `https://${proj.link}`}
+                            href={normalizeUrl(proj.link)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-1.5 rounded-lg bg-slate-50 hover:bg-purple-50 text-slate-500 hover:text-purple-700 transition-colors shrink-0"
+                            className="
+                              flex
+                              h-9
+                              w-9
+                              shrink-0
+                              items-center
+                              justify-center
+                              rounded-xl
+                              border
+                              border-[#E3E2DC]
+                              bg-[#F8F7F3]
+                              text-[#66706B]
+                              transition-all
+                              hover:border-[#465B9E]/30
+                              hover:bg-[#465B9E]
+                              hover:text-white
+                            "
                             title="Visit Project"
                           >
-                            <ArrowUpRight className="w-4 h-4" />
+                            <ArrowUpRight className="h-4 w-4" />
                           </a>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 mb-4">
+                      <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#66706B]">
                         {proj.roleOrType && (
-                          <span className="text-indigo-600 font-medium">{proj.roleOrType}</span>
+                          <span className="font-medium text-[#465B9E]">{proj.roleOrType}</span>
                         )}
 
-                        {proj.organization && <span>• {proj.organization}</span>}
+                        {proj.organization && (
+                          <>
+                            <span>·</span>
+                            <span>{proj.organization}</span>
+                          </>
+                        )}
 
                         {proj.date && (
-                          <span className="font-mono text-slate-400">
-                            • {formatDate(proj.date)}
-                          </span>
+                          <>
+                            <span>·</span>
+                            <span>{formatDate(proj.date)}</span>
+                          </>
                         )}
                       </div>
 
                       {descList.length > 0 && (
-                        <div className="space-y-2 mb-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        <div className="mt-6 space-y-3">
                           {descList.slice(0, 3).map((bullet, bIdx) => (
-                            <p key={bIdx} className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />
-
+                            <p
+                              key={bIdx}
+                              className="flex items-start gap-3 text-sm leading-7 text-[#66706B]"
+                            >
+                              <span className="mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full bg-[#465B9E]" />
                               <span>{bullet}</span>
                             </p>
                           ))}
@@ -547,13 +795,23 @@ export default function PublicPortfolioViewer({ resume }) {
                       )}
                     </div>
 
-                    <div>
+                    <div className="mt-7">
                       {tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+                        <div className="flex flex-wrap gap-2 border-t border-[#E3E2DC] pt-5">
                           {tags.map((tag, tIdx) => (
                             <span
                               key={tIdx}
-                              className="px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-[11px] font-medium text-slate-600"
+                              className="
+                                rounded-full
+                                border
+                                border-[#E3E2DC]
+                                bg-[#F8F7F3]
+                                px-3
+                                py-1.5
+                                text-[11px]
+                                font-medium
+                                text-[#66706B]
+                              "
                             >
                               {tag}
                             </span>
@@ -562,21 +820,28 @@ export default function PublicPortfolioViewer({ resume }) {
                       )}
 
                       {proj.link && (
-                        <div className="mt-4">
-                          <a
-                            href={proj.link.startsWith("http") ? proj.link : `https://${proj.link}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 hover:text-purple-700 transition-colors"
-                          >
-                            <span>Explore Project</span>
-
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
+                        <a
+                          href={normalizeUrl(proj.link)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="
+                            mt-5
+                            inline-flex
+                            items-center
+                            gap-2
+                            text-xs
+                            font-semibold
+                            text-[#465B9E]
+                            transition-colors
+                            hover:text-[#344B93]
+                          "
+                        >
+                          Explore project
+                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                        </a>
                       )}
                     </div>
-                  </div>
+                  </article>
                 );
               })}
             </div>
@@ -587,34 +852,48 @@ export default function PublicPortfolioViewer({ resume }) {
             SKILLS
         ====================================================== */}
 
-        {skills && skills.length > 0 && (
-          <section className="space-y-6">
+        {skills.length > 0 && (
+          <section className="mt-20">
             <SectionHeading
+              eyebrow="Expertise"
               icon={CheckCircle2}
-              title="Skills & Expertise"
-              description="Technical skills and professional capabilities"
+              title="Skills & expertise"
+              description="Technical skills and professional capabilities."
               count={`${skills.length} Skills`}
-              iconClass="text-emerald-600 bg-emerald-50 border-emerald-100"
             />
 
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
-              <div className="flex flex-wrap gap-2.5 sm:gap-3">
+            <div className="rounded-3xl border border-[#E3E2DC] bg-white p-6 sm:p-8">
+              <div className="flex flex-wrap gap-2.5">
                 {skills.map((skill, idx) => {
-                  const skillName = typeof skill === "string" ? skill : skill.name;
+                  const skillName = typeof skill === "string" ? skill : skill?.name;
 
-                  const skillLevel = typeof skill === "object" ? skill.level : null;
+                  const skillLevel = typeof skill === "object" ? skill?.level : null;
 
                   return (
                     <div
                       key={idx}
-                      className="group flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 transition-all"
+                      className="
+                        group
+                        flex
+                        items-center
+                        gap-2
+                        rounded-full
+                        border
+                        border-[#E3E2DC]
+                        bg-[#F8F7F3]
+                        px-3.5
+                        py-2
+                        transition-all
+                        hover:border-[#465B9E]/30
+                        hover:bg-white
+                      "
                     >
-                      <span className="text-xs sm:text-sm font-semibold text-slate-700 group-hover:text-indigo-700">
+                      <span className="text-xs font-semibold text-[#17201C] sm:text-sm">
                         {skillName}
                       </span>
 
                       {skillLevel && (
-                        <span className="text-[10px] font-medium uppercase bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded border border-indigo-200">
+                        <span className="rounded-full bg-[#465B9E]/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#465B9E]">
                           {skillLevel}
                         </span>
                       )}
@@ -630,272 +909,350 @@ export default function PublicPortfolioViewer({ resume }) {
             EDUCATION + CERTIFICATIONS
         ====================================================== */}
 
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          {/* Education */}
+        {(education.length > 0 || certificates.length > 0) && (
+          <div className="mt-20 grid items-start gap-12 lg:grid-cols-2">
+            {/* Education */}
 
-          {education && education.length > 0 && (
-            <section className="space-y-6">
-              <SectionHeading
-                icon={GraduationCap}
-                title="Education"
-                description="Academic background and qualifications"
-                iconClass="text-blue-600 bg-blue-50 border-blue-100"
-              />
+            {education.length > 0 && (
+              <section>
+                <SectionHeading
+                  eyebrow="Education"
+                  icon={GraduationCap}
+                  title="Academic background"
+                  description="Education and qualifications."
+                />
 
-              <div className="space-y-4">
-                {education.map((edu, idx) => {
-                  const yearText =
-                    edu.startYear || edu.endYear
-                      ? `${edu.startYear || ""} ${edu.endYear ? `— ${edu.endYear}` : ""}`.trim()
-                      : null;
+                <div className="space-y-4">
+                  {education.map((edu, idx) => {
+                    const yearText =
+                      edu.startYear || edu.endYear
+                        ? `${edu.startYear || ""}${edu.endYear ? ` — ${edu.endYear}` : ""}`.trim()
+                        : null;
 
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-white border border-slate-200 rounded-2xl p-5 space-y-1.5 shadow-sm"
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-sm sm:text-base font-bold text-slate-900">
-                          {edu.degree || "Degree / Course"}
-                        </h3>
+                    return (
+                      <article
+                        key={idx}
+                        className="
+                          rounded-2xl
+                          border
+                          border-[#E3E2DC]
+                          bg-white
+                          p-5
+                          transition-all
+                          hover:border-[#CFCFC8]
+                          hover:shadow-[0_12px_35px_rgba(23,32,28,0.05)]
+                        "
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <h3 className="font-serif text-lg font-semibold text-[#17201C]">
+                            {edu.degree || "Degree / Course"}
+                          </h3>
 
-                        {yearText && (
-                          <span className="text-xs font-medium text-slate-400 shrink-0">
-                            {yearText}
-                          </span>
-                        )}
-                      </div>
-
-                      <p className="text-xs sm:text-sm font-medium text-indigo-600">
-                        {edu.institution || "Institution"}
-                      </p>
-
-                      {edu.grade && (
-                        <p className="text-xs text-emerald-600 font-medium">
-                          Grade / Score: {edu.grade}
-                        </p>
-                      )}
-
-                      {edu.description && edu.description.length > 0 && (
-                        <div className="text-xs text-slate-500 pt-1 space-y-1">
-                          {Array.isArray(edu.description) ? (
-                            edu.description.map((d, dIdx) => <p key={dIdx}>• {d}</p>)
-                          ) : (
-                            <p>{edu.description}</p>
+                          {yearText && (
+                            <span className="shrink-0 text-[11px] font-medium text-[#66706B]">
+                              {yearText}
+                            </span>
                           )}
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          )}
 
-          {/* Certifications */}
-
-          {certificates && certificates.length > 0 ? (
-            <section className="space-y-6">
-              <SectionHeading
-                icon={Award}
-                title="Certifications"
-                description="Professional credentials and certifications"
-                iconClass="text-amber-600 bg-amber-50 border-amber-100"
-              />
-
-              <div className="space-y-4">
-                {certificates.map((cert, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white border border-slate-200 rounded-2xl p-5 flex items-start justify-between gap-4 shadow-sm"
-                  >
-                    <div className="space-y-1">
-                      <h3 className="text-sm sm:text-base font-bold text-slate-900">
-                        {cert.title || "Certification"}
-                      </h3>
-
-                      <p className="text-xs text-indigo-600 font-medium">
-                        {cert.organization || "Issuing Body"}
-                      </p>
-
-                      {cert.year && (
-                        <p className="text-[11px] font-medium text-slate-400">
-                          Issued: {formatDate(cert.year) || cert.year}
+                        <p className="mt-2 text-sm font-medium text-[#465B9E]">
+                          {edu.institution || "Institution"}
                         </p>
-                      )}
-                    </div>
 
-                    {cert.credentialUrl && (
-                      <a
-                        href={
-                          cert.credentialUrl.startsWith("http")
-                            ? cert.credentialUrl
-                            : `https://${cert.credentialUrl}`
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs text-slate-600 hover:text-slate-900 transition-colors shrink-0"
-                      >
-                        <span>View Credential</span>
+                        {edu.grade && (
+                          <p className="mt-1 text-xs font-medium text-[#66706B]">
+                            Grade / Score: {edu.grade}
+                          </p>
+                        )}
 
-                        <ExternalLink className="w-3 h-3 text-amber-600" />
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : (
-            <section className="space-y-6">
-              <SectionHeading
-                icon={Sparkles}
-                title="Let's Connect"
-                description="Direct contact information"
-                iconClass="text-indigo-600 bg-indigo-50 border-indigo-100"
+                        {edu.description && edu.description.length > 0 && (
+                          <div className="mt-3 space-y-1 text-xs leading-6 text-[#66706B]">
+                            {Array.isArray(edu.description) ? (
+                              edu.description.map((d, dIdx) => <p key={dIdx}>• {d}</p>)
+                            ) : (
+                              <p>{edu.description}</p>
+                            )}
+                          </div>
+                        )}
+                      </article>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+
+            {/* Certifications */}
+
+            {certificates.length > 0 && (
+              <section>
+                <SectionHeading
+                  eyebrow="Credentials"
+                  icon={Award}
+                  title="Certifications"
+                  description="Professional credentials and certifications."
+                />
+
+                <div className="space-y-4">
+                  {certificates.map((cert, idx) => (
+                    <article
+                      key={idx}
+                      className="
+                        rounded-2xl
+                        border
+                        border-[#E3E2DC]
+                        bg-white
+                        p-5
+                        transition-all
+                        hover:border-[#CFCFC8]
+                        hover:shadow-[0_12px_35px_rgba(23,32,28,0.05)]
+                      "
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h3 className="font-serif text-lg font-semibold text-[#17201C]">
+                            {cert.title || "Certification"}
+                          </h3>
+
+                          <p className="mt-1 text-sm font-medium text-[#465B9E]">
+                            {cert.organization || "Issuing Body"}
+                          </p>
+
+                          {cert.year && (
+                            <p className="mt-1 text-[11px] text-[#66706B]">
+                              Issued: {formatDate(cert.year) || cert.year}
+                            </p>
+                          )}
+                        </div>
+
+                        {cert.credentialUrl && (
+                          <a
+                            href={normalizeUrl(cert.credentialUrl)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="
+                              inline-flex
+                              shrink-0
+                              items-center
+                              gap-1.5
+                              rounded-xl
+                              border
+                              border-[#E3E2DC]
+                              bg-[#F8F7F3]
+                              px-3
+                              py-2
+                              text-[11px]
+                              font-semibold
+                              text-[#17201C]
+                              transition-all
+                              hover:border-[#465B9E]/30
+                              hover:bg-white
+                            "
+                          >
+                            View
+                            <ExternalLink className="h-3 w-3 text-[#465B9E]" />
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
+
+        {/* =====================================================
+            CONTACT
+        ====================================================== */}
+
+        {(email || phone_no || linkedin) && (
+          <section className="mt-20">
+            <div
+              className="
+                relative
+                overflow-hidden
+                rounded-3xl
+                border
+                border-[#E3E2DC]
+                bg-[#17201C]
+                px-6
+                py-12
+                text-center
+                sm:px-10
+                sm:py-16
+              "
+            >
+              {/* subtle decoration */}
+
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  -right-24
+                  -top-24
+                  h-72
+                  w-72
+                  rounded-full
+                  bg-[#465B9E]/20
+                  blur-3xl
+                "
               />
 
-              <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Interested in working together? Feel free to connect directly through email or the
-                  available social profiles.
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  -bottom-32
+                  -left-20
+                  h-72
+                  w-72
+                  rounded-full
+                  bg-white/3
+                  blur-3xl
+                "
+              />
+
+              <div className="relative z-10 mx-auto max-w-2xl">
+                <div className="mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                  <Sparkles className="h-5 w-5 text-[#AAB7E8]" />
+                </div>
+
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AAB7E8]">
+                  Get in touch
                 </p>
 
-                <div className="space-y-2.5 pt-2">
+                <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                  Interested in working with {name}?
+                </h2>
+
+                <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/60 sm:text-base">
+                  Connect directly to discuss opportunities, collaborations, or professional work.
+                </p>
+
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                   {email && (
                     <a
-                      href={`mailto:${email}`}
-                      className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-100 text-xs sm:text-sm text-slate-700 transition-colors"
+                      href={`mailto:${email}?subject=Opportunity Inquiry for ${encodeURIComponent(
+                        name
+                      )}`}
+                      className="
+                        inline-flex
+                        min-h-11
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        bg-white
+                        px-5
+                        text-sm
+                        font-semibold
+                        text-[#17201C]
+                        transition-all
+                        hover:-translate-y-0.5
+                        hover:bg-[#F1F0EB]
+                      "
                     >
-                      <span className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-indigo-600" />
-
-                        <span>{email}</span>
-                      </span>
-
-                      <ArrowRight className="w-4 h-4 text-slate-400" />
+                      <Send className="h-4 w-4" />
+                      Get in touch
                     </a>
                   )}
 
-                  {phone_no && (
+                  <button
+                    onClick={handleDownloadPdf}
+                    disabled={downloading}
+                    type="button"
+                    className="
+                      inline-flex
+                      min-h-11
+                      items-center
+                      justify-center
+                      gap-2
+                      rounded-xl
+                      border
+                      border-white/15
+                      bg-white/5
+                      px-5
+                      text-sm
+                      font-semibold
+                      text-white
+                      transition-all
+                      hover:bg-white/10
+                      disabled:cursor-not-allowed
+                      disabled:opacity-60
+                    "
+                  >
+                    <Download className="h-4 w-4" />
+                    {downloading ? "Preparing..." : "Download Resume"}
+                  </button>
+
+                  {linkedin && (
                     <a
-                      href={`tel:${phone_no}`}
-                      className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-100 text-xs sm:text-sm text-slate-700 transition-colors"
+                      href={normalizeUrl(linkedin)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="
+                        inline-flex
+                        min-h-11
+                        items-center
+                        justify-center
+                        gap-2
+                        rounded-xl
+                        border
+                        border-white/15
+                        bg-white/5
+                        px-5
+                        text-sm
+                        font-semibold
+                        text-white
+                        transition-all
+                        hover:bg-white/10
+                      "
                     >
-                      <span className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-emerald-600" />
-
-                        <span>{phone_no}</span>
-                      </span>
-
-                      <ArrowRight className="w-4 h-4 text-slate-400" />
+                      <Linkedin className="h-4 w-4" />
+                      LinkedIn
                     </a>
                   )}
                 </div>
               </div>
-            </section>
-          )}
-        </div>
-
-        {/* =====================================================
-            CONTACT CTA
-        ====================================================== */}
-
-        <section className="relative bg-linear-to-br from-indigo-600 via-indigo-700 to-purple-700 rounded-3xl p-8 sm:p-12 text-center overflow-hidden shadow-xl shadow-indigo-600/15">
-          {/* Decorative background */}
-
-          <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
-
-          <div className="absolute -bottom-32 -left-20 w-80 h-80 rounded-full bg-purple-400/10 blur-3xl" />
-
-          <div className="relative z-10 max-w-2xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-indigo-100 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              Let's Connect
-            </span>
-
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Interested in working with {name}?
-            </h2>
-
-            <p className="text-xs sm:text-sm text-indigo-100 leading-relaxed">
-              Get in touch directly or download the resume to learn more about their professional
-              experience.
-            </p>
-          </div>
-
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3 pt-6">
-            {/* Download Resume */}
-
-            <button
-              onClick={handleDownloadPdf}
-              disabled={downloading}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs sm:text-sm shadow-lg transition-all hover:scale-[1.02] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              <Download className="w-4 h-4" />
-
-              <span>{downloading ? "Preparing..." : "Download Resume"}</span>
-            </button>
-
-            {/* Email */}
-
-            {email && (
-              <a
-                href={`mailto:${email}?subject=Opportunity Inquiry for ${encodeURIComponent(name)}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all hover:scale-[1.02]"
-              >
-                <Send className="w-4 h-4" />
-
-                <span>Get in Touch</span>
-              </a>
-            )}
-
-            {/* LinkedIn */}
-
-            {linkedin && (
-              <a
-                href={linkedin.startsWith("http") ? linkedin : `https://${linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-xs sm:text-sm transition-all"
-              >
-                <Linkedin className="w-4 h-4" />
-
-                <span>LinkedIn</span>
-              </a>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* =====================================================
             FOOTER
         ====================================================== */}
 
-        <footer className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/logos/nextcvlogolight.png"
-              alt="NextCV"
-              width={20}
-              height={20}
-              className="opacity-60"
-            />
+        <footer className="mt-16 border-t border-[#E3E2DC] pt-7">
+          <div className="flex flex-col items-center justify-between gap-4 text-xs text-[#66706B] sm:flex-row">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logos/nextcvlogolight.png"
+                alt="NextCV"
+                width={19}
+                height={19}
+                className="opacity-70"
+              />
 
-            <span>Portfolio created with NextCV</span>
-          </div>
+              <span>
+                Portfolio created with <span className="font-semibold text-[#17201C]">NextCV</span>
+              </span>
+            </div>
 
-          <div className="flex items-center gap-4">
-            <Link href="/" className="hover:text-slate-600 transition-colors">
-              Create Your Portfolio
-            </Link>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleCopyLink}
+                type="button"
+                className="font-medium transition-colors hover:text-[#465B9E]"
+              >
+                {copied ? "Link copied" : "Share portfolio"}
+              </button>
 
-            <span>•</span>
+              <span className="text-[#C5C5BE]">•</span>
 
-            <button
-              onClick={handleCopyLink}
-              className="hover:text-slate-600 transition-colors cursor-pointer"
-            >
-              Share Page
-            </button>
+              <Link href="/" className="font-medium transition-colors hover:text-[#465B9E]">
+                Create yours
+              </Link>
+            </div>
           </div>
         </footer>
       </main>

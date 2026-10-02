@@ -8,6 +8,7 @@ const Logo2 = ({ ClassName = "", color = "black" }) => {
         src={color === "black" ? "/logos/nextcvlogo.png" : "/logos/nextcvlogolight.png"}
         alt="NextCV logo"
         fill
+        unoptimized
         sizes="(max-width: 640px) 112px, (max-width: 768px) 144px, (max-width: 1024px) 176px, 208px"
         className="object-contain"
       />

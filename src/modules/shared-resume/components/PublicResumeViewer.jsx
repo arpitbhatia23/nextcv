@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-// Configure pdfjs worker
+// Configure PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 export default function PublicResumeViewer({ resume }) {
@@ -33,26 +33,38 @@ export default function PublicResumeViewer({ resume }) {
   const pdfGenRef = useRef(null);
   const viewerContainerRef = useRef(null);
 
-  // Measure container for responsive page width
+  /*
+   * =====================================================
+   * RESPONSIVE PDF WIDTH
+   * =====================================================
+   */
+
   useEffect(() => {
     const updateWidth = () => {
-      if (viewerContainerRef.current) {
-        const available = viewerContainerRef.current.clientWidth - 48;
+      if (!viewerContainerRef.current) return;
 
-        const optimal = Math.min(Math.max(available, 280), 820);
+      const available = viewerContainerRef.current.clientWidth - 48;
 
-        setContainerWidth(optimal);
-      }
+      const optimal = Math.min(Math.max(available, 280), 820);
+
+      setContainerWidth(optimal);
     };
 
     updateWidth();
 
     window.addEventListener("resize", updateWidth);
 
-    return () => window.removeEventListener("resize", updateWidth);
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    };
   }, []);
 
-  // Generate PDF from resume data
+  /*
+   * =====================================================
+   * GENERATE PDF
+   * =====================================================
+   */
+
   useEffect(() => {
     let isMounted = true;
 
@@ -62,7 +74,9 @@ export default function PublicResumeViewer({ resume }) {
 
         const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
 
-        const pdfGen = new pdfGenerator(resume, resume?.ResumeType, { type: "resume" });
+        const pdfGen = new pdfGenerator(resume, resume?.ResumeType, {
+          type: "resume",
+        });
 
         pdfGenRef.current = pdfGen;
 
@@ -88,14 +102,22 @@ export default function PublicResumeViewer({ resume }) {
 
     return () => {
       isMounted = false;
+
       pdfGenRef.current?.cleanUp?.();
     };
   }, [resume]);
 
-  // Copy public link
+  /*
+   * =====================================================
+   * COPY PUBLIC LINK
+   * =====================================================
+   */
+
   const handleCopyLink = async () => {
     try {
       const url = typeof window !== "undefined" ? window.location.href : "";
+
+      if (!url) return;
 
       if (navigator.clipboard) {
         await navigator.clipboard.writeText(url);
@@ -103,17 +125,26 @@ export default function PublicResumeViewer({ resume }) {
 
       setCopied(true);
 
-      toast.success("Public link copied to clipboard!");
+      toast.success("Resume link copied to clipboard");
 
-      setTimeout(() => setCopied(false), 2500);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2500);
     } catch {
       toast.error("Failed to copy link");
     }
   };
 
-  // Download PDF
+  /*
+   * =====================================================
+   * DOWNLOAD
+   * =====================================================
+   */
+
   const handleDownload = async () => {
-    if (!pdfGenRef.current || downloading) return;
+    if (!pdfGenRef.current || downloading) {
+      return;
+    }
 
     try {
       setDownloading(true);
@@ -122,7 +153,7 @@ export default function PublicResumeViewer({ resume }) {
 
       await pdfGenRef.current.downloadPdf();
 
-      toast.success("Download started!");
+      toast.success("Download started");
     } catch (err) {
       console.error(err);
 
@@ -132,7 +163,12 @@ export default function PublicResumeViewer({ resume }) {
     }
   };
 
-  // Print PDF
+  /*
+   * =====================================================
+   * PRINT
+   * =====================================================
+   */
+
   const handlePrint = () => {
     if (!pdfUrl) return;
 
@@ -144,121 +180,163 @@ export default function PublicResumeViewer({ resume }) {
     }
   };
 
-  // Zoom controls
-  const zoomIn = () => setScale(s => Math.min(Number((s + 0.15).toFixed(2)), 1.6));
+  /*
+   * =====================================================
+   * ZOOM
+   * =====================================================
+   */
 
-  const zoomOut = () => setScale(s => Math.max(Number((s - 0.15).toFixed(2)), 0.65));
+  const zoomIn = () => {
+    setScale(s => Math.min(Number((s + 0.15).toFixed(2)), 1.6));
+  };
 
-  const resetZoom = () => setScale(1);
+  const zoomOut = () => {
+    setScale(s => Math.max(Number((s - 0.15).toFixed(2)), 0.65));
+  };
+
+  const resetZoom = () => {
+    setScale(1);
+  };
 
   const pageWidth = Math.round(containerWidth * scale);
 
+  /*
+   * =====================================================
+   * RENDER
+   * =====================================================
+   */
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col selection:bg-indigo-100 selection:text-indigo-900">
-      {/* =====================================================
+    <div className="min-h-screen bg-[#F8F7F3] text-[#17201C] font-sans selection:bg-[#465B9E]/15 selection:text-[#17201C] flex flex-col">
+      {/* =================================================
           TOP NAVIGATION
-      ====================================================== */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200 px-4 sm:px-6 py-3">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Candidate Identity */}
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="relative w-9 h-9 rounded-xl bg-linear-to-br from-indigo-600 to-violet-600 flex items-center justify-center font-bold text-white shadow-sm shrink-0">
+      ================================================= */}
+
+      <header className="sticky top-0 z-50 border-b border-[#E3E2DC]/90 bg-[#F8F7F3]/92 backdrop-blur-xl">
+        <div className="mx-auto flex h-17 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          {/* Candidate identity */}
+
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#DCE1F0] bg-[#EEF0F7] text-sm font-semibold text-[#465B9E]">
               {resume?.name ? resume.name.charAt(0).toUpperCase() : "R"}
             </div>
 
             <div className="min-w-0">
-              <h1 className="text-sm sm:text-base font-semibold text-slate-900 tracking-tight truncate">
-                {resume?.name || "Professional"}
-              </h1>
+              <div className="flex items-center gap-2">
+                <h1 className="truncate text-sm font-semibold tracking-tight text-[#17201C] sm:text-base">
+                  {resume?.name || "Professional"}
+                </h1>
 
-              <p className="text-xs text-slate-500 truncate flex items-center gap-1.5">
+                {numPages && (
+                  <span className="hidden shrink-0 rounded-full border border-[#E3E2DC] bg-white px-2 py-0.5 text-[10px] font-medium text-[#66706B] sm:inline-flex">
+                    {numPages} {numPages === 1 ? "page" : "pages"}
+                  </span>
+                )}
+              </div>
+
+              <p className="flex min-w-0 items-center gap-1.5 truncate text-xs text-[#66706B]">
                 {resume?.jobRole ? (
                   <>
-                    <Briefcase className="w-3 h-3 shrink-0" />
+                    <Briefcase className="h-3 w-3 shrink-0 text-[#465B9E]" aria-hidden="true" />
 
-                    <span>{resume.jobRole}</span>
+                    <span className="truncate">{resume.jobRole}</span>
                   </>
                 ) : (
                   <span>Professional Resume</span>
-                )}
-
-                {numPages && (
-                  <span className="text-slate-400 hidden md:inline">
-                    • {numPages} {numPages === 1 ? "page" : "pages"}
-                  </span>
                 )}
               </p>
             </div>
           </div>
 
-          {/* Action Toolbar */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Toolbar */}
+
+          <div className="flex shrink-0 items-center gap-2">
             {/* Zoom */}
-            <div className="hidden md:flex items-center bg-slate-50 border border-slate-200 rounded-lg p-1 text-slate-600">
+
+            <div className="hidden items-center rounded-xl border border-[#E3E2DC] bg-white p-1 text-[#66706B] shadow-[0_4px_18px_rgba(23,32,28,0.04)] md:flex">
               <button
+                type="button"
                 onClick={zoomOut}
                 disabled={scale <= 0.65}
-                title="Zoom Out"
-                className="p-1.5 hover:bg-white hover:text-slate-900 rounded-md transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                title="Zoom out"
+                aria-label="Zoom out"
+                className="rounded-lg p-1.5 transition-colors hover:bg-[#F1F0EB] hover:text-[#17201C] disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30"
               >
-                <ZoomOut className="w-4 h-4" />
+                <ZoomOut className="h-4 w-4" aria-hidden="true" />
               </button>
 
               <button
+                type="button"
                 onClick={resetZoom}
-                title="Reset Zoom"
-                className="px-2 text-xs font-mono font-medium hover:text-indigo-600 transition-colors"
+                title="Reset zoom"
+                aria-label="Reset zoom"
+                className="min-w-12 px-2 text-xs font-medium tabular-nums text-[#5B625C] transition-colors hover:text-[#465B9E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30"
               >
                 {Math.round(scale * 100)}%
               </button>
 
               <button
+                type="button"
                 onClick={zoomIn}
                 disabled={scale >= 1.6}
-                title="Zoom In"
-                className="p-1.5 hover:bg-white hover:text-slate-900 rounded-md transition-colors disabled:opacity-30 disabled:hover:bg-transparent"
+                title="Zoom in"
+                aria-label="Zoom in"
+                className="rounded-lg p-1.5 transition-colors hover:bg-[#F1F0EB] hover:text-[#17201C] disabled:pointer-events-none disabled:opacity-30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30"
               >
-                <ZoomIn className="w-4 h-4" />
+                <ZoomIn className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
 
             {/* Print */}
+
             <button
+              type="button"
               onClick={handlePrint}
               disabled={!pdfUrl}
-              title="Print Resume"
-              className="hidden sm:inline-flex items-center justify-center p-2 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors disabled:opacity-40"
+              title="Print resume"
+              aria-label="Print resume"
+              className="hidden h-9 w-9 items-center justify-center rounded-xl border border-[#E3E2DC] bg-white text-[#66706B] transition-all hover:border-[#C8CDD9] hover:bg-[#FAFAF8] hover:text-[#17201C] disabled:pointer-events-none disabled:opacity-40 sm:inline-flex focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30"
             >
-              <Printer className="w-4 h-4" />
+              <Printer className="h-4 w-4" aria-hidden="true" />
             </button>
 
             {/* Share */}
+
             <button
+              type="button"
               onClick={handleCopyLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-xs sm:text-sm font-medium text-slate-700 hover:text-slate-900 transition-all active:scale-95"
+              aria-label={copied ? "Resume link copied" : "Share resume"}
+              aria-pressed={copied}
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl border border-[#E3E2DC] bg-white px-3 text-xs font-semibold text-[#17201C] transition-all hover:border-[#C8CDD9] hover:bg-[#FAFAF8] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30 sm:text-sm"
             >
               {copied ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="h-3.5 w-3.5 text-[#465B9E]" aria-hidden="true" />
 
-                  <span className="text-emerald-600">Copied</span>
+                  <span className="hidden sm:inline">Copied</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-3.5 h-3.5 text-slate-500" />
+                  <Share2 className="h-3.5 w-3.5 text-[#66706B]" aria-hidden="true" />
 
-                  <span>Share</span>
+                  <span className="hidden sm:inline">Share</span>
                 </>
               )}
             </button>
 
             {/* Download */}
+
             <button
+              type="button"
               onClick={handleDownload}
               disabled={!pdfUrl || downloading}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-linear-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-indigo-500/20 transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+              aria-busy={downloading}
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[#465B9E] px-3.5 text-xs font-semibold text-white shadow-[0_6px_20px_rgba(70,91,158,0.18)] transition-all hover:bg-[#344B93] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/40 focus-visible:ring-offset-2 sm:text-sm"
             >
-              <Download className={`w-3.5 h-3.5 ${downloading ? "animate-bounce" : ""}`} />
+              <Download
+                className={`h-3.5 w-3.5 ${downloading ? "animate-bounce" : ""}`}
+                aria-hidden="true"
+              />
 
               <span className="hidden sm:inline">
                 {downloading ? "Downloading..." : "Download Resume"}
@@ -270,52 +348,89 @@ export default function PublicResumeViewer({ resume }) {
         </div>
       </header>
 
-      {/* =====================================================
-          MAIN PDF VIEWER
-      ====================================================== */}
+      {/* =================================================
+          PDF VIEWER
+      ================================================= */}
+
       <main
         ref={viewerContainerRef}
-        className="flex-1 relative flex flex-col items-center justify-start py-8 sm:py-12 px-3 sm:px-6 pb-36 overflow-x-auto"
+        className="relative flex flex-1 flex-col items-center overflow-x-auto px-3 py-8 pb-36 sm:px-6 sm:py-12"
       >
-        {loading ? (
-          <div className="my-auto flex flex-col items-center gap-4 py-24 text-center">
-            <div className="relative w-16 h-16">
-              <div className="absolute inset-0 rounded-2xl bg-indigo-100 animate-ping" />
+        {/* Very subtle editorial background */}
 
-              <div className="relative w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-600 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-                <FileCheck className="w-8 h-8 text-white animate-pulse" />
-              </div>
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.45] bg-[radial-gradient(circle_at_50%_0%,rgba(70,91,158,0.07),transparent_38%)]"
+          aria-hidden="true"
+        />
+
+        {loading ? (
+          /* =============================================
+             LOADING STATE
+          ============================================== */
+
+          <div className="relative my-auto flex flex-col items-center gap-5 py-24 text-center">
+            <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-[#DCE1F0] bg-white shadow-[0_10px_35px_rgba(23,32,28,0.07)]">
+              <div className="absolute inset-2 rounded-xl border-2 border-[#465B9E]/15" />
+
+              <div className="h-6 w-6 animate-spin rounded-full border-[2.5px] border-[#465B9E] border-t-transparent" />
             </div>
 
-            <div className="space-y-1">
-              <h2 className="text-base font-semibold text-slate-900">Preparing Resume</h2>
+            <div className="space-y-1.5">
+              <h2 className="font-serif text-xl font-medium text-[#17201C]">
+                Preparing your resume
+              </h2>
 
-              <p className="text-xs text-slate-500">Preparing your resume preview...</p>
+              <p className="text-xs text-[#66706B]">Generating a high-quality preview...</p>
             </div>
           </div>
         ) : pdfUrl ? (
-          <div className="flex flex-col items-center transition-all duration-200">
+          /* =============================================
+             PDF
+          ============================================== */
+
+          <div className="relative z-10 flex flex-col items-center">
             <Document
               file={pdfUrl}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
               loading={
-                <div className="w-[320px] sm:w-150 h-200 bg-white border border-slate-200 rounded-lg shadow-sm animate-pulse flex items-center justify-center">
-                  <p className="text-xs text-slate-400">Loading resume...</p>
+                <div
+                  className="flex items-center justify-center rounded-xl border border-[#E3E2DC] bg-white shadow-[0_12px_40px_rgba(23,32,28,0.07)]"
+                  style={{
+                    width: pageWidth,
+                    minHeight: Math.round(pageWidth * 1.414),
+                  }}
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="h-7 w-7 animate-spin rounded-full border-2 border-[#465B9E] border-t-transparent" />
+
+                    <p className="text-xs text-[#66706B]">Loading resume...</p>
+                  </div>
                 </div>
               }
               error={
-                <div className="p-8 text-center bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm">
-                  Failed to render resume. Please refresh the page or try again.
+                <div className="max-w-md rounded-2xl border border-[#E3E2DC] bg-white p-8 text-center shadow-[0_12px_40px_rgba(23,32,28,0.06)]">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-[#F1F0EB] text-[#465B9E]">
+                    <FileCheck className="h-5 w-5" aria-hidden="true" />
+                  </div>
+
+                  <h2 className="mt-4 font-serif text-xl font-medium text-[#17201C]">
+                    Preview unavailable
+                  </h2>
+
+                  <p className="mt-2 text-sm leading-6 text-[#66706B]">
+                    We couldn't render this resume preview. Please refresh the page and try again.
+                  </p>
                 </div>
               }
             >
               {Array.from({
                 length: numPages || 1,
               }).map((_, idx) => (
-                <div key={idx} className="relative group mb-8 last:mb-0">
-                  {/* Resume Paper */}
+                <div key={idx} className="group relative mb-8 last:mb-0 sm:mb-10">
+                  {/* Resume paper */}
+
                   <div
-                    className="relative bg-white rounded-sm shadow-[0_12px_40px_-12px_rgba(15,23,42,0.22),0_0_0_1px_rgba(15,23,42,0.08)] overflow-hidden transition-transform duration-300"
+                    className="relative overflow-hidden rounded-[2px] bg-white shadow-[0_18px_55px_-16px_rgba(23,32,28,0.24),0_0_0_1px_rgba(23,32,28,0.09)] transition-shadow duration-300 group-hover:shadow-[0_22px_65px_-16px_rgba(23,32,28,0.28),0_0_0_1px_rgba(23,32,28,0.11)]"
                     style={{
                       width: pageWidth,
                     }}
@@ -329,9 +444,10 @@ export default function PublicResumeViewer({ resume }) {
                     />
                   </div>
 
-                  {/* Page Indicator */}
+                  {/* Page indicator */}
+
                   {numPages && numPages > 1 && (
-                    <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-[10px] font-mono text-slate-500 shadow-sm">
+                    <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[#E3E2DC] bg-white px-3 py-1 text-[10px] font-medium tabular-nums text-[#66706B] shadow-[0_4px_15px_rgba(23,32,28,0.08)]">
                       Page {idx + 1} of {numPages}
                     </div>
                   )}
@@ -340,67 +456,83 @@ export default function PublicResumeViewer({ resume }) {
             </Document>
           </div>
         ) : (
-          <div className="my-auto py-24 text-center">
-            <p className="text-sm text-slate-500">Unable to load resume.</p>
+          /* =============================================
+             EMPTY STATE
+          ============================================== */
+
+          <div className="relative my-auto py-24 text-center">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-[#E3E2DC] bg-white text-[#465B9E]">
+              <FileCheck className="h-5 w-5" aria-hidden="true" />
+            </div>
+
+            <h2 className="mt-5 font-serif text-xl font-medium text-[#17201C]">
+              Resume preview unavailable
+            </h2>
+
+            <p className="mt-2 text-sm text-[#66706B]">Please refresh the page and try again.</p>
           </div>
         )}
       </main>
 
-      {/* =====================================================
-          NEXTCV FOOTER
-      ====================================================== */}
-      <footer className="fixed bottom-4 left-4 right-4 z-40 max-w-4xl mx-auto">
-        <div className="relative overflow-hidden rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200 p-3 sm:p-4 shadow-[0_16px_45px_rgba(15,23,42,0.12)] flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
-          {/* Accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-linear-to-r from-transparent via-indigo-500 to-transparent opacity-70" />
+      {/* =================================================
+          FLOATING NEXTCV CTA
+      ================================================= */}
 
-          {/* Branding */}
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <Link
-              href="/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2.5 group shrink-0"
-            >
-              <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-slate-50 border border-slate-200 p-1 flex items-center justify-center group-hover:border-indigo-300 transition-colors">
-                <Image
-                  src="/logos/nextcvlogolight.png"
-                  alt="NextCV logo"
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                />
-              </div>
+      <footer className="fixed bottom-4 left-3 right-3 z-40 sm:bottom-5 sm:left-5 sm:right-5">
+        <div className="relative mx-auto flex max-w-4xl items-center justify-between gap-4 overflow-hidden rounded-2xl border border-[#DCDAD3] bg-white/95 px-4 py-3 shadow-[0_18px_55px_rgba(23,32,28,0.13)] backdrop-blur-xl sm:px-5 sm:py-3.5">
+          {/* Subtle accent */}
 
-              <div className="leading-tight">
-                <span className="font-bold text-sm tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
-                  NextCV
-                </span>
+          <div className="absolute left-0 top-0 h-full w-0.75 bg-[#465B9E]" aria-hidden="true" />
 
-                <p className="text-[11px] text-slate-500 hidden xs:block">
-                  Create your professional resume
-                </p>
-              </div>
-            </Link>
-          </div>
+          {/* Brand */}
+
+          <Link
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-w-0 items-center gap-3 pl-1 group"
+          >
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-[#E3E2DC] bg-[#F8F7F3] p-1.5 transition-colors group-hover:border-[#C8CDD9]">
+              <Image
+                src="/logos/nextcvlogo.png"
+                alt="NextCV"
+                width={22}
+                height={22}
+                className="object-contain opacity-70"
+              />
+            </div>
+
+            <div className="hidden min-w-0 sm:block">
+              <span className="block text-sm font-semibold tracking-tight text-[#17201C] transition-colors group-hover:text-[#465B9E]">
+                NextCV
+              </span>
+
+              <span className="block truncate text-[11px] text-[#8A908B]">
+                Professional resumes, made simple
+              </span>
+            </div>
+          </Link>
 
           {/* CTA */}
-          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
-            <span className="text-xs text-slate-500 hidden lg:inline">
-              Create your professional resume
+
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="hidden text-xs text-[#66706B] lg:inline">
+              Create your own professional resume
             </span>
 
             <Link
               href="/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-indigo-600 via-indigo-600 to-violet-600 hover:from-indigo-700 hover:via-indigo-700 hover:to-violet-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[#17201C] px-3.5 text-xs font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#2B3530] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/40 focus-visible:ring-offset-2 sm:px-4 sm:text-sm"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="h-3.5 w-3.5 text-[#AAB5D9]" aria-hidden="true" />
 
-              <span>Build Your Resume</span>
+              <span className="hidden xs:inline">Build Your Resume</span>
 
-              <ArrowRight className="w-3.5 h-3.5 ml-0.5 opacity-80" />
+              <span className="xs:hidden">Build Resume</span>
+
+              <ArrowRight className="h-3.5 w-3.5 opacity-70" aria-hidden="true" />
             </Link>
           </div>
         </div>

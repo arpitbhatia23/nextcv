@@ -86,7 +86,7 @@ export default function AIWriterPage() {
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">How The AI Writer Works</h2>
           <p className="text-slate-600 text-sm sm:text-base">
-            From zero to an ATS-optimized resume in under 3 minutes.
+            Draft resume content with AI assistance, then review and tailor it to your experience.
           </p>
         </div>
 

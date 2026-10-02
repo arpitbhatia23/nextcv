@@ -1,125 +1,104 @@
-import React, { cache } from "react";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import Logo2 from "../Logo2";
-// import { SaasHuntBadge } from "../Saashunt";
-import { FaTwitter, FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
 import { GetYear } from "./getyear";
-
-// Social Links Data
-const socialLinks = [
-  { icon: <FaTwitter />, href: "#", label: "Twitter" },
-  { icon: <FaGithub />, href: "#", label: "GitHub" },
-  { icon: <FaLinkedinIn />, href: "#", label: "LinkedIn" },
-  { icon: <FaInstagram />, href: "#", label: "Instagram" },
-];
-
-const footerLinks = [
+import seoPages from "../../../app/(landingPage)/seo-pages.json";
+const footerGroups = [
   {
     title: "Product",
     links: [
-      { label: "Templates", href: "/templates" },
-      { label: "Examples", href: "/examples" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "Resume builder", href: "/" },
+      { label: "Product overview", href: "/product" },
+      { label: "ATS checker", href: "/ats-resume-checker" },
       { label: "AI Writer", href: "/ai-writer" },
-      { label: "ATS Resume Checker", href: "/ats-resume-checker" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "Home", href: "/" },
-      { label: "About Us", href: "/about-us" },
-      { label: "Blog", href: "/blogs" },
-      { label: "Contact", href: "/contact" },
-      { label: "Career", href: "/career" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms of Service", href: "/terms" },
+      { label: "Cover letter", href: "/dashboard/cover-letter" },
+      { label: "Templates", href: "/templates" },
+      { label: "Resume portfolio", href: "/p" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Resume Price in India", href: "/pricing" },
-      { label: "Best AI Resume Builder India", href: "/best-ai-resume-builder-india" },
-      { label: "Free Resume Builder (No Payment)", href: "/free-resume-builder-no-payment" },
-      { label: "How Much Resume Cost?", href: "/pricing" },
-      { label: "Free vs Paid Resume Builder", href: "/pricing" },
-      { label: "Resume Writing Services Cost", href: "/pricing" },
+      { label: "Resume examples", href: "/examples" },
+      { label: "Career guides", href: "/career" },
+      { label: "Blog", href: "/blogs" },
+      { label: "ATS guide", href: "/ats-friendly-resume-format-india" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About NextCV", href: "/about-us" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy policy", href: "/privacy-policy" },
+      { label: "Terms of service", href: "/terms" },
     ],
   },
 ];
 
-const stats = [
-  { value: "1k+", label: "Resumes Built" },
-  { value: "95%", label: "Success Rate" },
-  { value: "< 5m", label: "Time to Build" },
-  { value: "Free", label: "To Start" },
-];
+// Convert SEO slugs into readable labels
+const seoLinks = seoPages
+  .filter(page => page?.slug)
+  .map(page => ({
+    label: page.slug
+      .replace(/^\/+|\/+$/g, "")
+      .split("/")
+      .pop()
+      ?.split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    href: page.slug.startsWith("/") ? page.slug : `/${page.slug}`,
+  }));
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#020617] text-white border-t border-slate-900 font-sans">
-      {/* Stats Strip - Refined */}
-      <div className="border-b border-slate-900 bg-[#0B0F1A]/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center md:border-r border-slate-800 last:border-0 relative"
-              >
-                {/* Mobile divider support could be added here if needed, but grid gap handles spacing */}
-                <span className="text-sm md:text-lg font-bold text-white mb-1.5">{stat.value}</span>
-                <span className="text-xs font-medium uppercase tracking-wider text-slate-100">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          {/* Brand Column (Span 4) */}
-          <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="inline-block relative z-10" aria-label="NextCV Home">
-              <Logo2 size={60} color="white" ClassName="text-white" />
+    <footer className="border-t border-white/10 bg-slate-950 text-white">
+      <div className="nc-container py-12 sm:py-14">
+        {/* Main footer */}
+        <div className="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+          {/* Brand */}
+          <div className="max-w-sm">
+            <Link
+              href="/"
+              aria-label="NextCV home"
+              className="inline-flex rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <Logo2 color="white" ClassName="h-10 w-24" />
             </Link>
-            <p className="text-white leading-relaxed max-w-sm text-sm">
-              NextCV is the advanced AI-powered resume builder designed to help students and
-              professionals create ATS-friendly resumes in minutes.
+
+            <p className="mt-4 text-sm leading-6 text-slate-300">
+              Resume, AI writing, ATS review, and career tools for students and job seekers.
             </p>
-            <div className="flex gap-4 pt-2">
-              {socialLinks.map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-white hover:bg-indigo-500 hover:text-white transition-all duration-300 transform hover:scale-110 shadow-sm hover:shadow-indigo-500/20"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
+
+            <a
+              href="mailto:help@nextcv.in"
+              className="mt-5 inline-flex items-center gap-2 rounded-lg text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              <Mail aria-hidden="true" className="h-4 w-4" />
+              help@nextcv.in
+            </a>
           </div>
 
-          {/* Links Columns (Span 8 -> 2+3+3) */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {footerLinks.map((column, idx) => (
-              <div key={idx} className="flex flex-col">
-                <h3 className="text-white font-semibold mb-6">{column.title}</h3>
-                <ul className="space-y-4">
-                  {column.links.map((link, linkIdx) => (
-                    <li key={linkIdx}>
+          {/* Navigation */}
+          <nav
+            aria-label="Footer navigation"
+            className="grid grid-cols-2 gap-x-18 gap-y-10 sm:grid-cols-4"
+          >
+            {footerGroups.map(group => (
+              <div key={group.title}>
+                <div className="text-lg font-semibold text-white">{group.title}</div>
+
+                <ul className="mt-4 space-y-3">
+                  {group.links.map(link => (
+                    <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="text-sm hover:text-indigo-400 transition-colors duration-200 block w-fit"
+                        className="inline-flex rounded-sm text-sm text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                       >
                         {link.label}
                       </Link>
@@ -128,255 +107,35 @@ export const Footer = () => {
                 </ul>
               </div>
             ))}
-          </div>
+          </nav>
         </div>
 
-        {/* SEO Links Block */}
-        <div className="pt-8 pb-8 border-t border-slate-900">
-          <h3 className="text-slate-100 font-semibold mb-4 text-sm uppercase tracking-wider">
-            Popular Career & Resume Guides
-          </h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-3">
-            <Link
-              href="/ats-resume-best-practices"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Resume Best Practices 2026
-            </Link>
-            <Link
-              href="/ats-friendly-resume-meaning"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Friendly Resume Meaning
-            </Link>
-            <Link
-              href="/ats-friendly-resume-tips"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Friendly Resume Tips 2026
-            </Link>
-            <Link
-              href="/ats-friendly-resume-format-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Friendly Resume Format India 2026
-            </Link>
-            <Link
-              href="/ats-resume-optimization"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Resume Optimization 2026
-            </Link>
-            <Link
-              href="/common-ats-resume-mistakes"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Common ATS Resume Mistakes
-            </Link>
-            <Link
-              href="/ats-friendly-resume-checklist"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              ATS Friendly Resume Checklist
-            </Link>
-            <Link
-              href="/what-is-ats-friendly-resume"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              What Is ATS Friendly Resume
-            </Link>
-            <Link
-              href="/resume-format-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Format India 2026
-            </Link>
-            <Link
-              href="/fresher-resume-format-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Fresher Resume Format India 2026
-            </Link>
-            <Link
-              href="/best-resume-format-for-freshers-india-2026"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Best Resume Format For Freshers India 2026
-            </Link>
-            <Link
-              href="/indian-resume-format"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Indian Resume Format
-            </Link>
-            <Link
-              href="/resume-format-for-bca-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Format For BCA Freshers
-            </Link>
-            <Link
-              href="/resume-format-for-mca-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Format For MCA Freshers
-            </Link>
-            <Link
-              href="/tcs-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              TCS Resume Format For Freshers
-            </Link>
-            <Link
-              href="/infosys-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Infosys Resume Format For Freshers
-            </Link>
-            <Link
-              href="/wipro-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Wipro Resume Format For Freshers
-            </Link>
-            <Link
-              href="/accenture-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Accenture Resume Format For Freshers
-            </Link>
-            <Link
-              href="/hcl-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              HCL Resume Format For Freshers
-            </Link>
-            <Link
-              href="/tech-mahindra-resume-format"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Tech Mahindra Resume Format
-            </Link>
-            <Link
-              href="/best-resume-builder-india-2026"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Best Resume Builder India 2026
-            </Link>
-            <Link
-              href="/how-to-make-resume-ats-friendly-2026"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              How to Make Resume ATS Friendly 2026
-            </Link>
-            <Link
-              href="/career-objective-for-resume-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Career Objective for Resume for Freshers
-            </Link>
-            <Link
-              href="/resume-vs-cv-in-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume vs CV in India
-            </Link>
-            <Link
-              href="/non-it-resume-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Non IT Resume for Freshers
-            </Link>
-            <Link
-              href="/resume-for-mnc-company"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume for MNC Company
-            </Link>
-            <Link
-              href="/best-resume-format-for-it-jobs-in-india-2026"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Best Resume Format for IT Jobs in India 2026
-            </Link>
-            <Link
-              href="/cv-format-for-ai-screening"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              CV Format for AI Screening
-            </Link>
-            <Link
-              href="/latest-resume-format-2026"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Latest Resume Format 2026
-            </Link>
-            <Link
-              href="/resume-builder-price-in-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Builder Price in India
-            </Link>
-            <Link
-              href="/resume-builder-price-india "
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Builder Price in India
-            </Link>
-            <Link
-              href="/mnc-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              MNC Resume Format For Freshers
-            </Link>
-            <Link
-              href="/ltimindtree-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Ltimindtree Resume Format For Freshers
-            </Link>
-            <Link
-              href="/resume-vs-cv-india"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Resume Vs Cv India
-            </Link>
-            <Link
-              href="/cognizant-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Cognizant Resume Format For Freshers
-            </Link>
-            <Link
-              href="/tech-mahindra-resume-format-for-freshers"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Tech mahindra resume format for freshers
-            </Link>
-            <Link
-              href="/fresher-resume-format"
-              className="text-xs text-slate-100 hover:text-indigo-400 transition-colors"
-            >
-              Fresher resume format
-            </Link>
-          </div>
-        </div>
+        {/* SEO Pages */}
+        {seoLinks.length > 0 && (
+          <div className="mt-12 border-t border-white/10 pt-8">
+            <div className="mb-5 text-lg font-semibold text-white">Career & Resume Guides</div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 text-sm text-slate-100 order-2 md:order-1">
-            <GetYear />
+            <div className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {seoLinks.map(link => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-slate-400 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
-          {/* 
-          <div className="order-1 md:order-2 grayscale hover:grayscale-0 transition-all duration-300">
-            <SaasHuntBadge />
-          </div> */}
+        )}
 
-          <div className="flex items-center gap-2 text-sm text-slate-100 order-3 md:order-3">
-            <span>
-              Made with <span className="text-red-500 animate-pulse">❤️</span> by Aurpit & Tamanna
-            </span>
-          </div>
+        {/* Bottom bar */}
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © <GetYear /> NextCV. All rights reserved.
+          </p>
+
+          <p>Free to build · One-time payment · No subscription</p>
         </div>
       </div>
     </footer>

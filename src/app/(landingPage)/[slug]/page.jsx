@@ -139,7 +139,7 @@ export default async function SeoPage({ params }) {
                 Pay-Per-Resume (₹49 - ₹399)
               </span>
               <span>•</span>
-              <span>ATS Score 95+ Tested</span>
+              <span>ATS checks are diagnostic, not a hiring guarantee</span>
             </div>
           </div>
         </div>
@@ -182,9 +182,9 @@ export default async function SeoPage({ params }) {
             ) : (
               <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
                 <p className="text-sm sm:text-base leading-relaxed text-[#365184]">
-                  Use this guide to shape a clear, relevant, ATS-readable resume for your next
-                  application. NextCV provides battle-tested templates ranging from ₹49 to ₹399 with
-                  no recurring monthly subscriptions.
+                  Use this guide to shape a clear, relevant resume for your next application. NextCV
+                  offers one-time download plans ranging from ₹49 to ₹399 with no monthly
+                  subscription.
                 </p>
               </section>
             )}
@@ -235,7 +235,7 @@ export default async function SeoPage({ params }) {
               </h3>
               <p className="mt-3 text-sm sm:text-base text-indigo-100/90 leading-relaxed">
                 Choose from our wide collection of professional templates starting at just ₹49 to
-                ₹399. Instant PDF download with 100% ATS score compatibility.
+                ₹399. Download a readable PDF; ATS behavior varies by employer and system.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link

@@ -1,31 +1,21 @@
-import dynamic from "next/dynamic";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import Herosection from "@/shared/components/herosection/Herosection";
-import ATSFeatureSection from "@/shared/components/herosection/ATSFeatureSection";
-import Link from "next/link";
-import careerPages from "@/app/(landingPage)/career-pages.json";
-const Templates = dynamic(() => import("@/shared/components/templateslanding/Templates"));
-const ResumeSharingSection = dynamic(
-  () => import("@/shared/components/herosection/ResumeSharingSection")
-);
-const CoverLetterSection = dynamic(
-  () => import("@/shared/components/herosection/CoverLetterSection")
-);
-const SEOSection = dynamic(() => import("@/shared/components/herosection/SEOSection"));
-const PageContent = dynamic(() => import("@/shared/components/pageContent/PageContent"));
-const HowitWork = dynamic(() => import("@/shared/components/herosection/HowitWork"));
-const ProcessWorks = dynamic(() => import("@/shared/components/processWorks/ProcessWorks"));
-const Testimonial = dynamic(() => import("@/shared/components/testimonial/Testimonial"));
-
-const FAQ = dynamic(() => import("@/shared/components/herosection/FAQ"));
-const SEOKeywordCloud = dynamic(() => import("@/shared/components/herosection/SEOKeywordCloud"));
+import LandingHero from "@/shared/components/landing/LandingHero";
+import WorkflowSection from "@/shared/components/landing/WorkflowSection";
+import ATSKeywordSection from "@/shared/components/landing/ATSKeywordSection";
+import AIWritingSection from "@/shared/components/landing/AIWritingSection";
+import TemplatesSection from "@/shared/components/landing/TemplatesSection";
+import ShareProfileSection from "@/shared/components/landing/ShareProfileSection";
+import CoverLetterSection from "@/shared/components/landing/CoverLetterSection";
+import PricingSection from "@/shared/components/landing/PricingSection";
+import FAQSection from "@/shared/components/landing/FAQSection";
+import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
 
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
   title: "Free ATS Resume Builder & AI Cover Letter for Indian Freshers | NextCV",
   description:
-    "Create an ATS-friendly resume and tailored AI cover letter with NextCV. Choose professional templates, share verified live resume links for Premium & Elite tiers, and prepare for Indian job applications.",
+    "Create a professional resume and tailored AI cover letter with NextCV. Choose resume templates, share resume links with Premium or Elite, and prepare for job applications.",
   path: "",
   keywords: [
     "resume builder",
@@ -41,27 +31,17 @@ export const metadata = createSeoMetadata({
 
 export default function Home() {
   return (
-    <>
-      <Herosection />
-      <ATSFeatureSection />
-      <ResumeSharingSection />
+    <div className="overflow-hidden bg-[#F8F7F3] text-[#17201C] selection:bg-[#dce4ff] selection:text-[#17201C]">
+      <LandingHero />
+      <WorkflowSection />
+      <ATSKeywordSection />
+      <AIWritingSection />
+      <TemplatesSection />
+      <ShareProfileSection />
       <CoverLetterSection />
-
-      <PageContent />
-      <SEOSection />
-      <section id="Templates">
-        <Templates />
-      </section>
-
-      <HowitWork />
-
-      <ProcessWorks />
-
-      <FAQ />
-
-      <Testimonial />
-
-      <SEOKeywordCloud />
-    </>
+      <PricingSection />
+      <FAQSection />
+      <LandingFinalCTA />
+    </div>
   );
 }

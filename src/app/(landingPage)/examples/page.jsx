@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { ArrowRight, BookOpen, CheckCircle2, Sparkles, Target, Zap } from "lucide-react";
+import { ArrowRight, BookOpen, Sparkles, Target, Zap } from "lucide-react";
 import ExamplesGallery from "./ExamplesGallery";
 
 export const metadata = createSeoMetadata({
   title: "Resume Examples for Freshers in India 2026 | NextCV",
   description:
-    "Explore professional ATS resume examples for Indian job seekers. Find recruiter-approved resume samples for freshers, developers, data analysts, and MNC roles.",
+    "Explore illustrative resume examples for Indian job seekers, freshers, developers, and data analysts.",
   path: "/examples",
   keywords: [
     "resume examples",
@@ -54,7 +54,7 @@ export default function ExamplesPage() {
           <div className="max-w-4xl mx-auto text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
               <BookOpen className="w-4 h-4 text-indigo-600" />
-              Recruiter-Approved Resume Samples 2026
+              Resume examples · illustrative content
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#071644] tracking-tight leading-[1.15]">
@@ -65,8 +65,8 @@ export default function ExamplesPage() {
             </h1>
 
             <p className="text-sm sm:text-base text-[#365184] max-w-2xl mx-auto leading-relaxed">
-              Unsure what to write? Explore our interactive library of ATS-optimized resume examples
-              tailored for Indian IT MNCs, startups, and campus placements.
+              Explore example structures for different roles and career stages. These profiles and
+              scores are demonstrations, not customer results or hiring outcomes.
             </p>
 
             <div className="pt-2 flex flex-wrap justify-center gap-4">
@@ -90,11 +90,11 @@ export default function ExamplesPage() {
           <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
-                How To Use These Resume Examples
+                How to use these resume examples
               </h2>
               <p className="text-slate-600 text-sm sm:text-base">
-                Follow these three essential strategies to transform template inspiration into job
-                interview invites.
+                Use these examples as prompts, then replace every detail with accurate evidence from
+                your own experience.
               </p>
             </div>
 
@@ -127,8 +127,8 @@ export default function ExamplesPage() {
                 </div>
                 <h3 className="text-base font-bold text-slate-900">3. Use NextCV AI Builder</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  Avoid manual formatting issues in Word. Use NextCV to generate a clean, 100%
-                  ATS-ready PDF instantly for ₹399.
+                  Use a clear, text-readable format, then review your content against the role. ATS
+                  behavior varies by employer and system.
                 </p>
               </div>
             </div>
@@ -142,9 +142,9 @@ export default function ExamplesPage() {
               Fast-Track Your Job Search With ATS Examples
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600">
-              Starting with a blank page is intimidating. Reviewing industry-tested resume samples
-              helps you visualize how successful candidates structure work experience, academic
-              projects, and technical skills for recruiters at TCS, Infosys, Wipro, and Accenture.
+              Starting with a blank page is intimidating. Reviewing illustrative resume samples
+              helps you explore ways to structure work experience, academic projects, and technical
+              skills for recruiters at TCS, Infosys, Wipro, and Accenture.
             </p>
           </div>
         </section>
@@ -156,7 +156,8 @@ export default function ExamplesPage() {
               Build Your Personalized Resume Now
             </h2>
             <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-              Turn template inspiration into your own ATS resume in under 5 minutes for just ₹399.
+              Turn a useful starting point into a resume that reflects your own work. Build for free
+              and choose a one-time download plan when ready.
             </p>
             <div>
               <Link
