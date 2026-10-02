@@ -100,6 +100,7 @@ async function extractTextFromPDF(arrayBuffer) {
      * pdf-parse directly.
      */
 
+    await import("pdf-parse/worker");
     const pdfParseModule = await import("pdf-parse");
     configurePdfWorker(pdfParseModule);
 
