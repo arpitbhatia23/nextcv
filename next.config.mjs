@@ -9,6 +9,11 @@ const withBundle = withBundleAnalyzer({
 const nextConfig = {
   reactStrictMode: true,
   serverExternalPackages: ["pdf-parse", "pdfjs-dist"],
+  outputFileTracingIncludes: {
+    "/api/ats-checker/analyze": [
+      "./node_modules/pdf-parse/node_modules/pdfjs-dist/legacy/build/pdf.worker.mjs",
+    ],
+  },
 
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,

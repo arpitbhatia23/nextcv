@@ -10,6 +10,7 @@ import {
 import {
   Users,
   FileText,
+  BriefcaseBusiness,
   CreditCard,
   TrendingUp,
   Calendar,
@@ -21,6 +22,8 @@ import {
   IndianRupee,
   Zap,
   Mail,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {
   LineChart,
@@ -50,6 +53,7 @@ const FontImports = () => (
 
 const INK = "#1C2333";
 const RUST = "#B3382C";
+const TEAL = "#0F6E63";
 const PAPER = "#F7F7F5";
 const LINE = "#E4E2DC";
 const MUTE = "#6B7280";
@@ -192,6 +196,186 @@ function SectionHeader({ icon: Icon, title, onExport }) {
         <span className="hidden sm:inline">EXPORT</span>
       </button>
     </div>
+  );
+}
+
+function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let isCurrentRequest = true;
+
+    const fetchPage = async () => {
+      setLoading(true);
+      setError(false);
+      try {
+        const response = await axios.get("/api/analytics/recentRecords", {
+          params: { type, page },
+        });
+        if (isCurrentRequest) {
+          const result = response?.data?.data;
+          const pages = result?.totalPages || 0;
+          if (page > Math.max(pages, 1)) {
+            setPage(Math.max(pages, 1));
+            return;
+          }
+          setRows(result?.rows || []);
+          setTotal(result?.total || 0);
+          setTotalPages(pages);
+        }
+      } catch (requestError) {
+        console.error(`Failed to load ${type} records:`, requestError);
+        if (isCurrentRequest) setError(true);
+      } finally {
+        if (isCurrentRequest) setLoading(false);
+      }
+    };
+
+    fetchPage();
+    return () => {
+      isCurrentRequest = false;
+    };
+  }, [page, type]);
+
+  const firstRecord = total ? (page - 1) * 8 + 1 : 0;
+  const lastRecord = Math.min(page * 8, total);
+
+  return (
+    <section className="min-w-0 border" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+      <div
+        className="flex items-center justify-between gap-3 border-b px-4 py-3"
+        style={{ borderColor: LINE }}
+      >
+        <h3
+          className="flex items-center gap-2 font-mono text-[10px] tracking-widest"
+          style={{ color: INK }}
+        >
+          <Icon className="h-3.5 w-3.5" style={{ color: RUST }} />
+          {title.toUpperCase()}
+        </h3>
+        <span className="font-mono text-[10px]" style={{ color: MUTE }}>
+          {total.toLocaleString()} RECORDS
+        </span>
+      </div>
+      {rows.length ? (
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-150 border-collapse text-left">
+            <thead>
+              <tr className="border-b" style={{ borderColor: LINE, backgroundColor: PAPER }}>
+                {columns.map(column => (
+                  <th
+                    key={column.key}
+                    className="px-4 py-2.5 font-mono text-[9px] font-medium tracking-widest"
+                    style={{ color: MUTE }}
+                  >
+                    {column.label.toUpperCase()}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr
+                  key={row._id || row.slug || index}
+                  className="border-b last:border-b-0"
+                  style={{ borderColor: LINE }}
+                >
+                  {columns.map(column => (
+                    <td key={column.key} className="px-4 py-3 text-xs" style={{ color: INK }}>
+                      {column.render(row)}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : loading ? (
+        <p
+          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
+          style={{ color: MUTE }}
+        >
+          LOADING RECORDS...
+        </p>
+      ) : error ? (
+        <p
+          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
+          style={{ color: RUST }}
+        >
+          COULD NOT LOAD RECORDS
+        </p>
+      ) : (
+        <p
+          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
+          style={{ color: FAINT }}
+        >
+          {emptyMessage}
+        </p>
+      )}
+      <div
+        className="flex items-center justify-between gap-3 border-t px-4 py-2.5"
+        style={{ borderColor: LINE }}
+      >
+        <span className="font-mono text-[9px] tracking-wide" style={{ color: MUTE }}>
+          {firstRecord}-{lastRecord} OF {total.toLocaleString()}
+        </span>
+        <div className="flex items-center gap-2">
+          <span className="font-mono text-[9px]" style={{ color: MUTE }}>
+            PAGE {totalPages ? page : 0} / {totalPages}
+          </span>
+          <button
+            type="button"
+            aria-label={`Previous ${title.toLowerCase()} page`}
+            title="Previous page"
+            onClick={() => setPage(currentPage => Math.max(1, currentPage - 1))}
+            disabled={page <= 1 || loading}
+            className="flex h-8 w-8 items-center justify-center border disabled:cursor-not-allowed disabled:opacity-40"
+            style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            type="button"
+            aria-label={`Next ${title.toLowerCase()} page`}
+            title="Next page"
+            onClick={() => setPage(currentPage => Math.min(totalPages, currentPage + 1))}
+            disabled={page >= totalPages || loading}
+            className="flex h-8 w-8 items-center justify-center border disabled:cursor-not-allowed disabled:opacity-40"
+            style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function formatDate(value) {
+  if (!value) return "—";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "—"
+    : new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(date);
+}
+
+function StatusLabel({ children, positive = false }) {
+  return (
+    <span
+      className="inline-flex border px-2 py-1 font-mono text-[9px] tracking-wider"
+      style={{
+        borderColor: positive ? "#B8D5C8" : LINE,
+        color: positive ? TEAL : MUTE,
+        backgroundColor: positive ? "#F2F8F4" : PAPER,
+      }}
+    >
+      {children}
+    </span>
   );
 }
 
@@ -401,7 +585,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           title="Content Analytics"
           onExport={() => exportAnalyticsCSV({ data, section: "resumes" })}
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-5">
           <MetricCard
             title="Total Resumes"
             value={data?.resumeStats?.totalResumes?.toLocaleString()}
@@ -422,76 +606,142 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             value={data?.resumeStats?.topTemplate || "N/A"}
             icon={Award}
           />
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          <div className="border" style={{ borderColor: LINE }}>
-            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
-              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
-                TOP JOB ROLES
-              </p>
-            </div>
-            <div className="px-2 pb-2">
-              <PieChartComponent
-                data={data?.resumeStats?.topResumeTypes?.map(item => ({
-                  name: item.type,
-                  value: item.count,
-                }))}
-              />
-            </div>
-          </div>
-
-          <div className="border lg:col-span-2" style={{ borderColor: LINE }}>
-            <div
-              className="px-4 sm:px-6 pt-5 pb-3 border-b flex items-center gap-2"
-              style={{ borderColor: LINE }}
-            >
-              <Target className="w-4 h-4" style={{ color: RUST }} />
-              <p className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
-                TOP SKILLS IN DEMAND
-              </p>
-            </div>
-            <div className="p-4 sm:p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-                {data?.resumeStats?.topSkills?.length > 0 ? (
-                  data.resumeStats.topSkills.slice(0, 10).map((skilldata, index) => {
-                    const maxCount = data.resumeStats.topSkills[0]?.count || 1;
-                    const percentage = Math.round((skilldata.count / maxCount) * 100);
-
-                    return (
-                      <div key={index} className="min-w-0">
-                        <div className="flex items-center justify-between mb-1.5 gap-4">
-                          <span className="text-sm font-medium truncate" style={{ color: INK }}>
-                            {skilldata.skill.name || "Unknown Skill"}
-                          </span>
-                          <span
-                            className="font-mono text-[10px] tracking-widest shrink-0"
-                            style={{ color: MUTE }}
-                          >
-                            {skilldata.count}
-                          </span>
-                        </div>
-                        <div className="h-1.5 w-full" style={{ backgroundColor: "#F0EFEA" }}>
-                          <div
-                            className="h-full"
-                            style={{ width: `${percentage}%`, backgroundColor: RUST }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <p
-                    className="font-mono text-[11px] tracking-widest text-center py-8 col-span-2"
-                    style={{ color: FAINT }}
-                  >
-                    NO SKILL DATA AVAILABLE
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
+          <MetricCard
+            title="Portfolios"
+            value={data?.portfolioStats?.totalPortfolios?.toLocaleString() || "0"}
+            icon={BriefcaseBusiness}
+          />
         </div>
       </section>
+
+      <div className="space-y-4 sm:space-y-6">
+        <DataTableSection
+          icon={Users}
+          title="Latest Users"
+          type="users"
+          emptyMessage="NO USER RECORDS FOUND"
+          columns={[
+            {
+              key: "name",
+              label: "Name",
+              render: row => <span className="font-medium">{row.name || "Unnamed"}</span>,
+            },
+            { key: "email", label: "Email", render: row => row.email || "—" },
+            {
+              key: "role",
+              label: "Role",
+              render: row => (
+                <StatusLabel positive={row.role === "admin"}>{row.role || "user"}</StatusLabel>
+              ),
+            },
+            { key: "createdAt", label: "Joined", render: row => formatDate(row.createdAt) },
+            { key: "lastActive", label: "Last Active", render: row => formatDate(row.lastActive) },
+          ]}
+        />
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 xl:grid-cols-2">
+          <DataTableSection
+            icon={FileText}
+            title="Latest Resumes"
+            type="resumes"
+            emptyMessage="NO RESUME RECORDS FOUND"
+            columns={[
+              {
+                key: "name",
+                label: "Candidate",
+                render: row => <span className="font-medium">{row.name || "Unnamed"}</span>,
+              },
+              { key: "jobRole", label: "Role", render: row => row.jobRole || "—" },
+              { key: "ResumeType", label: "Template", render: row => row.ResumeType || "—" },
+              {
+                key: "status",
+                label: "Status",
+                render: row => (
+                  <StatusLabel positive={row.status === "paid"}>
+                    {row.status || "draft"}
+                  </StatusLabel>
+                ),
+              },
+              { key: "updatedAt", label: "Updated", render: row => formatDate(row.updatedAt) },
+            ]}
+          />
+          <DataTableSection
+            icon={BriefcaseBusiness}
+            title="Latest Portfolios"
+            type="portfolios"
+            emptyMessage="NO PORTFOLIOS FOUND"
+            columns={[
+              {
+                key: "slug",
+                label: "Portfolio",
+                render: row => (
+                  <a
+                    className="font-medium underline decoration-[#D8D6CE] underline-offset-2"
+                    href={`/p/${row.slug}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {row.slug || "Untitled"}
+                  </a>
+                ),
+              },
+              {
+                key: "user",
+                label: "Owner",
+                render: row => row.userId?.name || row.userId?.email || "Unknown",
+              },
+              { key: "resume", label: "Resume", render: row => row.resumeId?.name || "—" },
+              {
+                key: "visibility",
+                label: "Visibility",
+                render: row => (
+                  <StatusLabel positive={row.isPublic}>
+                    {row.isPublic ? "Public" : "Private"}
+                  </StatusLabel>
+                ),
+              },
+              { key: "createdAt", label: "Created", render: row => formatDate(row.createdAt) },
+            ]}
+          />
+        </div>
+        <DataTableSection
+          icon={FileText}
+          title="Latest Shared Resumes"
+          type="sharedResumes"
+          emptyMessage="NO SHARED RESUME RECORDS FOUND"
+          columns={[
+            {
+              key: "slug",
+              label: "Shared Resume",
+              render: row => (
+                <a
+                  className="font-medium underline decoration-[#D8D6CE] underline-offset-2"
+                  href={`/r/${row.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {row.slug || "Untitled"}
+                </a>
+              ),
+            },
+            {
+              key: "user",
+              label: "Owner",
+              render: row => row.userId?.name || row.userId?.email || "Unknown",
+            },
+            { key: "resume", label: "Resume", render: row => row.resumeId?.name || "—" },
+            {
+              key: "visibility",
+              label: "Visibility",
+              render: row => (
+                <StatusLabel positive={row.isPublic}>
+                  {row.isPublic ? "Public" : "Private"}
+                </StatusLabel>
+              ),
+            },
+            { key: "createdAt", label: "Created", render: row => formatDate(row.createdAt) },
+          ]}
+        />
+      </div>
 
       {/* ── Cover Letters ── */}
       <section

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { extractTextFromResume } from "@/modules/resume/services/extractTextFromResume";
 import { calculateATSScore } from "@/modules/resume/services/CalculateAtsScore";
 
+export const runtime = "nodejs";
+
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
 export async function POST(req) {

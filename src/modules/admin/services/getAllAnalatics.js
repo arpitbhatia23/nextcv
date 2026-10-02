@@ -6,6 +6,7 @@ import Coupons from "@/modules/coupon/models/coupon";
 import { NextResponse } from "next/server";
 import { redis } from "@/shared/utils/Redis";
 import CoverLetter from "@/modules/cover-letter/model/cover-letter.model";
+import { portfolio } from "@/modules/portfolio/model/portfolio";
 
 export const getAllAnalytics = async ({ timeRange = "all", customStart, customEnd }) => {
   const session = await requiredAuth();
@@ -17,7 +18,7 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
 
   // Base query for time filtering
   const timeQuery = startDate ? { createdAt: { $gte: startDate, $lte: endDate } } : {};
-  const cacheKey = `analytics:${timeRange}:${startDate?.getTime() || "all"}:${endDate?.getTime() || "now"}`;
+  const cacheKey = `analytics:v3:${timeRange}:${startDate?.getTime() || "all"}:${endDate?.getTime() || "now"}`;
 
   try {
     const cached = await redis.get(cacheKey);
@@ -76,8 +77,6 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
           totalResumes,
           paidResumes,
           draftResumes,
-          topResumeTypesData,
-          topSkillsData,
           topJobRolesData,
           topTechnologiesData,
           topTemplateData,
@@ -85,19 +84,6 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
           Resume.countDocuments(timeQuery),
           Resume.countDocuments({ ...timeQuery, status: "paid" }),
           Resume.countDocuments({ ...timeQuery, status: "draft" }),
-          Resume.aggregate([
-            { $match: timeQuery },
-            { $group: { _id: "$jobRole", count: { $sum: 1 } } },
-            { $sort: { count: -1 } },
-            { $limit: 10 },
-          ]),
-          Resume.aggregate([
-            { $match: timeQuery },
-            { $unwind: "$skills" },
-            { $group: { _id: "$skills", count: { $sum: 1 } } },
-            { $sort: { count: -1 } },
-            { $limit: 15 },
-          ]),
           Resume.aggregate([
             { $match: timeQuery },
             { $group: { _id: "$jobRole", count: { $sum: 1 } } },
@@ -124,8 +110,6 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
           totalResumes,
           paidResumes,
           draftResumes,
-          topResumeTypes: topResumeTypesData.map(i => ({ type: i._id || "Other", count: i.count })),
-          topSkills: topSkillsData.map(i => ({ skill: i._id, count: i.count })),
           topJobRoles: topJobRolesData.map(i => ({ role: i._id || "Other", count: i.count })),
           topTechnologies: topTechnologiesData.map(i => ({ tech: i._id, count: i.count })),
           topTemplate: topTemplateData[0]?._id || null,
@@ -235,6 +219,8 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
       })(),
     ]);
 
+  const totalPortfolios = await portfolio.countDocuments({});
+
   // Now calculate dependent metrics safely
   const paymentStats = {
     ...paymentStatsRaw,
@@ -252,6 +238,7 @@ export const getAllAnalytics = async ({ timeRange = "all", customStart, customEn
   const responseData = {
     userStats,
     resumeStats,
+    portfolioStats: { totalPortfolios },
     paymentStats,
     todayStats,
     couponStats,
