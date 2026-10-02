@@ -1,6 +1,8 @@
 import "server-only";
 
 import { PDFDocument, PDFName, PDFArray, PDFDict, PDFString, PDFHexString } from "pdf-lib";
+import { createRequire } from "node:module";
+import { pathToFileURL } from "node:url";
 
 const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
@@ -99,6 +101,7 @@ async function extractTextFromPDF(arrayBuffer) {
      */
 
     const pdfParseModule = await import("pdf-parse");
+    configurePdfWorker(pdfParseModule);
 
     try {
       return await parsePdfText(pdfParseModule, buffer);
@@ -125,6 +128,17 @@ async function extractTextFromPDF(arrayBuffer) {
 
     throw extractionError;
   }
+}
+
+function configurePdfWorker(pdfParseModule) {
+  const PDFParse = pdfParseModule.PDFParse;
+  if (typeof PDFParse?.setWorker !== "function") return;
+
+  const appRequire = createRequire(`${process.cwd()}/package.json`);
+  const parserRequire = createRequire(appRequire.resolve("pdf-parse"));
+  const workerPath = parserRequire.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
+
+  PDFParse.setWorker(pathToFileURL(workerPath).href);
 }
 
 async function parsePdfText(pdfParseModule, buffer) {
