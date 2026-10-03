@@ -55,6 +55,7 @@ export const usePayment = ({
         toast.error("Unable to create payment order");
         return;
       }
+      console.log(formData.phone_no.replace(/\D/g, "").slice(-10));
 
       const option = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_CLIENT_ID,
@@ -73,9 +74,7 @@ export const usePayment = ({
 
           email: formData?.email || "",
 
-          contact: formData?.phone_no
-            ? `+91${formData.phone_no.replace(/\D/g, "").slice(-10)}`
-            : "",
+          contact: formData?.phone_no ? `${formData.phone_no.replace(/\D/g, "").slice(-10)}` : "",
         },
         description: "NEXTCV Transaction",
 

@@ -4,7 +4,7 @@ import { apiError } from "@/shared";
 
 export const createResume = async ({
   ResumeType,
-  phone,
+  phone_no,
   name,
   email,
   address,
@@ -23,7 +23,7 @@ export const createResume = async ({
   const resume = await Resume.create({
     status: "draft",
     ResumeType: ResumeType,
-    phone_no: phone,
+    phone_no: phone_no,
     name: name,
     email: email,
     address: address,

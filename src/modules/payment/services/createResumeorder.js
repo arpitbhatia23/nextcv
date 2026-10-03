@@ -9,7 +9,7 @@ import { NextResponse } from "next/server";
 export const createResuemOrder = async ({ reqData }) => {
   const {
     name,
-    phone,
+    phone_no,
     email,
     address,
     linkedin,
@@ -44,7 +44,7 @@ export const createResuemOrder = async ({ reqData }) => {
     resumeId = await createResume({
       userId,
       ResumeType,
-      phone,
+      phone_no,
       name,
       email,
       address,
