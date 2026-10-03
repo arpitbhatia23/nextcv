@@ -51,28 +51,30 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
+const INK = "#17201C";
+const BRAND = "#465B9E";
 const TEAL = "#0F6E63";
-const PAPER = "#F7F7F5";
-const LINE = "#E4E2DC";
-const MUTE = "#6B7280";
-const FAINT = "#B7B5AC";
+const PAPER = "#F8F7F3";
+const LINE = "#E3E2DC";
+const MUTE = "#5B625C";
+const FAINT = "#8A908B";
 
-/* Charted lines/wedges cycle through ink, rust, and three muted supporting
-   tones so multi-series charts stay legible without leaving the palette. */
-const COLORS = [INK, RUST, "#7A8471", "#8C7A66", "#5B7A8C", "#A8896F"];
+/* Charted lines/wedges cycle through brand indigo and muted supporting
+   tones so multi-series charts stay legible without visual noise. */
+const COLORS = [BRAND, "#344B93", "#5268B6", "#6573A4", TEAL, "#A8896F"];
 
 function MetricCard({ title, value, icon: Icon }) {
   return (
-    <div className="border p-4" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+    <div className="rounded-2xl border p-4 sm:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)]" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
       <div className="flex items-center justify-between mb-3">
-        <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
-          {title.toUpperCase()}
+        <p className="font-mono text-[10px] tracking-wider uppercase text-[#66706B]">
+          {title}
         </p>
-        <Icon className="h-3.5 w-3.5" style={{ color: FAINT }} />
+        <div className="w-7 h-7 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+          <Icon className="h-3.5 w-3.5" />
+        </div>
       </div>
-      <div className="font-display text-xl sm:text-2xl font-semibold" style={{ color: INK }}>
+      <div className="font-display text-xl sm:text-2xl font-semibold text-[#17201C]">
         {value}
       </div>
     </div>
@@ -82,14 +84,14 @@ function MetricCard({ title, value, icon: Icon }) {
 function CustomTooltip({ active, payload, label, prefix = "" }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="border px-3 py-2" style={{ backgroundColor: "#FFFFFF", borderColor: INK }}>
+    <div className="rounded-xl border px-3 py-2 shadow-lg" style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}>
       {label && (
-        <p className="font-mono text-[10px] tracking-widest mb-1" style={{ color: MUTE }}>
+        <p className="font-mono text-[10px] tracking-wider mb-1 text-[#66706B]">
           {label}
         </p>
       )}
       {payload.map((p, i) => (
-        <p key={i} className="font-display text-sm font-semibold" style={{ color: INK }}>
+        <p key={i} className="font-sans text-sm font-semibold text-[#17201C]">
           {p.name ? `${p.name}: ` : ""}
           {prefix}
           {p.value}
@@ -120,9 +122,9 @@ const RevenueChart = memo(({ data }) => {
         <Line
           type="monotone"
           dataKey="revenue"
-          stroke={RUST}
-          strokeWidth={2}
-          dot={{ fill: RUST, strokeWidth: 0, r: 3 }}
+          stroke={BRAND}
+          strokeWidth={2.5}
+          dot={{ fill: BRAND, strokeWidth: 0, r: 4 }}
         />
       </LineChart>
     </ResponsiveContainer>
@@ -181,19 +183,17 @@ function SectionHeader({ icon: Icon, title, onExport }) {
       style={{ borderColor: LINE }}
     >
       <h2
-        className="font-mono text-[11px] tracking-widest flex items-center gap-2"
-        style={{ color: INK }}
+        className="font-sans text-sm font-semibold tracking-wide flex items-center gap-2 text-[#17201C]"
       >
-        <Icon className="h-4 w-4" style={{ color: RUST }} />
-        {title.toUpperCase()}
+        <Icon className="h-4 w-4 text-[#465B9E]" />
+        {title}
       </h2>
       <button
         onClick={onExport}
-        className="flex items-center gap-1.5 border px-3 py-1.5 font-mono text-[10px] tracking-widest transition hover:bg-[#F7F7F5]"
-        style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+        className="flex items-center gap-1.5 border border-[#E3E2DC] rounded-xl px-3 py-1.5 font-sans text-xs font-medium transition hover:bg-[#F1F0EB] text-[#17201C] bg-white shadow-xs"
       >
-        <Download className="h-3 w-3" />
-        <span className="hidden sm:inline">EXPORT</span>
+        <Download className="h-3.5 w-3.5" />
+        <span className="hidden sm:inline">Export</span>
       </button>
     </div>
   );
@@ -246,19 +246,18 @@ function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
   const lastRecord = Math.min(page * 8, total);
 
   return (
-    <section className="min-w-0 border" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+    <section className="min-w-0 rounded-2xl border shadow-[0_2px_12px_rgba(23,32,28,0.04)] overflow-hidden" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
       <div
-        className="flex items-center justify-between gap-3 border-b px-4 py-3"
+        className="flex items-center justify-between gap-3 border-b px-4 sm:px-6 py-3.5 bg-[#F8F7F3]/40"
         style={{ borderColor: LINE }}
       >
         <h3
-          className="flex items-center gap-2 font-mono text-[10px] tracking-widest"
-          style={{ color: INK }}
+          className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-[#17201C]"
         >
-          <Icon className="h-3.5 w-3.5" style={{ color: RUST }} />
-          {title.toUpperCase()}
+          <Icon className="h-4 w-4 text-[#465B9E]" />
+          {title}
         </h3>
-        <span className="font-mono text-[10px]" style={{ color: MUTE }}>
+        <span className="font-mono text-[10px] text-[#8A908B] px-2 py-0.5 rounded-full bg-white border border-[#E3E2DC]">
           {total.toLocaleString()} RECORDS
         </span>
       </div>
@@ -266,27 +265,25 @@ function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
         <div className="overflow-x-auto">
           <table className="w-full min-w-150 border-collapse text-left">
             <thead>
-              <tr className="border-b" style={{ borderColor: LINE, backgroundColor: PAPER }}>
+              <tr className="border-b bg-[#F8F7F3]/60" style={{ borderColor: LINE }}>
                 {columns.map(column => (
                   <th
                     key={column.key}
-                    className="px-4 py-2.5 font-mono text-[9px] font-medium tracking-widest"
-                    style={{ color: MUTE }}
+                    className="px-4 sm:px-5 py-3 font-mono text-[9px] font-medium tracking-wider text-[#66706B]"
                   >
                     {column.label.toUpperCase()}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-[#E3E2DC]">
               {rows.map((row, index) => (
                 <tr
                   key={row._id || row.slug || index}
-                  className="border-b last:border-b-0"
-                  style={{ borderColor: LINE }}
+                  className="hover:bg-[#F8F7F3]/30 transition-colors"
                 >
                   {columns.map(column => (
-                    <td key={column.key} className="px-4 py-3 text-xs" style={{ color: INK }}>
+                    <td key={column.key} className="px-4 sm:px-5 py-3.5 text-xs text-[#17201C]">
                       {column.render(row)}
                     </td>
                   ))}
@@ -297,35 +294,32 @@ function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
         </div>
       ) : loading ? (
         <p
-          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
-          style={{ color: MUTE }}
+          className="px-4 py-8 text-center font-mono text-xs tracking-wider animate-pulse text-[#66706B]"
         >
           LOADING RECORDS...
         </p>
       ) : error ? (
         <p
-          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
-          style={{ color: RUST }}
+          className="px-4 py-8 text-center font-mono text-xs tracking-wider text-amber-800"
         >
           COULD NOT LOAD RECORDS
         </p>
       ) : (
         <p
-          className="px-4 py-8 text-center font-mono text-[10px] tracking-widest"
-          style={{ color: FAINT }}
+          className="px-4 py-8 text-center font-mono text-xs tracking-wider text-[#8A908B]"
         >
           {emptyMessage}
         </p>
       )}
       <div
-        className="flex items-center justify-between gap-3 border-t px-4 py-2.5"
+        className="flex items-center justify-between gap-3 border-t px-4 sm:px-6 py-3 bg-[#F8F7F3]/30"
         style={{ borderColor: LINE }}
       >
-        <span className="font-mono text-[9px] tracking-wide" style={{ color: MUTE }}>
-          {firstRecord}-{lastRecord} OF {total.toLocaleString()}
+        <span className="font-mono text-[10px] tracking-wide text-[#66706B]">
+          {firstRecord}–{lastRecord} OF {total.toLocaleString()}
         </span>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[9px]" style={{ color: MUTE }}>
+          <span className="font-mono text-[10px] text-[#8A908B]">
             PAGE {totalPages ? page : 0} / {totalPages}
           </span>
           <button
@@ -334,8 +328,7 @@ function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
             title="Previous page"
             onClick={() => setPage(currentPage => Math.max(1, currentPage - 1))}
             disabled={page <= 1 || loading}
-            className="flex h-8 w-8 items-center justify-center border disabled:cursor-not-allowed disabled:opacity-40"
-            style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -345,8 +338,7 @@ function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
             title="Next page"
             onClick={() => setPage(currentPage => Math.min(totalPages, currentPage + 1))}
             disabled={page >= totalPages || loading}
-            className="flex h-8 w-8 items-center justify-center border disabled:cursor-not-allowed disabled:opacity-40"
-            style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -367,12 +359,11 @@ function formatDate(value) {
 function StatusLabel({ children, positive = false }) {
   return (
     <span
-      className="inline-flex border px-2 py-1 font-mono text-[9px] tracking-wider"
-      style={{
-        borderColor: positive ? "#B8D5C8" : LINE,
-        color: positive ? TEAL : MUTE,
-        backgroundColor: positive ? "#F2F8F4" : PAPER,
-      }}
+      className={`inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[9px] tracking-wide ${
+        positive
+          ? "border-emerald-200 text-emerald-800 bg-emerald-50"
+          : "border-[#E3E2DC] text-[#5B625C] bg-[#F8F7F3]"
+      }`}
     >
       {children}
     </span>
@@ -409,11 +400,10 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
   if (loading) {
     return (
       <div
-        className="flex items-center justify-center h-64 border"
-        style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+        className="flex items-center justify-center h-64 rounded-2xl border border-[#E3E2DC] bg-white shadow-xs"
       >
-        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
-          COMPILING LEDGER&hellip;
+        <p className="font-mono text-xs tracking-wider animate-pulse text-[#66706B]">
+          COMPILING ANALYTICS LEDGER&hellip;
         </p>
       </div>
     );
@@ -422,10 +412,9 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
   if (error) {
     return (
       <div
-        className="border p-10 text-center"
-        style={{ borderColor: RUST, backgroundColor: "#FBF3F1" }}
+        className="rounded-2xl border border-amber-200 bg-amber-50 p-10 text-center"
       >
-        <p className="font-mono text-xs tracking-widest" style={{ color: RUST }}>
+        <p className="font-mono text-xs tracking-widest text-amber-900">
           {error.toUpperCase()}
         </p>
       </div>
@@ -435,55 +424,61 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* ── Today's Snapshot ── */}
-      <section className="grid grid-cols-1 md:grid-cols-3 border" style={{ borderColor: INK }}>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div
-          className="p-5 relative overflow-hidden border-b md:border-b-0 md:border-r"
-          style={{ backgroundColor: INK, borderColor: INK }}
+          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
         >
-          <Zap className="absolute -right-3 -bottom-3 h-20 w-20 text-white/5" strokeWidth={1} />
-          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: "#B7B5AC" }}>
-            TODAY&apos;S REVENUE
-          </p>
-          <h3 className="font-display text-2xl sm:text-3xl font-semibold flex items-center gap-1 text-white">
-            <IndianRupee className="h-5 w-5 sm:h-6 sm:w-6" />
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
+              Today&apos;s Revenue
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Zap className="h-4 w-4" />
+            </div>
+          </div>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold flex items-center gap-1 text-[#17201C]">
+            <IndianRupee className="h-5 w-5 text-[#465B9E]" />
             {data?.todayStats?.todayRevenue || 0}
           </h3>
-          <p className="font-mono text-[10px] mt-2" style={{ color: "#8B90A0" }}>
-            UPDATED JUST NOW
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
+            UPDATED REALTIME
           </p>
         </div>
+
         <div
-          className="p-5 relative overflow-hidden border-b md:border-b-0 md:border-r"
-          style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
+          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
         >
-          <Users
-            className="absolute -right-3 -bottom-3 h-20 w-20"
-            style={{ color: LINE }}
-            strokeWidth={1}
-          />
-          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: MUTE }}>
-            TODAY&apos;S NEW USERS
-          </p>
-          <h3 className="font-display text-2xl sm:text-3xl font-semibold" style={{ color: INK }}>
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
+              Today&apos;s New Users
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Users className="h-4 w-4" />
+            </div>
+          </div>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#17201C]">
             {data?.todayStats?.todayNewUsers || 0}
           </h3>
-          <p className="font-mono text-[10px] mt-2" style={{ color: FAINT }}>
-            TRACKING ACQUISITION
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
+            CANDIDATE SIGNUPS
           </p>
         </div>
-        <div className="p-5 relative overflow-hidden" style={{ backgroundColor: "#FFFFFF" }}>
-          <Target
-            className="absolute -right-3 -bottom-3 h-20 w-20"
-            style={{ color: LINE }}
-            strokeWidth={1}
-          />
-          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: MUTE }}>
-            CONVERSION RATE
-          </p>
-          <h3 className="font-display text-2xl sm:text-3xl font-semibold" style={{ color: RUST }}>
+
+        <div
+          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
+        >
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
+              Conversion Rate
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Target className="h-4 w-4" />
+            </div>
+          </div>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#17201C]">
             {data?.paymentStats?.conversionRate || 0}%
           </h3>
-          <p className="font-mono text-[10px] mt-2" style={{ color: FAINT }}>
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
             PAID VS FREE USERS
           </p>
         </div>
@@ -491,7 +486,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
       {/* ── Users ── */}
       <section
-        className="border p-4 sm:p-5"
+        className="rounded-2xl border p-4 sm:p-6 shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
         style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
       >
         <SectionHeader
@@ -520,7 +515,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
       {/* ── Payment ── */}
       <section
-        className="border p-4 sm:p-5"
+        className="rounded-2xl border p-4 sm:p-6 shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
         style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
       >
         <SectionHeader
@@ -547,23 +542,23 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          <div className="border" style={{ borderColor: LINE }}>
-            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
-              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+          <div className="rounded-xl border border-[#E3E2DC] overflow-hidden">
+            <div className="px-4 pt-4 pb-3 border-b border-[#E3E2DC] bg-[#F8F7F3]/40">
+              <p className="font-mono text-[10px] tracking-wider uppercase text-[#66706B]">
                 MONTHLY REVENUE TREND
               </p>
             </div>
-            <div className="px-2 pb-2">
+            <div className="p-3">
               <RevenueChart data={data?.paymentStats?.monthlyRevenue} />
             </div>
           </div>
-          <div className="border" style={{ borderColor: LINE }}>
-            <div className="px-4 pt-4 pb-3 border-b" style={{ borderColor: LINE }}>
-              <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
+          <div className="rounded-xl border border-[#E3E2DC] overflow-hidden">
+            <div className="px-4 pt-4 pb-3 border-b border-[#E3E2DC] bg-[#F8F7F3]/40">
+              <p className="font-mono text-[10px] tracking-wider uppercase text-[#66706B]">
                 PAYMENT METHODS
               </p>
             </div>
-            <div className="px-2 pb-2">
+            <div className="p-3">
               <PieChartComponent
                 data={data?.paymentStats?.topPaymentModes?.map(mode => ({
                   name: mode.mode,
@@ -577,7 +572,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
       {/* ── Resumes ── */}
       <section
-        className="border p-4 sm:p-5"
+        className="rounded-2xl border p-4 sm:p-6 shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
         style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
       >
         <SectionHeader
@@ -745,7 +740,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
       {/* ── Cover Letters ── */}
       <section
-        className="border p-4 sm:p-5"
+        className="rounded-2xl border p-4 sm:p-6 shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
         style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
       >
         <SectionHeader
@@ -787,19 +782,19 @@ export default function AnalyticsPage() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         {/* Letterhead */}
         <div
-          className="mb-6 pb-5 border-b-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
-          style={{ borderColor: INK }}
+          className="mb-8 pb-6 border-b flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          style={{ borderColor: LINE }}
         >
           <div>
-            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
+            <div className="font-mono text-[11px] tracking-widest uppercase mb-2 font-medium" style={{ color: BRAND }}>
               BUSINESS INTELLIGENCE
             </div>
-            <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+            <h1 className="font-display text-2xl sm:text-3xl font-medium tracking-tight" style={{ color: INK }}>
               Analytics Studio
             </h1>
             <p
               className="mt-1 text-xs font-mono tracking-wide"
-              style={{ color: isPending ? RUST : MUTE }}
+              style={{ color: isPending ? BRAND : MUTE }}
             >
               {isPending ? "UPDATING METRICS…" : "LIVE PLATFORM METRICS & REPORTING"}
             </p>
@@ -817,7 +812,7 @@ export default function AnalyticsPage() {
                       setCustomStart(val);
                     });
                   }}
-                  className="font-mono text-xs border px-2 py-2 outline-none"
+                  className="font-sans text-xs border rounded-xl px-3 py-2 outline-none transition-colors focus:border-[#465B9E]"
                   style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 />
                 <input
@@ -829,7 +824,7 @@ export default function AnalyticsPage() {
                       setCustomEnd(val);
                     });
                   }}
-                  className="font-mono text-xs border px-2 py-2 outline-none"
+                  className="font-sans text-xs border rounded-xl px-3 py-2 outline-none transition-colors focus:border-[#465B9E]"
                   style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 />
               </div>
@@ -844,19 +839,19 @@ export default function AnalyticsPage() {
               disabled={isPending}
             >
               <SelectTrigger
-                className="w-40 sm:w-48 font-mono text-xs tracking-widest rounded-none border"
+                className="w-40 sm:w-48 font-sans text-xs font-medium rounded-xl border h-10 shadow-none hover:bg-[#F1F0EB] transition-colors"
                 style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
                 aria-label="Select time range"
               >
                 <SelectValue placeholder="TIME RANGE" />
               </SelectTrigger>
-              <SelectContent className="rounded-none font-mono text-xs">
-                <SelectItem value="today">TODAY</SelectItem>
-                <SelectItem value="7d">LAST 7 DAYS</SelectItem>
-                <SelectItem value="30d">LAST 30 DAYS</SelectItem>
-                <SelectItem value="90d">LAST 90 DAYS</SelectItem>
-                <SelectItem value="all">ALL TIME</SelectItem>
-                <SelectItem value="custom">CUSTOM RANGE</SelectItem>
+              <SelectContent className="rounded-xl border shadow-lg font-sans text-xs" style={{ borderColor: LINE }}>
+                <SelectItem value="today">Today</SelectItem>
+                <SelectItem value="7d">Last 7 Days</SelectItem>
+                <SelectItem value="30d">Last 30 Days</SelectItem>
+                <SelectItem value="90d">Last 90 Days</SelectItem>
+                <SelectItem value="all">All Time</SelectItem>
+                <SelectItem value="custom">Custom Range</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -866,7 +861,7 @@ export default function AnalyticsPage() {
         <Suspense
           fallback={
             <div
-              className="flex items-center justify-center h-64 border"
+              className="flex items-center justify-center h-64 border rounded-2xl"
               style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
             >
               <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>

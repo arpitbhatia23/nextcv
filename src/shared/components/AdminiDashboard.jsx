@@ -24,8 +24,6 @@ const Coupons = dynamic(() => import("@/modules/coupon/components/Coupons"), {
   ssr: false,
 });
 
-/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
-   reference codes / labels / tab counters. Body stays on the default sans. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -34,28 +32,12 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
-const TEAL = "#0F6E63";
-const AMBER = "#B08900";
-const LINE = "#E4E2DC";
-const MUTED = "#6B7280";
-const PAPER = "#F7F7F5";
-
 const TABS = [
   { id: "overview", label: "Overview", icon: LayoutDashboard, code: "01" },
   { id: "analytics", label: "Analytics", icon: BarChart3, code: "02" },
   { id: "payment", label: "Payments", icon: CreditCard, code: "03" },
   { id: "coupons", label: "Coupons", icon: TicketPercent, code: "04" },
 ];
-
-// Per-tab accent colours, kept within the letterhead palette
-const TAB_ACCENT = {
-  overview: INK,
-  analytics: "#5B4636", // sepia — reads as ink's warmer sibling
-  payment: TEAL,
-  coupons: AMBER,
-};
 
 const AdminiDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -68,29 +50,30 @@ const AdminiDashboard = () => {
   };
 
   return (
-    <div className="flex flex-1 flex-col min-h-screen" style={{ backgroundColor: PAPER }}>
+    <div className="flex flex-1 flex-col min-h-screen bg-[#F8F7F3] text-[#17201C]">
       <FontImports />
 
-      {/* ── Letterhead tab bar ─────────────────────────────────────── */}
-      <div
-        className="sticky top-0 z-20 border-b-2"
-        style={{ backgroundColor: "#FFFFFF", borderColor: INK }}
-      >
-        <div className="px-2 sm:px-4 lg:px-6">
-          <div
-            className="font-mono text-[10px] tracking-widest pt-3 pb-1 px-1 sm:px-3"
-            style={{ color: RUST }}
-          >
-            ADMIN LEDGER
+      {/* ── Header tab bar ─────────────────────────────────────── */}
+      <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-[#E3E2DC]">
+        <div className="px-3 sm:px-6 lg:px-8 py-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+            <div>
+              <div className="font-mono text-[10px] tracking-widest text-[#465B9E]">
+                ADMIN WORKSPACE
+              </div>
+              <h1 className="font-display text-lg sm:text-xl font-medium text-[#17201C]">
+                Platform Control Ledger
+              </h1>
+            </div>
           </div>
+
           <nav
             role="tablist"
             aria-label="Admin dashboard sections"
-            className="flex overflow-x-auto scrollbar-hide"
+            className="flex items-center gap-1.5 overflow-x-auto scrollbar-hide py-1"
           >
             {TABS.map(({ id, label, icon: Icon, code }) => {
               const isActive = activeTab === id;
-              const accent = TAB_ACCENT[id];
 
               return (
                 <button
@@ -102,41 +85,32 @@ const AdminiDashboard = () => {
                   onClick={() => handleTabChange(id)}
                   disabled={isPending}
                   className={[
-                    "group relative flex items-center gap-2 px-3 sm:px-5 py-3.5 sm:py-4",
-                    "font-mono text-[11px] sm:text-xs tracking-widest uppercase whitespace-nowrap select-none",
-                    "border-b-2 transition-all duration-200 shrink-0",
-                    isPending ? "opacity-50 grayscale-[0.5]" : "opacity-100",
+                    "group relative flex items-center gap-2 px-3.5 py-2 rounded-xl",
+                    "font-sans text-xs sm:text-sm font-medium transition-all duration-200 shrink-0",
+                    isPending ? "opacity-50" : "opacity-100",
+                    isActive
+                      ? "bg-[#EEF0F7] text-[#465B9E] shadow-xs"
+                      : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]",
                   ].join(" ")}
-                  style={{
-                    borderColor: isActive ? accent : "transparent",
-                    color: isActive ? accent : MUTED,
-                    backgroundColor: isActive ? PAPER : "transparent",
-                  }}
                 >
                   <span
-                    className="font-mono text-[9px] tracking-widest opacity-60"
+                    className={[
+                      "font-mono text-[10px] tracking-wider transition-colors",
+                      isActive ? "text-[#465B9E]" : "text-[#8A908B]",
+                    ].join(" ")}
                     aria-hidden="true"
                   >
                     {code}
                   </span>
                   <Icon
-                    className={[
-                      "h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0 transition-transform duration-200",
-                      isActive ? "scale-110" : "group-hover:scale-105",
-                    ].join(" ")}
-                    strokeWidth={1.5}
+                    className="h-4 w-4 shrink-0 transition-transform duration-200"
+                    strokeWidth={1.75}
                   />
-                  {/* Full label always visible — short on tiny screens */}
-                  <span className="hidden xs:inline">{label}</span>
-                  {/* Two-letter fallback on truly tiny screens */}
-                  <span className="inline xs:hidden">{label.slice(0, 3)}</span>
+                  <span>{label}</span>
 
                   {/* Active dot indicator */}
                   {isActive && (
-                    <span
-                      className="ml-1 h-1.5 w-1.5 rounded-full"
-                      style={{ backgroundColor: accent }}
-                    />
+                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
                   )}
                 </button>
               );

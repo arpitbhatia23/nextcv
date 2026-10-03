@@ -38,7 +38,7 @@ const FontImports = () => (
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  phone: z.string().min(1, { message: "Phone number is required" }),
+  phone_no: z.string().min(1, { message: "Phone number is required" }),
   email: z.string().email({ message: "Invalid email address" }),
   address: z.string().min(3, { message: "Address is required" }),
   jobRole: z.string().optional(),
@@ -50,8 +50,8 @@ const schema = z.object({
 });
 
 const inputClass =
-  "rounded-none border transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm";
-const inputStyle = { backgroundColor: "#F7F7F5", borderColor: "#E4E2DC", color: "#1C2333" };
+  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const BasicInfoStep = () => {
   const formData = useResumeStore(s => s.formData);
@@ -73,7 +73,7 @@ const BasicInfoStep = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       name: formData?.name ?? "",
-      phone: formData?.phone ?? "",
+      phone_no: formData?.phone_no ?? "",
       email: formData?.email ?? "",
       linkedin: formData?.linkedin ?? "",
       github: formData?.github ?? "",
@@ -88,7 +88,7 @@ const BasicInfoStep = () => {
     if (formData) {
       form.reset({
         name: formData.name ?? "",
-        phone: formData.phone ?? "",
+        phone_no: formData.phone_no ?? "",
         email: formData.email ?? "",
         linkedin: formData.linkedin ?? "",
         github: formData.github ?? "",
@@ -112,32 +112,23 @@ const BasicInfoStep = () => {
   };
 
   return (
-    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+    <div className="py-4 md:py-8 bg-[#F8F7F3]">
       <FontImports />
       <div className="grid gap-2 md:gap-8 items-start">
         <div className="space-y-4 md:space-y-6" id="tour-resume-form">
-          <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
-            <div
-              className="font-mono text-[10px] tracking-widest mb-1"
-              style={{ color: "#B3382C" }}
-            >
+          <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
+            <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
               STEP 02 — BASIC DETAILS
             </div>
-            <h2
-              className="font-display text-lg md:text-xl font-medium"
-              style={{ color: "#1C2333" }}
-            >
+            <h2 className="font-display text-xl md:text-2xl font-medium text-[#17201C]">
               Basic Details
             </h2>
-            <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
+            <p className="text-xs md:text-sm mt-1 text-[#5B625C]">
               Start with your contact information and target role
             </p>
           </div>
 
-          <Card
-            className="rounded-none border shadow-none overflow-hidden"
-            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
-          >
+          <Card className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] bg-white overflow-hidden">
             <CardContent className="p-4 md:p-6">
               <Form {...form}>
                 <form className="space-y-4 md:space-y-5" onSubmit={form.handleSubmit(handlesave)}>
@@ -218,7 +209,7 @@ const BasicInfoStep = () => {
                     />
 
                     <FormField
-                      name="phone"
+                      name="phone_no"
                       control={form.control}
                       render={({ field }) => (
                         <FormItem>
@@ -422,10 +413,9 @@ const BasicInfoStep = () => {
                     <Button
                       type="submit"
                       disabled={isloading}
-                      className="rounded-none text-white shadow-none h-10 md:h-10 px-4 md:px-6 font-mono text-xs md:text-sm tracking-widest"
-                      style={{ backgroundColor: "#B3382C" }}
+                      className="rounded-xl text-white shadow-xs h-10 md:h-11 px-5 md:px-7 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                     >
-                      {isloading ? "SAVING..." : "NEXT"}
+                      {isloading ? "Saving..." : "Next Step"}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </div>

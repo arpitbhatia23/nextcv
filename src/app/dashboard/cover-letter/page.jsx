@@ -1,7 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { FileText, Sparkles, Check, ArrowRight, Loader2 } from "lucide-react";
-import { useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
+import {
+  FileText,
+  Sparkles,
+  Check,
+  ArrowRight,
+  Loader2,
+  BriefcaseBusiness,
+  Clock3,
+  ChevronRight,
+  WandSparkles,
+} from "lucide-react";
 import axios from "axios";
 import PDFPreview from "@/modules/resume/components/pdfPreview";
 import { formatDate } from "@/shared/utils/datefromater";
@@ -13,13 +23,26 @@ import { usePayment } from "@/modules/cover-letter/Hook/usePayment";
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import Link from "next/link";
 
-/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
-   reference codes / labels / prices. Body stays on the default sans. */
+/**
+ * NextCV design system:
+ * Background: #F8F7F3
+ * Primary:    #17201C
+ * Muted:      #5B625C / #66706B
+ * Surface:    #FFFFFF
+ * Border:     #E3E2DC
+ * Accent:     #465B9E / #344B93
+ */
 const FontImports = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+
+    .nextcv-serif {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+
+    .nextcv-sans {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
   `}</style>
 );
 
@@ -33,7 +56,9 @@ const Page = () => {
   const [resumes, setResumes] = useState([]);
   const [resumesLoading, setResumesLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
+
   const resume = resumes.find(r => r?.resumedata?._id === selectedResume);
+
   const [coverLetter, setCoverLetter] = useState(null);
   const [pdfurl, setPdfurl] = useState();
   const [amount, setAmount] = useState(79);
@@ -42,16 +67,18 @@ const Page = () => {
   const [discount, setDiscount] = useState(null);
   const [isSubmit, setIsSubmit] = useState(false);
   const [draftId, setDraftId] = useState(null);
+
   const coverletterData = {
     jobRole: resume?.resumedata.jobRole,
     skills: resume?.resumedata.skills,
     experince: resume?.resumedata.experience,
-    jobDescription: jobDescription,
-    tone: tone,
-    length: length,
-    company: company,
+    jobDescription,
+    tone,
+    length,
+    company,
     name: resume?.resumedata.name,
   };
+
   const { handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
     originalAmount: 100,
@@ -60,21 +87,22 @@ const Page = () => {
     setApplied,
     setDiscount,
   });
+
   useEffect(() => {
-    const resume = async () => {
+    const fetchResumes = async () => {
       setResumesLoading(true);
+
       try {
         const data = await axios.get("/api/resume/getAllResume");
-        console.log(data?.data?.data?.paid);
-        setResumes(data?.data?.data?.paid);
+        setResumes(data?.data?.data?.paid || []);
       } finally {
         setResumesLoading(false);
       }
     };
-    resume();
+
+    fetchResumes();
   }, []);
 
-  // Both a selected resume and a company name are required before we call the API.
   const isCompanyMissing = !company.trim();
   const isResumeMissing = !resume;
   const canGenerate = !isResumeMissing && !isCompanyMissing && !isGenerating;
@@ -86,27 +114,37 @@ const Page = () => {
       toast.error("Select a resume before generating your cover letter.");
       return;
     }
+
     if (isCompanyMissing) {
       toast.error("Company name is required.");
       return;
     }
 
     setIsGenerating(true);
+
     try {
-      const res = await axios.post("/api/cover-letter/gen", { data: coverletterData });
+      const res = await axios.post("/api/cover-letter/gen", {
+        data: coverletterData,
+      });
+
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
 
-      setCoverLetter({ ...JSON.parse(res.data.data), productType: "cover-letter" });
+      setCoverLetter({
+        ...JSON.parse(res.data.data),
+        productType: "cover-letter",
+      });
 
       const pdfGen = new pdfGenerator(JSON.parse(res.data.data), "classic", {
         type: "cover-letter",
       });
+
       const url = await pdfGen.createPdf();
       setPdfurl(url);
     } finally {
       setIsGenerating(false);
     }
   };
+
   const { handelPayment, isPaymentSubmit, isRedirecting } = usePayment({
     couponCode,
     coverLetter,
@@ -123,74 +161,73 @@ const Page = () => {
 
   return (
     <>
-      <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
+      <div className="nextcv-sans min-h-screen bg-[#F8F7F3] text-[#17201C]">
         <FontImports />
-        <div className="mx-auto max-w-7xl px-6 py-10">
-          {/* Letterhead */}
-          <div
-            className="mb-10 pb-6 border-b-2 flex flex-wrap items-end justify-between gap-4"
-            style={{ borderColor: "#1C2333" }}
-          >
-            <div>
-              <div
-                className="font-mono text-[11px] tracking-widest mb-2"
-                style={{ color: "#B3382C" }}
-              >
-                CORRESPONDENCE ARCHIVE
+
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+          {/* Header */}
+          <header className="mb-8">
+            <div className="flex flex-col gap-5 border-b border-[#E3E2DC] pb-7 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#465B9E]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
+                  NextCV AI Tools
+                </div>
+
+                <h1 className="nextcv-serif text-4xl font-medium tracking-[-0.025em] text-[#17201C] sm:text-5xl">
+                  Write a cover letter
+                  <span className="text-[#465B9E]">.</span>
+                </h1>
+
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-[#66706B] sm:text-[15px]">
+                  Create a tailored cover letter from your resume and the job you&apos;re applying
+                  for.
+                </p>
               </div>
-              <h1 className="font-display text-3xl font-medium" style={{ color: "#1C2333" }}>
-                Cover Letter
-              </h1>
+
+              <Link
+                href="my-cover-letter"
+                className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-xl border border-[#E3E2DC] bg-white px-4 text-sm font-medium text-[#17201C] transition hover:border-[#C9C9C2] hover:bg-[#FBFAF7] focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 sm:self-auto"
+              >
+                My letters
+                <ArrowRight size={15} />
+              </Link>
             </div>
-            <Link href={"my-cover-letter"}>
-              <button
-                className="rounded-none border px-5 py-2.5 font-mono text-xs tracking-widest transition"
-                style={{ borderColor: "#1C2333", color: "#1C2333", backgroundColor: "#FFFFFF" }}
-              >
-                MY LETTERS
-              </button>
-            </Link>
-          </div>
+          </header>
 
-          {/* Main grid: resume select (small) | job details | live preview (big) */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-            {/* Resume selection - narrow */}
-            <div
-              className="border p-5 lg:col-span-3"
-              style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <h2
-                  className="font-mono text-[10px] font-medium tracking-widest"
-                  style={{ color: "#6B7280" }}
-                >
-                  SELECT RESUME
-                </h2>
-                {isResumeMissing && !resumesLoading && (
-                  <span
-                    className="font-mono text-[10px] tracking-widest"
-                    style={{ color: "#B3382C" }}
-                  >
-                    REQUIRED
-                  </span>
-                )}
+          {/* Main workspace */}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-start">
+            {/* Resume selection */}
+            <section className="overflow-hidden rounded-2xl border border-[#E3E2DC] bg-white lg:col-span-3">
+              <div className="border-b border-[#E7E5DF] px-5 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5B625C]">
+                      Step 01
+                    </p>
+                    <h2 className="mt-1 text-sm font-semibold text-[#17201C]">
+                      Choose your resume
+                    </h2>
+                  </div>
+
+                  {isResumeMissing && !resumesLoading && (
+                    <span className="rounded-full bg-[#F3ECEB] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#9B4D46]">
+                      Required
+                    </span>
+                  )}
+                </div>
               </div>
 
-              <div className="space-y-3 overflow-auto">
+              <div className="max-h-130 space-y-2 overflow-auto p-3">
                 {resumesLoading ? (
-                  // Skeleton loading animation while resumes are fetched
                   Array.from({ length: 3 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="animate-pulse border p-4"
-                      style={{ borderColor: "#E4E2DC" }}
-                    >
+                    <div key={i} className="animate-pulse rounded-xl border border-[#E7E5DF] p-4">
                       <div className="flex items-start gap-3">
-                        <div className="h-9 w-9 shrink-0" style={{ backgroundColor: "#EDEBE5" }} />
+                        <div className="h-10 w-10 rounded-xl bg-[#EEEDE8]" />
                         <div className="min-w-0 flex-1 space-y-2">
-                          <div className="h-3.5 w-3/4" style={{ backgroundColor: "#EDEBE5" }} />
-                          <div className="h-3 w-1/2" style={{ backgroundColor: "#EDEBE5" }} />
-                          <div className="h-3 w-2/3" style={{ backgroundColor: "#EDEBE5" }} />
+                          <div className="h-3.5 w-3/4 rounded bg-[#EEEDE8]" />
+                          <div className="h-3 w-1/2 rounded bg-[#EEEDE8]" />
+                          <div className="h-3 w-2/3 rounded bg-[#EEEDE8]" />
                         </div>
                       </div>
                     </div>
@@ -200,160 +237,183 @@ const Page = () => {
                     const active = selectedResume === r?.resumedata?._id;
 
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={r?.resumedata?._id}
                         onClick={() => setSelectedResume(r?.resumedata?._id)}
-                        className="cursor-pointer border p-4 transition"
-                        style={
+                        className={`group w-full rounded-xl border p-3.5 text-left transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 ${
                           active
-                            ? { borderColor: "#1C2333", backgroundColor: "#F7F7F5" }
-                            : { borderColor: "#E4E2DC" }
-                        }
+                            ? "border-[#465B9E] bg-[#F1F3F9]"
+                            : "border-[#E7E5DF] bg-white hover:border-[#CFCFC8] hover:bg-[#FBFAF7]"
+                        }`}
                       >
                         <div className="flex items-start gap-3">
                           <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center"
-                            style={
-                              active
-                                ? { backgroundColor: "#1C2333", color: "#FFFFFF" }
-                                : { backgroundColor: "#F7F7F5", color: "#1C2333" }
-                            }
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
+                              active ? "bg-[#465B9E] text-white" : "bg-[#F1F0EB] text-[#5B625C]"
+                            }`}
                           >
-                            {active ? <Check size={16} /> : <FileText size={16} />}
+                            {active ? (
+                              <Check size={16} strokeWidth={2.4} />
+                            ) : (
+                              <FileText size={17} />
+                            )}
                           </div>
 
-                          <div className="min-w-0">
-                            <h3
-                              className="truncate text-sm font-semibold"
-                              style={{ color: "#1C2333" }}
-                            >
-                              {r?.resumedata?.name}
-                            </h3>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <h3 className="truncate text-sm font-semibold text-[#17201C]">
+                                {r?.resumedata?.name}
+                              </h3>
+                              <ChevronRight
+                                size={14}
+                                className={`shrink-0 transition ${
+                                  active
+                                    ? "text-[#465B9E]"
+                                    : "text-[#A0A49F] group-hover:text-[#5B625C]"
+                                }`}
+                              />
+                            </div>
 
-                            <p
-                              className="mt-0.5 truncate font-mono text-[11px]"
-                              style={{ color: "#6B7280" }}
-                            >
+                            <p className="mt-1 truncate text-xs text-[#66706B]">
+                              {r?.resumedata?.jobRole || "Professional resume"}
+                            </p>
+
+                            <div className="mt-2 flex items-center gap-1.5 text-[10px] text-[#8A908B]">
+                              <Clock3 size={11} />
                               {formatDate(r?.resumedata?.updatedAt)}
-                            </p>
-
-                            <p className="text-xs" style={{ color: "#B7B5AC" }}>
-                              {r?.resumedata?.jobRole}
-                            </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      </button>
                     );
                   })
                 ) : (
-                  <div className="py-8 text-center text-sm" style={{ color: "#6B7280" }}>
-                    No resumes found.
+                  <div className="rounded-xl border border-dashed border-[#D9D8D1] px-5 py-10 text-center">
+                    <FileText size={24} className="mx-auto mb-3 text-[#A4A8A3]" />
+                    <p className="text-sm font-medium text-[#17201C]">No paid resumes found</p>
+                    <p className="mt-1 text-xs leading-5 text-[#66706B]">
+                      Create and unlock a resume first to use it here.
+                    </p>
                   </div>
                 )}
               </div>
-            </div>
+            </section>
 
             {/* Job details */}
-            <div
-              className="border p-6 lg:col-span-4"
-              style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <h2
-                  className="font-mono text-[10px] font-medium tracking-widest"
-                  style={{ color: "#6B7280" }}
-                >
-                  JOB DETAILS
-                </h2>
-                {isCompanyMissing && (
-                  <span
-                    className="font-mono text-[10px] tracking-widest"
-                    style={{ color: "#B3382C" }}
-                  >
-                    COMPANY REQUIRED
+            <section className="rounded-2xl border border-[#E3E2DC] bg-white p-5 sm:p-6 lg:col-span-4">
+              <div className="mb-6 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5B625C]">
+                    Step 02
+                  </p>
+                  <h2 className="mt-1 text-sm font-semibold text-[#17201C]">Add job details</h2>
+                </div>
+
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF0F7] text-[#465B9E]">
+                  <BriefcaseBusiness size={17} />
+                </div>
+              </div>
+
+              <div className="space-y-5">
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-[#17201C]">
+                    Company name
                   </span>
-                )}
+                  <input
+                    value={company}
+                    onChange={e => setCompany(e.target.value)}
+                    placeholder="e.g. Google, TCS, Deloitte"
+                    disabled={isGenerating}
+                    className={`h-12 w-full rounded-xl border bg-white px-3.5 text-sm text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:ring-2 disabled:cursor-not-allowed disabled:bg-[#F5F4F0] ${
+                      isCompanyMissing
+                        ? "border-[#D8C5C2] focus:border-[#465B9E] focus:ring-[#465B9E]/10"
+                        : "border-[#E3E2DC] focus:border-[#465B9E] focus:ring-[#465B9E]/10"
+                    }`}
+                  />
+                </label>
+
+                <label className="block">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-xs font-semibold text-[#17201C]">Job description</span>
+                    <span className="text-[10px] text-[#8A908B]">Recommended</span>
+                  </div>
+
+                  <textarea
+                    value={jobDescription}
+                    onChange={e => setJobDescription(e.target.value)}
+                    rows={7}
+                    placeholder="Paste the job description here. NextCV will tailor your letter around the role..."
+                    disabled={isGenerating}
+                    className="w-full resize-none rounded-xl border border-[#E3E2DC] bg-white px-3.5 py-3 text-sm leading-6 text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10 disabled:cursor-not-allowed disabled:bg-[#F5F4F0]"
+                  />
+                </label>
               </div>
 
-              <div className="space-y-4">
-                <input
-                  value={company}
-                  onChange={e => setCompany(e.target.value)}
-                  placeholder="Company name"
-                  disabled={isGenerating}
-                  className="w-full rounded-none border px-4 py-3 text-sm outline-none disabled:cursor-not-allowed disabled:text-gray-400"
-                  style={{
-                    borderColor: isCompanyMissing ? "#B3382C" : "#E4E2DC",
-                    backgroundColor: isGenerating ? "#F7F7F5" : "#FFFFFF",
-                  }}
-                />
-                <textarea
-                  value={jobDescription}
-                  onChange={e => setJobDescription(e.target.value)}
-                  rows="5"
-                  placeholder="Paste job description..."
-                  disabled={isGenerating}
-                  className="w-full rounded-none border px-4 py-3 text-sm outline-none disabled:cursor-not-allowed disabled:text-gray-400"
-                  style={{
-                    borderColor: "#E4E2DC",
-                    backgroundColor: isGenerating ? "#F7F7F5" : "#FFFFFF",
-                  }}
-                />
-              </div>
+              <div className="mt-6 border-t border-[#E7E5DF] pt-5">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-1">
+                  <div>
+                    <h3 className="mb-2.5 text-xs font-semibold text-[#17201C]">Tone</h3>
 
-              <div className="mt-6">
-                <h3
-                  className="mb-2 font-mono text-[10px] font-medium tracking-widest"
-                  style={{ color: "#B7B5AC" }}
-                >
-                  TONE
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {toneOptions.map(item => (
-                    <button
-                      key={item}
-                      onClick={() => setTone(item)}
-                      disabled={isGenerating}
-                      className="rounded-none border px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
-                      style={
-                        tone === item
-                          ? { backgroundColor: "#1C2333", color: "#FFFFFF", borderColor: "#1C2333" }
-                          : { backgroundColor: "#FFFFFF", color: "#6B7280", borderColor: "#E4E2DC" }
-                      }
-                    >
-                      {item}
-                    </button>
-                  ))}
+                    <div className="flex flex-wrap gap-2">
+                      {toneOptions.map(item => (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => setTone(item)}
+                          disabled={isGenerating}
+                          className={`rounded-lg border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
+                            tone === item
+                              ? "border-[#465B9E] bg-[#465B9E] text-white"
+                              : "border-[#E3E2DC] bg-white text-[#5B625C] hover:border-[#CFCFC8] hover:text-[#17201C]"
+                          }`}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="mb-2.5 text-xs font-semibold text-[#17201C]">Length</h3>
+
+                    <div className="flex flex-wrap gap-2">
+                      {lengthOptions.map(item => (
+                        <button
+                          type="button"
+                          key={item}
+                          onClick={() => setLength(item)}
+                          disabled={isGenerating}
+                          className={`rounded-lg border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
+                            length === item
+                              ? "border-[#465B9E] bg-[#465B9E] text-white"
+                              : "border-[#E3E2DC] bg-white text-[#5B625C] hover:border-[#CFCFC8] hover:text-[#17201C]"
+                          }`}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="mt-5">
-                <h3
-                  className="mb-2 font-mono text-[10px] font-medium tracking-widest"
-                  style={{ color: "#B7B5AC" }}
-                >
-                  LENGTH
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {lengthOptions.map(item => (
-                    <button
-                      key={item}
-                      onClick={() => setLength(item)}
-                      disabled={isGenerating}
-                      className="rounded-none border px-4 py-2 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50"
-                      style={
-                        length === item
-                          ? { backgroundColor: "#1C2333", color: "#FFFFFF", borderColor: "#1C2333" }
-                          : { backgroundColor: "#FFFFFF", color: "#6B7280", borderColor: "#E4E2DC" }
-                      }
-                    >
-                      {item}
-                    </button>
-                  ))}
+              <div className="mt-6 rounded-xl border border-[#E7E5DF] bg-[#FBFAF7] p-3.5">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEF0F7] text-[#465B9E]">
+                    <WandSparkles size={15} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-[#17201C]">AI tailoring</p>
+                    <p className="mt-1 text-[11px] leading-5 text-[#66706B]">
+                      Your selected resume, company, role and job description are used to
+                      personalize the letter.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <button
+              <Button
                 onClick={Generate_coverLetter}
                 disabled={!canGenerate}
                 title={
@@ -363,71 +423,74 @@ const Page = () => {
                       ? "Enter a company name first"
                       : undefined
                 }
-                className="mt-8 flex w-full items-center justify-center gap-2 rounded-none py-4 font-medium text-white shadow-none transition disabled:cursor-not-allowed"
-                style={{
-                  backgroundColor: isGenerating ? "#8a4038" : !canGenerate ? "#C9A39D" : "#B3382C",
-                }}
+                className="mt-5 h-12 w-full rounded-xl border-0 bg-[#465B9E] text-sm font-semibold text-white shadow-none transition hover:bg-[#344B93] focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:bg-[#D9DCE7] disabled:text-[#8A908B]"
               >
                 {isGenerating ? (
                   <>
-                    <Loader2 size={18} className="animate-spin" />
+                    <Loader2 size={17} className="mr-2 animate-spin" />
                     Generating...
                   </>
                 ) : (
                   <>
-                    <Sparkles size={18} />
-                    Generate Cover Letter
+                    <Sparkles size={17} className="mr-2" />
+                    Generate cover letter
                   </>
                 )}
-              </button>
+              </Button>
+
               {(isResumeMissing || isCompanyMissing) && (
-                <p
-                  className="mt-2 font-mono text-[10px] tracking-widest text-center"
-                  style={{ color: "#B3382C" }}
-                >
+                <p className="mt-2.5 text-center text-[10px] font-medium uppercase tracking-wider text-[#9B4D46]">
                   {isResumeMissing && isCompanyMissing
-                    ? "SELECT A RESUME AND ENTER A COMPANY NAME"
+                    ? "Select a resume and enter a company"
                     : isResumeMissing
-                      ? "SELECT A RESUME TO CONTINUE"
-                      : "ENTER A COMPANY NAME TO CONTINUE"}
+                      ? "Select a resume to continue"
+                      : "Enter a company to continue"}
                 </p>
               )}
-            </div>
+            </section>
 
-            {/* Live preview - wide */}
-            <div className="lg:col-span-5">
-              {isGenerating ? (
-                // Generation animation while the cover letter PDF is being built
-                <div
-                  className="flex h-full min-h-150 flex-col items-center justify-center border-2"
-                  style={{
-                    borderStyle: "dashed",
-                    borderColor: "#D8D6CE",
-                    backgroundColor: "#FBFBF9",
-                  }}
-                >
-                  <div className="relative mb-4 flex h-16 w-16 items-center justify-center">
-                    <span
-                      className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-30"
-                      style={{ backgroundColor: "#B3382C" }}
-                    />
-                    <span
-                      className="relative inline-flex h-12 w-12 items-center justify-center rounded-full"
-                      style={{ backgroundColor: "#1C2333" }}
-                    >
-                      <Sparkles size={20} className="animate-pulse text-white" />
-                    </span>
-                  </div>
-                  <h3 className="font-display text-lg font-medium" style={{ color: "#1C2333" }}>
-                    Crafting your cover letter
-                  </h3>
-                  <p className="mt-2 font-mono text-xs" style={{ color: "#6B7280" }}>
-                    This usually takes a few seconds...
+            {/* Preview / payment */}
+            <section className="lg:col-span-5">
+              <div className="mb-3 flex items-center justify-between px-1">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5B625C]">
+                    Step 03
                   </p>
+                  <h2 className="mt-1 text-sm font-semibold text-[#17201C]">Preview & finish</h2>
+                </div>
+
+                {pdfurl && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EAF1E9] px-2.5 py-1 text-[10px] font-semibold text-[#42634A]">
+                    <Check size={11} />
+                    Ready
+                  </span>
+                )}
+              </div>
+
+              {isGenerating ? (
+                <div className="flex min-h-155 flex-col items-center justify-center rounded-2xl border border-[#E3E2DC] bg-white p-8 text-center">
+                  <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF0F7] text-[#465B9E]">
+                    <span className="absolute inset-0 animate-ping rounded-2xl bg-[#465B9E]/10" />
+                    <Sparkles size={22} className="relative animate-pulse" />
+                  </div>
+
+                  <h3 className="nextcv-serif text-2xl font-medium text-[#17201C]">
+                    Crafting your letter
+                  </h3>
+
+                  <p className="mt-2 max-w-xs text-sm leading-6 text-[#66706B]">
+                    NextCV is tailoring your application to the role. This usually takes a few
+                    seconds.
+                  </p>
+
+                  <div className="mt-6 h-1.5 w-40 overflow-hidden rounded-full bg-[#E7E5DF]">
+                    <div className="h-full w-1/2 animate-pulse rounded-full bg-[#465B9E]" />
+                  </div>
                 </div>
               ) : pdfurl ? (
-                <>
+                <div className="rounded-2xl border border-[#E3E2DC] bg-white p-3 sm:p-4">
                   <PDFPreview variant="cover-letter" pdfUrl={pdfurl} />
+
                   <div className="mt-4 space-y-3">
                     {!applied ? (
                       <div className="flex gap-2">
@@ -435,79 +498,103 @@ const Page = () => {
                           value={couponCode}
                           onChange={e => setCouponCode(e.target.value)}
                           placeholder="Coupon code"
-                          className="flex-1 rounded-none border px-3 py-2 font-mono text-sm uppercase placeholder:normal-case"
-                          style={{ borderColor: "#E4E2DC" }}
+                          className="h-11 min-w-0 flex-1 rounded-xl border border-[#E3E2DC] bg-white px-3.5 text-sm uppercase text-[#17201C] outline-none placeholder:normal-case placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10"
                         />
 
                         <Button
                           disabled={!couponCode || isSubmit}
                           onClick={() => handleCoupon(couponCode)}
-                          className="rounded-none font-mono text-xs"
-                          style={{ backgroundColor: "#1C2333" }}
+                          className="h-11 rounded-xl border-0 bg-[#17201C] px-4 text-xs font-semibold text-white hover:bg-[#28322D]"
                         >
-                          {isSubmit ? "APPLYING..." : "APPLY"}
+                          {isSubmit ? "Applying..." : "Apply"}
                         </Button>
                       </div>
                     ) : (
-                      <div
-                        className="flex justify-between p-3 text-sm font-mono"
-                        style={{ backgroundColor: "#EAF4F2", color: "#0F6E63" }}
-                      >
-                        <span>COUPON APPLIED</span>
+                      <div className="flex items-center justify-between rounded-xl border border-[#DCE8DC] bg-[#F1F7F1] px-3.5 py-3 text-xs">
+                        <span className="flex items-center gap-2 font-semibold text-[#42634A]">
+                          <Check size={14} />
+                          Coupon applied
+                        </span>
 
-                        <button style={{ color: "#B3382C" }} onClick={removeCoupon}>
-                          REMOVE
+                        <button
+                          type="button"
+                          className="font-semibold text-[#7D514C] hover:underline"
+                          onClick={removeCoupon}
+                        >
+                          Remove
                         </button>
                       </div>
                     )}
-                    <div className="flex items-center justify-between gap-4">
+
+                    <div className="grid grid-cols-2 gap-2.5">
                       <Button
                         variant="outline"
                         onClick={handleSaveDraft}
-                        className="flex-1 rounded-none"
-                        style={{ borderColor: "#1C2333", color: "#1C2333" }}
+                        className="h-11 rounded-xl border-[#D9D8D1] bg-white text-sm font-semibold text-[#17201C] hover:bg-[#FBFAF7]"
                       >
-                        {isdraftSubmit ? "Saving as draft" : "Save Draft"}
+                        {isdraftSubmit ? "Saving..." : "Save draft"}
                       </Button>
 
                       <Button
                         onClick={handelPayment}
-                        className="flex-1 rounded-none text-white"
-                        style={{ backgroundColor: "#B3382C" }}
+                        className="h-11 rounded-xl border-0 bg-[#465B9E] text-sm font-semibold text-white hover:bg-[#344B93]"
                         disabled={isPaymentSubmit || isRedirecting}
                       >
-                        {isPaymentSubmit ? "Proceed to Payment" : `Pay ₹${amount}`}{" "}
+                        {isPaymentSubmit ? "Processing..." : `Pay ₹${amount}`}
                       </Button>
                     </div>
-                  </div>
-                </>
-              ) : (
-                <div
-                  className="flex h-full min-h-150 items-center justify-center border-2"
-                  style={{
-                    borderStyle: "dashed",
-                    borderColor: "#D8D6CE",
-                    backgroundColor: "#FBFBF9",
-                  }}
-                >
-                  <div className="text-center">
-                    <FileText
-                      className="mx-auto mb-4 h-12 w-12"
-                      style={{ color: "#C9C7BF" }}
-                      strokeWidth={1.25}
-                    />
-                    <h3 className="font-display text-lg font-medium" style={{ color: "#1C2333" }}>
-                      Preview will appear here
-                    </h3>
-                    <p className="mt-2 text-sm" style={{ color: "#6B7280" }}>
-                      Generate your cover letter to see the live preview.
+
+                    <p className="text-center text-[10px] leading-4 text-[#8A908B]">
+                      One-time payment · No subscription
                     </p>
                   </div>
                 </div>
+              ) : (
+                <div className="flex min-h-155 items-center justify-center rounded-2xl border border-dashed border-[#D6D5CE] bg-white px-8 text-center">
+                  <div className="max-w-sm">
+                    <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F1F0EB] text-[#66706B]">
+                      <FileText size={24} strokeWidth={1.6} />
+                    </div>
+
+                    <h3 className="nextcv-serif text-2xl font-medium text-[#17201C]">
+                      Your preview starts here
+                    </h3>
+
+                    <p className="mt-2 text-sm leading-6 text-[#66706B]">
+                      Choose a resume, add the company and generate your cover letter to see the
+                      finished document here.
+                    </p>
+
+                    <div className="mx-auto mt-6 flex max-w-xs items-center justify-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-[#8A908B]">
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          !isResumeMissing ? "bg-[#465B9E]" : "bg-[#D6D5CE]"
+                        }`}
+                      />
+                      Resume
+                      <span className="h-px w-5 bg-[#E3E2DC]" />
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          !isCompanyMissing ? "bg-[#465B9E]" : "bg-[#D6D5CE]"
+                        }`}
+                      />
+                      Company
+                      <span className="h-px w-5 bg-[#E3E2DC]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#D6D5CE]" />
+                      Generate
+                    </div>
+                  </div>
+                </div>
               )}
-            </div>
+            </section>
           </div>
-        </div>
+
+          {/* Footer note */}
+          <div className="mt-7 flex flex-col gap-2 border-t border-[#E3E2DC] pt-5 text-[11px] text-[#8A908B] sm:flex-row sm:items-center sm:justify-between">
+            <p>NextCV · AI-powered career tools for job seekers.</p>
+            <p>Build once. Apply with confidence.</p>
+          </div>
+        </main>
       </div>
 
       {isRedirecting && <RedirectToPayment />}

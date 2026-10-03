@@ -35,8 +35,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
-/* Fonts match the Correspondence Archive letterhead:
-   Fraunces for display type, IBM Plex Mono for labels / codes. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -45,15 +43,6 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
-const PAPER = "#F7F7F5";
-const LINE = "#E4E2DC";
-const MUTE = "#6B7280";
-const FAINT = "#B7B5AC";
-const GOOD = "#0F6E63";
-const GOOD_BG = "#EAF4F2";
-
 const couponSchema = z.object({
   code: z.string().min(1, "Code is required"),
   discount: z.coerce.number().min(0, "Must be ≥ 0"),
@@ -61,51 +50,36 @@ const couponSchema = z.object({
   expiryDate: z.string().min(1, "Expiry date required"),
 });
 
-/* Coupon card, styled as a perforated ticket stub — the signature
-   element for this page, since a coupon literally is a redeemable slip. */
 function CouponCard({ coupon, onDelete, onToggle, onCopy }) {
   const isActive = coupon.isActive;
   const isExpired = new Date(coupon.expiry) < new Date();
 
   return (
     <div
-      className="relative flex border transition-opacity"
-      style={{
-        borderColor: isActive ? INK : LINE,
-        backgroundColor: "#FFFFFF",
-        opacity: isActive ? 1 : 0.65,
-      }}
+      className={`relative rounded-2xl border transition-all duration-200 bg-white overflow-hidden ${
+        isActive
+          ? "border-[#E3E2DC] shadow-[0_2px_12px_rgba(23,32,28,0.04)] hover:shadow-[0_8px_24px_rgba(23,32,28,0.08)]"
+          : "border-[#E3E2DC] opacity-70 bg-[#FBFBF9]"
+      }`}
     >
-      {/* Perforation notches */}
-      <span
-        className="absolute -left-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full"
-        style={{ backgroundColor: PAPER, border: `1px solid ${isActive ? INK : LINE}` }}
-      />
-      <span
-        className="absolute -right-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full"
-        style={{ backgroundColor: PAPER, border: `1px solid ${isActive ? INK : LINE}` }}
-      />
-
-      <div className="flex-1 p-4 sm:p-5">
+      <div className="p-5">
         {/* Top row */}
         <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2 min-w-0">
-            <Tag className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? RUST : FAINT }} />
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-xl bg-[#EEF0F7] flex items-center justify-center text-[#465B9E] shrink-0">
+              <Tag className="h-4 w-4" />
+            </div>
             <div className="min-w-0">
-              <p
-                className="font-mono text-sm font-medium tracking-widest truncate"
-                style={{ color: INK }}
-              >
+              <p className="font-mono text-sm font-semibold tracking-wider text-[#17201C] truncate">
                 {coupon.couponCode}
               </p>
               <div className="flex items-center gap-1.5 mt-1">
                 <span
-                  className="inline-flex items-center gap-0.5 text-[10px] font-mono tracking-widest px-1.5 py-0.5 border"
-                  style={
+                  className={`inline-flex items-center gap-1 text-[10px] font-mono tracking-wide px-2 py-0.5 rounded-full border ${
                     isActive
-                      ? { color: GOOD, backgroundColor: GOOD_BG, borderColor: "#BFE0DA" }
-                      : { color: MUTE, backgroundColor: "#F0EFEA", borderColor: LINE }
-                  }
+                      ? "text-emerald-700 bg-emerald-50 border-emerald-200"
+                      : "text-[#66706B] bg-[#F1F0EB] border-[#E3E2DC]"
+                  }`}
                 >
                   {isActive ? (
                     <CheckCircle2 className="h-2.5 w-2.5" />
@@ -114,11 +88,9 @@ function CouponCard({ coupon, onDelete, onToggle, onCopy }) {
                   )}
                   {isActive ? "ACTIVE" : "INACTIVE"}
                 </span>
+
                 {isExpired && (
-                  <span
-                    className="text-[10px] font-mono tracking-widest px-1.5 py-0.5 border"
-                    style={{ color: RUST, backgroundColor: "#FBF3F1", borderColor: "#E9C7C0" }}
-                  >
+                  <span className="text-[10px] font-mono tracking-wide px-2 py-0.5 rounded-full text-amber-800 bg-amber-50 border border-amber-200">
                     EXPIRED
                   </span>
                 )}
@@ -131,66 +103,59 @@ function CouponCard({ coupon, onDelete, onToggle, onCopy }) {
             <button
               onClick={() => onCopy(coupon.couponCode)}
               title="Copy code"
-              className="p-1.5 transition-colors"
-              style={{ color: FAINT }}
-              onMouseEnter={e => (e.currentTarget.style.color = INK)}
-              onMouseLeave={e => (e.currentTarget.style.color = FAINT)}
+              className="p-1.5 rounded-lg text-[#8A908B] hover:text-[#17201C] hover:bg-[#F1F0EB] transition-colors"
             >
               <Copy className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={() => onDelete(coupon._id)}
               title="Delete"
-              className="p-1.5 transition-colors"
-              style={{ color: FAINT }}
-              onMouseEnter={e => (e.currentTarget.style.color = RUST)}
-              onMouseLeave={e => (e.currentTarget.style.color = FAINT)}
+              className="p-1.5 rounded-lg text-[#8A908B] hover:text-red-600 hover:bg-red-50 transition-colors"
             >
               <Trash2 className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>
 
-        {/* Perforated divider */}
-        <div className="border-t border-dashed my-3" style={{ borderColor: LINE }} />
+        {/* Divider */}
+        <div className="border-t border-[#E3E2DC] my-3.5" />
 
         {/* Discount info */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-1.5">
             {coupon.type === "percentage" ? (
-              <Percent className="h-3.5 w-3.5" style={{ color: RUST }} />
+              <Percent className="h-4 w-4 text-[#465B9E]" />
             ) : (
-              <DollarSign className="h-3.5 w-3.5" style={{ color: RUST }} />
+              <DollarSign className="h-4 w-4 text-[#465B9E]" />
             )}
-            <span className="font-display text-lg font-semibold" style={{ color: INK }}>
+            <span className="font-display text-xl font-semibold text-[#17201C]">
               {coupon.type === "percentage" ? `${coupon.discount}%` : `₹${coupon.discount}`}
             </span>
-            <span className="font-mono text-[10px] tracking-widest" style={{ color: FAINT }}>
-              {coupon.type?.toUpperCase()}
+            <span className="font-mono text-[10px] tracking-wider text-[#8A908B] uppercase">
+              {coupon.type}
             </span>
           </div>
-          <div
-            className="flex items-center gap-1 font-mono text-[10px] tracking-widest"
-            style={{ color: MUTE }}
-          >
-            <Calendar className="h-3 w-3" />
-            {new Date(coupon.expiry)
-              .toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "2-digit" })
-              .toUpperCase()}
+
+          <div className="flex items-center gap-1 font-mono text-[10px] text-[#66706B]">
+            <Calendar className="h-3 w-3 text-[#8A908B]" />
+            {new Date(coupon.expiry).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
           </div>
         </div>
 
         {/* Toggle button */}
         <button
           onClick={() => onToggle(coupon._id)}
-          className="w-full py-2 font-mono text-[10px] tracking-widest border transition-colors"
-          style={
+          className={`w-full py-2 rounded-xl text-xs font-sans font-medium border transition-colors ${
             isActive
-              ? { borderColor: "#E9C7C0", color: RUST, backgroundColor: "#FFFFFF" }
-              : { borderColor: "#BFE0DA", color: GOOD, backgroundColor: "#FFFFFF" }
-          }
+              ? "border-[#E3E2DC] text-[#5B625C] bg-white hover:bg-[#F1F0EB] hover:text-[#17201C]"
+              : "border-emerald-200 text-emerald-700 bg-emerald-50 hover:bg-emerald-100"
+          }`}
         >
-          {isActive ? "DEACTIVATE" : "ACTIVATE"}
+          {isActive ? "Deactivate Coupon" : "Activate Coupon"}
         </button>
       </div>
     </div>
@@ -202,7 +167,7 @@ const Page = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCoupon, setEditingCoupon] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterStatus, setFilterStatus] = useState("all"); // all | active | inactive
+  const [filterStatus, setFilterStatus] = useState("all");
 
   const form = useForm({
     resolver: zodResolver(couponSchema),
@@ -267,7 +232,6 @@ const Page = () => {
     toast.success(`Copied: ${code}`);
   };
 
-  // Filtered coupons
   const filtered = coupons.filter(c => {
     const matchSearch = c.couponCode?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchStatus =
@@ -278,90 +242,81 @@ const Page = () => {
   const activeCoupons = coupons.filter(c => c.isActive).length;
 
   return (
-    <div style={{ backgroundColor: PAPER }} className="min-h-screen p-3 sm:p-4 lg:p-6">
+    <div className="bg-[#F8F7F3] min-h-screen p-4 sm:p-6 lg:p-8">
       <FontImports />
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* ── Letterhead ── */}
-        <div
-          className="pb-5 border-b-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
-          style={{ borderColor: INK }}
-        >
+        {/* Header */}
+        <div className="pb-5 border-b border-[#E3E2DC] flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
-              PROMOTIONAL LEDGER
+            <div className="font-mono text-[10px] tracking-widest text-[#465B9E] mb-1">
+              PROMOTIONS WORKSPACE
             </div>
-            <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+            <h1 className="font-display text-2xl sm:text-3xl font-medium text-[#17201C]">
               Coupon Management
             </h1>
-            <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: MUTE }}>
-              CREATE AND MANAGE PROMOTIONAL COUPONS
+            <p className="text-xs sm:text-sm text-[#5B625C] mt-1">
+              Create, configure, and monitor discount vouchers.
             </p>
           </div>
+
           <button
             onClick={() => {
               form.reset();
               setEditingCoupon(null);
               setShowAddForm(v => !v);
             }}
-            className="flex items-center gap-1.5 px-4 py-2.5 font-mono text-[11px] tracking-widest transition-colors"
-            style={
+            className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl font-sans text-xs sm:text-sm font-medium transition-colors shadow-xs ${
               showAddForm
-                ? { border: `1px solid ${LINE}`, color: INK, backgroundColor: "#FFFFFF" }
-                : { backgroundColor: RUST, color: "#FFFFFF" }
-            }
+                ? "border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
+                : "bg-[#465B9E] hover:bg-[#344B93] text-white"
+            }`}
           >
             {showAddForm ? (
               <>
-                <X className="h-3.5 w-3.5" />
-                CANCEL
+                <X className="h-4 w-4" />
+                Cancel
               </>
             ) : (
               <>
-                <Plus className="h-3.5 w-3.5" />
-                ADD COUPON
+                <Plus className="h-4 w-4" />
+                Add Coupon
               </>
             )}
           </button>
         </div>
 
-        {/* ── Quick Stats ── */}
-        <div className="grid grid-cols-3 border" style={{ borderColor: LINE }}>
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
-            { label: "TOTAL", value: coupons.length, color: INK },
-            { label: "ACTIVE", value: activeCoupons, color: GOOD },
-            { label: "INACTIVE", value: coupons.length - activeCoupons, color: FAINT },
-          ].map((stat, i) => (
+            { label: "Total Coupons", value: coupons.length, tag: "ALL CREATED" },
+            { label: "Active Codes", value: activeCoupons, tag: "REDEEMABLE" },
+            { label: "Inactive Codes", value: coupons.length - activeCoupons, tag: "PAUSED" },
+          ].map(stat => (
             <div
               key={stat.label}
-              className="p-4 text-center"
-              style={{
-                backgroundColor: "#FFFFFF",
-                borderRight: i < 2 ? `1px solid ${LINE}` : "none",
-              }}
+              className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
             >
-              <p className="font-display text-2xl font-semibold" style={{ color: stat.color }}>
-                {stat.value}
-              </p>
-              <p className="font-mono text-[10px] tracking-widest mt-1" style={{ color: MUTE }}>
-                {stat.label}
-              </p>
+              <div className="flex items-center justify-between mb-1">
+                <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
+                  {stat.label}
+                </span>
+                <span className="font-mono text-[9px] text-[#8A908B] px-1.5 py-0.5 rounded-md bg-[#F8F7F3]">
+                  {stat.tag}
+                </span>
+              </div>
+              <p className="font-display text-3xl font-semibold text-[#17201C]">{stat.value}</p>
             </div>
           ))}
         </div>
 
-        {/* ── Add Form ── */}
+        {/* Add Form */}
         {showAddForm && (
-          <div
-            className="border p-4 sm:p-5"
-            style={{ borderColor: RUST, backgroundColor: "#FFFFFF" }}
-          >
-            <h2
-              className="font-mono text-[11px] tracking-widest mb-4 flex items-center gap-1.5 pb-3 border-b"
-              style={{ color: INK, borderColor: LINE }}
-            >
-              <Tag className="h-3.5 w-3.5" style={{ color: RUST }} />
-              {editingCoupon ? "UPDATE COUPON" : "CREATE NEW COUPON"}
+          <div className="rounded-2xl border border-[#E3E2DC] bg-white p-5 sm:p-6 shadow-[0_4px_20px_rgba(23,32,28,0.06)] animate-in fade-in slide-in-from-top-4 duration-300">
+            <h2 className="font-sans text-sm font-semibold mb-4 flex items-center gap-2 pb-3 border-b border-[#E3E2DC] text-[#17201C]">
+              <Tag className="h-4 w-4 text-[#465B9E]" />
+              {editingCoupon ? "Update Coupon" : "Create New Coupon"}
             </h2>
+
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -372,17 +327,13 @@ const Page = () => {
                   name="code"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel
-                        className="font-mono text-[10px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
+                      <FormLabel className="font-mono text-[10px] tracking-wider text-[#5B625C]">
                         COUPON CODE
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="SAVE20"
-                          className="text-sm uppercase rounded-none"
-                          style={{ borderColor: LINE }}
+                          placeholder="e.g. SAVE20"
+                          className="text-sm uppercase rounded-xl border-[#E3E2DC] bg-[#F8F7F3] focus:bg-white focus:border-[#465B9E]"
                           {...field}
                           onChange={e => field.onChange(e.target.value.toUpperCase())}
                         />
@@ -397,24 +348,18 @@ const Page = () => {
                   name="type"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel
-                        className="font-mono text-[10px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
+                      <FormLabel className="font-mono text-[10px] tracking-wider text-[#5B625C]">
                         DISCOUNT TYPE
                       </FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger
-                            className="text-sm rounded-none"
-                            style={{ borderColor: LINE }}
-                          >
+                          <SelectTrigger className="text-sm rounded-xl border-[#E3E2DC] bg-[#F8F7F3]">
                             <SelectValue placeholder="Select type" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="rounded-none">
+                        <SelectContent className="rounded-xl border-[#E3E2DC]">
                           <SelectItem value="percentage">Percentage (%)</SelectItem>
-                          <SelectItem value="fixed">Fixed (₹)</SelectItem>
+                          <SelectItem value="fixed">Fixed Amount (₹)</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage className="text-xs" />
@@ -427,17 +372,13 @@ const Page = () => {
                   name="discount"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel
-                        className="font-mono text-[10px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
+                      <FormLabel className="font-mono text-[10px] tracking-wider text-[#5B625C]">
                         DISCOUNT VALUE
                       </FormLabel>
                       <FormControl>
                         <Input
                           type="number"
-                          className="text-sm rounded-none"
-                          style={{ borderColor: LINE }}
+                          className="text-sm rounded-xl border-[#E3E2DC] bg-[#F8F7F3] focus:bg-white focus:border-[#465B9E]"
                           placeholder="e.g. 20"
                           {...field}
                         />
@@ -452,17 +393,13 @@ const Page = () => {
                   name="expiryDate"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel
-                        className="font-mono text-[10px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
+                      <FormLabel className="font-mono text-[10px] tracking-wider text-[#5B625C]">
                         EXPIRY DATE
                       </FormLabel>
                       <FormControl>
                         <Input
                           type="date"
-                          className="text-sm rounded-none"
-                          style={{ borderColor: LINE }}
+                          className="text-sm rounded-xl border-[#E3E2DC] bg-[#F8F7F3] focus:bg-white focus:border-[#465B9E]"
                           {...field}
                         />
                       </FormControl>
@@ -471,25 +408,23 @@ const Page = () => {
                   )}
                 />
 
-                <div className="sm:col-span-2 flex gap-2 pt-1">
+                <div className="sm:col-span-2 flex gap-2.5 pt-2">
                   <button
                     type="submit"
-                    className="px-5 py-2.5 font-mono text-[11px] tracking-widest text-white transition hover:opacity-90"
-                    style={{ backgroundColor: RUST }}
+                    className="px-5 py-2.5 rounded-xl font-sans text-xs sm:text-sm font-medium text-white bg-[#465B9E] hover:bg-[#344B93] transition-colors shadow-xs"
                   >
-                    {editingCoupon ? "UPDATE COUPON" : "CREATE COUPON"}
+                    {editingCoupon ? "Update Coupon" : "Create Coupon"}
                   </button>
                   <button
                     type="button"
-                    className="px-5 py-2.5 font-mono text-[11px] tracking-widest border transition"
-                    style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
+                    className="px-5 py-2.5 rounded-xl font-sans text-xs sm:text-sm font-medium border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB] transition-colors"
                     onClick={() => {
                       setShowAddForm(false);
                       setEditingCoupon(null);
                       form.reset();
                     }}
                   >
-                    CANCEL
+                    Cancel
                   </button>
                 </div>
               </form>
@@ -497,46 +432,42 @@ const Page = () => {
           </div>
         )}
 
-        {/* ── Search & Filter ── */}
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+        {/* Search & Filter */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-              style={{ color: FAINT }}
-            />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none text-[#8A908B]" />
             <input
               type="text"
-              placeholder="Search coupons…"
+              placeholder="Search coupons by code…"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 text-sm border outline-none transition"
-              style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+              className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm rounded-xl border border-[#E3E2DC] bg-white outline-none focus:border-[#465B9E] focus:ring-1 focus:ring-[#465B9E] transition-all shadow-xs"
             />
           </div>
-          <div className="flex gap-1.5">
+
+          <div className="flex items-center p-1 bg-white border border-[#E3E2DC] rounded-xl shadow-xs">
             {["all", "active", "inactive"].map(status => {
               const active = filterStatus === status;
               return (
                 <button
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className="px-3 py-2.5 font-mono text-[10px] tracking-widest border transition-colors"
-                  style={
+                  className={`px-3 py-1.5 font-sans text-xs font-medium rounded-lg transition-all ${
                     active
-                      ? { backgroundColor: INK, color: "#FFFFFF", borderColor: INK }
-                      : { backgroundColor: "#FFFFFF", color: MUTE, borderColor: LINE }
-                  }
+                      ? "bg-[#465B9E] text-white shadow-xs"
+                      : "text-[#5B625C] hover:text-[#17201C] hover:bg-[#F1F0EB]"
+                  }`}
                 >
-                  {status.toUpperCase()}
+                  {status.charAt(0).toUpperCase() + status.slice(1)}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* ── Coupon Grid ── */}
+        {/* Coupon Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {filtered.map((coupon, index) => (
               <CouponCard
                 key={coupon._id || index}
@@ -548,20 +479,19 @@ const Page = () => {
             ))}
           </div>
         ) : (
-          <div
-            className="border py-16 px-4 text-center"
-            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
-          >
-            <Tag className="mx-auto mb-3 h-8 w-8" style={{ color: LINE }} strokeWidth={1.25} />
-            <p className="font-display text-base font-medium" style={{ color: INK }}>
+          <div className="rounded-2xl border border-dashed border-[#C8CDD9] bg-white py-16 px-4 text-center">
+            <div className="w-12 h-12 rounded-xl bg-[#EEF0F7] text-[#465B9E] flex items-center justify-center mx-auto mb-3">
+              <Tag className="h-6 w-6" strokeWidth={1.5} />
+            </div>
+            <p className="font-display text-lg font-medium text-[#17201C]">
               {searchTerm || filterStatus !== "all"
                 ? "No coupons match your filters"
-                : "No coupons yet"}
+                : "No coupons created yet"}
             </p>
-            <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: FAINT }}>
+            <p className="font-sans text-xs text-[#8A908B] mt-1">
               {searchTerm || filterStatus !== "all"
-                ? "TRY ADJUSTING YOUR SEARCH OR FILTER"
-                : "CLICK 'ADD COUPON' TO CREATE YOUR FIRST ONE"}
+                ? "Try searching for a different code or resetting filters."
+                : "Click 'Add Coupon' above to create your first discount voucher."}
             </p>
           </div>
         )}

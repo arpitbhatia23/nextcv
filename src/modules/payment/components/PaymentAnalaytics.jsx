@@ -27,8 +27,6 @@ import {
   TableRow,
 } from "@/shared/components/ui/table";
 
-/* Fonts match the Correspondence Archive letterhead:
-   Fraunces for display numerals, IBM Plex Mono for labels / codes. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -37,16 +35,19 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
-const PAPER = "#F7F7F5";
-const LINE = "#E4E2DC";
-const MUTE = "#6B7280";
-const FAINT = "#B7B5AC";
+const INK = "#17201C";
+const BRAND = "#465B9E";
+const BRAND_DARK = "#344B93";
+const BRAND_LIGHT = "#EEF0F7";
+const PAPER = "#F8F7F3";
+const LINE = "#E3E2DC";
+const MUTE = "#5B625C";
+const FAINT = "#8A908B";
 const GOOD = "#0F6E63";
 const GOOD_BG = "#EAF4F2";
+const RUST = "#B3382C";
 
-// Status badge config — restyled to the letterhead's ink / rust / good-green trio
+// Status badge config
 const STATUS_CONFIG = {
   completed: {
     label: "Completed",
@@ -109,11 +110,11 @@ function StatusPill({ status }) {
   const Icon = cfg.icon;
   return (
     <span
-      className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono tracking-widest border"
+      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-sans font-medium rounded-full border"
       style={{ color: cfg.color, backgroundColor: cfg.bg, borderColor: cfg.border }}
     >
       <Icon className="h-3 w-3" />
-      <span className="hidden sm:inline">{cfg.label.toUpperCase()}</span>
+      <span>{cfg.label}</span>
     </span>
   );
 }
@@ -124,19 +125,20 @@ const TransactionTable = React.memo(({ payments }) => {
   const start = (page - 1) * ITEMS_PER_PAGE;
   const current = payments.slice(start, start + ITEMS_PER_PAGE);
 
-  // Reset page when payments change
   useEffect(() => {
     setPage(1);
   }, [payments]);
 
   if (payments.length === 0) {
     return (
-      <div className="text-center py-12 px-4">
-        <Search className="mx-auto mb-3 h-8 w-8" style={{ color: LINE }} strokeWidth={1.25} />
-        <p className="font-display text-base font-medium" style={{ color: INK }}>
+      <div className="text-center py-16 px-4">
+        <div className="w-12 h-12 rounded-2xl bg-[#F8F7F3] border border-[#E3E2DC] flex items-center justify-center mx-auto mb-3 text-[#8A908B]">
+          <Search className="h-5 w-5" strokeWidth={1.5} />
+        </div>
+        <p className="font-display text-base font-medium text-[#17201C]">
           No transactions found
         </p>
-        <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: FAINT }}>
+        <p className="font-mono text-xs tracking-wider mt-1 text-[#8A908B]">
           TRY ADJUSTING YOUR FILTERS OR DATE RANGE
         </p>
       </div>
@@ -148,124 +150,90 @@ const TransactionTable = React.memo(({ payments }) => {
       {/* Table info bar */}
       <div
         className="px-4 sm:px-6 py-3 flex items-center justify-between border-b"
-        style={{ borderColor: LINE, backgroundColor: PAPER }}
+        style={{ borderColor: LINE, backgroundColor: "#FAF9F5" }}
       >
-        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
-          SHOWING {start + 1}–{Math.min(start + ITEMS_PER_PAGE, payments.length)} OF{" "}
-          {payments.length}
+        <p className="font-mono text-xs tracking-wider" style={{ color: MUTE }}>
+          SHOWING {start + 1}–{Math.min(start + ITEMS_PER_PAGE, payments.length)} OF {payments.length}
         </p>
-        <p className="font-mono text-[11px] tracking-widest" style={{ color: FAINT }}>
-          PAGE {page}/{totalPages}
+        <p className="font-mono text-xs tracking-wider" style={{ color: FAINT }}>
+          PAGE {page} OF {totalPages}
         </p>
       </div>
 
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
-            <TableRow style={{ backgroundColor: PAPER }} className="hover:bg-transparent">
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3"
-                style={{ color: MUTE }}
-              >
+            <TableRow style={{ backgroundColor: "#FAF9F5" }} className="hover:bg-transparent border-b" border-b-color={LINE}>
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 text-[#5B625C]">
                 TRANSACTION ID
               </TableHead>
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3"
-                style={{ color: MUTE }}
-              >
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 text-[#5B625C]">
                 DATE
               </TableHead>
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3 hidden sm:table-cell"
-                style={{ color: MUTE }}
-              >
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 hidden sm:table-cell text-[#5B625C]">
                 TIME
               </TableHead>
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3"
-                style={{ color: MUTE }}
-              >
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 text-[#5B625C]">
                 AMOUNT
               </TableHead>
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3 hidden md:table-cell"
-                style={{ color: MUTE }}
-              >
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 hidden md:table-cell text-[#5B625C]">
                 MODE
               </TableHead>
-              <TableHead
-                className="font-mono text-[10px] tracking-widest py-3"
-                style={{ color: MUTE }}
-              >
+              <TableHead className="font-mono text-[11px] tracking-wider py-3.5 text-[#5B625C]">
                 STATUS
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {current.map((payment, idx) => {
-              const isLast = idx === current.length - 1;
               return (
-                <React.Fragment key={payment._id}>
-                  <TableRow className="transition-colors" style={{ borderColor: LINE }}>
-                    <TableCell className="py-3 sm:py-4">
-                      <span
-                        className="font-mono text-xs truncate block max-w-25 sm:max-w-40"
-                        style={{ color: INK }}
-                      >
-                        {payment?.transcationId || payment?.transactionId || "—"}
-                      </span>
-                    </TableCell>
-                    <TableCell className="py-3 sm:py-4">
-                      <span className="font-mono text-xs whitespace-nowrap" style={{ color: MUTE }}>
-                        {new Date(payment?.createdAt).toLocaleDateString("en-IN", {
-                          day: "numeric",
-                          month: "short",
-                          year: "2-digit",
-                        })}
-                      </span>
-                    </TableCell>
-                    <TableCell className="py-3 sm:py-4 hidden sm:table-cell">
-                      <span className="font-mono text-[11px]" style={{ color: FAINT }}>
-                        {new Date(payment?.createdAt).toLocaleTimeString("en-IN", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          hour12: true,
-                        })}
-                      </span>
-                    </TableCell>
-                    <TableCell className="py-3 sm:py-4">
-                      <span
-                        className="font-display text-sm font-semibold"
-                        style={{
-                          color: payment?.status?.toLowerCase() === "failed" ? RUST : GOOD,
-                        }}
-                      >
-                        {formatCurrency(payment?.amount)}
-                      </span>
-                    </TableCell>
-                    <TableCell className="py-3 sm:py-4 hidden md:table-cell">
-                      <span
-                        className="font-mono text-[10px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
-                        {(payment?.paymentMode || "—").toUpperCase()}
-                      </span>
-                    </TableCell>
-                    <TableCell className="py-3 sm:py-4">
-                      <StatusPill status={payment?.status} />
-                    </TableCell>
-                  </TableRow>
-                  {/* Visual separator between groups of 5 rows */}
-                  {(idx + 1) % 5 === 0 && !isLast && (
-                    <TableRow key={`sep-${idx}`} className="h-0 p-0 hover:bg-transparent">
-                      <TableCell
-                        colSpan={6}
-                        className="p-0"
-                        style={{ borderTop: `1px dashed ${LINE}` }}
-                      />
-                    </TableRow>
-                  )}
-                </React.Fragment>
+                <TableRow
+                  key={payment._id || idx}
+                  className="transition-colors hover:bg-[#F8F7F3]/70 border-b"
+                  style={{ borderColor: LINE }}
+                >
+                  <TableCell className="py-3.5 sm:py-4">
+                    <span className="font-mono text-xs truncate block max-w-28 sm:max-w-44 text-[#17201C] font-medium">
+                      {payment?.transcationId || payment?.transactionId || "—"}
+                    </span>
+                  </TableCell>
+                  <TableCell className="py-3.5 sm:py-4">
+                    <span className="font-sans text-xs text-[#5B625C] whitespace-nowrap">
+                      {new Date(payment?.createdAt).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </TableCell>
+                  <TableCell className="py-3.5 sm:py-4 hidden sm:table-cell">
+                    <span className="font-mono text-[11px] text-[#8A908B]">
+                      {new Date(payment?.createdAt).toLocaleTimeString("en-IN", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </span>
+                  </TableCell>
+                  <TableCell className="py-3.5 sm:py-4">
+                    <span
+                      className="font-sans text-sm font-semibold"
+                      style={{
+                        color: payment?.status?.toLowerCase() === "failed" ? RUST : GOOD,
+                      }}
+                    >
+                      {formatCurrency(payment?.amount)}
+                    </span>
+                  </TableCell>
+                  <TableCell className="py-3.5 sm:py-4 hidden md:table-cell">
+                    <span className="font-mono text-xs tracking-wider text-[#5B625C]">
+                      {(payment?.paymentMode || "—").toUpperCase()}
+                    </span>
+                  </TableCell>
+                  <TableCell className="py-3.5 sm:py-4">
+                    <StatusPill status={payment?.status} />
+                  </TableCell>
+                </TableRow>
               );
             })}
           </TableBody>
@@ -275,20 +243,20 @@ const TransactionTable = React.memo(({ payments }) => {
       {/* Pagination */}
       {totalPages > 1 && (
         <div
-          className="px-4 sm:px-6 py-3 flex items-center justify-between border-t"
+          className="px-4 sm:px-6 py-3.5 flex items-center justify-between border-t"
           style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
         >
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="inline-flex items-center gap-1 px-3 py-1.5 font-mono text-[10px] tracking-widest border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 font-sans text-xs font-medium rounded-xl border transition-colors hover:bg-[#F1F0EB] disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ color: INK, borderColor: LINE, backgroundColor: "#FFFFFF" }}
           >
-            <ChevronLeft className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">PREV</span>
+            <ChevronLeft className="h-4 w-4" />
+            <span className="hidden sm:inline">Previous</span>
           </button>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
               let pageNum;
               if (totalPages <= 5) pageNum = i + 1;
@@ -301,12 +269,11 @@ const TransactionTable = React.memo(({ payments }) => {
                 <button
                   key={pageNum}
                   onClick={() => setPage(pageNum)}
-                  className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-xs transition-colors border"
-                  style={
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center font-sans text-xs font-medium transition-colors ${
                     active
-                      ? { backgroundColor: INK, color: "#FFFFFF", borderColor: INK }
-                      : { color: MUTE, borderColor: LINE, backgroundColor: "#FFFFFF" }
-                  }
+                      ? "bg-[#465B9E] text-white shadow-sm"
+                      : "text-[#5B625C] border border-[#E3E2DC] hover:bg-[#F1F0EB]"
+                  }`}
                 >
                   {pageNum}
                 </button>
@@ -317,11 +284,11 @@ const TransactionTable = React.memo(({ payments }) => {
           <button
             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="inline-flex items-center gap-1 px-3 py-1.5 font-mono text-[10px] tracking-widest border transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 font-sans text-xs font-medium rounded-xl border transition-colors hover:bg-[#F1F0EB] disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ color: INK, borderColor: LINE, backgroundColor: "#FFFFFF" }}
           >
-            <span className="hidden sm:inline">NEXT</span>
-            <ChevronRight className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Next</span>
+            <ChevronRight className="h-4 w-4" />
           </button>
         </div>
       )}
@@ -417,7 +384,6 @@ const AdminPaymentDashboard = () => {
   );
 
   const totals = useMemo(() => {
-    // Only successful / completed payments count toward revenue
     return successPayments.reduce(
       (acc, p) => {
         const amount = p.amount || 0;
@@ -473,9 +439,12 @@ const AdminPaymentDashboard = () => {
         className="min-h-100 flex items-center justify-center"
       >
         <FontImports />
-        <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
-          RETRIEVING TRANSACTION LEDGER&hellip;
-        </p>
+        <div className="flex flex-col items-center gap-3">
+          <RefreshCw className="h-6 w-6 animate-spin text-[#465B9E]" />
+          <p className="font-mono text-xs tracking-wider text-[#5B625C]">
+            RETRIEVING TRANSACTION LEDGER&hellip;
+          </p>
+        </div>
       </div>
     );
   }
@@ -489,13 +458,13 @@ const AdminPaymentDashboard = () => {
     },
     {
       label: "Avg. per Success",
-      sub: `${totals.successCount} paid txns`,
+      sub: `${totals.successCount} paid transactions`,
       value: formatCurrency(totals.average),
       icon: Calculator,
     },
     {
       label: "All Transactions",
-      sub: "Any status",
+      sub: "Any payment status",
       value: totals.count,
       icon: FileText,
     },
@@ -508,79 +477,70 @@ const AdminPaymentDashboard = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: PAPER }} className="min-h-screen p-3 sm:p-4 lg:p-6">
+    <div style={{ backgroundColor: PAPER }} className="min-h-screen p-4 sm:p-6 lg:p-8">
       <FontImports />
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* ── Letterhead ───────────────────────────────────── */}
+      <div className="max-w-7xl mx-auto space-y-8">
+        {/* ── Header ───────────────────────────────────── */}
         <div
-          className="pb-5 border-b-2 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
-          style={{ borderColor: INK }}
+          className="pb-6 border-b flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          style={{ borderColor: LINE }}
         >
           <div>
-            <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
+            <div className="font-mono text-[11px] tracking-widest uppercase mb-2 font-medium" style={{ color: BRAND }}>
               TRANSACTION LEDGER
             </div>
-            <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+            <h1 className="font-display text-2xl sm:text-3xl font-medium tracking-tight" style={{ color: INK }}>
               Payment Transactions
             </h1>
-            <p className="font-mono text-[11px] tracking-widest mt-1" style={{ color: MUTE }}>
+            <p className="text-xs font-mono tracking-wide mt-1 text-[#5B625C]">
               VIEW, FILTER, AND EXPORT ALL PAYMENT RECORDS
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2.5">
             <button
               onClick={fetchPayments}
               disabled={loading}
-              className="flex items-center gap-1.5 border px-3 py-2 font-mono text-[10px] tracking-widest transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 border rounded-xl px-4 py-2 font-sans text-xs font-medium transition-colors hover:bg-[#F1F0EB] disabled:opacity-50"
               style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
             >
-              <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
-              <span className="hidden sm:inline">REFRESH</span>
+              <RefreshCw className={`h-3.5 w-3.5 text-[#5B625C] ${loading ? "animate-spin" : ""}`} />
+              <span>Refresh</span>
             </button>
             <button
               onClick={exportToCSV}
-              className="flex items-center gap-1.5 px-3 sm:px-4 py-2 font-mono text-[10px] tracking-widest text-white transition-colors hover:opacity-90"
-              style={{ backgroundColor: RUST }}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl font-sans text-xs font-medium text-white transition-all shadow-sm hover:opacity-95"
+              style={{ backgroundColor: BRAND }}
             >
               <Download className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">EXPORT CSV</span>
-              <span className="inline sm:hidden">EXPORT</span>
+              <span>Export CSV</span>
             </button>
           </div>
         </div>
 
         {/* ── Summary Cards ─────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border" style={{ borderColor: LINE }}>
-          {summaryCards.map((card, i) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {summaryCards.map(card => {
             const Icon = card.icon;
             return (
               <div
                 key={card.label}
-                className="p-4 sm:p-5"
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  borderRight: i < summaryCards.length - 1 ? `1px solid ${LINE}` : "none",
-                  borderBottom: i < 2 ? `1px solid ${LINE}` : "none",
-                }}
+                className="p-5 rounded-2xl border bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+                style={{ borderColor: LINE }}
               >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
-                    {card.label.toUpperCase()}
-                  </p>
-                  <Icon className="h-4 w-4 shrink-0" style={{ color: FAINT }} />
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-sans text-xs font-medium text-[#5B625C]">
+                    {card.label}
+                  </span>
+                  <div className="w-8 h-8 rounded-xl bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+                    <Icon className="h-4 w-4" />
+                  </div>
                 </div>
-                <p
-                  className="font-display text-lg sm:text-2xl font-semibold truncate"
-                  style={{ color: INK }}
-                >
+                <div className="font-display text-2xl font-semibold text-[#17201C] tracking-tight">
                   {card.value}
-                </p>
+                </div>
                 {card.sub && (
-                  <p
-                    className="font-mono text-[10px] tracking-widest mt-1 truncate"
-                    style={{ color: FAINT }}
-                  >
-                    {card.sub.toUpperCase()}
+                  <p className="font-sans text-xs text-[#8A908B] mt-1.5">
+                    {card.sub}
                   </p>
                 )}
               </div>
@@ -589,25 +549,25 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Filters ───────────────────────────────────── */}
-        <div className="border p-4" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
-          <div className="flex items-center gap-2 mb-3">
-            <Filter className="h-3.5 w-3.5" style={{ color: FAINT }} />
-            <span className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
+        <div
+          className="border rounded-2xl p-5 bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+          style={{ borderColor: LINE }}
+        >
+          <div className="flex items-center gap-2 mb-3.5">
+            <Filter className="h-4 w-4 text-[#465B9E]" />
+            <span className="font-mono text-xs tracking-wider font-medium text-[#17201C]">
               FILTERS &amp; SEARCH
             </span>
           </div>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search
-                className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 pointer-events-none"
-                style={{ color: FAINT }}
-              />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8A908B] pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search by ID, mode, status…"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-4 py-2 text-sm border outline-none transition"
+                className="w-full pl-10 pr-4 py-2 text-xs font-sans rounded-xl border outline-none transition-colors focus:border-[#465B9E]"
                 style={{ borderColor: LINE }}
               />
             </div>
@@ -615,15 +575,15 @@ const AdminPaymentDashboard = () => {
               value={dateFilter.period}
               onChange={e => setDateFilter(f => ({ ...f, period: e.target.value }))}
               aria-label="time range"
-              className="border px-3 py-2 font-mono text-[11px] tracking-widest outline-none transition"
+              className="border rounded-xl px-3.5 py-2 font-sans text-xs font-medium outline-none transition-colors cursor-pointer focus:border-[#465B9E]"
               style={{ borderColor: LINE, color: INK, backgroundColor: "#FFFFFF" }}
             >
-              <option value="all">ALL TIME</option>
-              <option value="today">TODAY</option>
-              <option value="thisWeek">THIS WEEK</option>
-              <option value="thisMonth">THIS MONTH</option>
-              <option value="thisYear">THIS YEAR</option>
-              <option value="custom">CUSTOM RANGE</option>
+              <option value="all">All Time</option>
+              <option value="today">Today</option>
+              <option value="thisWeek">This Week</option>
+              <option value="thisMonth">This Month</option>
+              <option value="thisYear">This Year</option>
+              <option value="custom">Custom Range</option>
             </select>
             {dateFilter.period === "custom" && (
               <div className="flex gap-2">
@@ -631,14 +591,14 @@ const AdminPaymentDashboard = () => {
                   type="date"
                   value={dateFilter.startDate}
                   onChange={e => setDateFilter(f => ({ ...f, startDate: e.target.value }))}
-                  className="border px-3 py-2 font-mono text-xs outline-none"
+                  className="border rounded-xl px-3 py-2 font-sans text-xs outline-none focus:border-[#465B9E]"
                   style={{ borderColor: LINE, color: INK }}
                 />
                 <input
                   type="date"
                   value={dateFilter.endDate}
                   onChange={e => setDateFilter(f => ({ ...f, endDate: e.target.value }))}
-                  className="border px-3 py-2 font-mono text-xs outline-none"
+                  className="border rounded-xl px-3 py-2 font-sans text-xs outline-none focus:border-[#465B9E]"
                   style={{ borderColor: LINE, color: INK }}
                 />
               </div>
@@ -647,10 +607,13 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Transaction Tabs (All / Success / Failed / Pending) ── */}
-        <div className="border" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
+        <div
+          className="border rounded-2xl bg-white overflow-hidden shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+          style={{ borderColor: LINE }}
+        >
           {/* Tab bar */}
           <div
-            className="flex border-b overflow-x-auto scrollbar-hide"
+            className="flex items-center gap-1 p-3 border-b overflow-x-auto scrollbar-hide bg-[#FAF9F5]"
             style={{ borderColor: LINE }}
           >
             {TX_TABS.map(tab => {
@@ -661,22 +624,20 @@ const AdminPaymentDashboard = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTxTab(tab.id)}
-                  className="flex items-center gap-1.5 px-3 sm:px-5 py-3 sm:py-3.5 font-mono text-[11px] tracking-widest whitespace-nowrap border-b-2 transition-all duration-200 shrink-0"
-                  style={
+                  className={`flex items-center gap-2 px-4 py-2 font-sans text-xs font-medium rounded-xl transition-all duration-200 shrink-0 ${
                     isActive
-                      ? { borderColor: INK, color: INK, backgroundColor: PAPER }
-                      : { borderColor: "transparent", color: MUTE }
-                  }
+                      ? "bg-[#EEF0F7] text-[#465B9E] shadow-xs"
+                      : "text-[#5B625C] hover:bg-[#F1F0EB]"
+                  }`}
                 >
                   <Icon className="h-3.5 w-3.5" />
-                  {tab.label.toUpperCase()}
+                  <span>{tab.label}</span>
                   <span
-                    className="ml-0.5 px-1.5 py-0.5 text-[10px] font-mono"
-                    style={
+                    className={`ml-1 px-2 py-0.5 text-[10px] font-mono rounded-full ${
                       isActive
-                        ? { backgroundColor: INK, color: "#FFFFFF" }
-                        : { backgroundColor: "#F0EFEA", color: MUTE }
-                    }
+                        ? "bg-[#465B9E] text-white"
+                        : "bg-[#E3E2DC] text-[#5B625C]"
+                    }`}
                   >
                     {count}
                   </span>
@@ -686,22 +647,22 @@ const AdminPaymentDashboard = () => {
           </div>
 
           {/* Section header inside panel */}
-          <div className="px-4 sm:px-6 py-3 border-b" style={{ borderColor: LINE }}>
-            <h3
-              className="font-mono text-[11px] tracking-widest flex items-center gap-1.5"
-              style={{ color: INK }}
-            >
+          <div className="px-5 py-3.5 border-b flex items-center justify-between" style={{ borderColor: LINE }}>
+            <h3 className="font-mono text-xs tracking-wider flex items-center gap-2 text-[#17201C] font-medium">
               {(() => {
                 const tab = TX_TABS.find(t => t.id === activeTxTab);
                 const Icon = tab?.icon;
                 return (
                   <>
-                    {Icon && <Icon className="h-3.5 w-3.5" style={{ color: RUST }} />}
-                    {tab?.label.toUpperCase()} TRANSACTIONS
+                    {Icon && <Icon className="h-4 w-4 text-[#465B9E]" />}
+                    <span>{tab?.label.toUpperCase()} TRANSACTIONS</span>
                   </>
                 );
               })()}
             </h3>
+            <span className="font-mono text-xs text-[#8A908B]">
+              Total: {tabCounts[activeTxTab]}
+            </span>
           </div>
 
           {/* Table */}
@@ -712,31 +673,28 @@ const AdminPaymentDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Payment Mode Breakdown */}
           <div
-            className="border p-4 sm:p-5"
-            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+            className="border rounded-2xl p-5 sm:p-6 bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+            style={{ borderColor: LINE }}
           >
             <h4
-              className="font-mono text-[10px] tracking-widest mb-3 flex items-center gap-1.5 pb-3 border-b"
-              style={{ color: MUTE, borderColor: LINE }}
+              className="font-mono text-xs tracking-wider mb-4 flex items-center gap-2 pb-3 border-b font-medium text-[#17201C]"
+              style={{ borderColor: LINE }}
             >
-              <DollarSign className="h-3.5 w-3.5" style={{ color: RUST }} />
+              <DollarSign className="h-4 w-4 text-[#465B9E]" />
               PAYMENT MODE BREAKDOWN
             </h4>
             <div className="divide-y" style={{ borderColor: LINE }}>
               {Object.entries(totals.byPaymentMode).length === 0 ? (
-                <p
-                  className="font-mono text-[11px] tracking-widest text-center py-6"
-                  style={{ color: FAINT }}
-                >
-                  NO DATA
+                <p className="font-mono text-xs tracking-wider text-center py-8 text-[#8A908B]">
+                  NO DATA AVAILABLE
                 </p>
               ) : (
                 Object.entries(totals.byPaymentMode).map(([mode, amount]) => (
-                  <div key={mode} className="flex justify-between items-center py-2.5">
-                    <span className="font-mono text-[11px] tracking-widest" style={{ color: INK }}>
+                  <div key={mode} className="flex justify-between items-center py-3">
+                    <span className="font-sans text-xs font-medium text-[#17201C]">
                       {mode?.toUpperCase()}
                     </span>
-                    <span className="font-display text-sm font-semibold" style={{ color: RUST }}>
+                    <span className="font-sans text-sm font-semibold text-[#465B9E]">
                       {formatCurrency(amount)}
                     </span>
                   </div>
@@ -747,17 +705,17 @@ const AdminPaymentDashboard = () => {
 
           {/* Status Overview */}
           <div
-            className="border p-4 sm:p-5"
-            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+            className="border rounded-2xl p-5 sm:p-6 bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+            style={{ borderColor: LINE }}
           >
             <h4
-              className="font-mono text-[10px] tracking-widest mb-3 flex items-center gap-1.5 pb-3 border-b"
-              style={{ color: MUTE, borderColor: LINE }}
+              className="font-mono text-xs tracking-wider mb-4 flex items-center gap-2 pb-3 border-b font-medium text-[#17201C]"
+              style={{ borderColor: LINE }}
             >
-              <FileText className="h-3.5 w-3.5" style={{ color: RUST }} />
+              <FileText className="h-4 w-4 text-[#465B9E]" />
               TRANSACTION STATUS OVERVIEW
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {[
                 { key: "success", label: "Successful", count: successPayments.length },
                 { key: "failed", label: "Failed", count: failedPayments.length },
@@ -769,18 +727,15 @@ const AdminPaymentDashboard = () => {
                 const barColor = key === "success" ? GOOD : key === "failed" ? RUST : "#C99A2E";
                 return (
                   <div key={key}>
-                    <div className="flex justify-between items-center mb-1.5">
+                    <div className="flex justify-between items-center mb-2">
                       <StatusPill status={key} />
-                      <span
-                        className="font-mono text-[11px] tracking-widest"
-                        style={{ color: MUTE }}
-                      >
+                      <span className="font-mono text-xs tracking-wider text-[#5B625C]">
                         {count} ({pct}%)
                       </span>
                     </div>
-                    <div className="h-1.5 w-full" style={{ backgroundColor: "#F0EFEA" }}>
+                    <div className="h-2 w-full rounded-full overflow-hidden bg-[#F0EFEA]">
                       <div
-                        className="h-full transition-all duration-500"
+                        className="h-full rounded-full transition-all duration-500"
                         style={{ width: `${pct}%`, backgroundColor: barColor }}
                       />
                     </div>
@@ -793,20 +748,17 @@ const AdminPaymentDashboard = () => {
 
         {/* ── Monthly Breakdown ─────────────────────────── */}
         <div
-          className="border p-4 sm:p-5"
-          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+          className="border rounded-2xl p-5 sm:p-6 bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+          style={{ borderColor: LINE }}
         >
           <h4
-            className="font-mono text-[10px] tracking-widest mb-4 flex items-center gap-1.5 pb-3 border-b"
-            style={{ color: MUTE, borderColor: LINE }}
-          >
-            <Calendar className="h-3.5 w-3.5" style={{ color: RUST }} />
-            MONTHLY REVENUE
-          </h4>
-          <div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-0 border"
+            className="font-mono text-xs tracking-wider mb-5 flex items-center gap-2 pb-3 border-b font-medium text-[#17201C]"
             style={{ borderColor: LINE }}
           >
+            <Calendar className="h-4 w-4 text-[#465B9E]" />
+            MONTHLY REVENUE
+          </h4>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
             {Object.entries(
               filteredPayments.reduce((acc, p) => {
                 const month = new Date(p.createdAt).toLocaleDateString("en-IN", {
@@ -818,26 +770,15 @@ const AdminPaymentDashboard = () => {
               }, {})
             )
               .sort(([a], [b]) => new Date(a) - new Date(b))
-              .map(([month, amount], i, arr) => (
+              .map(([month, amount]) => (
                 <div
                   key={month}
-                  className="p-3"
-                  style={{
-                    borderRight:
-                      (i + 1) % 4 !== 0 && i !== arr.length - 1 ? `1px solid ${LINE}` : "none",
-                    borderTop: i >= 4 ? `1px solid ${LINE}` : "none",
-                  }}
+                  className="p-4 rounded-xl border border-[#E3E2DC] bg-[#F8F7F3]/50 transition-colors hover:bg-[#F8F7F3]"
                 >
-                  <p
-                    className="font-mono text-[10px] tracking-widest truncate"
-                    style={{ color: MUTE }}
-                  >
+                  <p className="font-mono text-[11px] tracking-wider text-[#5B625C] truncate">
                     {month.toUpperCase()}
                   </p>
-                  <p
-                    className="font-display text-sm sm:text-base font-semibold mt-0.5 truncate"
-                    style={{ color: INK }}
-                  >
+                  <p className="font-sans text-base font-semibold text-[#17201C] mt-1 truncate">
                     {formatCurrency(amount)}
                   </p>
                 </div>
@@ -846,8 +787,11 @@ const AdminPaymentDashboard = () => {
         </div>
 
         {/* ── Summary Footer ───────────────────────────── */}
-        <div className="p-5 sm:p-6" style={{ backgroundColor: INK }}>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div
+          className="p-6 rounded-2xl border bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)]"
+          style={{ borderColor: LINE }}
+        >
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center divide-y sm:divide-y-0 sm:divide-x divide-[#E3E2DC]">
             {[
               { label: "TOTAL REVENUE", value: formatCurrency(totals.total) },
               { label: "TRANSACTIONS", value: totals.count },
@@ -858,12 +802,12 @@ const AdminPaymentDashboard = () => {
                   (successPayments.length / (filteredPayments.length || 1)) * 100
                 )}%`,
               },
-            ].map(item => (
-              <div key={item.label}>
-                <p className="font-mono text-[10px] tracking-widest" style={{ color: "#8B90A0" }}>
+            ].map((item, idx) => (
+              <div key={item.label} className={idx > 0 ? "pt-4 sm:pt-0 sm:pl-4" : ""}>
+                <p className="font-mono text-xs tracking-wider text-[#8A908B]">
                   {item.label}
                 </p>
-                <p className="font-display text-lg sm:text-2xl font-semibold mt-1 text-white">
+                <p className="font-display text-xl sm:text-2xl font-semibold mt-1 text-[#17201C]">
                   {item.value}
                 </p>
               </div>
@@ -876,3 +820,4 @@ const AdminPaymentDashboard = () => {
 };
 
 export default AdminPaymentDashboard;
+

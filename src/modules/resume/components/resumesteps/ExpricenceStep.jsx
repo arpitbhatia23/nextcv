@@ -31,8 +31,8 @@ const FontImports = () => (
 );
 
 const inputClass =
-  "rounded-none border transition-all h-9 md:h-11 text-xs md:text-base placeholder:text-[10px] md:placeholder:text-sm";
-const inputStyle = { backgroundColor: "#F7F7F5", borderColor: "#E4E2DC", color: "#1C2333" };
+  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const ExperienceStep = () => {
   const formData = useResumeStore(s => s.formData);
@@ -107,31 +107,29 @@ const ExperienceStep = () => {
     jobDescription: formData.jobDescription,
   });
   return (
-    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+    <div className="py-4 md:py-8 bg-[#F8F7F3]">
       <FontImports />
 
-      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
-        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: "#B3382C" }}>
+      <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
+        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
           STEP 05 — WORK EXPERIENCE
         </div>
-        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
+        <h2 className="font-display text-xl md:text-2xl font-medium text-[#17201C]">
           Work Experience (optional)
         </h2>
-        <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
-          Add your professional experience
+        <p className="text-xs md:text-sm mt-1 text-[#5B625C]">
+          Add your professional experience and key achievements
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="rounded-none border shadow-none py-0 overflow-hidden"
-          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
           id="tour-experience-form"
         >
           <CardHeader
-            className="border-b p-3 gap-0 pb-0 flex flex-row justify-between items-center"
-            style={{ borderColor: "#E4E2DC" }}
+            className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center"
           >
             <CardTitle
               className="font-mono text-[10px] md:text-xs tracking-widest"
@@ -372,10 +370,9 @@ const ExperienceStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full rounded-none text-white shadow-none h-10 md:h-11 font-mono text-xs md:text-sm tracking-widest"
-                    style={{ backgroundColor: "#B3382C" }}
+                    className="w-full rounded-xl text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                   >
-                    {isEditing ? "UPDATE EXPERIENCE" : "SAVE EXPERIENCE"}
+                    {isEditing ? "Update Experience" : "Save Experience"}
                   </Button>
                 </div>
               </form>
@@ -386,15 +383,14 @@ const ExperienceStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="border p-4 md:p-5"
-            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+            className="rounded-2xl border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
+            style={{ borderColor: "#E3E2DC" }}
             id="tour-experience-list"
           >
             <h3
-              className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4"
-              style={{ color: "#6B7280" }}
+              className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]"
             >
-              <Briefcase className="w-4 h-4" style={{ color: "#B3382C" }} /> Career Journey
+              <Briefcase className="w-4 h-4 text-[#465B9E]" /> Career Journey
             </h3>
 
             {experienceList.length === 0 ? (
@@ -476,10 +472,9 @@ const ExperienceStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/skills")}
-              className="rounded-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
-              style={{ borderColor: "#E4E2DC", color: "#1C2333" }}
+              className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" /> PREVIOUS
+              <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
             <Button
               onClick={() => {
@@ -489,11 +484,10 @@ const ExperienceStep = () => {
                 });
                 router.push("/dashboard/builder/projects");
               }}
-              className="rounded-none text-white shadow-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
-              style={{ backgroundColor: "#B3382C" }}
+              className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
               id="tour-next-button"
             >
-              PROJECTS INFO <ArrowRight className="w-4 h-4 ml-2" />
+              Projects Info <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>

@@ -4,8 +4,6 @@ import axios from "axios";
 import { Tag } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
-/* Fonts match the Correspondence Archive letterhead:
-   Fraunces for display numerals, IBM Plex Mono for labels / codes. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -14,22 +12,13 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
-const PAPER = "#F7F7F5";
-const LINE = "#E4E2DC";
-const MUTE = "#6B7280";
-const FAINT = "#B7B5AC";
-
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="border px-3 py-2" style={{ backgroundColor: "#FFFFFF", borderColor: INK }}>
-      <p className="font-mono text-[10px] tracking-widest mb-1" style={{ color: MUTE }}>
-        {label}
-      </p>
-      <p className="font-display text-sm font-semibold" style={{ color: INK }}>
-        ₹{payload[0].value}
+    <div className="rounded-xl border border-[#E3E2DC] bg-white px-3 py-2 shadow-lg">
+      <p className="font-mono text-[10px] tracking-wider text-[#66706B] mb-0.5">COUPON: {label}</p>
+      <p className="font-sans text-sm font-semibold text-[#17201C]">
+        ₹{payload[0].value.toLocaleString()}
       </p>
     </div>
   );
@@ -60,14 +49,11 @@ const CouponStats = () => {
 
   if (loading) {
     return (
-      <div style={{ backgroundColor: PAPER }} className="px-3 py-6 sm:px-4 lg:px-6">
+      <div className="bg-[#F8F7F3] px-3 py-4 sm:px-6">
         <FontImports />
-        <div
-          className="border p-10 text-center"
-          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
-        >
-          <p className="font-mono text-[11px] tracking-widest" style={{ color: MUTE }}>
-            RETRIEVING COUPON LEDGER&hellip;
+        <div className="rounded-2xl border border-[#E3E2DC] bg-white p-10 text-center shadow-xs">
+          <p className="font-mono text-xs text-[#66706B] tracking-wider animate-pulse">
+            RETRIEVING COUPON ANALYTICS&hellip;
           </p>
         </div>
       </div>
@@ -75,114 +61,118 @@ const CouponStats = () => {
   }
 
   return (
-    <div style={{ backgroundColor: PAPER }} className="px-3 py-6 sm:px-4 lg:px-6">
+    <div className="bg-[#F8F7F3] px-3 py-4 sm:px-6 space-y-6">
       <FontImports />
 
-      {/* Letterhead */}
-      <div
-        className="mb-6 pb-5 border-b-2 flex flex-wrap items-end justify-between gap-4"
-        style={{ borderColor: INK }}
-      >
-        <div>
-          <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
-            PROMOTIONAL LEDGER
-          </div>
-          <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
-            Coupon Performance
-          </h1>
+      {/* Header */}
+      <div className="pb-4 border-b border-[#E3E2DC]">
+        <div className="font-mono text-[10px] tracking-widest text-[#465B9E] mb-1">
+          PROMOTIONAL LEDGER
         </div>
+        <h2 className="font-display text-2xl font-medium text-[#17201C]">Coupon Performance</h2>
+        <p className="text-xs sm:text-sm text-[#5B625C] mt-1">
+          Redemption volume, gross revenue generation, and discount efficiency.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-7 gap-6 items-start">
         {/* Revenue chart */}
-        <div
-          className="lg:col-span-4 border p-5"
-          style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
-        >
-          <h2 className="font-mono text-[10px] tracking-widest mb-4" style={{ color: MUTE }}>
-            REVENUE BY COUPON
-          </h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={stats}>
-              <CartesianGrid strokeDasharray="3 3" stroke={LINE} vertical={false} />
-              <XAxis
-                dataKey="_id"
-                stroke={FAINT}
-                fontSize={11}
-                fontFamily="'IBM Plex Mono', monospace"
-                tickLine={false}
-              />
-              <YAxis
-                stroke={FAINT}
-                fontSize={11}
-                fontFamily="'IBM Plex Mono', monospace"
-                tickFormatter={value => `₹${value}`}
-                tickLine={false}
-                axisLine={false}
-              />
-              <Tooltip content={<CustomTooltip />} cursor={{ fill: "#F7F7F5" }} />
-              <Bar dataKey="totalRevenue" fill={INK} radius={[0, 0, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="lg:col-span-4 rounded-2xl border border-[#E3E2DC] bg-white p-5 sm:p-6 shadow-[0_2px_12px_rgba(23,32,28,0.04)]">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-mono text-[11px] tracking-wider text-[#66706B] uppercase">
+              Revenue Generated by Coupon
+            </h3>
+            <span className="text-xs text-[#8A908B]">INR (₹)</span>
+          </div>
+
+          <div className="h-75 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={stats}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E3E2DC" vertical={false} />
+                <XAxis
+                  dataKey="_id"
+                  stroke="#8A908B"
+                  fontSize={11}
+                  fontFamily="'IBM Plex Mono', monospace"
+                  tickLine={false}
+                />
+                <YAxis
+                  stroke="#8A908B"
+                  fontSize={11}
+                  fontFamily="'IBM Plex Mono', monospace"
+                  tickFormatter={value => `₹${value}`}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: "#F8F7F3" }} />
+                <Bar dataKey="totalRevenue" fill="#465B9E" radius={[6, 6, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Side column */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Top performer — receipt-style stamp */}
-          <div className="border" style={{ borderColor: INK, backgroundColor: INK }}>
-            <div className="p-5">
-              <p
-                className="font-mono text-[10px] tracking-widest mb-2"
-                style={{ color: "#B7B5AC" }}
-              >
-                TOP PERFORMING COUPON
-              </p>
-              <div className="flex items-center gap-2 font-display text-2xl font-semibold text-white">
-                <Tag className="w-5 h-5" style={{ color: RUST }} />
-                {topCoupon ? topCoupon._id : "N/A"}
+          {/* Top performer card */}
+          <div className="rounded-2xl border border-[#C8CDD9] bg-[#EEF0F7] p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)]">
+            <div className="flex items-center justify-between mb-2">
+              <span className="font-mono text-[10px] tracking-widest text-[#465B9E] font-semibold uppercase">
+                Top Performing Coupon
+              </span>
+              <div className="w-7 h-7 rounded-lg bg-white/70 flex items-center justify-center text-[#465B9E]">
+                <Tag className="w-3.5 h-3.5" />
               </div>
-              <p className="font-mono text-[11px] mt-2" style={{ color: "#B7B5AC" }}>
-                {topCoupon ? `${topCoupon.usageCount} REDEMPTIONS` : "NO DATA ON FILE"}
-              </p>
             </div>
+
+            <div className="font-display text-2xl font-semibold text-[#17201C]">
+              {topCoupon ? topCoupon._id : "N/A"}
+            </div>
+
+            <p className="font-mono text-xs text-[#5B625C] mt-2">
+              {topCoupon ? `${topCoupon.usageCount} TOTAL REDEMPTIONS` : "NO DATA ON FILE"}
+            </p>
           </div>
 
-          {/* Usage details — ledger rows */}
-          <div>
-            <h2 className="font-mono text-[10px] tracking-widest mb-3" style={{ color: MUTE }}>
-              USAGE DETAILS
-            </h2>
-            <div className="border divide-y" style={{ borderColor: LINE }}>
+          {/* Usage details — ledger card */}
+          <div className="rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] overflow-hidden">
+            <div className="p-4 border-b border-[#E3E2DC] bg-[#F8F7F3]/40">
+              <h3 className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
+                Redemption Rankings
+              </h3>
+            </div>
+
+            <div className="divide-y divide-[#E3E2DC]">
               {stats.slice(0, 5).map(stat => {
                 const pct = (stat.totalRevenue / (stats[0]?.totalRevenue || 1)) * 100;
                 return (
-                  <div key={stat._id} className="p-4" style={{ backgroundColor: "#FFFFFF" }}>
+                  <div key={stat._id} className="p-4 hover:bg-[#F8F7F3]/30 transition-colors">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-mono text-xs tracking-widest" style={{ color: INK }}>
+                      <span className="font-mono text-xs font-semibold text-[#17201C]">
                         {stat._id}
                       </span>
-                      <span className="font-mono text-[11px]" style={{ color: MUTE }}>
+                      <span className="font-mono text-[11px] text-[#66706B]">
                         {stat.usageCount} USES
                       </span>
                     </div>
-                    <div
-                      className="flex items-center justify-between text-[11px] mb-2"
-                      style={{ color: FAINT }}
-                    >
-                      <span>Revenue: ₹{stat.totalRevenue}</span>
-                      <span>Discounts: ₹{stat.totalDiscountGiven}</span>
+
+                    <div className="flex items-center justify-between text-xs text-[#8A908B] mb-2 font-mono">
+                      <span>Rev: ₹{stat.totalRevenue.toLocaleString()}</span>
+                      <span>Disc: ₹{stat.totalDiscountGiven.toLocaleString()}</span>
                     </div>
-                    <div className="h-1.5 w-full" style={{ backgroundColor: "#F0EFEA" }}>
-                      <div className="h-full" style={{ width: `${pct}%`, backgroundColor: RUST }} />
+
+                    <div className="h-1.5 w-full bg-[#E8E9E5] rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#465B9E] rounded-full transition-all duration-300"
+                        style={{ width: `${pct}%` }}
+                      />
                     </div>
                   </div>
                 );
               })}
+
               {stats.length === 0 && (
-                <div className="p-6 text-center" style={{ backgroundColor: "#FFFFFF" }}>
-                  <p className="font-mono text-[11px] tracking-widest" style={{ color: FAINT }}>
-                    NO COUPON ACTIVITY RECORDED
-                  </p>
+                <div className="p-6 text-center text-[#8A908B]">
+                  <p className="font-mono text-xs tracking-wider">NO COUPON ACTIVITY RECORDED</p>
                 </div>
               )}
             </div>

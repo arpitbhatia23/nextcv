@@ -32,29 +32,33 @@ import dynamic from "next/dynamic";
 const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ssr: false,
   loading: () => (
-    <div className="font-mono text-xs tracking-widest" style={{ color: "#B7B5AC" }}>
+    <div className="nextcv-sans text-xs tracking-widest" style={{ color: "#8A908B" }}>
       LOADING PREVIEW...
     </div>
   ),
 });
 const TIERS = ["Basic", "Standard", "Premium", "Elite"];
 
+// Canonical NextCV review/export UI: warm editorial surface + restrained indigo accent.
+// Business logic, API contracts, payment flow, coupon flow, draft flow, and PDF generation are preserved.
+
 /* Fonts: Fraunces for headings, IBM Plex Mono for eyebrows, labels,
    and helper text — matches the rest of the builder steps. */
 const FontImports = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+    .nextcv-serif { font-family: 'Source Serif 4', Georgia, serif; }
+    .nextcv-sans { font-family: 'Inter', system-ui, sans-serif; }
+    .nextcv-mono { font-family: 'Inter', system-ui, sans-serif; }
   `}</style>
 );
 
-const NAVY = "#1C2333";
-const RUST = "#B3382C";
-const MUTED = "#6B7280";
-const FAINT = "#B7B5AC";
-const BORDER = "#E4E2DC";
-const BG = "#F7F7F5";
+const NAVY = "#17201C";
+const RUST = "#465B9E";
+const MUTED = "#5B625C";
+const FAINT = "#8A908B";
+const BORDER = "#E3E2DC";
+const BG = "#F8F7F3";
 const WHITE = "#FFFFFF";
 
 const FinalStep = () => {
@@ -162,8 +166,8 @@ const FinalStep = () => {
   }, 1000);
 
   const renderTierLabel = tier => {
-    if (tier === "Premium") return "🔥 Premium";
-    if (tier === "Elite") return "👑 Elite";
+    if (tier === "Premium") return "Premium";
+    if (tier === "Elite") return "Elite";
     return tier;
   };
 
@@ -171,14 +175,14 @@ const FinalStep = () => {
     <div
       key={template.key}
       onClick={() => setSelectedTemplate(template.key)}
-      className="group relative cursor-pointer border-2 transition-all duration-300"
+      className="group relative cursor-pointer border-2 rounded-xl overflow-hidden transition-all duration-300"
       style={{
         borderColor: selectedTemplate === template.key ? RUST : BORDER,
       }}
     >
       {template.tier === "Premium" && (
         <div
-          className="absolute top-2 left-2 z-10 px-2 py-1 font-mono text-[9px] tracking-widest text-white"
+          className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full nextcv-sans text-[9px] tracking-widest text-white"
           style={{ backgroundColor: RUST }}
         >
           MOST POPULAR
@@ -187,7 +191,7 @@ const FinalStep = () => {
 
       {template.tier === "Elite" && (
         <div
-          className="absolute top-2 left-2 z-10 px-2 py-1 font-mono text-[9px] tracking-widest text-white"
+          className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full nextcv-sans text-[9px] tracking-widest text-white"
           style={{ backgroundColor: NAVY }}
         >
           ALL ACCESS
@@ -209,7 +213,7 @@ const FinalStep = () => {
             style={{ color: FAINT }}
           >
             <LayoutTemplate className="w-8 h-8" />
-            <span className="font-mono text-[10px] uppercase tracking-widest">Preview</span>
+            <span className="nextcv-sans text-[10px] uppercase tracking-widest">Preview</span>
           </div>
         )}
       </div>
@@ -222,7 +226,7 @@ const FinalStep = () => {
         }}
       >
         <span
-          className="font-mono text-[10px] uppercase tracking-widest"
+          className="nextcv-sans text-[10px] uppercase tracking-widest"
           style={{ color: selectedTemplate === template.key ? RUST : MUTED }}
         >
           {template.label}
@@ -230,17 +234,17 @@ const FinalStep = () => {
 
         <div className="flex items-center justify-center gap-2 mt-1">
           <span
-            className="font-mono text-[9px] px-1.5 py-0.5 border uppercase tracking-widest"
+            className="nextcv-sans text-[9px] px-1.5 py-0.5 border uppercase tracking-widest"
             style={{ borderColor: BORDER, color: FAINT, backgroundColor: WHITE }}
           >
             {template.tier}
           </span>
 
-          <span className="font-mono text-[9px] line-through" style={{ color: FAINT }}>
+          <span className="nextcv-sans text-[9px] line-through" style={{ color: FAINT }}>
             ₹{template.originalPrice}
           </span>
 
-          <span className="font-mono text-[10px] tracking-widest" style={{ color: RUST }}>
+          <span className="nextcv-sans text-[10px] tracking-widest" style={{ color: RUST }}>
             ₹{template.price}
           </span>
         </div>
@@ -248,7 +252,7 @@ const FinalStep = () => {
 
       {selectedTemplate === template.key && (
         <div
-          className="absolute top-2 right-2 text-white p-1 z-10"
+          className="absolute top-3 right-3 text-white p-1.5 z-10 rounded-lg"
           style={{ backgroundColor: RUST }}
         >
           <CheckCircle2 className="w-3.5 h-3.5" />
@@ -257,18 +261,21 @@ const FinalStep = () => {
     </div>
   );
   return (
-    <div className="py-4" style={{ backgroundColor: BG }}>
+    <div className="min-h-full py-5 md:py-7" style={{ backgroundColor: BG }}>
       <FontImports />
 
-      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: NAVY }}>
-        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: RUST }}>
+      <div className="mb-6 pb-5 border-b" style={{ borderColor: BORDER }}>
+        <div className="nextcv-sans text-[10px] tracking-widest uppercase mb-1 font-medium" style={{ color: RUST }}>
           STEP 09 — REVIEW & DOWNLOAD
         </div>
-        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: NAVY }}>
-          Review & Download
+        <h2
+          className="nextcv-serif text-2xl md:text-3xl font-medium tracking-tight"
+          style={{ color: NAVY }}
+        >
+          Choose your template & download
         </h2>
-        <p className="text-[10px] md:text-xs mt-1" style={{ color: MUTED }}>
-          Perfect your resume and choose your signature style
+        <p className="nextcv-sans text-sm md:text-[15px] mt-1.5" style={{ color: MUTED }}>
+          Pick a template, review your resume, then download your ATS-ready PDF.
         </p>
       </div>
 
@@ -276,7 +283,7 @@ const FinalStep = () => {
       <div className="w-full flex flex-col gap-2 lg:hidden pb-5 pt-4">
         <div className="space-y-3">
           <label
-            className="font-mono text-[10px] tracking-widest flex items-center gap-2 uppercase"
+            className="nextcv-sans text-[10px] tracking-widest flex items-center gap-2 uppercase font-medium"
             style={{ color: MUTED }}
           >
             <LayoutTemplate className="w-3.5 h-3.5" style={{ color: RUST }} />
@@ -288,7 +295,7 @@ const FinalStep = () => {
               <button
                 key={tier}
                 onClick={() => setActiveTier(tier)}
-                className="shrink-0 border px-4 py-2 font-mono text-[10px] uppercase tracking-widest transition-all"
+                className="shrink-0 border rounded-xl px-4 py-2 nextcv-sans text-[10px] uppercase tracking-widest transition-all font-medium"
                 style={
                   activeTier === tier
                     ? { backgroundColor: RUST, color: WHITE, borderColor: RUST }
@@ -305,7 +312,7 @@ const FinalStep = () => {
               <div
                 key={template.key}
                 onClick={() => setSelectedTemplate(template.key)}
-                className="flex-none w-36 flex flex-col items-center gap-2 p-3 border-2 transition-all cursor-pointer snap-start relative"
+                className="flex-none w-36 flex flex-col items-center gap-2 p-3 border-2 rounded-xl overflow-hidden transition-all cursor-pointer snap-start relative"
                 style={{
                   backgroundColor: selectedTemplate === template.key ? BG : WHITE,
                   borderColor: selectedTemplate === template.key ? RUST : BORDER,
@@ -313,7 +320,7 @@ const FinalStep = () => {
               >
                 {template.tier === "Premium" && (
                   <span
-                    className="absolute top-2 left-2 z-10 px-1.5 py-0.5 font-mono text-[7px] tracking-widest text-white"
+                    className="absolute top-3 left-3 z-10 px-2 py-1 rounded-full nextcv-sans text-[7px] tracking-widest text-white"
                     style={{ backgroundColor: RUST }}
                   >
                     POPULAR
@@ -344,17 +351,20 @@ const FinalStep = () => {
 
                 <div className="w-full text-center">
                   <p
-                    className="font-mono text-[9px] uppercase tracking-widest truncate"
+                    className="nextcv-sans text-[9px] uppercase tracking-widest truncate"
                     style={{ color: selectedTemplate === template.key ? RUST : MUTED }}
                   >
                     {template.label}
                   </p>
 
                   <div className="flex items-center justify-center gap-1.5 mt-1">
-                    <span className="font-mono text-[8px] line-through" style={{ color: FAINT }}>
+                    <span className="nextcv-sans text-[8px] line-through" style={{ color: FAINT }}>
                       ₹{template.originalPrice}
                     </span>
-                    <span className="font-mono text-[8px] tracking-widest" style={{ color: RUST }}>
+                    <span
+                      className="nextcv-sans text-[8px] tracking-widest"
+                      style={{ color: RUST }}
+                    >
                       ₹{template.price}
                     </span>
                   </div>
@@ -365,16 +375,16 @@ const FinalStep = () => {
         </div>
 
         <Card
-          className="rounded-none border shadow-none overflow-hidden"
+          className="rounded-2xl border shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <CardHeader className="p-3 border-b" style={{ borderColor: BORDER }}>
             <CardTitle
-              className="font-mono text-[10px] tracking-widest flex items-center gap-2"
+              className="nextcv-sans text-[10px] tracking-widest flex items-center gap-2"
               style={{ color: MUTED }}
             >
               <FileText className="w-4 h-4" style={{ color: RUST }} />
-              PROFESSIONAL PREVIEW
+              RESUME PREVIEW
             </CardTitle>
           </CardHeader>
           <CardContent
@@ -386,12 +396,12 @@ const FinalStep = () => {
         </Card>
 
         <Card
-          className="rounded-none border shadow-none overflow-hidden"
+          className="rounded-2xl border shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <CardHeader className="p-4 border-b" style={{ borderColor: BORDER }}>
             <CardTitle
-              className="flex items-center gap-2 font-mono text-sm tracking-widest uppercase"
+              className="flex items-center gap-2 nextcv-sans text-sm tracking-widest uppercase"
               style={{ color: NAVY }}
             >
               <IndianRupee className="w-4 h-4" style={{ color: RUST }} />
@@ -404,14 +414,14 @@ const FinalStep = () => {
               className="flex justify-between items-center p-3 border"
               style={{ backgroundColor: BG, borderColor: BORDER }}
             >
-              <span className="font-mono text-xs tracking-widest" style={{ color: MUTED }}>
+              <span className="nextcv-sans text-xs tracking-widest" style={{ color: MUTED }}>
                 TOTAL AMOUNT
               </span>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] line-through" style={{ color: FAINT }}>
+                <span className="nextcv-sans text-[10px] line-through" style={{ color: FAINT }}>
                   ₹{basePrice}
                 </span>
-                <span className="font-display font-medium text-base" style={{ color: NAVY }}>
+                <span className="nextcv-serif font-medium text-base" style={{ color: NAVY }}>
                   ₹{amount}
                 </span>
               </div>
@@ -422,14 +432,14 @@ const FinalStep = () => {
                 value={couponCode}
                 onChange={e => setCouponCode(e.target.value)}
                 placeholder="PROMO CODE"
-                className="rounded-none border h-10 font-mono text-xs uppercase tracking-widest"
+                className="rounded-2xl border h-10 nextcv-sans text-xs uppercase tracking-widest"
                 style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                 disabled={applied}
               />
               <Button
                 onClick={() => debounceCoupon(couponCode)}
                 disabled={!couponCode.trim() || isSubmit || applied}
-                className="rounded-none h-10 px-4 font-mono text-xs tracking-widest shadow-none"
+                className="rounded-none h-10 px-4 nextcv-sans text-xs tracking-widest shadow-none"
                 style={{ backgroundColor: applied ? "#3F7A5C" : NAVY, color: WHITE }}
               >
                 {applied ? "APPLIED" : "APPLY"}
@@ -438,24 +448,24 @@ const FinalStep = () => {
 
             <div className="space-y-3 pt-2">
               <Button
-                className="w-full rounded-none shadow-none h-12 font-mono text-sm tracking-widest"
+                className="w-full rounded-xl shadow-none h-12 nextcv-sans text-sm tracking-widest"
                 style={{ backgroundColor: RUST, color: WHITE }}
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
               >
                 <Download className="w-4 h-4 mr-2" />
-                DOWNLOAD PREMIUM PDF
+                DOWNLOAD RESUME
               </Button>
 
               <Button
                 variant="outline"
-                className="w-full rounded-none h-10 font-mono text-xs tracking-widest"
+                className="w-full rounded-none h-10 nextcv-sans text-xs tracking-widest"
                 style={{ borderColor: BORDER, color: MUTED }}
                 onClick={debounceDraft}
                 disabled={isSubmit}
               >
                 <Save className="mr-2 h-3.5 w-3.5" />
-                SAVE CHANGES
+                SAVE DRAFT
               </Button>
             </div>
           </CardContent>
@@ -463,15 +473,15 @@ const FinalStep = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="hidden lg:flex gap-6 h-[70vh] min-h-150 pt-4">
+      <div className="hidden lg:flex gap-5 h-[72vh] min-h-155 pt-1">
         {/* Left: Template Selector */}
         <div
-          className="w-80 flex flex-col border rounded-none shadow-none overflow-hidden"
+          className="w-75 xl:w-80 flex flex-col border rounded-2xl shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <div className="p-4 border-b" style={{ borderColor: BORDER }}>
             <h3
-              className="font-mono text-xs tracking-widest flex items-center gap-2 uppercase"
+              className="nextcv-sans text-xs tracking-widest flex items-center gap-2 uppercase"
               style={{ color: MUTED }}
             >
               <LayoutTemplate className="w-4 h-4" style={{ color: RUST }} />
@@ -483,7 +493,7 @@ const FinalStep = () => {
                 <button
                   key={tier}
                   onClick={() => setActiveTier(tier)}
-                  className="border px-2 py-2 font-mono text-[10px] uppercase tracking-widest transition-all"
+                  className="rounded-xl border px-3 py-2.5 nextcv-sans text-[11px] font-semibold uppercase tracking-[0.08em] transition-all"
                   style={
                     activeTier === tier
                       ? { backgroundColor: RUST, color: WHITE, borderColor: RUST }
@@ -496,12 +506,12 @@ const FinalStep = () => {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar bg-[#F8F7F3]">
             {filteredTemplates.length > 0 ? (
               filteredTemplates.map(template => renderTemplateCard(template))
             ) : (
               <div
-                className="flex h-full items-center justify-center text-center font-mono text-xs tracking-widest"
+                className="flex h-full items-center justify-center text-center nextcv-sans text-xs tracking-widest"
                 style={{ color: FAINT }}
               >
                 NO TEMPLATES AVAILABLE IN THIS PACK.
@@ -512,20 +522,20 @@ const FinalStep = () => {
           <div className="p-4 border-t" style={{ borderColor: BORDER }}>
             <Button
               variant="outline"
-              className="w-full rounded-none font-mono text-xs tracking-widest"
+              className="w-full rounded-xl nextcv-sans text-xs font-medium tracking-wider hover:bg-[#F1F0EB] transition-colors"
               style={{ borderColor: BORDER, color: MUTED }}
               disabled={isSubmit}
               onClick={debounceDraft}
             >
               <Save className="h-3.5 w-3.5 mr-2" />
-              SAVE PROGRESS
+              Save Draft
             </Button>
           </div>
         </div>
 
         {/* Center: Preview */}
         <div
-          className="flex-1 flex flex-col border rounded-none shadow-none overflow-hidden"
+          className="flex-1 flex flex-col border rounded-2xl shadow-none overflow-hidden"
           style={{ backgroundColor: BG, borderColor: BORDER }}
         >
           <div
@@ -533,10 +543,10 @@ const FinalStep = () => {
             style={{ backgroundColor: WHITE, borderColor: BORDER }}
           >
             <span
-              className="font-mono text-xs tracking-widest uppercase flex items-center gap-2"
+              className="nextcv-sans text-xs tracking-widest uppercase flex items-center gap-2"
               style={{ color: FAINT }}
             >
-              A4 Studio Preview
+              Live resume preview
               <span
                 className="px-2 py-0.5 border text-[10px]"
                 style={{ color: RUST, borderColor: BORDER, backgroundColor: BG }}
@@ -551,10 +561,10 @@ const FinalStep = () => {
                 style={{ backgroundColor: "#3F7A5C" }}
               />
               <span
-                className="font-mono text-[10px] tracking-widest uppercase"
+                className="nextcv-sans text-[10px] tracking-widest uppercase"
                 style={{ color: "#3F7A5C" }}
               >
-                Synchronized
+                Auto-saved preview
               </span>
             </div>
           </div>
@@ -564,42 +574,42 @@ const FinalStep = () => {
 
         {/* Right: Checkout */}
         <div
-          className="w-80 flex flex-col border rounded-none shadow-none overflow-hidden h-fit"
+          className="w-75 xl:w-80 flex flex-col border rounded-2xl shadow-none overflow-hidden h-fit"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <div className="p-5 border-b" style={{ borderColor: BORDER }}>
             <h3
-              className="font-display text-lg font-medium tracking-tight flex items-center gap-2"
+              className="nextcv-serif text-lg font-medium tracking-tight flex items-center gap-2"
               style={{ color: NAVY }}
             >
               <Sparkles className="w-5 h-5" style={{ color: RUST }} />
               Complete Build
             </h3>
             <p
-              className="font-mono text-[10px] uppercase tracking-widest mt-1"
+              className="nextcv-sans text-[10px] uppercase tracking-widest mt-1"
               style={{ color: FAINT }}
             >
-              Premium ATS-Friendly Export
+              ATS-ready PDF export
             </p>
           </div>
 
           <div className="p-5 space-y-6">
             <div
-              className="p-4 border space-y-3"
+              className="p-4 border rounded-xl space-y-3"
               style={{ backgroundColor: BG, borderColor: BORDER }}
             >
               <div
-                className="flex justify-between items-center font-mono text-xs"
+                className="flex justify-between items-center nextcv-sans text-xs"
                 style={{ color: MUTED }}
               >
                 <span>Selected License</span>
-                <span style={{ color: NAVY }}>₹{basePrice}</span>
+                <span className="font-medium" style={{ color: NAVY }}>₹{basePrice}</span>
               </div>
 
               {applied && discount && (
                 <div
-                  className="flex justify-between items-center font-mono text-xs"
-                  style={{ color: "#3F7A5C" }}
+                  className="flex justify-between items-center nextcv-sans text-xs font-medium"
+                  style={{ color: "#0F6E63" }}
                 >
                   <span>Special Coupon</span>
                   <span>
@@ -613,17 +623,17 @@ const FinalStep = () => {
                 style={{ borderColor: BORDER }}
               >
                 <span
-                  className="font-mono text-sm uppercase tracking-widest"
+                  className="nextcv-sans text-xs font-semibold uppercase tracking-wider"
                   style={{ color: NAVY }}
                 >
                   Grand Total
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs line-through" style={{ color: FAINT }}>
+                  <span className="nextcv-sans text-xs line-through" style={{ color: FAINT }}>
                     ₹{basePrice}
                   </span>
                   <span
-                    className="font-display text-xl font-medium tracking-tight"
+                    className="nextcv-serif text-2xl font-semibold tracking-tight"
                     style={{ color: NAVY }}
                   >
                     ₹{amount}
@@ -634,18 +644,18 @@ const FinalStep = () => {
 
             <div className="space-y-2">
               <label
-                className="font-mono text-[10px] uppercase tracking-widest"
-                style={{ color: FAINT }}
+                className="nextcv-sans text-[11px] font-medium uppercase tracking-wider"
+                style={{ color: MUTED }}
               >
-                Discount Rewards
+                Have a coupon?
               </label>
 
               <div className="flex gap-2 relative">
                 <Input
                   value={couponCode}
                   onChange={e => setCouponCode(e.target.value)}
-                  placeholder="ENTER CODE"
-                  className="rounded-none border h-10 font-mono text-xs uppercase tracking-widest placeholder:normal-case placeholder:font-normal placeholder:tracking-normal"
+                  placeholder="Enter code"
+                  className="rounded-xl border h-10 nextcv-sans text-xs uppercase tracking-wider placeholder:normal-case placeholder:font-normal placeholder:tracking-normal focus:border-[#465B9E]"
                   style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                   disabled={applied}
                 />
@@ -655,29 +665,29 @@ const FinalStep = () => {
                     onClick={() => debounceCoupon(couponCode)}
                     disabled={!couponCode.trim() || isSubmit}
                     size="sm"
-                    className="rounded-none px-4 h-10 font-mono text-xs tracking-widest shadow-none"
-                    style={{ backgroundColor: NAVY, color: WHITE }}
+                    className="rounded-xl px-4 h-10 nextcv-sans text-xs font-medium tracking-wide shadow-none hover:bg-[#344B93] transition-colors"
+                    style={{ backgroundColor: RUST, color: WHITE }}
                   >
                     Apply
                   </Button>
                 ) : (
                   <button
                     onClick={removeCoupon}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 transition-colors hover:opacity-80"
                     style={{ color: RUST }}
                   >
-                    <AlertCircle className="w-5 h-5" />
+                    <AlertCircle className="w-4 h-4" />
                   </button>
                 )}
               </div>
 
               {applied && (
                 <p
-                  className="font-mono text-[10px] tracking-widest flex items-center gap-1 animate-in fade-in slide-in-from-top-1"
-                  style={{ color: "#3F7A5C" }}
+                  className="nextcv-sans text-xs tracking-wide font-medium flex items-center gap-1.5 animate-in fade-in slide-in-from-top-1"
+                  style={{ color: "#0F6E63" }}
                 >
-                  <CheckCircle2 className="w-3 h-3" />
-                  PROMOTION CODE APPLIED!
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  Coupon applied successfully
                 </p>
               )}
             </div>
@@ -685,12 +695,12 @@ const FinalStep = () => {
 
           <div className="p-5 border-t" style={{ borderColor: BORDER }}>
             <Button
-              className="w-full rounded-none shadow-none py-6 font-mono text-sm uppercase tracking-widest transition-all"
+              className="w-full rounded-xl shadow-sm py-6 nextcv-sans text-sm font-medium tracking-wider transition-all hover:bg-[#344B93]"
               style={{ backgroundColor: RUST, color: WHITE }}
               onClick={debouncePayment}
               disabled={isSubmit || (couponCode && !applied)}
             >
-              <Download className="mr-2 h-5 w-5" />
+              <Download className="mr-2 h-4 w-4" />
               Download Resume
             </Button>
           </div>

@@ -32,61 +32,50 @@ import dynamic from "next/dynamic";
 import { usePayment } from "@/modules/cover-letter/Hook/usePayment";
 const PDFPreview = dynamic(() => import("@/modules/resume/components/pdfPreview"), {
   ssr: false,
-  loading: () => <div className="text-sm text-[#6B7280]">Loading preview...</div>,
+  loading: () => <div className="text-sm text-[#66706B]">Loading preview...</div>,
 });
 
-/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
-   reference codes / dates / counters. Body stays on the default sans. */
+/* Canonical NextCV typography and visual system. */
 const FontImports = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
+    .nextcv-serif { font-family: 'Source Serif 4', Georgia, serif; }
+    .nextcv-sans { font-family: 'Inter', system-ui, sans-serif; }
+    .nextcv-mono { font-family: 'Inter', system-ui, sans-serif; }
   `}</style>
 );
 
 const PostmarkBadge = ({ status }) => {
   const isPaid = status === "paid";
-  const label = isPaid ? "UNLOCKED" : "DRAFT";
-  const ring = isPaid ? "#0F6E63" : "#B3382C";
+
   return (
     <div
-      className="absolute -top-3 -right-3 w-16 h-16 rounded-full flex items-center justify-center rotate-6 select-none"
-      style={{
-        border: `1.5px dashed ${ring}`,
-        color: ring,
-        backgroundColor: "#FFFFFF",
-      }}
+      className={`absolute right-4 top-4 z-10 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+        isPaid ? "bg-[#EAF1E9] text-[#42634A]" : "bg-[#EEF0F7] text-[#465B9E]"
+      }`}
     >
-      <div className="text-center leading-none">
-        <div className="font-mono text-[8px] tracking-wider">{label}</div>
-        <div className="w-6 h-px mx-auto my-0.5" style={{ backgroundColor: ring }} />
-        <div className="font-mono text-[7px] tracking-wider opacity-70">
-          {isPaid ? "PAID" : "PENDING"}
-        </div>
-      </div>
+      {isPaid ? "Unlocked" : "Draft"}
     </div>
   );
 };
 
 const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
   <Card
-    className="group relative border rounded-none shadow-none transition-all duration-300 hover:-translate-y-1"
-    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+    className="group relative overflow-hidden rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+    style={{ backgroundColor: "#FFFFFF", borderColor: "#E3E2DC" }}
   >
     <PostmarkBadge status={coverLetter?.status} />
     <CardContent className="p-0">
       {/* Torn-edge letter strip */}
       <div
-        className="h-2 w-full"
+        className="h-1.5 w-full bg-[#EEF0F7]"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(45deg, #E4E2DC 0, #E4E2DC 4px, transparent 4px, transparent 8px)",
+          backgroundColor: "#EEF0F7",
         }}
       />
       <div
-        className="p-6 flex items-center justify-center h-40 relative overflow-hidden cursor-pointer"
-        style={{ backgroundColor: "#F7F7F5" }}
+        className="relative flex h-44 cursor-pointer items-center justify-center overflow-hidden border-b border-[#E7E5DF] p-6 transition hover:bg-[#F7F7F4]"
+        style={{ backgroundColor: "#FBFAF7" }}
         onClick={() => onPreview(coverLetter)}
       >
         <FileText
@@ -94,21 +83,21 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
           style={{ color: "#C9C7BF" }}
           strokeWidth={1.25}
         />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[#1C2333]/5">
+        <div className="absolute inset-0 flex items-center justify-center bg-[#17201C]/5 opacity-0 transition-all duration-200 group-hover:opacity-100">
           <span
-            className="px-4 py-2 text-xs font-mono tracking-wide border"
-            style={{ backgroundColor: "#FFFFFF", borderColor: "#1C2333", color: "#1C2333" }}
+            className="px-4 py-2 text-xs nextcv-mono tracking-wide border"
+            style={{ backgroundColor: "#FFFFFF", borderColor: "#17201C", color: "#17201C" }}
           >
             OPEN PREVIEW
           </span>
         </div>
       </div>
 
-      <div className="px-5 py-4 border-t" style={{ borderColor: "#E4E2DC" }}>
+      <div className="px-5 py-4 border-t" style={{ borderColor: "#E3E2DC" }}>
         <div className="flex items-start justify-between gap-3">
           <h2
             className="text-sm font-semibold truncate flex-1"
-            style={{ color: "#1C2333" }}
+            style={{ color: "#17201C" }}
             title={coverLetter?.name}
           >
             {coverLetter?.name || "Untitled Cover Letter"}
@@ -118,13 +107,13 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 -mr-2 rounded-none"
-                style={{ color: "#6B7280" }}
+                className="h-7 w-7 -mr-2 rounded-xl"
+                style={{ color: "#66706B" }}
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 rounded-none">
+            <DropdownMenuContent align="end" className="w-48 rounded-xl">
               <DropdownMenuItem onClick={() => onDownload(coverLetter)}>
                 <Download className="mr-2 h-4 w-4" />
                 Download PDF
@@ -141,7 +130,7 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
           </DropdownMenu>
         </div>
 
-        <div className="mt-3 font-mono text-[10px] tracking-wide" style={{ color: "#6B7280" }}>
+        <div className="mt-3 nextcv-mono text-[10px] tracking-wide" style={{ color: "#66706B" }}>
           {/* ref line kept for a letterhead feel; date logic left as-is upstream */}
           REF · {(coverLetter?._id || "0000").toString().slice(-6).toUpperCase()}
         </div>
@@ -152,19 +141,19 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
 
 const EmptyState = ({ icon: Icon, title, body, action }) => (
   <div
-    className="text-center py-24 border"
-    style={{ borderStyle: "dashed", borderColor: "#D8D6CE", backgroundColor: "#FBFBF9" }}
+    className="rounded-2xl border border-dashed px-6 py-20 text-center"
+    style={{ borderStyle: "dashed", borderColor: "#D6D5CE", backgroundColor: "#FBFAF7" }}
   >
     <div
-      className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
-      style={{ backgroundColor: "#F0EFEA", color: "#B7B5AC" }}
+      className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl"
+      style={{ backgroundColor: "#F1F0EB", color: "#8A908B" }}
     >
       <Icon className="w-7 h-7" strokeWidth={1.5} />
     </div>
-    <h3 className="font-display text-lg font-medium mb-2" style={{ color: "#1C2333" }}>
+    <h3 className="nextcv-serif text-lg font-medium mb-2" style={{ color: "#17201C" }}>
       {title}
     </h3>
-    <p className="text-sm max-w-sm mx-auto mb-6" style={{ color: "#6B7280" }}>
+    <p className="text-sm max-w-sm mx-auto mb-6" style={{ color: "#66706B" }}>
       {body}
     </p>
     {action}
@@ -282,21 +271,25 @@ const MyCoverLetter = () => {
   console.log(basePrice);
   if (loading) {
     return (
-      <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
+      <div className="nextcv-sans min-h-screen" style={{ backgroundColor: "#F8F7F3" }}>
         <FontImports />
-        <div className="max-w-400 mx-auto p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="border animate-pulse" style={{ borderColor: "#E4E2DC" }}>
-                <div className="h-40" style={{ backgroundColor: "#EDEBE5" }}></div>
+              <div
+                key={i}
+                className="overflow-hidden rounded-2xl border animate-pulse"
+                style={{ borderColor: "#E3E2DC" }}
+              >
+                <div className="h-44" style={{ backgroundColor: "#EEEDE8" }}></div>
                 <div className="p-5">
                   <div
-                    className="h-4 rounded-none w-3/4 mb-3"
-                    style={{ backgroundColor: "#EDEBE5" }}
+                    className="h-4 rounded-xl w-3/4 mb-3"
+                    style={{ backgroundColor: "#EEEDE8" }}
                   ></div>
                   <div
-                    className="h-3 rounded-none w-1/2"
-                    style={{ backgroundColor: "#EDEBE5" }}
+                    className="h-3 rounded-xl w-1/2"
+                    style={{ backgroundColor: "#EEEDE8" }}
                   ></div>
                 </div>
               </div>
@@ -308,50 +301,52 @@ const MyCoverLetter = () => {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
+    <div className="nextcv-sans min-h-screen" style={{ backgroundColor: "#F8F7F3" }}>
       <FontImports />
-      <div className="max-w-400 mx-auto p-6 md:p-10">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         {/* Letterhead */}
         <div
-          className="pb-6 mb-10 border-b-2 flex flex-col md:flex-row md:items-end justify-between gap-4"
-          style={{ borderColor: "#1C2333" }}
+          className="pb-6 mb-10 border-b flex flex-col md:flex-row md:items-end justify-between gap-4"
+          style={{ borderColor: "#17201C" }}
           id="tour-my-cover-letters-header"
         >
           <div>
             <div
-              className="font-mono text-[11px] tracking-widest mb-2"
-              style={{ color: "#B3382C" }}
+              className="nextcv-mono text-[11px] tracking-[0.16em] mb-2"
+              style={{ color: "#465B9E" }}
             >
-              CORRESPONDENCE ARCHIVE
+              NEXTCV AI TOOLS
             </div>
-            <h1 className="font-display text-3xl font-medium" style={{ color: "#1C2333" }}>
-              My Cover Letters
+            <h1
+              className="nextcv-serif text-4xl font-medium tracking-[-0.025em] sm:text-5xl"
+              style={{ color: "#17201C" }}
+            >
+              My cover letters
             </h1>
-            <p className="mt-2 text-sm" style={{ color: "#6B7280" }}>
-              Every letter you've drafted or unlocked, kept on file. Preview, download, or start a
-              new one.
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#66706B] sm:text-[15px]">
+              Your saved cover letters, drafts, and unlocked documents — all in one place.
             </p>
           </div>
           <Button
             onClick={() => route.push("/dashboard/cover-letter")}
-            className="rounded-none h-11 px-6 text-white shadow-none"
-            style={{ backgroundColor: "#1C2333" }}
+            className="h-11 rounded-xl bg-[#465B9E] px-5 text-sm font-semibold text-white shadow-none hover:bg-[#344B93]"
+            style={{ backgroundColor: "#17201C" }}
             id="tour-create-new-button"
           >
-            <Plus className="mr-2 h-4 w-4" /> Create New Cover Letter
+            <Plus className="mr-2 h-4 w-4" /> Create cover letter
           </Button>
         </div>
 
         {/* PDF Modal */}
         {isModelOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2333]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="relative w-full max-w-9xl h-[90vh] bg-white rounded-none shadow-2xl overflow-hidden flex flex-col">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="relative w-full max-w-6xl h-[90vh]  rounded-2xl bg-white shadow-2xl overflow-hidden flex flex-col">
               <div
-                className="flex items-center justify-between p-4 border-b bg-white z-10"
-                style={{ borderColor: "#E4E2DC" }}
+                className="z-10 flex items-center justify-between border-b bg-white p-4"
+                style={{ borderColor: "#E3E2DC" }}
               >
-                <h3 className="font-display text-base font-medium" style={{ color: "#1C2333" }}>
-                  Cover Letter Preview
+                <h3 className="nextcv-serif text-base font-medium" style={{ color: "#17201C" }}>
+                  Cover letter preview
                 </h3>
                 <Button
                   variant="ghost"
@@ -361,15 +356,15 @@ const MyCoverLetter = () => {
                     setPaid(false);
                     setIsModelOpen(false);
                   }}
-                  className="rounded-none"
+                  className="rounded-xl"
                 >
-                  <X className="w-5 h-5" style={{ color: "#6B7280" }} />
+                  <X className="w-5 h-5" style={{ color: "#66706B" }} />
                 </Button>
               </div>
 
               <div
                 className="flex-1 overflow-auto p-8 flex justify-center"
-                style={{ backgroundColor: "#F7F7F5" }}
+                style={{ backgroundColor: "#F8F7F3" }}
               >
                 <PDFPreview pdfUrl={pdfUrl} paid={paid} variant={isMobile ? "mobile" : "desktop"} />
               </div>
@@ -379,17 +374,18 @@ const MyCoverLetter = () => {
 
         {/* Payment Modal */}
         {paymentModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2333]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="bg-white w-full max-w-md rounded-none shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="w-full max-w-md  rounded-2xl bg-white shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
               <div
                 className="p-6 border-b flex justify-between items-center"
-                style={{ borderColor: "#E4E2DC" }}
+                style={{ borderColor: "#E3E2DC" }}
               >
                 <h3
-                  className="font-display text-lg font-medium flex items-center gap-2"
-                  style={{ color: "#1C2333" }}
+                  className="nextcv-serif text-lg font-medium flex items-center gap-2"
+                  style={{ color: "#17201C" }}
                 >
-                  <BadgePercent className="w-5 h-5" style={{ color: "#B3382C" }} /> Unlock Download
+                  <BadgePercent className="w-5 h-5" style={{ color: "#465B9E" }} /> Unlock your
+                  download
                 </h3>
                 <Button
                   variant="ghost"
@@ -398,7 +394,7 @@ const MyCoverLetter = () => {
                     setPaymentModal(false);
                     setCoverLetterData(null);
                   }}
-                  className="h-8 w-8 p-0 rounded-none"
+                  className="h-8 w-8 p-0 rounded-xl"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -406,30 +402,30 @@ const MyCoverLetter = () => {
 
               <div className="p-6 space-y-6">
                 <div
-                  className="text-center p-4 border"
-                  style={{ borderColor: "#E4E2DC", backgroundColor: "#F7F7F5" }}
+                  className="rounded-xl border p-4 text-center"
+                  style={{ borderColor: "#E3E2DC", backgroundColor: "#F8F7F3" }}
                 >
                   <div
-                    className="font-mono text-[11px] tracking-widest mb-1"
-                    style={{ color: "#6B7280" }}
+                    className="nextcv-mono text-[11px] tracking-[0.16em] mb-1"
+                    style={{ color: "#66706B" }}
                   >
                     TOTAL AMOUNT
                   </div>
-                  <div className="font-display text-3xl font-medium" style={{ color: "#1C2333" }}>
+                  <div className="nextcv-serif text-3xl font-medium" style={{ color: "#17201C" }}>
                     ₹{basePrice}
                   </div>
-                  <div className="text-xs line-through mt-1" style={{ color: "#B7B5AC" }}>
+                  <div className="text-xs line-through mt-1" style={{ color: "#8A908B" }}>
                     ₹{originalAmount}
                   </div>
-                  <div className="text-xs mt-1 font-mono" style={{ color: "#0F6E63" }}>
+                  <div className="text-xs mt-1 nextcv-mono" style={{ color: "#42634A" }}>
                     YOU SAVED ₹{basePrice - amount}
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <label
-                    className="text-xs font-mono tracking-widest uppercase"
-                    style={{ color: "#6B7280" }}
+                    className="text-xs nextcv-mono tracking-[0.16em] uppercase"
+                    style={{ color: "#66706B" }}
                   >
                     Have a coupon?
                   </label>
@@ -438,7 +434,7 @@ const MyCoverLetter = () => {
                       value={couponCode}
                       onChange={e => setCouponCode(e.target.value)}
                       placeholder="ENTER COUPON CODE"
-                      className="font-mono uppercase placeholder:normal-case rounded-none"
+                      className="nextcv-mono uppercase placeholder:normal-case rounded-xl"
                       disabled={applied}
                     />
                     {!applied ? (
@@ -446,7 +442,7 @@ const MyCoverLetter = () => {
                         onClick={() => handleCoupon(couponCode)}
                         disabled={!couponCode.trim() || isSubmit || applied}
                         variant="secondary"
-                        className="font-mono text-xs rounded-none"
+                        className="nextcv-mono text-xs rounded-xl"
                       >
                         APPLY
                       </Button>
@@ -455,7 +451,7 @@ const MyCoverLetter = () => {
                         onClick={removeCoupon}
                         variant="destructive"
                         size="icon"
-                        className="shrink-0 rounded-none"
+                        className="shrink-0 rounded-xl"
                       >
                         <X className="w-4 h-4" />
                       </Button>
@@ -463,8 +459,8 @@ const MyCoverLetter = () => {
                   </div>
                   {applied && couponDiscount && (
                     <div
-                      className="flex items-center gap-2 text-sm font-mono p-2"
-                      style={{ color: "#0F6E63", backgroundColor: "#EAF4F2" }}
+                      className="flex items-center gap-2 text-sm nextcv-mono p-2"
+                      style={{ color: "#42634A", backgroundColor: "#F1F7F1" }}
                     >
                       <BadgePercent className="w-4 h-4" />
                       {couponDiscount.type === "percentage"
@@ -475,15 +471,15 @@ const MyCoverLetter = () => {
                 </div>
 
                 <Button
-                  className="w-full text-white font-medium h-12 rounded-none text-base shadow-none"
-                  style={{ backgroundColor: "#B3382C" }}
+                  className="w-full text-white font-medium h-12 rounded-xl text-base shadow-sm"
+                  style={{ backgroundColor: "#465B9E" }}
                   onClick={() => handelPayment()}
                   disabled={isPaymentSubmit || isRedirecting}
                 >
-                  Pay ₹{amount} & Download
+                  Pay ₹{amount} & download
                 </Button>
 
-                <p className="text-xs text-center font-mono" style={{ color: "#B7B5AC" }}>
+                <p className="text-xs text-center nextcv-mono" style={{ color: "#8A908B" }}>
                   SECURE PAYMENT · PHONEPE / RAZORPAY
                 </p>
               </div>
@@ -492,34 +488,26 @@ const MyCoverLetter = () => {
         )}
 
         <Tabs defaultValue="My-CoverLetter" className="w-full" id="tour-coverletter-tabs">
-          <div className="border-b mb-10" style={{ borderColor: "#E4E2DC" }}>
-            <TabsList className="bg-transparent h-auto p-0 space-x-10 rounded-none">
+          <div className="border-b mb-10" style={{ borderColor: "#E3E2DC" }}>
+            <TabsList className="bg-transparent h-auto p-0 space-x-10 rounded-xl">
               <TabsTrigger
                 value="My-CoverLetter"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-mono text-xs tracking-widest shadow-none transition-all data-[state=active]:shadow-none"
-                style={{ color: "#6B7280" }}
+                className="bg-transparent border-b border-transparent rounded-xl px-0 py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all data-[state=active]:shadow-sm"
+                style={{ color: "#66706B" }}
               >
-                <span className="data-[state=active]:text-[#1C2333]">
+                <span className="data-[state=active]:text-[#17201C]">
                   UNLOCKED ({paidCoverLetters?.length || 0})
                 </span>
               </TabsTrigger>
               <TabsTrigger
                 value="Draft-CoverLetter"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-mono text-xs tracking-widest shadow-none transition-all"
-                style={{ color: "#6B7280" }}
+                className="bg-transparent border-b border-transparent rounded-xl px-0 py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all"
+                style={{ color: "#66706B" }}
               >
                 DRAFTS ({draftCoverLetters?.length || 0})
               </TabsTrigger>
             </TabsList>
           </div>
-
-          <style>{`
-            [data-state="active"][value="My-CoverLetter"],
-            [data-state="active"][value="Draft-CoverLetter"] {
-              border-color: #1C2333 !important;
-              color: #1C2333 !important;
-            }
-          `}</style>
 
           <TabsContent value="My-CoverLetter" className="outline-none">
             {!paidCoverLetters || paidCoverLetters.length === 0 ? (
@@ -530,7 +518,7 @@ const MyCoverLetter = () => {
               />
             ) : (
               <div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 pt-2"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-2"
                 id="tour-coverletter-list"
               >
                 {paidCoverLetters.map(coverLetter => {
@@ -557,15 +545,15 @@ const MyCoverLetter = () => {
                 action={
                   <Button
                     onClick={() => route.push("/dashboard/builder")}
-                    className="rounded-none"
-                    style={{ backgroundColor: "#1C2333" }}
+                    className="rounded-xl"
+                    style={{ backgroundColor: "#17201C" }}
                   >
-                    Create New Cover Letter
+                    Create cover letter
                   </Button>
                 }
               />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 pt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 pt-2">
                 {draftCoverLetters.map(coverLetter => (
                   <CoverLetterCard
                     key={coverLetter?._id}

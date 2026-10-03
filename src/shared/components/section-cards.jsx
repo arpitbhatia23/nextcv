@@ -6,8 +6,6 @@ import { IndianRupee, Users, Target, Zap, FileText } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 
-/* Fonts match the Correspondence Archive letterhead:
-   Fraunces for display numerals, IBM Plex Mono for labels / codes. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -16,20 +14,14 @@ const FontImports = () => (
   `}</style>
 );
 
-const INK = "#1C2333";
-const RUST = "#B3382C";
-const PAPER = "#F7F7F5";
-const LINE = "#E4E2DC";
-const MUTE = "#6B7280";
-const FAINT = "#B7B5AC";
-
 function GrowthMark({ value }) {
   if (value === null || value === undefined) return null;
   const isUp = value >= 0;
   return (
     <span
-      className="font-mono text-[11px] tracking-widest inline-flex items-center gap-1"
-      style={{ color: isUp ? "#0F6E63" : RUST }}
+      className={`font-mono text-[11px] tracking-wide inline-flex items-center gap-1 font-medium ${
+        isUp ? "text-emerald-700" : "text-amber-800"
+      }`}
     >
       {isUp ? <IconTrendingUp className="h-3 w-3" /> : <IconTrendingDown className="h-3 w-3" />}
       {isUp ? "+" : ""}
@@ -72,130 +64,122 @@ function SectionCards() {
   const ranges = ["today", "7d", "30d", "90d", "all"];
 
   return (
-    <div style={{ backgroundColor: PAPER }} className="px-3 py-6 sm:px-4 lg:px-6">
+    <div className="bg-[#F8F7F3] px-3 py-4 sm:px-6 lg:px-8 space-y-6">
       <FontImports />
 
-      {/* Letterhead */}
-      <div
-        className="mb-6 pb-5 border-b-2 flex flex-wrap items-end justify-between gap-4"
-        style={{ borderColor: INK }}
-      >
+      {/* Header row */}
+      <div className="flex flex-wrap items-end justify-between gap-4 pb-5 border-b border-[#E3E2DC]">
         <div>
-          <div className="font-mono text-[11px] tracking-widest mb-2" style={{ color: RUST }}>
-            LEDGER &amp; ACCOUNT SUMMARY
+          <div className="font-mono text-[10px] tracking-widest text-[#465B9E] mb-1">
+            EXECUTIVE OVERVIEW
           </div>
-          <h1 className="font-display text-3xl font-medium" style={{ color: INK }}>
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-[#17201C]">
             Performance Report
-          </h1>
+          </h2>
+          <p className="text-xs sm:text-sm text-[#5B625C] mt-1">
+            Real-time business telemetry and user conversion statistics.
+          </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div
-            className="flex border font-mono text-[11px] tracking-widest overflow-x-auto"
-            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
-          >
-            {ranges.map((r, i) => (
+          {/* Time range picker */}
+          <div className="flex items-center p-1 bg-white border border-[#E3E2DC] rounded-xl shadow-xs">
+            {ranges.map(r => (
               <button
                 key={r}
                 onClick={() => setRange(r)}
-                className="px-3 py-2 whitespace-nowrap transition"
-                style={{
-                  color: range === r ? "#FFFFFF" : MUTE,
-                  backgroundColor: range === r ? INK : "transparent",
-                  borderLeft: i === 0 ? "none" : `1px solid ${LINE}`,
-                }}
+                className={`px-3 py-1.5 text-xs font-sans font-medium rounded-lg transition-all ${
+                  range === r
+                    ? "bg-[#465B9E] text-white shadow-xs"
+                    : "text-[#5B625C] hover:text-[#17201C] hover:bg-[#F1F0EB]"
+                }`}
               >
                 {r.toUpperCase()}
               </button>
             ))}
           </div>
+
           <button
             onClick={() => fetchData()}
             disabled={loading}
-            className="border p-2.5 transition disabled:opacity-50"
-            style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}
+            className="border border-[#E3E2DC] bg-white p-2 rounded-xl text-[#5B625C] hover:text-[#17201C] hover:bg-[#F1F0EB] transition-colors disabled:opacity-50"
+            title="Refresh statistics"
           >
-            <IconRefresh
-              className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
-              style={{ color: INK }}
-            />
+            <IconRefresh className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           </button>
         </div>
       </div>
 
-      {/* Today's quick stats — treated like a stamped receipt strip */}
-      <div
-        className="grid grid-cols-1 sm:grid-cols-3 gap-0 border mb-6"
-        style={{ borderColor: INK }}
-      >
-        <div
-          className="p-5 relative overflow-hidden"
-          style={{ backgroundColor: INK, borderRight: `1px solid ${INK}` }}
-        >
-          <Zap className="absolute -right-3 -bottom-3 h-20 w-20 text-white/5" strokeWidth={1} />
-          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: "#B7B5AC" }}>
-            TODAY&apos;S REVENUE
-          </p>
-          <div className="flex items-baseline gap-1 font-display text-2xl font-semibold text-white">
-            <IndianRupee className="h-4 w-4" />
+      {/* Today's quick stats cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Revenue */}
+        <div className="p-6 rounded-2xl bg-white border border-[#E3E2DC] shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-[10px] tracking-widest text-[#66706B] uppercase">
+              Today&apos;s Revenue
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Zap className="h-4 w-4" />
+            </div>
+          </div>
+          <div className="flex items-baseline gap-1 font-display text-3xl font-semibold text-[#17201C]">
+            <IndianRupee className="h-5 w-5 text-[#465B9E]" />
             {data?.metrics?.todayRevenue || 0}
           </div>
+          <p className="text-[11px] text-[#8A908B] mt-2">Gross payments received today</p>
         </div>
 
-        <div
-          className="p-5 relative overflow-hidden border-t sm:border-t-0"
-          style={{
-            backgroundColor: "#FFFFFF",
-            borderColor: LINE,
-            borderRight: `1px solid ${LINE}`,
-          }}
-        >
-          <Users
-            className="absolute -right-3 -bottom-3 h-20 w-20"
-            style={{ color: LINE }}
-            strokeWidth={1}
-          />
-          <p className="font-mono text-[10px] tracking-widest mb-2" style={{ color: MUTE }}>
-            NEW SIGNUPS TODAY
-          </p>
-          <div className="font-display text-2xl font-semibold" style={{ color: INK }}>
+        {/* New Users */}
+        <div className="p-6 rounded-2xl bg-white border border-[#E3E2DC] shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-[10px] tracking-widest text-[#66706B] uppercase">
+              New Signups Today
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Users className="h-4 w-4" />
+            </div>
+          </div>
+          <div className="font-display text-3xl font-semibold text-[#17201C]">
             {data?.metrics?.todayNewUsers || 0}
           </div>
+          <p className="text-[11px] text-[#8A908B] mt-2">Candidates registered in last 24h</p>
         </div>
 
-        <div
-          className="p-5 border-t sm:border-t-0"
-          style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <p className="font-mono text-[10px] tracking-widest" style={{ color: MUTE }}>
-              CONVERSION RATE
-            </p>
-            <Target className="h-3.5 w-3.5" style={{ color: FAINT }} />
+        {/* Conversion Rate */}
+        <div className="p-6 rounded-2xl bg-white border border-[#E3E2DC] shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-mono text-[10px] tracking-widest text-[#66706B] uppercase">
+              Conversion Rate
+            </span>
+            <div className="w-8 h-8 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
+              <Target className="h-4 w-4" />
+            </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <div className="font-display text-2xl font-semibold" style={{ color: INK }}>
+            <div className="font-display text-3xl font-semibold text-[#17201C]">
               {data?.metrics?.conversionRate || 0}%
             </div>
-            <span className="font-mono text-[10px] tracking-widest" style={{ color: FAINT }}>
-              GOAL 5%
-            </span>
+            <span className="font-mono text-[10px] tracking-widest text-[#8A908B]">GOAL 5%</span>
           </div>
+          <p className="text-[11px] text-[#8A908B] mt-2">Visitor to paid download conversion</p>
         </div>
       </div>
 
-      {/* Ledger rows — replaces the card grid, reads like archived entries */}
-      <div className="mb-4">
-        <h2 className="font-mono text-[10px] tracking-widest mb-3" style={{ color: MUTE }}>
-          FILED UNDER &middot; {range.toUpperCase()}
-        </h2>
+      {/* Ledger rows — clean card container */}
+      <div className="bg-white rounded-2xl border border-[#E3E2DC] shadow-[0_2px_12px_rgba(23,32,28,0.04)] overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-[#E3E2DC] bg-[#F8F7F3]/50 flex items-center justify-between">
+          <h3 className="font-mono text-[11px] tracking-wider text-[#66706B] uppercase">
+            Metrics Breakdown &middot; {range.toUpperCase()}
+          </h3>
+          <span className="text-xs text-[#8A908B]">Audited values</span>
+        </div>
 
-        <div className="border divide-y" style={{ borderColor: LINE }}>
+        <div className="divide-y divide-[#E3E2DC]">
           <LedgerRow
             label="Revenue (Range)"
             value={
               <span className="inline-flex items-center gap-1">
-                <IndianRupee className="h-4 w-4" style={{ color: RUST }} />
+                <IndianRupee className="h-4 w-4 text-[#465B9E]" />
                 {data?.paymentThisMonth || 0}
               </span>
             }
@@ -224,55 +208,43 @@ function SectionCards() {
         </div>
       </div>
 
-      {/* Pro services callout */}
-      <div
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 border"
-        style={{ borderColor: RUST, backgroundColor: "#FBF3F1" }}
-      >
+      {/* Pro services banner */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl border border-[#C8CDD9] bg-[#EEF0F7]">
         <div className="flex items-center gap-3">
-          <div
-            className="h-10 w-10 flex items-center justify-center shrink-0"
-            style={{ backgroundColor: RUST }}
-          >
-            <FileText className="h-5 w-5 text-white" strokeWidth={1.5} />
+          <div className="h-10 w-10 rounded-xl bg-[#465B9E] flex items-center justify-center shrink-0 text-white shadow-xs">
+            <FileText className="h-5 w-5" strokeWidth={1.5} />
           </div>
           <div>
-            <p className="font-mono text-[10px] tracking-widest mb-1" style={{ color: RUST }}>
-              PRO SERVICES
+            <p className="font-mono text-[10px] tracking-widest text-[#465B9E] font-semibold mb-0.5">
+              PRO ENGAGEMENT
             </p>
-            <p className="text-sm font-medium" style={{ color: INK }}>
-              Send personalized follow-ups to inactive users
+            <p className="text-sm font-medium text-[#17201C]">
+              Send automated follow-up reminders to unfinished drafts
             </p>
           </div>
         </div>
         <button
           onClick={sendReminders}
-          className="rounded-none px-5 py-2.5 font-mono text-xs tracking-widest text-white transition hover:opacity-90 shrink-0"
-          style={{ backgroundColor: RUST }}
+          className="rounded-xl px-5 py-2.5 font-sans text-xs font-medium text-white transition hover:bg-[#344B93] bg-[#465B9E] shadow-xs shrink-0"
         >
-          SEND BULK REMINDERS
+          Send Bulk Reminders
         </button>
       </div>
     </div>
   );
 }
 
-function LedgerRow({ label, value, growth, note, last }) {
+function LedgerRow({ label, value, growth, note }) {
   return (
-    <div
-      className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-4"
-      style={{ backgroundColor: "#FFFFFF" }}
-    >
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-4 sm:p-5 hover:bg-[#F8F7F3]/40 transition-colors">
       <div className="flex-1">
-        <p className="font-mono text-[10px] tracking-widest mb-1" style={{ color: MUTE }}>
-          {label.toUpperCase()}
+        <p className="font-sans text-xs font-semibold text-[#17201C] mb-0.5">
+          {label}
         </p>
-        <p className="text-[11px]" style={{ color: FAINT }}>
-          {note}
-        </p>
+        <p className="text-xs text-[#8A908B]">{note}</p>
       </div>
       <div className="flex items-center gap-4 sm:justify-end sm:min-w-45">
-        <div className="font-display text-xl font-semibold tabular-nums" style={{ color: INK }}>
+        <div className="font-display text-xl font-semibold text-[#17201C] tabular-nums">
           {value}
         </div>
         <GrowthMark value={growth} />

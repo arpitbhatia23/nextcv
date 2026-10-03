@@ -66,8 +66,17 @@ export const usePayment = ({
         name: "NEXTCV.IN",
         hidden: {
           contact: true,
+          email: true,
         },
+        prefill: {
+          name: formData?.name || "",
 
+          email: formData?.email || "",
+
+          contact: formData?.phone_no
+            ? `+91${formData.phone_no.replace(/\D/g, "").slice(-10)}`
+            : "",
+        },
         description: "NEXTCV Transaction",
 
         order_id: res.data.data.id,

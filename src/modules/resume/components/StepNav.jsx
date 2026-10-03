@@ -26,8 +26,6 @@ const stepsConfig = [
   { key: "review", label: "Review", icon: CheckCircle },
 ];
 
-/* Fonts: Fraunces for the wordmark, IBM Plex Mono for labels and
-   step counter — matches the rest of the builder. */
 const FontImports = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
@@ -35,14 +33,6 @@ const FontImports = () => (
     .font-mono { font-family: 'IBM Plex Mono', monospace; }
   `}</style>
 );
-
-const NAVY = "#1C2333";
-const RUST = "#B3382C";
-const MUTED = "#6B7280";
-const FAINT = "#B7B5AC";
-const BORDER = "#E4E2DC";
-const BG = "#F7F7F5";
-const WHITE = "#FFFFFF";
 
 export default function StepNav() {
   const pathname = usePathname();
@@ -79,44 +69,52 @@ export default function StepNav() {
   };
 
   return (
-    <div
-      className="sticky top-0 z-40 backdrop-blur-md border-b"
-      style={{ backgroundColor: "rgba(255,255,255,0.9)", borderColor: BORDER }}
-    >
+    <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-[#E3E2DC]">
       <FontImports />
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Top Row */}
         <div className="flex items-center justify-between h-14">
-          <h2 className="font-display font-medium text-sm" style={{ color: NAVY }}>
-            Resume Builder
-          </h2>
+          <div className="flex items-center gap-3">
+            <h2 className="font-display font-medium text-base text-[#17201C]">
+              Resume Studio
+            </h2>
+            <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#E3E2DC]" />
+            <span className="hidden sm:inline-block font-mono text-[11px] text-[#66706B] tracking-wider">
+              ATS-OPTIMIZED
+            </span>
+          </div>
 
           <div className="flex items-center gap-4">
             <div
-              className="font-mono text-[10px] tracking-widest"
-              style={{ color: saveStatus === "saving" ? MUTED : "#3F7A5C" }}
+              className={`font-mono text-[10px] tracking-wider flex items-center gap-1.5 ${
+                saveStatus === "saving" ? "text-[#66706B]" : "text-emerald-700"
+              }`}
             >
-              {saveStatus === "saving" ? "SAVING LOCALLY..." : "SAVED LOCALLY"}
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  saveStatus === "saving" ? "bg-amber-500 animate-pulse" : "bg-emerald-600"
+                }`}
+              />
+              {saveStatus === "saving" ? "SAVING..." : "SAVED LOCALLY"}
             </div>
-            <div className="font-mono text-[10px] tracking-widest" style={{ color: MUTED }}>
+            <div className="font-mono text-[10px] tracking-widest text-[#8A908B]">
               STEP {currentStep + 1} OF {stepsConfig.length}
             </div>
           </div>
         </div>
 
         {/* Progress Bar (GPU optimized) */}
-        <div className="h-1 overflow-hidden" style={{ backgroundColor: BORDER }}>
+        <div className="h-1 overflow-hidden bg-[#E3E2DC] rounded-full">
           <div
-            className="h-full transition-transform duration-300 origin-left"
+            className="h-full bg-[#465B9E] transition-transform duration-300 origin-left rounded-full"
             style={{
-              backgroundColor: RUST,
               transform: `scaleX(${progress / 100})`,
             }}
           />
         </div>
 
         {/* Steps */}
-        <div className="flex gap-6 py-3 overflow-x-auto">
+        <div className="flex items-center gap-2 sm:gap-4 py-3 overflow-x-auto scrollbar-hide">
           {stepsConfig.map((step, index) => {
             const Icon = step.icon;
 
@@ -124,35 +122,40 @@ export default function StepNav() {
             const isCompleted = index < currentStep;
             const isAccessible = index <= currentStep;
 
-            const textColor = isActive
-              ? RUST
-              : isCompleted
-                ? "#3F7A5C"
-                : !isAccessible
-                  ? FAINT
-                  : MUTED;
-
             return (
               <button
                 key={step.key}
                 onClick={() => handleNavigation(index)}
                 disabled={!isAccessible}
-                className={`flex items-center gap-2 transition whitespace-nowrap font-mono text-xs tracking-widest ${
-                  !isAccessible ? "cursor-not-allowed" : ""
+                className={`group flex items-center gap-2 py-1 px-2.5 rounded-xl transition-all duration-200 shrink-0 select-none ${
+                  isActive
+                    ? "bg-[#EEF0F7] text-[#465B9E] font-medium"
+                    : isCompleted
+                      ? "text-[#17201C] hover:bg-[#F1F0EB]"
+                      : isAccessible
+                        ? "text-[#5B625C] hover:bg-[#F1F0EB]"
+                        : "text-[#8A908B] cursor-not-allowed opacity-60"
                 }`}
-                style={{ color: textColor }}
               >
                 <div
-                  className="w-7 h-7 flex items-center justify-center rounded-none border"
-                  style={{
-                    backgroundColor: isActive ? BG : isCompleted ? "#EEF3EE" : WHITE,
-                    borderColor: isActive ? RUST : isCompleted ? "#3F7A5C" : BORDER,
-                  }}
+                  className={`w-6 h-6 flex items-center justify-center rounded-lg border text-xs transition-colors ${
+                    isActive
+                      ? "bg-white border-[#465B9E] text-[#465B9E]"
+                      : isCompleted
+                        ? "bg-emerald-50 border-emerald-300 text-emerald-700"
+                        : isAccessible
+                          ? "bg-white border-[#E3E2DC] text-[#66706B]"
+                          : "bg-[#F8F7F3] border-[#E3E2DC] text-[#8A908B]"
+                  }`}
                 >
-                  {isCompleted ? <CheckCircle className="w-4 h-4" /> : <Icon className="w-4 h-4" />}
+                  {isCompleted ? (
+                    <CheckCircle className="w-3.5 h-3.5" />
+                  ) : (
+                    <Icon className="w-3.5 h-3.5" />
+                  )}
                 </div>
 
-                <span className="uppercase">{step.label}</span>
+                <span className="font-sans text-xs tracking-wide">{step.label}</span>
               </button>
             );
           })}

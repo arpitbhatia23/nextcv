@@ -32,8 +32,8 @@ const FontImports = () => (
 );
 
 const inputClass =
-  "rounded-none border transition-all h-9 md:h-10 text-xs md:text-sm placeholder:text-[10px]";
-const inputStyle = { backgroundColor: "#F7F7F5", borderColor: "#E4E2DC", color: "#1C2333" };
+  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const SkillStep = () => {
   const formData = useResumeStore(s => s.formData);
@@ -183,34 +183,31 @@ const SkillStep = () => {
   };
 
   return (
-    <div className="py-4 md:py-8" style={{ backgroundColor: "#F7F7F5" }}>
+    <div className="py-4 md:py-8 bg-[#F8F7F3]">
       <FontImports />
 
-      <div className="mb-2 pb-4 border-b-2" style={{ borderColor: "#1C2333" }}>
-        <div className="font-mono text-[10px] tracking-widest mb-1" style={{ color: "#B3382C" }}>
+      <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
+        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
           STEP 04 — SKILLS
         </div>
-        <h2 className="font-display text-lg md:text-xl font-medium" style={{ color: "#1C2333" }}>
+        <h2 className="font-display text-xl md:text-2xl font-medium text-[#17201C]">
           Skills
         </h2>
-        <p className="text-[10px] md:text-xs mt-1" style={{ color: "#6B7280" }}>
-          Showcase your technical and soft skills
+        <p className="text-xs md:text-sm mt-1 text-[#5B625C]">
+          Showcase your technical capabilities and key strengths
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="rounded-none border shadow-none py-0 overflow-hidden"
-          style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
         >
           <CardHeader
-            className="border-b p-3 pb-0 flex justify-between items-center gap-0"
-            style={{ borderColor: "#E4E2DC" }}
+            className="border-b border-[#E3E2DC] p-4 flex justify-between items-center"
           >
             <CardTitle
-              className="font-mono text-[10px] md:text-xs tracking-widest"
-              style={{ color: "#6B7280" }}
+              className="font-mono text-[10px] md:text-xs tracking-wider text-[#5B625C]"
             >
               {isEditing ? "EDIT SKILL" : "ADD SKILL"}
             </CardTitle>
@@ -220,8 +217,7 @@ const SkillStep = () => {
                   variant="ghost"
                   size="sm"
                   onClick={cancelEdit}
-                  className="h-7 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
-                  style={{ color: "#6B7280" }}
+                  className="h-8 rounded-lg font-sans text-xs text-[#5B625C] hover:bg-[#F1F0EB]"
                 >
                   Cancel
                 </Button>
@@ -231,11 +227,10 @@ const SkillStep = () => {
                 onClick={handleAiGeneration}
                 disabled={isGenerating || skillList.length > 0}
                 variant="default"
-                className="rounded-none text-white h-7 text-[10px] md:text-xs font-mono tracking-widest shadow-none"
-                style={{ backgroundColor: "#B3382C" }}
+                className="rounded-lg text-[#465B9E] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] h-8 text-xs font-sans font-medium shadow-none"
               >
-                <Sparkles className="w-3 md:w-4 h-3 md:h-4 mr-1 md:mr-2" />
-                {isGenerating ? "WAIT..." : "SUGGEST"}
+                <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                {isGenerating ? "Generating..." : "Suggest Skills"}
               </Button>
             </div>
           </CardHeader>
@@ -294,10 +289,9 @@ const SkillStep = () => {
 
                 <Button
                   type="submit"
-                  className="w-full rounded-none text-white shadow-none h-9 md:h-10 font-mono text-xs md:text-sm tracking-widest"
-                  style={{ backgroundColor: "#B3382C" }}
+                  className="w-full rounded-xl text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                 >
-                  {isEditing ? "UPDATE SKILL" : "ADD SKILL"}
+                  {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
               </form>
             </Form>
@@ -307,22 +301,20 @@ const SkillStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="border p-4 md:p-5"
-            style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+            className="rounded-2xl border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
+            style={{ borderColor: "#E3E2DC" }}
           >
             <div className="flex justify-between items-center mb-4">
               <h3
-                className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2"
-                style={{ color: "#6B7280" }}
+                className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 text-[#5B625C]"
               >
-                <Wrench className="w-4 h-4" style={{ color: "#B3382C" }} /> Added Skills
+                <Wrench className="w-4 h-4 text-[#465B9E]" /> Added Skills
               </h3>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleClearAll}
-                className="h-7 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
-                style={{ color: "#B3382C" }}
+                className="h-7 rounded-lg font-sans text-xs text-[#8A908B] hover:text-red-600 hover:bg-red-50"
               >
                 Clear All
               </Button>
@@ -397,17 +389,15 @@ const SkillStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/education")}
-              className="rounded-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
-              style={{ borderColor: "#E4E2DC", color: "#1C2333" }}
+              className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" /> PREVIOUS
+              <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
             <Button
               onClick={handleNext}
-              className="rounded-none text-white shadow-none h-10 px-4 font-mono text-xs md:text-sm tracking-widest"
-              style={{ backgroundColor: "#B3382C" }}
+              className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
             >
-              EXPERIENCE INFO <ArrowRight className="w-4 h-4 ml-2" />
+              Experience Info <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
