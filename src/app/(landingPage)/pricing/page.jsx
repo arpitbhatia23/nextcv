@@ -100,7 +100,6 @@ const plans = [
       "Professional portfolio website",
       "Generate portfolio from your resume",
       "Shareable portfolio link",
-      "AI cover letter generator",
       "Modern premium layouts",
       "High-resolution PDF download",
       "Advanced AI writing tools",
