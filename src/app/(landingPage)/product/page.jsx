@@ -39,7 +39,7 @@ const features = [
     description:
       "Use your resume information as the foundation for an online professional portfolio with your profile, experience, projects, skills, and education. Portfolio creation is included with Elite.",
     action: "Explore portfolio builder",
-    href: "/p",
+    href: "/",
     visual: "portfolio",
   },
 ];
