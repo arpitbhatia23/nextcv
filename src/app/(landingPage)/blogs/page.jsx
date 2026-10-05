@@ -3,9 +3,9 @@ import { createSeoMetadata } from "@/shared/utils/seo";
 import { client } from "@/sanity";
 
 export const metadata = createSeoMetadata({
-  title: "ATS Resume Templates & Career Guides India 2026 | NextCV",
+  title: "ATS Resume Tips, Templates & Guides for India 2026 | NextCV",
   description:
-    "Read resume writing guides, ATS tips, career advice and template resources for Indian freshers and job seekers.",
+    "Get ATS-friendly resume tips, templates, formats and career advice for Indian freshers and job seekers. Learn how to build a resume that gets noticed.",
   path: "/blogs",
   keywords: [
     "resume writing guides",

@@ -13,9 +13,9 @@ import {
 import AIPlayground from "./AIPlayground";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Writer for Freshers in India | NextCV",
+  title: "AI Resume Writer for Indian Jobs | Rewrite & Improve Your Resume",
   description:
-    "Use NextCV's AI resume writer to create professional summaries, achievement bullets, skills, and project descriptions for Indian job applications.",
+    "Create stronger resumes for your next job with AI. Rewrite experience, projects, skills, and summaries with professional, job-focused content.",
   path: "/ai-writer",
   keywords: [
     "ai resume writer",

@@ -16,12 +16,13 @@ export const viewport = {
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
+
   title: {
-    default: "Free ATS Resume Builder for Indian Freshers | NextCV",
-    template: "%s | NextCV",
+    default: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools ",
   },
   description:
-    "Create an ATS-friendly resume for Indian freshers with professional templates and simple online editing.",
+    "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+
   alternates: {
     canonical: "https://www.nextcv.in/",
   },
@@ -53,10 +54,10 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "NextCV",
+              name: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools",
               url: "https://www.nextcv.in",
               description:
-                "Create an ATS-friendly resume for Indian freshers with professional templates and simple online editing.",
+                "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
             }),
           }}
         />

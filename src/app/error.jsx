@@ -29,13 +29,17 @@ export default function Error({ error, reset }) {
           An unexpected error occurred. The issue has been reported.
         </p>
 
-        {error?.message && (
+        {error && (
           <div className="bg-white border border-slate-200 rounded-2xl p-4 mb-8 text-left">
             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
               Technical Details
             </p>
             <p className="text-xs font-mono text-rose-600 break-all bg-rose-50 p-3 rounded-xl">
-              {error.message}
+              {typeof error?.message === "string"
+                ? error.message
+                : typeof error === "string"
+                  ? error
+                  : error?.title || error?.content || String(error?.message || "An unexpected error occurred.")}
             </p>
           </div>
         )}

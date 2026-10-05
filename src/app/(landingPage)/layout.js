@@ -3,14 +3,15 @@ import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
+  title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+  description:
+    "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
 
   applicationName: "NextCV",
 
-  title: "NextCV – AI Resume Builder & Career Tools for Job Seekers",
+  title: "",
 
-  description:
-    "Build a professional resume with AI, improve your profile, explore career guides, and get job-ready with NextCV.",
-
+  description: "",
   authors: [{ name: "NextCV" }],
   creator: "NextCV",
   publisher: "NextCV",
@@ -22,9 +23,9 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "NextCV – AI Resume Builder & Career Tools for Job Seekers",
+    title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
     description:
-      "Build a professional resume with AI, improve your profile, explore career guides, and get job-ready with NextCV.",
+      "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
     url: "https://www.nextcv.in/",
     siteName: "NextCV",
     locale: "en_IN",
@@ -33,9 +34,9 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "NextCV – AI Resume Builder & Career Tools for Job Seekers",
+    title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
     description:
-      "Build a professional resume with AI, improve your profile, explore career guides, and get job-ready with NextCV.",
+      "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
     creator: "@aurpitaurpit",
   },
 };
@@ -55,10 +56,10 @@ export default function LandingLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
-              name: "Free ATS Resume Builder for Indian Freshers 2026 | NextCV",
               operatingSystem: "Web",
+              name: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
               description:
-                "Create an ATS-friendly resume for Indian fresher jobs with professional templates and simple online editing.",
+                "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
               applicationCategory: "Productivity",
               url: "https://www.nextcv.in",
               screenshot: "https://www.nextcv.in/opengraph-image.png",

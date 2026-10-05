@@ -4,9 +4,9 @@ import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free ATS Resume Checker for Freshers in India 2026 | Check Score Online",
+  title: "Check Your ATS Resume Score Free | ATS Resume Checker | NextCV",
   description:
-    "Best ATS checker for freshers in India. Learn why ATS rejects resumes in India and how to fix them. Optimized for TCS, Infosys, and 2026 hiring standards.",
+    "Check your resume's ATS score online and identify formatting, keywords, and content issues that can affect how your resume performs in ATS screening.",
   keywords: [
     "free ats resume checker for freshers in india",
     "check if my resume is ats friendly free",

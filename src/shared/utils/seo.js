@@ -1,3 +1,5 @@
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.nextcv.in").replace(/\/$/, "");
+
 export const DEFAULT_SEO_KEYWORDS = [
   "free resume builder",
   "ATS friendly resume",
@@ -10,14 +12,18 @@ export const DEFAULT_SEO_KEYWORDS = [
 export function createSeoMetadata({
   title,
   description,
-  path,
+  path = "",
   image = "/opengraph-image.png",
   type = "website",
   keywords = DEFAULT_SEO_KEYWORDS,
+  robots,
 }) {
-  const url = `https://www.nextcv.in${path}`;
+  const normalizedPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
+  const url = `${SITE_URL}${normalizedPath}`;
+  const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image.startsWith("/") ? image : `/${image}`}`;
 
-  return {
+  const metadata = {
+    metadataBase: new URL(SITE_URL),
     title,
     description,
     keywords,
@@ -32,7 +38,7 @@ export function createSeoMetadata({
       type,
       images: [
         {
-          url: image,
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: title,
@@ -43,7 +49,13 @@ export function createSeoMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [image],
+      images: [imageUrl],
     },
   };
+
+  if (robots) {
+    metadata.robots = robots;
+  }
+
+  return metadata;
 }

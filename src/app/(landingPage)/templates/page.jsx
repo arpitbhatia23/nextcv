@@ -5,9 +5,9 @@ import BuildButton from "@/shared/components/landing/BuildButton";
 import TemplatesSection from "@/shared/components/landing/TemplatesSection";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Templates for Freshers and Professionals | NextCV",
+  title: "Best Resume Templates & Formats for Every Career | NextCV",
   description:
-    "Compare a focused selection of resume formats for freshers, developers, and professionals. Preview before choosing; build for free and pay once to download.",
+    "Explore professional, ATS-friendly resume templates and formats for freshers and experienced professionals. Choose a design and build your resume with NextCV.",
   path: "/templates",
   keywords: [
     "resume templates",

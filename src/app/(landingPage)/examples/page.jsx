@@ -4,9 +4,9 @@ import { ArrowRight, BookOpen, Sparkles, Target, Zap } from "lucide-react";
 import ExamplesGallery from "./ExamplesGallery";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Examples for Freshers in India 2026 | NextCV",
+  title: "Resume Examples & Samples for Jobs in India 2026",
   description:
-    "Explore illustrative resume examples for Indian job seekers, freshers, developers, and data analysts.",
+    "Explore resume examples and samples for Indian jobs, including fresher, IT, developer, non-technical, and experienced professional resumes.",
   path: "/examples",
   keywords: [
     "resume examples",

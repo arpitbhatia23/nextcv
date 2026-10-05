@@ -3,9 +3,9 @@ import careerPages from "../career-pages.json";
 import { createSeoMetadata } from "@/shared/utils/seo";
 
 export const metadata = createSeoMetadata({
-  title: "Career Guide | NextCV",
+  title: "Career Guide: Get Hired, Build Your Resume & Ace Interviews | NextCV",
   description:
-    "Explore practical career guides on job search, resumes, interviews, skills, career growth, and landing your next job with NextCV.",
+    "Get practical career tips to build a better resume, find jobs, prepare for interviews, improve your skills, and get hired faster.",
   path: "/career",
   keywords: [
     "career guide",

@@ -4,9 +4,9 @@ import { Mail, MessageSquare, MapPin, ShieldCheck, ArrowRight } from "lucide-rea
 import Link from "next/link";
 
 export const metadata = createSeoMetadata({
-  title: "Contact NextCV | Resume Support & Enquiries",
+  title: "Contact NextCV | Get Help with Your Resume & Career Tools",
   description:
-    "Contact NextCV for resume builder support, account questions, payment help, template issues, and general enquiries.",
+    "Have a question about NextCV? Get help with your resume, account, payments, templates, AI tools, and other career-related services.",
   path: "/contact",
   keywords: ["contact nextcv", "resume builder support", "nextcv help"],
 });

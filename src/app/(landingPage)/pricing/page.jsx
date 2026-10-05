@@ -20,9 +20,10 @@ import {
 } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Builder Pricing in India | Plans from ₹49 | NextCV",
+  title: "Resume Price: How Much Does a Resume Cost? | NextCV ₹49+",
   description:
-    "Create a professional resume with NextCV. Choose from Basic, Standard, Premium and Elite plans. Get 20% OFF your first payment with coupon FIRST20. Elite also includes a professional portfolio website.",
+    "Looking for an affordable resume builder? NextCV starts at ₹49 with a one-time payment. Build an ATS-friendly resume, download your PDF and pay no monthly subscription.",
+  path: "/pricing",
   keywords: [
     "resume builder pricing India",
     "resume maker price India",

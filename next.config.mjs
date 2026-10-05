@@ -35,6 +35,20 @@ const nextConfig = {
     ],
   },
 
+  async redirects() {
+    return [
+      { source: "/ats-resume-tips", destination: "/ats-resume-checker", permanent: true },
+      { source: "/how-to-make-ats-friendly-resume", destination: "/ats-resume-checker", permanent: true },
+      { source: "/ats-resume-mistakes", destination: "/ats-resume-checker", permanent: true },
+      { source: "/what-is-ats-resume", destination: "/ats-resume-checker", permanent: true },
+      { source: "/best-resume-builder-india", destination: "/templates", permanent: true },
+      { source: "/online-resume-maker-india", destination: "/templates", permanent: true },
+      { source: "/resume-vs-cv-difference", destination: "/career/software-engineer-resume-guide", permanent: true },
+      { source: "/hr-interview-questions-and-answers", destination: "/career/hr-manager-interview-questions", permanent: true },
+      { source: "/resume-builder-pricing-india", destination: "/pricing", permanent: true },
+    ];
+  },
+
   // cacheComponents: true,
   experimental: {
     cssChunking: true,

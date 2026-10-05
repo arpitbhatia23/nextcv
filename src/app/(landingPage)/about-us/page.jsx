@@ -14,9 +14,9 @@ import {
 import { createSeoMetadata } from "@/shared/utils/seo";
 
 export const metadata = createSeoMetadata({
-  title: "About NextCV | AI Resume Builder for Freshers in India",
+  title: "What Is NextCV? | AI Resume & Career Tools for Job Seekers",
   description:
-    "Learn about NextCV, an AI-powered ATS resume builder helping Indian freshers and job seekers create professional resumes from ₹49 to ₹399 per resume.",
+    "Meet NextCV, an AI-powered career platform built to help job seekers create ATS resumes, improve their profiles, generate cover letters, and get job-ready.",
   path: "/about-us",
   keywords: ["nextcv", "ai resume builder india", "resume builder for freshers"],
 });
