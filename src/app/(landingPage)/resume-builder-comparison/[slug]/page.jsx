@@ -8,6 +8,7 @@ import {
   comparisonFeatureLabels,
   featureStatusLabels,
 } from "../../comparison_pages.js";
+import { createSeoMetadata } from "@/shared/utils/seo.js";
 
 // ---------------------------------------------------------
 // STATIC PARAMS
@@ -31,27 +32,11 @@ export async function generateMetadata({ params }) {
   if (!page) {
     return {};
   }
-
-  return {
+  return createSeoMetadata({
     title: page.seo.title,
-    description: page.seo.description,
-
-    alternates: {
-      canonical: `/resume-builder-comparison/${page.slug}`,
-    },
-
-    openGraph: {
-      title: page.seo.title,
-      description: page.seo.description,
-      type: "article",
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: page.seo.title,
-      description: page.seo.description,
-    },
-  };
+    description: page.seo?.description,
+    path: `/resume-builder-comparison/${page.slug}`,
+  });
 }
 
 // ---------------------------------------------------------

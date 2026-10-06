@@ -2,7 +2,7 @@ import { client } from "@/sanity";
 import seoPages from "./(landingPage)/seo-pages.json" with { type: "json" };
 import careerPages from "./(landingPage)/career-pages.json" with { type: "json" };
 import { SITE_URL } from "@/shared/utils/seo";
-import { getComparisonPages } from "./(landingPage)/comparison_pages";
+import { comparisonPages } from "./(landingPage)/comparison_pages";
 
 // Fallback timestamp used when a source does not provide a modification date.
 const BUILD_FALLBACK_DATE = new Date("2026-10-05T04:38:16.000Z");
@@ -53,12 +53,6 @@ export default async function sitemap() {
 
   /* =========================================================
      SEO LANDING PAGES
-     
-     seo-pages.json structure:
-     {
-       "slug": "ats-friendly-resume-format-india",
-       "title": "..."
-     }
   ========================================================= */
 
   const dynamicSeoPages = (seoPages || [])
@@ -70,12 +64,6 @@ export default async function sitemap() {
 
   /* =========================================================
      CAREER PAGES
-     
-     career-pages.json structure:
-     {
-       "slug": "data-scientist-resume-guide",
-       "title": "..."
-     }
   ========================================================= */
 
   const careerPageEntries = (careerPages || [])
@@ -100,24 +88,12 @@ export default async function sitemap() {
      COMPARISON PAGES
   ========================================================= */
 
-  const comparisonPages = (getComparisonPages || []).map(page => {
-    if (typeof page === "string") {
-      return {
-        url: page.startsWith("http") ? page : `${baseUrl}/${page.replace(/^\/+/, "")}`,
-        lastModified: BUILD_FALLBACK_DATE,
-      };
-    }
-
-    return {
-      ...page,
-      url: page.url?.startsWith("http")
-        ? page.url
-        : `${baseUrl}/${String(page.url || "")
-            .replace(/^\/+/, "")
-            .replace(/\/+$/, "")}`,
-      lastModified: page.lastModified || BUILD_FALLBACK_DATE,
-    };
-  });
+  const comparisonPageEntries = (comparisonPages || [])
+    .filter(page => page?.slug)
+    .map(page => ({
+      url: `${baseUrl}/resume-builder-comparison/${page.slug.replace(/^\/+|\/+$/g, "")}`,
+      lastModified: page?._updatedAt ? new Date(page._updatedAt) : BUILD_FALLBACK_DATE,
+    }));
 
   /* =========================================================
      FINAL SITEMAP
@@ -128,6 +104,6 @@ export default async function sitemap() {
     ...careerPageEntries,
     ...dynamicSeoPages,
     ...blogPages,
-    ...comparisonPages,
+    ...comparisonPageEntries,
   ];
 }
