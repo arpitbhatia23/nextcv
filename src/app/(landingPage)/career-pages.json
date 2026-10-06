@@ -76,7 +76,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Software Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.5L – ₹8.0L LPA *(Product MNCs & Top Startups: ₹10L – ₹18L LPA)*\n- **Mid-Level Professional (3–6 Years):** ₹10.0L – ₹20.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹22.0L – ₹45.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Gurugram, Pune, Mumbai\n- **Market Demand:** High\n- **Key Compensation Drivers:** System design, Cloud architecture, Data structures & algorithms"
       },
       {
         "id": "related-roles",
@@ -99,6 +99,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.5L – ₹8.0L LPA",
+      "midLevel": "₹10.0L – ₹20.0L LPA",
+      "seniorLevel": "₹22.0L – ₹45.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Gurugram",
+        "Pune",
+        "Mumbai"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "System design, Cloud architecture, Data structures & algorithms"
     }
   },
   {
@@ -178,7 +194,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Data Scientist** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹6.0L – ₹10.0L LPA *(Product Tech: ₹12L – ₹20L LPA)*\n- **Mid-Level Professional (3–6 Years):** ₹12.0L – ₹24.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹26.0L – ₹50.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Gurugram, Pune, Mumbai\n- **Market Demand:** Very High\n- **Key Compensation Drivers:** Machine learning models, GenAI expertise, Python/R, SQL & Business acumen"
       },
       {
         "id": "related-roles",
@@ -201,6 +217,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹6.0L – ₹10.0L LPA",
+      "midLevel": "₹12.0L – ₹24.0L LPA",
+      "seniorLevel": "₹26.0L – ₹50.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Gurugram",
+        "Pune",
+        "Mumbai"
+      ],
+      "marketDemand": "Very High",
+      "keyDrivers": "Machine learning models, GenAI expertise, Python/R, SQL & Business acumen"
     }
   },
   {
@@ -280,7 +312,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Data Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.5L – ₹6.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.0L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹28.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Hyderabad, Mumbai, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Advanced SQL, Python, Power BI/Tableau, Statistical modeling"
       },
       {
         "id": "related-roles",
@@ -303,6 +335,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.5L – ₹6.5L LPA",
+      "midLevel": "₹7.0L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹28.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Hyderabad",
+        "Mumbai",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Advanced SQL, Python, Power BI/Tableau, Statistical modeling"
     }
   },
   {
@@ -382,7 +430,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Product Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹8.0L – ₹15.0L LPA (Associate PM)\n- **Mid-Level Professional (3–6 Years):** ₹16.0L – ₹28.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹30.0L – ₹60.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Mumbai, Hyderabad\n- **Market Demand:** Very High\n- **Key Compensation Drivers:** Product strategy, User research, Data-driven roadmap execution, Metric ownership"
       },
       {
         "id": "related-roles",
@@ -405,6 +453,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹8.0L – ₹15.0L LPA (Associate PM)",
+      "midLevel": "₹16.0L – ₹28.0L LPA",
+      "seniorLevel": "₹30.0L – ₹60.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Mumbai",
+        "Hyderabad"
+      ],
+      "marketDemand": "Very High",
+      "keyDrivers": "Product strategy, User research, Data-driven roadmap execution, Metric ownership"
     }
   },
   {
@@ -484,7 +547,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **UX Designer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.0L – ₹7.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹8.5L – ₹16.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹18.0L – ₹35.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Gurugram, Pune, Hyderabad\n- **Market Demand:** High\n- **Key Compensation Drivers:** Figma proficiency, User testing, Information architecture, Design systems"
       },
       {
         "id": "related-roles",
@@ -507,6 +570,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.0L – ₹7.5L LPA",
+      "midLevel": "₹8.5L – ₹16.0L LPA",
+      "seniorLevel": "₹18.0L – ₹35.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Gurugram",
+        "Pune",
+        "Hyderabad"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Figma proficiency, User testing, Information architecture, Design systems"
     }
   },
   {
@@ -586,7 +665,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **UI Designer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.5L – ₹6.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.0L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹28.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Gurugram, Pune\n- **Market Demand:** Moderate to High\n- **Key Compensation Drivers:** Visual design, Prototyping, Design systems, UI animation"
       },
       {
         "id": "related-roles",
@@ -609,6 +688,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.5L – ₹6.5L LPA",
+      "midLevel": "₹7.0L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹28.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Gurugram",
+        "Pune"
+      ],
+      "marketDemand": "Moderate to High",
+      "keyDrivers": "Visual design, Prototyping, Design systems, UI animation"
     }
   },
   {
@@ -688,7 +782,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Digital Marketing Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹6.5L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹30.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Mumbai, Delhi NCR\n- **Market Demand:** High\n- **Key Compensation Drivers:** Performance marketing (ROAS), SEO/SEM strategies, Analytics, Content strategy"
       },
       {
         "id": "related-roles",
@@ -711,6 +805,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.5L LPA",
+      "midLevel": "₹6.5L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹30.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Mumbai",
+        "Delhi NCR"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Performance marketing (ROAS), SEO/SEM strategies, Analytics, Content strategy"
     }
   },
   {
@@ -790,7 +899,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **SEO Specialist** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.8L – ₹4.8L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.5L – ₹11.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹12.0L – ₹22.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Noida, Mumbai, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Technical SEO, Keyword research, Programmatic SEO, Search Analytics"
       },
       {
         "id": "related-roles",
@@ -813,6 +922,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.8L – ₹4.8L LPA",
+      "midLevel": "₹5.5L – ₹11.0L LPA",
+      "seniorLevel": "₹12.0L – ₹22.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Noida",
+        "Mumbai",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Technical SEO, Keyword research, Programmatic SEO, Search Analytics"
     }
   },
   {
@@ -892,7 +1017,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Content Writer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.5L – ₹4.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.0L – ₹9.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹10.0L – ₹18.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Delhi NCR, Mumbai, Remote\n- **Market Demand:** Moderate to High\n- **Key Compensation Drivers:** B2B/SaaS writing, Copywriting, SEO content strategy, Editing"
       },
       {
         "id": "related-roles",
@@ -915,6 +1040,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.5L – ₹4.5L LPA",
+      "midLevel": "₹5.0L – ₹9.5L LPA",
+      "seniorLevel": "₹10.0L – ₹18.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Delhi NCR",
+        "Mumbai",
+        "Remote"
+      ],
+      "marketDemand": "Moderate to High",
+      "keyDrivers": "B2B/SaaS writing, Copywriting, SEO content strategy, Editing"
     }
   },
   {
@@ -994,7 +1134,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Business Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.5L – ₹7.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹8.0L – ₹15.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹16.0L – ₹30.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Hyderabad, Pune, Mumbai\n- **Market Demand:** High\n- **Key Compensation Drivers:** BRD/FRD documentation, Agile workflows, SQL, Client stakeholder management"
       },
       {
         "id": "related-roles",
@@ -1017,6 +1157,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.5L – ₹7.5L LPA",
+      "midLevel": "₹8.0L – ₹15.0L LPA",
+      "seniorLevel": "₹16.0L – ₹30.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Hyderabad",
+        "Pune",
+        "Mumbai"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "BRD/FRD documentation, Agile workflows, SQL, Client stakeholder management"
     }
   },
   {
@@ -1096,7 +1252,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **HR Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.2L – ₹5.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹6.5L – ₹13.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹14.0L – ₹28.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Gurugram, Hyderabad, Chennai\n- **Market Demand:** High\n- **Key Compensation Drivers:** Talent acquisition, HR Ops, Employee engagement, Compliance & Policy"
       },
       {
         "id": "related-roles",
@@ -1119,6 +1275,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.2L – ₹5.5L LPA",
+      "midLevel": "₹6.5L – ₹13.0L LPA",
+      "seniorLevel": "₹14.0L – ₹28.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Gurugram",
+        "Hyderabad",
+        "Chennai"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Talent acquisition, HR Ops, Employee engagement, Compliance & Policy"
     }
   },
   {
@@ -1198,7 +1370,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Technical Recruiter** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹6.0L – ₹12.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹13.0L – ₹24.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Gurugram, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Tech sourcing (LinkedIn/Github), Boolean search, Candidate pipeline speed"
       },
       {
         "id": "related-roles",
@@ -1221,6 +1393,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.5L LPA",
+      "midLevel": "₹6.0L – ₹12.0L LPA",
+      "seniorLevel": "₹13.0L – ₹24.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Gurugram",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Tech sourcing (LinkedIn/Github), Boolean search, Candidate pipeline speed"
     }
   },
   {
@@ -1300,7 +1487,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Sales Executive** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.0L LPA + Incentives\n- **Mid-Level Professional (3–6 Years):** ₹5.5L – ₹11.0L LPA + Incentives\n- **Senior / Lead Professional (7+ Years):** ₹12.0L – ₹25.0L+ LPA + OTE\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Delhi NCR, Pune, Hyderabad\n- **Market Demand:** High\n- **Key Compensation Drivers:** Lead conversion rate, B2B SaaS sales, Deal closure, Pipeline management"
       },
       {
         "id": "related-roles",
@@ -1323,6 +1510,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.0L LPA + Incentives",
+      "midLevel": "₹5.5L – ₹11.0L LPA + Incentives",
+      "seniorLevel": "₹12.0L – ₹25.0L+ LPA + OTE",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Delhi NCR",
+        "Pune",
+        "Hyderabad"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Lead conversion rate, B2B SaaS sales, Deal closure, Pipeline management"
     }
   },
   {
@@ -1402,7 +1605,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Account Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.5L – ₹6.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.0L – ₹13.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹14.0L – ₹26.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Gurugram, Hyderabad\n- **Market Demand:** High\n- **Key Compensation Drivers:** Client retention, Account expansion/upsell, Relationship management"
       },
       {
         "id": "related-roles",
@@ -1425,6 +1628,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.5L – ₹6.0L LPA",
+      "midLevel": "₹7.0L – ₹13.5L LPA",
+      "seniorLevel": "₹14.0L – ₹26.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Gurugram",
+        "Hyderabad"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Client retention, Account expansion/upsell, Relationship management"
     }
   },
   {
@@ -1504,7 +1722,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Financial Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.0L – ₹7.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.5L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹30.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Mumbai, Bengaluru, Gurugram, Hyderabad\n- **Market Demand:** High\n- **Key Compensation Drivers:** Financial modeling, Forecasting, Valuation, Advanced Excel & SQL"
       },
       {
         "id": "related-roles",
@@ -1527,6 +1745,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.0L – ₹7.0L LPA",
+      "midLevel": "₹7.5L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹30.0L+ LPA",
+      "topLocations": [
+        "Mumbai",
+        "Bengaluru",
+        "Gurugram",
+        "Hyderabad"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Financial modeling, Forecasting, Valuation, Advanced Excel & SQL"
     }
   },
   {
@@ -1606,7 +1839,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Accountant** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.5L – ₹4.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹4.8L – ₹9.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹10.0L – ₹18.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Mumbai, Delhi NCR, Bengaluru, Chennai, Kolkata\n- **Market Demand:** Stable / High\n- **Key Compensation Drivers:** GST, Tally Prime / SAP, Financial reporting, Statutory audits"
       },
       {
         "id": "related-roles",
@@ -1629,6 +1862,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.5L – ₹4.5L LPA",
+      "midLevel": "₹4.8L – ₹9.0L LPA",
+      "seniorLevel": "₹10.0L – ₹18.0L+ LPA",
+      "topLocations": [
+        "Mumbai",
+        "Delhi NCR",
+        "Bengaluru",
+        "Chennai",
+        "Kolkata"
+      ],
+      "marketDemand": "Stable / High",
+      "keyDrivers": "GST, Tally Prime / SAP, Financial reporting, Statutory audits"
     }
   },
   {
@@ -1708,7 +1957,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Investment Banking Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹9.0L – ₹18.0L LPA (Global Investment Banks: ₹16L – ₹30L)\n- **Mid-Level Professional (3–6 Years):** ₹18.0L – ₹35.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹38.0L – ₹80.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Mumbai, Bengaluru, Gurugram\n- **Market Demand:** High (Competitive)\n- **Key Compensation Drivers:** LBO/DCF Financial modeling, M&A deal execution, Pitchbook generation"
       },
       {
         "id": "related-roles",
@@ -1731,6 +1980,20 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹9.0L – ₹18.0L LPA (Global Investment Banks: ₹16L – ₹30L)",
+      "midLevel": "₹18.0L – ₹35.0L LPA",
+      "seniorLevel": "₹38.0L – ₹80.0L+ LPA",
+      "topLocations": [
+        "Mumbai",
+        "Bengaluru",
+        "Gurugram"
+      ],
+      "marketDemand": "High (Competitive)",
+      "keyDrivers": "LBO/DCF Financial modeling, M&A deal execution, Pitchbook generation"
     }
   },
   {
@@ -1810,7 +2073,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Project Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹6.0L – ₹10.0L LPA (Associate PM)\n- **Mid-Level Professional (3–6 Years):** ₹11.0L – ₹19.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹20.0L – ₹38.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Pune, Gurugram, Chennai\n- **Market Demand:** High\n- **Key Compensation Drivers:** PMP / Scrum Master certification, Delivery tracking, Risk mitigation"
       },
       {
         "id": "related-roles",
@@ -1833,6 +2096,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹6.0L – ₹10.0L LPA (Associate PM)",
+      "midLevel": "₹11.0L – ₹19.0L LPA",
+      "seniorLevel": "₹20.0L – ₹38.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Pune",
+        "Gurugram",
+        "Chennai"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "PMP / Scrum Master certification, Delivery tracking, Risk mitigation"
     }
   },
   {
@@ -1912,7 +2191,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **DevOps Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹5.0L – ₹9.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹10.0L – ₹20.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹22.0L – ₹42.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Pune, Gurugram, Chennai\n- **Market Demand:** Very High\n- **Key Compensation Drivers:** AWS/Azure/GCP, Kubernetes, Docker, CI/CD pipelines, Infrastructure as Code (Terraform)"
       },
       {
         "id": "related-roles",
@@ -1935,6 +2214,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹5.0L – ₹9.0L LPA",
+      "midLevel": "₹10.0L – ₹20.0L LPA",
+      "seniorLevel": "₹22.0L – ₹42.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Pune",
+        "Gurugram",
+        "Chennai"
+      ],
+      "marketDemand": "Very High",
+      "keyDrivers": "AWS/Azure/GCP, Kubernetes, Docker, CI/CD pipelines, Infrastructure as Code (Terraform)"
     }
   },
   {
@@ -2014,7 +2309,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Cybersecurity Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.8L – ₹8.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹9.5L – ₹18.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹19.0L – ₹36.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Gurugram, Pune, Mumbai\n- **Market Demand:** Very High\n- **Key Compensation Drivers:** SIEM tools, Penetration testing, CEH/CISSP certifications, Network security"
       },
       {
         "id": "related-roles",
@@ -2037,6 +2332,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.8L – ₹8.5L LPA",
+      "midLevel": "₹9.5L – ₹18.0L LPA",
+      "seniorLevel": "₹19.0L – ₹36.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Gurugram",
+        "Pune",
+        "Mumbai"
+      ],
+      "marketDemand": "Very High",
+      "keyDrivers": "SIEM tools, Penetration testing, CEH/CISSP certifications, Network security"
     }
   },
   {
@@ -2116,7 +2427,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Network Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.5L – ₹10.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹11.0L – ₹22.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Pune, Chennai, Mumbai\n- **Market Demand:** Moderate to High\n- **Key Compensation Drivers:** CCNA/CCNP, Routing & Switching, Firewalls, Cloud networking"
       },
       {
         "id": "related-roles",
@@ -2139,6 +2450,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.0L LPA",
+      "midLevel": "₹5.5L – ₹10.5L LPA",
+      "seniorLevel": "₹11.0L – ₹22.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Pune",
+        "Chennai",
+        "Mumbai"
+      ],
+      "marketDemand": "Moderate to High",
+      "keyDrivers": "CCNA/CCNP, Routing & Switching, Firewalls, Cloud networking"
     }
   },
   {
@@ -2218,7 +2545,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Mechanical Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.8L – ₹11.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹12.0L – ₹24.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Pune, Chennai, Bengaluru, Ahmedabad, Coimbatore\n- **Market Demand:** Moderate\n- **Key Compensation Drivers:** CAD/CAM (SolidWorks, AutoCAD), Thermal analysis, Manufacturing processes"
       },
       {
         "id": "related-roles",
@@ -2241,6 +2568,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.5L LPA",
+      "midLevel": "₹5.8L – ₹11.0L LPA",
+      "seniorLevel": "₹12.0L – ₹24.0L+ LPA",
+      "topLocations": [
+        "Pune",
+        "Chennai",
+        "Bengaluru",
+        "Ahmedabad",
+        "Coimbatore"
+      ],
+      "marketDemand": "Moderate",
+      "keyDrivers": "CAD/CAM (SolidWorks, AutoCAD), Thermal analysis, Manufacturing processes"
     }
   },
   {
@@ -2320,7 +2663,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Civil Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.8L – ₹4.8L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.0L – ₹10.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹11.0L – ₹22.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Mumbai, Bengaluru, Delhi NCR, Hyderabad, Pune\n- **Market Demand:** Moderate\n- **Key Compensation Drivers:** AutoCAD, Structural analysis (STAAD Pro), Site management, Estimation"
       },
       {
         "id": "related-roles",
@@ -2343,6 +2686,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.8L – ₹4.8L LPA",
+      "midLevel": "₹5.0L – ₹10.0L LPA",
+      "seniorLevel": "₹11.0L – ₹22.0L+ LPA",
+      "topLocations": [
+        "Mumbai",
+        "Bengaluru",
+        "Delhi NCR",
+        "Hyderabad",
+        "Pune"
+      ],
+      "marketDemand": "Moderate",
+      "keyDrivers": "AutoCAD, Structural analysis (STAAD Pro), Site management, Estimation"
     }
   },
   {
@@ -2422,7 +2781,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Electrical Engineer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹3.0L – ₹5.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.8L – ₹11.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹12.0L – ₹25.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Pune, Chennai, Hyderabad, Vadodara\n- **Market Demand:** Moderate to High\n- **Key Compensation Drivers:** PLC/SCADA, Circuit design, Power systems, EV/Automation tech"
       },
       {
         "id": "related-roles",
@@ -2445,6 +2804,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹3.0L – ₹5.5L LPA",
+      "midLevel": "₹5.8L – ₹11.5L LPA",
+      "seniorLevel": "₹12.0L – ₹25.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Pune",
+        "Chennai",
+        "Hyderabad",
+        "Vadodara"
+      ],
+      "marketDemand": "Moderate to High",
+      "keyDrivers": "PLC/SCADA, Circuit design, Power systems, EV/Automation tech"
     }
   },
   {
@@ -2524,7 +2899,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Registered Nurse** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.4L – ₹4.2L LPA\n- **Mid-Level Professional (3–6 Years):** ₹4.5L – ₹7.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹8.0L – ₹15.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Delhi NCR, Chennai, Hyderabad\n- **Market Demand:** Very High\n- **Key Compensation Drivers:** ICU/Critical Care specialization, NABH hospital experience, Overseas licensing (NCLEX)"
       },
       {
         "id": "related-roles",
@@ -2547,6 +2922,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.4L – ₹4.2L LPA",
+      "midLevel": "₹4.5L – ₹7.5L LPA",
+      "seniorLevel": "₹8.0L – ₹15.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Delhi NCR",
+        "Chennai",
+        "Hyderabad"
+      ],
+      "marketDemand": "Very High",
+      "keyDrivers": "ICU/Critical Care specialization, NABH hospital experience, Overseas licensing (NCLEX)"
     }
   },
   {
@@ -2626,7 +3017,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **School Teacher** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.5L – ₹4.5L LPA\n- **Mid-Level Professional (3–6 Years):** ₹4.8L – ₹8.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹9.0L – ₹16.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Delhi NCR, Mumbai, Hyderabad, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** B.Ed / CTET qualifications, International school experience (IB/IGCSE), Subject expertise"
       },
       {
         "id": "related-roles",
@@ -2649,6 +3040,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.5L – ₹4.5L LPA",
+      "midLevel": "₹4.8L – ₹8.5L LPA",
+      "seniorLevel": "₹9.0L – ₹16.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Delhi NCR",
+        "Mumbai",
+        "Hyderabad",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "B.Ed / CTET qualifications, International school experience (IB/IGCSE), Subject expertise"
     }
   },
   {
@@ -2728,7 +3135,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Graphic Designer** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.8L – ₹4.8L LPA\n- **Mid-Level Professional (3–6 Years):** ₹5.0L – ₹9.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹10.0L – ₹20.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Delhi NCR, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Portfolio quality, Adobe Illustrator/Photoshop, Branding & Visual identity"
       },
       {
         "id": "related-roles",
@@ -2751,6 +3158,21 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.8L – ₹4.8L LPA",
+      "midLevel": "₹5.0L – ₹9.5L LPA",
+      "seniorLevel": "₹10.0L – ₹20.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Delhi NCR",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Portfolio quality, Adobe Illustrator/Photoshop, Branding & Visual identity"
     }
   },
   {
@@ -2830,7 +3252,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Customer Support Executive** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹2.2L – ₹4.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹4.2L – ₹7.5L LPA\n- **Senior / Lead Professional (7+ Years):** ₹8.0L – ₹15.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Hyderabad, Gurugram, Pune, Chennai\n- **Market Demand:** High\n- **Key Compensation Drivers:** English communication, CRM tools (Zendesk/Salesforce), SLA adherence, International voice process"
       },
       {
         "id": "related-roles",
@@ -2853,6 +3275,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹2.2L – ₹4.0L LPA",
+      "midLevel": "₹4.2L – ₹7.5L LPA",
+      "seniorLevel": "₹8.0L – ₹15.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Hyderabad",
+        "Gurugram",
+        "Pune",
+        "Chennai"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "English communication, CRM tools (Zendesk/Salesforce), SLA adherence, International voice process"
     }
   },
   {
@@ -2932,7 +3370,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Operations Manager** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.0L – ₹7.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.5L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹32.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Gurugram, Mumbai, Hyderabad, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Process optimization, Six Sigma / Lean certification, Logistics & Supply chain coordination"
       },
       {
         "id": "related-roles",
@@ -2955,6 +3393,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.0L – ₹7.0L LPA",
+      "midLevel": "₹7.5L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹32.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Gurugram",
+        "Mumbai",
+        "Hyderabad",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Process optimization, Six Sigma / Lean certification, Logistics & Supply chain coordination"
     }
   },
   {
@@ -3034,7 +3488,7 @@
       {
         "id": "salary-and-market-data",
         "heading": "Salary and Market Data",
-        "content": "Do not treat a single salary number as universal. Compensation depends on country, city, employer, industry, experience, level, specialization and total compensation structure. For an India-focused NextCV page, salary figures should be sourced from current India-specific data and clearly labeled by geography and experience level. U.S. BLS figures are useful for understanding occupations but should not be presented as Indian salary expectations.\n\nFor example, BLS currently describes occupational profiles using duties, work environment, education, pay and outlook, but its wage data are U.S. data. citeturn2search10"
+        "content": "Compensation for a **Supply Chain Analyst** in India varies based on experience level, location, company tier, and specialized technical expertise.\n\n### Salary Ranges in India (Annual LPA)\n\n- **Entry-Level / Junior (0–2 Years):** ₹4.0L – ₹7.0L LPA\n- **Mid-Level Professional (3–6 Years):** ₹7.5L – ₹14.0L LPA\n- **Senior / Lead Professional (7+ Years):** ₹15.0L – ₹28.0L+ LPA\n\n### Key Market Insights & Top Employment Hubs\n\n- **Top Employment Hubs:** Bengaluru, Mumbai, Gurugram, Chennai, Pune\n- **Market Demand:** High\n- **Key Compensation Drivers:** Inventory forecasting, SAP/Oracle SCM, SQL & Data analytics, Logistics management"
       },
       {
         "id": "related-roles",
@@ -3057,6 +3511,22 @@
       "href": "/dashboard/builder",
       "secondary": "Explore Resume Guides",
       "secondaryHref": "/career"
+    },
+    "salaryData": {
+      "currency": "INR",
+      "period": "per annum",
+      "entryLevel": "₹4.0L – ₹7.0L LPA",
+      "midLevel": "₹7.5L – ₹14.0L LPA",
+      "seniorLevel": "₹15.0L – ₹28.0L+ LPA",
+      "topLocations": [
+        "Bengaluru",
+        "Mumbai",
+        "Gurugram",
+        "Chennai",
+        "Pune"
+      ],
+      "marketDemand": "High",
+      "keyDrivers": "Inventory forecasting, SAP/Oracle SCM, SQL & Data analytics, Logistics management"
     }
   },
   {

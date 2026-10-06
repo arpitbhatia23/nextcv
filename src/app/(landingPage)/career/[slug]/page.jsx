@@ -84,7 +84,12 @@ export default async function CareerPage({ params }) {
           {/* Sections Column */}
           <div className="lg:col-span-8">
             {sections.map((section, index) => (
-              <CareerSection key={section.id || index} section={section} index={index} />
+              <CareerSection
+                key={section.id || index}
+                section={section}
+                index={index}
+                salaryData={career.salaryData}
+              />
             ))}
 
             {/* Related Career Guides */}

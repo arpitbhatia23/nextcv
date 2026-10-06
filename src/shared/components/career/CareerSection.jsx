@@ -2,9 +2,10 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { CareerFAQ } from "./CareerFAQ";
 import { CareerChecklist } from "./CareerChecklist";
+import { CareerSalary } from "./CareerSalary";
 import { Check } from "lucide-react";
 
-export function CareerSection({ section, index }) {
+export function CareerSection({ section, index, salaryData }) {
   if (!section || !section.content || !section.content.trim()) return null;
 
   const headingLower = (section.heading || "").toLowerCase();
@@ -12,6 +13,7 @@ export function CareerSection({ section, index }) {
 
   const isFAQ = headingLower.includes("frequently asked questions") || headingLower.includes("faq");
   const isChecklist = headingLower.includes("checklist");
+  const isSalary = headingLower.includes("salary");
 
   return (
     <section id={section.id} className="scroll-mt-28 border-t border-[#E3E3DD] py-14 sm:py-20">
@@ -29,11 +31,13 @@ export function CareerSection({ section, index }) {
         {section.heading}
       </h2>
 
-      {/* Special handling for FAQ and Checklist */}
+      {/* Special handling for FAQ, Checklist, and Salary */}
       {isFAQ ? (
         <CareerFAQ content={section.content} />
       ) : isChecklist ? (
         <CareerChecklist content={section.content} />
+      ) : isSalary ? (
+        <CareerSalary content={section.content} salaryData={salaryData} />
       ) : (
         /* Regular Editorial Content Block */
         <div className="prose-nextcv text-base leading-8 text-[#5B625C]">
