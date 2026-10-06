@@ -195,6 +195,10 @@ const footerGroups = [
         label: "ATS Guide",
         href: "/ats-friendly-resume-format-india",
       },
+      {
+        label: "Resume Comparisons",
+        href: "/resume-builder-comparison",
+      },
     ],
   },
 

@@ -21,26 +21,26 @@ export default function CoverLetterSection() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-[#deddd6] bg-white p-4 shadow-sm sm:p-5">
+        <div className=" border border-[#deddd6] bg-white p-4 shadow-sm sm:p-5">
           <div className="flex items-center gap-2 border-b border-[#ebeae5] pb-3 text-xs font-semibold text-[#374138]">
             <FileText aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> Application inputs
           </div>
           <div className="grid gap-2 py-4 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
-            <div className="rounded-xl border border-[#e4e5df] bg-[#fafaf8] p-3">
+            <div className="border border-[#e4e5df] bg-[#fafaf8] p-3">
               <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-[#737b72]">
                 Your resume
               </span>
               <p className="mt-1 text-xs font-medium text-[#303a32]">Experience & skills</p>
             </div>
             <Plus aria-hidden="true" className="mx-auto h-4 w-4 text-[#929890] sm:mx-0" />
-            <div className="rounded-xl border border-[#e4e5df] bg-[#fafaf8] p-3">
+            <div className=" border border-[#e4e5df] bg-[#fafaf8] p-3">
               <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-[#737b72]">
                 Job description
               </span>
               <p className="mt-1 text-xs font-medium text-[#303a32]">Role requirements</p>
             </div>
             <Plus aria-hidden="true" className="mx-auto h-4 w-4 text-[#929890] sm:mx-0" />
-            <div className="rounded-xl border border-[#d9deeb] bg-[#f4f6fa] p-3">
+            <div className="border border-[#d9deeb] bg-[#f4f6fa] p-3">
               <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-[#66749d]">
                 Target role
               </span>
@@ -48,7 +48,7 @@ export default function CoverLetterSection() {
             </div>
           </div>
           <div className="rounded-xl border border-[#e7e5dc] bg-[#fbfaf6] p-4">
-            <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#737b72]">
+            <p className="text-[9px] font-semibold uppercase tracking-widest text-[#737b72]">
               Example letter preview
             </p>
             <p className="mt-3 font-serif text-sm text-[#303a32]">Dear Hiring Team,</p>

@@ -13,7 +13,7 @@ export default function BuildButton({
     <Button
       type="button"
       onClick={() => signIn("google", { callbackUrl })}
-      className={`h-12 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 ${className}`}
+      className={`rounded-none! h-12 bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 ${className}`}
     >
       {children}
       <ArrowRight aria-hidden="true" className="h-4 w-4" />

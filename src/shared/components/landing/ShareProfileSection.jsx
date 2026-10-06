@@ -37,8 +37,8 @@ export default function ShareProfileSection() {
         </div>
 
         <div className="relative mx-auto w-full max-w-xl">
-          <div className="absolute -left-2 top-6 h-[82%] w-[90%] rounded-3xl border border-[#e5e4dd] bg-[#f3f2ed] sm:-left-5" />
-          <article className="relative ml-auto w-[94%] overflow-hidden rounded-3xl border border-[#dbded8] bg-[#f8f8f4] shadow-[0_22px_60px_-44px_rgba(31,42,35,0.55)]">
+          <div className="absolute -left-2 top-6 h-[82%] w-[90%]  border border-[#e5e4dd] bg-[#f3f2ed] sm:-left-5" />
+          <article className="relative ml-auto w-[94%] overflow-hidden  border border-[#dbded8] bg-[#f8f8f4] shadow-[0_22px_60px_-44px_rgba(31,42,35,0.55)]">
             <div className="flex items-center justify-between border-b border-[#e2e4de] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#29352e]">
                 <Globe2 aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> Example profile
@@ -53,13 +53,13 @@ export default function ShareProfileSection() {
                 <div>
                   <p className="font-serif text-lg text-[#202a23]">Jordan Lee</p>
                   <p className="mt-1 text-xs text-[#6c746b]">Software Engineer</p>
-                  <span className="mt-2 inline-flex rounded-md border border-[#dcdfd8] bg-white px-2 py-1 text-[9px] text-[#626a62]">
+                  <span className="mt-2 inline-flex  border border-[#dcdfd8] bg-white px-2 py-1 text-[9px] text-[#626a62]">
                     Example profile
                   </span>
                 </div>
               </div>
               <div className="min-w-0">
-                <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#5268a8]">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-[#5268a8]">
                   About
                 </p>
                 <p className="mt-2 text-xs leading-5 text-[#59625b]">
@@ -70,7 +70,7 @@ export default function ShareProfileSection() {
                   {["Experience", "Projects", "Skills", "Education"].map(item => (
                     <div
                       key={item}
-                      className="rounded-lg border border-[#e1e3dd] bg-white px-3 py-2 text-[10px] font-medium text-[#525b53]"
+                      className=" border border-[#e1e3dd] bg-white px-3 py-2 text-[10px] font-medium text-[#525b53]"
                     >
                       {item}
                     </div>

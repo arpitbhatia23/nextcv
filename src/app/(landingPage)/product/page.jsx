@@ -47,7 +47,7 @@ const features = [
 function FeatureVisual({ type }) {
   if (type === "writing") {
     return (
-      <div className="rounded-2xl border border-[#deded7] bg-white p-5 shadow-sm sm:p-6">
+      <div className=" border border-[#deded7] bg-white p-5 shadow-sm sm:p-6">
         <div className="flex items-center justify-between gap-3 border-b border-[#ecebe5] pb-4">
           <span className="flex items-center gap-2 text-xs font-semibold text-[#303a32]">
             <Sparkles aria-hidden="true" className="h-4 w-4 text-[#344b93]" /> AI writing example
@@ -57,10 +57,10 @@ function FeatureVisual({ type }) {
         <p className="mt-4 text-[10px] font-semibold uppercase tracking-widest text-[#737a72]">
           Your project notes
         </p>
-        <p className="mt-2 rounded-lg bg-[#f5f4ee] p-3 text-xs leading-5 text-[#626a65]">
+        <p className="mt-2  bg-[#f5f4ee] p-3 text-xs leading-5 text-[#626a65]">
           Built a dashboard, improved page loading, worked with the design team.
         </p>
-        <div className="mt-4 rounded-xl border border-[#d9dce5] bg-[#f4f5f8] p-4">
+        <div className="mt-4  border border-[#d9dce5] bg-[#f4f5f8] p-4">
           <p className="text-[10px] font-semibold uppercase tracking-widest text-[#5268a8]">
             Suggested description · example
           </p>
@@ -75,18 +75,16 @@ function FeatureVisual({ type }) {
 
   if (type === "sharing") {
     return (
-      <div className="overflow-hidden rounded-2xl border border-[#deded7] bg-white shadow-sm">
+      <div className="overflow-hidden  border border-[#deded7] bg-white shadow-sm">
         <div className="flex items-center justify-between gap-3 border-b border-[#ecebe5] px-4 py-3">
           <span className="flex items-center gap-2 text-xs font-semibold text-[#303a32]">
             <Link2 aria-hidden="true" className="h-4 w-4 text-[#344b93]" /> Example resume link
           </span>
-          <span className="rounded-md bg-[#eef0f5] px-2 py-1 text-[10px] text-[#344b93]">
-            Preview
-          </span>
+          <span className=" bg-[#eef0f5] px-2 py-1 text-[10px] text-[#344b93]">Preview</span>
         </div>
         <div className="p-5 sm:p-6">
           <div className="flex items-start gap-4">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e1e5f0] font-serif text-sm text-[#344b93]">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center  bg-[#e1e5f0] font-serif text-sm text-[#344b93]">
               JD
             </div>
             <div className="min-w-0 flex-1">
@@ -96,7 +94,7 @@ function FeatureVisual({ type }) {
               </p>
             </div>
           </div>
-          <div className="mt-5 flex items-center gap-2 rounded-lg border border-[#e2e0d9] bg-[#faf9f6] px-3 py-2.5 text-xs text-[#59615b]">
+          <div className="mt-5 flex items-center gap-2  border border-[#e2e0d9] bg-[#faf9f6] px-3 py-2.5 text-xs text-[#59615b]">
             <Globe2 aria-hidden="true" className="h-4 w-4 shrink-0 text-[#5268a8]" />
             <span className="truncate">nextcv.in/r/your-name</span>
           </div>
@@ -109,7 +107,7 @@ function FeatureVisual({ type }) {
   }
 
   return (
-    <div className="rounded-2xl border border-[#deded7] bg-white p-5 shadow-sm sm:p-6">
+    <div className=" border border-[#deded7] bg-white p-5 shadow-sm sm:p-6">
       <div className="flex items-center justify-between border-b border-[#ecebe5] pb-4">
         <span className="flex items-center gap-2 text-xs font-semibold text-[#303a32]">
           <Globe2 aria-hidden="true" className="h-4 w-4 text-[#344b93]" /> Portfolio preview ·
@@ -118,7 +116,7 @@ function FeatureVisual({ type }) {
         <span className="text-[10px] text-[#737a72]">From your resume</span>
       </div>
       <div className="mt-4 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e1e5f0] font-serif text-sm text-[#344b93]">
+        <div className="flex h-10 w-10 items-center justify-center  bg-[#e1e5f0] font-serif text-sm text-[#344b93]">
           JD
         </div>
         <div>
@@ -130,7 +128,7 @@ function FeatureVisual({ type }) {
         {["About", "Experience", "Projects", "Skills"].map(item => (
           <div
             key={item}
-            className="rounded-lg border border-[#e2e0d9] bg-[#faf9f6] px-3 py-3 text-xs font-medium text-[#4d574f]"
+            className=" border border-[#e2e0d9] bg-[#faf9f6] px-3 py-3 text-xs font-medium text-[#4d574f]"
           >
             {item}
           </div>
@@ -160,7 +158,7 @@ export default function ProductPage() {
               <BuildButton className="w-full sm:w-auto" />
               <Link
                 href="/pricing"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#c9cbc3] bg-white/70 px-5 py-3 text-sm font-semibold text-[#303a32] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
+                className="inline-flex min-h-12 items-center justify-center gap-2  border border-[#c9cbc3] bg-white/70 px-5 py-3 text-sm font-semibold text-[#303a32] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
               >
                 See plans <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
@@ -169,7 +167,7 @@ export default function ProductPage() {
               Free to build · One-time plans · No monthly subscription
             </p>
           </div>
-          <div className="rounded-3xl border border-[#deded7] bg-white p-4 shadow-[0_22px_60px_-44px_rgba(31,42,35,0.55)] sm:p-5">
+          <div className=" border border-[#deded7] bg-white p-4 shadow-[0_22px_60px_-44px_rgba(31,42,35,0.55)] sm:p-5">
             <div className="flex items-center justify-between border-b border-[#ecebe5] pb-3">
               <span className="text-xs font-semibold text-[#303a32]">Example workspace</span>
               <span className="text-[10px] text-[#737a72]">Resume → AI → share</span>
@@ -180,15 +178,12 @@ export default function ProductPage() {
                 { icon: Sparkles, label: "AI writing", text: "Clearer descriptions to review" },
                 { icon: Globe2, label: "Online profile", text: "Share your work by link" },
               ].map(({ icon: Icon, label, text }, index) => (
-                <div
-                  key={label}
-                  className="relative rounded-xl border border-[#e2e0d9] bg-[#faf9f6] p-3"
-                >
+                <div key={label} className="relative  border border-[#e2e0d9] bg-[#faf9f6] p-3">
                   <Icon aria-hidden="true" className="h-4 w-4 text-[#5268a8]" />
                   <p className="mt-3 text-xs font-semibold text-[#303a32]">{label}</p>
                   <p className="mt-1 text-[10px] leading-4 text-[#737a72]">{text}</p>
                   {index < 2 && (
-                    <span className="absolute -right-2 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 items-center justify-center rounded-full border border-[#e2e0d9] bg-white text-[9px] text-[#5268a8] sm:flex">
+                    <span className="absolute -right-2 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 items-center justify-center  border border-[#e2e0d9] bg-white text-[9px] text-[#5268a8] sm:flex">
                       →
                     </span>
                   )}
@@ -260,7 +255,7 @@ export default function ProductPage() {
           </div>
           <Link
             href="/pricing"
-            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#e8e9db] px-5 py-3 text-sm font-semibold text-[#1d2b24] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#17231f]"
+            className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2  bg-[#e8e9db] px-5 py-3 text-sm font-semibold text-[#1d2b24] transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#17231f]"
           >
             Compare plans <Check aria-hidden="true" className="h-4 w-4" />
           </Link>

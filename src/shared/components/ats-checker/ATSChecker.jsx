@@ -104,12 +104,12 @@ export default function ATSChecker() {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-10">
+      <div className="bg-white  shadow-sm border border-slate-200 p-6 md:p-10">
         {/* Upload Section */}
         {!file ? (
           <div
             {...getRootProps()}
-            className={`relative flex flex-col items-center justify-center w-full h-72 rounded-2xl border-2 border-dashed transition-all cursor-pointer ${
+            className={`relative flex flex-col items-center justify-center w-full h-72  border-2 border-dashed transition-all cursor-pointer ${
               isDragActive
                 ? "border-indigo-600 bg-indigo-50/50 scale-[1.01]"
                 : "border-slate-300 hover:border-indigo-500 hover:bg-slate-50/60"
@@ -118,7 +118,7 @@ export default function ATSChecker() {
             <input {...getInputProps()} />
 
             <div className="flex flex-col items-center text-center space-y-4 px-4">
-              <div className="p-4 bg-[#f2f3ff] border border-[#e4e7ff] rounded-2xl text-[#3730d8] shadow-xs">
+              <div className="p-4 bg-[#f2f3ff] border border-[#e4e7ff]  text-[#3730d8] shadow-xs">
                 <UploadCloud className="w-8 h-8 text-indigo-600" />
               </div>
 
@@ -135,11 +135,11 @@ export default function ATSChecker() {
               </div>
 
               <div className="flex items-center gap-3 pt-2">
-                <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[11px] font-semibold font-mono">
+                <span className="px-3 py-1 bg-slate-100 text-slate-600  text-[11px] font-semibold font-mono">
                   PDF Format
                 </span>
 
-                <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-[11px] font-semibold font-mono">
+                <span className="px-3 py-1 bg-slate-100 text-slate-600  text-[11px] font-semibold font-mono">
                   DOCX Format
                 </span>
               </div>
@@ -148,9 +148,9 @@ export default function ATSChecker() {
         ) : (
           <>
             {/* Uploaded File */}
-            <div className="flex items-center justify-between p-4 bg-indigo-50/80 rounded-2xl border border-indigo-100 mb-6">
+            <div className="flex items-center justify-between p-4 bg-indigo-50/80  border border-indigo-100 mb-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-indigo-100 rounded-xl text-indigo-600">
+                <div className="p-3 bg-indigo-100  text-indigo-600">
                   <FileText className="w-6 h-6" />
                 </div>
 
@@ -168,7 +168,7 @@ export default function ATSChecker() {
               {!analyzing && (
                 <button
                   onClick={removeFile}
-                  className="p-2 hover:bg-indigo-200/60 rounded-xl text-indigo-700 transition-colors text-xs font-semibold flex items-center gap-1"
+                  className="p-2 hover:bg-indigo-200/60  text-indigo-700 transition-colors text-xs font-semibold flex items-center gap-1"
                 >
                   <X className="w-4 h-4" />
                   Remove
@@ -197,7 +197,7 @@ export default function ATSChecker() {
                   onChange={e => setJobDescription(e.target.value)}
                   placeholder="Paste the job description here to check keyword gaps, missing skills, and JD match..."
                   rows={8}
-                  className="w-full resize-y rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none transition-all focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+                  className="w-full resize-y  border border-slate-200 bg-slate-50/50 px-4 py-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none transition-all focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                 />
 
                 <div className="flex items-center justify-between mt-2">
@@ -217,7 +217,7 @@ export default function ATSChecker() {
               <button
                 type="button"
                 onClick={handleAnalyze}
-                className="w-full flex items-center justify-center gap-2 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 transition-all shadow-sm hover:shadow-md"
+                className="w-full flex items-center justify-center gap-2  bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-6 transition-all shadow-sm hover:shadow-md"
               >
                 <Search className="w-5 h-5" />
                 {jobDescription.trim() ? "Analyze Resume & JD Match" : "Analyze ATS Score"}
@@ -228,7 +228,7 @@ export default function ATSChecker() {
 
         {/* Error */}
         {error && (
-          <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-2xl border border-red-200 flex items-center gap-3 text-xs sm:text-sm">
+          <div className="mt-4 p-4 bg-red-50 text-red-700  border border-red-200 flex items-center gap-3 text-xs sm:text-sm">
             <AlertCircle className="w-5 h-5 shrink-0 text-red-600" />
             <p className="font-medium">{error}</p>
           </div>
@@ -248,7 +248,7 @@ export default function ATSChecker() {
                   duration: 2,
                 }}
               >
-                <div className="w-12 h-12 bg-indigo-600 rounded-2xl shadow-md flex items-center justify-center text-white">
+                <div className="w-12 h-12 bg-indigo-600  shadow-md flex items-center justify-center text-white">
                   <Search className="w-6 h-6" />
                 </div>
               </motion.div>
@@ -260,7 +260,7 @@ export default function ATSChecker() {
                 {jobDescription.trim() ? "Analyzing Resume & JD..." : "Analyzing ATS Score..."}
               </p>
 
-              <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-slate-100  overflow-hidden">
                 <motion.div
                   className="h-full bg-indigo-600"
                   initial={{ width: "0%" }}

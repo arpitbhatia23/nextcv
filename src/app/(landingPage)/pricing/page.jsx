@@ -158,7 +158,7 @@ function DiscountPrice({ price }) {
         <span className="mb-1 text-sm text-muted-foreground line-through">₹{price}</span>
       </div>
 
-      <div className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-success/20 bg-success/5 px-2.5 py-1 text-xs font-semibold text-success">
+      <div className="mt-2 inline-flex items-center gap-1.5  border border-success/20 bg-success/5 px-2.5 py-1 text-xs font-semibold text-success">
         <Percent className="h-3 w-3" />
         With FIRST20
       </div>
@@ -173,7 +173,7 @@ export default function PricingPage() {
       <section className="border-b border-border bg-background">
         <div className="nc-container pb-14 pt-28 sm:pb-20 sm:pt-32">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-success/20 bg-success/5 px-4 py-2 text-xs font-semibold text-success">
+            <div className="mb-5 inline-flex items-center gap-2  border border-success/20 bg-success/5 px-4 py-2 text-xs font-semibold text-success">
               <Sparkles className="h-4 w-4" />
               FIRST20 · 20% off your first payment
             </div>
@@ -190,9 +190,9 @@ export default function PricingPage() {
             </p>
 
             {/* COUPON */}
-            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center justify-between gap-4 rounded-2xl border border-border bg-surface-muted p-4 sm:flex-row sm:px-5">
+            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center justify-between gap-4  border border-border bg-surface-muted p-4 sm:flex-row sm:px-5">
               <div className="flex items-center gap-3 text-left">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center  bg-primary text-white">
                   <Percent className="h-5 w-5" />
                 </div>
 
@@ -204,7 +204,7 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-dashed border-success/50 bg-surface px-4 py-2 font-mono text-sm font-bold tracking-widest text-success">
+              <div className=" border border-dashed border-success/50 bg-surface px-4 py-2 font-mono text-sm font-bold tracking-widest text-success">
                 FIRST20
               </div>
             </div>
@@ -240,7 +240,7 @@ export default function PricingPage() {
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <div className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                      <div className="inline-flex items-center gap-1.5 whitespace-nowrap  bg-primary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
                         <Star className="h-3 w-3 fill-current" />
                         Most Popular
                       </div>
@@ -256,7 +256,7 @@ export default function PricingPage() {
                       </h3>
                     </div>
 
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface-muted text-primary">
+                    <div className="flex h-10 w-10 items-center justify-center  bg-surface-muted text-primary">
                       <Icon className="h-5 w-5" />
                     </div>
                   </CardHeader>
@@ -275,7 +275,7 @@ export default function PricingPage() {
                         key={feature}
                         className={`flex items-start gap-2.5 text-sm ${
                           plan.name === "Elite" && feature === "Professional portfolio website"
-                            ? "rounded-xl border border-primary/20 bg-accent p-2.5 font-semibold text-primary"
+                            ? " border border-primary/20 bg-accent p-2.5 font-semibold text-primary"
                             : "text-foreground"
                         }`}
                       >
@@ -333,7 +333,7 @@ export default function PricingPage() {
       <section className="border-y border-border bg-surface py-16 sm:py-20">
         <div className="nc-container">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+            <span className="inline-flex items-center gap-2  border border-primary/20 bg-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
               <Crown className="h-3.5 w-3.5" />
               Elite feature
             </span>
@@ -370,7 +370,7 @@ export default function PricingPage() {
 
               return (
                 <div key={item.title} className="nc-card p-6">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface-muted text-primary">
+                  <div className="flex h-11 w-11 items-center justify-center  bg-surface-muted text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
 
@@ -382,7 +382,7 @@ export default function PricingPage() {
             })}
           </div>
 
-          <div className="mx-auto mt-8 max-w-3xl rounded-2xl border border-border bg-surface-muted p-5 text-center">
+          <div className="mx-auto mt-8 max-w-3xl  border border-border bg-surface-muted p-5 text-center">
             <p className="text-sm font-semibold text-foreground">
               Elite = Resume + Resume Sharing + Portfolio + Cover Letter
             </p>
@@ -399,12 +399,12 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid gap-5 lg:grid-cols-3">
             {/* RESUME SHARING */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-white">
+            <div className=" border border-slate-200 bg-white p-7 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
                 <Globe className="h-6 w-6" />
               </div>
 
-              <span className="mt-5 inline-flex rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
+              <span className="mt-5 inline-flex  border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
                 Premium & Elite
               </span>
 
@@ -422,12 +422,12 @@ export default function PricingPage() {
             </div>
 
             {/* PORTFOLIO */}
-            <div className="rounded-3xl border border-violet-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-600 text-white">
+            <div className=" border border-violet-200 bg-white p-7 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center  bg-violet-600 text-white">
                 <Layers className="h-6 w-6" />
               </div>
 
-              <span className="mt-5 inline-flex rounded-full border border-violet-200 bg-violet-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-violet-700">
+              <span className="mt-5 inline-flex  border border-violet-200 bg-violet-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-violet-700">
                 Elite Only
               </span>
 
@@ -445,12 +445,12 @@ export default function PricingPage() {
             </div>
 
             {/* COVER LETTER */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-white">
+            <div className=" border border-slate-200 bg-white p-7 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
                 <Sparkles className="h-6 w-6" />
               </div>
 
-              <span className="mt-5 inline-flex rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
+              <span className="mt-5 inline-flex  border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
                 Elite
               </span>
 
@@ -506,9 +506,9 @@ export default function PricingPage() {
               return (
                 <div
                   key={item.title}
-                  className="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm"
+                  className=" border border-slate-200 bg-white p-6 text-center shadow-sm"
                 >
-                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 text-slate-800">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center  bg-slate-100 text-slate-800">
                     <Icon className="h-5 w-5" />
                   </div>
 
@@ -531,7 +531,7 @@ export default function PricingPage() {
             <p className="mt-3 text-sm text-slate-500">Choose based on what you need today.</p>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+          <div className="mt-10 overflow-hidden  border border-slate-200 bg-white shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full min-w-190 border-collapse text-left">
                 <thead>
@@ -587,10 +587,10 @@ export default function PricingPage() {
       {/* COUPON BANNER */}
       <section className="bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl bg-slate-950 p-7 text-white sm:p-10">
+          <div className="overflow-hidden  bg-slate-950 p-7 text-white sm:p-10">
             <div className="flex flex-col items-center justify-between gap-7 md:flex-row">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
+                <div className="inline-flex items-center gap-2  bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
                   <Sparkles className="h-3.5 w-3.5" />
                   LIMITED INTRODUCTORY OFFER
                 </div>
@@ -604,7 +604,7 @@ export default function PricingPage() {
                 </p>
               </div>
 
-              <div className="shrink-0 rounded-2xl border border-white/20 bg-white px-6 py-4 text-center text-slate-950">
+              <div className="shrink-0  border border-white/20 bg-white px-6 py-4 text-center text-slate-950">
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                   Coupon Code
                 </p>
@@ -622,7 +622,7 @@ export default function PricingPage() {
       <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl bg-white text-slate-800 shadow-sm ring-1 ring-slate-200">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center  bg-white text-slate-800 shadow-sm ring-1 ring-slate-200">
               <HelpCircle className="h-5 w-5" />
             </div>
 
@@ -635,12 +635,12 @@ export default function PricingPage() {
             {faqs.map(faq => (
               <details
                 key={faq.question}
-                className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                className="group  border border-slate-200 bg-white p-5 shadow-sm"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-sm font-bold text-slate-950">
                   <span>{faq.question}</span>
 
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-transform group-open:rotate-45">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center  bg-slate-100 text-slate-600 transition-transform group-open:rotate-45">
                     <span className="text-lg leading-none">+</span>
                   </span>
                 </summary>
@@ -655,7 +655,7 @@ export default function PricingPage() {
       {/* FINAL CTA */}
       <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-white">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
             <Sparkles className="h-6 w-6" />
           </div>
 
@@ -671,7 +671,7 @@ export default function PricingPage() {
 
           <Link
             href="/templates"
-            className="mt-7 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-slate-950 px-7 text-sm font-bold text-white transition hover:bg-slate-800"
+            className="mt-7 inline-flex h-12 items-center justify-center gap-2  bg-slate-950 px-7 text-sm font-bold text-white transition hover:bg-slate-800"
           >
             Browse Templates
             <ArrowRight className="h-4 w-4" />

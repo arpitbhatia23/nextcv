@@ -137,19 +137,19 @@ export default async function CareerList({ searchParams }) {
         {/* Decorative background */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-orange-100/70 blur-3xl"
+          className="pointer-events-none absolute -left-32 -top-32 h-80 w-80  bg-orange-100/70 blur-3xl"
         />
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 top-20 h-96 w-96 rounded-full bg-blue-100/60 blur-3xl"
+          className="pointer-events-none absolute -right-32 top-20 h-96 w-96  bg-blue-100/60 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8 lg:px-12 lg:pb-20 lg:pt-32">
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />
+            <div className="mb-6 inline-flex items-center gap-2  border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 shadow-sm">
+              <span className="h-1.5 w-1.5  bg-orange-500" />
               Career Guides
             </div>
 
@@ -236,7 +236,7 @@ export default async function CareerList({ searchParams }) {
               return (
                 <article
                   key={`${slug}-${index}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-black/[0.07] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-black/12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+                  className="group relative flex h-full flex-col overflow-hidden  border border-black/[0.07] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-black/12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
                 >
                   {/* Top accent */}
                   <div className="h-1 w-full bg-linear-to-r from-orange-400 via-orange-500 to-amber-400 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
@@ -244,7 +244,7 @@ export default async function CareerList({ searchParams }) {
                   <div className="flex flex-1 flex-col p-7">
                     {/* Meta */}
                     <div className="mb-5 flex items-center justify-between gap-3">
-                      <span className="inline-flex max-w-[70%] items-center truncate rounded-full bg-zinc-100 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-600">
+                      <span className="inline-flex max-w-[70%] items-center truncate  bg-zinc-100 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-600">
                         {category}
                       </span>
 
@@ -307,7 +307,7 @@ export default async function CareerList({ searchParams }) {
             })}
           </div>
         ) : (
-          <div className="rounded-3xl border border-black/[0.07] bg-white px-6 py-20 text-center">
+          <div className=" border border-black/[0.07] bg-white px-6 py-20 text-center">
             <h3 className="font-serif text-2xl font-medium text-zinc-950">
               No career guides found
             </h3>
@@ -316,7 +316,7 @@ export default async function CareerList({ searchParams }) {
 
             <Link
               href="/career?page=1"
-              className="mt-7 inline-flex rounded-full bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+              className="mt-7 inline-flex  bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
             >
               View career guides
             </Link>
@@ -335,7 +335,7 @@ export default async function CareerList({ searchParams }) {
             {page > 1 ? (
               <Link
                 href={`/career?page=${page - 1}`}
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
+                className="inline-flex h-11 items-center gap-2  border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
                 aria-label="Previous page"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -354,7 +354,7 @@ export default async function CareerList({ searchParams }) {
             ) : (
               <span
                 aria-disabled="true"
-                className="inline-flex h-11 cursor-not-allowed items-center gap-2 rounded-full border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
+                className="inline-flex h-11 cursor-not-allowed items-center gap-2  border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M13 8H3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -393,7 +393,7 @@ export default async function CareerList({ searchParams }) {
                     href={`/career?page=${item}`}
                     aria-current={isActive ? "page" : undefined}
                     className={[
-                      "flex h-11 min-w-11 items-center justify-center rounded-full px-3 text-sm font-semibold transition-all",
+                      "flex h-11 min-w-11 items-center justify-center  px-3 text-sm font-semibold transition-all",
                       isActive
                         ? "bg-zinc-950 text-white shadow-sm"
                         : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950",
@@ -409,7 +409,7 @@ export default async function CareerList({ searchParams }) {
             {page < totalPages ? (
               <Link
                 href={`/career?page=${page + 1}`}
-                className="inline-flex h-11 items-center gap-2 rounded-full border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
+                className="inline-flex h-11 items-center gap-2  border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
                 aria-label="Next page"
               >
                 Next
@@ -428,7 +428,7 @@ export default async function CareerList({ searchParams }) {
             ) : (
               <span
                 aria-disabled="true"
-                className="inline-flex h-11 cursor-not-allowed items-center gap-2 rounded-full border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
+                className="inline-flex h-11 cursor-not-allowed items-center gap-2  border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
               >
                 Next
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -452,16 +452,16 @@ export default async function CareerList({ searchParams }) {
           CTA
       ====================================================== */}
       <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-12 lg:pb-24">
-        <div className="relative overflow-hidden rounded-2xl bg-zinc-950 px-7 py-12 sm:px-10 sm:py-14 lg:px-14">
+        <div className="relative overflow-hidden  bg-zinc-950 px-7 py-12 sm:px-10 sm:py-14 lg:px-14">
           {/* Background decoration */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-orange-500/20 blur-3xl"
+            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64  bg-orange-500/20 blur-3xl"
           />
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"
+            className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72  bg-blue-500/10 blur-3xl"
           />
 
           <div className="relative max-w-3xl">
@@ -481,7 +481,7 @@ export default async function CareerList({ searchParams }) {
             <div className="mt-8">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-orange-500 hover:text-white"
+                className="inline-flex items-center gap-2  bg-white px-6 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-orange-500 hover:text-white"
               >
                 Build your resume
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

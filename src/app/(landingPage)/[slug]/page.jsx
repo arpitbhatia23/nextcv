@@ -99,7 +99,7 @@ export default async function SeoPage({ params }) {
               <span>Home</span>
             </Link>
             <span className="text-slate-300">/</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f2f3ff] px-3 py-1 text-[#3730d8] border border-[#e4e7ff]">
+            <span className="inline-flex items-center gap-1.5   px-3 py-1 text-[#3730d8] ">
               Career Field Guide
             </span>
             <span className="ml-auto hidden sm:inline-block text-[#365184]">
@@ -120,7 +120,7 @@ export default async function SeoPage({ params }) {
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6 border-t border-slate-200/60">
             <Link
               href="/templates"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg"
+              className="inline-flex items-center justify-center gap-2  bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg"
             >
               Build Your Resume Now
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,7 +151,7 @@ export default async function SeoPage({ params }) {
         <article className="min-w-0">
           <div className="mb-8 flex items-center justify-between border-b border-slate-200 pb-4">
             <h2 className="text-lg font-bold text-[#071644]">Step-by-Step Guide</h2>
-            <span className="text-xs font-medium text-[#365184] bg-slate-100 px-2.5 py-1 rounded-full">
+            <span className="text-xs font-medium text-[#365184] bg-slate-100 px-2.5 py-1 ">
               {page.faqs?.length ? `${page.faqs.length} FAQs Included` : "Detailed Walkthrough"}
             </span>
           </div>
@@ -162,10 +162,10 @@ export default async function SeoPage({ params }) {
               page.sections.map((section, index) => (
                 <section
                   key={section.title || index}
-                  className="group rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-200 hover:border-indigo-300 hover:shadow-md"
+                  className="group  border border-slate-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-200 hover:border-indigo-300 hover:shadow-md"
                 >
                   <div className="flex items-start gap-4 sm:gap-6">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 font-extrabold text-base border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center  bg-indigo-50 text-indigo-600 font-extrabold text-base border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                       {String(index + 1).padStart(2, "0")}
                     </div>
                     <div className="flex-1">
@@ -180,7 +180,7 @@ export default async function SeoPage({ params }) {
                 </section>
               ))
             ) : (
-              <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8">
+              <section className=" border border-slate-200 bg-slate-50 p-6 sm:p-8">
                 <p className="text-sm sm:text-base leading-relaxed text-[#365184]">
                   Use this guide to shape a clear, relevant resume for your next application. NextCV
                   offers one-time download plans ranging from ₹49 to ₹399 with no monthly
@@ -206,7 +206,7 @@ export default async function SeoPage({ params }) {
                 {page.faqs.map((faq, idx) => (
                   <details
                     key={faq.q || idx}
-                    className="group rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 transition-all hover:border-indigo-200"
+                    className="group  border border-slate-200 bg-white p-5 sm:p-6 transition-all hover:border-indigo-200"
                   >
                     <summary className="cursor-pointer list-none text-base font-bold text-[#071644] flex items-center justify-between gap-4">
                       <span>{faq.q}</span>
@@ -224,10 +224,10 @@ export default async function SeoPage({ params }) {
           )}
 
           {/* Bottom Call to Action Card */}
-          <div className="mt-14 rounded-3xl bg-linear-to-br from-[#071644] via-[#0d2259] to-[#152e75] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
-            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
+          <div className="mt-14  bg-linear-to-br from-[#071644] via-[#0d2259] to-[#152e75] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 h-64 w-64  bg-indigo-500/20 blur-3xl pointer-events-none" />
             <div className="relative z-10 max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1  bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
                 ATS Optimization Ready
               </span>
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
@@ -240,13 +240,13 @@ export default async function SeoPage({ params }) {
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
                   href="/templates"
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center  bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 transition-colors"
                 >
                   Browse Resume Templates
                 </Link>
                 <Link
                   href="/ats-resume-checker"
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
+                  className="w-full sm:w-auto inline-flex items-center justify-center border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
                 >
                   Check Existing ATS Score
                 </Link>
@@ -258,7 +258,7 @@ export default async function SeoPage({ params }) {
         {/* Sidebar */}
         <aside className="space-y-6">
           {/* Related Guides Card */}
-          <div className="sticky top-24 rounded-3xl border border-slate-200 bg-slate-50/80 p-6 backdrop-blur-xs">
+          <div className="sticky top-24  border border-slate-200 bg-slate-50/80 p-6 backdrop-blur-xs">
             <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -276,7 +276,7 @@ export default async function SeoPage({ params }) {
                 <Link
                   key={href}
                   href={href}
-                  className="group flex items-center justify-between rounded-xl bg-white border border-slate-200/80 px-4 py-3 text-sm font-semibold text-[#071644] transition-all hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-600"
+                  className="group flex items-center justify-between  bg-white border border-slate-200/80 px-4 py-3 text-sm font-semibold text-[#071644] transition-all hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-600"
                 >
                   <span className="line-clamp-1">{label}</span>
                   <span className="text-slate-400 group-hover:text-indigo-600 transition-colors">

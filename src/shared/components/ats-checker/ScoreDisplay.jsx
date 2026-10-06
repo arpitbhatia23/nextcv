@@ -33,7 +33,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
     <div className="w-full mt-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Main Score Card */}
-        <div className="lg:col-span-5 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="lg:col-span-5 bg-white  p-8 border border-slate-200 shadow-sm flex flex-col items-center justify-center relative overflow-hidden">
           {isNextCV && (
             <div className="absolute top-4 right-4 bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase px-3 py-1 rounded-full flex items-center gap-1 border border-emerald-200">
               <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> ATS Verified
@@ -81,7 +81,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
           </div>
 
           <div
-            className={`px-6 py-2 rounded-2xl text-xs sm:text-sm font-extrabold uppercase tracking-wider border ${getScoreBg(score)} ${getScoreColor(score)}`}
+            className={`px-6 py-2  text-xs sm:text-sm font-extrabold uppercase tracking-wider border ${getScoreBg(score)} ${getScoreColor(score)}`}
           >
             {status}
           </div>
@@ -95,9 +95,9 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
 
         {/* Detailed Analysis */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
+          <div className="bg-white  p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4">
             <h3 className="text-lg font-bold text-[#071644] flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
+              <div className="w-8 h-8 bg-indigo-50  flex items-center justify-center text-indigo-600">
                 <Sparkles className="w-4 h-4" />
               </div>
               Critical Analysis Report
@@ -110,19 +110,19 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-200 transition-all"
+                  className="flex items-start gap-4 p-4  bg-slate-50 border border-slate-200 hover:border-indigo-200 transition-all"
                 >
                   <div className="mt-0.5 shrink-0">
                     {rec.type === "success" ? (
-                      <div className="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600">
+                      <div className="w-6 h-6  bg-emerald-100 flex items-center justify-center text-emerald-600">
                         <CheckCircle className="w-4 h-4" />
                       </div>
                     ) : rec.type === "warning" ? (
-                      <div className="w-6 h-6 rounded-lg bg-amber-100 flex items-center justify-center text-amber-600">
+                      <div className="w-6 h-6  bg-amber-100 flex items-center justify-center text-amber-600">
                         <AlertTriangle className="w-4 h-4" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-lg bg-rose-100 flex items-center justify-center text-rose-600">
+                      <div className="w-6 h-6  bg-rose-100 flex items-center justify-center text-rose-600">
                         <XCircle className="w-4 h-4" />
                       </div>
                     )}
@@ -142,7 +142,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#071644] text-white rounded-xl p-2 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
+              className="bg-[#071644] text-white  p-2 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
             >
               <div className="space-y-1 text-center md:text-left">
                 <h4 className="font-bold text-white text-lg tracking-tight">
@@ -155,7 +155,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
               </div>
               <Link
                 href="/"
-                className="w-full md:w-full px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs rounded-md transition-all shadow-md flex items-center justify-center "
+                className="w-full md:w-full px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs  transition-all shadow-md flex items-center justify-center "
               >
                 Build Resume Now <ArrowRight className="w-4 h-4" />
               </Link>
@@ -165,7 +165,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
       </div>
 
       {keywordGap && (
-        <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
+        <section className="mt-8  border border-slate-200 bg-white p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h3 className="text-lg font-bold text-[#071644]">Job Description Keyword Match</h3>
@@ -175,7 +175,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
                   : "No recognized skills or keywords were found in the job description."}
               </p>
             </div>
-            <div className="flex items-baseline gap-1 self-start rounded-xl border border-indigo-100 bg-indigo-50 px-4 py-2 sm:self-auto">
+            <div className="flex items-baseline gap-1 self-start  border border-indigo-100 bg-indigo-50 px-4 py-2 sm:self-auto">
               <span className="text-2xl font-extrabold text-indigo-700">{keywordGap.score}%</span>
               <span className="text-xs font-semibold text-indigo-600">JD match</span>
             </div>
@@ -210,7 +210,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
                         <li
                           key={item.keyword}
                           title={item.matchedAs ? `Matched as ${item.matchedAs}` : item.importance}
-                          className={`rounded-lg border px-2.5 py-1 text-xs font-semibold ${chipClass}`}
+                          className={` border px-2.5 py-1 text-xs font-semibold ${chipClass}`}
                         >
                           {item.keyword}
                         </li>

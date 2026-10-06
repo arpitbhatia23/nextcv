@@ -79,7 +79,7 @@ export default function TemplatesPage() {
       <header className="border-b border-border pt-28 sm:pt-32">
         <div className="nc-container pb-12 pt-2 sm:pb-16">
           <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-primary">
+            <p className="inline-flex items-center gap-2  border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-primary">
               <FileText aria-hidden="true" className="h-4 w-4" /> Resume formats
             </p>
             <h1 className="mt-5 font-display text-4xl leading-tight text-foreground sm:text-5xl">
@@ -193,7 +193,7 @@ export default function TemplatesPage() {
               Browse resume examples
             </Link>
           </div>
-          <div className="mt-10 flex flex-col gap-4 rounded-3xl bg-slate-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div className="mt-10 flex flex-col gap-4  bg-slate-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
             <div>
               <h2 className="font-display text-2xl">Found your format?</h2>
               <p className="mt-2 text-sm text-slate-300">

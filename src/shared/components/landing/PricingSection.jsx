@@ -12,7 +12,7 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="bg-[#F8F7F3] py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-        <div className="grid gap-10 rounded-3xl border border-[#deddd6] bg-white p-6 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:p-12">
+        <div className="grid gap-10  border border-[#deddd6] bg-white p-6 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:p-12">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
               Straightforward pricing
@@ -33,7 +33,7 @@ export default function PricingSection() {
               <BuildButton />
               <Link
                 href="/pricing"
-                className="inline-flex min-h-12 items-center gap-2 rounded-xl border border-[#c9cbc8] px-4 py-3 text-sm font-semibold text-[#303a32] transition-colors hover:border-[#8995bd] hover:bg-[#fafaf8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
+                className="inline-flex min-h-12 items-center gap-2  border border-[#c9cbc8] px-4 py-3 text-sm font-semibold text-[#303a32] transition-colors hover:border-[#8995bd] hover:bg-[#fafaf8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
               >
                 See all plans <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
               </Link>

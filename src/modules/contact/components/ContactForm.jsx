@@ -52,6 +52,7 @@ export default function ContactForm() {
           onChange={event => setName(event.target.value)}
           required
           disabled={loading}
+          className={"rounded-none!"}
         />
       </div>
 
@@ -68,6 +69,7 @@ export default function ContactForm() {
           value={email}
           onChange={event => setEmail(event.target.value)}
           required
+          className={"rounded-none!"}
           disabled={loading}
         />
       </div>
@@ -85,11 +87,12 @@ export default function ContactForm() {
           onChange={event => setMessage(event.target.value)}
           required
           disabled={loading}
+          className={"rounded-none!"}
         />
       </div>
 
       <div className="flex flex-wrap items-center gap-3 pt-1">
-        <Button type="submit" size="lg" disabled={loading}>
+        <Button type="submit" size="lg" disabled={loading} className={"rounded-none!"}>
           {loading ? "Sending..." : "Send message"}
         </Button>
         {status && (

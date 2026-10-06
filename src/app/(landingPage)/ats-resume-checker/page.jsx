@@ -31,14 +31,14 @@ export default function ATSCheckerPage() {
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
       {/* Background Ambient Glows */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute left-[28%] -top-20 h-112.5 w-125 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-        <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+        <div className="absolute left-[28%] -top-20 h-112.5 w-125  bg-[#eef2ff] opacity-70 blur-[100px]" />
+        <div className="absolute right-0 top-60 h-100 w-125  bg-[#eef4ff] opacity-80 blur-[110px]" />
       </div>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10 text-center">
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1  bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
             <CheckCircle2 className="w-4 h-4 text-indigo-600" />
             <span>Updated for 2026 Placement Season</span>
           </div>
@@ -69,9 +69,9 @@ export default function ATSCheckerPage() {
       <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Company Specifics */}
-          <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+          <div className="bg-slate-50 p-8  border border-slate-200 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600">
+              <div className="p-2.5 bg-indigo-50 border border-indigo-100  text-indigo-600">
                 <Briefcase className="w-6 h-6" />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">
@@ -87,9 +87,9 @@ export default function ATSCheckerPage() {
                 (company, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl shadow-xs"
+                    className="flex items-center gap-2 p-2.5 bg-white border border-slate-200  shadow-xs"
                   >
-                    <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                    <span className="w-2 h-2  bg-indigo-600" />
                     <span>{company}</span>
                   </li>
                 )
@@ -102,9 +102,9 @@ export default function ATSCheckerPage() {
           </div>
 
           {/* Student Focused */}
-          <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+          <div className="bg-slate-50 p-8  border border-slate-200 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-indigo-50 border border-indigo-100 rounded-xl text-indigo-600">
+              <div className="p-2.5 bg-indigo-50 border border-indigo-100  text-indigo-600">
                 <Search className="w-6 h-6" />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-[#071644]">
@@ -116,21 +116,21 @@ export default function ATSCheckerPage() {
               any recruiter reads your application.
             </p>
             <ul className="space-y-3 text-xs sm:text-sm text-slate-700 pt-2">
-              <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
+              <li className="flex gap-3 items-start bg-white p-3  border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-slate-900">B.Tech / CSE / BCA:</strong> Scans technical
                   stack keywords, framework lists, and GitHub project metrics.
                 </span>
               </li>
-              <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
+              <li className="flex gap-3 items-start bg-white p-3  border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-slate-900">MBA / Business Freshers:</strong> Scans for
                   project leadership, Agile terms, and KPI achievements.
                 </span>
               </li>
-              <li className="flex gap-3 items-start bg-white p-3 rounded-xl border border-slate-200">
+              <li className="flex gap-3 items-start bg-white p-3  border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>
                   <strong className="text-slate-900">Core Engineering:</strong> Validates domain
@@ -172,10 +172,7 @@ export default function ATSCheckerPage() {
               a: "NextCV operates on a transparent pay-per-resume model ranging from ₹49 to ₹399 depending on the template selected. No monthly auto-renewals.",
             },
           ].map((faq, i) => (
-            <div
-              key={i}
-              className="bg-slate-50 p-6 rounded-2xl border border-slate-200 shadow-xs space-y-2"
-            >
+            <div key={i} className="bg-slate-50 p-6  border border-slate-200 shadow-xs space-y-2">
               <h3 className="text-base font-bold text-slate-900">{faq.q}</h3>
               <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{faq.a}</p>
             </div>
@@ -185,7 +182,7 @@ export default function ATSCheckerPage() {
 
       {/* CTA Footer Banner */}
       <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
-        <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
+        <div className="bg-[#071644]  p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
           <h2 className="text-2xl sm:text-4xl font-extrabold">
             Build A High-Scoring ATS Resume Today
           </h2>
@@ -196,7 +193,7 @@ export default function ATSCheckerPage() {
           <div>
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-3.5  bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
             >
               Build Resume Now <ArrowRight className="w-4 h-4" />
             </Link>

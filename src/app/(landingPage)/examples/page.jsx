@@ -45,14 +45,14 @@ export default function ExamplesPage() {
       <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
         {/* Background Ambient Glows */}
         <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
-          <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-[#eef4ff] opacity-80 blur-[110px]" />
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150  bg-[#eef2ff] opacity-70 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-100 w-125  bg-[#eef4ff] opacity-80 blur-[110px]" />
         </div>
 
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1  bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
               <BookOpen className="w-4 h-4 text-indigo-600" />
               Resume examples · illustrative content
             </div>
@@ -72,7 +72,7 @@ export default function ExamplesPage() {
             <div className="pt-2 flex flex-wrap justify-center gap-4">
               <Link
                 href="/"
-                className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
+                className="px-8 py-3.5  bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
               >
                 Create Your Custom Resume <ArrowRight className="w-4 h-4" />
               </Link>
@@ -87,7 +87,7 @@ export default function ExamplesPage() {
 
         {/* Pro Tips Section */}
         <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
-          <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
+          <div className="bg-slate-50  p-8 md:p-14 border border-slate-200 shadow-sm space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#071644]">
                 How to use these resume examples
@@ -99,8 +99,8 @@ export default function ExamplesPage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
+              <div className="bg-white border border-slate-200 p-6  space-y-3 shadow-xs">
+                <div className="w-10 h-10  bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
                   <Target className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">1. Align Keywords</h3>
@@ -110,8 +110,8 @@ export default function ExamplesPage() {
                 </p>
               </div>
 
-              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
+              <div className="bg-white border border-slate-200 p-6  space-y-3 shadow-xs">
+                <div className="w-10 h-10  bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600">
                   <Zap className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">2. Quantify Achievements</h3>
@@ -121,8 +121,8 @@ export default function ExamplesPage() {
                 </p>
               </div>
 
-              <div className="bg-white border border-slate-200 p-6 rounded-2xl space-y-3 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600">
+              <div className="bg-white border border-slate-200 p-6  space-y-3 shadow-xs">
+                <div className="w-10 h-10  bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600">
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900">3. Use NextCV AI Builder</h3>
@@ -151,7 +151,7 @@ export default function ExamplesPage() {
 
         {/* CTA Banner */}
         <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
-          <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
+          <div className="bg-[#071644]  p-10 md:p-14 text-center space-y-6 shadow-xl text-white">
             <h2 className="text-2xl sm:text-4xl font-extrabold">
               Build Your Personalized Resume Now
             </h2>
@@ -162,7 +162,7 @@ export default function ExamplesPage() {
             <div>
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-3.5  bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
               >
                 Create My Resume Now <ArrowRight className="w-4 h-4" />
               </Link>

@@ -21,7 +21,7 @@ export default function LandingFinalCTA() {
           <BuildButton className="bg-[#e8e9db] text-[#1d2b24] hover:bg-white active:bg-[#d8dbc8] focus-visible:ring-white focus-visible:ring-offset-[#17231f]" />
           <Link
             href="/ats-resume-checker"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#17231f]"
+            className="inline-flex min-h-12 items-center justify-center  border border-white/30 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#17231f]"
           >
             Check ATS Score
           </Link>

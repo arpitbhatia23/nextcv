@@ -52,14 +52,14 @@ export default function AboutPage() {
       <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
         {/* Background Ambient Glows */}
         <div className="pointer-events-none absolute inset-0 z-0">
-          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-indigo-100 opacity-50 blur-[100px]" />
-          <div className="absolute right-0 top-60 h-100 w-125 rounded-full bg-indigo-100 opacity-50 blur-[110px]" />
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150 bg-indigo-100 opacity-50 blur-[100px]" />
+          <div className="absolute right-0 top-60 h-100 w-125  bg-indigo-100 opacity-50 blur-[110px]" />
         </div>
 
         {/* Hero Section */}
         <section className="relative pt-32 pb-16 px-6 max-w-7xl mx-auto z-10">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1  bg-[#f2f3ff] border border-[#e4e7ff] text-[#3730d8] text-xs sm:text-sm font-semibold">
               <Users className="w-4 h-4 text-indigo-600" />
               Built by Students, For Indian Job Seekers
             </div>
@@ -82,13 +82,13 @@ export default function AboutPage() {
             <div className="pt-2 flex flex-wrap justify-center gap-4">
               <Link
                 href="/"
-                className="px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
+                className="px-8 py-3.5  bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-lg shadow-indigo-600/20 hover:scale-[1.02] transition-all flex items-center gap-2"
               >
                 Build Your Resume Now <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/pricing"
-                className="px-8 py-3.5 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-all"
+                className="px-8 py-3.5  bg-slate-50 border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-100 transition-all"
               >
                 View Transparent Pricing
               </Link>
@@ -110,7 +110,7 @@ export default function AboutPage() {
 
         {/* Story Section */}
         <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
-          <div className="bg-slate-50 rounded-3xl p-8 md:p-14 border border-slate-200 shadow-sm relative overflow-hidden">
+          <div className="bg-slate-50  p-8 md:p-14 border border-slate-200 shadow-sm relative overflow-hidden">
             <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-2 text-indigo-600 text-sm font-semibold">
@@ -141,23 +141,23 @@ export default function AboutPage() {
               </div>
 
               {/* Visual Comparison Card */}
-              <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl space-y-6 shadow-sm">
+              <div className="bg-white border border-slate-200 p-6 sm:p-8  space-y-6 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                   <span className="text-xs uppercase tracking-wider font-semibold text-slate-500">
                     NextCV plan model
                   </span>
-                  <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold border border-emerald-100">
+                  <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700  text-xs font-semibold border border-emerald-100">
                     Pay Per Resume
                   </span>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 rounded-xl bg-slate-50 border border-slate-200">
+                  <div className="flex justify-between items-center p-3  bg-slate-50 border border-slate-200">
                     <span className="text-sm font-medium text-slate-600">Build and edit</span>
                     <span className="text-sm font-semibold text-primary">Free</span>
                   </div>
 
-                  <div className="flex justify-between items-center p-4 rounded-xl bg-indigo-50 border border-indigo-200 shadow-xs">
+                  <div className="flex justify-between items-center p-4  bg-indigo-50 border border-indigo-200 shadow-xs">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-indigo-600" />
                       <span className="text-sm font-bold text-[#071644]">Download plans</span>
@@ -220,10 +220,10 @@ export default function AboutPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white border border-slate-200 p-8 rounded-2xl hover:border-indigo-300 hover:shadow-md transition-all duration-300"
+                className="bg-white border border-slate-200 p-8  hover:border-indigo-300 hover:shadow-md transition-all duration-300"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl ${item.bg} border flex items-center justify-center mb-6`}
+                  className={`w-12 h-12 rounded-full ${item.bg} border flex items-center justify-center mb-6`}
                 >
                   {item.icon}
                 </div>
@@ -248,8 +248,8 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Founder 1: Aurpit */}
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-3xl relative overflow-hidden group hover:border-indigo-300 transition-all shadow-sm">
-              <div className="w-16 h-16 bg-indigo-600 rounded-2xl mx-auto md:mx-0 mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-md">
+            <div className="bg-slate-50 border border-slate-200 p-8  relative overflow-hidden group hover:border-indigo-300 transition-all shadow-sm">
+              <div className="w-16 h-16 bg-indigo-600  mx-auto md:mx-0 mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-md">
                 A
               </div>
 
@@ -262,21 +262,21 @@ export default function AboutPage() {
                 and building tools that empower students across Tier-1, Tier-2, and Tier-3 cities.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs  font-mono">
                   Next.js
                 </span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs  font-mono">
                   AI Systems
                 </span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs  font-mono">
                   Full Stack
                 </span>
               </div>
             </div>
 
             {/* Founder 2: Tamanna */}
-            <div className="bg-slate-50 border border-slate-200 p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-300 transition-all shadow-sm">
-              <div className="w-16 h-16 bg-emerald-600 rounded-2xl mx-auto md:mx-0 mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-md">
+            <div className="bg-slate-50 border border-slate-200 p-8  relative overflow-hidden group hover:border-emerald-300 transition-all shadow-sm">
+              <div className="w-16 h-16 bg-emerald-600  mx-auto md:mx-0 mb-6 flex items-center justify-center text-2xl font-extrabold text-white shadow-md">
                 T
               </div>
 
@@ -289,13 +289,13 @@ export default function AboutPage() {
                 clear resume layouts, and accessible interfaces.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs  font-mono">
                   Product Design
                 </span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs font-mono">
                   UX Architecture
                 </span>
-                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs rounded-full font-mono">
+                <span className="px-3 py-1 bg-white border border-slate-200 text-slate-700 text-xs  font-mono">
                   ATS Research
                 </span>
               </div>
@@ -305,7 +305,7 @@ export default function AboutPage() {
 
         {/* CTA Footer Section */}
         <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
-          <div className="bg-[#071644] rounded-3xl p-10 md:p-14 text-center space-y-6 shadow-xl relative overflow-hidden text-white">
+          <div className="bg-[#071644]  p-10 md:p-14 text-center space-y-6 shadow-xl relative overflow-hidden text-white">
             <h2 className="text-2xl sm:text-4xl font-extrabold">
               Ready to create an ATS resume that gets interviews?
             </h2>
@@ -316,7 +316,7 @@ export default function AboutPage() {
             <div className="pt-2">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-8 py-3.5  bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-lg transition-all hover:scale-105"
               >
                 Create Resume Now <ArrowRight className="w-4 h-4" />
               </Link>

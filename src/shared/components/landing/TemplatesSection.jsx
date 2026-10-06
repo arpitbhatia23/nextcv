@@ -157,7 +157,7 @@ export default function TemplatesSection({
                   triggerRef.current = event.currentTarget;
                   setPreview(template);
                 }}
-                className="relative block aspect-4/3 w-full overflow-hidden rounded-2xl border border-[#dfded8] bg-[#eeede8] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
+                className="relative block aspect-4/3 w-full overflow-hidden  border border-[#dfded8] bg-[#eeede8] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
                 aria-label={`Preview ${template.title} resume template`}
               >
                 <Image
@@ -169,7 +169,7 @@ export default function TemplatesSection({
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
-                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-lg border border-[#deded8] bg-white/95 px-2.5 py-1.5 text-[10px] font-semibold text-[#333e36]">
+                <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5  border border-[#deded8] bg-white/95 px-2.5 py-1.5 text-[10px] font-semibold text-[#333e36]">
                   <Eye aria-hidden="true" className="h-3.5 w-3.5" /> Preview
                 </span>
               </button>
@@ -199,7 +199,7 @@ export default function TemplatesSection({
             aria-modal="true"
             aria-labelledby="template-preview-title"
             ref={dialogRef}
-            className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-white/20 bg-[#f8f7f3] shadow-2xl"
+            className="relative flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden  border border-white/20 bg-[#f8f7f3] shadow-2xl"
           >
             <div className="flex items-center justify-between gap-4 border-b border-[#e1dfd7] px-4 py-3 sm:px-5">
               <div>

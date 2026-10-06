@@ -269,9 +269,9 @@ export default async function CareerPage({ params }) {
         {/* Background decoration */}
 
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-indigo-100/40 blur-3xl" />
+          <div className="absolute -right-40 -top-40 h-96 w-96  bg-indigo-100/40 blur-3xl" />
 
-          <div className="absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-amber-100/30 blur-3xl" />
+          <div className="absolute -left-40 bottom-0 h-80 w-80  bg-amber-100/30 blur-3xl" />
 
           <div
             className="absolute inset-0 opacity-[0.035]"
@@ -292,8 +292,8 @@ export default async function CareerPage({ params }) {
               fontFamily: "var(--font-sans)",
             }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-indigo-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-600" />
+            <span className="inline-flex items-center gap-2  border border-indigo-100 bg-indigo-50 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-indigo-700">
+              <span className="h-1.5 w-1.5  bg-indigo-600" />
 
               {category}
             </span>
@@ -327,7 +327,7 @@ export default async function CareerPage({ params }) {
               fontFamily: "var(--font-sans)",
             }}
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#17201C] text-xs font-bold text-white">
+            <div className="flex h-9 w-9 items-center justify-center  bg-[#17201C] text-xs font-bold text-white">
               NC
             </div>
 
@@ -365,7 +365,7 @@ export default async function CareerPage({ params }) {
                 }}
                 aria-label="Table of contents"
               >
-                <div className="rounded-xl border border-[#E3E0D8] bg-white/70 p-5 shadow-[0_8px_30px_rgba(20,20,20,0.03)]">
+                <div className=" border border-[#E3E0D8] bg-white/70 p-5 shadow-[0_8px_30px_rgba(20,20,20,0.03)]">
                   <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] text-[#8B918D]">
                     In this guide
                   </p>
@@ -375,9 +375,9 @@ export default async function CareerPage({ params }) {
                       <li key={heading.id}>
                         <a
                           href={`#${heading.id}`}
-                          className="group relative block rounded-lg py-2 pl-3 pr-2 text-[13px] leading-5 text-[#737B76] transition hover:bg-indigo-50/60 hover:text-indigo-600"
+                          className="group relative block  py-2 pl-3 pr-2 text-[13px] leading-5 text-[#737B76] transition hover:bg-indigo-50/60 hover:text-indigo-600"
                         >
-                          <span className="absolute left-0 top-2 bottom-2 w-0.5 rounded-full bg-transparent transition group-hover:bg-indigo-500" />
+                          <span className="absolute left-0 top-2 bottom-2 w-0.5  bg-transparent transition group-hover:bg-indigo-500" />
 
                           {heading.text}
                         </a>
@@ -400,7 +400,7 @@ export default async function CareerPage({ params }) {
 
             {showToc && (
               <details
-                className="mb-10 overflow-hidden rounded-xl border border-[#E3E0D8] bg-white shadow-[0_5px_20px_rgba(20,20,20,0.03)] lg:hidden"
+                className="mb-10 overflow-hidden  border border-[#E3E0D8] bg-white shadow-[0_5px_20px_rgba(20,20,20,0.03)] lg:hidden"
                 style={{
                   fontFamily: "var(--font-sans)",
                 }}
@@ -409,7 +409,7 @@ export default async function CareerPage({ params }) {
                   <span className="flex items-center justify-between">
                     <span>In this guide</span>
 
-                    <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#F4F3EF] text-xs text-[#777E79]">
+                    <span className="flex h-7 w-7 items-center justify-center  bg-[#F4F3EF] text-xs text-[#777E79]">
                       ☰
                     </span>
                   </span>
@@ -421,7 +421,7 @@ export default async function CareerPage({ params }) {
                       <li key={heading.id}>
                         <a
                           href={`#${heading.id}`}
-                          className="block rounded-lg px-3 py-2 text-sm leading-6 text-[#69716C] transition hover:bg-indigo-50 hover:text-indigo-600"
+                          className="block  px-3 py-2 text-sm leading-6 text-[#69716C] transition hover:bg-indigo-50 hover:text-indigo-600"
                         >
                           {heading.text}
                         </a>
@@ -516,7 +516,7 @@ export default async function CareerPage({ params }) {
                     <Link
                       key={rel.slug}
                       href={`/career/${rel.slug}`}
-                      className="group rounded-xl border border-[#E3E0D8] bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_10px_30px_rgba(20,20,20,0.06)]"
+                      className="group  border border-[#E3E0D8] bg-white p-5 transition duration-200 hover:-translate-y-0.5 hover:border-indigo-200 hover:shadow-[0_10px_30px_rgba(20,20,20,0.06)]"
                     >
                       <div className="flex items-start justify-between gap-4">
                         <h3 className="text-base font-semibold leading-6 text-[#252D29] transition group-hover:text-indigo-600">
@@ -540,23 +540,23 @@ export default async function CareerPage({ params }) {
             {/* ---------------------------------------------------------------- */}
 
             <section
-              className="relative mt-20 overflow-hidden rounded-2xl bg-[#17201C] px-7 py-10 text-center sm:px-12 sm:py-14"
+              className="relative mt-20 overflow-hidden  bg-[#17201C] px-7 py-10 text-center sm:px-12 sm:py-14"
               style={{
                 fontFamily: "var(--font-sans)",
               }}
             >
               <div
-                className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-indigo-500/20 blur-3xl"
+                className="pointer-events-none absolute -right-20 -top-24 h-64 w-64  bg-indigo-500/20 blur-3xl"
                 aria-hidden="true"
               />
 
               <div
-                className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-indigo-400/10 blur-3xl"
+                className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64  bg-indigo-400/10 blur-3xl"
                 aria-hidden="true"
               />
 
               <div className="relative">
-                <span className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-indigo-200">
+                <span className="inline-flex  bg-white/10 px-3 py-1 text-xs font-medium text-indigo-200">
                   Ready to build?
                 </span>
 
@@ -571,7 +571,7 @@ export default async function CareerPage({ params }) {
 
                 <Link
                   href="/dashboard/builder"
-                  className="mt-7 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3.5 text-sm font-semibold text-[#17201C] transition hover:-translate-y-0.5 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-[#17201C]"
+                  className="mt-7 inline-flex items-center gap-2  bg-white px-6 py-3.5 text-sm font-semibold text-[#17201C] transition hover:-translate-y-0.5 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-[#17201C]"
                 >
                   Build my resume
                   <span>→</span>
@@ -594,7 +594,7 @@ export default async function CareerPage({ params }) {
       >
         <Link
           href="/"
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition active:scale-[0.98]"
+          className="flex w-full items-center justify-center gap-2  bg-indigo-600 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition active:scale-[0.98]"
         >
           Build my resume
           <span>→</span>

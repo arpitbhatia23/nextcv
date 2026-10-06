@@ -210,7 +210,7 @@ export default function ExamplesGallery() {
             placeholder="Search role e.g. Full Stack Developer, TCS Fresher, Data Analyst..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="h-12 pl-12"
+            className="h-12 pl-12 rounded-none!"
           />
         </div>
 
@@ -224,7 +224,7 @@ export default function ExamplesGallery() {
               type="button"
               aria-pressed={activeCategory === cat}
               onClick={() => setActiveCategory(cat)}
-              className="h-10 px-4 text-xs font-semibold sm:text-sm"
+              className="h-10 px-4 text-xs font-semibold sm:text-sm rounded-none!"
             >
               {cat}
             </Button>
@@ -249,12 +249,12 @@ export default function ExamplesGallery() {
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-white to-transparent pointer-events-none" />
-                <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-slate-800 font-bold text-[11px] px-2.5 py-1 rounded-lg border border-slate-200 shadow-xs">
+                <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md text-slate-800 font-bold text-[11px] px-2.5 py-1  border border-slate-200 shadow-xs">
                   {item.templateName}
                 </span>
                 <Link
                   href="/pricing"
-                  className="absolute bottom-3 right-3 rounded-lg bg-primary px-2.5 py-1 text-[11px] font-semibold text-white shadow-xs hover:bg-primary/90"
+                  className="absolute bottom-3 right-3  bg-primary px-2.5 py-1 text-[11px] font-semibold text-white shadow-xs hover:bg-primary/90"
                 >
                   Compare plans
                 </Link>
@@ -263,10 +263,10 @@ export default function ExamplesGallery() {
               {/* Card Body */}
               <div className="p-6 space-y-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="rounded-full border border-border bg-accent px-3 py-1 text-xs font-semibold text-primary">
+                  <span className=" border border-border bg-accent px-3 py-1 text-xs font-semibold text-primary">
                     {item.expLevel}
                   </span>
-                  <span className="rounded-full border border-primary/15 bg-accent px-2.5 py-1 text-xs font-medium text-primary">
+                  <span className=" border border-primary/15 bg-accent px-2.5 py-1 text-xs font-medium text-primary">
                     Example score: {item.atsScore}%
                   </span>
                 </div>
@@ -288,7 +288,7 @@ export default function ExamplesGallery() {
                   <ul className="space-y-1.5">
                     {item.bullets.slice(0, 2).map((b, i) => (
                       <li key={i} className="text-xs text-slate-600 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0" />
+                        <span className="w-1.5 h-1.5  bg-indigo-600 mt-1.5 shrink-0" />
                         <span className="line-clamp-2">{b}</span>
                       </li>
                     ))}
@@ -299,7 +299,7 @@ export default function ExamplesGallery() {
                   {item.skills.map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-mono border border-slate-200"
+                      className="px-2.5 py-1 bg-slate-100 text-slate-700  text-[11px] font-mono border border-slate-200"
                     >
                       {skill}
                     </span>
@@ -316,7 +316,7 @@ export default function ExamplesGallery() {
                   previewTriggerRef.current = event.currentTarget;
                   setPreviewExample(item);
                 }}
-                className="h-11 flex-1 text-xs"
+                className="h-11 flex-1 text-xs rounded-none!"
               >
                 <Eye className="w-3.5 h-3.5 text-indigo-600" /> Quick View
               </Button>
@@ -327,7 +327,7 @@ export default function ExamplesGallery() {
       </div>
 
       {filteredExamples.length === 0 && (
-        <div className="text-center py-16 bg-slate-50 rounded-3xl border border-slate-200">
+        <div className="text-center py-16 bg-slate-50  border border-slate-200">
           <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
           <h3 className="text-lg font-bold text-slate-900 mb-2">
             No examples found for "{searchQuery}"
@@ -371,7 +371,7 @@ export default function ExamplesGallery() {
                 type="button"
                 onClick={() => setPreviewExample(null)}
                 aria-label="Close resume example preview"
-                className="h-10 px-3 text-xs"
+                className="h-10 px-3 text-xs rounded-none!"
               >
                 Close
               </Button>
@@ -380,7 +380,7 @@ export default function ExamplesGallery() {
             <div className="grid md:grid-cols-3 gap-6">
               {/* Left Column: Image Preview */}
               <div className="md:col-span-1">
-                <div className="relative h-72 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-xs">
+                <div className="relative h-72  overflow-hidden border border-slate-200 bg-slate-100 shadow-xs">
                   <Image
                     src={previewExample.templateImg}
                     alt={previewExample.templateName}
@@ -405,7 +405,7 @@ export default function ExamplesGallery() {
               <div className="md:col-span-2 space-y-4 text-xs sm:text-sm text-slate-600">
                 <div>
                   <h4 className="font-bold text-slate-900 mb-1">Professional Summary</h4>
-                  <p className="bg-slate-50 p-4 rounded-xl border border-slate-200 leading-relaxed text-slate-700">
+                  <p className="bg-slate-50 p-4  border border-slate-200 leading-relaxed text-slate-700">
                     "{previewExample.summary}"
                   </p>
                 </div>
@@ -416,7 +416,7 @@ export default function ExamplesGallery() {
                     {previewExample.bullets.map((b, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-700"
+                        className="flex items-start gap-2 bg-slate-50 p-3  border border-slate-200 text-slate-700"
                       >
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                         <span>{b}</span>
@@ -431,7 +431,7 @@ export default function ExamplesGallery() {
                     {previewExample.skills.map((skill, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-lg text-xs font-mono"
+                        className="px-3 py-1 bg-indigo-50 text-indigo-700 border border-indigo-100  text-xs font-mono"
                       >
                         {skill}
                       </span>
@@ -444,13 +444,13 @@ export default function ExamplesGallery() {
             <div className="pt-4 border-t border-slate-100 flex justify-end gap-3">
               <button
                 onClick={() => setPreviewExample(null)}
-                className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold"
+                className="px-5 py-2.5  bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold"
               >
                 Back to List
               </button>
               <Link
                 href="/"
-                className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-2 shadow-md"
+                className="px-6 py-2.5  bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-2 shadow-md"
               >
                 Create My Resume With This Template <ArrowRight className="w-4 h-4" />
               </Link>
