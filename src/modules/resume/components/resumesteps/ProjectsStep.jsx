@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Edit2, Trash2, FolderKanban, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -20,25 +20,17 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 import posthog from "@/shared/utils/posthog";
-/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
-   labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "../fontImport";
 
 const inputClass =
-  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  "rounded-none! border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
 const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const ProjectsStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
   const router = useRouter();
-  const [projectList, setProjectList] = useState(formData.projects || []);
+  const [projectList, setProjectList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
@@ -51,6 +43,16 @@ const ProjectsStep = () => {
     router.prefetch("/dashboard/builder/certificate");
   }, [router]);
 
+  const EMPTY_FORM = {
+    title: "",
+    roleOrType: "",
+    organization: "",
+    date: "",
+    technologiesOrTopics: "",
+    link: "",
+    description: "",
+    features: "",
+  };
   const form = useForm({
     defaultValues: {
       title: "",
@@ -64,42 +66,58 @@ const ProjectsStep = () => {
     },
   });
 
+  // Sync local list → store on every change (including empty array deletions)
   useEffect(() => {
-    if (projectList?.length > 0) {
-      updateForm({ projects: projectList });
+    if (formData.projects.length > 0) {
+      console.log(formData.projects[0].id);
+      setProjectList(
+        (formData.projects || []).map((p, i) => {
+          return { ...p, id: p.id ?? Date.now() + i };
+        })
+      );
     }
-  }, [projectList]);
-
-  useEffect(() => {
-    setProjectList(formData.projects);
   }, [formData.projects]);
 
-  console.log("fromdaata", formData);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const onSubmit = values => {
     if (isEditing) {
-      setProjectList(prev =>
-        prev.map(proj => (proj.id === editingId ? { ...values, id: editingId } : proj))
-      );
+      const updatedproject = { ...values, id: editingId };
+      setProjectList(prev => prev.map(proj => (proj.id === editingId ? updatedproject : proj)));
+      updateForm({
+        projects: formData.projects.map(item => (item.id === editingId ? updatedproject : item)),
+      });
+
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setProjectList(prev => [...prev, { ...values, id: Date.now() }]);
+      const updatedProject = { ...values, id: Date.now() };
+      setProjectList(prev => [...prev, updatedProject]);
+      updateForm({ projects: [...formData.projects, updatedProject] });
     }
-    form.reset();
+    form.reset(EMPTY_FORM);
   };
 
   const handleEdit = project => {
-    form.reset(project);
+    const descValue = Array.isArray(project.description)
+      ? project.description.join("\n")
+      : String(project.description ?? "");
+
+    form.reset({ ...project, description: descValue });
     setIsEditing(true);
     setEditingId(project.id);
   };
 
   const handleDelete = id => {
-    setProjectList(prev => prev.filter(proj => proj.id !== id));
+    console.log(id, formData.projects);
+    const updatedporject = projectList.filter(proj => proj.id !== id);
+    console.log(updatedporject);
+    setProjectList(updatedporject);
+    updateForm({ projects: updatedporject });
   };
 
   const cancelEdit = () => {
-    form.reset();
+    form.reset(EMPTY_FORM);
     setIsEditing(false);
     setEditingId(null);
   };
@@ -128,12 +146,10 @@ const ProjectsStep = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
+          className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
           id="tour-projects-form"
         >
-          <CardHeader
-            className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center"
-          >
+          <CardHeader className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center">
             <CardTitle
               className="font-mono text-[10px] md:text-xs tracking-widest"
               style={{ color: "#6B7280" }}
@@ -145,7 +161,7 @@ const ProjectsStep = () => {
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-7 rounded-none font-mono text-[10px] md:text-xs hover:bg-transparent"
+                className="h-7 rounded-none!font-mono text-[10px] md:text-xs hover:bg-transparent"
                 style={{ color: "#6B7280" }}
               >
                 Cancel
@@ -291,7 +307,7 @@ const ProjectsStep = () => {
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="h-6 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+                          className="h-6 rounded-none!font-mono text-[10px] tracking-widest hover:bg-transparent"
                           style={{ color: "#B3382C" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
@@ -300,7 +316,7 @@ const ProjectsStep = () => {
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
                             ? "AI WRITING..."
-                            : form.watch("description")?.trim()
+                            : String(form.watch("description") ?? "").trim()
                               ? "REFINE AI"
                               : "AI GENERATED"}
                         </Button>
@@ -311,7 +327,7 @@ const ProjectsStep = () => {
                             placeholder="Brief records..."
                             rows={3}
                             {...field}
-                            className={`rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
+                            className={`rounded-none!border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
                               isGenerating ? "opacity-50" : ""
                             }`}
                             style={inputStyle}
@@ -341,7 +357,7 @@ const ProjectsStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full rounded-xl text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                   >
                     {isEditing ? "Update Project" : "Save Project"}
                   </Button>
@@ -354,13 +370,11 @@ const ProjectsStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="rounded-2xl border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
+            className="border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
             style={{ borderColor: "#E3E2DC" }}
             id="tour-projects-list"
           >
-            <h3
-              className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]"
-            >
+            <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]">
               <FolderKanban className="w-4 h-4 text-[#465B9E]" /> Portfolio Showcase
             </h3>
 
@@ -400,7 +414,7 @@ const ProjectsStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none!hover:bg-transparent"
                           style={{ color: "#B7B5AC" }}
                           onClick={() => handleEdit(project)}
                         >
@@ -409,7 +423,7 @@ const ProjectsStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none!hover:bg-transparent"
                           style={{ color: "#B7B5AC" }}
                           onClick={() => handleDelete(project.id)}
                         >
@@ -445,7 +459,7 @@ const ProjectsStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/experience")}
-              className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
+              className="h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
@@ -457,7 +471,7 @@ const ProjectsStep = () => {
                 });
                 router.push("/dashboard/builder/certificate");
               }}
-              className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
               id="tour-next-button"
             >
               Certificates Info <ArrowRight className="w-4 h-4 ml-2" />

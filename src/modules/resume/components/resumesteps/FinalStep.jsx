@@ -29,6 +29,7 @@ import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
 import { templatesMetadata } from "@/shared/utils/template-metadata";
 import posthog from "@/shared/utils/posthog";
 import dynamic from "next/dynamic";
+import { FontImports } from "../fontImport";
 const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ssr: false,
   loading: () => (
@@ -38,20 +39,6 @@ const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ),
 });
 const TIERS = ["Basic", "Standard", "Premium", "Elite"];
-
-// Canonical NextCV review/export UI: warm editorial surface + restrained indigo accent.
-// Business logic, API contracts, payment flow, coupon flow, draft flow, and PDF generation are preserved.
-
-/* Fonts: Fraunces for headings, IBM Plex Mono for eyebrows, labels,
-   and helper text — matches the rest of the builder steps. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
-    .nextcv-serif { font-family: 'Source Serif 4', Georgia, serif; }
-    .nextcv-sans { font-family: 'Inter', system-ui, sans-serif; }
-    .nextcv-mono { font-family: 'Inter', system-ui, sans-serif; }
-  `}</style>
-);
 
 const NAVY = "#17201C";
 const RUST = "#465B9E";
@@ -175,14 +162,14 @@ const FinalStep = () => {
     <div
       key={template.key}
       onClick={() => setSelectedTemplate(template.key)}
-      className="group relative cursor-pointer border-2 rounded-xl overflow-hidden transition-all duration-300"
+      className="group relative cursor-pointer border-2  overflow-hidden transition-all duration-300"
       style={{
         borderColor: selectedTemplate === template.key ? RUST : BORDER,
       }}
     >
       {template.tier === "Premium" && (
         <div
-          className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full nextcv-sans text-[9px] tracking-widest text-white"
+          className="absolute top-3 left-3 z-10 px-2.5 py-1  nextcv-sans text-[9px] tracking-widest text-white"
           style={{ backgroundColor: RUST }}
         >
           MOST POPULAR
@@ -191,7 +178,7 @@ const FinalStep = () => {
 
       {template.tier === "Elite" && (
         <div
-          className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full nextcv-sans text-[9px] tracking-widest text-white"
+          className="absolute top-3 left-3 z-10 px-2.5 py-1  nextcv-sans text-[9px] tracking-widest text-white"
           style={{ backgroundColor: NAVY }}
         >
           ALL ACCESS
@@ -252,7 +239,7 @@ const FinalStep = () => {
 
       {selectedTemplate === template.key && (
         <div
-          className="absolute top-3 right-3 text-white p-1.5 z-10 rounded-lg"
+          className="absolute top-3 right-3 text-white p-1.5 z-10 "
           style={{ backgroundColor: RUST }}
         >
           <CheckCircle2 className="w-3.5 h-3.5" />
@@ -265,7 +252,10 @@ const FinalStep = () => {
       <FontImports />
 
       <div className="mb-6 pb-5 border-b" style={{ borderColor: BORDER }}>
-        <div className="nextcv-sans text-[10px] tracking-widest uppercase mb-1 font-medium" style={{ color: RUST }}>
+        <div
+          className="nextcv-sans text-[10px] tracking-widest uppercase mb-1 font-medium"
+          style={{ color: RUST }}
+        >
           STEP 09 — REVIEW & DOWNLOAD
         </div>
         <h2
@@ -295,7 +285,7 @@ const FinalStep = () => {
               <button
                 key={tier}
                 onClick={() => setActiveTier(tier)}
-                className="shrink-0 border rounded-xl px-4 py-2 nextcv-sans text-[10px] uppercase tracking-widest transition-all font-medium"
+                className="shrink-0 border  px-4 py-2 nextcv-sans text-[10px] uppercase tracking-widest transition-all font-medium"
                 style={
                   activeTier === tier
                     ? { backgroundColor: RUST, color: WHITE, borderColor: RUST }
@@ -312,7 +302,7 @@ const FinalStep = () => {
               <div
                 key={template.key}
                 onClick={() => setSelectedTemplate(template.key)}
-                className="flex-none w-36 flex flex-col items-center gap-2 p-3 border-2 rounded-xl overflow-hidden transition-all cursor-pointer snap-start relative"
+                className="flex-none w-36 flex flex-col items-center gap-2 p-3 border-2  overflow-hidden transition-all cursor-pointer snap-start relative"
                 style={{
                   backgroundColor: selectedTemplate === template.key ? BG : WHITE,
                   borderColor: selectedTemplate === template.key ? RUST : BORDER,
@@ -320,7 +310,7 @@ const FinalStep = () => {
               >
                 {template.tier === "Premium" && (
                   <span
-                    className="absolute top-3 left-3 z-10 px-2 py-1 rounded-full nextcv-sans text-[7px] tracking-widest text-white"
+                    className="absolute top-3 left-3 z-10 px-2 py-1  nextcv-sans text-[7px] tracking-widest text-white"
                     style={{ backgroundColor: RUST }}
                   >
                     POPULAR
@@ -375,7 +365,7 @@ const FinalStep = () => {
         </div>
 
         <Card
-          className="rounded-2xl border shadow-none overflow-hidden"
+          className=" border shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <CardHeader className="p-3 border-b" style={{ borderColor: BORDER }}>
@@ -396,7 +386,7 @@ const FinalStep = () => {
         </Card>
 
         <Card
-          className="rounded-2xl border shadow-none overflow-hidden"
+          className=" border shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <CardHeader className="p-4 border-b" style={{ borderColor: BORDER }}>
@@ -432,14 +422,14 @@ const FinalStep = () => {
                 value={couponCode}
                 onChange={e => setCouponCode(e.target.value)}
                 placeholder="PROMO CODE"
-                className="rounded-2xl border h-10 nextcv-sans text-xs uppercase tracking-widest"
+                className=" border rounded-none! h-10 nextcv-sans text-xs uppercase tracking-widest"
                 style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                 disabled={applied}
               />
               <Button
                 onClick={() => debounceCoupon(couponCode)}
                 disabled={!couponCode.trim() || isSubmit || applied}
-                className="rounded-none h-10 px-4 nextcv-sans text-xs tracking-widest shadow-none"
+                className="rounded-none! h-10 px-4 nextcv-sans text-xs tracking-widest shadow-none"
                 style={{ backgroundColor: applied ? "#3F7A5C" : NAVY, color: WHITE }}
               >
                 {applied ? "APPLIED" : "APPLY"}
@@ -448,7 +438,7 @@ const FinalStep = () => {
 
             <div className="space-y-3 pt-2">
               <Button
-                className="w-full rounded-xl shadow-none h-12 nextcv-sans text-sm tracking-widest"
+                className="w-full  shadow-none h-12 nextcv-sans text-sm tracking-widest"
                 style={{ backgroundColor: RUST, color: WHITE }}
                 onClick={debouncePayment}
                 disabled={isSubmit || (couponCode && !applied)}
@@ -459,7 +449,7 @@ const FinalStep = () => {
 
               <Button
                 variant="outline"
-                className="w-full rounded-none h-10 nextcv-sans text-xs tracking-widest"
+                className="w-full rounded-none! h-10 nextcv-sans text-xs tracking-widest"
                 style={{ borderColor: BORDER, color: MUTED }}
                 onClick={debounceDraft}
                 disabled={isSubmit}
@@ -476,7 +466,7 @@ const FinalStep = () => {
       <div className="hidden lg:flex gap-5 h-[72vh] min-h-155 pt-1">
         {/* Left: Template Selector */}
         <div
-          className="w-75 xl:w-80 flex flex-col border rounded-2xl shadow-none overflow-hidden"
+          className="w-75 xl:w-80 flex flex-col border  shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <div className="p-4 border-b" style={{ borderColor: BORDER }}>
@@ -493,7 +483,7 @@ const FinalStep = () => {
                 <button
                   key={tier}
                   onClick={() => setActiveTier(tier)}
-                  className="rounded-xl border px-3 py-2.5 nextcv-sans text-[11px] font-semibold uppercase tracking-[0.08em] transition-all"
+                  className=" border px-3 py-2.5 nextcv-sans text-[11px] font-semibold uppercase tracking-[0.08em] transition-all"
                   style={
                     activeTier === tier
                       ? { backgroundColor: RUST, color: WHITE, borderColor: RUST }
@@ -522,7 +512,7 @@ const FinalStep = () => {
           <div className="p-4 border-t" style={{ borderColor: BORDER }}>
             <Button
               variant="outline"
-              className="w-full rounded-xl nextcv-sans text-xs font-medium tracking-wider hover:bg-[#F1F0EB] transition-colors"
+              className="w-full  nextcv-sans text-xs font-medium tracking-wider hover:bg-[#F1F0EB] transition-colors"
               style={{ borderColor: BORDER, color: MUTED }}
               disabled={isSubmit}
               onClick={debounceDraft}
@@ -535,7 +525,7 @@ const FinalStep = () => {
 
         {/* Center: Preview */}
         <div
-          className="flex-1 flex flex-col border rounded-2xl shadow-none overflow-hidden"
+          className="flex-1 flex flex-col border  shadow-none overflow-hidden"
           style={{ backgroundColor: BG, borderColor: BORDER }}
         >
           <div
@@ -557,7 +547,7 @@ const FinalStep = () => {
 
             <div className="flex items-center gap-1">
               <div
-                className="w-2 h-2 rounded-full animate-pulse"
+                className="w-2 h-2  animate-pulse rounded-full"
                 style={{ backgroundColor: "#3F7A5C" }}
               />
               <span
@@ -574,7 +564,7 @@ const FinalStep = () => {
 
         {/* Right: Checkout */}
         <div
-          className="w-75 xl:w-80 flex flex-col border rounded-2xl shadow-none overflow-hidden h-fit"
+          className="w-75 xl:w-80 flex flex-col border  shadow-none overflow-hidden h-fit"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <div className="p-5 border-b" style={{ borderColor: BORDER }}>
@@ -595,7 +585,7 @@ const FinalStep = () => {
 
           <div className="p-5 space-y-6">
             <div
-              className="p-4 border rounded-xl space-y-3"
+              className="p-4 border  space-y-3"
               style={{ backgroundColor: BG, borderColor: BORDER }}
             >
               <div
@@ -603,7 +593,9 @@ const FinalStep = () => {
                 style={{ color: MUTED }}
               >
                 <span>Selected License</span>
-                <span className="font-medium" style={{ color: NAVY }}>₹{basePrice}</span>
+                <span className="font-medium" style={{ color: NAVY }}>
+                  ₹{basePrice}
+                </span>
               </div>
 
               {applied && discount && (
@@ -655,7 +647,7 @@ const FinalStep = () => {
                   value={couponCode}
                   onChange={e => setCouponCode(e.target.value)}
                   placeholder="Enter code"
-                  className="rounded-xl border h-10 nextcv-sans text-xs uppercase tracking-wider placeholder:normal-case placeholder:font-normal placeholder:tracking-normal focus:border-[#465B9E]"
+                  className=" border h-10 nextcv-sans text-xs uppercase tracking-wider placeholder:normal-case placeholder:font-normal placeholder:tracking-normal focus:border-[#465B9E]"
                   style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                   disabled={applied}
                 />
@@ -665,7 +657,7 @@ const FinalStep = () => {
                     onClick={() => debounceCoupon(couponCode)}
                     disabled={!couponCode.trim() || isSubmit}
                     size="sm"
-                    className="rounded-xl px-4 h-10 nextcv-sans text-xs font-medium tracking-wide shadow-none hover:bg-[#344B93] transition-colors"
+                    className=" px-4 h-10 nextcv-sans text-xs font-medium tracking-wide shadow-none hover:bg-[#344B93] transition-colors"
                     style={{ backgroundColor: RUST, color: WHITE }}
                   >
                     Apply
@@ -695,7 +687,7 @@ const FinalStep = () => {
 
           <div className="p-5 border-t" style={{ borderColor: BORDER }}>
             <Button
-              className="w-full rounded-xl shadow-sm py-6 nextcv-sans text-sm font-medium tracking-wider transition-all hover:bg-[#344B93]"
+              className="w-full  shadow-sm py-6 nextcv-sans text-sm font-medium tracking-wider transition-all hover:bg-[#344B93]"
               style={{ backgroundColor: RUST, color: WHITE }}
               onClick={debouncePayment}
               disabled={isSubmit || (couponCode && !applied)}

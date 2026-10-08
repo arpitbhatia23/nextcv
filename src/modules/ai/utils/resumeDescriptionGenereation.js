@@ -1,5 +1,4 @@
 import crypto from "crypto";
-import { encode } from "@toon-format/toon";
 import { extractJobKeywordsPrompt, PromptStrategies } from "./promptStratgies.js";
 import { groq, groq_model, posthog } from "./aiConfig.js";
 import { redis } from "@/shared/utils/Redis.js";
@@ -8,6 +7,10 @@ const FAST_MODEL = "openai/gpt-oss-20b";
 const SMART_MODEL = "openai/gpt-oss-120b";
 
 export const hash = value => crypto.createHash("sha256").update(String(value)).digest("hex");
+
+/* ============================================================
+   REDIS
+   ============================================================ */
 
 export const getCached = async key => {
   try {
@@ -20,7 +23,6 @@ export const getCached = async key => {
 
 export const setCached = async (key, value, ttl = 60 * 60 * 24 * 2) => {
   try {
-    // Don't cache empty AI responses
     if (!key || !String(value ?? "").trim()) return;
 
     await redis.set(key, String(value), "EX", ttl);
@@ -29,132 +31,257 @@ export const setCached = async (key, value, ttl = 60 * 60 * 24 * 2) => {
   }
 };
 
+/* ============================================================
+   AI GENERATOR
+   20B → 120B fallback
+   ============================================================ */
+
 const generateFromPrompt = async (prompt, options = {}) => {
-  try {
-    const toonPrompt = encode(prompt?.trim());
+  const cleanPrompt = prompt?.trim();
 
-    if (!toonPrompt) {
-      throw new Error("Prompt is required");
-    }
+  if (!cleanPrompt) {
+    throw new Error("Prompt is required");
+  }
 
-    const model = options.model || groq_model || FAST_MODEL;
+  const {
+    maxCompletionTokens = 500,
+    temperature = 0.3,
+    reasoningEffort = "low",
+    traceId = crypto.randomUUID(),
+    model: requestedModel,
+  } = options;
 
-    const cacheKey = `gen:${hash(`${model}:${options.maxCompletionTokens ?? 500}:${toonPrompt}`)}`;
+  /*
+   * Requested model:
+   * - explicitly supplied model
+   * - otherwise configured groq_model
+   * - otherwise FAST_MODEL
+   */
+  const primaryModel = requestedModel || groq_model || FAST_MODEL;
 
-    const cached = await getCached(cacheKey);
+  /*
+   * Never use the same model twice.
+   */
+  const models = [primaryModel, primaryModel === SMART_MODEL ? FAST_MODEL : SMART_MODEL].filter(
+    (model, index, arr) => arr.indexOf(model) === index
+  );
 
-    if (cached) return cached;
+  /*
+   * Cache must depend on:
+   * - prompt
+   * - model
+   * - token limit
+   *
+   * Otherwise changing model can return an old response.
+   */
+  const cacheKey = `gen:${hash(`${primaryModel}:${maxCompletionTokens}:${cleanPrompt}`)}`;
 
-    const response = await groq.chat.completions.create({
-      model,
-      messages: [
-        {
-          role: "user",
-          content: toonPrompt,
-        },
-      ],
-      temperature: options.temperature ?? 0.3,
+  const cached = await getCached(cacheKey);
 
-      // Reasoning and visible output share this limit
-      max_completion_tokens: options.maxCompletionTokens ?? 500,
+  if (cached) {
+    console.log(`[AI] Cache HIT`);
+    return cached;
+  }
 
-      reasoning_effort: options.reasoningEffort ?? "low",
-      include_reasoning: false,
-      posthogTraceId: options.traceId ?? crypto.randomUUID(),
-      posthogProperties: {
-        $ai_session_id: `process-${process.pid}`,
-        $ai_provider: "groq",
-      },
-    });
+  let lastError = null;
 
-    await posthog.flush();
+  for (let i = 0; i < models.length; i++) {
+    const model = models[i];
 
-    const choice = response.choices?.[0];
-    const result = choice?.message?.content?.trim() || "";
+    try {
+      console.log(`[AI] Trying ${model}${i > 0 ? " (fallback)" : ""}`);
 
-    console.log("Generation usage:", response.usage);
-
-    if (!result) {
-      console.error("Groq returned empty content:", {
+      const response = await groq.chat.completions.create({
         model,
-        finishReason: choice?.finish_reason,
-        message: choice?.message,
-        usage: response.usage,
+
+        messages: [
+          {
+            role: "user",
+            content: cleanPrompt,
+          },
+        ],
+
+        temperature,
+
+        /*
+         * Reasoning + visible output share this budget.
+         */
+        max_completion_tokens: maxCompletionTokens,
+
+        reasoning_effort: reasoningEffort,
+        include_reasoning: false,
+
+        posthogTraceId: traceId,
+
+        posthogProperties: {
+          $ai_session_id: `process-${process.pid}`,
+          $ai_provider: "groq",
+          $ai_model: model,
+        },
       });
 
-      return "";
+      await posthog.flush();
+
+      const choice = response.choices?.[0];
+
+      const result = choice?.message?.content?.trim() || "";
+
+      console.log("[AI] Usage:", {
+        model,
+        promptTokens: response.usage?.prompt_tokens,
+        completionTokens: response.usage?.completion_tokens,
+        totalTokens: response.usage?.total_tokens,
+        finishReason: choice?.finish_reason,
+      });
+
+      /*
+       * Empty output is treated as failure so the fallback
+       * model gets a chance.
+       */
+      if (!result) {
+        lastError = new Error(`${model} returned empty content`);
+
+        console.warn(`[AI] ${model} returned empty content`);
+
+        continue;
+      }
+
+      /*
+       * If the model hit its output limit, don't cache the
+       * potentially incomplete result.
+       */
+      if (choice?.finish_reason === "length") {
+        lastError = new Error(`${model} reached max completion tokens`);
+
+        console.warn(`[AI] ${model} output truncated`);
+
+        continue;
+      }
+
+      /*
+       * Successful response.
+       */
+      await setCached(cacheKey, result);
+
+      return result;
+    } catch (error) {
+      lastError = error;
+
+      console.error(`[AI] ${model} failed:`, error?.message || error);
+
+      /*
+       * Try the fallback model.
+       */
+      continue;
     }
-
-    await setCached(cacheKey, result);
-
-    return result;
-  } catch (error) {
-    console.error("Groq AI Error:", error);
-    return "";
   }
+
+  console.error("[AI] All models failed:", lastError?.message);
+
+  return "";
 };
+
+/* ============================================================
+   ATS KEYWORDS
+   ============================================================ */
 
 const extractJobKeywords = async (jobDescription, traceId = crypto.randomUUID()) => {
   const text = jobDescription?.trim();
 
   if (!text) return "";
 
-  // Include model and prompt version to avoid stale results
   const cacheKey = `ats:v2:${hash(`${FAST_MODEL}:${extractJobKeywordsPrompt}:${text}`)}`;
 
   const cached = await getCached(cacheKey);
 
-  if (cached) return cached;
+  if (cached) {
+    console.log("[ATS] Cache HIT");
+    return cached;
+  }
 
-  try {
-    const response = await groq.chat.completions.create({
-      model: FAST_MODEL,
-      messages: [
-        {
-          role: "system",
-          content: extractJobKeywordsPrompt,
+  const models = [FAST_MODEL, SMART_MODEL];
+
+  let lastError = null;
+
+  for (let i = 0; i < models.length; i++) {
+    const model = models[i];
+
+    try {
+      console.log(`[ATS] Trying ${model}${i > 0 ? " (fallback)" : ""}`);
+
+      const response = await groq.chat.completions.create({
+        model,
+
+        messages: [
+          {
+            role: "system",
+            content: extractJobKeywordsPrompt,
+          },
+          {
+            role: "user",
+            content: text.slice(0, 2500),
+          },
+        ],
+
+        temperature: 0.1,
+        max_completion_tokens: 500,
+
+        reasoning_effort: "low",
+        include_reasoning: false,
+
+        posthogTraceId: traceId,
+
+        posthogProperties: {
+          $ai_session_id: `process-${process.pid}`,
+          $ai_provider: "groq",
+          $ai_model: model,
         },
-        {
-          role: "user",
-          content: text.slice(0, 2500),
-        },
-      ],
-      temperature: 0.1,
-      max_completion_tokens: 500,
-      reasoning_effort: "low",
-      include_reasoning: false,
-      posthogTraceId: traceId,
-      posthogProperties: {
-        $ai_session_id: `process-${process.pid}`,
-        $ai_provider: "groq",
-      },
-    });
-
-    await posthog.flush();
-
-    const choice = response.choices?.[0];
-    const keywords = choice?.message?.content?.trim() || "";
-
-    console.log("ATS keyword usage:", response.usage);
-
-    if (!keywords) {
-      console.error("Empty keyword response:", {
-        finishReason: choice?.finish_reason,
-        message: choice?.message,
-        usage: response.usage,
       });
 
-      return "";
+      await posthog.flush();
+
+      const choice = response.choices?.[0];
+
+      const keywords = choice?.message?.content?.trim() || "";
+
+      console.log("[ATS] Usage:", {
+        model,
+        promptTokens: response.usage?.prompt_tokens,
+        completionTokens: response.usage?.completion_tokens,
+        totalTokens: response.usage?.total_tokens,
+        finishReason: choice?.finish_reason,
+      });
+
+      if (!keywords) {
+        lastError = new Error(`${model} returned empty keyword response`);
+
+        continue;
+      }
+
+      if (choice?.finish_reason === "length") {
+        lastError = new Error(`${model} keyword response was truncated`);
+
+        continue;
+      }
+
+      await setCached(cacheKey, keywords);
+
+      return keywords;
+    } catch (error) {
+      lastError = error;
+
+      console.error(`[ATS] ${model} failed:`, error?.message || error);
     }
-
-    await setCached(cacheKey, keywords);
-
-    return keywords;
-  } catch (error) {
-    console.error("Keyword extraction error:", error);
-    return "";
   }
+
+  console.error("[ATS] All models failed:", lastError?.message);
+
+  return "";
 };
+
+/* ============================================================
+   RESUME GENERATOR
+   ============================================================ */
 
 export const ResumeGenerator = {
   education: data =>
@@ -164,6 +291,7 @@ export const ResumeGenerator = {
 
   project: async (data, jobDescription = "") => {
     const traceId = crypto.randomUUID();
+
     const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
@@ -180,6 +308,7 @@ export const ResumeGenerator = {
 
   experience: async (data, jobDescription = "") => {
     const traceId = crypto.randomUUID();
+
     const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
@@ -196,6 +325,7 @@ export const ResumeGenerator = {
 
   skills: async (data, jobDescription = "") => {
     const traceId = crypto.randomUUID();
+
     const atsKeywords = await extractJobKeywords(jobDescription, traceId);
 
     return generateFromPrompt(
@@ -212,20 +342,20 @@ export const ResumeGenerator = {
 
   summary: async data => {
     const traceId = crypto.randomUUID();
-    const atsKeywords = await extractJobKeywords(data.jobDescription, traceId);
+
+    const atsKeywords = await extractJobKeywords(data?.jobDescription, traceId);
 
     return generateFromPrompt(
       PromptStrategies.summary({
-        role: data.jobRole,
-        skills: data.skills,
-        education: data.education?.map(item => item.description).join("\n"),
-        experience: data.experience?.map(item => item.description).join("\n"),
-        projects: data.projects?.map(item => item.description).join("\n"),
-        summary: data.summary,
+        role: data?.jobRole,
+        skills: data?.skills,
+        education: data?.education?.map(item => item?.description).join("\n"),
+        experience: data?.experience?.map(item => item?.description).join("\n"),
+        projects: data?.projects?.map(item => item?.description).join("\n"),
+        summary: data?.summary,
         atsKeywords,
       }),
       {
-        // Use FAST_MODEL initially to conserve free-tier tokens
         model: FAST_MODEL,
         maxCompletionTokens: 600,
         reasoningEffort: "low",

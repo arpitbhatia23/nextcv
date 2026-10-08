@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useForm } from "react-hook-form";
 import {
@@ -25,16 +25,7 @@ import {
   CollapsibleTrigger,
 } from "@/shared/components/ui/collapsible";
 import posthog from "@/shared/utils/posthog";
-
-/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
-   labels, and helper text. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "../fontImport";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -50,7 +41,7 @@ const schema = z.object({
 });
 
 const inputClass =
-  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  " border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 rounded-none! focus-visible:ring-[#465B9E]";
 const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const BasicInfoStep = () => {
@@ -128,7 +119,7 @@ const BasicInfoStep = () => {
             </p>
           </div>
 
-          <Card className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] bg-white overflow-hidden">
+          <Card className=" border border-[#E3E2DC] rounded-none shadow-[0_4px_20px_rgba(23,32,28,0.04)] bg-white overflow-hidden">
             <CardContent className="p-4 md:p-6">
               <Form {...form}>
                 <form className="space-y-4 md:space-y-5" onSubmit={form.handleSubmit(handlesave)}>
@@ -139,7 +130,7 @@ const BasicInfoStep = () => {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel
-                            className="font-mono text-[10px] md:text-xs tracking-widest"
+                            className="font-mono text-[10px] md:text-xs tracking-widest "
                             style={{ color: "#6B7280" }}
                           >
                             FULL NAME
@@ -261,7 +252,7 @@ const BasicInfoStep = () => {
                     <CollapsibleTrigger asChild>
                       <Button
                         variant="ghost"
-                        className="w-full justify-between px-0 p-4 rounded-none hover:bg-transparent"
+                        className="w-full justify-between px-0 p-4 rounded-none! hover:bg-transparent"
                         style={{ color: "#1C2333" }}
                       >
                         <span className="font-mono text-xs tracking-widest">
@@ -291,7 +282,7 @@ const BasicInfoStep = () => {
 
                               Avoid company overview, perks, salary, and benefits."
                                 {...field}
-                                className="rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm"
+                                className="rounded-none! border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm"
                                 style={inputStyle}
                               />
                             </FormControl>
@@ -312,7 +303,7 @@ const BasicInfoStep = () => {
                     <CollapsibleTrigger asChild>
                       <Button
                         variant="ghost"
-                        className="w-full justify-between px-0 p-4 rounded-none hover:bg-transparent"
+                        className="w-full justify-between px-0 p-4 rounded-none! hover:bg-transparent"
                         style={{ color: "#1C2333" }}
                       >
                         <span className="font-mono text-xs tracking-widest">
@@ -350,7 +341,7 @@ const BasicInfoStep = () => {
                                     <Input
                                       placeholder="LinkedIn URL"
                                       {...field}
-                                      className="pl-9 md:pl-10 rounded-none border transition-all h-8 md:h-11 text-[10px] md:text-sm"
+                                      className="pl-9 md:pl-10 rounded-none! border transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                       style={inputStyle}
                                     />
                                   </div>
@@ -373,7 +364,7 @@ const BasicInfoStep = () => {
                                     <Input
                                       placeholder="GitHub URL"
                                       {...field}
-                                      className="pl-9 md:pl-10 rounded-none border transition-all h-8 md:h-11 text-[10px] md:text-sm"
+                                      className="pl-9 md:pl-10 rounded-none! border transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                       style={inputStyle}
                                     />
                                   </div>
@@ -396,7 +387,7 @@ const BasicInfoStep = () => {
                                     <Input
                                       placeholder="Portfolio URL"
                                       {...field}
-                                      className="pl-9 md:pl-10 rounded-none border transition-all h-8 md:h-11 text-[10px] md:text-sm"
+                                      className="pl-9 md:pl-10 rounded-none! border transition-all h-8 md:h-11 text-[10px] md:text-sm"
                                       style={inputStyle}
                                     />
                                   </div>
@@ -413,7 +404,7 @@ const BasicInfoStep = () => {
                     <Button
                       type="submit"
                       disabled={isloading}
-                      className="rounded-xl text-white shadow-xs h-10 md:h-11 px-5 md:px-7 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                      className=" text-white shadow-xs h-10 md:h-11 px-5 md:px-7 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                     >
                       {isloading ? "Saving..." : "Next Step"}
                       <ArrowRight className="w-4 h-4 ml-2" />

@@ -10,14 +10,7 @@ import useResumeStore from "@/store/useResumeStore";
 import { Button } from "@/shared/components/ui/button";
 import { templatesMetadata } from "@/shared/utils/template-metadata";
 import posthog from "@/shared/utils/posthog";
-
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "./fontImport";
 
 const tierStyles = {
   basic: { color: "#5B625C", border: "#E3E2DC", bg: "#F1F0EB" },
@@ -153,7 +146,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
           </p>
         </div>
 
-        <div className="hidden items-center gap-4 border border-[#E3E2DC] rounded-2xl px-4 py-3 bg-white shadow-xs lg:flex">
+        <div className="hidden items-center gap-4 border border-[#E3E2DC]  px-4 py-3 bg-white shadow-xs lg:flex">
           <div className="flex -space-x-2.5">
             {[1, 2, 3, 4].map(item => (
               <div
@@ -174,9 +167,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
           <div className="font-mono text-[10px] leading-tight text-[#8A908B]">
             TRUSTED BY
             <br />
-            <span className="font-sans font-semibold text-[#17201C]">
-              12,000+ JOB SEEKERS
-            </span>
+            <span className="font-sans font-semibold text-[#17201C]">12,000+ JOB SEEKERS</span>
           </div>
         </div>
       </div>
@@ -199,7 +190,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 role="tab"
                 aria-selected={isActive}
                 onClick={() => setActiveTier(tab.key)}
-                className={`shrink-0 rounded-xl px-4 py-2 font-sans text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                className={`shrink-0  px-4 py-2 font-sans text-xs sm:text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
                   isActive
                     ? "bg-[#465B9E] text-white shadow-xs"
                     : "bg-white border border-[#E3E2DC] text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]"
@@ -208,10 +199,8 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 <span>{tab.label}</span>
 
                 <span
-                  className={`px-1.5 py-0.5 text-[10px] font-mono rounded-md ${
-                    isActive
-                      ? "bg-white/20 text-white"
-                      : "bg-[#F8F7F3] text-[#8A908B]"
+                  className={`px-1.5 py-0.5 text-[10px] font-mono  ${
+                    isActive ? "bg-white/20 text-white" : "bg-[#F8F7F3] text-[#8A908B]"
                   }`}
                 >
                   {count}
@@ -224,10 +213,8 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
       {/* No templates state */}
       {filteredTemplates.length === 0 && (
-        <div
-          className="flex min-h-64 flex-col items-center justify-center rounded-2xl border border-dashed border-[#C8CDD9] px-6 text-center bg-white"
-        >
-          <div className="mb-4 rounded-xl p-4 bg-[#EEF0F7] text-[#465B9E]">
+        <div className="flex min-h-64 flex-col items-center justify-center  border border-dashed border-[#C8CDD9] px-6 text-center bg-white">
+          <div className="mb-4  p-4 bg-[#EEF0F7] text-[#465B9E]">
             <LayoutTemplate className="h-8 w-8" strokeWidth={1.5} />
           </div>
 
@@ -275,7 +262,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                     relative
                     aspect-[3/4.2]
                     overflow-hidden
-                    rounded-2xl
+                    
                     border
                     transition-all
                     duration-300
@@ -306,7 +293,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                       <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[#17201C]/10" />
 
                       <div
-                        className="absolute bottom-3 left-3 border rounded-md px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider backdrop-blur-md transition-transform duration-300 group-hover:translate-x-0.5"
+                        className="absolute bottom-3 left-3 border  px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider backdrop-blur-md transition-transform duration-300 group-hover:translate-x-0.5"
                         style={{
                           borderColor: tierStyle.border,
                           color: tierStyle.color,
@@ -318,7 +305,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                     </div>
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center gap-3 text-[#8A908B]">
-                      <div className="rounded-xl p-4 bg-[#F8F7F3]">
+                      <div className=" p-4 bg-[#F8F7F3]">
                         <LayoutTemplate className="h-8 w-8 opacity-40" />
                       </div>
                       <span className="font-mono text-xs uppercase tracking-wider">No Preview</span>
@@ -334,7 +321,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
                   {/* Badge */}
                   {badge && (
-                    <div className="absolute left-3 top-3 z-10 rounded-md border border-[#E3E2DC] bg-white/95 backdrop-blur-md px-2.5 py-1 font-mono text-[10px] text-[#465B9E] font-medium shadow-xs">
+                    <div className="absolute left-3 top-3 z-10  border border-[#E3E2DC] bg-white/95 backdrop-blur-md px-2.5 py-1 font-mono text-[10px] text-[#465B9E] font-medium shadow-xs">
                       <Sparkles className="mb-0.5 mr-1 inline-block h-3 w-3" />
                       {badge}
                     </div>
@@ -349,7 +336,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                         event.stopPropagation();
                         handleSelect(key);
                       }}
-                      className="rounded-xl px-5 py-2.5 font-sans font-medium text-xs bg-white text-[#17201C] hover:bg-[#F8F7F3] shadow-lg transition-transform duration-200"
+                      className=" px-5 py-2.5 font-sans font-medium text-xs bg-white text-[#17201C] hover:bg-[#F8F7F3] shadow-lg transition-transform duration-200"
                     >
                       Use Template
                     </Button>
@@ -359,9 +346,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                 {/* Template information */}
                 <div className="mt-3 px-1">
                   <div className="flex items-center justify-between gap-2">
-                    <h4 className="truncate text-sm font-semibold text-[#17201C]">
-                      {label}
-                    </h4>
+                    <h4 className="truncate text-sm font-semibold text-[#17201C]">{label}</h4>
 
                     {templateData?.tag && (
                       <span className="shrink-0 font-mono text-[10px] text-[#8A908B]">
@@ -372,9 +357,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
 
                   <div className="mt-1.5 flex items-center gap-2 font-mono">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-bold text-[#17201C]">
-                        ₹{discountedPrice}
-                      </span>
+                      <span className="text-xs font-bold text-[#17201C]">₹{discountedPrice}</span>
 
                       {originalPrice > discountedPrice && (
                         <span className="text-[10px] line-through text-[#8A908B]">
@@ -399,9 +382,9 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
       {/* Floating selected-template action bar */}
       {selectedTemplate && selectedTemplateData && (
         <div className="fixed bottom-6 left-0 right-0 z-50 animate-in px-4 duration-500 fade-in slide-in-from-bottom-6">
-          <div className="mx-auto flex max-w-lg items-center justify-between rounded-2xl border border-[#E3E2DC] bg-[#17201C] p-3 shadow-2xl md:p-4 text-white">
+          <div className="mx-auto flex max-w-lg items-center justify-between  border border-[#E3E2DC] bg-[#17201C] p-3 shadow-2xl md:p-4 text-white">
             <div className="flex items-center gap-3 pl-2">
-              <div className="h-12 w-10 shrink-0 overflow-hidden rounded-lg border border-white/20 bg-white/10 p-0.5">
+              <div className="h-12 w-10 shrink-0 overflow-hidden  border border-white/20 bg-white/10 p-0.5">
                 {selectedTemplateData.image ? (
                   <Image
                     src={selectedTemplateData.image}
@@ -422,9 +405,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
                   TEMPLATE SELECTED
                 </p>
 
-                <h5 className="text-sm font-semibold text-white">
-                  {selectedTemplateData.label}
-                </h5>
+                <h5 className="text-sm font-semibold text-white">{selectedTemplateData.label}</h5>
               </div>
             </div>
 
@@ -432,7 +413,7 @@ const TemplateSelectorV3 = ({ onSelect, next }) => {
               type="button"
               disabled={isPending}
               onClick={() => handleSelect(selectedTemplate)}
-              className="group h-10 rounded-xl px-5 font-sans font-medium text-xs sm:text-sm text-white shadow-md transition-all sm:px-6 bg-[#465B9E] hover:bg-[#344B93]"
+              className="group h-10  px-5 font-sans font-medium text-xs sm:text-sm text-white shadow-md transition-all sm:px-6 bg-[#465B9E] hover:bg-[#344B93]"
             >
               {isPending ? "LOADING..." : "Start Building"}
 

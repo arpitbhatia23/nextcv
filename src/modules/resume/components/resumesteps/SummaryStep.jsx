@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -14,16 +14,7 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import { useRouter } from "next/navigation";
 import useResumeStore from "@/store/useResumeStore";
 import posthog from "@/shared/utils/posthog";
-
-/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
-   labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep / ExperienceStep / ProjectsStep / CertificateStep. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "../fontImport";
 
 const schema = z.object({
   summary: z.string().min(20, {
@@ -131,15 +122,9 @@ const SummaryStep = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start">
-        <Card
-          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
-        >
-          <CardHeader
-            className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center"
-          >
-            <CardTitle
-              className="font-mono text-[10px] md:text-xs tracking-wider text-[#5B625C]"
-            >
+        <Card className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white">
+          <CardHeader className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center">
+            <CardTitle className="font-mono text-[10px] md:text-xs tracking-wider text-[#5B625C]">
               YOUR SUMMARY
             </CardTitle>
 
@@ -147,12 +132,16 @@ const SummaryStep = () => {
               type="button"
               size="sm"
               variant="ghost"
-              className="h-8 rounded-lg font-sans text-xs text-[#465B9E] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] font-medium"
+              className="h-8 font-sans text-xs rounded-none! text-[#465B9E] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] font-medium"
               disabled={isGenerating}
               onClick={handleAiGeneration}
             >
               <Sparkles className="w-3.5 h-3.5 mr-1.5" />
-              {isGenerating ? "Writing..." : watchedSummary?.trim() ? "Refine with AI" : "Generate with AI"}
+              {isGenerating
+                ? "Writing..."
+                : watchedSummary?.trim()
+                  ? "Refine with AI"
+                  : "Generate with AI"}
             </Button>
           </CardHeader>
 
@@ -170,19 +159,15 @@ const SummaryStep = () => {
                             rows={8}
                             {...field}
                             disabled={isGenerating}
-                            className={`rounded-xl border border-[#E3E2DC] bg-[#F8F7F3] text-[#17201C] resize-none transition-all text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E] ${
+                            className={`border rounded-none! border-[#E3E2DC] bg-[#F8F7F3] text-[#17201C] resize-none transition-all text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E] ${
                               isGenerating ? "opacity-50" : ""
                             }`}
                             placeholder="Write your professional summary here or generate one with AI..."
                           />
 
                           {isGenerating && (
-                            <div
-                              className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px] rounded-xl bg-white/60"
-                            >
-                              <div
-                                className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-[#465B9E] animate-pulse"
-                              >
+                            <div className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px] bg-white/60">
+                              <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-[#465B9E] animate-pulse">
                                 <Sparkles className="w-3.5 h-3.5" />
                                 GENERATING...
                               </div>
@@ -191,9 +176,7 @@ const SummaryStep = () => {
                         </div>
                       </FormControl>
 
-                      <p
-                        className="font-mono text-[10px] md:text-xs text-right text-[#8A908B]"
-                      >
+                      <p className="font-mono text-[10px] md:text-xs text-right text-[#8A908B]">
                         {watchedSummary?.length || 0} CHARACTERS
                       </p>
 
@@ -207,15 +190,11 @@ const SummaryStep = () => {
 
           <CardFooter className="p-0">
             <div className="p-4 w-full border-t border-[#E3E2DC] bg-[#F8F7F3]/40">
-              <h3
-                className="font-mono text-[10px] md:text-xs font-medium mb-2 flex items-center gap-2 uppercase tracking-widest text-[#5B625C]"
-              >
+              <h3 className="font-mono text-[10px] md:text-xs font-medium mb-2 flex items-center gap-2 uppercase tracking-widest text-[#5B625C]">
                 <AlignLeft className="w-3.5 h-3.5 text-[#465B9E]" />
                 Best Practices
               </h3>
-              <ul
-                className="text-xs text-[#5B625C] space-y-1 pl-4 list-disc leading-relaxed"
-              >
+              <ul className="text-xs text-[#5B625C] space-y-1 pl-4 list-disc leading-relaxed">
                 <li>Keep it concise: 2-3 impact-driven lines.</li>
                 <li>Align your summary with the target job role.</li>
                 <li>Highlight top skills, achievements, and unique qualifications.</li>
@@ -224,15 +203,9 @@ const SummaryStep = () => {
           </CardFooter>
         </Card>
 
-        <Card
-          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
-        >
-          <CardHeader
-            className="border-b border-[#E3E2DC] p-4"
-          >
-            <CardTitle
-              className="font-mono text-[10px] md:text-xs tracking-wider flex items-center gap-2 text-[#5B625C]"
-            >
+        <Card className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white">
+          <CardHeader className="border-b border-[#E3E2DC] p-4">
+            <CardTitle className="font-mono text-[10px] md:text-xs tracking-wider flex items-center gap-2 text-[#5B625C]">
               <BrainCircuit className="w-4 h-4 text-[#465B9E]" />
               LIVE PREVIEW
             </CardTitle>
@@ -240,15 +213,11 @@ const SummaryStep = () => {
 
           <CardContent className="p-4 md:p-6 min-h-37.5 bg-[#F8F7F3]/50">
             {watchedSummary ? (
-              <p
-                className="font-display text-xs md:text-sm leading-relaxed italic border-l-2 border-[#465B9E] pl-4 text-[#17201C]"
-              >
+              <p className="font-display text-xs md:text-sm leading-relaxed italic border-l-2 border-[#465B9E] pl-4 text-[#17201C]">
                 {watchedSummary}
               </p>
             ) : (
-              <div
-                className="flex flex-col items-center justify-center py-12 text-[#8A908B]"
-              >
+              <div className="flex flex-col items-center justify-center py-12 text-[#8A908B]">
                 <AlignLeft className="w-8 h-8 mb-2 opacity-40 text-[#465B9E]" />
                 <p className="font-mono text-[10px] md:text-xs tracking-wider">
                   Your summary will appear here...
@@ -263,7 +232,7 @@ const SummaryStep = () => {
         <Button
           variant="outline"
           onClick={() => router.push("/dashboard/builder/certificate")}
-          className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
+          className="h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Previous
@@ -272,7 +241,7 @@ const SummaryStep = () => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={isGenerating}
-          className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+          className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
         >
           Final Review
           <ArrowRight className="w-4 h-4 ml-2" />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Edit2, Trash2, GraduationCap, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -22,26 +22,17 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 import posthog from "@/shared/utils/posthog";
-/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
-   labels, and helper text — matches BasicInfoStep. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "../fontImport";
 
 const inputClass =
-  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  "border rounded-none! transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
 const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const EducationStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
-  const [isloading, setIsLoading] = useState(false);
 
-  const [educationList, setEducationList] = useState(formData.education || []);
+  const [educationList, setEducationList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const router = useRouter();
@@ -55,6 +46,14 @@ const EducationStep = () => {
     router.prefetch("/dashboard/builder/skills");
   }, [router]);
 
+  const Empty_from = {
+    degree: "",
+    institution: "",
+    startYear: "",
+    endYear: "",
+    grade: "",
+    description: "",
+  };
   const schema = z.object({
     degree: z.string().min(2, { message: "degree is required" }),
     institution: z.string().min(2, { message: "intustion is required" }),
@@ -77,40 +76,70 @@ const EducationStep = () => {
   });
 
   useEffect(() => {
-    if (educationList.length > 0) {
-      updateForm({ education: educationList });
+    console.log(formData.education);
+    if (formData.education.length > 0) {
+      setEducationList(
+        (formData.education || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
+      );
     }
-  }, [educationList]);
-  useEffect(() => {
-    setEducationList(formData.education);
-  }, [formData.education]);
+  }, [formData?.education]);
+
+  // useEffect(() => {
+  //   if (educationList.length > 0) {
+  //     updateForm({ education: educationList });
+  //   }
+  // }, [educationList]);
 
   const onSubmit = values => {
     if (isEditing) {
-      setEducationList(prev =>
-        prev.map(edu => (edu.id === editingId ? { ...values, id: editingId } : edu))
-      );
+      const updatedEducation = { ...values, id: editingId };
+      setEducationList(prev => prev.map(edu => (edu.id === editingId ? updatedEducation : edu)));
+      updateForm({
+        education: formData.education.map(item =>
+          item.id === editingId ? updatedEducation : item
+        ),
+      });
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setEducationList(prev => [...prev, { ...values, id: Date.now() }]);
+      const newEducation = {
+        ...values,
+        id: Date.now(),
+      };
+
+      setEducationList(prev => [...prev, newEducation]);
+
+      updateForm({
+        education: [...formData?.education, newEducation],
+      });
     }
 
-    form.reset();
+    form.reset(Empty_from);
   };
 
   const handleEdit = education => {
-    form.reset(education);
+    // Normalise description: imported data may be an array of bullet strings
+    const descValue = Array.isArray(education.description)
+      ? education.description.join("\n")
+      : String(education.description ?? "");
+
+    form.reset({ ...education, description: descValue });
     setIsEditing(true);
     setEditingId(education.id);
   };
 
   const handleDelete = id => {
-    setEducationList(prev => prev.filter(edu => edu.id !== id));
+    const updatedEducation = educationList.filter(edu => edu.id !== id);
+
+    setEducationList(updatedEducation);
+
+    updateForm({
+      education: updatedEducation,
+    });
   };
 
   const cancelEdit = () => {
-    form.reset();
+    form.reset(Empty_from);
     setIsEditing(false);
     setEditingId(null);
   };
@@ -136,7 +165,7 @@ const EducationStep = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
+          className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
           id="tour-education-form"
         >
           <CardHeader
@@ -156,7 +185,7 @@ const EducationStep = () => {
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-6 rounded-none font-mono text-[10px] md:text-xs hover:bg-transparent"
+                className="h-6 rounded-none! font-mono text-[10px] md:text-xs hover:bg-transparent"
                 style={{ color: "#6B7280" }}
               >
                 Cancel
@@ -301,7 +330,7 @@ const EducationStep = () => {
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="h-6 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+                          className="h-6 rounded-none! font-mono text-[10px] tracking-widest hover:bg-transparent"
                           style={{ color: "#B3382C" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
@@ -310,7 +339,7 @@ const EducationStep = () => {
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
                             ? "AI WRITING..."
-                            : form.watch("description")?.trim()
+                            : form?.watch("description")?.trim()
                               ? "REFINE AI"
                               : "AI BULLET POINTS"}
                         </Button>
@@ -321,7 +350,7 @@ const EducationStep = () => {
                             placeholder="Brief achievements..."
                             rows={3}
                             {...field}
-                            className={`rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
+                            className={`rounded-none! border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
                               isGenerating ? "opacity-50" : ""
                             }`}
                             style={inputStyle}
@@ -351,7 +380,7 @@ const EducationStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full rounded-xl text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                   >
                     {isEditing ? "Update Qualification" : "Save Qualification"}
                   </Button>
@@ -364,17 +393,15 @@ const EducationStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="rounded-2xl border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
+            className="border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
             style={{ borderColor: "#E3E2DC" }}
             id="tour-education-list"
           >
-            <h3
-              className="font-mono text-[10px] md:text-xs font-medium mb-4 flex items-center gap-2 uppercase tracking-widest text-[#5B625C]"
-            >
+            <h3 className="font-mono text-[10px] md:text-xs font-medium mb-4 flex items-center gap-2 uppercase tracking-widest text-[#5B625C]">
               <GraduationCap className="w-4 h-4 text-[#465B9E]" /> Academic Timeline
             </h3>
 
-            {educationList.length === 0 ? (
+            {educationList?.length === 0 ? (
               <div
                 className="text-center py-8 md:py-10 border border-dashed"
                 style={{ borderColor: "#E4E2DC", backgroundColor: "#F7F7F5" }}
@@ -385,54 +412,55 @@ const EducationStep = () => {
               </div>
             ) : (
               <div className="space-y-3">
-                {educationList.map((edu, index) => (
-                  <div
-                    key={edu?.id || index}
-                    className="p-3 md:p-4 border flex justify-between group transition-colors"
-                    style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
-                  >
-                    <div className="min-w-0 flex-1">
-                      <h4
-                        className="font-display font-medium text-xs md:text-sm truncate"
-                        style={{ color: "#1C2333" }}
-                      >
-                        {edu.degree}
-                      </h4>
-                      <div
-                        className="font-mono text-[10px] md:text-xs truncate mt-0.5"
-                        style={{ color: "#6B7280" }}
-                      >
-                        {edu.institution}
+                {educationList &&
+                  educationList?.map((edu, index) => (
+                    <div
+                      key={edu?.id || index}
+                      className="p-3 md:p-4 border flex justify-between group transition-colors"
+                      style={{ backgroundColor: "#FFFFFF", borderColor: "#E4E2DC" }}
+                    >
+                      <div className="min-w-0 flex-1">
+                        <h4
+                          className="font-display font-medium text-xs md:text-sm truncate"
+                          style={{ color: "#1C2333" }}
+                        >
+                          {edu.degree}
+                        </h4>
+                        <div
+                          className="font-mono text-[10px] md:text-xs truncate mt-0.5"
+                          style={{ color: "#6B7280" }}
+                        >
+                          {edu.institution}
+                        </div>
+                        <div
+                          className="font-mono text-[9px] md:text-xs mt-1"
+                          style={{ color: "#B7B5AC" }}
+                        >
+                          {edu.startYear} - {edu.endYear || "Present"}
+                        </div>
                       </div>
-                      <div
-                        className="font-mono text-[9px] md:text-xs mt-1"
-                        style={{ color: "#B7B5AC" }}
-                      >
-                        {edu.startYear} - {edu.endYear || "Present"}
+                      <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity ml-2 shrink-0">
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none! hover:bg-transparent"
+                          style={{ color: "#B7B5AC" }}
+                          onClick={() => handleEdit(edu)}
+                        >
+                          <Edit2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="ghost"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none! hover:bg-transparent"
+                          style={{ color: "#B7B5AC" }}
+                          onClick={() => handleDelete(edu.id)}
+                        >
+                          <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        </Button>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity ml-2 shrink-0">
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
-                        style={{ color: "#B7B5AC" }}
-                        onClick={() => handleEdit(edu)}
-                      >
-                        <Edit2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
-                        style={{ color: "#B7B5AC" }}
-                        onClick={() => handleDelete(edu.id)}
-                      >
-                        <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>
@@ -443,7 +471,7 @@ const EducationStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/basicInfo")}
-              className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
+              className="h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
@@ -455,7 +483,7 @@ const EducationStep = () => {
                 });
                 router.push("/dashboard/builder/skills");
               }}
-              className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
               id="tour-next-button"
             >
               Skills Info <ArrowRight className="w-4 h-4 ml-2" />

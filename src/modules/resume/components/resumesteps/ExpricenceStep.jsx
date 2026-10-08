@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Briefcase, Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -20,25 +20,17 @@ import { useAiGeneration } from "../../hooks/useAiGeneation";
 import useResumeStore from "@/store/useResumeStore";
 import { useRouter } from "next/navigation";
 import posthog from "@/shared/utils/posthog";
-/* Fonts: Fraunces for the section title, IBM Plex Mono for eyebrows,
-   labels, and helper text — matches BasicInfoStep / EducationStep / SkillStep. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
+import { FontImports } from "../fontImport";
 
 const inputClass =
-  "rounded-xl border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  " rounded-none! border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
 const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const ExperienceStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
   const router = useRouter();
-  const [experienceList, setExperienceList] = useState(formData.experience || []);
+  const [experienceList, setExperienceList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
@@ -50,7 +42,15 @@ const ExperienceStep = () => {
     });
     router.prefetch("/dashboard/builder/projects");
   }, [router]);
-
+  const EMPTY_FORM = {
+    companyName: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    work: [],
+    tools: [],
+    description: "",
+  };
   const form = useForm({
     defaultValues: {
       companyName: "",
@@ -64,39 +64,52 @@ const ExperienceStep = () => {
   });
 
   useEffect(() => {
-    if (experienceList.length > 0) {
-      updateForm({ experience: experienceList });
+    if (formData.experience.length > 0) {
+      setExperienceList(
+        (formData.experience || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
+      );
     }
-  }, [experienceList]);
-  useEffect(() => {
-    setExperienceList(formData.experience);
-  }, [formData.experience]);
+  }, [formData?.experience]);
 
   const onSubmit = values => {
     if (isEditing) {
-      setExperienceList(prev =>
-        prev.map(exp => (exp.id === editingId ? { ...values, id: editingId } : exp))
-      );
+      const updatedexperince = { ...values, id: editingId };
+      setExperienceList(prev => prev.map(exp => (exp.id === editingId ? updatedexperince : exp)));
+      updateForm({
+        experience: formData.experience.map(item =>
+          item.id === editingId ? updatedexperince : item
+        ),
+      });
+
       setIsEditing(false);
       setEditingId(null);
     } else {
-      setExperienceList(prev => [...prev, { ...values, id: Date.now() }]);
+      const updatedExprience = { ...values, id: Date.now() };
+      setExperienceList(prev => [...prev, updatedExprience]);
+      updateForm({ experience: [...formData.experience, updatedExprience] });
     }
-    form.reset();
+    form.reset(EMPTY_FORM);
   };
 
   const handleEdit = experience => {
-    form.reset(experience);
+    // Imported data may have description as a string[] of bullet points
+    const descValue = Array.isArray(experience.description)
+      ? experience.description.join("\n")
+      : String(experience.description ?? "");
+
+    form.reset({ ...experience, description: descValue });
     setIsEditing(true);
     setEditingId(experience.id);
   };
 
   const handleDelete = id => {
-    setExperienceList(prev => prev.filter(exp => exp.id !== id));
+    const updatedExprience = experienceList.filter(exp => exp.id !== id);
+    setExperienceList(updatedExprience);
+    updateForm({ experience: updatedExprience });
   };
 
   const cancelEdit = () => {
-    form.reset();
+    form.reset(EMPTY_FORM);
     setIsEditing(false);
     setEditingId(null);
   };
@@ -125,12 +138,10 @@ const ExperienceStep = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-start">
         {/* Form Section */}
         <Card
-          className="rounded-2xl border border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
+          className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white"
           id="tour-experience-form"
         >
-          <CardHeader
-            className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center"
-          >
+          <CardHeader className="border-b border-[#E3E2DC] p-4 flex flex-row justify-between items-center">
             <CardTitle
               className="font-mono text-[10px] md:text-xs tracking-widest"
               style={{ color: "#6B7280" }}
@@ -142,7 +153,7 @@ const ExperienceStep = () => {
                 variant="ghost"
                 size="sm"
                 onClick={cancelEdit}
-                className="h-7 rounded-none font-mono text-[10px] md:text-xs hover:bg-transparent"
+                className="h-7 rounded-none! font-mono text-[10px] md:text-xs hover:bg-transparent"
                 style={{ color: "#6B7280" }}
               >
                 Cancel
@@ -320,7 +331,7 @@ const ExperienceStep = () => {
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="h-6 rounded-none font-mono text-[10px] tracking-widest hover:bg-transparent"
+                          className="h-6 rounded-none! font-mono text-[10px] tracking-widest hover:bg-transparent"
                           style={{ color: "#B3382C" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
@@ -329,7 +340,7 @@ const ExperienceStep = () => {
                           <Sparkles className="w-3 h-3 mr-1" />
                           {isGenerating
                             ? "AI WRITING..."
-                            : form.watch("description")?.trim()
+                            : String(form?.watch("description") ?? "").trim()
                               ? "REFINE AI"
                               : "AI GENERATED"}
                         </Button>
@@ -340,7 +351,7 @@ const ExperienceStep = () => {
                             placeholder="Brief records..."
                             rows={3}
                             {...field}
-                            className={`rounded-none border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
+                            className={`rounded-none! border resize-none text-xs md:text-sm placeholder:text-[10px] md:placeholder:text-sm transition-all ${
                               isGenerating ? "opacity-50" : ""
                             }`}
                             style={inputStyle}
@@ -370,7 +381,7 @@ const ExperienceStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full rounded-xl text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
                   >
                     {isEditing ? "Update Experience" : "Save Experience"}
                   </Button>
@@ -383,13 +394,11 @@ const ExperienceStep = () => {
         {/* List Section */}
         <div className="space-y-6">
           <div
-            className="rounded-2xl border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
+            className="border p-4 md:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)] bg-white"
             style={{ borderColor: "#E3E2DC" }}
             id="tour-experience-list"
           >
-            <h3
-              className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]"
-            >
+            <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]">
               <Briefcase className="w-4 h-4 text-[#465B9E]" /> Career Journey
             </h3>
 
@@ -429,7 +438,7 @@ const ExperienceStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none! hover:bg-transparent"
                           style={{ color: "#B7B5AC" }}
                           onClick={() => handleEdit(exp)}
                         >
@@ -438,7 +447,7 @@ const ExperienceStep = () => {
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
+                          className="h-6 w-6 md:h-8 md:w-8 rounded-none! hover:bg-transparent"
                           style={{ color: "#B7B5AC" }}
                           onClick={() => handleDelete(exp.id)}
                         >
@@ -472,7 +481,7 @@ const ExperienceStep = () => {
             <Button
               variant="outline"
               onClick={() => router.push("/dashboard/builder/skills")}
-              className="rounded-xl h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
+              className="h-10 px-4 md:px-5 font-sans text-xs md:text-sm font-medium border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB]"
             >
               <ArrowLeft className="w-4 h-4 mr-2" /> Previous
             </Button>
@@ -484,7 +493,7 @@ const ExperienceStep = () => {
                 });
                 router.push("/dashboard/builder/projects");
               }}
-              className="rounded-xl text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
               id="tour-next-button"
             >
               Projects Info <ArrowRight className="w-4 h-4 ml-2" />
