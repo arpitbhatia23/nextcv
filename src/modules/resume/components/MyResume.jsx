@@ -13,6 +13,7 @@ import { usePayment } from "@/modules/payment/hooks/usePayment";
 import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
+import { FontImports } from "./fontImport";
 
 const PDFPreview = dynamic(() => import("./pdfPreview"), {
   ssr: false,
@@ -26,15 +27,6 @@ const SharePortfolioModal = dynamic(
 );
 const EmptyState = dynamic(() => import("./empty"));
 const ResumeCard = dynamic(() => import("./resumeCard"));
-/* Fonts: Fraunces for the letterhead display type, IBM Plex Mono for
-   reference codes / dates / counters. Body stays on the default sans. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-    .font-display { font-family: 'Fraunces', serif; }
-    .font-mono { font-family: 'IBM Plex Mono', monospace; }
-  `}</style>
-);
 
 const MyResume = () => {
   const [resumes, setResumes] = useState([]);
@@ -171,21 +163,37 @@ const MyResume = () => {
         <FontImports />
         <div className="max-w-7xl mx-auto p-6 md:p-10">
           {/* Header skeleton */}
-          <div className="pb-6 mb-10 border-b flex flex-col md:flex-row md:items-end justify-between gap-4" style={{ borderColor: "#E3E2DC" }}>
+          <div
+            className="pb-6 mb-10 border-b flex flex-col md:flex-row md:items-end justify-between gap-4"
+            style={{ borderColor: "#E3E2DC" }}
+          >
             <div>
-              <div className="h-3 w-32 rounded-full mb-3 animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
-              <div className="h-8 w-48 rounded-xl mb-2 animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
-              <div className="h-4 w-80 max-w-full rounded-xl animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
+              <div
+                className="h-3 w-32  mb-3 animate-pulse"
+                style={{ backgroundColor: "#E3E2DC" }}
+              />
+              <div
+                className="h-8 w-48  mb-2 animate-pulse"
+                style={{ backgroundColor: "#E3E2DC" }}
+              />
+              <div
+                className="h-4 w-80 max-w-full  animate-pulse"
+                style={{ backgroundColor: "#E3E2DC" }}
+              />
             </div>
-            <div className="h-10 w-40 rounded-xl animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
+            <div className="h-10 w-40  animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
-              <div key={i} className="rounded-2xl border animate-pulse overflow-hidden" style={{ borderColor: "#E3E2DC" }}>
+              <div
+                key={i}
+                className=" border animate-pulse overflow-hidden"
+                style={{ borderColor: "#E3E2DC" }}
+              >
                 <div className="h-40" style={{ backgroundColor: "#F1F0EB" }} />
                 <div className="p-5">
-                  <div className="h-4 rounded-lg w-3/4 mb-3" style={{ backgroundColor: "#E3E2DC" }} />
-                  <div className="h-3 rounded-lg w-1/2" style={{ backgroundColor: "#E3E2DC" }} />
+                  <div className="h-4  w-3/4 mb-3" style={{ backgroundColor: "#E3E2DC" }} />
+                  <div className="h-3  w-1/2" style={{ backgroundColor: "#E3E2DC" }} />
                 </div>
               </div>
             ))}
@@ -221,7 +229,7 @@ const MyResume = () => {
           </div>
           <Button
             onClick={() => route.push("/dashboard/builder")}
-            className="rounded-xl h-10 px-5 text-white shadow-none hover:opacity-90 transition-opacity"
+            className=" h-10 px-5 text-white shadow-none hover:opacity-90 transition-opacity"
             style={{ backgroundColor: "#465B9E" }}
             id="tour-create-new-button"
           >
@@ -232,7 +240,7 @@ const MyResume = () => {
         {/* PDF Modal */}
         {isModelOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="relative w-full max-w-5xl h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-[#E3E2DC]">
+            <div className="relative w-full max-w-5xl h-[90vh] bg-white  shadow-2xl overflow-hidden flex flex-col border border-[#E3E2DC]">
               <div
                 className="flex items-center justify-between p-4 border-b bg-white z-10"
                 style={{ borderColor: "#E3E2DC" }}
@@ -246,7 +254,7 @@ const MyResume = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => setSharingResume(resumeData)}
-                      className="rounded-lg font-sans text-xs flex items-center gap-1.5 border-[#E3E2DC] text-[#465B9E] hover:bg-[#EEF0F7] hover:border-[#C8CDD9]"
+                      className=" font-sans text-xs flex items-center gap-1.5 border-[#E3E2DC] text-[#465B9E] hover:bg-[#EEF0F7] hover:border-[#C8CDD9]"
                     >
                       <Share2 className="w-3.5 h-3.5" />
                       <span>Share Link</span>
@@ -260,7 +268,7 @@ const MyResume = () => {
                       setPaid(false);
                       setIsModelOpen(false);
                     }}
-                    className="rounded-lg hover:bg-[#F1F0EB]"
+                    className=" hover:bg-[#F1F0EB]"
                   >
                     <X className="w-5 h-5" style={{ color: "#66706B" }} />
                   </Button>
@@ -280,7 +288,7 @@ const MyResume = () => {
         {/* Payment Modal */}
         {paymentModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-[#E3E2DC]">
+            <div className="bg-white w-full max-w-md  shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-[#E3E2DC]">
               <div
                 className="p-6 border-b flex justify-between items-center"
                 style={{ borderColor: "#E3E2DC" }}
@@ -298,7 +306,7 @@ const MyResume = () => {
                     setPaymentModal(false);
                     setResumeData(null);
                   }}
-                  className="h-8 w-8 p-0 rounded-lg hover:bg-[#F1F0EB]"
+                  className="h-8 w-8 p-0  hover:bg-[#F1F0EB]"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -306,7 +314,7 @@ const MyResume = () => {
 
               <div className="p-6 space-y-6">
                 <div
-                  className="text-center p-4 rounded-xl border"
+                  className="text-center p-4  border"
                   style={{ borderColor: "#E3E2DC", backgroundColor: "#F8F7F3" }}
                 >
                   <div
@@ -327,10 +335,7 @@ const MyResume = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <label
-                    className="text-xs font-sans font-medium"
-                    style={{ color: "#5B625C" }}
-                  >
+                  <label className="text-xs font-sans font-medium" style={{ color: "#5B625C" }}>
                     Have a coupon code?
                   </label>
                   <div className="flex gap-2">
@@ -338,7 +343,7 @@ const MyResume = () => {
                       value={couponCode}
                       onChange={e => setCouponCode(e.target.value)}
                       placeholder="ENTER COUPON CODE"
-                      className="font-mono uppercase placeholder:normal-case rounded-lg"
+                      className="font-mono uppercase placeholder:normal-case "
                       disabled={applied}
                     />
                     {!applied ? (
@@ -346,7 +351,7 @@ const MyResume = () => {
                         onClick={() => handleCoupon(couponCode)}
                         disabled={!couponCode.trim() || isSubmit || applied}
                         variant="secondary"
-                        className="font-sans text-xs rounded-lg"
+                        className="font-sans text-xs "
                       >
                         Apply
                       </Button>
@@ -355,7 +360,7 @@ const MyResume = () => {
                         onClick={removeCoupon}
                         variant="destructive"
                         size="icon"
-                        className="shrink-0 rounded-lg"
+                        className="shrink-0 "
                       >
                         <X className="w-4 h-4" />
                       </Button>
@@ -363,7 +368,7 @@ const MyResume = () => {
                   </div>
                   {applied && couponDiscount && (
                     <div
-                      className="flex items-center gap-2 text-sm font-mono p-2 rounded-lg"
+                      className="flex items-center gap-2 text-sm font-mono p-2 "
                       style={{ color: "#0F6E63", backgroundColor: "#EAF4F2" }}
                     >
                       <BadgePercent className="w-4 h-4" />
@@ -375,7 +380,7 @@ const MyResume = () => {
                 </div>
 
                 <Button
-                  className="w-full text-white font-medium h-12 rounded-xl text-base shadow-none"
+                  className="w-full text-white font-medium h-12  text-base shadow-none"
                   style={{ backgroundColor: "#465B9E" }}
                   onClick={() => handelPayment()}
                   disabled={isSubmit || isRedirecting}
@@ -396,14 +401,14 @@ const MyResume = () => {
             <TabsList className="bg-transparent h-auto p-0 space-x-8 rounded-none">
               <TabsTrigger
                 value="My-Resume"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
+                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
                 style={{ color: "#66706B" }}
               >
                 Unlocked ({paidResumes?.length || 0})
               </TabsTrigger>
               <TabsTrigger
                 value="Draft-Resume"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-0 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
+                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
                 style={{ color: "#66706B" }}
               >
                 Drafts ({draftResumes?.length || 0})
@@ -419,7 +424,7 @@ const MyResume = () => {
             }
           `}</style>
 
-          <TabsContent value="My-Resume" className="outline-none">
+          <TabsContent value="My-Resume" className="outline-none rounded-none">
             {!paidResumes || paidResumes.length === 0 ? (
               <EmptyState
                 icon={FileText}
@@ -457,7 +462,7 @@ const MyResume = () => {
                 action={
                   <Button
                     onClick={() => route.push("/dashboard/builder")}
-                    className="rounded-xl"
+                    className=""
                     style={{ backgroundColor: "#465B9E" }}
                   >
                     Create New Resume

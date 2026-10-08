@@ -1,5 +1,11 @@
 "use client";
-import { SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/shared/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,11 +21,13 @@ export function NavMain({ items }) {
             return (
               <SidebarMenuItem key={item.title}>
                 <Link href={item?.url}>
-                  <SidebarMenuButton 
-                    tooltip={item.title} 
-                    className={`flex items-center justify-start gap-4 py-6 px-3 rounded-xl transition-all duration-200 group shadow-none ${isActive ? 'bg-[#EEF0F7] text-[#465B9E]' : 'text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]'}`}
+                  <SidebarMenuButton
+                    tooltip={item.title}
+                    className={`flex items-center justify-start gap-4 py-6 px-3  transition-all duration-200 group shadow-none ${isActive ? "bg-[#EEF0F7] text-[#465B9E]" : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]"}`}
                   >
-                    <div className={`flex items-center justify-center w-9 h-9 border transition-all duration-200 rounded-lg ${isActive ? 'bg-[#EEF0F7] border-[#C8CDD9]' : 'bg-white border-[#E3E2DC]'}`}>
+                    <div
+                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200  ${isActive ? "bg-[#EEF0F7] border-[#C8CDD9]" : "bg-white border-[#E3E2DC]"}`}
+                    >
                       <span className="transition-colors">
                         {item.icon && <item.icon size={18} strokeWidth={1.75} />}
                       </span>
@@ -27,7 +35,11 @@ export function NavMain({ items }) {
                     <span className="font-sans text-sm font-medium transition-colors">
                       {item.title}
                     </span>
-                    {item.badge && <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono bg-[#B3382C]">{item.badge}</span>}
+                    {item.badge && (
+                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono bg-[#B3382C]">
+                        {item.badge}
+                      </span>
+                    )}
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>

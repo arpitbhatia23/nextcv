@@ -30,27 +30,18 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
 import { usePayment } from "@/modules/cover-letter/Hook/usePayment";
+import { FontImports } from "@/modules/resume/components/fontImport";
 const PDFPreview = dynamic(() => import("@/modules/resume/components/pdfPreview"), {
   ssr: false,
   loading: () => <div className="text-sm text-[#66706B]">Loading preview...</div>,
 });
-
-/* Canonical NextCV typography and visual system. */
-const FontImports = () => (
-  <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap');
-    .nextcv-serif { font-family: 'Source Serif 4', Georgia, serif; }
-    .nextcv-sans { font-family: 'Inter', system-ui, sans-serif; }
-    .nextcv-mono { font-family: 'Inter', system-ui, sans-serif; }
-  `}</style>
-);
 
 const PostmarkBadge = ({ status }) => {
   const isPaid = status === "paid";
 
   return (
     <div
-      className={`absolute right-4 top-4 z-10 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
+      className={`absolute right-4 top-4 z-10  px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
         isPaid ? "bg-[#EAF1E9] text-[#42634A]" : "bg-[#EEF0F7] text-[#465B9E]"
       }`}
     >
@@ -61,7 +52,7 @@ const PostmarkBadge = ({ status }) => {
 
 const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
   <Card
-    className="group relative overflow-hidden rounded-2xl border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+    className="group relative overflow-hidden rounded-none! border shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
     style={{ backgroundColor: "#FFFFFF", borderColor: "#E3E2DC" }}
   >
     <PostmarkBadge status={coverLetter?.status} />
@@ -107,13 +98,13 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 -mr-2 rounded-xl"
+                className="h-7 w-7 -mr-2 "
                 style={{ color: "#66706B" }}
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 rounded-xl">
+            <DropdownMenuContent align="end" className="w-48 ">
               <DropdownMenuItem onClick={() => onDownload(coverLetter)}>
                 <Download className="mr-2 h-4 w-4" />
                 Download PDF
@@ -141,11 +132,11 @@ const CoverLetterCard = ({ coverLetter, onPreview, onDownload, onDelete }) => (
 
 const EmptyState = ({ icon: Icon, title, body, action }) => (
   <div
-    className="rounded-2xl border border-dashed px-6 py-20 text-center"
+    className=" border border-dashed px-6 py-20 text-center"
     style={{ borderStyle: "dashed", borderColor: "#D6D5CE", backgroundColor: "#FBFAF7" }}
   >
     <div
-      className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl"
+      className="mx-auto mb-5 flex h-14 w-14 items-center justify-center "
       style={{ backgroundColor: "#F1F0EB", color: "#8A908B" }}
     >
       <Icon className="w-7 h-7" strokeWidth={1.5} />
@@ -278,19 +269,13 @@ const MyCoverLetter = () => {
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className="overflow-hidden rounded-2xl border animate-pulse"
+                className="overflow-hidden  border animate-pulse"
                 style={{ borderColor: "#E3E2DC" }}
               >
                 <div className="h-44" style={{ backgroundColor: "#EEEDE8" }}></div>
                 <div className="p-5">
-                  <div
-                    className="h-4 rounded-xl w-3/4 mb-3"
-                    style={{ backgroundColor: "#EEEDE8" }}
-                  ></div>
-                  <div
-                    className="h-3 rounded-xl w-1/2"
-                    style={{ backgroundColor: "#EEEDE8" }}
-                  ></div>
+                  <div className="h-4  w-3/4 mb-3" style={{ backgroundColor: "#EEEDE8" }}></div>
+                  <div className="h-3  w-1/2" style={{ backgroundColor: "#EEEDE8" }}></div>
                 </div>
               </div>
             ))}
@@ -329,7 +314,7 @@ const MyCoverLetter = () => {
           </div>
           <Button
             onClick={() => route.push("/dashboard/cover-letter")}
-            className="h-11 rounded-xl bg-[#465B9E] px-5 text-sm font-semibold text-white shadow-none hover:bg-[#344B93]"
+            className="h-11  bg-[#465B9E] px-5 text-sm font-semibold text-white shadow-none hover:bg-[#344B93]"
             style={{ backgroundColor: "#17201C" }}
             id="tour-create-new-button"
           >
@@ -340,7 +325,7 @@ const MyCoverLetter = () => {
         {/* PDF Modal */}
         {isModelOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="relative w-full max-w-6xl h-[90vh]  rounded-2xl bg-white shadow-2xl overflow-hidden flex flex-col">
+            <div className="relative w-full max-w-6xl h-[90vh]   bg-white shadow-2xl overflow-hidden flex flex-col">
               <div
                 className="z-10 flex items-center justify-between border-b bg-white p-4"
                 style={{ borderColor: "#E3E2DC" }}
@@ -356,7 +341,7 @@ const MyCoverLetter = () => {
                     setPaid(false);
                     setIsModelOpen(false);
                   }}
-                  className="rounded-xl"
+                  className=""
                 >
                   <X className="w-5 h-5" style={{ color: "#66706B" }} />
                 </Button>
@@ -375,7 +360,7 @@ const MyCoverLetter = () => {
         {/* Payment Modal */}
         {paymentModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/85 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="w-full max-w-md  rounded-2xl bg-white shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="w-full max-w-md   bg-white shadow-xl overflow-hidden animate-in zoom-in-95 duration-200">
               <div
                 className="p-6 border-b flex justify-between items-center"
                 style={{ borderColor: "#E3E2DC" }}
@@ -394,7 +379,7 @@ const MyCoverLetter = () => {
                     setPaymentModal(false);
                     setCoverLetterData(null);
                   }}
-                  className="h-8 w-8 p-0 rounded-xl"
+                  className="h-8 w-8 p-0 "
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -402,7 +387,7 @@ const MyCoverLetter = () => {
 
               <div className="p-6 space-y-6">
                 <div
-                  className="rounded-xl border p-4 text-center"
+                  className=" border p-4 text-center"
                   style={{ borderColor: "#E3E2DC", backgroundColor: "#F8F7F3" }}
                 >
                   <div
@@ -434,7 +419,7 @@ const MyCoverLetter = () => {
                       value={couponCode}
                       onChange={e => setCouponCode(e.target.value)}
                       placeholder="ENTER COUPON CODE"
-                      className="nextcv-mono uppercase placeholder:normal-case rounded-xl"
+                      className="nextcv-mono uppercase placeholder:normal-case "
                       disabled={applied}
                     />
                     {!applied ? (
@@ -442,7 +427,7 @@ const MyCoverLetter = () => {
                         onClick={() => handleCoupon(couponCode)}
                         disabled={!couponCode.trim() || isSubmit || applied}
                         variant="secondary"
-                        className="nextcv-mono text-xs rounded-xl"
+                        className="nextcv-mono text-xs "
                       >
                         APPLY
                       </Button>
@@ -451,7 +436,7 @@ const MyCoverLetter = () => {
                         onClick={removeCoupon}
                         variant="destructive"
                         size="icon"
-                        className="shrink-0 rounded-xl"
+                        className="shrink-0 "
                       >
                         <X className="w-4 h-4" />
                       </Button>
@@ -471,7 +456,7 @@ const MyCoverLetter = () => {
                 </div>
 
                 <Button
-                  className="w-full text-white font-medium h-12 rounded-xl text-base shadow-sm"
+                  className="w-full text-white font-medium h-12  text-base shadow-sm"
                   style={{ backgroundColor: "#465B9E" }}
                   onClick={() => handelPayment()}
                   disabled={isPaymentSubmit || isRedirecting}
@@ -489,19 +474,19 @@ const MyCoverLetter = () => {
 
         <Tabs defaultValue="My-CoverLetter" className="w-full" id="tour-coverletter-tabs">
           <div className="border-b mb-10" style={{ borderColor: "#E3E2DC" }}>
-            <TabsList className="bg-transparent h-auto p-0 space-x-10 rounded-xl">
+            <TabsList className="bg-transparent h-auto p-0 space-x-10 ">
               <TabsTrigger
                 value="My-CoverLetter"
-                className="bg-transparent border-b border-transparent rounded-xl px-0 py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all data-[state=active]:shadow-sm"
+                className="bg-transparent border-b rounded-none! border-transparent  px-2 py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all data-[state=active]:shadow-sm"
                 style={{ color: "#66706B" }}
               >
-                <span className="data-[state=active]:text-[#17201C]">
+                <span className="data-[state=active]:text-[#17201C] ">
                   UNLOCKED ({paidCoverLetters?.length || 0})
                 </span>
               </TabsTrigger>
               <TabsTrigger
                 value="Draft-CoverLetter"
-                className="bg-transparent border-b border-transparent rounded-xl px-0 py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all"
+                className="bg-transparent px-2 rounded-none! border-b border-transparent   py-3 nextcv-mono text-xs tracking-[0.16em] shadow-sm transition-all"
                 style={{ color: "#66706B" }}
               >
                 DRAFTS ({draftCoverLetters?.length || 0})
@@ -545,7 +530,7 @@ const MyCoverLetter = () => {
                 action={
                   <Button
                     onClick={() => route.push("/dashboard/builder")}
-                    className="rounded-xl"
+                    className=""
                     style={{ backgroundColor: "#17201C" }}
                   >
                     Create cover letter

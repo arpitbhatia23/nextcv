@@ -170,7 +170,7 @@ const Page = () => {
             <div className="flex flex-col gap-5 border-b border-[#E3E2DC] pb-7 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#465B9E]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
+                  <span className="h-1.5 w-1.5  bg-[#465B9E]" />
                   NextCV AI Tools
                 </div>
 
@@ -187,7 +187,7 @@ const Page = () => {
 
               <Link
                 href="my-cover-letter"
-                className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-xl border border-[#E3E2DC] bg-white px-4 text-sm font-medium text-[#17201C] transition hover:border-[#C9C9C2] hover:bg-[#FBFAF7] focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 sm:self-auto"
+                className="inline-flex h-11 items-center justify-center gap-2 self-start  border border-[#E3E2DC] bg-white px-4 text-sm font-medium text-[#17201C] transition hover:border-[#C9C9C2] hover:bg-[#FBFAF7] focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 sm:self-auto"
               >
                 My letters
                 <ArrowRight size={15} />
@@ -198,7 +198,7 @@ const Page = () => {
           {/* Main workspace */}
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:items-start">
             {/* Resume selection */}
-            <section className="overflow-hidden rounded-2xl border border-[#E3E2DC] bg-white lg:col-span-3">
+            <section className="overflow-hidden  border border-[#E3E2DC] bg-white lg:col-span-3">
               <div className="border-b border-[#E7E5DF] px-5 py-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -211,7 +211,7 @@ const Page = () => {
                   </div>
 
                   {isResumeMissing && !resumesLoading && (
-                    <span className="rounded-full bg-[#F3ECEB] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#9B4D46]">
+                    <span className=" bg-[#F3ECEB] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#9B4D46]">
                       Required
                     </span>
                   )}
@@ -221,9 +221,9 @@ const Page = () => {
               <div className="max-h-130 space-y-2 overflow-auto p-3">
                 {resumesLoading ? (
                   Array.from({ length: 3 }).map((_, i) => (
-                    <div key={i} className="animate-pulse rounded-xl border border-[#E7E5DF] p-4">
+                    <div key={i} className="animate-pulse  border border-[#E7E5DF] p-4">
                       <div className="flex items-start gap-3">
-                        <div className="h-10 w-10 rounded-xl bg-[#EEEDE8]" />
+                        <div className="h-10 w-10  bg-[#EEEDE8]" />
                         <div className="min-w-0 flex-1 space-y-2">
                           <div className="h-3.5 w-3/4 rounded bg-[#EEEDE8]" />
                           <div className="h-3 w-1/2 rounded bg-[#EEEDE8]" />
@@ -241,7 +241,7 @@ const Page = () => {
                         type="button"
                         key={r?.resumedata?._id}
                         onClick={() => setSelectedResume(r?.resumedata?._id)}
-                        className={`group w-full rounded-xl border p-3.5 text-left transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 ${
+                        className={`group w-full  border p-3.5 text-left transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 ${
                           active
                             ? "border-[#465B9E] bg-[#F1F3F9]"
                             : "border-[#E7E5DF] bg-white hover:border-[#CFCFC8] hover:bg-[#FBFAF7]"
@@ -249,7 +249,7 @@ const Page = () => {
                       >
                         <div className="flex items-start gap-3">
                           <div
-                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center  ${
                               active ? "bg-[#465B9E] text-white" : "bg-[#F1F0EB] text-[#5B625C]"
                             }`}
                           >
@@ -289,7 +289,7 @@ const Page = () => {
                     );
                   })
                 ) : (
-                  <div className="rounded-xl border border-dashed border-[#D9D8D1] px-5 py-10 text-center">
+                  <div className=" border border-dashed border-[#D9D8D1] px-5 py-10 text-center">
                     <FileText size={24} className="mx-auto mb-3 text-[#A4A8A3]" />
                     <p className="text-sm font-medium text-[#17201C]">No paid resumes found</p>
                     <p className="mt-1 text-xs leading-5 text-[#66706B]">
@@ -301,7 +301,7 @@ const Page = () => {
             </section>
 
             {/* Job details */}
-            <section className="rounded-2xl border border-[#E3E2DC] bg-white p-5 sm:p-6 lg:col-span-4">
+            <section className=" border border-[#E3E2DC] bg-white p-5 sm:p-6 lg:col-span-4">
               <div className="mb-6 flex items-start justify-between gap-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#5B625C]">
@@ -310,7 +310,7 @@ const Page = () => {
                   <h2 className="mt-1 text-sm font-semibold text-[#17201C]">Add job details</h2>
                 </div>
 
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF0F7] text-[#465B9E]">
+                <div className="flex h-9 w-9 items-center justify-center  bg-[#EEF0F7] text-[#465B9E]">
                   <BriefcaseBusiness size={17} />
                 </div>
               </div>
@@ -325,7 +325,7 @@ const Page = () => {
                     onChange={e => setCompany(e.target.value)}
                     placeholder="e.g. Google, TCS, Deloitte"
                     disabled={isGenerating}
-                    className={`h-12 w-full rounded-xl border bg-white px-3.5 text-sm text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:ring-2 disabled:cursor-not-allowed disabled:bg-[#F5F4F0] ${
+                    className={`h-12 w-full  border bg-white px-3.5 text-sm text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:ring-2 disabled:cursor-not-allowed disabled:bg-[#F5F4F0] ${
                       isCompanyMissing
                         ? "border-[#D8C5C2] focus:border-[#465B9E] focus:ring-[#465B9E]/10"
                         : "border-[#E3E2DC] focus:border-[#465B9E] focus:ring-[#465B9E]/10"
@@ -345,7 +345,7 @@ const Page = () => {
                     rows={7}
                     placeholder="Paste the job description here. NextCV will tailor your letter around the role..."
                     disabled={isGenerating}
-                    className="w-full resize-none rounded-xl border border-[#E3E2DC] bg-white px-3.5 py-3 text-sm leading-6 text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10 disabled:cursor-not-allowed disabled:bg-[#F5F4F0]"
+                    className="w-full resize-none  border border-[#E3E2DC] bg-white px-3.5 py-3 text-sm leading-6 text-[#17201C] outline-none transition placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10 disabled:cursor-not-allowed disabled:bg-[#F5F4F0]"
                   />
                 </label>
               </div>
@@ -362,7 +362,7 @@ const Page = () => {
                           key={item}
                           onClick={() => setTone(item)}
                           disabled={isGenerating}
-                          className={`rounded-lg border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
+                          className={` border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
                             tone === item
                               ? "border-[#465B9E] bg-[#465B9E] text-white"
                               : "border-[#E3E2DC] bg-white text-[#5B625C] hover:border-[#CFCFC8] hover:text-[#17201C]"
@@ -384,7 +384,7 @@ const Page = () => {
                           key={item}
                           onClick={() => setLength(item)}
                           disabled={isGenerating}
-                          className={`rounded-lg border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
+                          className={` border px-3 py-2 text-xs font-medium transition focus:outline-none focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:opacity-50 ${
                             length === item
                               ? "border-[#465B9E] bg-[#465B9E] text-white"
                               : "border-[#E3E2DC] bg-white text-[#5B625C] hover:border-[#CFCFC8] hover:text-[#17201C]"
@@ -398,9 +398,9 @@ const Page = () => {
                 </div>
               </div>
 
-              <div className="mt-6 rounded-xl border border-[#E7E5DF] bg-[#FBFAF7] p-3.5">
+              <div className="mt-6  border border-[#E7E5DF] bg-[#FBFAF7] p-3.5">
                 <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#EEF0F7] text-[#465B9E]">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center  bg-[#EEF0F7] text-[#465B9E]">
                     <WandSparkles size={15} />
                   </div>
                   <div>
@@ -423,7 +423,7 @@ const Page = () => {
                       ? "Enter a company name first"
                       : undefined
                 }
-                className="mt-5 h-12 w-full rounded-xl border-0 bg-[#465B9E] text-sm font-semibold text-white shadow-none transition hover:bg-[#344B93] focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:bg-[#D9DCE7] disabled:text-[#8A908B]"
+                className="mt-5 h-12 w-full  border-0 bg-[#465B9E] text-sm font-semibold text-white shadow-none transition hover:bg-[#344B93] focus:ring-2 focus:ring-[#465B9E]/20 disabled:cursor-not-allowed disabled:bg-[#D9DCE7] disabled:text-[#8A908B]"
               >
                 {isGenerating ? (
                   <>
@@ -460,7 +460,7 @@ const Page = () => {
                 </div>
 
                 {pdfurl && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#EAF1E9] px-2.5 py-1 text-[10px] font-semibold text-[#42634A]">
+                  <span className="inline-flex items-center gap-1.5  bg-[#EAF1E9] px-2.5 py-1 text-[10px] font-semibold text-[#42634A]">
                     <Check size={11} />
                     Ready
                   </span>
@@ -468,9 +468,9 @@ const Page = () => {
               </div>
 
               {isGenerating ? (
-                <div className="flex min-h-155 flex-col items-center justify-center rounded-2xl border border-[#E3E2DC] bg-white p-8 text-center">
-                  <div className="relative mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#EEF0F7] text-[#465B9E]">
-                    <span className="absolute inset-0 animate-ping rounded-2xl bg-[#465B9E]/10" />
+                <div className="flex min-h-155 flex-col items-center justify-center  border border-[#E3E2DC] bg-white p-8 text-center">
+                  <div className="relative mb-5 flex h-14 w-14 items-center justify-center  bg-[#EEF0F7] text-[#465B9E]">
+                    <span className="absolute inset-0 animate-ping  bg-[#465B9E]/10" />
                     <Sparkles size={22} className="relative animate-pulse" />
                   </div>
 
@@ -483,12 +483,12 @@ const Page = () => {
                     seconds.
                   </p>
 
-                  <div className="mt-6 h-1.5 w-40 overflow-hidden rounded-full bg-[#E7E5DF]">
-                    <div className="h-full w-1/2 animate-pulse rounded-full bg-[#465B9E]" />
+                  <div className="mt-6 h-1.5 w-40 overflow-hidden  bg-[#E7E5DF]">
+                    <div className="h-full w-1/2 animate-pulse  bg-[#465B9E]" />
                   </div>
                 </div>
               ) : pdfurl ? (
-                <div className="rounded-2xl border border-[#E3E2DC] bg-white p-3 sm:p-4">
+                <div className=" border border-[#E3E2DC] bg-white p-3 sm:p-4">
                   <PDFPreview variant="cover-letter" pdfUrl={pdfurl} />
 
                   <div className="mt-4 space-y-3">
@@ -498,19 +498,19 @@ const Page = () => {
                           value={couponCode}
                           onChange={e => setCouponCode(e.target.value)}
                           placeholder="Coupon code"
-                          className="h-11 min-w-0 flex-1 rounded-xl border border-[#E3E2DC] bg-white px-3.5 text-sm uppercase text-[#17201C] outline-none placeholder:normal-case placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10"
+                          className="h-11 min-w-0 flex-1  border border-[#E3E2DC] bg-white px-3.5 text-sm uppercase text-[#17201C] outline-none placeholder:normal-case placeholder:text-[#A0A49F] focus:border-[#465B9E] focus:ring-2 focus:ring-[#465B9E]/10"
                         />
 
                         <Button
                           disabled={!couponCode || isSubmit}
                           onClick={() => handleCoupon(couponCode)}
-                          className="h-11 rounded-xl border-0 bg-[#17201C] px-4 text-xs font-semibold text-white hover:bg-[#28322D]"
+                          className="h-11  border-0 bg-[#17201C] px-4 text-xs font-semibold text-white hover:bg-[#28322D]"
                         >
                           {isSubmit ? "Applying..." : "Apply"}
                         </Button>
                       </div>
                     ) : (
-                      <div className="flex items-center justify-between rounded-xl border border-[#DCE8DC] bg-[#F1F7F1] px-3.5 py-3 text-xs">
+                      <div className="flex items-center justify-between  border border-[#DCE8DC] bg-[#F1F7F1] px-3.5 py-3 text-xs">
                         <span className="flex items-center gap-2 font-semibold text-[#42634A]">
                           <Check size={14} />
                           Coupon applied
@@ -530,14 +530,14 @@ const Page = () => {
                       <Button
                         variant="outline"
                         onClick={handleSaveDraft}
-                        className="h-11 rounded-xl border-[#D9D8D1] bg-white text-sm font-semibold text-[#17201C] hover:bg-[#FBFAF7]"
+                        className="h-11  border-[#D9D8D1] bg-white text-sm font-semibold text-[#17201C] hover:bg-[#FBFAF7]"
                       >
                         {isdraftSubmit ? "Saving..." : "Save draft"}
                       </Button>
 
                       <Button
                         onClick={handelPayment}
-                        className="h-11 rounded-xl border-0 bg-[#465B9E] text-sm font-semibold text-white hover:bg-[#344B93]"
+                        className="h-11  border-0 bg-[#465B9E] text-sm font-semibold text-white hover:bg-[#344B93]"
                         disabled={isPaymentSubmit || isRedirecting}
                       >
                         {isPaymentSubmit ? "Processing..." : `Pay ₹${amount}`}
@@ -550,9 +550,9 @@ const Page = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex min-h-155 items-center justify-center rounded-2xl border border-dashed border-[#D6D5CE] bg-white px-8 text-center">
+                <div className="flex min-h-155 items-center justify-center  border border-dashed border-[#D6D5CE] bg-white px-8 text-center">
                   <div className="max-w-sm">
-                    <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F1F0EB] text-[#66706B]">
+                    <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center  bg-[#F1F0EB] text-[#66706B]">
                       <FileText size={24} strokeWidth={1.6} />
                     </div>
 
@@ -567,20 +567,20 @@ const Page = () => {
 
                     <div className="mx-auto mt-6 flex max-w-xs items-center justify-center gap-2 text-[10px] font-semibold uppercase tracking-wider text-[#8A908B]">
                       <span
-                        className={`h-1.5 w-1.5 rounded-full ${
+                        className={`h-1.5 w-1.5  ${
                           !isResumeMissing ? "bg-[#465B9E]" : "bg-[#D6D5CE]"
                         }`}
                       />
                       Resume
                       <span className="h-px w-5 bg-[#E3E2DC]" />
                       <span
-                        className={`h-1.5 w-1.5 rounded-full ${
+                        className={`h-1.5 w-1.5  ${
                           !isCompanyMissing ? "bg-[#465B9E]" : "bg-[#D6D5CE]"
                         }`}
                       />
                       Company
                       <span className="h-px w-5 bg-[#E3E2DC]" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#D6D5CE]" />
+                      <span className="h-1.5 w-1.5  bg-[#D6D5CE]" />
                       Generate
                     </div>
                   </div>

@@ -3,7 +3,15 @@ import * as React from "react";
 import { IconDashboard } from "@tabler/icons-react";
 import { NavMain } from "@/shared/components/nav-main";
 import { NavUser } from "@/shared/components/nav-user";
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/shared/components/ui/sidebar";
 import Logo2 from "./Logo2";
 import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
 import { Separator } from "@/shared/components/ui/separator";
@@ -36,16 +44,24 @@ export function AppSidebar({ ...props }) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/" className="flex items-center justify-center mt-6 p-6"><Logo2 size={60} /></a>
+              <a href="/" className="flex items-center justify-center mt-6 p-6">
+                <Logo2 size={60} />
+              </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <div className="px-6"><Separator className="bg-[#E3E2DC]" /></div>
-      <SidebarContent className="px-4 py-8"><NavMain items={data.navMain} /></SidebarContent>
-      <div className="px-6"><Separator className="bg-[#E3E2DC]" /></div>
+      <div className="px-6">
+        <Separator className="bg-[#E3E2DC]" />
+      </div>
+      <SidebarContent className="px-4 py-8">
+        <NavMain items={data.navMain} />
+      </SidebarContent>
+      <div className="px-6">
+        <Separator className="bg-[#E3E2DC]" />
+      </div>
       <SidebarFooter className="p-4 mb-2">
-        <div className="bg-white border border-[#E3E2DC] rounded-xl p-2">
+        <div className="bg-white border border-[#E3E2DC]  p-2">
           <NavUser user={user} />
         </div>
       </SidebarFooter>
