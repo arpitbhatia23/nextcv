@@ -55,13 +55,6 @@ const CertificateStep = () => {
 
   const router = useRouter();
 
-  /*
-   * Local list is used for rendering.
-   *
-   * IMPORTANT:
-   * Do NOT initialize this directly with formData.certificates because
-   * formData may be populated asynchronously after this component mounts.
-   */
   const [certList, setCertList] = useState([]);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -93,7 +86,7 @@ const CertificateStep = () => {
   });
 
   useEffect(() => {
-    if (formData.certificates > 0) {
+    if (formData?.certificates?.length > 0) {
       setCertList(
         (formData.certificates || []).map((c, i) => ({ ...c, id: c.id ?? Date.now() + i }))
       );
@@ -465,9 +458,9 @@ const CertificateStep = () => {
               </div>
             ) : (
               <div className="space-y-3">
-                {certList.map(cert => (
+                {certList?.map(cert => (
                   <div
-                    key={cert._id}
+                    key={cert?._id}
                     className="p-3 md:p-4 border flex flex-col gap-2 group transition-colors"
                     style={{
                       backgroundColor: "#FFFFFF",
@@ -480,23 +473,23 @@ const CertificateStep = () => {
                           className="font-display font-medium text-xs md:text-sm truncate"
                           style={{ color: "#1C2333" }}
                         >
-                          {cert.title}
+                          {cert?.title}
                         </h4>
 
                         <div
                           className="font-mono text-[10px] md:text-xs truncate mt-0.5"
                           style={{ color: "#B3382C" }}
                         >
-                          {cert.organization}
+                          {cert?.organization}
 
                           {cert.year && (
                             <span style={{ color: "#B7B5AC" }} className="ml-1 font-normal">
-                              ({cert.year})
+                              ({cert?.year})
                             </span>
                           )}
                         </div>
 
-                        {cert.credentialUrl && (
+                        {cert?.credentialUrl && (
                           <a
                             href={cert.credentialUrl}
                             target="_blank"
