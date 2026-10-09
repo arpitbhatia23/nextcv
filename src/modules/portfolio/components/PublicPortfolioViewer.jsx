@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,17 +17,108 @@ import {
   Download,
   Share2,
   Check,
-  Sparkles,
   Calendar,
-  ArrowRight,
-  Layers,
-  Building,
-  CheckCircle2,
   ArrowUpRight,
   Send,
 } from "lucide-react";
 import { toast } from "sonner";
 import { formatDate } from "@/shared/utils/datefromater";
+
+const C = {
+  bg: "#F8F7F3",
+  text: "#17201C",
+  accent: "#465B9E",
+  hover: "#344B93",
+  muted: "#66706B",
+  border: "#E3E2DC",
+  white: "#FFFFFF",
+};
+
+const arr = value => (Array.isArray(value) ? value : []);
+
+function url(value) {
+  if (!value || typeof value !== "string") return "";
+  const v = value.trim();
+  return /^https?:\/\//i.test(v) ? v : `https://${v}`;
+}
+
+function descriptions(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (typeof value === "string") {
+    return value
+      .split("\n")
+      .map(v => v.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+function initials(name) {
+  return String(name || "Professional")
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map(v => v[0] || "")
+    .join("")
+    .toUpperCase();
+}
+
+function SectionTitle({ eyebrow, title, count }) {
+  return (
+    <div className="mb-7 flex items-end justify-between gap-4 border-b border-[#E3E2DC] pb-4">
+      <div>
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#465B9E]">
+          {eyebrow}
+        </p>
+        <h2 className="font-serif text-2xl font-semibold tracking-tight text-[#17201C] sm:text-3xl">
+          {title}
+        </h2>
+      </div>
+      {count ? <span className="pb-1 text-xs text-[#66706B]">{count}</span> : null}
+    </div>
+  );
+}
+
+function TextList({ value, limit }) {
+  const items = descriptions(value);
+  const visible = limit ? items.slice(0, limit) : items;
+
+  if (!visible.length) return null;
+
+  return (
+    <ul className="mt-4 space-y-2.5">
+      {visible.map((item, i) => (
+        <li key={i} className="flex items-start gap-3 text-sm leading-7 text-[#66706B]">
+          <span className="mt-2.75 h-1.5 w-1.5 shrink-0 bg-[#465B9E]" />
+          <span className="min-w-0">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ContactLink({ href, icon: Icon, children, primary, external }) {
+  if (!href) return null;
+
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={[
+        "inline-flex min-h-11 items-center justify-center gap-2 px-4 text-sm font-medium",
+        "transition-colors duration-200 focus-visible:outline ",
+        "focus-visible:outline-offset-2 focus-visible:outline-[#465B9E]",
+        primary
+          ? "bg-[#465B9E] text-white hover:bg-[#344B93]"
+          : "border border-[#E3E2DC] bg-white text-[#17201C] hover:border-[#465B9E] hover:text-[#465B9E]",
+      ].join(" ")}
+    >
+      {Icon && <Icon size={16} />}
+      {children}
+    </a>
+  );
+}
 
 export default function PublicPortfolioViewer({ resume }) {
   const [copied, setCopied] = useState(false);
@@ -37,7 +128,7 @@ export default function PublicPortfolioViewer({ resume }) {
 
   const {
     name = "Professional",
-    jobRole = "Job Seeker",
+    jobRole = "Professional",
     phone_no,
     email,
     address,
@@ -45,629 +136,334 @@ export default function PublicPortfolioViewer({ resume }) {
     github,
     portfolio: websiteUrl,
     summary,
-    skills = [],
-    education = [],
-    experience = [],
-    projects = [],
-    certificates = [],
   } = resume;
 
-  const initials = name
-    .split(" ")
-    .map(n => n[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  const experience = arr(resume.experience);
+  const projects = arr(resume.projects);
+  const skills = arr(resume.skills);
+  const education = arr(resume.education);
+  const certificates = arr(resume.certificates);
 
-  /* -------------------------------------------------------
-     HELPERS
-  ------------------------------------------------------- */
+  const skillCount = skills.filter(s => typeof s === "string" || s?.name).length;
 
-  const normalizeUrl = url => {
-    if (!url) return "";
-    return url.startsWith("http") ? url : `https://${url}`;
+  const dateRange = (start, end) => {
+    const a = start ? formatDate(start) : "";
+    const b = end ? formatDate(end) : "Present";
+    if (!a && !end) return null;
+    return `${a || "Start"} — ${b || "Present"}`;
   };
 
-  const handleCopyLink = async () => {
+  const copyLink = async () => {
     try {
-      const url = typeof window !== "undefined" ? window.location.href : "";
-
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(url);
+      if (!navigator.clipboard?.writeText) {
+        toast.error("Clipboard unavailable. Copy the page URL manually.");
+        return;
       }
 
+      await navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       toast.success("Portfolio link copied!");
-
-      setTimeout(() => {
-        setCopied(false);
-      }, 2000);
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Failed to copy portfolio link");
+      toast.error("Unable to copy the portfolio link.");
     }
   };
 
-  const handleDownloadPdf = async () => {
+  const downloadResume = async () => {
+    if (downloading) return;
+
     try {
       setDownloading(true);
 
       const { pdfGenerator } = await import("@/shared/lib/pdfGenerator");
-
-      const pdfGen = new pdfGenerator(resume, resume?.ResumeType || "classic", {
+      const generator = new pdfGenerator(resume, resume?.ResumeType || "classic", {
         type: "resume",
       });
 
-      const url = await pdfGen.createPdf();
+      const pdfUrl = await generator.createPdf();
 
-      if (url) {
-        const link = document.createElement("a");
-
-        link.href = url;
-
-        const cleanName = name.trim().replace(/\s+/g, "_") || "Resume";
-
-        link.download = `${cleanName}_Resume.pdf`;
-
-        link.click();
-
-        toast.success("Resume downloaded successfully!");
+      if (!pdfUrl) {
+        toast.error("Could not generate the resume PDF.");
+        return;
       }
-    } catch (err) {
-      console.error("Download error:", err);
-      toast.error("Failed to download resume.");
+
+      const link = document.createElement("a");
+      const filename =
+        String(name || "Resume")
+          .trim()
+          .replace(/[^\w-]+/g, "_") || "Resume";
+
+      link.href = pdfUrl;
+      link.download = `${filename}_Resume.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      toast.success("Resume download started!");
+    } catch (error) {
+      console.error("Resume download failed:", error);
+      toast.error("Failed to download the resume.");
     } finally {
       setDownloading(false);
     }
   };
 
-  const renderDateRange = (start, end) => {
-    const formattedStart = formatDate(start);
-    const formattedEnd = end ? formatDate(end) : "Present";
-
-    if (!formattedStart && !formattedEnd) {
-      return null;
-    }
-
-    return `${formattedStart || "Start"} — ${formattedEnd || "Present"}`;
-  };
-
-  /* -------------------------------------------------------
-     SECTION HEADING
-  ------------------------------------------------------- */
-
-  const SectionHeading = ({ eyebrow, icon: Icon, title, description, count }) => (
-    <div className="mb-8">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          {eyebrow && (
-            <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#465B9E]">
-              {Icon && <Icon className="h-3.5 w-3.5" />}
-              {eyebrow}
-            </div>
-          )}
-
-          <h2 className="font-serif text-2xl font-semibold tracking-tight text-[#17201C] sm:text-3xl">
-            {title}
-          </h2>
-
-          {description && (
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#66706B]">{description}</p>
-          )}
-        </div>
-
-        {count && (
-          <span className="hidden rounded-full border border-[#E3E2DC] bg-white px-3 py-1 text-[11px] font-medium text-[#66706B] sm:inline-flex">
-            {count}
-          </span>
-        )}
-      </div>
-
-      <div className="mt-6 h-px bg-[#E3E2DC]" />
-    </div>
-  );
-
-  /* -------------------------------------------------------
-     RETURN
-  ------------------------------------------------------- */
-
   return (
     <div
-      className="
-        min-h-screen
-        bg-[#F8F7F3]
-        text-[#17201C]
-        font-sans
-        selection:bg-[#465B9E]/15
-        selection:text-[#17201C]
-      "
+      className="min-h-screen bg-[#F8F7F3] font-sans text-[#17201C]"
+      style={{ fontFamily: "Inter, sans-serif" }}
     >
-      {/* =====================================================
-          SUBTLE BACKGROUND
-      ====================================================== */}
+      {/* Navigation */}
+      <header className="sticky top-0 z-40 border-b border-[#E3E2DC] bg-[#F8F7F3]/95 backdrop-blur-md">
+        <div className="mx-auto flex min-h-17 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
+          <Link href="/" className="flex min-w-0 items-center gap-3">
+            <Image
+              src="/logos/nextcvlogo.png"
+              alt="NextCV"
+              width={28}
+              height={28}
+              className="shrink-0 object-contain"
+            />
+            <span className="hidden text-sm font-semibold tracking-tight sm:inline">Portfolio</span>
+            <span className="hidden text-[#E3E2DC] sm:inline">/</span>
+            <span className="max-w-36 truncate text-sm text-[#66706B]">{name}</span>
+          </Link>
 
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.22]"
-          style={{
-            backgroundImage: "radial-gradient(#17201C 0.7px, transparent 0.7px)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-
-        <div
-          className="
-            absolute
-            -top-40
-            left-1/2
-            h-105
-            w-175
-            -translate-x-1/2
-            rounded-full
-            bg-[#465B9E]/4.5
-            blur-[100px]
-          "
-        />
-      </div>
-
-      {/* =====================================================
-          NAVIGATION
-      ====================================================== */}
-
-      <header
-        className="
-          sticky
-          top-0
-          z-50
-          border-b
-          border-[#E3E2DC]/90
-          bg-[#F8F7F3]/90
-          backdrop-blur-xl
-        "
-      >
-        <div className="mx-auto flex h-17 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          {/* Identity */}
-
-          <div className="flex min-w-0 items-center gap-3">
-            <div
-              className="
-                flex
-                h-10
-                w-10
-                shrink-0
-                items-center
-                justify-center
-                rounded-xl
-                border
-                border-[#E3E2DC]
-                bg-white
-                font-serif
-                text-sm
-                font-semibold
-                text-[#465B9E]
-                shadow-[0_4px_14px_rgba(23,32,28,0.05)]
-              "
-            >
-              {initials}
-            </div>
-
-            <div className="min-w-0">
-              <span className="block truncate text-sm font-semibold tracking-tight text-[#17201C] sm:text-[15px]">
-                {name}
-              </span>
-
-              <span className="block truncate text-[11px] text-[#66706B]">
-                {jobRole || "Professional Portfolio"}
-              </span>
-            </div>
-          </div>
-
-          {/* Actions */}
-
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button
-              onClick={handleCopyLink}
               type="button"
-              className="
-                inline-flex
-                h-10
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                border
-                border-[#E3E2DC]
-                bg-white
-                px-3
-                text-xs
-                font-semibold
-                text-[#17201C]
-                transition-all
-                hover:border-[#CFCFC8]
-                hover:bg-[#F1F0EB]
-                active:scale-[0.98]
-                sm:px-4
-              "
-              title="Share portfolio"
+              onClick={copyLink}
+              aria-label="Share portfolio"
+              className="inline-flex h-10 items-center gap-2 border border-[#E3E2DC] bg-white px-3 text-sm transition-colors hover:border-[#465B9E] hover:text-[#465B9E] sm:px-4"
             >
-              {copied ? (
-                <>
-                  <Check className="h-3.5 w-3.5 text-[#465B9E]" />
-                  <span className="hidden sm:inline">Copied</span>
-                </>
-              ) : (
-                <>
-                  <Share2 className="h-3.5 w-3.5 text-[#66706B]" />
-                  <span className="hidden sm:inline">Share</span>
-                </>
-              )}
+              {copied ? <Check size={16} /> : <Share2 size={16} />}
+              <span className="hidden sm:inline">{copied ? "Copied" : "Share"}</span>
             </button>
 
             <button
-              onClick={handleDownloadPdf}
-              disabled={downloading}
               type="button"
-              className="
-                inline-flex
-                h-10
-                items-center
-                justify-center
-                gap-2
-                rounded-xl
-                bg-[#465B9E]
-                px-3.5
-                text-xs
-                font-semibold
-                text-white
-                shadow-[0_7px_20px_rgba(70,91,158,0.18)]
-                transition-all
-                hover:bg-[#344B93]
-                hover:-translate-y-0.5
-                active:translate-y-0
-                disabled:cursor-not-allowed
-                disabled:opacity-60
-                sm:px-4
-              "
+              onClick={downloadResume}
+              disabled={downloading}
+              className="inline-flex h-10 items-center gap-2 bg-[#465B9E] px-3 text-sm font-medium text-white transition-colors hover:bg-[#344B93] disabled:opacity-60 sm:px-4"
             >
-              <Download className="h-3.5 w-3.5" />
-
-              <span>{downloading ? "Preparing..." : "Download Resume"}</span>
+              <Download size={16} />
+              <span className="hidden sm:inline">
+                {downloading ? "Preparing..." : "Download resume"}
+              </span>
+              <span className="sm:hidden">PDF</span>
             </button>
           </div>
         </div>
       </header>
 
-      {/* =====================================================
-          MAIN
-      ====================================================== */}
-
-      <main className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
-        {/* =====================================================
-            HERO
-        ====================================================== */}
-
-        <section className="border-b border-[#E3E2DC] pb-14 sm:pb-20">
-          <div className="max-w-4xl">
-            {/* Small label */}
-
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E3E2DC] bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
-              Professional Portfolio
-            </div>
-
-            {/* Name */}
-
-            <h1
-              className="
-                max-w-4xl
-                font-serif
-                text-[3.1rem]
-                font-semibold
-                leading-[0.98]
-                tracking-[-0.045em]
-                text-[#17201C]
-                sm:text-6xl
-                lg:text-7xl
-              "
-            >
-              {name.toUpperCase()}
-            </h1>
-
-            {/* Role */}
-
-            <p className="mt-5 max-w-2xl text-lg font-medium leading-8 text-[#465B9E] sm:text-xl">
-              {jobRole || "Professional"}
+      <main className="mx-auto max-w-6xl px-5 sm:px-8">
+        {/* Hero */}
+        <section className="grid gap-10 border-b border-[#E3E2DC] py-14 sm:py-20 lg:grid-cols-[1fr_280px] lg:gap-16 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="mb-6 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#465B9E]">
+              <span className="h-1.5 w-1.5 bg-[#465B9E]" />
+              Independent professional portfolio
             </p>
 
-            {/* Location */}
+            <h1
+              className="bwrap-break-word font-serif text-5xl font-medium leading-[1.02] tracking-[-0.045em] sm:text-7xl lg:text-[88px]"
+              style={{ fontFamily: '"Source Serif 4", Georgia, serif' }}
+            >
+              {name}
+              <span className="text-[#465B9E]">.</span>
+            </h1>
 
-            {address && (
-              <div className="mt-4 flex items-center gap-2 text-sm text-[#66706B]">
-                <MapPin className="h-4 w-4 text-[#465B9E]" />
-                {address}
-              </div>
-            )}
-
-            {/* Summary */}
+            <p className="mt-5 text-lg font-medium leading-7 text-[#465B9E] sm:text-xl">
+              {jobRole}
+            </p>
 
             {summary && (
-              <p className="mt-7 max-w-3xl text-base leading-8 text-[#66706B] sm:text-lg">
+              <p className="mt-7 max-w-2xl whitespace-pre-line text-[15px] leading-8 text-[#66706B]">
                 {summary}
               </p>
             )}
 
-            {/* Actions */}
+            {address && (
+              <p className="mt-5 flex items-start gap-2 text-sm text-[#66706B]">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[#465B9E]" />
+                {address}
+              </p>
+            )}
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-2.5">
               {email && (
-                <a
-                  href={`mailto:${email}`}
-                  className="
-                    inline-flex
-                    min-h-11
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    bg-[#17201C]
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-white
-                    transition-all
-                    hover:bg-[#26312C]
-                    hover:-translate-y-0.5
-                  "
-                >
-                  <Mail className="h-4 w-4" />
-                  Email Me
-                </a>
+                <ContactLink href={`mailto:${email}`} icon={Mail} primary>
+                  Get in touch <ArrowUpRight size={15} />
+                </ContactLink>
               )}
-
               {linkedin && (
-                <a
-                  href={normalizeUrl(linkedin)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    min-h-11
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    border
-                    border-[#E3E2DC]
-                    bg-white
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-[#17201C]
-                    transition-all
-                    hover:border-[#465B9E]/40
-                    hover:bg-[#F1F0EB]
-                  "
-                >
-                  <Linkedin className="h-4 w-4 text-[#465B9E]" />
+                <ContactLink href={url(linkedin)} icon={Linkedin} external>
                   LinkedIn
-                </a>
+                </ContactLink>
               )}
-
               {github && (
-                <a
-                  href={normalizeUrl(github)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    min-h-11
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    border
-                    border-[#E3E2DC]
-                    bg-white
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-[#17201C]
-                    transition-all
-                    hover:bg-[#F1F0EB]
-                  "
-                >
-                  <Github className="h-4 w-4" />
+                <ContactLink href={url(github)} icon={Github} external>
                   GitHub
-                </a>
+                </ContactLink>
               )}
-
               {websiteUrl && (
-                <a
-                  href={normalizeUrl(websiteUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    min-h-11
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    border
-                    border-[#E3E2DC]
-                    bg-white
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-[#17201C]
-                    transition-all
-                    hover:bg-[#F1F0EB]
-                  "
-                >
-                  <Globe className="h-4 w-4 text-[#465B9E]" />
+                <ContactLink href={url(websiteUrl)} icon={Globe} external>
                   Website
-                </a>
-              )}
-
-              {phone_no && (
-                <a
-                  href={`tel:${phone_no}`}
-                  className="
-                    inline-flex
-                    min-h-11
-                    items-center
-                    justify-center
-                    gap-2
-                    rounded-xl
-                    border
-                    border-[#E3E2DC]
-                    bg-white
-                    px-5
-                    text-sm
-                    font-semibold
-                    text-[#17201C]
-                    transition-all
-                    hover:bg-[#F1F0EB]
-                  "
-                >
-                  <Phone className="h-4 w-4 text-[#465B9E]" />
-                  Call
-                </a>
+                </ContactLink>
               )}
             </div>
           </div>
 
-          {/* Hero metadata */}
+          {/* Profile overview */}
+          <aside className="self-start border-t-2 border-[#465B9E] pt-5 lg:mt-14">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#66706B]">
+              At a glance
+            </p>
 
-          <div className="mt-12 grid grid-cols-2 border-t border-[#E3E2DC] pt-6 sm:grid-cols-4">
-            <div className="border-r border-[#E3E2DC] pr-4">
-              <p className="font-serif text-2xl font-semibold text-[#17201C]">
-                {experience.length || "—"}
-              </p>
-
-              <p className="mt-1 text-xs text-[#66706B]">Career roles</p>
+            <div className="mt-5 divide-y divide-[#E3E2DC]">
+              {[
+                { label: "Experience", value: experience.length },
+                { label: "Projects", value: projects.length },
+                { label: "Skills", value: skillCount },
+                { label: "Certifications", value: certificates.length },
+              ].map(item => (
+                <div key={item.label} className="flex items-center justify-between py-4">
+                  <span className="text-sm text-[#66706B]">{item.label}</span>
+                  <span className="font-serif text-2xl font-semibold">
+                    {item.value.toString().padStart(2, "0")}
+                  </span>
+                </div>
+              ))}
             </div>
 
-            <div className="border-r border-[#E3E2DC] px-4 sm:px-5">
-              <p className="font-serif text-2xl font-semibold text-[#17201C]">
-                {projects.length || "—"}
-              </p>
-
-              <p className="mt-1 text-xs text-[#66706B]">Projects</p>
+            <div className="mt-5 border border-[#E3E2DC] bg-white p-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#F1F0EB] font-serif text-lg font-semibold text-[#465B9E]">
+                  {initials(name)}
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold">{name}</p>
+                  <p className="mt-1 text-xs text-[#66706B]">Professional profile</p>
+                </div>
+              </div>
             </div>
-
-            <div className="border-r border-[#E3E2DC] px-4 sm:px-5">
-              <p className="font-serif text-2xl font-semibold text-[#17201C]">
-                {skills.length || "—"}
-              </p>
-
-              <p className="mt-1 text-xs text-[#66706B]">Skills</p>
-            </div>
-
-            <div className="pl-4 sm:pl-5">
-              <p className="font-serif text-2xl font-semibold text-[#17201C]">
-                {certificates.length || "—"}
-              </p>
-
-              <p className="mt-1 text-xs text-[#66706B]">Certifications</p>
-            </div>
-          </div>
+          </aside>
         </section>
 
-        {/* =====================================================
-            EXPERIENCE
-        ====================================================== */}
-
+        {/* Experience */}
         {experience.length > 0 && (
-          <section className="mt-20">
-            <SectionHeading
-              eyebrow="Experience"
-              icon={Briefcase}
-              title="Professional experience"
-              description="Career experience, responsibilities, and contributions."
-              count={`${experience.length} ${experience.length === 1 ? "Role" : "Roles"}`}
+          <section className="py-14 sm:py-20">
+            <SectionTitle
+              eyebrow="01 / Career"
+              title="Experience"
+              count={`${experience.length} roles`}
             />
 
-            <div className="space-y-5">
-              {experience.map((exp, idx) => {
-                const dateRange = renderDateRange(exp.startDate, exp.endDate);
+            <div>
+              {experience.map((exp, i) => (
+                <article
+                  key={`${exp.position || "role"}-${i}`}
+                  className="grid gap-4 border-b border-[#E3E2DC] py-7 first:pt-0 last:border-0 last:pb-0 sm:grid-cols-[1fr_190px] sm:gap-10"
+                >
+                  <div className="min-w-0">
+                    <h3 className="font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+                      {exp.position || "Position"}
+                    </h3>
+                    {exp.companyName && (
+                      <p className="mt-2 flex items-center gap-2 text-sm font-medium text-[#465B9E]">
+                        <Briefcase size={15} />
+                        {exp.companyName}
+                      </p>
+                    )}
+                    <TextList value={exp.description} />
+                  </div>
 
-                const descList = Array.isArray(exp.description)
-                  ? exp.description
-                  : typeof exp.description === "string"
-                    ? exp.description.split("\n").filter(Boolean)
+                  {(exp.startDate || exp.endDate) && (
+                    <p className="flex items-start gap-2 text-xs leading-6 text-[#66706B] sm:justify-end">
+                      <Calendar size={14} className="mt-1 shrink-0" />
+                      {dateRange(exp.startDate, exp.endDate)}
+                    </p>
+                  )}
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Projects */}
+        {projects.length > 0 && (
+          <section className="border-t border-[#E3E2DC] py-14 sm:py-20">
+            <SectionTitle
+              eyebrow="02 / Selected work"
+              title="Projects"
+              count={`${projects.length} projects`}
+            />
+
+            <div className="grid gap-x-12 md:grid-cols-2">
+              {projects.map((project, i) => {
+                const tags = Array.isArray(project.technologiesOrTopics)
+                  ? project.technologiesOrTopics
+                  : typeof project.technologiesOrTopics === "string"
+                    ? project.technologiesOrTopics.split(",")
                     : [];
+
+                const projectUrl = project.link ? url(project.link) : "";
 
                 return (
                   <article
-                    key={idx}
-                    className="
-                      group
-                      relative
-                      rounded-2xl
-                      border
-                      border-[#E3E2DC]
-                      bg-white
-                      p-6
-                      transition-all
-                      duration-200
-                      hover:-translate-y-0.5
-                      hover:border-[#CFCFC8]
-                      hover:shadow-[0_14px_40px_rgba(23,32,28,0.06)]
-                      sm:p-7
-                    "
+                    key={`${project.title || "project"}-${i}`}
+                    className="flex min-w-0 flex-col border-b border-[#E3E2DC] py-7 first:pt-0 md:nth-[-n+2]]:pt-0"
                   >
-                    <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                      <div>
-                        <h3 className="font-serif text-xl font-semibold tracking-tight text-[#17201C]">
-                          {exp.position || "Role Title"}
-                        </h3>
-
-                        {exp.companyName && (
-                          <div className="mt-2 flex items-center gap-2 text-sm font-medium text-[#66706B]">
-                            <Building className="h-4 w-4 text-[#465B9E]" />
-                            {exp.companyName}
-                          </div>
-                        )}
-                      </div>
-
-                      {dateRange && (
-                        <span
-                          className="
-                            inline-flex
-                            w-fit
-                            shrink-0
-                            items-center
-                            gap-1.5
-                            rounded-full
-                            border
-                            border-[#E3E2DC]
-                            bg-[#F8F7F3]
-                            px-3
-                            py-1.5
-                            text-[11px]
-                            font-medium
-                            text-[#66706B]
-                          "
+                    <div className="flex items-start justify-between gap-4">
+                      <h3 className="wrap-break-wordDS font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+                        {project.title || "Project"}
+                      </h3>
+                      {projectUrl && (
+                        <a
+                          href={projectUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open ${project.title || "project"}`}
+                          className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#E3E2DC] bg-white text-[#465B9E] transition-colors hover:bg-[#465B9E] hover:text-white"
                         >
-                          <Calendar className="h-3 w-3 text-[#465B9E]" />
-                          {dateRange}
-                        </span>
+                          <ArrowUpRight size={17} />
+                        </a>
                       )}
                     </div>
 
-                    {descList.length > 0 && (
-                      <ul className="mt-6 space-y-3">
-                        {descList.map((bullet, bIdx) => (
-                          <li
-                            key={bIdx}
-                            className="flex items-start gap-3 text-sm leading-7 text-[#66706B]"
-                          >
-                            <span className="mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full bg-[#465B9E]" />
-                            <span>{bullet}</span>
-                          </li>
+                    {(project.roleOrType || project.organization || project.date) && (
+                      <p className="mt-3 text-xs leading-6 text-[#66706B]">
+                        {[
+                          project.roleOrType,
+                          project.organization,
+                          project.date ? formatDate(project.date) : "",
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </p>
+                    )}
+
+                    <TextList value={project.description} limit={3} />
+
+                    {tags.filter(Boolean).length > 0 && (
+                      <div className="mt-5 flex flex-wrap gap-x-3 gap-y-2 border-t border-[#E3E2DC] pt-4">
+                        {tags.map((tag, j) => (
+                          <span key={`${tag}-${j}`} className="text-xs text-[#66706B]">
+                            {String(tag).trim()}
+                          </span>
                         ))}
-                      </ul>
+                      </div>
+                    )}
+
+                    {projectUrl && (
+                      <a
+                        href={projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-5 inline-flex w-fit items-center gap-2 text-xs font-semibold text-[#465B9E] hover:text-[#344B93]"
+                      >
+                        Explore project <ArrowUpRight size={14} />
+                      </a>
                     )}
                   </article>
                 );
@@ -676,584 +472,227 @@ export default function PublicPortfolioViewer({ resume }) {
           </section>
         )}
 
-        {/* =====================================================
-            PROJECTS
-        ====================================================== */}
-
-        {projects.length > 0 && (
-          <section className="mt-20">
-            <SectionHeading
-              eyebrow="Selected Work"
-              icon={Layers}
-              title="Featured projects"
-              description="Selected projects, products, and work worth exploring."
-              count={`${projects.length} ${projects.length === 1 ? "Project" : "Projects"}`}
+        {/* Skills */}
+        {skills.length > 0 && (
+          <section className="border-t border-[#E3E2DC] py-14 sm:py-20">
+            <SectionTitle
+              eyebrow="03 / Expertise"
+              title="Skills & expertise"
+              count={`${skillCount} skills`}
             />
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {projects.map((proj, idx) => {
-                const descList = Array.isArray(proj.description)
-                  ? proj.description
-                  : typeof proj.description === "string"
-                    ? proj.description.split("\n").filter(Boolean)
-                    : [];
+            <div className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+              {skills.map((skill, i) => {
+                const skillName = typeof skill === "string" ? skill : skill?.name;
+                const level = typeof skill === "object" ? skill?.level : null;
 
-                const tags = proj.technologiesOrTopics
-                  ? proj.technologiesOrTopics
-                      .split(",")
-                      .map(t => t.trim())
-                      .filter(Boolean)
-                  : [];
+                if (!skillName) return null;
 
                 return (
-                  <article
-                    key={idx}
-                    className="
-                      group
-                      flex
-                      flex-col
-                      justify-between
-                      rounded-2xl
-                      border
-                      border-[#E3E2DC]
-                      bg-white
-                      p-6
-                      transition-all
-                      duration-200
-                      hover:-translate-y-1
-                      hover:border-[#CFCFC8]
-                      hover:shadow-[0_16px_45px_rgba(23,32,28,0.07)]
-                    "
+                  <div
+                    key={`${skillName}-${i}`}
+                    className="flex items-center justify-between gap-3 border-b border-[#E3E2DC] py-4"
                   >
-                    <div>
-                      <div className="flex items-start justify-between gap-4">
-                        <h3 className="font-serif text-xl font-semibold tracking-tight text-[#17201C] transition-colors group-hover:text-[#465B9E]">
-                          {proj.title || "Project Title"}
-                        </h3>
-
-                        {proj.link && (
-                          <a
-                            href={normalizeUrl(proj.link)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="
-                              flex
-                              h-9
-                              w-9
-                              shrink-0
-                              items-center
-                              justify-center
-                              rounded-xl
-                              border
-                              border-[#E3E2DC]
-                              bg-[#F8F7F3]
-                              text-[#66706B]
-                              transition-all
-                              hover:border-[#465B9E]/30
-                              hover:bg-[#465B9E]
-                              hover:text-white
-                            "
-                            title="Visit Project"
-                          >
-                            <ArrowUpRight className="h-4 w-4" />
-                          </a>
-                        )}
-                      </div>
-
-                      <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#66706B]">
-                        {proj.roleOrType && (
-                          <span className="font-medium text-[#465B9E]">{proj.roleOrType}</span>
-                        )}
-
-                        {proj.organization && (
-                          <>
-                            <span>·</span>
-                            <span>{proj.organization}</span>
-                          </>
-                        )}
-
-                        {proj.date && (
-                          <>
-                            <span>·</span>
-                            <span>{formatDate(proj.date)}</span>
-                          </>
-                        )}
-                      </div>
-
-                      {descList.length > 0 && (
-                        <div className="mt-6 space-y-3">
-                          {descList.slice(0, 3).map((bullet, bIdx) => (
-                            <p
-                              key={bIdx}
-                              className="flex items-start gap-3 text-sm leading-7 text-[#66706B]"
-                            >
-                              <span className="mt-2.25 h-1.5 w-1.5 shrink-0 rounded-full bg-[#465B9E]" />
-                              <span>{bullet}</span>
-                            </p>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="mt-7">
-                      {tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 border-t border-[#E3E2DC] pt-5">
-                          {tags.map((tag, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="
-                                rounded-full
-                                border
-                                border-[#E3E2DC]
-                                bg-[#F8F7F3]
-                                px-3
-                                py-1.5
-                                text-[11px]
-                                font-medium
-                                text-[#66706B]
-                              "
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {proj.link && (
-                        <a
-                          href={normalizeUrl(proj.link)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="
-                            mt-5
-                            inline-flex
-                            items-center
-                            gap-2
-                            text-xs
-                            font-semibold
-                            text-[#465B9E]
-                            transition-colors
-                            hover:text-[#344B93]
-                          "
-                        >
-                          Explore project
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                        </a>
-                      )}
-                    </div>
-                  </article>
+                    <span className="text-sm font-medium">{skillName}</span>
+                    {level && <span className="text-xs text-[#66706B]">{level}</span>}
+                  </div>
                 );
               })}
             </div>
           </section>
         )}
 
-        {/* =====================================================
-            SKILLS
-        ====================================================== */}
-
-        {skills.length > 0 && (
-          <section className="mt-20">
-            <SectionHeading
-              eyebrow="Expertise"
-              icon={CheckCircle2}
-              title="Skills & expertise"
-              description="Technical skills and professional capabilities."
-              count={`${skills.length} Skills`}
-            />
-
-            <div className="rounded-3xl border border-[#E3E2DC] bg-white p-6 sm:p-8">
-              <div className="flex flex-wrap gap-2.5">
-                {skills.map((skill, idx) => {
-                  const skillName = typeof skill === "string" ? skill : skill?.name;
-
-                  const skillLevel = typeof skill === "object" ? skill?.level : null;
-
-                  return (
-                    <div
-                      key={idx}
-                      className="
-                        group
-                        flex
-                        items-center
-                        gap-2
-                        rounded-full
-                        border
-                        border-[#E3E2DC]
-                        bg-[#F8F7F3]
-                        px-3.5
-                        py-2
-                        transition-all
-                        hover:border-[#465B9E]/30
-                        hover:bg-white
-                      "
-                    >
-                      <span className="text-xs font-semibold text-[#17201C] sm:text-sm">
-                        {skillName}
-                      </span>
-
-                      {skillLevel && (
-                        <span className="rounded-full bg-[#465B9E]/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-[#465B9E]">
-                          {skillLevel}
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* =====================================================
-            EDUCATION + CERTIFICATIONS
-        ====================================================== */}
-
+        {/* Education and certifications */}
         {(education.length > 0 || certificates.length > 0) && (
-          <div className="mt-20 grid items-start gap-12 lg:grid-cols-2">
-            {/* Education */}
+          <section className="border-t border-[#E3E2DC] py-14 sm:py-20">
+            <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-16">
+              {education.length > 0 && (
+                <div>
+                  <SectionTitle eyebrow="04 / Education" title="Academic background" />
 
-            {education.length > 0 && (
-              <section>
-                <SectionHeading
-                  eyebrow="Education"
-                  icon={GraduationCap}
-                  title="Academic background"
-                  description="Education and qualifications."
-                />
-
-                <div className="space-y-4">
-                  {education.map((edu, idx) => {
-                    const yearText =
-                      edu.startYear || edu.endYear
-                        ? `${edu.startYear || ""}${edu.endYear ? ` — ${edu.endYear}` : ""}`.trim()
-                        : null;
-
-                    return (
-                      <article
-                        key={idx}
-                        className="
-                          rounded-2xl
-                          border
-                          border-[#E3E2DC]
-                          bg-white
-                          p-5
-                          transition-all
-                          hover:border-[#CFCFC8]
-                          hover:shadow-[0_12px_35px_rgba(23,32,28,0.05)]
-                        "
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <h3 className="font-serif text-lg font-semibold text-[#17201C]">
+                  {education.map((edu, i) => (
+                    <article
+                      key={`${edu.degree || "education"}-${i}`}
+                      className="border-b border-[#E3E2DC] py-5 first:pt-0 last:border-0"
+                    >
+                      <div className="flex items-start gap-3">
+                        <GraduationCap size={18} className="mt-1 shrink-0 text-[#465B9E]" />
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-serif text-lg font-semibold">
                             {edu.degree || "Degree / Course"}
                           </h3>
-
-                          {yearText && (
-                            <span className="shrink-0 text-[11px] font-medium text-[#66706B]">
-                              {yearText}
-                            </span>
-                          )}
-                        </div>
-
-                        <p className="mt-2 text-sm font-medium text-[#465B9E]">
-                          {edu.institution || "Institution"}
-                        </p>
-
-                        {edu.grade && (
-                          <p className="mt-1 text-xs font-medium text-[#66706B]">
-                            Grade / Score: {edu.grade}
+                          <p className="mt-2 text-sm text-[#465B9E]">
+                            {edu.institution || "Institution"}
                           </p>
-                        )}
-
-                        {edu.description && edu.description.length > 0 && (
-                          <div className="mt-3 space-y-1 text-xs leading-6 text-[#66706B]">
-                            {Array.isArray(edu.description) ? (
-                              edu.description.map((d, dIdx) => <p key={dIdx}>• {d}</p>)
-                            ) : (
-                              <p>{edu.description}</p>
-                            )}
-                          </div>
-                        )}
-                      </article>
-                    );
-                  })}
+                          {(edu.startYear || edu.endYear) && (
+                            <p className="mt-2 text-xs text-[#66706B]">
+                              {[edu.startYear, edu.endYear].filter(Boolean).join(" — ")}
+                            </p>
+                          )}
+                          {edu.grade && (
+                            <p className="mt-2 text-xs text-[#66706B]">
+                              Grade / Score: {edu.grade}
+                            </p>
+                          )}
+                          <TextList value={edu.description} />
+                        </div>
+                      </div>
+                    </article>
+                  ))}
                 </div>
-              </section>
-            )}
+              )}
 
-            {/* Certifications */}
+              {certificates.length > 0 && (
+                <div>
+                  <SectionTitle eyebrow="05 / Credentials" title="Certifications" />
 
-            {certificates.length > 0 && (
-              <section>
-                <SectionHeading
-                  eyebrow="Credentials"
-                  icon={Award}
-                  title="Certifications"
-                  description="Professional credentials and certifications."
-                />
-
-                <div className="space-y-4">
-                  {certificates.map((cert, idx) => (
+                  {certificates.map((cert, i) => (
                     <article
-                      key={idx}
-                      className="
-                        rounded-2xl
-                        border
-                        border-[#E3E2DC]
-                        bg-white
-                        p-5
-                        transition-all
-                        hover:border-[#CFCFC8]
-                        hover:shadow-[0_12px_35px_rgba(23,32,28,0.05)]
-                      "
+                      key={`${cert.title || "certificate"}-${i}`}
+                      className="border-b border-[#E3E2DC] py-5 first:pt-0 last:border-0"
                     >
-                      <div className="flex items-start justify-between gap-4">
-                        <div>
-                          <h3 className="font-serif text-lg font-semibold text-[#17201C]">
+                      <div className="flex items-start gap-3">
+                        <Award size={18} className="mt-1 shrink-0 text-[#465B9E]" />
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-serif text-lg font-semibold">
                             {cert.title || "Certification"}
                           </h3>
-
-                          <p className="mt-1 text-sm font-medium text-[#465B9E]">
-                            {cert.organization || "Issuing Body"}
+                          <p className="mt-2 text-sm text-[#465B9E]">
+                            {cert.organization || "Issuing organization"}
                           </p>
-
                           {cert.year && (
-                            <p className="mt-1 text-[11px] text-[#66706B]">
+                            <p className="mt-2 text-xs text-[#66706B]">
                               Issued: {formatDate(cert.year) || cert.year}
                             </p>
                           )}
                         </div>
-
                         {cert.credentialUrl && (
                           <a
-                            href={normalizeUrl(cert.credentialUrl)}
+                            href={url(cert.credentialUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="
-                              inline-flex
-                              shrink-0
-                              items-center
-                              gap-1.5
-                              rounded-xl
-                              border
-                              border-[#E3E2DC]
-                              bg-[#F8F7F3]
-                              px-3
-                              py-2
-                              text-[11px]
-                              font-semibold
-                              text-[#17201C]
-                              transition-all
-                              hover:border-[#465B9E]/30
-                              hover:bg-white
-                            "
+                            className="inline-flex shrink-0 items-center gap-1.5 border border-[#E3E2DC] bg-white px-3 py-2 text-xs hover:border-[#465B9E] hover:text-[#465B9E]"
                           >
-                            View
-                            <ExternalLink className="h-3 w-3 text-[#465B9E]" />
+                            Verify <ExternalLink size={12} />
                           </a>
                         )}
                       </div>
                     </article>
                   ))}
                 </div>
-              </section>
-            )}
-          </div>
-        )}
-
-        {/* =====================================================
-            CONTACT
-        ====================================================== */}
-
-        {(email || phone_no || linkedin) && (
-          <section className="mt-20">
-            <div
-              className="
-                relative
-                overflow-hidden
-                rounded-3xl
-                border
-                border-[#E3E2DC]
-                bg-[#17201C]
-                px-6
-                py-12
-                text-center
-                sm:px-10
-                sm:py-16
-              "
-            >
-              {/* subtle decoration */}
-
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  -right-24
-                  -top-24
-                  h-72
-                  w-72
-                  rounded-full
-                  bg-[#465B9E]/20
-                  blur-3xl
-                "
-              />
-
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  -bottom-32
-                  -left-20
-                  h-72
-                  w-72
-                  rounded-full
-                  bg-white/3
-                  blur-3xl
-                "
-              />
-
-              <div className="relative z-10 mx-auto max-w-2xl">
-                <div className="mx-auto mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-                  <Sparkles className="h-5 w-5 text-[#AAB7E8]" />
-                </div>
-
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#AAB7E8]">
-                  Get in touch
-                </p>
-
-                <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-                  Interested in working with {name}?
-                </h2>
-
-                <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-white/60 sm:text-base">
-                  Connect directly to discuss opportunities, collaborations, or professional work.
-                </p>
-
-                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-                  {email && (
-                    <a
-                      href={`mailto:${email}?subject=Opportunity Inquiry for ${encodeURIComponent(
-                        name
-                      )}`}
-                      className="
-                        inline-flex
-                        min-h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        rounded-xl
-                        bg-white
-                        px-5
-                        text-sm
-                        font-semibold
-                        text-[#17201C]
-                        transition-all
-                        hover:-translate-y-0.5
-                        hover:bg-[#F1F0EB]
-                      "
-                    >
-                      <Send className="h-4 w-4" />
-                      Get in touch
-                    </a>
-                  )}
-
-                  <button
-                    onClick={handleDownloadPdf}
-                    disabled={downloading}
-                    type="button"
-                    className="
-                      inline-flex
-                      min-h-11
-                      items-center
-                      justify-center
-                      gap-2
-                      rounded-xl
-                      border
-                      border-white/15
-                      bg-white/5
-                      px-5
-                      text-sm
-                      font-semibold
-                      text-white
-                      transition-all
-                      hover:bg-white/10
-                      disabled:cursor-not-allowed
-                      disabled:opacity-60
-                    "
-                  >
-                    <Download className="h-4 w-4" />
-                    {downloading ? "Preparing..." : "Download Resume"}
-                  </button>
-
-                  {linkedin && (
-                    <a
-                      href={normalizeUrl(linkedin)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="
-                        inline-flex
-                        min-h-11
-                        items-center
-                        justify-center
-                        gap-2
-                        rounded-xl
-                        border
-                        border-white/15
-                        bg-white/5
-                        px-5
-                        text-sm
-                        font-semibold
-                        text-white
-                        transition-all
-                        hover:bg-white/10
-                      "
-                    >
-                      <Linkedin className="h-4 w-4" />
-                      LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
+              )}
             </div>
           </section>
         )}
 
-        {/* =====================================================
-            FOOTER
-        ====================================================== */}
+        {/* Contact CTA */}
+        {(email || phone_no || linkedin) && (
+          <section className="mb-14 bg-[#17201C] px-6 py-10 text-white sm:mb-20 sm:px-12 sm:py-14">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C5CBE5]">
+              Have a project or opportunity?
+            </p>
 
-        <footer className="mt-16 border-t border-[#E3E2DC] pt-7">
-          <div className="flex flex-col items-center justify-between gap-4 text-xs text-[#66706B] sm:flex-row">
-            <div className="flex items-center gap-2">
-              <Image
-                src="/logos/nextcvlogolight.png"
-                alt="NextCV"
-                width={19}
-                height={19}
-                className="opacity-70"
-              />
+            <div className="mt-4 grid gap-7 sm:grid-cols-[1fr_auto] sm:items-end">
+              <div>
+                <h2
+                  className="font-serif text-3xl font-medium tracking-tight sm:text-5xl"
+                  style={{ fontFamily: '"Source Serif 4", Georgia, serif' }}
+                >
+                  Let&apos;s make something meaningful.
+                </h2>
+                <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">
+                  Interested in working with {name}? Reach out to discuss opportunities,
+                  collaborations, or professional work.
+                </p>
+              </div>
 
-              <span>
-                Portfolio created with <span className="font-semibold text-[#17201C]">NextCV</span>
-              </span>
+              {email && (
+                <a
+                  href={`mailto:${email}?subject=${encodeURIComponent(
+                    `Professional opportunity for ${name}`
+                  )}`}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-white px-5 text-sm font-semibold text-[#17201C] transition-colors hover:bg-[#E8EAF4]"
+                >
+                  <Send size={15} /> Get in touch
+                </a>
+              )}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="mt-8 flex flex-wrap gap-5 border-t border-white/15 pt-5 text-sm text-white/70">
+              {phone_no && (
+                <a
+                  href={`tel:${phone_no}`}
+                  className="inline-flex items-center gap-2 hover:text-white"
+                >
+                  <Phone size={15} /> Call
+                </a>
+              )}
+              {linkedin && (
+                <a
+                  href={url(linkedin)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 hover:text-white"
+                >
+                  <Linkedin size={15} /> LinkedIn
+                </a>
+              )}
+              {email && (
+                <a
+                  href={`mailto:${email}`}
+                  className="inline-flex items-center gap-2 hover:text-white"
+                >
+                  <Mail size={15} /> Email
+                </a>
+              )}
               <button
-                onClick={handleCopyLink}
                 type="button"
-                className="font-medium transition-colors hover:text-[#465B9E]"
+                onClick={downloadResume}
+                disabled={downloading}
+                className="inline-flex items-center gap-2 hover:text-white disabled:opacity-60"
               >
+                <Download size={15} />
+                {downloading ? "Preparing..." : "Download resume"}
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* Footer */}
+        <footer className="border-t border-[#E3E2DC] py-7">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <Link href="/" className="inline-flex w-fit items-center gap-2">
+              <Image
+                src="/logos/nextcvlogo.png"
+                alt="NextCV"
+                width={23}
+                height={23}
+                className="object-contain"
+              />
+              <span className="text-xs text-[#66706B]">
+                Portfolio powered by <span className="font-semibold text-[#17201C]">NextCV</span>
+              </span>
+            </Link>
+
+            <div className="flex flex-wrap items-center gap-5 text-xs">
+              <button
+                type="button"
+                onClick={copyLink}
+                className="inline-flex items-center gap-1.5 text-[#66706B] hover:text-[#465B9E]"
+              >
+                {copied ? <Check size={14} /> : <Share2 size={14} />}
                 {copied ? "Link copied" : "Share portfolio"}
               </button>
 
-              <span className="text-[#C5C5BE]">•</span>
-
-              <Link href="/" className="font-medium transition-colors hover:text-[#465B9E]">
-                Create yours
+              <Link href="/templates" className="font-semibold text-[#465B9E] hover:text-[#344B93]">
+                Build your portfolio →
               </Link>
             </div>
           </div>
+
+          <p className="mt-5 text-[11px] leading-5 text-[#8A918C]">
+            A professional portfolio showcasing experience, projects, skills, and qualifications.
+          </p>
         </footer>
       </main>
     </div>

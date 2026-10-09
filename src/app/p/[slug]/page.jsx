@@ -1,31 +1,44 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import { cache } from "react";
+import { notFound } from "next/navigation";
 import { getPortfolioBySlug } from "@/modules/portfolio/services/getPortfolio";
-import { UserX, Sparkles, ArrowLeft } from "lucide-react";
+import { Sparkles, ArrowLeft } from "lucide-react";
 import { createSeoMetadata } from "@/shared/utils/seo";
 
 export const dynamicParams = true;
+
+const getCachedPortfolio = cache(async slug => {
+  return getPortfolioBySlug(slug);
+});
 
 const PublicPortfolioViewer = dynamic(
   () => import("@/modules/portfolio/components/PublicPortfolioViewer"),
   {
     loading: () => (
       <main className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex items-center justify-center px-6">
-        <div className="w-full max-w-md flex flex-col items-center text-center">
-          {/* Loading mark */}
-          <div className="relative mb-6">
-            <div className="w-12 h-12 rounded-2xl border border-[#E3E2DC] bg-white shadow-sm flex items-center justify-center">
-              <div className="w-5 h-5 rounded-full border-2 border-[#465B9E] border-t-transparent animate-spin" />
-            </div>
+        <div className="w-full max-w-sm">
+          <Link href="/" className="inline-flex items-center gap-2 mb-12">
+            <Image
+              src="/logos/nextcvlogolight.png"
+              alt="NextCV"
+              width={24}
+              height={24}
+              className="object-contain"
+            />
+            <span className="text-sm font-semibold tracking-tight">NextCV</span>
+          </Link>
+
+          <div className="h-px bg-[#E3E2DC] mb-8" />
+
+          <div className="flex items-center gap-3">
+            <div className="h-5 w-5 shrink-0 rounded-full border-2 border-[#465B9E] border-t-transparent animate-spin" />
+            <p className="text-sm text-[#66706B]">Preparing portfolio...</p>
           </div>
 
-          <h1 className="font-serif text-2xl sm:text-3xl font-semibold tracking-tight text-[#17201C]">
-            Loading portfolio
-          </h1>
-
-          <p className="mt-2 text-sm sm:text-base text-[#66706B]">
-            Preparing the professional profile for you.
+          <p className="mt-16 text-xs tracking-[0.12em] text-[#8A918C]">
+            PROFESSIONAL PORTFOLIOS · NEXTCV
           </p>
         </div>
       </main>
@@ -35,14 +48,12 @@ const PublicPortfolioViewer = dynamic(
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-
-  const data = await getPortfolioBySlug(slug);
+  const data = await getCachedPortfolio(slug);
 
   if (!data?.resume) {
     return {
-      title: "Portfolio Not Found | NextCV",
-      description:
-        "The requested professional portfolio could not be found or is currently unavailable.",
+      title: "Portfolio Unavailable | NextCV",
+      description: "This professional portfolio may have been removed or made private.",
       robots: {
         index: false,
         follow: false,
@@ -51,170 +62,112 @@ export async function generateMetadata({ params }) {
   }
 
   const { resume } = data;
-
   const candidateName = resume?.name || "Professional";
   const candidateRole = resume?.jobRole || "Professional Portfolio";
 
-  const title = `${candidateName} | ${candidateRole} | Professional Portfolio`;
+  const title = `${candidateName} | ${candidateRole} | NextCV Portfolio`;
 
-  const description = `Explore ${candidateName}'s professional portfolio, including work experience, projects, skills, education, certifications, and professional background.`;
-
-  const canonicalUrl = `/p/${slug}`;
+  const description =
+    `Explore ${candidateName}'s professional portfolio, including ` +
+    "work experience, projects, skills, education, certifications, " +
+    "and professional background.";
 
   return createSeoMetadata({
     title,
     description,
-    path: canonicalUrl,
+    path: `/p/${slug}`,
   });
 }
 
 export default async function PublicPortfolioPage({ params }) {
   const { slug } = await params;
+  const data = await getCachedPortfolio(slug);
 
-  const data = await getPortfolioBySlug(slug);
-
-  /*
-   * Portfolio does not exist / is private / unavailable
-   */
   if (!data?.resume) {
     return (
       <main className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col">
-        {/* Subtle background texture */}
-        <div className="pointer-events-none fixed inset-0 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-[0.28]"
-            style={{
-              backgroundImage: "radial-gradient(#17201C 0.7px, transparent 0.7px)",
-              backgroundSize: "24px 24px",
-            }}
-          />
-        </div>
+        <header className="w-full border-b border-[#E3E2DC]">
+          <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+            <Link href="/" className="inline-flex items-center gap-2" aria-label="NextCV home">
+              <Image
+                src="/logos/nextcvlogolight.png"
+                alt="NextCV"
+                width={24}
+                height={24}
+                className="object-contain"
+              />
+              <span className="text-sm font-semibold tracking-tight">NextCV</span>
+            </Link>
 
-        {/* Content */}
-        <div className="relative z-10 flex-1 flex items-center justify-center px-5 py-16 sm:px-6">
-          <div className="w-full max-w-lg">
-            {/* Brand */}
-            <div className="flex justify-center mb-8">
-              <Link href="/" className="inline-flex items-center gap-2.5 group">
-                <div className="w-9 h-9 rounded-xl bg-white border border-[#E3E2DC] shadow-sm flex items-center justify-center overflow-hidden">
-                  <Image
-                    src="/logos/nextcvlogolight.png"
-                    alt="NextCV"
-                    width={22}
-                    height={22}
-                    className="object-contain"
-                  />
-                </div>
+            <span className="text-xs text-[#66706B]">Professional portfolios</span>
+          </div>
+        </header>
 
-                <span className="text-sm font-semibold tracking-tight text-[#17201C]">NextCV</span>
+        <section className="flex flex-1 items-center justify-center px-5 py-16 sm:py-20">
+          <div className="w-full max-w-xl">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 bg-[#465B9E]" />
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#465B9E]">
+                Portfolio unavailable
+              </p>
+            </div>
+
+            <h1 className="mt-6 max-w-lg font-serif text-4xl font-semibold leading-[1.12] tracking-tight sm:text-5xl">
+              This portfolio isn&apos;t available.
+            </h1>
+
+            <p className="mt-5 max-w-md text-sm leading-7 text-[#66706B] sm:text-base">
+              This link may be incorrect, the portfolio may have been removed, or its owner may have
+              made it private.
+            </p>
+
+            <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center">
+              <Link
+                href="/templates"
+                className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#465B9E] px-5 text-sm font-medium text-white transition-colors hover:bg-[#344B93] focus-visible:outline f focus-visible:outline-offset-2 focus-visible:outline-[#465B9E]"
+              >
+                Create your portfolio
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
+              </Link>
+
+              <Link
+                href="/"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[#17201C] transition-colors hover:text-[#465B9E] focus-visible:outline  focus-visible:outline-offset-4 focus-visible:outline-[#465B9E]"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                Back to NextCV
               </Link>
             </div>
 
-            {/* Main card */}
-            <div className="rounded-3xl border border-[#E3E2DC] bg-white shadow-[0_20px_60px_rgba(23,32,28,0.07)] overflow-hidden">
-              <div className="p-7 sm:p-10">
-                {/* Icon */}
-                <div className="flex justify-center mb-7">
-                  <div className="w-16 h-16 rounded-2xl bg-[#F1F0EB] border border-[#E3E2DC] flex items-center justify-center">
-                    <UserX className="w-7 h-7 text-[#66706B]" strokeWidth={1.7} />
-                  </div>
-                </div>
+            <div className="mt-16 border-t border-[#E3E2DC] pt-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs leading-5 text-[#66706B]">
+                  Build a professional presence with NextCV.
+                </p>
 
-                {/* Heading */}
-                <div className="text-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#465B9E] mb-3">
-                    Portfolio unavailable
-                  </p>
-
-                  <h1 className="font-serif text-3xl sm:text-4xl font-semibold tracking-tight text-[#17201C]">
-                    This portfolio isn&apos;t available
-                  </h1>
-
-                  <p className="mt-4 text-sm sm:text-base leading-7 text-[#66706B] max-w-md mx-auto">
-                    This portfolio link may not exist, may have been removed, or its owner may have
-                    made it private.
-                  </p>
-                </div>
-
-                {/* Actions */}
-                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <Link
-                    href="/"
-                    className="
-                      inline-flex items-center justify-center gap-2
-                      min-h-11 px-5
-                      rounded-xl
-                      border border-[#E3E2DC]
-                      bg-[#F8F7F3]
-                      text-[#17201C]
-                      text-sm font-semibold
-                      transition-all duration-200
-                      hover:bg-[#F1F0EB]
-                      hover:border-[#D8D6CF]
-                      active:scale-[0.98]
-                    "
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Go to Home
-                  </Link>
-
-                  <Link
-                    href="/templates"
-                    className="
-                      inline-flex items-center justify-center gap-2
-                      min-h-11 px-5
-                      rounded-xl
-                      bg-[#465B9E]
-                      hover:bg-[#344B93]
-                      text-white
-                      text-sm font-semibold
-                      shadow-[0_8px_24px_rgba(70,91,158,0.20)]
-                      transition-all duration-200
-                      hover:-translate-y-0.5
-                      active:translate-y-0
-                    "
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    Create Your Portfolio
-                  </Link>
-                </div>
-              </div>
-
-              {/* Bottom brand strip */}
-              <div className="border-t border-[#E3E2DC] bg-[#F8F7F3] px-6 py-4">
-                <div className="flex items-center justify-center gap-2 text-xs text-[#66706B]">
-                  <Image
-                    src="/logos/nextcvlogolight.png"
-                    alt="NextCV"
-                    width={17}
-                    height={17}
-                    className="object-contain opacity-70"
-                  />
-
-                  <span>
-                    Professional portfolio powered by{" "}
-                    <span className="font-semibold text-[#17201C]">NextCV</span>
-                  </span>
-                </div>
+                <Link
+                  href="/templates"
+                  className="text-xs font-semibold text-[#465B9E] transition-colors hover:text-[#344B93]"
+                >
+                  Explore resume templates →
+                </Link>
               </div>
             </div>
-
-            {/* Small supporting text */}
-            <p className="mt-6 text-center text-xs text-[#8A918C]">
-              Create a professional portfolio from your NextCV resume.
-            </p>
           </div>
-        </div>
+        </section>
+
+        <footer className="border-t border-[#E3E2DC]">
+          <div className="mx-auto flex min-h-14 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+            <span className="text-xs font-semibold text-[#17201C]">NextCV</span>
+            <span className="text-right text-xs text-[#8A918C]">
+              Resume, writing and portfolio tools
+            </span>
+          </div>
+        </footer>
       </main>
     );
   }
 
-  /*
-   * Public portfolio
-   *
-   * The actual portfolio viewer remains responsible
-   * for rendering the candidate's portfolio.
-   */
   return (
     <main className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
       <PublicPortfolioViewer resume={data.resume} slug={slug} />
