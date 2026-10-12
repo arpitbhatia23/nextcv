@@ -7,10 +7,10 @@ export default function CoverLetterSection() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-10">
         <div>
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
-            <Sparkles aria-hidden="true" className="h-4 w-4" /> Complete the application
+            <Sparkles aria-hidden="true" className="h-4 w-4" /> Cover letter builder
           </p>
           <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
-            One resume. One role. One tailored letter.
+            Write a tailored cover letter from your resume and job description.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-6 text-[#626962]">
             Bring your resume and the job description together to draft a cover letter for the role

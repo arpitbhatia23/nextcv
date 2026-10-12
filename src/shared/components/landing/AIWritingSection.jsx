@@ -65,14 +65,14 @@ export default function AIWritingSection() {
 
           <div className="order-1 lg:order-2">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
-              Useful AI, grounded in your story
+              AI Writer — built into the resume builder
             </p>
             <h2 className="mt-3 max-w-lg font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
-              AI that works with your resume.
+              AI Writer that works with your resume skills.
             </h2>
             <p className="mt-5 max-w-xl text-sm leading-6 text-[#626a73]">
-              Start from your own experience, then use focused writing tools to make it clearer and
-              more relevant. Every suggestion stays yours to review.
+              Start from your own experience, then use focused AI writing tools to surface the right
+              skills and make your resume more relevant. Every suggestion stays yours to review.
             </p>
             <ul className="mt-7 divide-y divide-[#d9dce5] border-y border-[#d9dce5]">
               {tools.map(tool => (

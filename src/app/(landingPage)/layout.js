@@ -3,15 +3,11 @@ import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+  title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
   description:
-    "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+    "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download. AI Writer included.",
 
   applicationName: "NextCV",
-
-  title: "",
-
-  description: "",
   authors: [{ name: "NextCV" }],
   creator: "NextCV",
   publisher: "NextCV",
@@ -23,9 +19,9 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+    title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
     description:
-      "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+      "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download.",
     url: "https://www.nextcv.in/",
     siteName: "NextCV",
     locale: "en_IN",
@@ -34,9 +30,9 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+    title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
     description:
-      "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+      "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download.",
     creator: "@aurpitaurpit",
   },
 };

@@ -15,14 +15,14 @@ export default function ATSKeywordSection() {
         <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-16">
           <div>
             <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#b8c5a8]">
-              <ScanSearch aria-hidden="true" className="h-4 w-4" /> Check against the role
+              <ScanSearch aria-hidden="true" className="h-4 w-4" /> Match resume to job description
             </p>
             <h2 className="mt-4 max-w-lg font-serif text-3xl leading-tight sm:text-4xl">
-              Know what your resume is missing.
+              See which skills your software engineer resume is missing for the role.
             </h2>
             <p className="mt-5 max-w-lg text-sm leading-6 text-[#c0c9c2]">
-              Paste a job description to see where your resume aligns, which skills need attention,
-              and what to improve before you apply.
+              Paste a job description to find missing skills, keyword gaps, and what to improve in
+              your resume before you apply.
             </p>
             <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {auditItems.map(item => (

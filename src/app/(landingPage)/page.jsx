@@ -13,19 +13,23 @@ import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+  title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
   description:
-    "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+    "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download. AI Writer included.",
   path: "",
   keywords: [
     "resume builder",
     "ats friendly resume",
-    "resume sharing link",
+    "job description keyword match",
     "ai cover letter builder",
+    "skills for resume",
+    "software engineer resume",
+    "ai writer for resume",
+    "one-time payment resume",
+    "ready to download resume",
     "free resume builder",
-    "ai resume builder",
-    "resume templates for freshers",
     "online resume maker",
+    "resume templates for freshers",
   ],
 });
 
