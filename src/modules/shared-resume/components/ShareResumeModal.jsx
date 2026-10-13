@@ -13,51 +13,46 @@ import {
   Sparkles,
   AlertCircle,
   Loader2,
+  Pause,
+  Play,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 
 export default function ShareResumeModal({ isOpen, onClose, resume }) {
   const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (!isOpen || !resume?._id) {
       setShareUrl("");
+      setIsPublic(true);
       setError("");
       setCopied(false);
+      setConfirmDelete(false);
       return;
     }
 
     const generateOrFetchLink = async () => {
       setLoading(true);
       setError("");
+      setConfirmDelete(false);
       try {
         const res = await axios.post("/api/r/create", { resumeId: resume._id });
         if (res.data?.success && res.data?.data?.slug) {
           const origin = typeof window !== "undefined" ? window.location.origin : "";
           const url = `${origin}/r/${res.data.data.slug}`;
           setShareUrl(url);
-
-          // Automatically copy to clipboard for fast user experience
-          if (navigator.clipboard) {
-            try {
-              await navigator.clipboard.writeText(url);
-              setCopied(true);
-              toast.success("Resume link generated and copied to clipboard!");
-              setTimeout(() => setCopied(false), 2500);
-            } catch {
-              // Ignore clipboard failure on auto-copy
-            }
-          }
+          setIsPublic(res.data.data.isPublic !== false);
         } else {
-          console.log(res);
           setError(res.data?.message || "Failed to generate public share link");
         }
       } catch (err) {
-        console.log("Axios error:", err);
-
         if (axios.isAxiosError(err) && err.response?.status === 403) {
           setError("You are not authorized to create a public share link for this resume.");
           toast.error("You are not authorized to create a public share link.");
@@ -66,7 +61,6 @@ export default function ShareResumeModal({ isOpen, onClose, resume }) {
             err.response?.data?.message ||
             err.message ||
             "Could not create share link for this resume";
-
           setError(msg);
           toast.error(msg);
         }
@@ -94,6 +88,56 @@ export default function ShareResumeModal({ isOpen, onClose, resume }) {
     }
   };
 
+  const handleTogglePause = async () => {
+    if (!resume?._id) return;
+    setActionLoading(true);
+    try {
+      const nextState = !isPublic;
+      const res = await axios.post("/api/r/toggle", {
+        resumeId: resume._id,
+        isPublic: nextState,
+      });
+
+      if (res.data?.success) {
+        setIsPublic(nextState);
+        toast.success(
+          nextState
+            ? "Resume sharing is now live and public!"
+            : "Resume sharing paused. The link is now private."
+        );
+      } else {
+        toast.error(res.data?.message || "Failed to update sharing status");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to toggle sharing status");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDeleteSharedLink = async () => {
+    if (!resume?._id) return;
+    setActionLoading(true);
+    try {
+      const res = await axios.post("/api/r/delete", {
+        resumeId: resume._id,
+      });
+
+      if (res.data?.success) {
+        toast.success("Shared resume link deleted successfully");
+        setShareUrl("");
+        setConfirmDelete(false);
+        onClose();
+      } else {
+        toast.error(res.data?.message || "Failed to delete share link");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to delete share link");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2333]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="relative w-full max-w-lg bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200">
@@ -114,7 +158,8 @@ export default function ShareResumeModal({ isOpen, onClose, resume }) {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Close modal"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -137,11 +182,28 @@ export default function ShareResumeModal({ isOpen, onClose, resume }) {
             </div>
           ) : (
             <div className="space-y-4">
+              {/* URL & Status Header */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700 flex items-center gap-1.5">
-                  <Globe className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Public View URL</span>
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-slate-700 flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Public View URL</span>
+                  </label>
+                  <div>
+                    {isPublic ? (
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Live &amp; Public
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                        <Pause className="w-3 h-3 text-amber-600" />
+                        Paused (Private)
+                      </span>
+                    )}
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
@@ -167,6 +229,74 @@ export default function ShareResumeModal({ isOpen, onClose, resume }) {
                     )}
                   </Button>
                 </div>
+              </div>
+
+              {/* Pause notice banner if paused */}
+              {!isPublic && (
+                <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>
+                    Resume sharing is currently <strong>paused</strong>. Anyone visiting this link
+                    will see a private notice until you resume.
+                  </span>
+                </div>
+              )}
+
+              {/* Controls bar: Pause/Resume and Delete */}
+              <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
+                <Button
+                  onClick={handleTogglePause}
+                  disabled={actionLoading}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-8 gap-1.5 border-slate-300 hover:bg-white"
+                >
+                  {isPublic ? (
+                    <>
+                      <Pause className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Pause Sharing</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Resume Sharing</span>
+                    </>
+                  )}
+                </Button>
+
+                {!confirmDelete ? (
+                  <Button
+                    onClick={() => setConfirmDelete(true)}
+                    disabled={actionLoading}
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs h-8 gap-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Link</span>
+                  </Button>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-rose-600">Delete?</span>
+                    <Button
+                      onClick={handleDeleteSharedLink}
+                      disabled={actionLoading}
+                      size="sm"
+                      className="text-xs h-7 px-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded"
+                    >
+                      {actionLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : "Confirm"}
+                    </Button>
+                    <Button
+                      onClick={() => setConfirmDelete(false)}
+                      disabled={actionLoading}
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7 px-2 text-slate-600 rounded"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                )}
               </div>
 
               {/* Informational feature badges */}

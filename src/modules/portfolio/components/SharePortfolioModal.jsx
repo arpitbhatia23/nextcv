@@ -13,44 +13,42 @@ import {
   Crown,
   AlertCircle,
   Loader2,
+  Pause,
+  Play,
+  Trash2,
 } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 
 export default function SharePortfolioModal({ isOpen, onClose, resume }) {
   const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
   const [portfolioUrl, setPortfolioUrl] = useState("");
+  const [isPublic, setIsPublic] = useState(true);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (!isOpen || !resume?._id) {
       setPortfolioUrl("");
+      setIsPublic(true);
       setError("");
       setCopied(false);
+      setConfirmDelete(false);
       return;
     }
 
     const generateOrFetchPortfolio = async () => {
       setLoading(true);
       setError("");
+      setConfirmDelete(false);
       try {
         const res = await axios.post("/api/p/create", { resumeId: resume._id });
         if (res.data?.success && res.data?.data?.slug) {
           const origin = typeof window !== "undefined" ? window.location.origin : "";
           const url = `${origin}/p/${res.data.data.slug}`;
           setPortfolioUrl(url);
-
-          // Auto-copy for fast UX
-          if (navigator.clipboard) {
-            try {
-              await navigator.clipboard.writeText(url);
-              setCopied(true);
-              toast.success("Portfolio link generated and copied to clipboard!");
-              setTimeout(() => setCopied(false), 2500);
-            } catch {
-              // ignore clipboard permission failure
-            }
-          }
+          setIsPublic(res.data.data.isPublic !== false);
         } else {
           setError(res.data?.message || "Failed to generate portfolio link");
         }
@@ -92,6 +90,56 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
     }
   };
 
+  const handleTogglePause = async () => {
+    if (!resume?._id) return;
+    setActionLoading(true);
+    try {
+      const nextState = !isPublic;
+      const res = await axios.post("/api/p/toggle", {
+        resumeId: resume._id,
+        isPublic: nextState,
+      });
+
+      if (res.data?.success) {
+        setIsPublic(nextState);
+        toast.success(
+          nextState
+            ? "Portfolio is now live and public!"
+            : "Portfolio paused. The link is now private."
+        );
+      } else {
+        toast.error(res.data?.message || "Failed to update portfolio status");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to toggle portfolio status");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDeletePortfolio = async () => {
+    if (!resume?._id) return;
+    setActionLoading(true);
+    try {
+      const res = await axios.post("/api/p/delete", {
+        resumeId: resume._id,
+      });
+
+      if (res.data?.success) {
+        toast.success("Portfolio deleted successfully");
+        setPortfolioUrl("");
+        setConfirmDelete(false);
+        onClose();
+      } else {
+        toast.error(res.data?.message || "Failed to delete portfolio");
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to delete portfolio");
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C2333]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="relative w-full max-w-lg bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200 animate-in zoom-in-95 duration-200">
@@ -117,6 +165,7 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
           </div>
           <button
             onClick={onClose}
+            aria-label="Close modal"
             className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
@@ -128,7 +177,7 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
           {loading ? (
             <div className="py-8 flex flex-col items-center justify-center gap-3 text-center">
               <Loader2 className="w-7 h-7 text-indigo-600 animate-spin" />
-              <p className="text-xs text-slate-500">Building your portfolio page...</p>
+              <p className="text-xs text-slate-500">Loading your portfolio page...</p>
             </div>
           ) : error ? (
             <div className="p-4 rounded-xl bg-amber-50 border border-amber-200/80 flex items-start gap-3 text-amber-900">
@@ -140,11 +189,28 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
             </div>
           ) : (
             <div className="space-y-4">
+              {/* URL & Status Header */}
               <div className="space-y-1.5">
-                <label className="text-xs font-medium text-slate-700 flex items-center gap-1.5">
-                  <Globe className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Your Portfolio URL</span>
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-slate-700 flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Your Portfolio URL</span>
+                  </label>
+                  <div>
+                    {isPublic ? (
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Live &amp; Public
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                        <Pause className="w-3 h-3 text-amber-600" />
+                        Paused (Private)
+                      </span>
+                    )}
+                  </div>
+                </div>
+
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
@@ -172,6 +238,74 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
                 </div>
               </div>
 
+              {/* Pause notice banner if paused */}
+              {!isPublic && (
+                <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>
+                    Your portfolio is currently <strong>paused</strong>. Anyone visiting this link
+                    will see a private notice until you resume.
+                  </span>
+                </div>
+              )}
+
+              {/* Controls bar: Pause/Resume and Delete */}
+              <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
+                <Button
+                  onClick={handleTogglePause}
+                  disabled={actionLoading}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-8 gap-1.5 border-slate-300 hover:bg-white"
+                >
+                  {isPublic ? (
+                    <>
+                      <Pause className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Pause Portfolio</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Resume Portfolio</span>
+                    </>
+                  )}
+                </Button>
+
+                {!confirmDelete ? (
+                  <Button
+                    onClick={() => setConfirmDelete(true)}
+                    disabled={actionLoading}
+                    variant="ghost"
+                    size="sm"
+                    className="text-xs h-8 gap-1.5 text-rose-600 hover:text-rose-700 hover:bg-rose-50"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Portfolio</span>
+                  </Button>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold text-rose-600">Delete?</span>
+                    <Button
+                      onClick={handleDeletePortfolio}
+                      disabled={actionLoading}
+                      size="sm"
+                      className="text-xs h-7 px-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded"
+                    >
+                      {actionLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : "Confirm"}
+                    </Button>
+                    <Button
+                      onClick={() => setConfirmDelete(false)}
+                      disabled={actionLoading}
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7 px-2 text-slate-600 rounded"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                )}
+              </div>
+
               {/* What's included callout */}
               <div className="p-3.5 rounded-lg bg-indigo-50/60 border border-indigo-100 text-indigo-950 space-y-2">
                 <div className="flex items-center gap-1.5 font-medium text-xs text-indigo-900">
@@ -179,10 +313,10 @@ export default function SharePortfolioModal({ isOpen, onClose, resume }) {
                   <span>Elite Portfolio — What recruiters see</span>
                 </div>
                 <ul className="text-[11px] text-indigo-800/80 leading-relaxed space-y-1 pl-1">
-                  <li>• Full profile with experience, projects & skills</li>
+                  <li>• Full profile with experience, projects &amp; skills</li>
                   <li>• One-click ATS PDF download for recruiters</li>
                   <li>• Verified NextCV badge &amp; direct email contact</li>
-                  <li>• Works perfectly on mobile &amp; desktop</li>
+                  <li>• Works seamlessly on mobile &amp; desktop</li>
                 </ul>
               </div>
             </div>
