@@ -13,9 +13,9 @@ import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
+  title: "AI Resume Builder for Indian Freshers | NextCV",
   description:
-    "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download. AI Writer included.",
+    "Create an ATS-friendly resume with AI. Tailor it to job descriptions, improve your resume content, and generate a cover letter with NextCV.",
   path: "",
   keywords: [
     "resume builder",

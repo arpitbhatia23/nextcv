@@ -115,11 +115,18 @@ export default function ATSChecker() {
                 : "border-slate-300 hover:border-indigo-500 hover:bg-slate-50/60"
             }`}
           >
-            <input {...getInputProps()} />
+            <label htmlFor="resume-file-input" className="sr-only">
+              Upload resume file in PDF or DOCX format
+            </label>
+            <input
+              id="resume-file-input"
+              aria-label="Upload resume file in PDF or DOCX format"
+              {...getInputProps()}
+            />
 
             <div className="flex flex-col items-center text-center space-y-4 px-4">
               <div className="p-4 bg-[#f2f3ff] border border-[#e4e7ff]  text-[#3730d8] shadow-xs">
-                <UploadCloud className="w-8 h-8 text-indigo-600" />
+                <UploadCloud className="w-8 h-8 text-indigo-600" aria-hidden="true" />
               </div>
 
               <div>
@@ -130,7 +137,7 @@ export default function ATSChecker() {
                 </p>
 
                 <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Supports PDF & DOCX (Max 5MB) • 100% Free & Private Scan
+                  Supports PDF & DOCX (Max 5MB) • Private document scan
                 </p>
               </div>
 
@@ -151,7 +158,7 @@ export default function ATSChecker() {
             <div className="flex items-center justify-between p-4 bg-indigo-50/80  border border-indigo-100 mb-6">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-indigo-100  text-indigo-600">
-                  <FileText className="w-6 h-6" />
+                  <FileText className="w-6 h-6" aria-hidden="true" />
                 </div>
 
                 <div>
@@ -167,10 +174,12 @@ export default function ATSChecker() {
 
               {!analyzing && (
                 <button
+                  type="button"
                   onClick={removeFile}
-                  className="p-2 hover:bg-indigo-200/60  text-indigo-700 transition-colors text-xs font-semibold flex items-center gap-1"
+                  aria-label="Remove uploaded resume"
+                  className="min-h-[44px] min-w-[44px] p-2 hover:bg-indigo-200/60  text-indigo-700 transition-colors text-xs font-semibold flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4" aria-hidden="true" />
                   Remove
                 </button>
               )}

@@ -313,6 +313,7 @@ export const Footer = () => {
 
               <Link
                 href="/career"
+                aria-label="View all career and resume guides"
                 className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-slate-300 transition hover:text-white"
               >
                 View all guides
@@ -343,6 +344,7 @@ export const Footer = () => {
                   {group.links.length > 5 && (
                     <Link
                       href="/career"
+                      aria-label={`View more ${group.category}`}
                       className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-slate-500 transition hover:text-white"
                     >
                       More guides

@@ -18,7 +18,7 @@ const nextConfig = {
   // Keep disabled unless you explicitly need it
   // reactCompiler: true,
   // Disabled because Cloudflare/Vercel Edge handles Brotli/Gzip much more efficiently
-  compress: false,
+  compress: true,
   productionBrowserSourceMaps: false,
 
   compiler: {
@@ -46,6 +46,36 @@ const nextConfig = {
       { source: "/resume-vs-cv-difference", destination: "/career/software-engineer-resume-guide", permanent: true },
       { source: "/hr-interview-questions-and-answers", destination: "/career/hr-manager-interview-questions", permanent: true },
       { source: "/resume-builder-pricing-india", destination: "/pricing", permanent: true },
+    ];
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains",
+          },
+        ],
+      },
     ];
   },
 

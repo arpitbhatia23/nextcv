@@ -88,8 +88,8 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
 
           <p className="text-slate-500 text-xs text-center mt-6 leading-relaxed max-w-70">
             {isNextCV
-              ? "Your resume is highly optimized for modern ATS algorithms. You are ready to apply!"
-              : "Significant improvements needed. Standard templates often fail ATS scans due to poor formatting."}
+              ? "Your document shows strong structural readability, clear sections, and relevant keywords."
+              : "Formatting or content gaps detected. Review the recommendations below to improve parsing clarity."}
           </p>
         </div>
 
@@ -100,7 +100,7 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
               <div className="w-8 h-8 bg-indigo-50  flex items-center justify-center text-indigo-600">
                 <Sparkles className="w-4 h-4" />
               </div>
-              Critical Analysis Report
+              Analysis Breakdown
             </h3>
 
             <div className="grid grid-cols-1 gap-3">
@@ -142,22 +142,22 @@ const ScoreDisplay = ({ score, recommendations = [], keywordGap }) => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-[#071644] text-white  p-2 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
+              className="bg-[#071644] text-white  p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md"
             >
               <div className="space-y-1 text-center md:text-left">
-                <h4 className="font-bold text-white text-lg tracking-tight">
-                  Want a <span className="text-indigo-400">90+ ATS Score</span>?
+                <h4 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                  Need an <span className="text-indigo-400">ATS-Optimized Format</span>?
                 </h4>
                 <p className="text-slate-300 text-xs">
-                  Switch to NextCV templates built for high-performance job applications starting at
-                  ₹49.
+                  NextCV templates use clean single-column layouts designed for reliable parsing.
                 </p>
               </div>
               <Link
                 href="/"
-                className="w-full md:w-full px-6 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs  transition-all shadow-md flex items-center justify-center "
+                aria-label="Build a resume with NextCV"
+                className="w-full md:w-auto shrink-0 min-h-11 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-all shadow-md flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
               >
-                Build Resume Now <ArrowRight className="w-4 h-4" />
+                Build Resume Now <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </motion.div>
           )}

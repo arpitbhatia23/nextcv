@@ -35,9 +35,10 @@ export default function Nav() {
         >
           <Image
             src="/logos/nextcvlogo.png"
-            alt=""
+            alt="NextCV"
             width={120}
             height={48}
+            priority
             unoptimized
             className="h-10 w-24 object-contain"
           />
