@@ -1,57 +1,26 @@
-# NextCV - AI Resume Builder for India | ATS-Friendly Resume Maker
 
-NextCV is an AI-powered resume builder designed specifically for Indian job seekers. Create ATS-friendly resumes that pass Applicant Tracking Systems used by companies like TCS, Infosys, Wipro, Accenture, Cognizant, HCLTech, Deloitte, Capgemini, Amazon, and many more.
+# NextCV
 
-Generate professional resumes in minutes using AI-powered content suggestions, modern resume templates, and recruiter-approved formatting.
+> NextCV is an online resume builder for Indian freshers and job seekers, offering ATS-oriented resume templates, AI-assisted resume writing, and career tools.
 
-Whether you are a fresher, experienced software engineer, MBA graduate, B.Com student, nurse, teacher, or working professional, NextCV helps you build a resume that increases interview opportunities.
+NextCV helps users create, edit, and preview resumes online before purchasing a watermark-free PDF download. Its pricing model uses one-time payments rather than recurring subscriptions.
 
-## Features
+## Main Website
 
-- AI Resume Generator
-- ATS-Friendly Resume Templates
-- Resume Checker
-- Professional PDF Export
-- One-Time Payment (No Subscription)
-- Resume Builder for Freshers
-- Resume Builder for Experienced Professionals
-- Resume Builder for Students
-- Resume Builder for IT Jobs
-- Resume Builder for Government Jobs
-- Resume Builder for Private Companies
+- [NextCV Homepage](https://nextcv.in/): Official website and resume-building product.
 
-## Why Choose NextCV?
+## Product Features
 
-Unlike many resume builders that require monthly subscriptions, NextCV offers a simple one-time payment for professional ATS-friendly resumes.
+- [Resume Builder](https://nextcv.in/): Create and edit a resume using available templates and resume-building tools.
+- [Resume Builder Comparisons](https://nextcv.in/resume-builder-comparison): Compare resume-building services and alternatives.
+- [Public Resume Sharing](https://nextcv.in/): Resume sharing links are available with eligible plans.
 
-Every template is optimized for Applicant Tracking Systems while maintaining a clean and modern design recruiters prefer.
+## Pricing
 
-Our AI helps write:
+- [NextCV](https://nextcv.in/): Check the live website for current plans, prices, and included features.
 
-- Professional Summary
-- Career Objective
-- Work Experience
-- Skills
-- Projects
-- Achievements
-- Certifications
+## Important Information
 
-## Perfect For
-
-- Freshers
-- Software Developers
-- Full Stack Developers
-- MERN Developers
-- Data Analysts
-- UI UX Designers
-- Mechanical Engineers
-- Civil Engineers
-- MBA Graduates
-- BCA Students
-- BTech Students
-- Nurses
-- Teachers
-- Sales Professionals
-- HR Professionals
-
-Build your professional resume today with NextCV.
+- Resume templates are designed to support ATS readability; actual parsing and hiring outcomes depend on the resume, employer, and recruitment system.
+- AI-generated content should be reviewed and corrected by the user before applying for jobs.
+- Product features, prices, and policies may change. Refer to the official website for current information.
