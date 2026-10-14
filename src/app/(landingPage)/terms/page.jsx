@@ -48,8 +48,8 @@ export default function TermsPage() {
       />
       <main className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900 relative overflow-hidden">
         {/* Background Ambient Glows */}
-        <div className="pointer-events-none absolute inset-0 -z-0">
-          <div className="absolute left-[28%] -top-20 h-[450px] w-[600px] rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute left-[28%] -top-20 h-112.5 w-150 rounded-full bg-[#eef2ff] opacity-70 blur-[100px]" />
         </div>
 
         {/* Hero Header */}
@@ -80,7 +80,7 @@ export default function TermsPage() {
                   Table of Contents
                 </span>
                 <nav className="space-y-2 text-xs font-medium">
-                  {sections.map((sec) => (
+                  {sections.map(sec => (
                     <a
                       key={sec.id}
                       href={`#${sec.id}`}
@@ -98,17 +98,22 @@ export default function TermsPage() {
               {/* Introduction Card */}
               <div className="bg-slate-50 border border-slate-200 p-6 sm:p-8 rounded-3xl space-y-4 shadow-xs">
                 <p>
-                  This document is an electronic record in terms of the Information Technology Act, 2000 and rules thereunder as applicable, and the amended provisions pertaining to electronic records in various statutes as amended by the Information Technology Act, 2000.
+                  This document is an electronic record in terms of the Information Technology Act,
+                  2000 and rules thereunder as applicable, and the amended provisions pertaining to
+                  electronic records in various statutes as amended by the Information Technology
+                  Act, 2000.
                 </p>
                 <p>
-                  The Platform is owned by <strong className="text-slate-900">NEXTCV</strong>, with its registered office located at:
+                  The Platform is owned by <strong className="text-slate-900">NEXTCV</strong>, with
+                  its registered office located at:
                 </p>
                 <div className="bg-white p-4 rounded-2xl border border-slate-200 flex items-start gap-3 text-xs sm:text-sm text-slate-700 shadow-xs">
                   <MapPin className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
                   <div>
                     <strong>NEXTCV Registered Address:</strong>
                     <br />
-                    Village Arth, Post Office Jalag, Tehsil Jaisinghpur, District Kangra, Himachal Pradesh, 176094, India.
+                    Village Arth, Post Office Jalag, Tehsil Jaisinghpur, District Kangra, Himachal
+                    Pradesh, 176094, India.
                   </div>
                 </div>
               </div>
@@ -117,7 +122,10 @@ export default function TermsPage() {
               <section id="agreement" className="space-y-3 pt-4 border-t border-slate-100">
                 <h2 className="text-xl font-bold text-[#071644]">1. Agreement & Acceptance</h2>
                 <p>
-                  Accessing, browsing, or otherwise using the NextCV platform (including mobile web or subdomains) indicates your explicit agreement to all the terms and conditions in this agreement. These terms may be revised from time to time without prior individual notice.
+                  Accessing, browsing, or otherwise using the NextCV platform (including mobile web
+                  or subdomains) indicates your explicit agreement to all the terms and conditions
+                  in this agreement. These terms may be revised from time to time without prior
+                  individual notice.
                 </p>
               </section>
 
@@ -125,11 +133,22 @@ export default function TermsPage() {
               <section id="services" className="space-y-3 pt-6 border-t border-slate-100">
                 <h2 className="text-xl font-bold text-[#071644]">2. Use of Services & Platform</h2>
                 <ul className="space-y-2 list-disc pl-5 text-slate-700">
-                  <li>You agree to provide accurate and truthful information when building your resume.</li>
+                  <li>
+                    You agree to provide accurate and truthful information when building your
+                    resume.
+                  </li>
                   <li>Use of the Platform and services is entirely at your own risk.</li>
-                  <li>No warranty is provided regarding exact placement outcomes or external ATS screening guarantees.</li>
-                  <li>The structure, code, graphics, and branding are proprietary intellectual property.</li>
-                  <li>You must not use the Platform for unlawful, fraudulent, or forbidden purposes.</li>
+                  <li>
+                    No warranty is provided regarding exact placement outcomes or external ATS
+                    screening guarantees.
+                  </li>
+                  <li>
+                    The structure, code, graphics, and branding are proprietary intellectual
+                    property.
+                  </li>
+                  <li>
+                    You must not use the Platform for unlawful, fraudulent, or forbidden purposes.
+                  </li>
                 </ul>
               </section>
 
@@ -137,17 +156,27 @@ export default function TermsPage() {
               <section id="transactions" className="space-y-3 pt-6 border-t border-slate-100">
                 <h2 className="text-xl font-bold text-[#071644]">3. Transactions & Charges</h2>
                 <p>
-                  Initiating a payment transaction on NextCV constitutes a legally binding purchase contract. All charges are displayed transparently before payment processing via authorized payment gateways (UPI, Cards, NetBanking).
+                  Initiating a payment transaction on NextCV constitutes a legally binding purchase
+                  contract. All charges are displayed transparently before payment processing via
+                  authorized payment gateways (UPI, Cards, NetBanking).
                 </p>
               </section>
 
               {/* Section 4 */}
               <section id="refunds" className="space-y-3 pt-6 border-t border-slate-100">
-                <h2 className="text-xl font-bold text-[#071644]">4. Cancellation & Refund Policy</h2>
+                <h2 className="text-xl font-bold text-[#071644]">
+                  4. Cancellation & Refund Policy
+                </h2>
                 <div className="bg-amber-50 border border-amber-200 p-5 rounded-2xl text-amber-900 text-xs sm:text-sm space-y-2">
                   <p className="font-bold">Important Notice regarding Digital Downloads:</p>
                   <p>
-                    Because digital resume documents and AI processing are delivered immediately upon payment, <strong>NextCV does not offer cancellation or refunds once a download or generation process is complete</strong>.
+                    Because digital resume documents and AI processing are delivered immediately
+                    upon payment,{" "}
+                    <strong>
+                      NextCV does not offer cancellation or refunds once a download or generation
+                      process is complete
+                    </strong>
+                    .
                   </p>
                 </div>
               </section>
@@ -156,15 +185,22 @@ export default function TermsPage() {
               <section id="indemnity" className="space-y-3 pt-6 border-t border-slate-100">
                 <h2 className="text-xl font-bold text-[#071644]">5. Indemnity & Liability</h2>
                 <p>
-                  You agree to indemnify, defend, and hold harmless NextCV, its founders, and affiliates against any third-party claims, liabilities, damages, or costs arising from your violation of these terms or misuse of the platform.
+                  You agree to indemnify, defend, and hold harmless NextCV, its founders, and
+                  affiliates against any third-party claims, liabilities, damages, or costs arising
+                  from your violation of these terms or misuse of the platform.
                 </p>
               </section>
 
               {/* Section 6 */}
               <section id="jurisdiction" className="space-y-3 pt-6 border-t border-slate-100">
-                <h2 className="text-xl font-bold text-[#071644]">6. Governing Law & Jurisdiction</h2>
+                <h2 className="text-xl font-bold text-[#071644]">
+                  6. Governing Law & Jurisdiction
+                </h2>
                 <p>
-                  These Terms shall be governed by and construed in accordance with the laws of India. All disputes arising out of or in connection with this agreement shall be subject to the exclusive jurisdiction of the competent courts in Jaisinghpur, Himachal Pradesh.
+                  These Terms shall be governed by and construed in accordance with the laws of
+                  India. All disputes arising out of or in connection with this agreement shall be
+                  subject to the exclusive jurisdiction of the competent courts in Jaisinghpur,
+                  Himachal Pradesh.
                 </p>
               </section>
 
@@ -172,14 +208,17 @@ export default function TermsPage() {
               <section id="contact" className="space-y-3 pt-6 border-t border-slate-100">
                 <h2 className="text-xl font-bold text-[#071644]">7. Contact & Operator Details</h2>
                 <p>
-                  This website is operated by <strong className="text-slate-900">ARPIT SO SH RAJESH KUMAR</strong>.
+                  This website is operated by{" "}
+                  <strong className="text-slate-900">Aurpit & Tamanna</strong>.
                 </p>
                 <p>
-                  For any legal inquiries or concerns regarding these terms, please reach out via our{" "}
+                  For any legal inquiries or concerns regarding these terms, please reach out via
+                  our{" "}
                   <Link href="/contact" className="text-indigo-600 hover:underline font-medium">
                     Contact Support Page
                   </Link>{" "}
-                  or email <span className="font-mono text-indigo-600 font-medium">help@nextcv.in</span>.
+                  or email{" "}
+                  <span className="font-mono text-indigo-600 font-medium">help@nextcv.in</span>.
                 </p>
               </section>
             </div>
