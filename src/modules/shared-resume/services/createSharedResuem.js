@@ -1,7 +1,9 @@
 import Resume from "@/modules/resume/models/resume.model";
+import { User } from "@/modules/auth";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import { SharedResume } from "@/modules/shared-resume/model/shared-resume";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
 
@@ -23,6 +25,11 @@ export const createSharedResume = async ({ req }) => {
 
   await dbConnect();
 
+  const userOwnsResume = await User.exists({ _id: userId, resume: resumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to share this resume");
+  }
+
   const resume = await Resume.findById(resumeId).select("_id name ResumeType status");
   if (!resume) {
     throw new apiError(404, "resume not found");
@@ -43,7 +50,7 @@ export const createSharedResume = async ({ req }) => {
     throw new apiError(403, "Public sharing is only available for Premium or Elite resumes");
   }
 
-  let existingSharedResume = await SharedResume.findOne({ userId, resumeId });
+  const existingSharedResume = await SharedResume.findOne({ userId, resumeId });
   if (existingSharedResume) {
     return NextResponse.json(
       new apiResponse(200, "Shared resume already exists", existingSharedResume),
@@ -72,6 +79,12 @@ export const createSharedResume = async ({ req }) => {
     resumeId,
     isPublic: true,
   });
+
+  try {
+    await redis.del(`sharedresume:status:${userId}:${resumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in createSharedResume:", err);
+  }
 
   return NextResponse.json(
     new apiResponse(201, "Shared resume created successfully", sharedResume),

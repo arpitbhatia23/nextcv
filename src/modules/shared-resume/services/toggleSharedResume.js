@@ -1,4 +1,6 @@
+import { User } from "@/modules/auth";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { SharedResume } from "../model/shared-resume";
 import { NextResponse } from "next/server";
 
@@ -28,6 +30,11 @@ export const toggleSharedResume = async ({ req, resumeId, isPublic }) => {
 
   await dbConnect();
 
+  const userOwnsResume = await User.exists({ _id: userId, resume: targetResumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to modify this resume");
+  }
+
   const record = await SharedResume.findOne({ userId, resumeId: targetResumeId });
   if (!record) {
     throw new apiError(404, "Shared resume not found");
@@ -35,6 +42,14 @@ export const toggleSharedResume = async ({ req, resumeId, isPublic }) => {
 
   record.isPublic = typeof targetIsPublic === "boolean" ? targetIsPublic : !record.isPublic;
   await record.save();
+
+  // Invalidate Redis cache
+  try {
+    await redis.del(`sharedresume:slug:${record.slug.toLowerCase().trim()}`);
+    await redis.del(`sharedresume:status:${userId}:${targetResumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in toggleSharedResume:", err);
+  }
 
   return NextResponse.json(
     new apiResponse(

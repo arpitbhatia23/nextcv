@@ -1,4 +1,6 @@
+import { User } from "@/modules/auth";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { portfolio } from "../model/portfolio";
 import { NextResponse } from "next/server";
 
@@ -31,9 +33,24 @@ export const deletePortfolio = async ({ req, resumeId }) => {
 
   await dbConnect();
 
+  const userOwnsResume = await User.exists({ _id: userId, resume: targetResumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to delete this portfolio");
+  }
+
   const deleted = await portfolio.findOneAndDelete({ userId, resumeId: targetResumeId });
   if (!deleted) {
     throw new apiError(404, "Portfolio not found");
+  }
+
+  // Invalidate Redis cache
+  try {
+    if (deleted.slug) {
+      await redis.del(`portfolio:slug:${deleted.slug.toLowerCase().trim()}`);
+    }
+    await redis.del(`portfolio:status:${userId}:${targetResumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in deletePortfolio:", err);
   }
 
   return NextResponse.json(

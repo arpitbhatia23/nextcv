@@ -1,4 +1,6 @@
+import { User } from "@/modules/auth";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { portfolio } from "../model/portfolio";
 import { NextResponse } from "next/server";
 
@@ -28,6 +30,11 @@ export const togglePortfolio = async ({ req, resumeId, isPublic }) => {
 
   await dbConnect();
 
+  const userOwnsResume = await User.exists({ _id: userId, resume: targetResumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to modify this portfolio");
+  }
+
   const record = await portfolio.findOne({ userId, resumeId: targetResumeId });
   if (!record) {
     throw new apiError(404, "Portfolio not found for this resume");
@@ -35,6 +42,14 @@ export const togglePortfolio = async ({ req, resumeId, isPublic }) => {
 
   record.isPublic = typeof targetIsPublic === "boolean" ? targetIsPublic : !record.isPublic;
   await record.save();
+
+  // Invalidate Redis cache
+  try {
+    await redis.del(`portfolio:slug:${record.slug.toLowerCase().trim()}`);
+    await redis.del(`portfolio:status:${userId}:${targetResumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in togglePortfolio:", err);
+  }
 
   return NextResponse.json(
     new apiResponse(

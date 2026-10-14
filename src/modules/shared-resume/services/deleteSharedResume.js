@@ -1,4 +1,6 @@
+import { User } from "@/modules/auth";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { SharedResume } from "../model/shared-resume";
 import { NextResponse } from "next/server";
 
@@ -31,9 +33,24 @@ export const deleteSharedResume = async ({ req, resumeId }) => {
 
   await dbConnect();
 
+  const userOwnsResume = await User.exists({ _id: userId, resume: targetResumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to delete this resume link");
+  }
+
   const deleted = await SharedResume.findOneAndDelete({ userId, resumeId: targetResumeId });
   if (!deleted) {
     throw new apiError(404, "Shared resume not found");
+  }
+
+  // Invalidate Redis cache
+  try {
+    if (deleted.slug) {
+      await redis.del(`sharedresume:slug:${deleted.slug.toLowerCase().trim()}`);
+    }
+    await redis.del(`sharedresume:status:${userId}:${targetResumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in deleteSharedResume:", err);
   }
 
   return NextResponse.json(

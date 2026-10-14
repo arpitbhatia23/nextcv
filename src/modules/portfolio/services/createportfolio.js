@@ -1,6 +1,8 @@
 import Resume from "@/modules/resume/models/resume.model";
+import { User } from "@/modules/auth";
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
 import { apiError, apiResponse, dbConnect, requiredAuth } from "@/shared";
+import { redis } from "@/shared/utils/Redis";
 import { portfolio } from "../model/portfolio";
 import { nanoid } from "nanoid";
 import { NextResponse } from "next/server";
@@ -17,10 +19,16 @@ export const createPortfolio = async ({ req }) => {
   const userId = session?.user?.id;
 
   if (!userId) {
-    throw new apiError(400, "userId is required");
+    throw new apiError(401, "Unauthorized");
   }
 
   await dbConnect();
+
+  const userOwnsResume = await User.exists({ _id: userId, resume: resumeId });
+  if (!userOwnsResume) {
+    throw new apiError(403, "You do not have permission to create a portfolio for this resume");
+  }
+
   const resume = await Resume.findById(resumeId).select("_id name ResumeType status");
   if (!resume) {
     throw new apiError(404, "Resume not found");
@@ -33,10 +41,10 @@ export const createPortfolio = async ({ req }) => {
 
   const tier = template?.tier?.toLowerCase();
   if (tier !== "elite") {
-    throw new apiError(403, "Portfolio page is only available for   Elite resumes");
+    throw new apiError(403, "Portfolio page is only available for Elite resumes");
   }
 
-  let existingPortfolio = await portfolio.findOne({ userId, resumeId });
+  const existingPortfolio = await portfolio.findOne({ userId, resumeId });
   if (existingPortfolio) {
     return NextResponse.json(new apiResponse(200, "Portfolio already exists", existingPortfolio), {
       status: 200,
@@ -66,6 +74,12 @@ export const createPortfolio = async ({ req }) => {
 
   if (!sharedportfolio) {
     throw new apiError(500, "Something went wrong while creating portfolio");
+  }
+
+  try {
+    await redis.del(`portfolio:status:${userId}:${resumeId}`);
+  } catch (err) {
+    console.error("Redis cache invalidation error in createPortfolio:", err);
   }
 
   return NextResponse.json(
