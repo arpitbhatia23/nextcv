@@ -12,10 +12,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
+
 import Logo2 from "./Logo2";
-import { ChartSpline, IndianRupee, TicketPercent, FileText, Palette } from "lucide-react";
+import { ChartSpline, IndianRupee, TicketPercent, FileText } from "lucide-react";
 import { Separator } from "@/shared/components/ui/separator";
 import { userStore } from "@/store/user.store";
+import Link from "next/link";
 
 const userData = {
   navMain: [
@@ -39,29 +41,29 @@ export function AppSidebar({ ...props }) {
   const user = userStore(s => s.user);
   const data = user?.role === "admin" ? adminData : userData;
   return (
-    <Sidebar collapsible="offcanvas" className="bg-[#F8F7F3] border-r border-[#E3E2DC]" {...props}>
+    <Sidebar collapsible="offcanvas" className="bg-[#F1F5EF] border-r border-[#DDE2D9]" {...props}>
       <SidebarHeader className="p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="/" className="flex items-center justify-center mt-6 p-6">
+              <Link href="/" className="flex items-center justify-center mt-6 p-6">
                 <Logo2 size={60} />
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <div className="px-6">
-        <Separator className="bg-[#E3E2DC]" />
+        <Separator className="bg-[#DDE2D9]" />
       </div>
       <SidebarContent className="px-4 py-8">
         <NavMain items={data.navMain} />
       </SidebarContent>
       <div className="px-6">
-        <Separator className="bg-[#E3E2DC]" />
+        <Separator className="bg-[#DDE2D9]" />
       </div>
       <SidebarFooter className="p-4 mb-2">
-        <div className="bg-white border border-[#E3E2DC]  p-2">
+        <div className="bg-white border border-[#DDE2D9] p-2">
           <NavUser user={user} />
         </div>
       </SidebarFooter>

@@ -36,7 +36,7 @@ export default function ResumeStartPage() {
       <div className="mx-auto flex min-h-screen max-w-5xl flex-col justify-start px-6 py-6">
         {/* Header */}
         <header className="mx-auto w-full max-w-xl text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#5268B6]">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#344B38]">
             Resume Builder
           </p>
 
@@ -55,12 +55,12 @@ export default function ResumeStartPage() {
           <button
             type="button"
             onClick={handleCreate}
-            className="group flex flex-col border border-[#E3E3DD] bg-white p-7 text-left transition duration-200 hover:border-[#5268B6]"
+            className="group flex flex-col border border-[#E3E3DD] bg-white p-7 text-left transition duration-200 hover:border-[#344B38]"
           >
             {/* Icon + Badge row */}
             <div className="flex items-start justify-between">
               <div className="flex h-10 w-10 items-center justify-center border border-[#E3E3DD] bg-[#F8F7F3]">
-                <FileText size={19} strokeWidth={1.7} className="text-[#344B93]" />
+                <FileText size={19} strokeWidth={1.7} className="text-[#344B38]" />
               </div>
               <span className="text-xs font-medium text-[#8A8F89]">New</span>
             </div>
@@ -74,7 +74,7 @@ export default function ResumeStartPage() {
             </div>
 
             {/* CTA */}
-            <div className="mt-8 flex items-center text-sm font-semibold text-[#344B93]">
+            <div className="mt-8 flex items-center text-sm font-semibold text-[#344B38]">
               Start building
               <ArrowRight
                 size={15}
@@ -87,14 +87,14 @@ export default function ResumeStartPage() {
           <button
             type="button"
             onClick={() => setShowImport(true)}
-            className="group flex flex-col border border-[#5268B6] bg-white p-7 text-left transition duration-200 hover:bg-[#F5F6FB]"
+            className="group flex flex-col border border-[#344B38] bg-white p-7 text-left transition duration-200 hover:bg-[#F5F6FB]"
           >
             {/* Icon + Badge row */}
             <div className="flex items-start justify-between">
-              <div className="flex h-10 w-10 items-center justify-center bg-[#344B93]">
+              <div className="flex h-10 w-10 items-center justify-center bg-[#344B38]">
                 <Upload size={19} strokeWidth={1.7} className="text-white" />
               </div>
-              <span className="text-xs font-semibold text-[#344B93]">Recommended</span>
+              <span className="text-xs font-semibold text-[#344B38]">Recommended</span>
             </div>
 
             {/* Title + Desc */}
@@ -107,7 +107,7 @@ export default function ResumeStartPage() {
             </div>
 
             {/* CTA */}
-            <div className="mt-8 flex items-center text-sm font-semibold text-[#344B93]">
+            <div className="mt-8 flex items-center text-sm font-semibold text-[#344B38]">
               Import resume
               <ArrowRight
                 size={15}

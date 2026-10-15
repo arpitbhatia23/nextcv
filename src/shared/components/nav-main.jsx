@@ -23,20 +23,28 @@ export function NavMain({ items }) {
                 <Link href={item?.url}>
                   <SidebarMenuButton
                     tooltip={item.title}
-                    className={`flex items-center justify-start gap-4 py-6 px-3  transition-all duration-200 group shadow-none ${isActive ? "bg-[#EEF0F7] text-[#344B38]" : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]"}`}
+                    className={`flex items-center justify-start gap-4 py-6 px-3 transition-all duration-200 group shadow-none ${
+                      isActive
+                        ? "bg-[#E5ECE2] text-[#344B38] font-semibold"
+                        : "text-[#4F5B51] hover:bg-[#E8EFE5] hover:text-[#344B38]"
+                    }`}
                   >
                     <div
-                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200  ${isActive ? "bg-[#EEF0F7] border-[#ffffff]" : "bg-white border-[#E3E2DC]"}`}
+                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200 ${
+                        isActive
+                          ? "bg-white border-[#DDE2D9] text-[#456B4A]"
+                          : "bg-white border-[#DDE2D9] text-[#456B4A]/80 group-hover:text-[#456B4A]"
+                      }`}
                     >
                       <span className="transition-colors">
                         {item.icon && <item.icon size={18} strokeWidth={1.75} />}
                       </span>
                     </div>
-                    <span className="font-sans text-sm font-medium transition-colors">
+                    <span className="font-sans text-sm transition-colors">
                       {item.title}
                     </span>
                     {item.badge && (
-                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono \">
+                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono bg-[#344B38]">
                         {item.badge}
                       </span>
                     )}

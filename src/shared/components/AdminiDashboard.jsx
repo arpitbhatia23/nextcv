@@ -50,18 +50,18 @@ const AdminiDashboard = () => {
   };
 
   return (
-    <div className="flex flex-1 flex-col min-h-screen bg-[#F8F7F3] text-[#17201C]">
+    <div className="flex flex-1 flex-col min-h-screen bg-[#F1F5EF] text-[#1C261E]">
       <FontImports />
 
       {/* ── Header tab bar ─────────────────────────────────────── */}
-      <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-[#E3E2DC]">
+      <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-[#DDE2D9]">
         <div className="px-3 sm:px-6 lg:px-8 py-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
             <div>
-              <div className="font-mono text-[10px] tracking-widest text-[#465B9E]">
+              <div className="font-mono text-[10px] tracking-widest text-[#456B4A]">
                 ADMIN WORKSPACE
               </div>
-              <h1 className="font-display text-lg sm:text-xl font-medium text-[#17201C]">
+              <h1 className="font-display text-lg sm:text-xl font-medium text-[#1C261E]">
                 Platform Control Ledger
               </h1>
             </div>
@@ -89,14 +89,14 @@ const AdminiDashboard = () => {
                     "font-sans text-xs sm:text-sm font-medium transition-all duration-200 shrink-0",
                     isPending ? "opacity-50" : "opacity-100",
                     isActive
-                      ? "bg-[#EEF0F7] text-[#465B9E] shadow-xs"
-                      : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]",
+                      ? "bg-[#E5ECE2] text-[#344B38] shadow-xs"
+                      : "text-[#5A665B] hover:bg-[#E8EFE5] hover:text-[#344B38]",
                   ].join(" ")}
                 >
                   <span
                     className={[
                       "font-mono text-[10px] tracking-wider transition-colors",
-                      isActive ? "text-[#465B9E]" : "text-[#8A908B]",
+                      isActive ? "text-[#456B4A]" : "text-[#5A665B]",
                     ].join(" ")}
                     aria-hidden="true"
                   >
@@ -110,7 +110,7 @@ const AdminiDashboard = () => {
 
                   {/* Active dot indicator */}
                   {isActive && (
-                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-[#465B9E]" />
+                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-[#344B38]" />
                   )}
                 </button>
               );

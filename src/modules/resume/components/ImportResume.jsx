@@ -102,7 +102,7 @@ export default function ResumeImport({ onBack, onImportComplete }) {
 
         {/* Header */}
         <div className="mb-8">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#5268B6]">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#344B38]">
             Import Resume
           </p>
           <h1 className="font-serif text-3xl font-semibold tracking-tight text-[#17201C]">
@@ -120,17 +120,17 @@ export default function ResumeImport({ onBack, onImportComplete }) {
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="flex min-h-56 w-full flex-col items-center justify-center border border-dashed border-[#CFCFC8] bg-[#F8F7F3] px-6 text-center transition hover:border-[#5268B6]"
+              className="flex min-h-56 w-full flex-col items-center justify-center border border-dashed border-[#CFCFC8] bg-[#F8F7F3] px-6 text-center transition hover:border-[#344B38]"
             >
               <div className="flex h-12 w-12 items-center justify-center border border-[#E3E3DD] bg-white">
-                <Upload size={22} strokeWidth={1.7} className="text-[#344B93]" />
+                <Upload size={22} strokeWidth={1.7} className="text-[#344B38]" />
               </div>
 
               <h2 className="mt-5 text-base font-semibold text-[#17201C]">Upload your resume</h2>
 
               <p className="mt-1.5 text-sm text-[#646A64]">PDF or DOCX · Max 10 MB</p>
 
-              <span className="mt-6 inline-flex items-center bg-[#344B93] px-5 py-2.5 text-sm font-semibold text-white">
+              <span className="mt-6 inline-flex items-center bg-[#344B38] px-5 py-2.5 text-sm font-semibold text-white">
                 Choose file
               </span>
             </button>
@@ -141,7 +141,7 @@ export default function ResumeImport({ onBack, onImportComplete }) {
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex min-w-0 items-center gap-3">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#E3E3DD] bg-white">
-                      <FileText size={18} className="text-[#344B93]" />
+                      <FileText size={18} className="text-[#344B38]" />
                     </div>
 
                     <div className="min-w-0">
@@ -169,7 +169,7 @@ export default function ResumeImport({ onBack, onImportComplete }) {
               {!isParsing && !success && (
                 <div className="mt-4 border border-[#E3E3DD] bg-[#F8F7F3] p-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#344B93]" />
+                    <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#344B38]" />
                     <div>
                       <p className="text-sm font-semibold text-[#17201C]">Ready to import</p>
                       <p className="mt-1 text-sm leading-6 text-[#646A64]">
@@ -185,7 +185,7 @@ export default function ResumeImport({ onBack, onImportComplete }) {
               {isParsing && (
                 <div className="mt-4 border border-[#E3E3DD] bg-[#F8F7F3] p-4">
                   <div className="flex items-center gap-3">
-                    <Loader2 size={17} className="shrink-0 animate-spin text-[#344B93]" />
+                    <Loader2 size={17} className="shrink-0 animate-spin text-[#344B38]" />
                     <div>
                       <p className="text-sm font-semibold text-[#17201C]">Reading your resume...</p>
                       <p className="mt-0.5 text-xs text-[#646A64]">
@@ -218,7 +218,7 @@ export default function ResumeImport({ onBack, onImportComplete }) {
                   type="button"
                   disabled={isParsing}
                   onClick={handleImport}
-                  className="mt-4 inline-flex min-h-11 w-full items-center justify-center bg-[#344B93] px-6 text-sm font-semibold text-white transition hover:bg-[#2D4181] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-4 inline-flex min-h-11 w-full items-center justify-center bg-[#344B38] px-6 text-sm font-semibold text-white transition hover:bg-[#2D4181] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isParsing ? (
                     <>

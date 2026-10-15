@@ -17,7 +17,7 @@ import { FontImports } from "./fontImport";
 
 const PDFPreview = dynamic(() => import("./pdfPreview"), {
   ssr: false,
-  loading: () => <div className="text-sm text-[#6B7280]">Loading preview...</div>,
+  loading: () => <div className="text-sm text-[#5A665B]">Loading preview...</div>,
 });
 const ShareResumeModal = dynamic(
   () => import("@/modules/shared-resume/components/ShareResumeModal")
@@ -83,7 +83,6 @@ const MyResume = () => {
       setAmount(originalAmount);
       setApplied(false);
       setCouponCode("");
-      // removeCoupon();
     }
   };
 
@@ -159,41 +158,41 @@ const MyResume = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen" style={{ backgroundColor: "#F8F7F3" }}>
+      <div className="min-h-screen" style={{ backgroundColor: "#F1F5EF" }}>
         <FontImports />
         <div className="max-w-7xl mx-auto p-6 md:p-10">
           {/* Header skeleton */}
           <div
             className="pb-6 mb-10 border-b flex flex-col md:flex-row md:items-end justify-between gap-4"
-            style={{ borderColor: "#E3E2DC" }}
+            style={{ borderColor: "#DDE2D9" }}
           >
             <div>
               <div
-                className="h-3 w-32  mb-3 animate-pulse"
-                style={{ backgroundColor: "#E3E2DC" }}
+                className="h-3 w-32 mb-3 animate-pulse"
+                style={{ backgroundColor: "#DDE2D9" }}
               />
               <div
-                className="h-8 w-48  mb-2 animate-pulse"
-                style={{ backgroundColor: "#E3E2DC" }}
+                className="h-8 w-48 mb-2 animate-pulse"
+                style={{ backgroundColor: "#DDE2D9" }}
               />
               <div
-                className="h-4 w-80 max-w-full  animate-pulse"
-                style={{ backgroundColor: "#E3E2DC" }}
+                className="h-4 w-80 max-w-full animate-pulse"
+                style={{ backgroundColor: "#DDE2D9" }}
               />
             </div>
-            <div className="h-10 w-40  animate-pulse" style={{ backgroundColor: "#E3E2DC" }} />
+            <div className="h-10 w-40 animate-pulse" style={{ backgroundColor: "#DDE2D9" }} />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div
                 key={i}
-                className=" border animate-pulse overflow-hidden"
-                style={{ borderColor: "#E3E2DC" }}
+                className="border animate-pulse overflow-hidden"
+                style={{ borderColor: "#DDE2D9" }}
               >
-                <div className="h-40" style={{ backgroundColor: "#F1F0EB" }} />
+                <div className="h-40" style={{ backgroundColor: "#E8EFE5" }} />
                 <div className="p-5">
-                  <div className="h-4  w-3/4 mb-3" style={{ backgroundColor: "#E3E2DC" }} />
-                  <div className="h-3  w-1/2" style={{ backgroundColor: "#E3E2DC" }} />
+                  <div className="h-4 w-3/4 mb-3" style={{ backgroundColor: "#DDE2D9" }} />
+                  <div className="h-3 w-1/2" style={{ backgroundColor: "#DDE2D9" }} />
                 </div>
               </div>
             ))}
@@ -204,33 +203,33 @@ const MyResume = () => {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#F8F7F3" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#F1F5EF" }}>
       <FontImports />
       <div className="max-w-7xl mx-auto p-6 md:p-10">
         {/* Page header */}
         <div
           className="pb-6 mb-10 border-b flex flex-col md:flex-row md:items-end justify-between gap-4"
-          style={{ borderColor: "#E3E2DC" }}
+          style={{ borderColor: "#DDE2D9" }}
           id="tour-my-resumes-header"
         >
           <div>
             <div
               className="font-mono text-[11px] tracking-widest mb-2"
-              style={{ color: "#465B9E" }}
+              style={{ color: "#456B4A" }}
             >
               YOUR WORKSPACE
             </div>
-            <h1 className="font-display text-3xl font-medium" style={{ color: "#17201C" }}>
+            <h1 className="font-display text-3xl font-medium" style={{ color: "#1C261E" }}>
               My Resumes
             </h1>
-            <p className="mt-2 text-sm" style={{ color: "#5B625C" }}>
+            <p className="mt-2 text-sm" style={{ color: "#5A665B" }}>
               Every resume you've drafted or unlocked, kept on file. Preview, edit, or download.
             </p>
           </div>
           <Button
             onClick={() => route.push("/dashboard/builder")}
-            className=" h-10 px-5 text-white shadow-none hover:opacity-90 transition-opacity"
-            style={{ backgroundColor: "#465B9E" }}
+            className="h-10 px-5 text-white shadow-none hover:opacity-90 transition-opacity cursor-pointer"
+            style={{ backgroundColor: "#344B38" }}
             id="tour-create-new-button"
           >
             <Plus className="mr-2 h-4 w-4" /> Create New Resume
@@ -239,13 +238,13 @@ const MyResume = () => {
 
         {/* PDF Modal */}
         {isModelOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="relative w-full max-w-5xl h-[90vh] bg-white  shadow-2xl overflow-hidden flex flex-col border border-[#E3E2DC]">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C261E]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="relative w-full max-w-5xl h-[90vh] bg-white shadow-2xl overflow-hidden flex flex-col border border-[#DDE2D9]">
               <div
                 className="flex items-center justify-between p-4 border-b bg-white z-10"
-                style={{ borderColor: "#E3E2DC" }}
+                style={{ borderColor: "#DDE2D9" }}
               >
-                <h3 className="font-display text-base font-medium" style={{ color: "#17201C" }}>
+                <h3 className="font-display text-base font-medium" style={{ color: "#1C261E" }}>
                   Resume Preview
                 </h3>
                 <div className="flex items-center gap-2">
@@ -254,7 +253,7 @@ const MyResume = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => setSharingResume(resumeData)}
-                      className=" font-sans text-xs flex items-center gap-1.5 border-[#E3E2DC] text-[#465B9E] hover:bg-[#EEF0F7] hover:border-[#C8CDD9]"
+                      className="font-sans text-xs flex items-center gap-1.5 border-[#DDE2D9] text-[#456B4A] hover:bg-[#E8EFE5] hover:border-[#CAD2C5]"
                     >
                       <Share2 className="w-3.5 h-3.5" />
                       <span>Share Link</span>
@@ -268,16 +267,16 @@ const MyResume = () => {
                       setPaid(false);
                       setIsModelOpen(false);
                     }}
-                    className=" hover:bg-[#F1F0EB]"
+                    className="hover:bg-[#E8EFE5]"
                   >
-                    <X className="w-5 h-5" style={{ color: "#66706B" }} />
+                    <X className="w-5 h-5" style={{ color: "#5A665B" }} />
                   </Button>
                 </div>
               </div>
 
               <div
                 className="flex-1 overflow-auto p-8 flex justify-center"
-                style={{ backgroundColor: "#F8F7F3" }}
+                style={{ backgroundColor: "#F1F5EF" }}
               >
                 <PDFPreview pdfUrl={pdfUrl} paid={paid} variant={isMobile ? "mobile" : "desktop"} />
               </div>
@@ -287,17 +286,17 @@ const MyResume = () => {
 
         {/* Payment Modal */}
         {paymentModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#17201C]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-            <div className="bg-white w-full max-w-md  shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-[#E3E2DC]">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C261E]/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+            <div className="bg-white w-full max-w-md shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-[#DDE2D9]">
               <div
                 className="p-6 border-b flex justify-between items-center"
-                style={{ borderColor: "#E3E2DC" }}
+                style={{ borderColor: "#DDE2D9" }}
               >
                 <h3
                   className="font-display text-lg font-medium flex items-center gap-2"
-                  style={{ color: "#17201C" }}
+                  style={{ color: "#1C261E" }}
                 >
-                  <BadgePercent className="w-5 h-5" style={{ color: "#465B9E" }} /> Unlock Download
+                  <BadgePercent className="w-5 h-5 text-[#456B4A]" /> Unlock Download
                 </h3>
                 <Button
                   variant="ghost"
@@ -306,7 +305,7 @@ const MyResume = () => {
                     setPaymentModal(false);
                     setResumeData(null);
                   }}
-                  className="h-8 w-8 p-0  hover:bg-[#F1F0EB]"
+                  className="h-8 w-8 p-0 hover:bg-[#E8EFE5]"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -314,28 +313,28 @@ const MyResume = () => {
 
               <div className="p-6 space-y-6">
                 <div
-                  className="text-center p-4  border"
-                  style={{ borderColor: "#E3E2DC", backgroundColor: "#F8F7F3" }}
+                  className="text-center p-4 border"
+                  style={{ borderColor: "#DDE2D9", backgroundColor: "#F1F5EF" }}
                 >
                   <div
                     className="font-mono text-[11px] tracking-widest mb-1"
-                    style={{ color: "#66706B" }}
+                    style={{ color: "#5A665B" }}
                   >
                     TOTAL AMOUNT
                   </div>
-                  <div className="font-display text-3xl font-medium" style={{ color: "#17201C" }}>
+                  <div className="font-display text-3xl font-medium" style={{ color: "#1C261E" }}>
                     ₹{basePrice}
                   </div>
-                  <div className="text-xs line-through mt-1" style={{ color: "#8A908B" }}>
+                  <div className="text-xs line-through mt-1" style={{ color: "#5A665B" }}>
                     ₹{originalAmount}
                   </div>
-                  <div className="text-xs mt-1 font-mono" style={{ color: "#0F6E63" }}>
+                  <div className="text-xs mt-1 font-mono" style={{ color: "#344B38" }}>
                     YOU SAVED ₹{originalAmount - basePrice}
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-xs font-sans font-medium" style={{ color: "#5B625C" }}>
+                  <label className="text-xs font-sans font-medium" style={{ color: "#5A665B" }}>
                     Have a coupon code?
                   </label>
                   <div className="flex gap-2">
@@ -343,7 +342,7 @@ const MyResume = () => {
                       value={couponCode}
                       onChange={e => setCouponCode(e.target.value)}
                       placeholder="ENTER COUPON CODE"
-                      className="font-mono uppercase placeholder:normal-case "
+                      className="font-mono uppercase placeholder:normal-case border-[#DDE2D9] focus-visible:ring-[#344B38]"
                       disabled={applied}
                     />
                     {!applied ? (
@@ -351,7 +350,7 @@ const MyResume = () => {
                         onClick={() => handleCoupon(couponCode)}
                         disabled={!couponCode.trim() || isSubmit || applied}
                         variant="secondary"
-                        className="font-sans text-xs "
+                        className="font-sans text-xs bg-[#E8EFE5] hover:bg-[#DDE2D9] text-[#344B38]"
                       >
                         Apply
                       </Button>
@@ -360,7 +359,7 @@ const MyResume = () => {
                         onClick={removeCoupon}
                         variant="destructive"
                         size="icon"
-                        className="shrink-0 "
+                        className="shrink-0"
                       >
                         <X className="w-4 h-4" />
                       </Button>
@@ -368,10 +367,10 @@ const MyResume = () => {
                   </div>
                   {applied && couponDiscount && (
                     <div
-                      className="flex items-center gap-2 text-sm font-mono p-2 "
-                      style={{ color: "#0F6E63", backgroundColor: "#EAF4F2" }}
+                      className="flex items-center gap-2 text-sm font-mono p-2"
+                      style={{ color: "#344B38", backgroundColor: "#E5ECE2" }}
                     >
-                      <BadgePercent className="w-4 h-4" />
+                      <BadgePercent className="w-4 h-4 text-[#456B4A]" />
                       {couponDiscount.type === "percentage"
                         ? `${couponDiscount.value}% OFF APPLIED`
                         : `₹${couponDiscount.value} OFF APPLIED`}
@@ -380,15 +379,15 @@ const MyResume = () => {
                 </div>
 
                 <Button
-                  className="w-full text-white font-medium h-12  text-base shadow-none"
-                  style={{ backgroundColor: "#465B9E" }}
+                  className="w-full text-white font-medium h-12 text-base shadow-none cursor-pointer"
+                  style={{ backgroundColor: "#344B38" }}
                   onClick={() => handelPayment()}
                   disabled={isSubmit || isRedirecting}
                 >
                   Pay ₹{amount} &amp; Download
                 </Button>
 
-                <p className="text-xs text-center font-mono" style={{ color: "#8A908B" }}>
+                <p className="text-xs text-center font-mono" style={{ color: "#5A665B" }}>
                   SECURE PAYMENT · PHONEPE / RAZORPAY
                 </p>
               </div>
@@ -397,19 +396,19 @@ const MyResume = () => {
         )}
 
         <Tabs defaultValue="My-Resume" className="w-full" id="tour-resume-tabs">
-          <div className="border-b mb-10" style={{ borderColor: "#E3E2DC" }}>
+          <div className="border-b mb-10" style={{ borderColor: "#DDE2D9" }}>
             <TabsList className="bg-transparent h-auto p-0 space-x-8 rounded-none">
               <TabsTrigger
                 value="My-Resume"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
-                style={{ color: "#66706B" }}
+                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#344B38] data-[state=active]:text-[#344B38]"
+                style={{ color: "#5A665B" }}
               >
                 Unlocked ({paidResumes?.length || 0})
               </TabsTrigger>
               <TabsTrigger
                 value="Draft-Resume"
-                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#465B9E] data-[state=active]:text-[#465B9E]"
-                style={{ color: "#66706B" }}
+                className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#344B38] data-[state=active]:text-[#344B38]"
+                style={{ color: "#5A665B" }}
               >
                 Drafts ({draftResumes?.length || 0})
               </TabsTrigger>
@@ -419,8 +418,8 @@ const MyResume = () => {
           <style>{`
             [data-state="active"][value="My-Resume"],
             [data-state="active"][value="Draft-Resume"] {
-              border-color: #465B9E !important;
-              color: #465B9E !important;
+              border-color: #344B38 !important;
+              color: #344B38 !important;
             }
           `}</style>
 
@@ -462,8 +461,8 @@ const MyResume = () => {
                 action={
                   <Button
                     onClick={() => route.push("/dashboard/builder")}
-                    className=""
-                    style={{ backgroundColor: "#465B9E" }}
+                    className="cursor-pointer text-white"
+                    style={{ backgroundColor: "#344B38" }}
                   >
                     Create New Resume
                   </Button>

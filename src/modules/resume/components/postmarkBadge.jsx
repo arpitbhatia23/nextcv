@@ -4,7 +4,7 @@ export const PostmarkBadge = ({ status }) => {
   const label = isPaid ? "UNLOCKED" : "DRAFT";
   const subLabel = isPaid ? "PAID" : "PENDING";
 
-  const ring = isPaid ? "#465B9E" : "#8A908B";
+  const ring = isPaid ? "#456B4A" : "#8A908B";
 
   return (
     <div
