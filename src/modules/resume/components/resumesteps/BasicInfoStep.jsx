@@ -404,7 +404,7 @@ const BasicInfoStep = () => {
                     <Button
                       type="submit"
                       disabled={isloading}
-                      className=" text-white shadow-xs h-10 md:h-11 px-5 md:px-7 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                      className=" text-white shadow-xs h-10 md:h-11 px-5 md:px-7 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#456B4A] hover:bg-[#456B4A] transition-colors"
                     >
                       {isloading ? "Saving..." : "Next Step"}
                       <ArrowRight className="w-4 h-4 ml-2" />

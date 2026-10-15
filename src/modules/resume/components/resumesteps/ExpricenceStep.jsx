@@ -182,7 +182,7 @@ const ExperienceStep = () => {
                           style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -205,7 +205,7 @@ const ExperienceStep = () => {
                           style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -229,7 +229,7 @@ const ExperienceStep = () => {
                             style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                        <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                       </FormItem>
                     )}
                   />
@@ -252,7 +252,7 @@ const ExperienceStep = () => {
                             style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                        <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                       </FormItem>
                     )}
                   />
@@ -283,7 +283,7 @@ const ExperienceStep = () => {
                           }
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -313,7 +313,7 @@ const ExperienceStep = () => {
                           }
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -332,7 +332,7 @@ const ExperienceStep = () => {
                           variant="ghost"
                           size="sm"
                           className="h-6 rounded-none! font-mono text-[10px] tracking-widest hover:bg-transparent"
-                          style={{ color: "#B3382C" }}
+                          style={{ color: "#344B38" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
                           id="tour-ai-button"
@@ -366,14 +366,14 @@ const ExperienceStep = () => {
                           >
                             <div
                               className="flex items-center gap-2 font-mono text-[10px] tracking-widest animate-pulse"
-                              style={{ color: "#B3382C" }}
+                              style={{ color: "#344B38" }}
                             >
                               <Sparkles className="w-3 h-3" /> GENERATING...
                             </div>
                           </div>
                         )}
                       </div>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -381,7 +381,7 @@ const ExperienceStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#344B38]  transition-colors"
                   >
                     {isEditing ? "Update Experience" : "Save Experience"}
                   </Button>
@@ -399,7 +399,7 @@ const ExperienceStep = () => {
             id="tour-experience-list"
           >
             <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]">
-              <Briefcase className="w-4 h-4 text-[#465B9E]" /> Career Journey
+              <Briefcase className="w-4 h-4 text-[#344B38]" /> Career Journey
             </h3>
 
             {experienceList.length === 0 ? (
@@ -429,7 +429,7 @@ const ExperienceStep = () => {
                         </h4>
                         <div
                           className="font-mono text-[10px] md:text-xs truncate mt-0.5"
-                          style={{ color: "#B3382C" }}
+                          style={{ color: "#344B38" }}
                         >
                           {exp.companyName}
                         </div>
@@ -493,7 +493,7 @@ const ExperienceStep = () => {
                 });
                 router.push("/dashboard/builder/projects");
               }}
-              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#344B38]  transition-colors"
               id="tour-next-button"
             >
               Projects Info <ArrowRight className="w-4 h-4 ml-2" />

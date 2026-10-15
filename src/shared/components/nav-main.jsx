@@ -23,10 +23,10 @@ export function NavMain({ items }) {
                 <Link href={item?.url}>
                   <SidebarMenuButton
                     tooltip={item.title}
-                    className={`flex items-center justify-start gap-4 py-6 px-3  transition-all duration-200 group shadow-none ${isActive ? "bg-[#EEF0F7] text-[#465B9E]" : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]"}`}
+                    className={`flex items-center justify-start gap-4 py-6 px-3  transition-all duration-200 group shadow-none ${isActive ? "bg-[#EEF0F7] text-[#344B38]" : "text-[#5B625C] hover:bg-[#F1F0EB] hover:text-[#17201C]"}`}
                   >
                     <div
-                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200  ${isActive ? "bg-[#EEF0F7] border-[#C8CDD9]" : "bg-white border-[#E3E2DC]"}`}
+                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200  ${isActive ? "bg-[#EEF0F7] border-[#ffffff]" : "bg-white border-[#E3E2DC]"}`}
                     >
                       <span className="transition-colors">
                         {item.icon && <item.icon size={18} strokeWidth={1.75} />}
@@ -36,7 +36,7 @@ export function NavMain({ items }) {
                       {item.title}
                     </span>
                     {item.badge && (
-                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono bg-[#B3382C]">
+                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono \">
                         {item.badge}
                       </span>
                     )}

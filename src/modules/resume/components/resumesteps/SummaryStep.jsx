@@ -110,7 +110,7 @@ const SummaryStep = () => {
       <FontImports />
 
       <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
-        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
+        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#344B38]">
           STEP 08 — PROFESSIONAL SUMMARY
         </div>
         <h2 className="font-display text-xl md:text-2xl font-medium text-[#17201C]">
@@ -132,7 +132,7 @@ const SummaryStep = () => {
               type="button"
               size="sm"
               variant="ghost"
-              className="h-8 font-sans text-xs rounded-none! text-[#465B9E] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] font-medium"
+              className="h-8 font-sans text-xs rounded-none! text-[#344B38] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] font-medium"
               disabled={isGenerating}
               onClick={handleAiGeneration}
             >
@@ -159,7 +159,7 @@ const SummaryStep = () => {
                             rows={8}
                             {...field}
                             disabled={isGenerating}
-                            className={`border rounded-none! border-[#E3E2DC] bg-[#F8F7F3] text-[#17201C] resize-none transition-all text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E] ${
+                            className={`border rounded-none! border-[#E3E2DC] bg-[#F8F7F3] text-[#17201C] resize-none transition-all text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#344B38] ${
                               isGenerating ? "opacity-50" : ""
                             }`}
                             placeholder="Write your professional summary here or generate one with AI..."
@@ -167,7 +167,7 @@ const SummaryStep = () => {
 
                           {isGenerating && (
                             <div className="absolute inset-0 flex items-center justify-center backdrop-blur-[1px] bg-white/60">
-                              <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-[#465B9E] animate-pulse">
+                              <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest text-[#344B38] animate-pulse">
                                 <Sparkles className="w-3.5 h-3.5" />
                                 GENERATING...
                               </div>
@@ -180,7 +180,7 @@ const SummaryStep = () => {
                         {watchedSummary?.length || 0} CHARACTERS
                       </p>
 
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -191,7 +191,7 @@ const SummaryStep = () => {
           <CardFooter className="p-0">
             <div className="p-4 w-full border-t border-[#E3E2DC] bg-[#F8F7F3]/40">
               <h3 className="font-mono text-[10px] md:text-xs font-medium mb-2 flex items-center gap-2 uppercase tracking-widest text-[#5B625C]">
-                <AlignLeft className="w-3.5 h-3.5 text-[#465B9E]" />
+                <AlignLeft className="w-3.5 h-3.5 text-[#344B38]" />
                 Best Practices
               </h3>
               <ul className="text-xs text-[#5B625C] space-y-1 pl-4 list-disc leading-relaxed">
@@ -206,19 +206,19 @@ const SummaryStep = () => {
         <Card className="border rounded-none! border-[#E3E2DC] shadow-[0_4px_20px_rgba(23,32,28,0.04)] py-0 overflow-hidden bg-white">
           <CardHeader className="border-b border-[#E3E2DC] p-4">
             <CardTitle className="font-mono text-[10px] md:text-xs tracking-wider flex items-center gap-2 text-[#5B625C]">
-              <BrainCircuit className="w-4 h-4 text-[#465B9E]" />
+              <BrainCircuit className="w-4 h-4 text-[#344B38]" />
               LIVE PREVIEW
             </CardTitle>
           </CardHeader>
 
           <CardContent className="p-4 md:p-6 min-h-37.5 bg-[#F8F7F3]/50">
             {watchedSummary ? (
-              <p className="font-display text-xs md:text-sm leading-relaxed italic border-l-2 border-[#465B9E] pl-4 text-[#17201C]">
+              <p className="font-display text-xs md:text-sm leading-relaxed italic border-l-2 border-[#344B38] pl-4 text-[#17201C]">
                 {watchedSummary}
               </p>
             ) : (
               <div className="flex flex-col items-center justify-center py-12 text-[#8A908B]">
-                <AlignLeft className="w-8 h-8 mb-2 opacity-40 text-[#465B9E]" />
+                <AlignLeft className="w-8 h-8 mb-2 opacity-40 text-[#344B38]" />
                 <p className="font-mono text-[10px] md:text-xs tracking-wider">
                   Your summary will appear here...
                 </p>
@@ -241,7 +241,7 @@ const SummaryStep = () => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={isGenerating}
-          className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+          className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#344B38]  transition-colors"
         >
           Final Review
           <ArrowRight className="w-4 h-4 ml-2" />

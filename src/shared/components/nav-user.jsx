@@ -16,7 +16,7 @@ export function NavUser({ user }) {
             >
               <Avatar className="h-8 w-8  border border-[#E3E2DC]">
                 <AvatarImage src={user?.image} alt={user?.name} />
-                <AvatarFallback className=" bg-[#465B9E] text-white font-sans text-xs font-semibold">
+                <AvatarFallback className=" bg-[#344B38] text-white font-sans text-xs font-semibold">
                   {user?.name ? user.name[0] + user.name[1] : "cn"}
                 </AvatarFallback>
               </Avatar>

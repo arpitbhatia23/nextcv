@@ -208,7 +208,7 @@ const SkillStep = () => {
                 onClick={handleAiGeneration}
                 disabled={isGenerating || skillList.length > 0}
                 variant="default"
-                className="text-[#465B9E] bg-[#EEF0F7] hover:bg-[#C8CDD9]/40 border border-[#C8CDD9] h-8 text-xs font-sans font-medium shadow-none"
+                className="text-[#000000] bg-[#afdbb7] hover:bg-[#C8CDD9]/40 border border-[#388144] h-8 text-xs font-sans font-medium shadow-none"
               >
                 <Sparkles className="w-3.5 h-3.5 mr-1.5" />
                 {isGenerating ? "Generating..." : "Suggest Skills"}
@@ -270,7 +270,7 @@ const SkillStep = () => {
 
                 <Button
                   type="submit"
-                  className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                  className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#344B38]  transition-colors"
                 >
                   {isEditing ? "Update Skill" : "Add Skill"}
                 </Button>
@@ -287,7 +287,7 @@ const SkillStep = () => {
           >
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 text-[#5B625C]">
-                <Wrench className="w-4 h-4 text-[#465B9E]" /> Added Skills
+                <Wrench className="w-4 h-4 text-[#344B38]" /> Added Skills
               </h3>
               <Button
                 variant="ghost"
@@ -374,7 +374,7 @@ const SkillStep = () => {
             </Button>
             <Button
               onClick={handleNext}
-              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#344B38]  transition-colors"
             >
               Experience Info <ArrowRight className="w-4 h-4 ml-2" />
             </Button>

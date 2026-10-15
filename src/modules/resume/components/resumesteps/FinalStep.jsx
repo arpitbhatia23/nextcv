@@ -41,7 +41,7 @@ const PDFPreview = dynamic(() => import("../pdfPreview"), {
 const TIERS = ["Basic", "Standard", "Premium", "Elite"];
 
 const NAVY = "#17201C";
-const RUST = "#465B9E";
+const RUST = "#344B38";
 const MUTED = "#5B625C";
 const FAINT = "#8A908B";
 const BORDER = "#E3E2DC";
@@ -647,7 +647,7 @@ const FinalStep = () => {
                   value={couponCode}
                   onChange={e => setCouponCode(e.target.value)}
                   placeholder="Enter code"
-                  className=" border h-10 nextcv-sans text-xs uppercase tracking-wider placeholder:normal-case placeholder:font-normal placeholder:tracking-normal focus:border-[#465B9E]"
+                  className=" border h-10 nextcv-sans text-xs uppercase tracking-wider placeholder:normal-case placeholder:font-normal placeholder:tracking-normal focus:border-[#344B38]"
                   style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                   disabled={applied}
                 />

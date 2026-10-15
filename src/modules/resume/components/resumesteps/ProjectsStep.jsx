@@ -23,7 +23,7 @@ import posthog from "@/shared/utils/posthog";
 import { FontImports } from "../fontImport";
 
 const inputClass =
-  "rounded-none! border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  "rounded-none! border transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#344B38]";
 const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: "#17201C" };
 
 const ProjectsStep = () => {
@@ -132,7 +132,7 @@ const ProjectsStep = () => {
       <FontImports />
 
       <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
-        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
+        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#344B38]">
           STEP 06 — PROJECTS
         </div>
         <h2 className="font-display text-xl md:text-2xl font-medium text-[#17201C]">
@@ -190,7 +190,7 @@ const ProjectsStep = () => {
                           style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -215,7 +215,7 @@ const ProjectsStep = () => {
                             style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                        <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                       </FormItem>
                     )}
                   />
@@ -239,7 +239,7 @@ const ProjectsStep = () => {
                             style={inputStyle}
                           />
                         </FormControl>
-                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                        <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                       </FormItem>
                     )}
                   />
@@ -264,7 +264,7 @@ const ProjectsStep = () => {
                           style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -288,7 +288,7 @@ const ProjectsStep = () => {
                           style={inputStyle}
                         />
                       </FormControl>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -308,7 +308,7 @@ const ProjectsStep = () => {
                           variant="ghost"
                           size="sm"
                           className="h-6 rounded-none!font-mono text-[10px] tracking-widest hover:bg-transparent"
-                          style={{ color: "#B3382C" }}
+                          style={{ color: "#344B38" }}
                           disabled={isGenerating}
                           onClick={handleAiGeneration}
                           id="tour-ai-button"
@@ -342,14 +342,14 @@ const ProjectsStep = () => {
                           >
                             <div
                               className="flex items-center gap-2 font-mono text-[10px] tracking-widest animate-pulse"
-                              style={{ color: "#B3382C" }}
+                              style={{ color: "#344B38" }}
                             >
                               <Sparkles className="w-3 h-3" /> GENERATING...
                             </div>
                           </div>
                         )}
                       </div>
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -357,7 +357,7 @@ const ProjectsStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#344B38]  transition-colors"
                   >
                     {isEditing ? "Update Project" : "Save Project"}
                   </Button>
@@ -375,7 +375,7 @@ const ProjectsStep = () => {
             id="tour-projects-list"
           >
             <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]">
-              <FolderKanban className="w-4 h-4 text-[#465B9E]" /> Portfolio Showcase
+              <FolderKanban className="w-4 h-4 text-[#344B38]" /> Portfolio Showcase
             </h3>
 
             {projectList.length === 0 ? (
@@ -405,7 +405,7 @@ const ProjectsStep = () => {
                         </h4>
                         <div
                           className="font-mono text-[10px] md:text-xs truncate mt-0.5"
-                          style={{ color: "#B3382C" }}
+                          style={{ color: "#344B38" }}
                         >
                           {project.roleOrType}
                         </div>
@@ -471,7 +471,7 @@ const ProjectsStep = () => {
                 });
                 router.push("/dashboard/builder/certificate");
               }}
-              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#344B38]  transition-colors"
               id="tour-next-button"
             >
               Certificates Info <ArrowRight className="w-4 h-4 ml-2" />

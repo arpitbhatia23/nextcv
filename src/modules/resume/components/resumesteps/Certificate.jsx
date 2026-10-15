@@ -34,7 +34,7 @@ import { FontImports } from "../fontImport";
  */
 
 const inputClass =
-  "border rounded-none transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#465B9E]";
+  "border rounded-none transition-all h-10 md:h-11 text-xs md:text-sm placeholder:text-xs focus-visible:ring-1 focus-visible:ring-[#344B38]";
 
 const inputStyle = {
   backgroundColor: "#F8F7F3",
@@ -88,7 +88,7 @@ const CertificateStep = () => {
   useEffect(() => {
     if (formData?.certificates?.length > 0) {
       setCertList(
-        (formData.certificates || []).map((c, i) => ({ ...c, id: c.id ?? Date.now() + i }))
+        (formData.certificates || []).map((c, i) => ({ ...c, _id: c._id ?? Date.now() + i }))
       );
     }
   }, [formData?.certificates]);
@@ -261,7 +261,7 @@ const CertificateStep = () => {
 
       {/* Header */}
       <div className="mb-2 pb-4 border-b border-[#E3E2DC]">
-        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#465B9E]">
+        <div className="font-mono text-[10px] tracking-widest mb-1 text-[#344B38]">
           STEP 07 — CERTIFICATIONS
         </div>
 
@@ -329,7 +329,7 @@ const CertificateStep = () => {
                         />
                       </FormControl>
 
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -356,7 +356,7 @@ const CertificateStep = () => {
                         />
                       </FormControl>
 
-                      <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                      <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                     </FormItem>
                   )}
                 />
@@ -410,7 +410,7 @@ const CertificateStep = () => {
                           />
                         </FormControl>
 
-                        <FormMessage className="text-[10px]" style={{ color: "#B3382C" }} />
+                        <FormMessage className="text-[10px]" style={{ color: "#344B38" }} />
                       </FormItem>
                     )}
                   />
@@ -420,7 +420,7 @@ const CertificateStep = () => {
                 <div className="pt-2">
                   <Button
                     type="submit"
-                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+                    className="w-full text-white shadow-xs h-10 md:h-11 font-sans text-xs md:text-sm font-medium tracking-wide bg-[#344B38] transition-colors"
                   >
                     {isEditing ? "Update Certificate" : "Save Certificate"}
                   </Button>
@@ -440,7 +440,7 @@ const CertificateStep = () => {
             style={{ borderColor: "#E3E2DC" }}
           >
             <h3 className="font-mono text-[10px] md:text-xs font-medium uppercase tracking-widest flex items-center gap-2 mb-4 text-[#5B625C]">
-              <Award className="w-4 h-4 text-[#465B9E]" />
+              <Award className="w-4 h-4 text-[#344B38]" />
               Verified Credentials
             </h3>
 
@@ -478,7 +478,7 @@ const CertificateStep = () => {
 
                         <div
                           className="font-mono text-[10px] md:text-xs truncate mt-0.5"
-                          style={{ color: "#B3382C" }}
+                          style={{ color: "#344B38" }}
                         >
                           {cert?.organization}
 
@@ -566,7 +566,7 @@ const CertificateStep = () => {
 
                 router.push("/dashboard/builder/summary");
               }}
-              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#465B9E] hover:bg-[#344B93] transition-colors"
+              className="text-white shadow-xs h-10 px-5 md:px-6 font-sans text-xs md:text-sm font-medium bg-[#344B38]  transition-colors"
               id="tour-next-button"
             >
               Summary Info
