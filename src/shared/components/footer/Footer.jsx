@@ -59,6 +59,19 @@ const getSeoCategory = (slug = "") => {
    SEO LABEL
 ========================================================= */
 
+const customSeoLabels = {
+  "tcs-resume-format-for-freshers": "TCS Resume Format for Freshers",
+  "infosys-resume-format-for-freshers": "Infosys Resume Templates",
+  "wipro-resume-format-for-freshers": "Wipro Resume Format",
+  "ats-friendly-resume-format-india": "ATS-Friendly Resume Guide for India",
+  "fresher-resume-format-india": "Resume Builder for Freshers",
+  "cognizant-resume-format-for-freshers": "Cognizant Resume Format for Freshers",
+  "accenture-resume-format-for-freshers": "Accenture Resume Format for Freshers",
+  "hcl-resume-format-for-freshers": "HCL Resume Format for Freshers",
+  "ltimindtree-resume-format-for-freshers": "LTIMindtree Resume Format for Freshers",
+  "tech-mahindra-resume-format-for-freshers": "Tech Mahindra Resume Format for Freshers",
+};
+
 const getSeoLabel = (slug = "") => {
   const cleanSlug = slug
     .replace(/^\/+|\/+$/g, "")
@@ -67,6 +80,10 @@ const getSeoLabel = (slug = "") => {
 
   if (!cleanSlug) {
     return "";
+  }
+
+  if (customSeoLabels[cleanSlug]) {
+    return customSeoLabels[cleanSlug];
   }
 
   return cleanSlug
@@ -81,6 +98,8 @@ const getSeoLabel = (slug = "") => {
       if (lower === "bca") return "BCA";
       if (lower === "mca") return "MCA";
       if (lower === "it") return "IT";
+      if (lower === "for") return "for";
+      if (lower === "in") return "in";
 
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
@@ -192,7 +211,7 @@ const footerGroups = [
         href: "/blogs",
       },
       {
-        label: "ATS Guide",
+        label: "ATS-Friendly Resume Guide",
         href: "/ats-friendly-resume-format-india",
       },
       {
@@ -363,7 +382,7 @@ export const Footer = () => {
 
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © <GetYear /> NextCV. All rights reserved.
+            <GetYear />
           </p>
 
           <p>Free to build · One-time payment · No subscription</p>

@@ -5,21 +5,22 @@ const steps = [
   {
     number: "01",
     title: "Build",
-    description: "Shape your experience into a clear, professional resume with guided AI writing.",
+    description:
+      "Create your resume with professional templates and organize your experience, education, skills, and projects.",
     icon: FileText,
   },
   {
     number: "02",
     title: "Improve",
     description:
-      "Compare it with the job description. Find keyword gaps and refine the details that matter.",
+      "Use AI-powered suggestions to refine your resume and tailor its content to the role you want.",
     icon: SearchCheck,
   },
   {
     number: "03",
     title: "Apply",
     description:
-      "Finish with a tailored cover letter and a profile you can share wherever you apply.",
+      "Prepare a matching cover letter and share your professional profile when the relevant features are available in your plan.",
     icon: Send,
   },
 ];

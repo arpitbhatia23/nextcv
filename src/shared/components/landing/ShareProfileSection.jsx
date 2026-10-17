@@ -10,12 +10,11 @@ export default function ShareProfileSection() {
             Beyond the attachment
           </p>
           <h2 className="mt-3 max-w-lg font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
-            Your resume shouldn’t stop at a PDF.
+            Share Your Professional Profile
           </h2>
           <p className="mt-5 max-w-lg text-sm leading-6 text-[#626962]">
-            Turn your experience into a professional online profile and share it in an application,
-            message, or email. Resume sharing and portfolio features are available with selected
-            plans.
+            Present your resume through a shareable link and build a professional online presence
+            with the portfolio features available in your plan.
           </p>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-xs text-[#555e56]">
             <li className="flex items-center gap-2">

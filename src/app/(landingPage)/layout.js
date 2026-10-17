@@ -3,9 +3,9 @@ import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
+  title: "AI Resume Builder for Freshers & Professionals | NextCV",
   description:
-    "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download. AI Writer included.",
+    "Build an ATS-friendly resume with AI. Match your resume to a job description, find missing skills, and create a tailored cover letter. Free to build, with one-time pricing.",
 
   applicationName: "NextCV",
   authors: [{ name: "NextCV" }],
@@ -19,9 +19,9 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
+    title: "AI Resume Builder for Freshers & Professionals | NextCV",
     description:
-      "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download.",
+      "Build an ATS-friendly resume with AI. Match your resume to a job description, find missing skills, and create a tailored cover letter. Free to build, with one-time pricing.",
     url: "https://www.nextcv.in/",
     siteName: "NextCV",
     locale: "en_IN",
@@ -30,9 +30,9 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "AI Resume Builder & Cover Letter | Match Job Description Skills | NextCV",
+    title: "AI Resume Builder for Freshers & Professionals | NextCV",
     description:
-      "Build an ATS-optimized resume, match it against any job description, find missing skills, and create a tailored cover letter — one-time payment, ready to download.",
+      "Build an ATS-friendly resume with AI. Match your resume to a job description, find missing skills, and create a tailored cover letter. Free to build, with one-time pricing.",
     creator: "@aurpitaurpit",
   },
 };

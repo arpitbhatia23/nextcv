@@ -1,43 +1,43 @@
 const questions = [
   {
-    question: "Is NextCV free to use?",
+    question: "Can I build a resume for free?",
     answer:
-      "You can build and edit your resume for free. A one-time payment is required when you choose a paid template and are ready to download.",
+      "Yes. You can create, edit, and preview your resume for free. A one-time payment starting at ₹49 is only required when you choose a template tier and are ready to download.",
   },
   {
-    question: "Do I need a subscription?",
+    question: "Is payment recurring or one-time?",
     answer:
-      "No. NextCV uses one-time payments for resume plans; there is no mandatory monthly subscription.",
+      "All pricing is strictly one-time per resume download. There are no automatic renewals, hidden fees, or monthly subscriptions.",
   },
   {
-    question: "Can I download my resume as a PDF?",
+    question: "Can I tailor my resume to a job description?",
     answer:
-      "Yes. Paid template tiers include a high-resolution PDF download. The available features depend on the plan you select.",
+      "Yes. You can paste a job description into our ATS checker to compare requirements, identify missing skills or keywords, and get actionable recommendations before submitting.",
   },
   {
-    question: "Does NextCV check ATS compatibility?",
+    question: "Does NextCV help improve ATS compatibility?",
     answer:
-      "The ATS checker reviews resume structure and content, and provides a diagnostic score. ATS systems vary, so the score is a guide rather than a guarantee.",
-  },
-  {
-    question: "Can I compare my resume with a job description?",
-    answer:
-      "Yes. Add a job description in the ATS checker to review matched, partial, and missing recognized keywords.",
+      "NextCV formats your resume with clean headings, readable fonts, and ATS-friendly section structures. The ATS checker provides a diagnostic compatibility score to guide your edits.",
   },
   {
     question: "Can I create a cover letter?",
     answer:
-      "Yes. The cover-letter tool can use your resume, target role, company, and job description to help draft a tailored letter.",
+      "Yes. The cover letter builder connects your resume details with the target job description to generate a tailored, role-specific cover letter that you can review and edit.",
   },
   {
-    question: "Can I create a shareable resume or portfolio?",
+    question: "Can I share my resume online?",
     answer:
-      "Resume sharing is included with Premium and Elite tiers. The portfolio website and cover-letter features are included with Elite; see pricing for current plan details.",
+      "Yes. Resume sharing via a secure public link is available on Premium and Elite plans. The Elite tier also includes an online portfolio website.",
   },
   {
-    question: "Which templates work well for freshers?",
+    question: "Can I download my resume as a PDF?",
     answer:
-      "Start with a clear, content-focused layout that gives education, projects, skills, and internships room to scan. You can preview templates before choosing one.",
+      "Yes. Downloading provides a high-resolution, print-ready PDF formatted to pass employer screening systems and maintain clean visual layout across devices.",
+  },
+  {
+    question: "Which resume templates work well for freshers?",
+    answer:
+      "Structured single-column or clean modern layouts like Minimal and Classic work best for freshers, giving prominence to your education, academic projects, technical skills, and internships.",
   },
 ];
 

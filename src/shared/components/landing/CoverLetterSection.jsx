@@ -10,11 +10,11 @@ export default function CoverLetterSection() {
             <Sparkles aria-hidden="true" className="h-4 w-4" /> Cover letter builder
           </p>
           <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
-            Write a tailored cover letter from your resume and job description.
+            Create a Cover Letter to Match Your Resume
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-6 text-[#626962]">
-            Bring your resume and the job description together to draft a cover letter for the role
-            and company you’re applying to. Review and personalize it before sending.
+            Prepare a role-specific cover letter that complements your resume and highlights the
+            experience and skills relevant to the opportunity.
           </p>
           <div className="mt-6">
             <BuildButton callbackUrl="/dashboard/cover-letter">Create Cover Letter</BuildButton>

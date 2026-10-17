@@ -56,8 +56,8 @@ const templates = [
 
 export default function TemplatesSection({
   showViewAll = true,
-  title = "Choose a format for your next move.",
-  description = "Explore a few thoughtfully designed starting points. Choose the structure that suits your experience and role.",
+  title = "Resume Templates for Different Career Goals",
+  description = "Choose a resume template that fits your experience and career goals, then personalize it with your own education, skills, projects, and work history.",
 } = {}) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [preview, setPreview] = useState(null);
@@ -123,7 +123,7 @@ export default function TemplatesSection({
               href="/templates"
               className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#344b93] underline decoration-[#aeb8d5] underline-offset-4 hover:text-[#26366d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
             >
-              View all templates <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              View all resume templates <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           )}
         </div>

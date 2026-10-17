@@ -13,13 +13,16 @@ import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder for Indian Freshers | NextCV",
+  title: "AI Resume Builder for Freshers & Professionals | NextCV",
   description:
-    "Create an ATS-friendly resume with AI. Tailor it to job descriptions, improve your resume content, and generate a cover letter with NextCV.",
+    "Build an ATS-friendly resume with AI. Match your resume to a job description, find missing skills, and create a tailored cover letter. Free to build, with one-time pricing.",
   path: "",
   keywords: [
     "resume builder",
+    "ai resume builder",
     "ats friendly resume",
+    "resume builder for freshers",
+    "resume builder india",
     "job description keyword match",
     "ai cover letter builder",
     "skills for resume",
@@ -27,8 +30,6 @@ export const metadata = createSeoMetadata({
     "ai writer for resume",
     "one-time payment resume",
     "ready to download resume",
-    "free resume builder",
-    "online resume maker",
     "resume templates for freshers",
   ],
 });

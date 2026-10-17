@@ -2,10 +2,10 @@ import Link from "next/link";
 import { ArrowUpRight, Check, CircleAlert, FileSearch, ScanSearch } from "lucide-react";
 
 const auditItems = [
-  "Job-description keyword match",
-  "Missing or partial skills",
-  "Resume structure and sections",
-  "Content clarity and relevance",
+  "Compare resume content with a job description",
+  "Identify matched and missing skills or keywords",
+  "Review actionable resume-improvement suggestions",
+  "Improve your resume before applying",
 ];
 
 export default function ATSKeywordSection() {
@@ -18,11 +18,11 @@ export default function ATSKeywordSection() {
               <ScanSearch aria-hidden="true" className="h-4 w-4" /> Match resume to job description
             </p>
             <h2 className="mt-4 max-w-lg font-serif text-3xl leading-tight sm:text-4xl">
-              See which skills your software engineer resume is missing for the role.
+              Check Your Resume Against a Job Description
             </h2>
             <p className="mt-5 max-w-lg text-sm leading-6 text-[#c0c9c2]">
-              Paste a job description to find missing skills, keyword gaps, and what to improve in
-              your resume before you apply.
+              See how your resume aligns with a target role, identify missing keywords and skills,
+              and find practical ways to improve your application.
             </p>
             <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {auditItems.map(item => (

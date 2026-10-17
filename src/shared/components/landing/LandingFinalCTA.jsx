@@ -10,11 +10,11 @@ export default function LandingFinalCTA() {
             Your next application starts here
           </p>
           <h2 className="mt-3 font-serif text-3xl leading-tight sm:text-4xl">
-            Build a resume you can actually apply with.
+            Make Your Next Application Count
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-6 text-[#c0c9c2]">
-            Create it, improve it against the job, and get the rest of your application ready. Free
-            to build; no subscription.
+            Build your resume, improve it for your target role, and prepare for your next
+            application with NextCV.
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">

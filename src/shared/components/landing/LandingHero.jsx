@@ -14,11 +14,12 @@ export default function LandingHero() {
             <span className="h-px w-7 bg-[#465b9e]" /> A clearer path from resume to application
           </p>
           <h1 className="font-serif text-[2.7rem] leading-[1.03] text-[#17201C] sm:text-6xl lg:text-[3.5rem] xl:text-[3.75rem]">
-            Build a resume that <span className="text-[#344b93]">matches the job.</span>
+            AI Resume Builder for <span className="text-[#344b93]">Your Next Job Application</span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-7 text-[#5b625c] sm:text-lg">
-            Create your resume, compare it with a job description, find what is missing, and improve
-            your application with AI.
+            Create a professional resume, tailor it to a job description, and improve it with
+            AI-powered suggestions. Check keyword gaps, refine your experience, and prepare a
+            matching cover letter — all in one place.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <BuildButton className="w-full sm:w-auto" />
