@@ -33,18 +33,20 @@ const handler = async req => {
   console.log("Redis cache miss");
 
   const { name, company, jobRole, tone, length, skills, experince, jobDescription } = data;
+  console.log(name, company, jobRole, tone, length, skills, experince, jobDescription);
+  const skillsList = skills && skills?.map(s => s.name).join(", ");
 
-  const skillsList = skills.map(s => s.name).join(", ");
-
-  const experience = experince
-    .map(
-      exp => `
+  const experience =
+    experince &&
+    experince
+      ?.map(
+        exp => `
 Position: ${exp.position}
 Company: ${exp.companyName}
 Duration: ${exp.startDate} - ${exp.endDate || "Present"}
 `
-    )
-    .join("\n\n");
+      )
+      .join("\n\n");
 
   const prompt = `
 You are an expert HR recruiter and professional cover letter writer.

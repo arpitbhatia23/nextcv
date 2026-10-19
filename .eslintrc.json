@@ -1,6 +1,6 @@
 {
   "extends": ["next", "prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier","react-hooks"],
   "rules": {
     // 🧹 Clean code
     "no-unused-vars": "warn",

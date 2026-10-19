@@ -169,8 +169,20 @@ const footerGroups = [
     title: "Product",
     links: [
       {
-        label: "Resume Builder",
-        href: "/",
+        label: "AI Resume Builder",
+        href: "/ai-resume-builder",
+      },
+      {
+        label: "AI Cover Letter",
+        href: "/ai-cover-letter-generator",
+      },
+      {
+        label: "Shareable Resume",
+        href: "/shareable-resume",
+      },
+      {
+        label: "Resume to Portfolio",
+        href: "/resume-to-portfolio",
       },
       {
         label: "Product Overview",
@@ -179,14 +191,6 @@ const footerGroups = [
       {
         label: "ATS Resume Checker",
         href: "/ats-resume-checker",
-      },
-      {
-        label: "AI Writer",
-        href: "/ai-writer",
-      },
-      {
-        label: "Cover Letter",
-        href: "/dashboard/cover-letter",
       },
       {
         label: "Templates",

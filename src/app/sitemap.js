@@ -10,10 +10,6 @@ const BUILD_FALLBACK_DATE = new Date("2026-10-05T04:38:16.000Z");
 export default async function sitemap() {
   const baseUrl = SITE_URL.replace(/\/$/, "");
 
-  /* =========================================================
-     BLOG POSTS FROM SANITY
-  ========================================================= */
-
   let blogs = [];
 
   try {
@@ -36,6 +32,11 @@ export default async function sitemap() {
 
   const staticPages = [
     { path: "" },
+    { path: "/product" },
+    { path: "/ai-resume-builder" },
+    { path: "/ai-cover-letter-generator" },
+    { path: "/shareable-resume" },
+    { path: "/resume-to-portfolio" },
     { path: "/templates" },
     { path: "/ats-resume-checker" },
     { path: "/pricing" },
