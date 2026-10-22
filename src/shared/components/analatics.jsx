@@ -1,5 +1,5 @@
 "use client";
-import { memo, Suspense, useEffect, useState, useTransition } from "react";
+import { Suspense, useEffect, useState, useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -14,7 +14,6 @@ import {
   CreditCard,
   TrendingUp,
   Calendar,
-  Download,
   Activity,
   DollarSign,
   Award,
@@ -22,24 +21,16 @@ import {
   IndianRupee,
   Zap,
   Mail,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import {
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+
 import axios from "axios";
 import { exportAnalyticsCSV } from "@/shared/lib/gencsv";
+import { SectionHeader } from "./SectionHeader";
+import { MetricCard } from "./MetricCard";
+import { RevenueChart } from "./RevenueChart";
+import { PieChartComponent } from "./PieChartComponent";
+import { DataTableSection } from "./DataTableSection";
+import { StatusLabel } from "./StatusLable";
 
 /* Fonts match the Correspondence Archive letterhead:
    Fraunces for display numerals, IBM Plex Mono for labels / codes. */
@@ -50,7 +41,6 @@ const FontImports = () => (
     .font-mono { font-family: 'IBM Plex Mono', monospace; }
   `}</style>
 );
-
 const INK = "#17201C";
 const BRAND = "#465B9E";
 const TEAL = "#0F6E63";
@@ -59,315 +49,28 @@ const LINE = "#E3E2DC";
 const MUTE = "#5B625C";
 const FAINT = "#8A908B";
 
-/* Charted lines/wedges cycle through brand indigo and muted supporting
-   tones so multi-series charts stay legible without visual noise. */
 const COLORS = [BRAND, "#344B93", "#5268B6", "#6573A4", TEAL, "#A8896F"];
 
-function MetricCard({ title, value, icon: Icon }) {
-  return (
-    <div className="rounded-2xl border p-4 sm:p-5 shadow-[0_2px_12px_rgba(23,32,28,0.04)]" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
-      <div className="flex items-center justify-between mb-3">
-        <p className="font-mono text-[10px] tracking-wider uppercase text-[#66706B]">
-          {title}
-        </p>
-        <div className="w-7 h-7 rounded-lg bg-[#EEF0F7] flex items-center justify-center text-[#465B9E]">
-          <Icon className="h-3.5 w-3.5" />
-        </div>
-      </div>
-      <div className="font-display text-xl sm:text-2xl font-semibold text-[#17201C]">
-        {value}
-      </div>
-    </div>
-  );
-}
+/* Charted lines/wedges cycle through brand indigo and muted supporting
+   tones so multi-series charts stay legible without visual noise. */
 
-function CustomTooltip({ active, payload, label, prefix = "" }) {
-  if (!active || !payload?.length) return null;
-  return (
-    <div className="rounded-xl border px-3 py-2 shadow-lg" style={{ backgroundColor: "#FFFFFF", borderColor: LINE }}>
-      {label && (
-        <p className="font-mono text-[10px] tracking-wider mb-1 text-[#66706B]">
-          {label}
-        </p>
-      )}
-      {payload.map((p, i) => (
-        <p key={i} className="font-sans text-sm font-semibold text-[#17201C]">
-          {p.name ? `${p.name}: ` : ""}
-          {prefix}
-          {p.value}
-        </p>
-      ))}
-    </div>
-  );
-}
-
-const RevenueChart = memo(({ data }) => {
-  return (
-    <ResponsiveContainer width="100%" height={240}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke={LINE} vertical={false} />
-        <XAxis
-          dataKey="month"
-          stroke={FAINT}
-          tick={{ fontSize: 11, fontFamily: "'IBM Plex Mono', monospace" }}
-          tickLine={false}
-        />
-        <YAxis
-          stroke={FAINT}
-          tick={{ fontSize: 11, fontFamily: "'IBM Plex Mono', monospace" }}
-          tickLine={false}
-          axisLine={false}
-        />
-        <Tooltip content={<CustomTooltip prefix="₹" />} cursor={{ stroke: LINE }} />
-        <Line
-          type="monotone"
-          dataKey="revenue"
-          stroke={BRAND}
-          strokeWidth={2.5}
-          dot={{ fill: BRAND, strokeWidth: 0, r: 4 }}
-        />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-});
-RevenueChart.displayName = "RevenueChart";
-
-const PieChartComponent = memo(({ data }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  return (
-    <ResponsiveContainer width="100%" height={260}>
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="45%"
-          labelLine={!isMobile}
-          label={isMobile ? false : ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-          outerRadius={isMobile ? 65 : 80}
-          innerRadius={isMobile ? 40 : 0}
-          paddingAngle={isMobile ? 3 : 0}
-          dataKey="value"
-          stroke="#FFFFFF"
-          strokeWidth={2}
-        >
-          {data?.map((_, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip content={<CustomTooltip />} />
-        <Legend
-          verticalAlign="bottom"
-          height={36}
-          wrapperStyle={{ fontSize: 10, paddingTop: 10, fontFamily: "'IBM Plex Mono', monospace" }}
-          iconType="square"
-          iconSize={8}
-        />
-      </PieChart>
-    </ResponsiveContainer>
-  );
-});
-PieChartComponent.displayName = "PieChartComponent";
-
-function SectionHeader({ icon: Icon, title, onExport }) {
-  return (
-    <div
-      className="flex items-center justify-between mb-5 pb-3 border-b"
-      style={{ borderColor: LINE }}
-    >
-      <h2
-        className="font-sans text-sm font-semibold tracking-wide flex items-center gap-2 text-[#17201C]"
-      >
-        <Icon className="h-4 w-4 text-[#465B9E]" />
-        {title}
-      </h2>
-      <button
-        onClick={onExport}
-        className="flex items-center gap-1.5 border border-[#E3E2DC] rounded-xl px-3 py-1.5 font-sans text-xs font-medium transition hover:bg-[#F1F0EB] text-[#17201C] bg-white shadow-xs"
-      >
-        <Download className="h-3.5 w-3.5" />
-        <span className="hidden sm:inline">Export</span>
-      </button>
-    </div>
-  );
-}
-
-function DataTableSection({ icon: Icon, title, type, columns, emptyMessage }) {
-  const [rows, setRows] = useState([]);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    let isCurrentRequest = true;
-
-    const fetchPage = async () => {
-      setLoading(true);
-      setError(false);
-      try {
-        const response = await axios.get("/api/analytics/recentRecords", {
-          params: { type, page },
-        });
-        if (isCurrentRequest) {
-          const result = response?.data?.data;
-          const pages = result?.totalPages || 0;
-          if (page > Math.max(pages, 1)) {
-            setPage(Math.max(pages, 1));
-            return;
-          }
-          setRows(result?.rows || []);
-          setTotal(result?.total || 0);
-          setTotalPages(pages);
-        }
-      } catch (requestError) {
-        console.error(`Failed to load ${type} records:`, requestError);
-        if (isCurrentRequest) setError(true);
-      } finally {
-        if (isCurrentRequest) setLoading(false);
-      }
-    };
-
-    fetchPage();
-    return () => {
-      isCurrentRequest = false;
-    };
-  }, [page, type]);
-
-  const firstRecord = total ? (page - 1) * 8 + 1 : 0;
-  const lastRecord = Math.min(page * 8, total);
-
-  return (
-    <section className="min-w-0 rounded-2xl border shadow-[0_2px_12px_rgba(23,32,28,0.04)] overflow-hidden" style={{ borderColor: LINE, backgroundColor: "#FFFFFF" }}>
-      <div
-        className="flex items-center justify-between gap-3 border-b px-4 sm:px-6 py-3.5 bg-[#F8F7F3]/40"
-        style={{ borderColor: LINE }}
-      >
-        <h3
-          className="flex items-center gap-2 font-sans text-xs sm:text-sm font-semibold text-[#17201C]"
-        >
-          <Icon className="h-4 w-4 text-[#465B9E]" />
-          {title}
-        </h3>
-        <span className="font-mono text-[10px] text-[#8A908B] px-2 py-0.5 rounded-full bg-white border border-[#E3E2DC]">
-          {total.toLocaleString()} RECORDS
-        </span>
-      </div>
-      {rows.length ? (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-150 border-collapse text-left">
-            <thead>
-              <tr className="border-b bg-[#F8F7F3]/60" style={{ borderColor: LINE }}>
-                {columns.map(column => (
-                  <th
-                    key={column.key}
-                    className="px-4 sm:px-5 py-3 font-mono text-[9px] font-medium tracking-wider text-[#66706B]"
-                  >
-                    {column.label.toUpperCase()}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#E3E2DC]">
-              {rows.map((row, index) => (
-                <tr
-                  key={row._id || row.slug || index}
-                  className="hover:bg-[#F8F7F3]/30 transition-colors"
-                >
-                  {columns.map(column => (
-                    <td key={column.key} className="px-4 sm:px-5 py-3.5 text-xs text-[#17201C]">
-                      {column.render(row)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : loading ? (
-        <p
-          className="px-4 py-8 text-center font-mono text-xs tracking-wider animate-pulse text-[#66706B]"
-        >
-          LOADING RECORDS...
-        </p>
-      ) : error ? (
-        <p
-          className="px-4 py-8 text-center font-mono text-xs tracking-wider text-amber-800"
-        >
-          COULD NOT LOAD RECORDS
-        </p>
-      ) : (
-        <p
-          className="px-4 py-8 text-center font-mono text-xs tracking-wider text-[#8A908B]"
-        >
-          {emptyMessage}
-        </p>
-      )}
-      <div
-        className="flex items-center justify-between gap-3 border-t px-4 sm:px-6 py-3 bg-[#F8F7F3]/30"
-        style={{ borderColor: LINE }}
-      >
-        <span className="font-mono text-[10px] tracking-wide text-[#66706B]">
-          {firstRecord}–{lastRecord} OF {total.toLocaleString()}
-        </span>
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-[#8A908B]">
-            PAGE {totalPages ? page : 0} / {totalPages}
-          </span>
-          <button
-            type="button"
-            aria-label={`Previous ${title.toLowerCase()} page`}
-            title="Previous page"
-            onClick={() => setPage(currentPage => Math.max(1, currentPage - 1))}
-            disabled={page <= 1 || loading}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            aria-label={`Next ${title.toLowerCase()} page`}
-            title="Next page"
-            onClick={() => setPage(currentPage => Math.min(totalPages, currentPage + 1))}
-            disabled={page >= totalPages || loading}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E3E2DC] text-[#17201C] bg-white hover:bg-[#F1F0EB] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function formatDate(value) {
+function formatDate(value, options = {}) {
   if (!value) return "—";
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? "—"
-    : new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(date);
-}
 
-function StatusLabel({ children, positive = false }) {
-  return (
-    <span
-      className={`inline-flex rounded-full border px-2.5 py-0.5 font-mono text-[9px] tracking-wide ${
-        positive
-          ? "border-emerald-200 text-emerald-800 bg-emerald-50"
-          : "border-[#E3E2DC] text-[#5B625C] bg-[#F8F7F3]"
-      }`}
-    >
-      {children}
-    </span>
-  );
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "—";
+
+  const { showDate = true, showTime = true } = options;
+
+  if (!showDate && !showTime) return "—";
+
+  const formatOptions = {};
+
+  if (showDate) formatOptions.dateStyle = "medium";
+  if (showTime) formatOptions.timeStyle = "short";
+
+  return new Intl.DateTimeFormat("en-IN", formatOptions).format(date);
 }
 
 function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
@@ -399,9 +102,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
   if (loading) {
     return (
-      <div
-        className="flex items-center justify-center h-64 rounded-2xl border border-[#E3E2DC] bg-white shadow-xs"
-      >
+      <div className="flex items-center justify-center h-64 rounded-2xl border border-[#E3E2DC] bg-white shadow-xs">
         <p className="font-mono text-xs tracking-wider animate-pulse text-[#66706B]">
           COMPILING ANALYTICS LEDGER&hellip;
         </p>
@@ -411,12 +112,8 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
 
   if (error) {
     return (
-      <div
-        className="rounded-2xl border border-amber-200 bg-amber-50 p-10 text-center"
-      >
-        <p className="font-mono text-xs tracking-widest text-amber-900">
-          {error.toUpperCase()}
-        </p>
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-10 text-center">
+        <p className="font-mono text-xs tracking-widest text-amber-900">{error.toUpperCase()}</p>
       </div>
     );
   }
@@ -425,9 +122,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
     <div className="space-y-6 sm:space-y-8">
       {/* ── Today's Snapshot ── */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div
-          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
-        >
+        <div className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
               Today&apos;s Revenue
@@ -440,14 +135,10 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
             <IndianRupee className="h-5 w-5 text-[#465B9E]" />
             {data?.todayStats?.todayRevenue || 0}
           </h3>
-          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
-            UPDATED REALTIME
-          </p>
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">UPDATED REALTIME</p>
         </div>
 
-        <div
-          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
-        >
+        <div className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
               Today&apos;s New Users
@@ -459,14 +150,10 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#17201C]">
             {data?.todayStats?.todayNewUsers || 0}
           </h3>
-          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
-            CANDIDATE SIGNUPS
-          </p>
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">CANDIDATE SIGNUPS</p>
         </div>
 
-        <div
-          className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden"
-        >
+        <div className="p-5 rounded-2xl border border-[#E3E2DC] bg-white shadow-[0_2px_12px_rgba(23,32,28,0.04)] relative overflow-hidden">
           <div className="flex items-center justify-between mb-2">
             <span className="font-mono text-[10px] tracking-wider text-[#66706B] uppercase">
               Conversion Rate
@@ -478,9 +165,7 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#17201C]">
             {data?.paymentStats?.conversionRate || 0}%
           </h3>
-          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">
-            PAID VS FREE USERS
-          </p>
+          <p className="font-mono text-[10px] mt-2 text-[#8A908B]">PAID VS FREE USERS</p>
         </div>
       </section>
 
@@ -493,22 +178,26 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           icon={Users}
           title="User Analytics"
           onExport={() => exportAnalyticsCSV({ data, section: "users" })}
+          LINE={LINE}
         />
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <MetricCard
             title="Total Users"
             value={data?.userStats?.totalUsers?.toLocaleString()}
             icon={Users}
+            LINE={LINE}
           />
           <MetricCard
             title="Active Users (Recent)"
             value={data?.userStats?.activeUsers?.toLocaleString()}
             icon={Activity}
+            LINE={LINE}
           />
           <MetricCard
             title="Admin Users"
             value={data?.userStats?.adminCount?.toLocaleString()}
             icon={Award}
+            LINE={LINE}
           />
         </div>
       </section>
@@ -522,23 +211,32 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           icon={CreditCard}
           title="Payment & Revenue"
           onExport={() => exportAnalyticsCSV({ data, section: "payments" })}
+          LINE={LINE}
         />
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4 mb-5">
           <MetricCard
             title="Total Revenue"
             value={`₹${data?.paymentStats?.totalRevenue?.toLocaleString()}`}
             icon={IndianRupee}
+            LINE={LINE}
           />
           <MetricCard
             title="This Month (MRR)"
             value={`₹${data?.paymentStats?.mrr?.toLocaleString()}`}
+            LINE={LINE}
             icon={TrendingUp}
           />
-          <MetricCard title="ARPU" value={`₹${data?.paymentStats?.arpu || 0}`} icon={DollarSign} />
+          <MetricCard
+            title="ARPU"
+            value={`₹${data?.paymentStats?.arpu || 0}`}
+            icon={DollarSign}
+            LINE={LINE}
+          />
           <MetricCard
             title="Avg Ticket"
             value={`₹${data?.paymentStats?.avgTransactionValue?.toFixed(2)}`}
             icon={Activity}
+            LINE={LINE}
           />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -549,7 +247,12 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
               </p>
             </div>
             <div className="p-3">
-              <RevenueChart data={data?.paymentStats?.monthlyRevenue} />
+              <RevenueChart
+                data={data?.paymentStats?.monthlyRevenue}
+                LINE={LINE}
+                FAINT={FAINT}
+                BRAND={BRAND}
+              />
             </div>
           </div>
           <div className="rounded-xl border border-[#E3E2DC] overflow-hidden">
@@ -564,6 +267,8 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                   name: mode.mode,
                   value: mode.revenue,
                 }))}
+                COLORS={COLORS}
+                LINE={LINE}
               />
             </div>
           </div>
@@ -579,32 +284,38 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
           icon={FileText}
           title="Content Analytics"
           onExport={() => exportAnalyticsCSV({ data, section: "resumes" })}
+          LINE={LINE}
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-5">
           <MetricCard
             title="Total Resumes"
             value={data?.resumeStats?.totalResumes?.toLocaleString()}
             icon={FileText}
+            LINE={LINE}
           />
           <MetricCard
             title="Paid Resumes"
             value={data?.resumeStats?.paidResumes?.toLocaleString()}
             icon={DollarSign}
+            LINE={LINE}
           />
           <MetricCard
             title="Draft Resumes"
             value={data?.resumeStats?.draftResumes?.toLocaleString()}
             icon={Calendar}
+            LINE={LINE}
           />
           <MetricCard
             title="Top Template"
             value={data?.resumeStats?.topTemplate || "N/A"}
             icon={Award}
+            LINE={LINE}
           />
           <MetricCard
             title="Portfolios"
             value={data?.portfolioStats?.totalPortfolios?.toLocaleString() || "0"}
             icon={BriefcaseBusiness}
+            LINE={LINE}
           />
         </div>
       </section>
@@ -629,7 +340,11 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                 <StatusLabel positive={row.role === "admin"}>{row.role || "user"}</StatusLabel>
               ),
             },
-            { key: "createdAt", label: "Joined", render: row => formatDate(row.createdAt) },
+            {
+              key: "createdAt",
+              label: "Joined",
+              render: row => formatDate(row.createdAt, { showDate: true, showTime: true }),
+            },
             { key: "lastActive", label: "Last Active", render: row => formatDate(row.lastActive) },
           ]}
         />
@@ -656,7 +371,11 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                   </StatusLabel>
                 ),
               },
-              { key: "updatedAt", label: "Updated", render: row => formatDate(row.updatedAt) },
+              {
+                key: "updatedAt",
+                label: "Updated",
+                render: row => formatDate(row.updatedAt, { showTime: false }),
+              },
             ]}
           />
           <DataTableSection
@@ -694,7 +413,11 @@ function AnalyticsDashboard({ timeRange = "all", customStart, customEnd }) {
                   </StatusLabel>
                 ),
               },
-              { key: "createdAt", label: "Created", render: row => formatDate(row.createdAt) },
+              {
+                key: "createdAt",
+                label: "Created",
+                render: row => formatDate(row.createdAt, { showTime: false }),
+              },
             ]}
           />
         </div>
@@ -786,10 +509,16 @@ export default function AnalyticsPage() {
           style={{ borderColor: LINE }}
         >
           <div>
-            <div className="font-mono text-[11px] tracking-widest uppercase mb-2 font-medium" style={{ color: BRAND }}>
+            <div
+              className="font-mono text-[11px] tracking-widest uppercase mb-2 font-medium"
+              style={{ color: BRAND }}
+            >
               BUSINESS INTELLIGENCE
             </div>
-            <h1 className="font-display text-2xl sm:text-3xl font-medium tracking-tight" style={{ color: INK }}>
+            <h1
+              className="font-display text-2xl sm:text-3xl font-medium tracking-tight"
+              style={{ color: INK }}
+            >
               Analytics Studio
             </h1>
             <p
@@ -845,7 +574,10 @@ export default function AnalyticsPage() {
               >
                 <SelectValue placeholder="TIME RANGE" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl border shadow-lg font-sans text-xs" style={{ borderColor: LINE }}>
+              <SelectContent
+                className="rounded-xl border shadow-lg font-sans text-xs"
+                style={{ borderColor: LINE }}
+              >
                 <SelectItem value="today">Today</SelectItem>
                 <SelectItem value="7d">Last 7 Days</SelectItem>
                 <SelectItem value="30d">Last 30 Days</SelectItem>

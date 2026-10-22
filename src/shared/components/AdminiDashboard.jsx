@@ -2,7 +2,8 @@
 import React, { useState, useTransition } from "react";
 import dynamic from "next/dynamic";
 import { BarChart3, CreditCard, TicketPercent, LayoutDashboard } from "lucide-react";
-
+import { AnimatePresence, motion } from "framer-motion";
+import { useSwipeableTabs } from "../hooks/useSwipe.js";
 // All sections loaded once with `ssr: false` — stay mounted, never remount
 const SectionCards = dynamic(() => import("@/shared/components/section-cards.jsx"), {
   ssr: false,
@@ -40,12 +41,14 @@ const TABS = [
 ];
 
 const AdminiDashboard = () => {
-  const [activeTab, setActiveTab] = useState("overview");
   const [isPending, startTransition] = useTransition();
-
+  const { activeTab, direction, goToTab, swipeHandlers, variants } = useSwipeableTabs(
+    TABS,
+    "overview"
+  );
   const handleTabChange = id => {
     startTransition(() => {
-      setActiveTab(id);
+      goToTab(id);
     });
   };
 
@@ -109,9 +112,7 @@ const AdminiDashboard = () => {
                   <span>{label}</span>
 
                   {/* Active dot indicator */}
-                  {isActive && (
-                    <span className="ml-1 h-1.5 w-1.5 rounded-full bg-[#344B38]" />
-                  )}
+                  {isActive && <span className="ml-1 h-1.5 w-1.5 rounded-full bg-[#344B38]" />}
                 </button>
               );
             })}
@@ -121,57 +122,74 @@ const AdminiDashboard = () => {
 
       {/* ── Tab Panels — Only render active tab to optimize INP ─── */}
       <div className="flex-1 flex flex-col min-h-150">
-        {activeTab === "overview" && (
-          <div
-            id="panel-overview"
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
+          <motion.div
+            key={activeTab}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.22 }}
+            {...swipeHandlers}
+            className="flex-1 min-w-0 touch-pan-y"
+            id={`panel-${activeTab}`}
             role="tabpanel"
-            aria-labelledby="tab-overview"
-            className="@container/main flex flex-1 flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300"
+            aria-labelledby={`tab-${activeTab}`}
           >
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-              <div className="px-3 sm:px-4 lg:px-6">
-                <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                  <CouponStats />
-                  <AdminFeedbackList />
+            {activeTab === "overview" && (
+              <div
+                id="panel-overview"
+                role="tabpanel"
+                aria-labelledby="tab-overview"
+                className="@container/main flex flex-1 flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-300"
+              >
+                <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                  <SectionCards />
+                  <div className="px-3 sm:px-4 lg:px-6">
+                    <div className="grid grid-cols-1 gap-4 sm:gap-6">
+                      <CouponStats />
+                      <AdminFeedbackList />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+            )}
 
-        {activeTab === "analytics" && (
-          <div
-            id="panel-analytics"
-            role="tabpanel"
-            aria-labelledby="tab-analytics"
-            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
-          >
-            <AnalyticsPage />
-          </div>
-        )}
+            {activeTab === "analytics" && (
+              <div
+                id="panel-analytics"
+                role="tabpanel"
+                aria-labelledby="tab-analytics"
+                className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+              >
+                <AnalyticsPage />
+              </div>
+            )}
 
-        {activeTab === "payment" && (
-          <div
-            id="panel-payment"
-            role="tabpanel"
-            aria-labelledby="tab-payment"
-            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
-          >
-            <AdminPaymentDashboard />
-          </div>
-        )}
+            {activeTab === "payment" && (
+              <div
+                id="panel-payment"
+                role="tabpanel"
+                aria-labelledby="tab-payment"
+                className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+              >
+                <AdminPaymentDashboard />
+              </div>
+            )}
 
-        {activeTab === "coupons" && (
-          <div
-            id="panel-coupons"
-            role="tabpanel"
-            aria-labelledby="tab-coupons"
-            className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
-          >
-            <Coupons />
-          </div>
-        )}
+            {activeTab === "coupons" && (
+              <div
+                id="panel-coupons"
+                role="tabpanel"
+                aria-labelledby="tab-coupons"
+                className="flex-1 animate-in fade-in slide-in-from-bottom-2 duration-300"
+              >
+                <Coupons />
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
