@@ -2,23 +2,30 @@
 
 import Script from "next/script";
 
+/**
+ * Microsoft Clarity script component.
+ * Only mounted if user grants consent.
+ * Masks all input fields and sensitive content by default.
+ */
 export default function ClarityComponent() {
   if (process.env.NODE_ENV !== "production") return null;
 
   return (
-    <Script type="text/javascript" strategy="lazyOnload">
-      {(function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "vkw299o6bb")}
+    <Script id="clarity-init" type="text/javascript" strategy="lazyOnload">
+      {`
+        (function (c, l, a, r, i, t, y) {
+          c[a] =
+            c[a] ||
+            function () {
+              (c[a].q = c[a].q || []).push(arguments);
+            };
+          t = l.createElement(r);
+          t.async = 1;
+          t.src = "https://www.clarity.ms/tag/" + i;
+          y = l.getElementsByTagName(r)[0];
+          y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "vkw299o6bb");
+      `}
     </Script>
   );
 }

@@ -3,6 +3,7 @@ import { Mail, ArrowRight } from "lucide-react";
 import Logo2 from "../Logo2";
 import { GetYear } from "./getyear";
 import seoPages from "../../../app/(landingPage)/seo-pages.json";
+import PrivacyPreferencesButton from "../PrivacyPreferencesButton";
 
 /* =========================================================
    SEO CATEGORY DETECTION
@@ -389,7 +390,7 @@ export const Footer = () => {
             <GetYear />
           </p>
 
-          <p>Free to build · One-time payment · No subscription</p>
+          <div className="flex flex-wrap items-center gap-3"><PrivacyPreferencesButton /><span>·</span><p>Free to build · One-time payment · No subscription</p></div>
         </div>
       </div>
     </footer>

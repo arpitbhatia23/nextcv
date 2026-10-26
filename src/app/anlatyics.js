@@ -4,6 +4,10 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
+/**
+ * Google Analytics 4 Script Component
+ * Only mounted if user grants consent.
+ */
 export default function GoogleAnalytics() {
   const pathname = usePathname();
 
@@ -31,7 +35,8 @@ export default function GoogleAnalytics() {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-CT60KM1G5Z', {
-            send_page_view: false // We'll manually send page_views
+            send_page_view: false, // We manually send page_views
+            anonymize_ip: true
           });
         `}
       </Script>
