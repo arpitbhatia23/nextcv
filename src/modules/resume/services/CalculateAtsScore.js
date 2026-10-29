@@ -1,5 +1,6 @@
 import {
   analyzeJDKeywordGap,
+  capitalize,
   cleanRecommendations,
   extractIndianPhone,
   getGrade,
