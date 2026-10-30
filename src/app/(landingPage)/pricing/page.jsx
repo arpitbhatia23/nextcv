@@ -143,7 +143,7 @@ const faqs = [
   {
     question: "What is the difference between Premium and Elite?",
     answer:
-      "Premium gives you a professional resume with a live sharing link. Elite adds the professional portfolio website, portfolio sharing, AI cover letter generation and additional premium features.",
+      "Premium gives you a professional resume with a live sharing link. Elite adds the professional portfolio website, portfolio sharing ",
   },
 ];
 
@@ -397,7 +397,7 @@ export default function PricingPage() {
       {/* FEATURE STRIP */}
       <section className="bg-slate-50 py-14 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-          <div className="grid gap-5 lg:grid-cols-3">
+          <div className="grid gap-5 lg:grid-cols-2">
             {/* RESUME SHARING */}
             <div className=" border border-slate-200 bg-white p-7 shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
@@ -441,29 +441,6 @@ export default function PricingPage() {
               <div className="mt-5 flex items-center gap-2 text-xs font-bold text-slate-700">
                 <Check className="h-4 w-4 text-emerald-600" />
                 Shareable portfolio link
-              </div>
-            </div>
-
-            {/* COVER LETTER */}
-            <div className=" border border-slate-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
-                <Sparkles className="h-6 w-6" />
-              </div>
-
-              <span className="mt-5 inline-flex  border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
-                Elite
-              </span>
-
-              <h3 className="mt-3 text-xl font-black text-slate-950">AI Cover Letter</h3>
-
-              <p className="mt-3 text-sm leading-6 text-slate-500">
-                Generate a personalized cover letter based on your resume and the role you are
-                applying for.
-              </p>
-
-              <div className="mt-5 flex items-center gap-2 text-xs font-bold text-slate-700">
-                <Check className="h-4 w-4 text-emerald-600" />
-                Generate faster with AI
               </div>
             </div>
           </div>

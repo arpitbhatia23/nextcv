@@ -4,79 +4,101 @@ import { getStoredConsent } from "./consent";
 let isInitialized = false;
 
 /**
- * Initializes PostHog client only if user has granted explicit consent.
+ * Check PostHog consent.
+ */
+function hasPostHogConsent() {
+  if (typeof window === "undefined") return false;
+
+  const consent = getStoredConsent();
+
+  return Boolean(consent?.hasChosen && consent?.posthog);
+}
+
+/**
+ * Initialize PostHog only after explicit consent.
  */
 export function initPostHogIfConsented() {
   if (typeof window === "undefined") return;
 
-  const consent = getStoredConsent();
-  if (consent.hasChosen && consent.posthog) {
-    if (!isInitialized && process.env.NEXT_PUBLIC_POSTHOG_API_KEY) {
-      posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
-        api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
-        capture_pageview: true,
-        // Mask inputs and avoid recording sensitive resume text by default
-        mask_all_element_attributes: true,
-        mask_all_text: false,
-        session_recording: {
-          maskAllInputs: true,
-          maskInputOptions: {
-            password: true,
-            color: true,
-            date: true,
-            "datetime-local": true,
-            email: true,
-            month: true,
-            number: true,
-            range: true,
-            search: true,
-            tel: true,
-            text: true,
-            time: true,
-            url: true,
-            week: true,
-            textarea: true,
-            select: true,
-          },
-        },
-      });
-      isInitialized = true;
-    } else if (isInitialized) {
-      posthog.opt_in_capturing();
-    }
-  } else {
-    // If user has not consented or explicitly rejected, opt out
-    if (isInitialized) {
-      try {
-        posthog.opt_out_capturing();
-      } catch (e) {
-        // Safe fallback
-      }
-    }
+  if (!hasPostHogConsent()) {
+    disablePostHogTracking();
+    return;
+  }
+
+  const apiKey = process.env.NEXT_PUBLIC_POSTHOG_API_KEY;
+
+  if (!apiKey) return;
+
+  if (isInitialized) {
+    posthog.opt_in_capturing();
+    return;
+  }
+
+  posthog.init(apiKey, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com",
+
+    capture_pageview: true,
+
+    // Disable automatic exceptions for strict consent control.
+    // Use safePostHog.captureException() instead.
+    capture_exceptions: false,
+
+    // Privacy protection
+    mask_all_element_attributes: true,
+    mask_all_text: true,
+
+    session_recording: {
+      maskAllInputs: true,
+      maskInputOptions: {
+        password: true,
+        color: true,
+        date: true,
+        "datetime-local": true,
+        email: true,
+        month: true,
+        number: true,
+        range: true,
+        search: true,
+        tel: true,
+        text: true,
+        time: true,
+        url: true,
+        week: true,
+        textarea: true,
+        select: true,
+      },
+    },
+  });
+
+  isInitialized = true;
+}
+
+/**
+ * Disable tracking when consent is withdrawn.
+ */
+export function disablePostHogTracking() {
+  if (typeof window === "undefined") return;
+  if (!isInitialized) return;
+
+  try {
+    posthog.stopSessionRecording();
+    posthog.opt_out_capturing();
+    posthog.reset();
+  } catch {
+    // Safe fallback
   }
 }
 
 /**
- * Stop PostHog tracking and reset identifiers when consent is withdrawn.
+ * Listen for consent changes.
  */
-export function disablePostHogTracking() {
-  if (typeof window === "undefined") return;
-  try {
-    posthog.opt_out_capturing();
-    posthog.reset();
-  } catch (err) {
-    // Ignore if not initialized
-  }
-}
-
-// Listen to consent changes if running in browser
 if (typeof window !== "undefined") {
-  // Check initial state
   initPostHogIfConsented();
 
-  window.addEventListener("nextcv-consent-changed", (event) => {
+  window.addEventListener("nextcv-consent-changed", event => {
     const detail = event?.detail;
-    if (detail?.posthog) {
+
+    if (detail?.posthog && hasPostHogConsent()) {
       initPostHogIfConsented();
     } else {
       disablePostHogTracking();
@@ -85,54 +107,128 @@ if (typeof window !== "undefined") {
 }
 
 /**
- * Privacy-safe PostHog proxy object that checks consent before firing captures.
+ * Privacy-safe PostHog wrapper.
  */
 const safePostHog = {
+  /**
+   * Capture custom events.
+   */
   capture: (eventName, properties) => {
-    if (typeof window === "undefined") return;
-    const consent = getStoredConsent();
-    if (!consent.hasChosen || !consent.posthog) return;
+    if (!hasPostHogConsent() || !isInitialized) return;
+
     try {
       posthog.capture(eventName, properties);
-    } catch (err) {
+    } catch {
       // Safe fallback
     }
   },
-  identify: (distinctId, properties) => {
+
+  /**
+   * Capture client-side exceptions.
+   */
+  captureException: error => {
     if (typeof window === "undefined") return;
-    const consent = getStoredConsent();
-    if (!consent.hasChosen || !consent.posthog) return;
+
+    if (!hasPostHogConsent()) {
+      console.warn("[PostHog] Exception skipped: no analytics consent");
+      return;
+    }
+
+    if (!isInitialized) {
+      console.warn("[PostHog] Exception skipped: SDK not initialized");
+      return;
+    }
+
+    if (typeof posthog.captureException !== "function") {
+      console.error("[PostHog] captureException is unavailable in the installed SDK");
+      return;
+    }
+
+    const exception = error instanceof Error ? error : new Error(String(error));
+
+    try {
+      const result = posthog.captureException(exception, {
+        source: "nextcv-client",
+      });
+
+      if (result === undefined) {
+        console.warn("[PostHog] No exception event returned. Check SDK Error Tracking support.");
+      } else {
+        console.info("[PostHog] Exception capture called successfully");
+      }
+
+      return result;
+    } catch (captureError) {
+      console.error("[PostHog] Exception capture failed:", captureError);
+    }
+  },
+  /**
+   * Identify logged-in users.
+   */
+  identify: (distinctId, properties) => {
+    if (!hasPostHogConsent() || !isInitialized) return;
+
     try {
       posthog.identify(distinctId, properties);
-    } catch (err) {
+    } catch {
       // Safe fallback
     }
   },
+
+  /**
+   * Reset user identity.
+   */
   reset: () => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !isInitialized) return;
+
     try {
       posthog.reset();
-    } catch (err) {
+    } catch {
       // Safe fallback
     }
   },
+
+  /**
+   * Opt into tracking.
+   */
   opt_in_capturing: () => {
-    if (typeof window === "undefined") return;
+    if (!isInitialized || !hasPostHogConsent()) return;
+
     try {
       posthog.opt_in_capturing();
-    } catch (err) {
+    } catch {
       // Safe fallback
     }
   },
+
+  /**
+   * Opt out of tracking.
+   */
   opt_out_capturing: () => {
-    if (typeof window === "undefined") return;
+    if (!isInitialized) return;
+
     try {
+      posthog.stopSessionRecording();
       posthog.opt_out_capturing();
-    } catch (err) {
+    } catch {
       // Safe fallback
     }
   },
-  // Expose underlying instance if strictly needed
+
+  /**
+   * Stop session recording.
+   */
+  stopSessionRecording: () => {
+    if (!isInitialized) return;
+
+    try {
+      posthog.stopSessionRecording();
+    } catch {
+      // Safe fallback
+    }
+  },
+
+  // Raw SDK instance
   _raw: posthog,
 };
 

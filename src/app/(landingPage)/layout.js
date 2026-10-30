@@ -3,9 +3,9 @@ import { Footer } from "@/shared/components/footer/Footer";
 
 export const metadata = {
   metadataBase: new URL("https://www.nextcv.in"),
-  title: "AI Resume Builder for Freshers & Professionals | NextCV",
+  title: "Build an ATS-ready resume that actually represents your skills.",
   description:
-    "Build an ATS-friendly resume with AI. Match your resume to a job description, find missing skills, and create a tailored cover letter. Free to build, with one-time pricing.",
+    "Create a professional resume for Indian fresher and entry-level jobs. Improve your project descriptions, match your resume to job requirements, and download a polished PDF. Start free. Pay once.",
 
   applicationName: "NextCV",
   authors: [{ name: "NextCV" }],
