@@ -24,7 +24,7 @@ export default function ResumeStartPage() {
             if (resume.data) {
               useResumeStore.getState().updateForm(resume.data);
             }
-            router.push("/dashboard/builder/template-selection");
+            router.push("/dashboard/builder/review");
           }}
         />
       </div>

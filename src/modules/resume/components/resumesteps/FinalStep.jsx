@@ -1,9 +1,13 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+
 import { Card, CardHeader, CardTitle, CardContent } from "@/shared/components/ui/card";
+
 import { Input } from "@/shared/components/ui/input";
+
 import { Button } from "@/shared/components/ui/button";
+
 import {
   IndianRupee,
   Save,
@@ -14,59 +18,96 @@ import {
   FileText,
   Sparkles,
 } from "lucide-react";
+
 import Image from "next/image";
 
 import { useDebouncedCallback } from "use-debounce";
+
 import useResumeStore from "@/store/useResumeStore";
+
 import FeedbackModal from "@/modules/feedback/components/FeedbackModal";
+
 import { usePayment } from "@/modules/payment/hooks/usePayment";
+
 import { useCoupon } from "@/modules/payment/hooks/useCoupon";
+
 import { useDraft } from "@/modules/resume/hooks/usedraft";
+
 import { useResumeGen } from "@/modules/resume/hooks/useResumeGen";
+
 import { usePricing } from "@/modules/payment/hooks/usePricing";
+
 import { getTemplateByName } from "@/modules/resume/services/templateMap";
+
 import RedirectToPayment from "@/modules/payment/components/redirectToPayment";
+
 import { templatesMetadata } from "@/shared/utils/template-metadata";
+
 import posthog from "@/shared/utils/posthog";
+
 import dynamic from "next/dynamic";
+
 import { FontImports } from "../fontImport";
+
+import { Tips } from "../Tips";
+
 const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ssr: false,
+
   loading: () => (
     <div className="nextcv-sans text-xs tracking-widest" style={{ color: "#8A908B" }}>
       LOADING PREVIEW...
     </div>
   ),
 });
+
 const TIERS = ["Basic", "Standard", "Premium", "Elite"];
 
 const NAVY = "#17201C";
+
 const RUST = "#344B38";
+
 const MUTED = "#5B625C";
+
 const FAINT = "#8A908B";
+
 const BORDER = "#E3E2DC";
+
 const BG = "#F8F7F3";
+
 const WHITE = "#FFFFFF";
 
 const FinalStep = () => {
   const formData = useResumeStore(s => s.formData);
+
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
+
   const setSelectedTemplate = useResumeStore(s => s.setSelectedTemplate);
 
   const [activeTier, setActiveTier] = useState("Premium");
+
   const [couponCode, setCouponCode] = useState("");
+
   const [amount, setAmount] = useState(49);
+
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+
   const [originalAmount, setOriginalAmount] = useState(0);
+
   const [isSubmit, setIsSubmit] = useState(false);
+
   const [applied, setApplied] = useState(false);
+
   const [draftId, setDraftId] = useState(null);
+
   const [discount, setDiscount] = useState(null);
+
   const templates = templatesMetadata;
 
   useEffect(() => {
-    posthog.capture("builder_step_viewed", {
+    posthog.capture("builderstepviewed", {
       step: "review",
+
       step_number: 9,
     });
   }, []);
@@ -77,9 +118,13 @@ const FinalStep = () => {
 
       return {
         ...template,
+
         tier: pricing?.tier || "Basic",
+
         price: pricing?.priceDiscounted || 49,
+
         originalPrice: pricing?.priceOriginal || 99,
+
         style: pricing?.style || "",
       };
     });
@@ -91,29 +136,45 @@ const FinalStep = () => {
 
   const { handelPayment, isRedirecting } = usePayment({
     discount,
+
     originalAmount,
+
     formData,
+
     applied,
+
     selectedTemplate,
+
     setIsSubmit,
+
     couponCode,
+
     draftId,
   });
 
   const { handleCoupon, removeCoupon } = useCoupon({
     setIsSubmit,
+
     originalAmount,
+
     setAmount,
+
     setCouponCode,
+
     setApplied,
+
     setDiscount,
   });
 
   const { handleSaveDraft } = useDraft({
     setIsSubmit,
+
     selectedTemplate,
+
     formData,
+
     setIsFeedbackOpen,
+
     setDraftId,
   });
 
@@ -121,40 +182,53 @@ const FinalStep = () => {
 
   const { basePrice } = usePricing({
     selectedTemplate,
+
     applied,
+
     originalAmount,
+
     discount,
+
     setAmount,
+
     setOriginalAmount,
   });
 
   const debouncePayment = useDebouncedCallback(() => {
     posthog.capture("payment_started", {
       step: "review",
+
       step_number: 9,
     });
+
     handelPayment();
   }, 1000);
 
   const debounceDraft = useDebouncedCallback(() => {
-    posthog.capture("resume_save_as_draft", {
+    posthog.capture("resumesave_asdraft", {
       step: "review",
+
       step_number: 9,
     });
+
     handleSaveDraft();
   }, 1000);
 
   const debounceCoupon = useDebouncedCallback(coupon => {
     posthog.capture("coupon_applied", {
       step: "review",
+
       step_number: 9,
     });
+
     handleCoupon(coupon);
   }, 1000);
 
   const renderTierLabel = tier => {
     if (tier === "Premium") return "Premium";
+
     if (tier === "Elite") return "Elite";
+
     return tier;
   };
 
@@ -200,6 +274,7 @@ const FinalStep = () => {
             style={{ color: FAINT }}
           >
             <LayoutTemplate className="w-8 h-8" />
+
             <span className="nextcv-sans text-[10px] uppercase tracking-widest">Preview</span>
           </div>
         )}
@@ -209,6 +284,7 @@ const FinalStep = () => {
         className="p-3 text-center border-t"
         style={{
           borderColor: BORDER,
+
           backgroundColor: selectedTemplate === template.key ? BG : WHITE,
         }}
       >
@@ -247,6 +323,7 @@ const FinalStep = () => {
       )}
     </div>
   );
+
   return (
     <div className="min-h-full py-5 md:py-7" style={{ backgroundColor: BG }}>
       <FontImports />
@@ -258,18 +335,21 @@ const FinalStep = () => {
         >
           STEP 09 — REVIEW & DOWNLOAD
         </div>
+
         <h2
           className="nextcv-serif text-2xl md:text-3xl font-medium tracking-tight"
           style={{ color: NAVY }}
         >
           Choose your template & download
         </h2>
+
         <p className="nextcv-sans text-sm md:text-[15px] mt-1.5" style={{ color: MUTED }}>
           Pick a template, review your resume, then download your ATS-ready PDF.
         </p>
       </div>
 
       {/* Mobile Layout */}
+
       <div className="w-full flex flex-col gap-2 lg:hidden pb-5 pt-4">
         <div className="space-y-3">
           <label
@@ -305,6 +385,7 @@ const FinalStep = () => {
                 className="flex-none w-36 flex flex-col items-center gap-2 p-3 border-2  overflow-hidden transition-all cursor-pointer snap-start relative"
                 style={{
                   backgroundColor: selectedTemplate === template.key ? BG : WHITE,
+
                   borderColor: selectedTemplate === template.key ? RUST : BORDER,
                 }}
               >
@@ -351,6 +432,7 @@ const FinalStep = () => {
                     <span className="nextcv-sans text-[8px] line-through" style={{ color: FAINT }}>
                       ₹{template.originalPrice}
                     </span>
+
                     <span
                       className="nextcv-sans text-[8px] tracking-widest"
                       style={{ color: RUST }}
@@ -377,6 +459,7 @@ const FinalStep = () => {
               RESUME PREVIEW
             </CardTitle>
           </CardHeader>
+
           <CardContent
             className="p-0 min-h-75 flex items-center justify-center"
             style={{ backgroundColor: BG }}
@@ -407,10 +490,12 @@ const FinalStep = () => {
               <span className="nextcv-sans text-xs tracking-widest" style={{ color: MUTED }}>
                 TOTAL AMOUNT
               </span>
+
               <div className="flex items-center gap-2">
                 <span className="nextcv-sans text-[10px] line-through" style={{ color: FAINT }}>
                   ₹{basePrice}
                 </span>
+
                 <span className="nextcv-serif font-medium text-base" style={{ color: NAVY }}>
                   ₹{amount}
                 </span>
@@ -426,6 +511,7 @@ const FinalStep = () => {
                 style={{ backgroundColor: WHITE, borderColor: BORDER, color: NAVY }}
                 disabled={applied}
               />
+
               <Button
                 onClick={() => debounceCoupon(couponCode)}
                 disabled={!couponCode.trim() || isSubmit || applied}
@@ -447,6 +533,11 @@ const FinalStep = () => {
                 DOWNLOAD RESUME
               </Button>
 
+              {/* Review reminders directly below the download action */}
+              <div className="w-full">
+                <Tips section="review" />
+              </div>
+
               <Button
                 variant="outline"
                 className="w-full rounded-none! h-10 nextcv-sans text-xs tracking-widest"
@@ -463,8 +554,10 @@ const FinalStep = () => {
       </div>
 
       {/* Desktop Layout */}
+
       <div className="hidden lg:flex gap-5 h-[72vh] min-h-155 pt-1">
         {/* Left: Template Selector */}
+
         <div
           className="w-75 xl:w-80 flex flex-col border  shadow-none overflow-hidden"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
@@ -524,6 +617,7 @@ const FinalStep = () => {
         </div>
 
         {/* Center: Preview */}
+
         <div
           className="flex-1 flex flex-col border  shadow-none overflow-hidden"
           style={{ backgroundColor: BG, borderColor: BORDER }}
@@ -550,6 +644,7 @@ const FinalStep = () => {
                 className="w-2 h-2  animate-pulse rounded-full"
                 style={{ backgroundColor: "#3F7A5C" }}
               />
+
               <span
                 className="nextcv-sans text-[10px] tracking-widest uppercase"
                 style={{ color: "#3F7A5C" }}
@@ -563,8 +658,9 @@ const FinalStep = () => {
         </div>
 
         {/* Right: Checkout */}
+
         <div
-          className="w-75 xl:w-80 flex flex-col border  shadow-none overflow-hidden h-fit"
+          className="w-75 xl:w-80 flex flex-col border shadow-none self-start sticky top-55 max-h-[calc(100vh-235px)] overflow-y-auto custom-scrollbar"
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <div className="p-5 border-b" style={{ borderColor: BORDER }}>
@@ -575,6 +671,7 @@ const FinalStep = () => {
               <Sparkles className="w-5 h-5" style={{ color: RUST }} />
               Complete Build
             </h3>
+
             <p
               className="nextcv-sans text-[10px] uppercase tracking-widest mt-1"
               style={{ color: FAINT }}
@@ -593,6 +690,7 @@ const FinalStep = () => {
                 style={{ color: MUTED }}
               >
                 <span>Selected License</span>
+
                 <span className="font-medium" style={{ color: NAVY }}>
                   ₹{basePrice}
                 </span>
@@ -604,6 +702,7 @@ const FinalStep = () => {
                   style={{ color: "#0F6E63" }}
                 >
                   <span>Special Coupon</span>
+
                   <span>
                     - {discount.type === "percentage" ? `${discount.value}%` : `₹${discount.value}`}
                   </span>
@@ -620,10 +719,12 @@ const FinalStep = () => {
                 >
                   Grand Total
                 </span>
+
                 <div className="flex items-center gap-2">
                   <span className="nextcv-sans text-xs line-through" style={{ color: FAINT }}>
                     ₹{basePrice}
                   </span>
+
                   <span
                     className="nextcv-serif text-2xl font-semibold tracking-tight"
                     style={{ color: NAVY }}
@@ -695,6 +796,10 @@ const FinalStep = () => {
               <Download className="mr-2 h-4 w-4" />
               Download Resume
             </Button>
+          </div>
+
+          <div className="px-5 pb-5 pt-4">
+            <Tips section="review" />
           </div>
         </div>
       </div>
