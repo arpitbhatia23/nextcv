@@ -6,6 +6,7 @@ import safePostHog from "@/shared/utils/posthog";
 
 export default function GlobalError({ error, reset }) {
   useEffect(() => {
+    console.log(error);
     safePostHog.captureException(error);
   }, [error]);
 

@@ -97,17 +97,17 @@ export function Tips({ section }) {
             </p>
           </div>
 
-          <span className="text-[10px] font-medium tracking-wider text-[#8A908B]">
-            {sectionTips.length} TIPS
-          </span>
+          {/* <span className="text-[10px] font-medium tracking-wider text-[#8A908B]">
+            {sectionTips?.length} TIPS
+          </span> */}
         </div>
 
         <div className="space-y-0 px-4">
-          {sectionTips.map((tip, index) => (
+          {sectionTips?.map((tip, index) => (
             <div
               key={`${section}-${index}`}
               className={`flex items-start gap-3 py-3 ${
-                index !== sectionTips.length - 1 ? "border-b border-[#F0EFEA]" : ""
+                index !== sectionTips?.length - 1 ? "border-b border-[#F0EFEA]" : ""
               }`}
             >
               <span className="flex h-6 w-6 shrink-0 items-center justify-center border border-[#DCE4D8] bg-[#F5F7F2] text-[10px] font-semibold text-[#456B4A]">

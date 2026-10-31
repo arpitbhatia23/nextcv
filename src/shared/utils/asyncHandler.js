@@ -1,11 +1,12 @@
 import { posthog } from "@/modules/ai/utils/aiConfig";
 import { NextResponse } from "next/server";
-export const asyncHandler = (handler) => {
+export const asyncHandler = handler => {
   return async (req, ctx) => {
     try {
       return await handler(req, ctx);
     } catch (error) {
       try {
+        console.log(error);
         posthog.captureException(error, "server-anonymous", {
           url: req?.nextUrl?.pathname || req?.url,
           method: req?.method,

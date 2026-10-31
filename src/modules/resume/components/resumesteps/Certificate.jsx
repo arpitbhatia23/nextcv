@@ -88,7 +88,7 @@ const CertificateStep = () => {
   useEffect(() => {
     if (formData?.certificates?.length > 0) {
       setCertList(
-        (formData.certificates || []).map((c, i) => ({ ...c, _id: c._id ?? Date.now() + i }))
+        (formData.certificates || []).map((c, i) => ({ ...c, id: c.id ?? Date.now() + i }))
       );
     }
   }, [formData?.certificates]);
@@ -152,11 +152,11 @@ const CertificateStep = () => {
        * UPDATE EXISTING CERTIFICATE
        */
       nextCertificates = certList.map(certificate => {
-        if (certificate._id === editingId) {
+        if (certificate.id === editingId) {
           return {
             ...certificate,
             ...values,
-            _id: editingId,
+            id: editingId,
           };
         }
 
@@ -170,7 +170,7 @@ const CertificateStep = () => {
         ...certList,
         {
           ...values,
-          _id: Date.now(),
+          id: Date.now(),
         },
       ];
     }
@@ -201,7 +201,7 @@ const CertificateStep = () => {
       credentialUrl: certificate?.credentialUrl || "",
     });
 
-    setEditingId(certificate?._id);
+    setEditingId(certificate?.id);
     setIsEditing(true);
 
     /*
@@ -223,7 +223,7 @@ const CertificateStep = () => {
   const handleDelete = id => {
     if (!id) return;
     console.log(id);
-    const nextCertificates = certList.filter(certificate => certificate._id !== id);
+    const nextCertificates = certList.filter(certificate => certificate.id !== id);
 
     saveCertificates(nextCertificates);
 
@@ -460,7 +460,7 @@ const CertificateStep = () => {
               <div className="space-y-3">
                 {certList?.map(cert => (
                   <div
-                    key={cert?._id}
+                    key={cert?.id}
                     className="p-3 md:p-4 border flex flex-col gap-2 group transition-colors"
                     style={{
                       backgroundColor: "#FFFFFF",
@@ -524,7 +524,7 @@ const CertificateStep = () => {
                           variant="ghost"
                           className="h-6 w-6 md:h-8 md:w-8 rounded-none hover:bg-transparent"
                           style={{ color: "#B7B5AC" }}
-                          onClick={() => handleDelete(cert._id)}
+                          onClick={() => handleDelete(cert.id)}
                           aria-label={`Delete ${cert.title}`}
                         >
                           <Trash2 className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -538,7 +538,7 @@ const CertificateStep = () => {
           </div>
 
           {/* Tips */}
-          <Tips section="certificates" />
+          <Tips section="certificate" />
 
           {/* Navigation */}
           <div className="flex justify-between items-center pt-4">
