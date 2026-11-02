@@ -1,5 +1,7 @@
 import { extractText, extractLinks, getDocumentProxy } from "unpdf";
-import keywordDatabase from "../data/keywordData.json";
+import { createRequire } from "module";
+const requireModule = createRequire(import.meta.url);
+const keywordDatabase = requireModule("../data/keywordData.json");
 
 import mammoth from "mammoth";
 import JSZip from "jszip";
@@ -452,9 +454,11 @@ export function analyzeJDKeywordGap(resumeText = "", jdText = "") {
       matchedKeywords: 0,
       partialKeywords: 0,
       missingKeywords: 0,
+      notDetectedKeywords: 0,
       matched: [],
       partial: [],
       missing: [],
+      notDetected: [],
     };
   }
 
@@ -462,7 +466,7 @@ export function analyzeJDKeywordGap(resumeText = "", jdText = "") {
 
   const matched = [];
   const partial = [];
-  const missing = [];
+  const notDetected = [];
 
   for (const item of jdKeywords) {
     const matchedAs = findResumeKeywordMatch(item.keyword, normalizedResume);
@@ -479,14 +483,7 @@ export function analyzeJDKeywordGap(resumeText = "", jdText = "") {
       continue;
     }
 
-    // A simple partial match is useful
-    // for multi-word skills.
-    //
-    // Example:
-    // "Redux Toolkit" in JD
-    // while "Redux" appears in resume.
     const keywordTokens = normalizeKeyword(item.keyword).split(" ").filter(Boolean);
-
     const matchedToken = keywordTokens.find(token => keywordExistsInText(token, normalizedResume));
 
     if (keywordTokens.length > 1 && matchedToken) {
@@ -501,19 +498,18 @@ export function analyzeJDKeywordGap(resumeText = "", jdText = "") {
       continue;
     }
 
-    missing.push({
+    notDetected.push({
       keyword: item.keyword,
       category: item.category,
       jobFamily: item.jobFamily,
       weight: item.weight,
       importance: item.weight === 3 ? "required" : item.weight === 2 ? "preferred" : "nice_to_have",
+      statusText: "Not detected in extracted resume text",
     });
   }
 
   const totalWeight = jdKeywords.reduce((sum, item) => sum + item.weight, 0);
 
-  // Full match = 100% of keyword weight.
-  // Partial match = 50% of keyword weight.
   const earnedWeight =
     matched.reduce((sum, item) => sum + item.weight, 0) +
     partial.reduce((sum, item) => sum + item.weight * 0.5, 0);
@@ -525,10 +521,12 @@ export function analyzeJDKeywordGap(resumeText = "", jdText = "") {
     totalKeywords: jdKeywords.length,
     matchedKeywords: matched.length,
     partialKeywords: partial.length,
-    missingKeywords: missing.length,
+    missingKeywords: notDetected.length,
+    notDetectedKeywords: notDetected.length,
     matched,
     partial,
-    missing,
+    missing: notDetected,
+    notDetected,
   };
 }
 
@@ -540,7 +538,8 @@ export function normalizeResumeText(text = "") {
     .replace(/(LinkedIn)(?=GitHub|Portfolio)/gi, "$1 ")
     .replace(/(GitHub)(?=LinkedIn|Portfolio)/gi, "$1 ")
     .replace(/(Portfolio)(?=LinkedIn|GitHub)/gi, "$1 ")
-    .replace(/\s+/g, " ")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
     .trim();
 }
 
@@ -572,82 +571,269 @@ export function extractIndianPhone(text = "") {
   return null;
 }
 
-export function getGrade(score) {
-  if (score >= 90) {
-    return "Outstanding";
+export function extractContactInformation(text = "") {
+  const normalized = normalizeResumeText(text);
+
+  const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/;
+  const emailMatch = normalized.match(emailRegex);
+  const email = emailMatch ? emailMatch[0] : null;
+
+  const phone = extractIndianPhone(normalized);
+
+  let intlPhone = null;
+  if (!phone) {
+    const intlRegex =
+      /(?:^|[^\d+])(\+?[1-9]\d{0,2}[-.\s]?(?:\(?\d{1,4}\)?[-.\s]?)?\d{3,4}[-.\s]?\d{3,4})(?!\d)/;
+    const intlMatch = normalized.match(intlRegex);
+    if (intlMatch) {
+      const cleanDigits = intlMatch[1].replace(/\D/g, "");
+      if (cleanDigits.length >= 10 && cleanDigits.length <= 15) {
+        intlPhone = intlMatch[1].trim();
+      }
+    }
   }
 
-  if (score >= 80) {
-    return "Excellent";
+  const detectedPhone = phone || intlPhone;
+
+  const linkedinRegex = /(?:https?:\/\/)?(?:www\.)?linkedin\.com\/(?:in|company)\/[a-zA-Z0-9-_%]+/i;
+  const githubRegex = /(?:https?:\/\/)?(?:www\.)?github\.com\/[a-zA-Z0-9-_%]+/i;
+  const portfolioRegex =
+    /(?:https?:\/\/)?(?:www\.)?(?!gmail\.com)(?!linkedin\.com)(?!github\.com)[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\/[^\s]*)?/i;
+
+  const hasLinkedIn = linkedinRegex.test(normalized) || /\blinkedin\b/i.test(normalized);
+  const hasGithub = githubRegex.test(normalized) || /\bgithub\b/i.test(normalized);
+  const hasPortfolio = portfolioRegex.test(normalized) || /\bportfolio\b/i.test(normalized);
+
+  return {
+    hasEmail: Boolean(email),
+    email,
+    hasPhone: Boolean(detectedPhone),
+    phone: detectedPhone,
+    hasLinkedIn,
+    hasGithub,
+    hasPortfolio,
+    hasProfileLink: hasLinkedIn || hasGithub || hasPortfolio,
+  };
+}
+
+export function detectResumeSections(text = "") {
+  const normalized = String(text).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  const lines = normalized
+    .split("\n")
+    .map(l => l.trim())
+    .filter(Boolean);
+
+  const sectionPatterns = {
+    summary:
+      /^(?:[•\-*#]?\s*)(?:professional\s+summary|career\s+summary|executive\s+summary|summary|profile|about\s+me|career\s+objective|objective)\s*(?::|—|-)?$/i,
+    experience:
+      /^(?:[•\-*#]?\s*)(?:work\s+experience|professional\s+experience|employment\s+history|work\s+history|relevant\s+experience|experience|internships?|internship\s+experience|industrial\s+training|training\s+(?:&|and)\s+experience)\s*(?::|—|-)?$/i,
+    education:
+      /^(?:[•\-*#]?\s*)(?:education(?:al)?(?:\s+background|\s+qualifications?)?|academic\s+background|academics?|qualifications?|education\s+(&|and)\s+training)\s*(?::|—|-)?$/i,
+    skills:
+      /^(?:[•\-*#]?\s*)(?:technical\s+skills|core\s+competencies|key\s+skills|skills\s+(?:&|and)\s+(?:tools|technologies)|skills|technologies|areas\s+of\s+expertise|proficiencies|tools\s+(&|and)\s+technologies)\s*(?::|—|-)?$/i,
+    projects:
+      /^(?:[•\-*#]?\s*)(?:key\s+projects|personal\s+projects|academic\s+projects|featured\s+projects|technical\s+projects|projects|project\s+work)\s*(?::|—|-)?$/i,
+    certifications:
+      /^(?:[•\-*#]?\s*)(?:certifications?|licenses?(?:\s+(?:&|and)\s+certifications?)?|certificates?|professional\s+credentials?|courses\s+(?:&|and)\s+certifications?)\s*(?::|—|-)?$/i,
+    achievements:
+      /^(?:[•\-*#]?\s*)(?:key\s+achievements|achievements?|awards?(?:\s+(?:&|and)\s+honors?)?|honors?|accomplishments?|co-curricular\s+activities)\s*(?::|—|-)?$/i,
+  };
+
+  const detected = {
+    summary: false,
+    experience: false,
+    education: false,
+    skills: false,
+    projects: false,
+    certifications: false,
+    achievements: false,
+  };
+
+  for (const line of lines) {
+    if (line.length > 55) continue;
+    for (const [key, regex] of Object.entries(sectionPatterns)) {
+      if (!detected[key] && regex.test(line)) {
+        detected[key] = true;
+      }
+    }
+  }
+
+  const inlinePatterns = {
+    summary:
+      /(?:^|\s)(?:professional\s+summary|career\s+summary|summary|profile|career\s+objective|objective)\s*:\s*[A-Z0-9]/i,
+    experience:
+      /(?:^|\s)(?:work\s+experience|professional\s+experience|employment\s+history|experience|internships?)\s*:\s*[A-Z0-9]/i,
+    education: /(?:^|\s)(?:education|academic\s+background|qualifications?)\s*:\s*[A-Z0-9]/i,
+    skills:
+      /(?:^|\s)(?:technical\s+skills|core\s+competencies|key\s+skills|skills)\s*:\s*[A-Z0-9]/i,
+    projects: /(?:^|\s)(?:projects?|academic\s+projects?|personal\s+projects?)\s*:\s*[A-Z0-9]/i,
+    certifications: /(?:^|\s)(?:certifications?|licenses?)\s*:\s*[A-Z0-9]/i,
+    achievements: /(?:^|\s)(?:achievements?|awards?)\s*:\s*[A-Z0-9]/i,
+  };
+
+  for (const [key, regex] of Object.entries(inlinePatterns)) {
+    if (!detected[key] && regex.test(normalized)) {
+      detected[key] = true;
+    }
+  }
+
+  const detectedList = Object.entries(detected)
+    .filter(([_, found]) => found)
+    .map(([key]) => capitalize(key));
+
+  return {
+    ...detected,
+    detectedCount: detectedList.length,
+    detectedList,
+    hasPracticalExperience: detected.experience || detected.projects,
+  };
+}
+
+export function extractMeasurableMetrics(text = "") {
+  const metricRegex =
+    /(?:[$₹]\s*\d+(?:,\d+)*(?:\.\d+)?|\b\d+(?:,\d+)*(?:\.\d+)?%|\b\d+(?:,\d+)*\s*(?:k|m|million|billion|lakh|crore|users|clients|customers|requests|events|transactions|team members|hours|days|weeks|months|years|x|fold)\b)/gi;
+  const matches = String(text).match(metricRegex) || [];
+  return unique(matches);
+}
+
+const ACTION_VERBS = [
+  "developed",
+  "built",
+  "created",
+  "implemented",
+  "designed",
+  "optimized",
+  "improved",
+  "managed",
+  "led",
+  "integrated",
+  "deployed",
+  "automated",
+  "engineered",
+  "launched",
+  "maintained",
+  "collaborated",
+  "architected",
+  "spearheaded",
+  "orchestrated",
+  "refactored",
+  "resolved",
+  "increased",
+  "reduced",
+  "saved",
+  "delivered",
+  "authored",
+  "configured",
+  "mentored",
+  "executed",
+  "formulated",
+  "established",
+  "analyzed",
+  "streamlined",
+];
+
+export function extractActionVerbs(text = "") {
+  const lower = String(text).toLowerCase();
+  const found = [];
+  for (const verb of ACTION_VERBS) {
+    const regex = new RegExp(`\\b${verb}\\b`, "i");
+    if (regex.test(lower)) {
+      found.push(verb);
+    }
+  }
+  return unique(found);
+}
+
+export function extractTechnicalSkills(text = "") {
+  const normalized = normalizeKeyword(text);
+  const found = new Map();
+
+  JD_KEYWORD_DICTIONARY.forEach((data, dictKeyword) => {
+    if (!dictKeyword || dictKeyword.length < 2) return;
+    if (data.category === "action_verb") return;
+
+    const pattern = new RegExp(`(^|\\s)${escapeRegex(dictKeyword)}(?=$|\\s)`, "i");
+    if (pattern.test(normalized)) {
+      const canonical = data.canonical;
+      if (!found.has(canonical)) {
+        found.set(canonical, {
+          name: canonical,
+          category: data.category || "skill",
+          jobFamily: data.jobFamily,
+        });
+      }
+    }
+  });
+
+  return Array.from(found.values());
+}
+
+export function getGrade(score) {
+  if (score >= 85) {
+    return "Strong";
   }
 
   if (score >= 70) {
     return "Good";
   }
 
-  if (score >= 60) {
-    return "Average";
+  if (score >= 50) {
+    return "Needs Improvement";
   }
 
-  return "Needs Work";
+  return "Requires Attention";
 }
 
 export function getScoreSummary(score) {
-  if (score >= 90) {
-    return "Excellent ATS compatibility. Resume structure and content are strong.";
-  }
-
-  if (score >= 80) {
-    return "Strong ATS compatibility. A few improvements can push it above 90.";
+  if (score >= 85) {
+    return "Strong ATS profile. Clear section structure, contact details, and relevant competencies detected.";
   }
 
   if (score >= 70) {
-    return "Good ATS compatibility, but important content or sections can be improved.";
+    return "Good ATS foundation. A few refinements in measurable impact or section clarity can strengthen your profile.";
   }
 
-  if (score >= 60) {
-    return "Average ATS compatibility. Improve resume length, sections, and keywords before applying.";
+  if (score >= 50) {
+    return "Moderate ATS compatibility. Add missing standard sections, action verbs, and quantifiable achievements.";
   }
 
-  return "Low ATS compatibility. Significant content and structure improvements are needed.";
+  return "Significant improvements needed. Ensure clean contact details, standard headings, and comprehensive experience or projects.";
 }
 
-export function cleanRecommendations(score, recommendations, checks) {
-  let finalRecommendations = recommendations;
+export function cleanRecommendations(score, recommendations = [], checks = {}) {
+  const seen = new Set();
+  const deduped = [];
 
-  if (checks.hasEmail && checks.hasPhone) {
-    finalRecommendations = finalRecommendations.filter(rec => {
-      const title = rec.title?.toLowerCase() || "";
+  for (const rec of recommendations) {
+    const titleKey = (rec.issue || rec.title || "").toLowerCase().trim();
+    if (!titleKey || seen.has(titleKey)) continue;
+    seen.add(titleKey);
 
-      return !title.includes("contact information");
+    deduped.push({
+      id: rec.id || titleKey.replace(/[^a-z0-9]+/g, "_"),
+      issue: rec.issue || rec.title,
+      severity: rec.severity || rec.type || "info",
+      evidence: rec.evidence || "",
+      explanation: rec.explanation || rec.message || "",
+      suggestedFix: rec.suggestedFix || rec.suggestion || "",
+      category: rec.category || "general",
     });
   }
 
-  // Do not hide warnings when score is low/average.
-  // If score is genuinely high, warnings can become info.
-  if (score >= 90) {
-    finalRecommendations = finalRecommendations.map(rec => {
-      if (rec.type === "warning" || rec.type === "error") {
-        return {
-          ...rec,
-          type: "info",
-        };
-      }
-
-      return rec;
-    });
-  }
-
-  const priority = {
-    success: 1,
+  const severityOrder = {
+    error: 1,
     warning: 2,
-    error: 3,
-    info: 4,
+    info: 3,
+    success: 4,
   };
 
-  return finalRecommendations.sort((a, b) => priority[a.type] - priority[b.type]).slice(0, 6);
+  return deduped
+    .sort((a, b) => (severityOrder[a.severity] || 5) - (severityOrder[b.severity] || 5))
+    .slice(0, 8);
 }
 
 export function capitalize(str) {
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 }

@@ -149,17 +149,17 @@ function ResumePageOne() {
     <article className="relative z-10 w-full max-w-120 min-w-60 border border-[#e5e5e5] bg-white px-3 py-2 shadow-[0_20px_45px_-18px_rgba(30,40,32,0.3)] transition-transform duration-500 hover:-translate-y-1 sm:max-w-120 sm:px-18 sm:py-8">
       <header className="border-b border-[#e5e5e5] pb-4 text-center">
         <h2 className="font-sans text-[22px] font-bold tracking-[0.07em] text-[#252525] sm:text-[25px]">
-          Jordan Smith
+          Aarav Sharma
         </h2>
 
         <p className="mt-1 text-[9px] font-medium uppercase tracking-[0.12em] text-[#444]">
-          Business Marketing Manager
+          Digital Marketing Manager
         </p>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[7px] text-[#555]">
-          <span>New York, USA</span>
+          <span>Bengaluru, India</span>
           <span>·</span>
-          <span>jordan.smith@email.com</span>
+          <span>aarav.sharma@email.com</span>
           <span>·</span>
           <span className="text-[#344b93]">LinkedIn</span>
         </div>
@@ -174,10 +174,10 @@ function ResumePageOne() {
             </h3>
 
             <div className="mt-2 space-y-1 text-[7px] leading-relaxed text-[#444]">
-              <p>New York, USA</p>
-              <p>jordan.smith@email.com</p>
-              <p>linkedin.com/in/jordan</p>
-              <p>+1 234 567 890</p>
+              <p>Bengaluru, Karnataka</p>
+              <p>aarav.sharma@email.com</p>
+              <p>linkedin.com/in/aaravsharma</p>
+              <p>+91 98765 43210</p>
             </div>
           </section>
 
@@ -203,6 +203,7 @@ function ResumePageOne() {
             <div className="mt-2 space-y-1 text-[8px] text-[#444]">
               <p>English</p>
               <p>Hindi</p>
+              <p>Kannada</p>
             </div>
           </section>
 
@@ -212,8 +213,8 @@ function ResumePageOne() {
             </h3>
 
             <div className="mt-2 space-y-1 text-[8px] text-[#444]">
-              <p>Marketing</p>
-              <p>Research</p>
+              <p>Digital Trends</p>
+              <p>Analytics</p>
               <p>Technology</p>
             </div>
           </section>
@@ -227,9 +228,10 @@ function ResumePageOne() {
             </h3>
 
             <p className="mt-2 text-[8px] leading-[1.65] text-[#333]">
-              A versatile professional with a background in business strategy and marketing.
-              Innovative thinker with a drive for results, strong communication skills and a passion
-              for continuous improvement.
+              Results-driven Digital Marketing Manager with experience in campaign strategy, SEO,
+              paid advertising and performance analytics. Skilled in managing cross-functional teams
+              and developing data-driven marketing strategies to improve brand visibility and
+              business growth.
             </p>
           </section>
 
@@ -240,28 +242,28 @@ function ResumePageOne() {
 
             <div className="mt-2">
               <p className="text-[8px] font-bold text-[#292929]">
-                Marketing Manager at Business Corp
+                Digital Marketing Manager at TechNova Solutions
               </p>
 
-              <p className="text-[7px] text-[#888]">Jan 2018 — Present</p>
+              <p className="text-[7px] text-[#888]">Jan 2022 — Present</p>
 
               <ul className="mt-1 list-disc space-y-0.5 pl-3 text-[8px] leading-normal text-[#333]">
-                <li>Led marketing campaigns effectively.</li>
-                <li>Managed a team of five professionals.</li>
-                <li>Increased campaign revenue by 20%.</li>
+                <li>Managed SEO and paid advertising campaigns.</li>
+                <li>Led a team of four marketing professionals.</li>
+                <li>Improved organic website traffic by 35%.</li>
               </ul>
             </div>
 
             <div className="mt-3">
               <p className="text-[8px] font-bold text-[#292929]">
-                Marketing Executive at Creative Agency
+                Marketing Executive at DigitalEdge Media
               </p>
 
-              <p className="text-[7px] text-[#888]">Jun 2016 — Dec 2017</p>
+              <p className="text-[7px] text-[#888]">Jun 2019 — Dec 2021</p>
 
               <ul className="mt-1 list-disc space-y-0.5 pl-3 text-[8px] leading-normal text-[#333]">
-                <li>Supported digital marketing campaigns.</li>
-                <li>Prepared reports on campaign performance.</li>
+                <li>Executed social media and email campaigns.</li>
+                <li>Analyzed campaign performance using Google Analytics.</li>
               </ul>
             </div>
           </section>
@@ -276,9 +278,9 @@ function ResumePageOne() {
                 Bachelor of Business Administration
               </p>
 
-              <p className="text-[7px] text-[#777]">State University</p>
+              <p className="text-[7px] text-[#777]">Christ University, Bengaluru</p>
 
-              <p className="text-[7px] text-[#888]">Jan 2014 — Jan 2018</p>
+              <p className="text-[7px] text-[#888]">2016 — 2019</p>
             </div>
           </section>
 
@@ -288,28 +290,30 @@ function ResumePageOne() {
             </h3>
 
             <div className="mt-2">
-              <p className="text-[8px] font-bold text-[#292929]">Marketing Campaign 2023</p>
+              <p className="text-[8px] font-bold text-[#292929]">E-commerce Growth Campaign</p>
 
-              <p className="text-[7px] text-[#888]">Jan 2023</p>
+              <p className="text-[7px] text-[#888]">Mar 2023 — Aug 2023</p>
 
-              <p className="text-[7px] italic text-[#465b9e]">Tech: Digital Marketing, Analytics</p>
+              <p className="text-[7px] italic text-[#465b9e]">
+                Tech: SEO, Google Ads, Google Analytics
+              </p>
 
               <ul className="mt-1 list-disc pl-3 text-[8px] leading-normal text-[#333]">
-                <li>Successful campaign that reached 1M users.</li>
-                <li>Improved audience engagement through targeted content.</li>
+                <li>Developed a digital campaign targeting online shoppers.</li>
+                <li>Improved campaign engagement through audience segmentation.</li>
               </ul>
             </div>
           </section>
 
           <section className="mt-5">
             <h3 className="text-[9px] font-bold uppercase tracking-[0.13em] text-[#292929]">
-              Certificates
+              Certifications
             </h3>
 
             <div className="mt-2">
-              <p className="text-[8px] font-bold text-[#292929]">Digital Marketing Certified</p>
+              <p className="text-[8px] font-bold text-[#292929]">Google Analytics Certification</p>
 
-              <p className="text-[7px] text-[#465b9e]">Google | Jan 2020</p>
+              <p className="text-[7px] text-[#465b9e]">Google | 2023</p>
             </div>
           </section>
         </main>
@@ -321,7 +325,6 @@ function ResumePageOne() {
     </article>
   );
 }
-
 function AIImprovementCard() {
   return (
     <div className="absolute left-1 top-[17%] z-20 w-39.5 border border-[#dcded6] bg-white p-3 shadow-[0_15px_35px_-15px_rgba(31,42,35,0.3)] sm:-left-3 sm:w-46.25">

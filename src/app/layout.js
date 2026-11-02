@@ -49,7 +49,9 @@ export default function RootLayout({ children }) {
           <CookieBanner />
         </main>
         <script
+          id="website-ldjson"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -63,7 +65,9 @@ export default function RootLayout({ children }) {
         />
 
         <script
+          id="organization-ldjson"
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
