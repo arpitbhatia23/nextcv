@@ -3,6 +3,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
@@ -127,8 +128,10 @@ const CreativeTeal = ({ data }) => (
     <Page size="A4" style={styles.page}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.role}>{data.jobRole || "Creative Professional"}</Text>
+        <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+        <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+          {data.jobRole || "Creative Professional"}
+        </Text>
         <View style={styles.contact}>
           <Text>{data.email}</Text>
           <Text>|</Text>
@@ -283,9 +286,11 @@ const CreativeTeal = ({ data }) => (
           ))}
         </View>
       )}
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

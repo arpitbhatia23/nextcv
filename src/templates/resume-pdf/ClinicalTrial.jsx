@@ -1,117 +1,116 @@
 "use client";
 import React from "react";
-import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
-    lineHeight: 1.5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 20,
-    borderLeftWidth: 5,
+    marginBottom: 16,
+    borderLeftWidth: 3,
     borderLeftColor: "#0284c7", // Sky/Blue 600
-    paddingLeft: 15,
+    paddingLeft: 12,
   },
   name: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
     color: "#0f172a",
-    marginBottom: 8, // Added margin to prevent overlap
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 6,
-
-    fontSize: 14,
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
     color: "#0284c7",
     textTransform: "uppercase",
-    letterSpacing: 1.2,
+    letterSpacing: 1,
     marginBottom: 6,
   },
   contactRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
-    fontSize: 9,
-    color: "#475569",
+    fontSize: 8.5,
+    color: "#64748b",
   },
-  // Sections
   section: {
-    marginBottom: 18,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
-    backgroundColor: "#334155", // Slate 700
-    padding: "3 8",
-    marginBottom: 10,
+    color: "#0f172a",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
+    marginBottom: 8,
     textTransform: "uppercase",
-    alignSelf: "flex-start",
-    borderRadius: 2,
+    letterSpacing: 0.8,
   },
-  // Research/Trial Experience
   jobBlock: {
-    marginBottom: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: "#e2e8f0",
-    paddingBottom: 10,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
     color: "#0284c7",
-    fontFamily: "Helvetica-Bold",
   },
   jobDate: {
-    fontSize: 9,
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
     color: "#64748b",
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 5,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 12,
+    width: 8,
+    fontSize: 9,
     color: "#0284c7",
   },
   bulletText: {
     flex: 1,
-    fontSize: 10,
+    fontSize: 9,
     color: "#334155",
+    lineHeight: 1.35,
   },
-  // Skills grid
   skillContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 6,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9,
+    fontSize: 8.5,
     backgroundColor: "#f0f9ff",
     padding: "3 6",
     color: "#0369a1",
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: "#bae6fd",
     borderRadius: 2,
+    fontFamily: "Helvetica",
   },
 });
 
@@ -121,8 +120,10 @@ const ClinicalTrial = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole || "Clinical Research Associate"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Clinical Research Associate"}
+          </Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
@@ -139,7 +140,7 @@ const ClinicalTrial = ({ data }) => {
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Professional Profile</Text>
-            <Text style={{ fontSize: 10, color: "#334155" }}>{data.summary}</Text>
+            <Text style={{ fontSize: 9, color: "#334155", lineHeight: 1.4 }}>{data.summary}</Text>
           </View>
         )}
 
@@ -157,7 +158,7 @@ const ClinicalTrial = ({ data }) => {
                 </View>
                 <Text style={styles.jobCompany}>{exp.companyName}</Text>
 
-                <View style={{ marginTop: 4 }}>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -189,11 +190,15 @@ const ClinicalTrial = ({ data }) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Certifications & Training</Text>
             {data.certificates.map((cert, i) => (
-              <View key={i} style={{ flexDirection: "row", marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold", width: 150 }}>{cert.title}</Text>
-                <Text style={{ fontSize: 10, color: "#475569" }}>
-                  {" "}
-                  - {cert.organization} ({formatDate(cert.year)})
+              <View
+                key={i}
+                style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 3 }}
+              >
+                <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                  {cert.title}
+                </Text>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>
+                  {cert.organization} ({formatDate(cert.year)})
                 </Text>
               </View>
             ))}
@@ -206,12 +211,15 @@ const ClinicalTrial = ({ data }) => {
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.institution}, {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
@@ -224,8 +232,12 @@ const ClinicalTrial = ({ data }) => {
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

@@ -3,107 +3,112 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Times-Roman",
-    backgroundColor: "#fff",
-    color: "#000",
-    lineHeight: 1.4,
+    backgroundColor: "#ffffff",
+    color: "#111827",
+    lineHeight: 1.38,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomColor: "#111827",
     paddingBottom: 10,
-    alignItems: "center", // Center aligned
+    alignItems: "center",
   },
   name: {
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "Times-Bold",
-    color: "#000",
-    marginBottom: 4,
+    color: "#111827",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   role: {
-    marginTop: 4,
-    fontSize: 12,
+    marginTop: 2,
+    fontSize: 10.5,
     fontFamily: "Times-Italic",
+    color: "#4b5563",
     marginBottom: 6,
   },
   contactRow: {
     flexDirection: "row",
     justifyContent: "center",
     gap: 12,
-    fontSize: 9,
-    color: "#333",
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10.5,
     fontFamily: "Times-Bold",
-    color: "#000",
+    color: "#111827",
     textTransform: "uppercase",
     marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#000", // Full width line
-    borderStyle: "dashed", // IBM style dash? Maybe solid is safer
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#111827",
+    paddingBottom: 2,
+    letterSpacing: 0.6,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Times-Bold",
+    color: "#111827",
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9.5,
     fontFamily: "Times-Italic",
-    color: "#333",
+    color: "#374151",
   },
   jobDate: {
-    fontSize: 9,
+    fontSize: 8.5,
     fontFamily: "Times-Roman",
+    color: "#6b7280",
   },
   description: {
-    fontSize: 10,
-    color: "#222",
-    marginTop: 2,
+    fontSize: 9,
+    color: "#374151",
+    lineHeight: 1.35,
     textAlign: "justify",
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 6,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 10,
-    color: "#000",
+    width: 8,
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   bulletText: {
     flex: 1,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 6,
   },
   skillItem: {
-    fontSize: 9.5,
+    fontSize: 9,
     fontFamily: "Times-Italic",
-    color: "#333",
+    color: "#1f2937",
   },
 });
 
@@ -111,21 +116,23 @@ const IbmClassic = ({ data }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header (Centered Classic) */}
+        {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Senior Technology Executive"}
+          </Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.linkedin} style={{ color: "#111827", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.portfolio} style={{ color: "#111827", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -152,11 +159,11 @@ const IbmClassic = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>-</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -179,18 +186,19 @@ const IbmClassic = ({ data }) => {
                 {proj.technologiesOrTopics && (
                   <Text
                     style={{
-                      fontSize: 9,
+                      fontSize: 8.5,
                       fontFamily: "Times-Italic",
+                      color: "#4b5563",
                       marginBottom: 2,
                     }}
                   >
                     Tech: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>-</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -208,7 +216,7 @@ const IbmClassic = ({ data }) => {
               {data.skills.map((skill, i) => (
                 <Text key={i} style={styles.skillItem}>
                   {skill.name || skill}
-                  {i < data.skills.length - 1 ? ", " : ""}
+                  {i < data.skills.length - 1 ? "  •  " : ""}
                 </Text>
               ))}
             </View>
@@ -221,15 +229,18 @@ const IbmClassic = ({ data }) => {
             <Text style={styles.sectionTitle}>Qualification</Text>
             {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontFamily: "Times-Bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.institution}, {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Times-Bold", color: "#111827" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#4b5563" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>-</Text>
+                        <Text style={styles.bulletPoint}>•</Text>
                         <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
@@ -238,15 +249,21 @@ const IbmClassic = ({ data }) => {
               </View>
             ))}
             {data.certificates?.map((cert, i) => (
-              <View key={i} style={{ marginTop: 4 }}>
-                <Text style={{ fontSize: 10, fontFamily: "Times-Bold" }}>{cert.title}</Text>
-                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+              <View key={i} style={{ marginTop: 3 }}>
+                <Text style={{ fontSize: 9.5, fontFamily: "Times-Bold", color: "#111827" }}>
+                  {cert.title}
+                </Text>
+                <Text style={{ fontSize: 8.5, color: "#4b5563" }}>{cert.organization}</Text>
               </View>
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

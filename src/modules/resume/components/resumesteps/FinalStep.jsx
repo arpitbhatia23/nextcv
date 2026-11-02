@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/shared/components/ui/card";
 
@@ -17,6 +17,8 @@ import {
   AlertCircle,
   FileText,
   Sparkles,
+  Maximize2,
+  X,
 } from "lucide-react";
 
 import Image from "next/image";
@@ -92,6 +94,14 @@ const FinalStep = () => {
 
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+
+  const previewDialogRef = useRef(null);
+
+  const closePreviewButtonRef = useRef(null);
+
+  const previewTriggerRef = useRef(null);
+
   const [originalAmount, setOriginalAmount] = useState(0);
 
   const [isSubmit, setIsSubmit] = useState(false);
@@ -111,6 +121,48 @@ const FinalStep = () => {
       step_number: 9,
     });
   }, []);
+
+  useEffect(() => {
+    if (!isPreviewOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closePreviewButtonRef.current?.focus();
+
+    const handlePreviewKeyDown = event => {
+      if (event.key === "Escape") {
+        setIsPreviewOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusableElements = previewDialogRef.current?.querySelectorAll(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusableElements?.length) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handlePreviewKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handlePreviewKeyDown);
+      previewTriggerRef.current?.focus();
+      previewTriggerRef.current = null;
+    };
+  }, [isPreviewOpen]);
 
   const templateWithPricing = useMemo(() => {
     return templates.map(template => {
@@ -223,6 +275,11 @@ const FinalStep = () => {
 
     handleCoupon(coupon);
   }, 1000);
+
+  const openPreview = event => {
+    previewTriggerRef.current = event.currentTarget;
+    setIsPreviewOpen(true);
+  };
 
   const renderTierLabel = tier => {
     if (tier === "Premium") return "Premium";
@@ -451,13 +508,25 @@ const FinalStep = () => {
           style={{ backgroundColor: WHITE, borderColor: BORDER }}
         >
           <CardHeader className="p-3 border-b" style={{ borderColor: BORDER }}>
-            <CardTitle
-              className="nextcv-sans text-[10px] tracking-widest flex items-center gap-2"
-              style={{ color: MUTED }}
-            >
-              <FileText className="w-4 h-4" style={{ color: RUST }} />
-              RESUME PREVIEW
-            </CardTitle>
+            <div className="flex items-center justify-between gap-3">
+              <CardTitle
+                className="nextcv-sans text-[10px] tracking-widest flex items-center gap-2"
+                style={{ color: MUTED }}
+              >
+                <FileText className="w-4 h-4" style={{ color: RUST }} />
+                RESUME PREVIEW
+              </CardTitle>
+              <button
+                type="button"
+                onClick={openPreview}
+                className="flex h-9 w-9 shrink-0 items-center justify-center border transition-colors hover:bg-[#F1F0EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#344B38]"
+                style={{ borderColor: BORDER, color: NAVY }}
+                aria-label="Expand live resume preview"
+                title="Expand preview"
+              >
+                <Maximize2 className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
           </CardHeader>
 
           <CardContent
@@ -639,18 +708,24 @@ const FinalStep = () => {
               </span>
             </span>
 
-            <div className="flex items-center gap-1">
-              <div
-                className="w-2 h-2  animate-pulse rounded-full"
-                style={{ backgroundColor: "#3F7A5C" }}
-              />
-
-              <span
-                className="nextcv-sans text-[10px] tracking-widest uppercase"
-                style={{ color: "#3F7A5C" }}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                <div
+                  className="w-2 h-2  animate-pulse rounded-full"
+                  style={{ backgroundColor: "#3F7A5C" }}
+                />
+              </div>
+              <button
+                type="button"
+                onClick={openPreview}
+                className="flex h-9 items-center gap-2 border px-3 transition-colors hover:bg-[#F1F0EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#344B38]"
+                style={{ borderColor: BORDER, color: NAVY }}
+                aria-label="Expand live resume preview"
+                title="Expand preview"
               >
-                Auto-saved preview
-              </span>
+                <Maximize2 className="h-3.5 w-3.5" aria-hidden="true" />
+                <span className="nextcv-sans text-[10px] uppercase tracking-wider">Expand</span>
+              </button>
             </div>
           </div>
 
@@ -803,6 +878,58 @@ const FinalStep = () => {
           </div>
         </div>
       </div>
+
+      {isPreviewOpen && (
+        <div
+          className="fixed inset-0 z-100 flex items-center justify-center bg-[#17201C]/75 p-0 sm:p-5"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setIsPreviewOpen(false);
+          }}
+        >
+          <section
+            ref={previewDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="resume-preview-title"
+            className="flex h-dvh w-full max-w-330 flex-col overflow-hidden border border-[#D7DBD4] bg-white shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:h-[94dvh]"
+          >
+            <header
+              className="flex shrink-0 items-center justify-between gap-4 border-b px-4 py-3 sm:px-6"
+              style={{ borderColor: BORDER }}
+            >
+              <div className="min-w-0">
+                <p
+                  className="nextcv-sans text-[9px] uppercase tracking-[0.16em]"
+                  style={{ color: FAINT }}
+                >
+                  Final review · Live document
+                </p>
+                <h2
+                  id="resume-preview-title"
+                  className="nextcv-serif mt-1 truncate text-lg font-medium"
+                  style={{ color: NAVY }}
+                >
+                  Resume preview
+                </h2>
+              </div>
+              <button
+                ref={closePreviewButtonRef}
+                type="button"
+                onClick={() => setIsPreviewOpen(false)}
+                className="flex h-10 w-10 shrink-0 items-center justify-center border transition-colors hover:bg-[#F1F0EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#344B38]"
+                style={{ borderColor: BORDER, color: NAVY }}
+                aria-label="Close resume preview"
+                title="Close preview"
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </header>
+            <div className="min-h-0 flex-1 p-2 sm:p-5" style={{ backgroundColor: BG }}>
+              <PDFPreview pdfUrl={pdfUrl} variant="modal" />
+            </div>
+          </section>
+        </div>
+      )}
 
       <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
 

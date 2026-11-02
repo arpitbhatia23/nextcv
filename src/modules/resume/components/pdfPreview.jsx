@@ -1,21 +1,43 @@
 "use client";
 
 import { WatermarkLayer } from "@/modules/payment/components/WatermarkLayer";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Document, Page } from "react-pdf";
 
 const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
   const [numPages, setNumPages] = useState(null);
+  const [modalPageWidth, setModalPageWidth] = useState(360);
+  const previewContainerRef = useRef(null);
 
   const isMobile = variant === "mobile";
   const isCoverLetter = variant === "cover-letter";
+  const isModal = variant === "modal";
 
-  const pageWidth = isMobile ? 280 : isCoverLetter ? 420 : 400;
+  useEffect(() => {
+    if (!isModal || !previewContainerRef.current || typeof ResizeObserver === "undefined") return;
 
-  const containerPadding = isMobile ? "p-4" : isCoverLetter ? "p-3 sm:p-4" : "p-5 sm:p-6 md:p-8";
+    const observer = new ResizeObserver(([entry]) => {
+      const availableWidth = Math.floor(entry.contentRect.width - 44);
+      setModalPageWidth(Math.max(180, Math.min(794, availableWidth)));
+    });
+
+    observer.observe(previewContainerRef.current);
+    return () => observer.disconnect();
+  }, [isModal]);
+
+  const pageWidth = isModal ? modalPageWidth : isMobile ? 280 : isCoverLetter ? 420 : 400;
+
+  const containerPadding = isModal
+    ? "h-full min-h-0 p-2 sm:p-4"
+    : isMobile
+      ? "p-4"
+      : isCoverLetter
+        ? "p-3 sm:p-4"
+        : "p-5 sm:p-6 md:p-8";
 
   return (
     <div
+      ref={previewContainerRef}
       className={`
         relative
         flex
@@ -49,7 +71,15 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
               border
               border-[#E3E2DC]
               bg-[#F1F0EB]
-              ${isMobile ? "max-h-[65vh]" : isCoverLetter ? "max-h-[72vh]" : "max-h-[75vh]"}
+              ${
+                isModal
+                  ? "h-full max-h-full"
+                  : isMobile
+                    ? "max-h-[65vh]"
+                    : isCoverLetter
+                      ? "max-h-[72vh]"
+                      : "max-h-[75vh]"
+              }
             `}
           >
             <div
@@ -92,7 +122,7 @@ const PDFPreview = ({ pdfUrl, variant = "desktop", paid = false }) => {
           </div>
         </Document>
       ) : (
-        <PDFEmptyState isMobile={isMobile} isCoverLetter={isCoverLetter} />
+        <PDFEmptyState isMobile={isMobile || isModal} isCoverLetter={isCoverLetter} />
       )}
     </div>
   );

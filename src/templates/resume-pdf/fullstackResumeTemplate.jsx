@@ -3,13 +3,14 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 // Color palette
-const GREEN = "#36b37e";
+const GREEN = "#059669";
 const TEAL = "#00b8d9";
-const GRAY = "#454f5b";
-const LIGHTGRAY = "#f6f8fa";
-const ACCENT = "#00897b";
+const GRAY = "#1e293b";
+const LIGHTGRAY = "#f8fafc";
+const ACCENT = "#0f766e";
 
 // Icons
 const PhoneIcon = () => (
@@ -55,34 +56,32 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   sidebar: {
-    width: "30%",
+    width: "32%",
     backgroundColor: LIGHTGRAY,
-    padding: 26,
-    paddingTop: 32,
-    paddingBottom: 24,
-    borderRight: "1 solid #e0e7ef",
-    minHeight: 900,
+    padding: 22,
+    borderRight: "0.75 solid #e2e8f0",
   },
   main: {
-    width: "70%",
-    padding: 32,
-    paddingBottom: 24,
+    width: "68%",
+    padding: 22,
   },
   // Sidebar content
   name: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: ACCENT,
-    letterSpacing: 1,
+    fontSize: 20,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
+    letterSpacing: -0.2,
     marginBottom: 2,
     textTransform: "uppercase",
   },
   role: {
-    color: GREEN,
-    fontSize: 13,
-    fontWeight: "bold",
-    marginBottom: 14,
+    color: ACCENT,
+    fontSize: 10,
+    fontFamily: "Helvetica",
+    marginBottom: 12,
     marginTop: 1,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactsRow: {
     flexDirection: "row",
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   sectionLabel: {
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     fontSize: 10,
     color: "#888",
     letterSpacing: 1.2,
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
   skillsListLabel: {
     fontSize: 10,
     color: ACCENT,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 2,
     marginTop: 12,
   },
@@ -140,14 +139,15 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   skillBadge: {
-    backgroundColor: "#e6f4f1",
-    color: "#00897b",
-    fontWeight: 500,
-    fontSize: 9.5,
-    borderRadius: 4,
-    padding: "3 10",
+    backgroundColor: "#ffffff",
+    color: ACCENT,
+    borderWidth: 0.5,
+    borderColor: "#cbd5e1",
+    fontSize: 8.5,
+    borderRadius: 2,
+    padding: "2 6",
     marginRight: 4,
-    marginBottom: 5,
+    marginBottom: 4,
   },
   expertiseSection: {
     marginTop: 10,
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   expertiseLabel: {
     fontSize: 10,
     color: ACCENT,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 4,
   },
   expertiseBarWrap: {
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   // Main content
   mainLabel: {
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     fontSize: 12,
     color: ACCENT,
     borderBottom: `2 solid ${ACCENT}`,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     marginBottom: 13,
   },
   expTitle: {
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     fontSize: 11.5,
     color: "#232323",
     marginBottom: 1,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   expOrg: {
     fontSize: 10.5,
     color: ACCENT,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 1,
   },
   expPeriodLoc: {
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   eduDegree: {
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     fontSize: 10.5,
     color: "#232323",
     marginBottom: 2,
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     marginBottom: 9,
   },
   openSourceTitle: {
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     fontSize: 11,
     color: ACCENT,
     marginBottom: 2,
@@ -296,8 +296,8 @@ const ModernFullStackPDFResume = ({ data }) => (
     <Page size="A4" style={styles.page}>
       {/* SIDEBAR */}
       <View style={styles.sidebar}>
-        <Text style={styles.name}>{data.name || "YOUR NAME"}</Text>
-        <Text style={styles.role}>{data.jobRole || "Your Title"}</Text>
+        <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name || "YOUR NAME"}</Text>
+        <Text style={[styles.role, HEADER_ROLE_STYLE]}>{data.jobRole || "Your Title"}</Text>
         {/* Contacts */}
         <View style={styles.contactsRow}>
           {data.phone && (
@@ -503,9 +503,11 @@ const ModernFullStackPDFResume = ({ data }) => (
           </View>
         )}
       </View>
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

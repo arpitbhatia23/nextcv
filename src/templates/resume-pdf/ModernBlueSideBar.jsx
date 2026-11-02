@@ -3,15 +3,14 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
-// Blue color theme
-const BLUE = "#2072c9";
-const LIGHTGRAY = "#f5f8fa";
-const DARK = "#232323";
+const BLUE = "#1e40af";
+const SLATE_BG = "#f8fafc";
+const DARK = "#0f172a";
 
-// SVG Icons
 const PhoneIcon = () => (
-  <Svg width="10" height="10" viewBox="0 0 24 24">
+  <Svg width="9" height="9" viewBox="0 0 24 24">
     <Path
       fill={BLUE}
       d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.89.76a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.36.27 2.68.76 3.89a1 1 0 01-.21 1.11l-2.2 2.2z"
@@ -19,7 +18,7 @@ const PhoneIcon = () => (
   </Svg>
 );
 const MailIcon = () => (
-  <Svg width="10" height="10" viewBox="0 0 24 24">
+  <Svg width="9" height="9" viewBox="0 0 24 24">
     <Path
       fill={BLUE}
       d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
@@ -27,7 +26,7 @@ const MailIcon = () => (
   </Svg>
 );
 const LocationIcon = () => (
-  <Svg width="10" height="10" viewBox="0 0 24 24">
+  <Svg width="9" height="9" viewBox="0 0 24 24">
     <Path
       fill={BLUE}
       d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"
@@ -35,7 +34,7 @@ const LocationIcon = () => (
   </Svg>
 );
 const LinkedInIcon = () => (
-  <Svg width="10" height="10" viewBox="0 0 24 24">
+  <Svg width="9" height="9" viewBox="0 0 24 24">
     <Path
       fill={BLUE}
       d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.54 20h-2.46v-8h2.46v8zm-1.23-9.21c-.79 0-1.43-.64-1.43-1.43s.64-1.43 1.43-1.43 1.43.64 1.43 1.43-.64 1.43-1.43 1.43zm14.23 9.21h-2.46v-4.18c0-1-.02-2.29-1.39-2.29-1.39 0-1.61 1.09-1.61 2.22v4.25h-2.46v-8h2.36v1.09h.03c.33-.62 1.13-1.27 2.33-1.27 2.49 0 2.95 1.64 2.95 3.77v4.41z"
@@ -46,137 +45,136 @@ const LinkedInIcon = () => (
 const styles = StyleSheet.create({
   page: {
     fontFamily: "Helvetica",
-    fontSize: 11,
-    backgroundColor: "#fff",
+    fontSize: 9.5,
+    backgroundColor: "#ffffff",
     color: DARK,
-    padding: 28,
+    padding: 30,
+    lineHeight: 1.4,
   },
   row: {
     flexDirection: "row",
     width: "100%",
   },
   leftCol: {
-    width: "37%",
-    backgroundColor: LIGHTGRAY,
-    borderRight: `1 solid #e0e7ef`,
+    width: "35%",
+    backgroundColor: SLATE_BG,
+    borderRight: `0.75 solid #e2e8f0`,
     padding: 14,
-    paddingTop: 24,
-    paddingBottom: 20,
-    paddingBottom: 20,
-    flexGrow: 1,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   rightCol: {
-    width: "63%",
-    padding: 24,
-    paddingTop: 8,
-    paddingBottom: 20,
+    width: "65%",
+    padding: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   name: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: BLUE,
+    fontSize: 20,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
     marginBottom: 2,
-    letterSpacing: 1,
+    letterSpacing: -0.2,
     textTransform: "uppercase",
   },
   role: {
-    color: "#3a8dde",
-    fontSize: 12,
-    fontWeight: "bold",
-    marginBottom: 8,
+    color: BLUE,
+    fontSize: 10,
+    fontFamily: "Helvetica",
+    marginBottom: 10,
     marginTop: 1,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   inlineIcons: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 2,
-    marginTop: 1,
+    marginBottom: 4,
     flexWrap: "wrap",
-    gap: 7,
+    gap: 6,
   },
   contact: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 2,
-    color: "#333",
-    fontSize: 10,
-    gap: 3,
+    color: "#475569",
+    fontSize: 8.5,
+    gap: 4,
   },
   link: {
     color: BLUE,
-    textDecoration: "underline",
-    marginLeft: 2,
-    fontSize: 10,
+    textDecoration: "none",
+    fontSize: 8.5,
   },
   sectionTitle: {
-    fontWeight: "bold",
-    fontSize: 13,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
     color: BLUE,
-    borderBottom: `2 solid ${BLUE}`,
-    marginBottom: 7,
-    letterSpacing: 1,
+    borderBottom: `0.75 solid #cbd5e1`,
+    marginBottom: 6,
+    letterSpacing: 0.8,
     paddingBottom: 2,
-    marginTop: 10,
+    marginTop: 8,
     textTransform: "uppercase",
   },
   section: {
-    marginBottom: 14,
+    marginBottom: 12,
   },
   summary: {
-    fontSize: 10.5,
-    color: "#232323",
-    lineHeight: 1.4,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
     marginBottom: 2,
   },
   expBlock: {
-    marginBottom: 12,
+    marginBottom: 9,
   },
   expTitle: {
-    fontWeight: "bold",
-    fontSize: 11.5,
-    color: "#232323",
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+    color: "#0f172a",
     marginBottom: 1,
   },
   expOrg: {
-    fontSize: 10.5,
+    fontSize: 9,
     color: BLUE,
-    fontWeight: "bold",
+    fontFamily: "Helvetica-Bold",
     marginBottom: 1,
   },
   expPeriodLoc: {
     flexDirection: "row",
-    fontSize: 9.5,
-    color: "#888",
-    marginBottom: 3,
+    fontSize: 8.5,
+    color: "#64748b",
+    marginBottom: 2,
     alignItems: "center",
     gap: 6,
   },
   expBullets: {
-    marginLeft: 8,
-    marginBottom: 3,
+    marginLeft: 4,
+    marginBottom: 2,
   },
   expBullet: {
-    fontSize: 9.5,
-    lineHeight: 1.25,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
     marginBottom: 1,
   },
   eduEntry: {
-    marginBottom: 10,
+    marginBottom: 7,
   },
   eduDegree: {
-    fontWeight: "bold",
-    fontSize: 10.5,
-    color: "#232323",
-    marginBottom: 2,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 9.5,
+    color: "#0f172a",
+    marginBottom: 1,
   },
   eduSchool: {
     color: BLUE,
-    fontSize: 10,
+    fontSize: 8.5,
     marginBottom: 1,
   },
   eduMeta: {
-    fontSize: 9,
-    color: "#555",
+    fontSize: 8.5,
+    color: "#64748b",
     marginBottom: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -185,94 +183,101 @@ const styles = StyleSheet.create({
   skillsWrap: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 6,
-    marginBottom: 10,
+    marginTop: 4,
+    marginBottom: 8,
     gap: 4,
   },
   skillBadge: {
-    backgroundColor: "#deedfb",
-    color: BLUE,
-    fontWeight: 500,
-    fontSize: 9.5,
-    borderRadius: 4,
-    padding: "3 9",
-    marginRight: 4,
-    marginBottom: 5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    borderWidth: 0.5,
+    borderColor: "#cbd5e1",
+    fontSize: 8.5,
+    borderRadius: 2,
+    padding: "2 6",
   },
   strengthsSection: {
-    marginTop: 8,
-    marginBottom: 10,
+    marginTop: 6,
+    marginBottom: 8,
   },
   strengthTitle: {
     color: BLUE,
-    fontWeight: "bold",
-    fontSize: 10.5,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 9,
     marginBottom: 1,
   },
   strengthText: {
-    fontSize: 9.5,
-    color: "#222",
-    marginBottom: 5,
+    fontSize: 8.5,
+    color: "#475569",
+    marginBottom: 4,
     lineHeight: 1.3,
   },
   langSection: {
-    marginTop: 8,
+    marginTop: 6,
   },
   langTitle: {
-    fontWeight: "bold",
-    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 9.5,
     color: BLUE,
-    marginBottom: 5,
+    marginBottom: 4,
     textTransform: "uppercase",
   },
   langRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 2,
+    marginBottom: 3,
     gap: 5,
   },
   langName: {
-    fontSize: 10,
-    width: 60,
+    fontSize: 8.5,
+    width: 55,
+    color: "#334155",
   },
   langBar: {
     flexDirection: "row",
     gap: 2,
   },
   langDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 4,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
     marginRight: 1,
-    backgroundColor: "#deedfb",
-    border: `1 solid ${BLUE}`,
+    backgroundColor: "#e2e8f0",
   },
   langDotActive: {
     backgroundColor: BLUE,
-    border: `1 solid ${BLUE}`,
   },
   projBlock: {
     marginBottom: 8,
   },
   projTitle: {
-    fontWeight: "bold",
-    fontSize: 11,
-    color: "#263238",
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+    color: "#0f172a",
   },
   projMeta: {
-    fontSize: 9,
-    color: "#1976d2",
+    fontSize: 8.5,
+    color: BLUE,
     marginBottom: 1,
   },
   projTech: {
-    fontSize: 9,
-    color: "#1976d2",
+    fontSize: 8.5,
+    color: "#0369a1",
     marginBottom: 1,
-    fontStyle: "italic",
+    fontFamily: "Helvetica-Oblique",
   },
-  projDesc: {
+  bulletList: {
+    marginTop: 2,
+  },
+  bulletItem: {
+    flexDirection: "row",
+    marginBottom: 2,
+    paddingLeft: 4,
+  },
+  bulletSymbol: {
+    width: 8,
     fontSize: 9,
-    color: "#444",
+    color: BLUE,
   },
 });
 
@@ -292,11 +297,11 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
       <View style={styles.row}>
         {/* LEFT COLUMN */}
         <View style={styles.leftCol}>
-          <Text style={styles.name}>{data.name || "Your Name"}</Text>
-          <Text style={styles.role}>{data.jobRole || "Job Title"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name || "Your Name"}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>{data.jobRole || "Job Title"}</Text>
 
           <View style={styles.inlineIcons}>
-            {data.phone && (
+            {(data.phone || data.phone_no) && (
               <View style={styles.contact}>
                 <PhoneIcon />
                 <Text>{data.phone || data.phone_no}</Text>
@@ -309,24 +314,24 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
               </View>
             )}
           </View>
-          <View style={styles.inlineIcons}>
-            {data.address && (
+          {data.address && (
+            <View style={styles.inlineIcons}>
               <View style={styles.contact}>
                 <LocationIcon />
                 <Text>{data.address}</Text>
               </View>
-            )}
-          </View>
-          <View style={styles.inlineIcons}>
-            {data.linkedin && (
+            </View>
+          )}
+          {data.linkedin && (
+            <View style={styles.inlineIcons}>
               <View style={styles.contact}>
                 <LinkedInIcon />
                 <Link src={data.linkedin} style={styles.link}>
                   {data.linkedin.replace("https://", "").replace("www.", "")}
                 </Link>
               </View>
-            )}
-          </View>
+            </View>
+          )}
 
           {/* Education */}
           {data.education?.length > 0 && (
@@ -347,15 +352,6 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                       </>
                     )}
                   </View>
-                  {/* {edu.description && (
-                    <View style={{ marginTop: 2 }}>
-                      {splitToBullets(edu.description).map((bullet, idx) => (
-                        <View key={idx} style={styles.expBullets}>
-                          <Text style={styles.expBullet}>• {bullet}</Text>
-                        </View>
-                      ))}
-                    </View>
-                  )} */}
                 </View>
               ))}
             </View>
@@ -393,7 +389,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Certificates</Text>
               {data.certificates.map((cert, i) => (
-                <View key={i} style={{ marginBottom: 6 }}>
+                <View key={i} style={{ marginBottom: 5 }}>
                   <Text style={styles.eduDegree}>{cert.title}</Text>
                   <Text style={styles.eduMeta}>
                     {cert.organization}
@@ -488,7 +484,7 @@ const ModernBlueSidebarPDFResume = ({ data }) => (
                       {splitToBullets(proj.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bulletItem}>
                           <Text style={styles.bulletSymbol}>•</Text>
-                          <Text>{bullet}</Text>
+                          <Text style={{ flex: 1, fontSize: 9, color: "#334155" }}>{bullet}</Text>
                         </View>
                       ))}
                     </View>

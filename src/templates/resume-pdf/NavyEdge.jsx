@@ -15,6 +15,7 @@ import {
 
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const COLORS = {
   navy: "#111c33",
@@ -49,8 +50,10 @@ const styles = StyleSheet.create({
   sidebar: {
     width: "26.5%",
     minHeight: "100%",
-    backgroundColor: COLORS.navy,
-    color: COLORS.white,
+    backgroundColor: "#f8fafc",
+    color: "#1e293b",
+    borderRightWidth: 0.75,
+    borderRightColor: "#e2e8f0",
     paddingTop: 22,
     paddingHorizontal: 20,
     paddingBottom: 22,
@@ -78,15 +81,15 @@ const styles = StyleSheet.create({
   },
 
   sidebarName: {
-    color: COLORS.white,
-    fontSize: 15,
+    color: "#0f172a",
+    fontSize: 14,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
     marginBottom: 4,
   },
 
   sidebarRole: {
-    color: "#76b2ff",
+    color: "#2563eb",
     fontSize: 8.5,
     textAlign: "center",
   },
@@ -99,11 +102,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     paddingTop: 18,
     borderTopWidth: 0.6,
-    borderTopColor: "#263550",
+    borderTopColor: "#e2e8f0",
   },
 
   sidebarTitle: {
-    color: "#69aefb",
+    color: "#0f172a",
     fontSize: 7.4,
     fontFamily: "Helvetica-Bold",
     marginBottom: 10,
@@ -139,14 +142,14 @@ const styles = StyleSheet.create({
 
   contactText: {
     flex: 1,
-    color: "#f2f4f8",
+    color: "#475569",
     fontSize: 7.1,
     lineHeight: 1.35,
   },
 
   contactLink: {
     flex: 1,
-    color: "#f2f4f8",
+    color: "#475569",
     fontSize: 7.1,
     lineHeight: 1.35,
     textDecoration: "none",
@@ -158,7 +161,9 @@ const styles = StyleSheet.create({
   },
 
   skillPill: {
-    backgroundColor: "#30405a",
+    backgroundColor: "#ffffff",
+    borderWidth: 0.5,
+    borderColor: "#cbd5e1",
     borderRadius: 9,
     paddingVertical: 3,
     paddingHorizontal: 7,
@@ -167,7 +172,7 @@ const styles = StyleSheet.create({
   },
 
   skillPillText: {
-    color: "#f8fafc",
+    color: "#1e293b",
     fontSize: 6.2,
   },
 
@@ -185,7 +190,7 @@ const styles = StyleSheet.create({
   },
 
   sidebarListItem: {
-    color: "#f1f5f9",
+    color: "#334155",
     fontSize: 7.1,
     marginBottom: 7,
   },
@@ -702,9 +707,9 @@ const NavyEdge = ({ data = {} }) => {
               <Text style={styles.avatarText}>{getInitials(data.name)}</Text>
             </View>
 
-            <Text style={styles.sidebarName}>{data.name || "Your Name"}</Text>
+            <Text style={[styles.sidebarName, HEADER_NAME_STYLE]}>{data.name || "Your Name"}</Text>
 
-            <Text style={styles.sidebarRole}>
+            <Text style={[styles.sidebarRole, HEADER_ROLE_STYLE]}>
               {data.jobRole || data.professionalTitle || "Professional"}
             </Text>
           </View>

@@ -7,93 +7,107 @@ import { splitToBullets } from "@/shared/utils/splitBullets";
 const styles = StyleSheet.create({
   page: {
     padding: 34,
-    fontSize: 10,
-    fontFamily: "Times-Roman", // Amazon document style
-    backgroundColor: "#fff",
-    color: "#000",
-    lineHeight: 1.4,
+    fontSize: 9.5,
+    fontFamily: "Times-Roman",
+    backgroundColor: "#ffffff",
+    color: "#111827",
+    lineHeight: 1.38,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomColor: "#111827",
     paddingBottom: 10,
   },
   name: {
-    fontSize: 20,
+    fontSize: 22,
     fontFamily: "Times-Bold",
     marginBottom: 4,
     textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   contactRow: {
     marginTop: 4,
     flexDirection: "row",
-    flexWrap: "wrap", // Wrap if too long
+    flexWrap: "wrap",
     gap: 12,
-    fontSize: 9,
+    fontSize: 8.5,
     fontFamily: "Times-Roman",
+    color: "#4b5563",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10.5,
     fontFamily: "Times-Bold",
     textTransform: "uppercase",
-    borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#111827",
     marginBottom: 8,
     paddingBottom: 2,
+    letterSpacing: 0.6,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
-    alignItems: "flex-end", // Align text bottom
+    marginBottom: 1,
+    alignItems: "baseline",
   },
   jobTitle: {
     fontFamily: "Times-Bold",
-    fontSize: 10.5,
+    fontSize: 10,
+    color: "#111827",
   },
   jobCompany: {
     fontFamily: "Times-Italic",
-    fontSize: 10.5,
+    fontSize: 9.5,
+    color: "#374151",
   },
   jobDate: {
     fontFamily: "Times-Italic",
-    fontSize: 9,
+    fontSize: 8.5,
+    color: "#6b7280",
   },
   description: {
-    fontSize: 10,
-    textAlign: "justify", // Document style
+    fontSize: 9,
+    color: "#374151",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 10,
+    paddingLeft: 6,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 10,
+    width: 8,
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   bulletText: {
     flex: 1,
+    fontSize: 9,
+    color: "#374151",
+    lineHeight: 1.35,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 6,
   },
   skillItem: {
     fontFamily: "Times-Roman",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-    paddingBottom: 1,
+    fontSize: 9,
+    color: "#1f2937",
+    backgroundColor: "#f9fafb",
+    borderWidth: 0.5,
+    borderColor: "#e5e7eb",
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    borderRadius: 2,
   },
 });
 
@@ -103,23 +117,24 @@ const AmazonOperations = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
+          <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
-            {data.email && <Text>Email: {data.email}</Text>}
-            {(data.phone || data.phone_no) && <Text>Phone: {data.phone || data.phone_no}</Text>}
+            {data.email && <Text>{data.email}</Text>}
+            {(data.phone || data.phone_no) && <Text>• {data.phone || data.phone_no}</Text>}
+            {data.address && <Text>• {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
-                LinkedIn
+              <Link src={data.linkedin} style={{ color: "#111827", textDecoration: "none" }}>
+                • LinkedIn
               </Link>
             )}
             {data.github && (
-              <Link src={data.github} style={{ color: "#000", textDecoration: "none" }}>
-                GitHub
+              <Link src={data.github} style={{ color: "#111827", textDecoration: "none" }}>
+                • GitHub
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
-                Portfolio
+              <Link src={data.portfolio} style={{ color: "#111827", textDecoration: "none" }}>
+                • Portfolio
               </Link>
             )}
           </View>
@@ -145,13 +160,12 @@ const AmazonOperations = ({ data }) => {
                     {formatDate(exp.startDate)} – {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -176,12 +190,11 @@ const AmazonOperations = ({ data }) => {
                   {edu.degree} {edu.grade ? `(GPA: ${edu.grade})` : ""}
                 </Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-
-                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -205,19 +218,19 @@ const AmazonOperations = ({ data }) => {
                   <Text
                     style={{
                       fontFamily: "Times-Italic",
-                      fontSize: 9,
+                      fontSize: 8.5,
+                      color: "#4b5563",
                       marginBottom: 2,
                     }}
                   >
                     Tech: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -246,8 +259,8 @@ const AmazonOperations = ({ data }) => {
             <Text style={styles.sectionTitle}>Certifications</Text>
             {data.certificates.map((cert, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontFamily: "Times-Bold", fontSize: 10 }}>{cert.title}</Text>
-                <Text style={{ fontSize: 9 }}>
+                <Text style={{ fontFamily: "Times-Bold", fontSize: 9.5 }}>{cert.title}</Text>
+                <Text style={{ fontSize: 8.5, color: "#6b7280" }}>
                   {cert.organization} ({formatDate(cert.year)})
                 </Text>
               </View>

@@ -3,6 +3,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Svg, Path } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 // Icon SVGs
 const LocationIcon = () => (
@@ -266,8 +267,10 @@ const ClassicMinimalistPDFResume = ({ data }) => (
     <Page size="A4" style={styles.page}>
       {/* Top: Photo, Name, Headline, Contacts */}
       <View style={styles.topSection}>
-        <Text style={styles.name}>{data.name || "YOUR NAME"}</Text>
-        <Text style={styles.subline}>{data.jobRole && data.jobRole.toUpperCase()}</Text>
+        <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name || "YOUR NAME"}</Text>
+        <Text style={[styles.subline, HEADER_ROLE_STYLE]}>
+          {data.jobRole && data.jobRole.toUpperCase()}
+        </Text>
         <View style={styles.infoRow}>
           {data.address && (
             <View style={styles.infoItem}>
@@ -465,9 +468,11 @@ const ClassicMinimalistPDFResume = ({ data }) => (
           )}
         </View>
       </View>
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

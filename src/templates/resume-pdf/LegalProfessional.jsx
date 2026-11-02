@@ -3,6 +3,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
@@ -119,8 +120,8 @@ const LegalProfessional = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole || "Attorney at Law"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>{data.jobRole || "Attorney at Law"}</Text>
           <View style={styles.contactRow}>
             {data.address && <Text>{data.address}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
@@ -221,8 +222,12 @@ const LegalProfessional = ({ data }) => {
             )}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

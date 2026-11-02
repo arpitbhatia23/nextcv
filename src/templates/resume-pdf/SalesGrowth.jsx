@@ -1,131 +1,130 @@
 "use client";
 import React from "react";
-import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
     lineHeight: 1.4,
   },
   header: {
-    marginBottom: 20,
-    backgroundColor: "#22c55e", // Growth Green
-    padding: 20,
-    color: "#fff",
+    marginBottom: 16,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#16a34a", // Growth Green accent
+    paddingBottom: 12,
   },
   name: {
-    fontSize: 28,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
-    marginBottom: 10,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 4,
-
-    fontSize: 14,
-    color: "#dcfce7", // Light green
-    marginBottom: 10,
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
+    color: "#16a34a",
+    marginBottom: 6,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactRow: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 15,
-    fontSize: 9,
-    color: "#f0fdf4",
+    gap: 12,
+    fontSize: 8.5,
+    color: "#64748b",
   },
-  // Sections
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#166534", // Dark Green
+    color: "#0f172a",
     marginBottom: 8,
-    borderBottomWidth: 2,
-    borderBottomColor: "#22c55e",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
     paddingBottom: 2,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
-  // Metrics/Achievement Box (Unique for Sales)
   metricsBox: {
     backgroundColor: "#f0fdf4",
-    padding: 10,
-    marginBottom: 15,
-    borderLeftWidth: 4,
-    borderLeftColor: "#22c55e",
-  },
-  metricsTitle: {
-    fontSize: 11,
-    fontFamily: "Helvetica-Bold",
-    color: "#15803d",
+    padding: "6 10",
     marginBottom: 10,
+    borderLeftWidth: 2.5,
+    borderLeftColor: "#16a34a",
+    borderRadius: 2,
   },
   metricsText: {
-    fontSize: 10,
+    fontSize: 9,
     color: "#166534",
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9,
     color: "#16a34a",
-    fontFamily: "Helvetica-Bold",
+    fontFamily: "Helvetica-Oblique",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 6,
+    paddingLeft: 4,
   },
   bulletPoint: {
     width: 8,
-    fontSize: 12,
-    color: "#22c55e",
+    fontSize: 9,
+    color: "#16a34a",
   },
   bulletText: {
     flex: 1,
-    fontSize: 10,
-    color: "#333",
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    backgroundColor: "#dcfce7",
-    padding: "3 8",
-    borderRadius: 4,
-    color: "#166534",
-    borderWidth: 1,
+    fontSize: 8.5,
+    backgroundColor: "#f0fdf4",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    borderRadius: 2,
+    color: "#15803d",
+    borderWidth: 0.5,
     borderColor: "#bbf7d0",
+    fontFamily: "Helvetica",
   },
 });
 
@@ -135,12 +134,24 @@ const SalesGrowth = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole || "Sales Professional"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Sales Professional"}
+          </Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
-            {data.linkedin && <Text>| LinkedIn</Text>}
+            {data.address && <Text>| {data.address}</Text>}
+            {data.linkedin && (
+              <Link src={data.linkedin} style={{ color: "#16a34a", textDecoration: "none" }}>
+                | LinkedIn
+              </Link>
+            )}
+            {data.portfolio && (
+              <Link src={data.portfolio} style={{ color: "#16a34a", textDecoration: "none" }}>
+                | Portfolio
+              </Link>
+            )}
           </View>
         </View>
 
@@ -148,19 +159,18 @@ const SalesGrowth = ({ data }) => {
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Professional Summary</Text>
-            <Text style={{ fontSize: 10, lineHeight: 1.5 }}>{data.summary}</Text>
+            <Text style={{ fontSize: 9, lineHeight: 1.4, color: "#334155" }}>{data.summary}</Text>
           </View>
         )}
 
-        {/* Key Achievements (Highlighted Section) */}
+        {/* Key Achievements */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Key Achievements</Text>
           <View style={styles.metricsBox}>
             <Text style={styles.metricsText}>
-              {/* Suggesting user to add dynamic metrics here later, for now using summary or first job highlights if available */}
               {data.summary
-                ? `Proven track record: ${data.summary.substring(0, 100)}...`
-                : "Consistent top performer exceeding quotas by 150% YoY."}
+                ? `Proven track record: ${data.summary.substring(0, 120)}...`
+                : "Consistent top performer exceeding quotas by 150% YoY through strategic account management and revenue pipeline optimization."}
             </Text>
           </View>
         </View>
@@ -177,11 +187,11 @@ const SalesGrowth = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={styles.jobCompany}>{exp.companyName}</Text>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
                 <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>$</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
@@ -205,21 +215,24 @@ const SalesGrowth = ({ data }) => {
           </View>
         )}
 
-        {/* Education */}
-        {data.education?.length > 0 && (
+        {/* Education & Certs */}
+        {(data.education?.length > 0 || data.certificates?.length > 0) && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
-            {data.education.map((edu, i) => (
+            {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 9 }}>
-                  {edu.institution} | {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>$</Text>
+                        <Text style={styles.bulletPoint}>•</Text>
                         <Text style={styles.bulletText}>{bullet}</Text>
                       </View>
                     ))}
@@ -229,17 +242,25 @@ const SalesGrowth = ({ data }) => {
             ))}
             {data.certificates?.length > 0 && (
               <View style={{ marginTop: 6 }}>
+                <Text style={[styles.sectionTitle, { marginBottom: 4 }]}>Certifications</Text>
                 {data.certificates.map((cert, i) => (
-                  <Text key={i} style={{ fontSize: 9 }}>
-                    {cert.title} - {cert.organization}
-                  </Text>
+                  <View key={i} style={{ marginTop: 2 }}>
+                    <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                      {cert.title}
+                    </Text>
+                    <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
+                  </View>
                 ))}
               </View>
             )}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

@@ -1,113 +1,119 @@
 "use client";
 import React from "react";
-import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10.5,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     color: "#202124", // Google Dark Grey
-    lineHeight: 1.2,
+    lineHeight: 1.38,
   },
   header: {
-    marginBottom: 15,
+    marginBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#dadce0", // Light grey divider
+    borderBottomColor: "#dadce0",
     paddingBottom: 10,
   },
   name: {
-    fontSize: 22, // Standout but not huge
+    fontSize: 22,
     fontFamily: "Helvetica-Bold",
     color: "#202124",
-    marginBottom: 6,
+    marginBottom: 4,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   contactRow: {
     marginTop: 4,
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
-    fontSize: 9,
-    color: "#5f6368", // Secondary text color
+    gap: 10,
+    fontSize: 8.5,
+    color: "#5f6368",
   },
   link: {
     color: "#1a73e8", // Google Blue
     textDecoration: "none",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
     color: "#202124",
     textTransform: "uppercase",
     marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#dadce0", // Subtle separator
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#dadce0",
     paddingBottom: 2,
-    letterSpacing: 0.5,
+    letterSpacing: 0.6,
   },
-  // Experience Item
   expItem: {
-    marginBottom: 10,
+    marginBottom: 9,
   },
   expHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   role: {
-    fontSize: 10.5,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
     color: "#202124",
   },
   company: {
-    fontSize: 10.5,
+    fontSize: 9,
     fontFamily: "Helvetica",
-    color: "#202124",
+    color: "#3c4043",
   },
   date: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: "#5f6368",
     textAlign: "right",
   },
   description: {
-    fontSize: 9.5,
+    fontSize: 9,
     color: "#3c4043",
     marginTop: 2,
+    lineHeight: 1.35,
   },
-  // Bullet points
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 10,
+    width: 8,
+    fontSize: 9,
     color: "#5f6368",
   },
   bulletText: {
     flex: 1,
+    fontSize: 9,
+    color: "#3c4043",
+    lineHeight: 1.35,
   },
-  // Skills
   skillSection: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 6,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    backgroundColor: "#f1f3f4",
-    paddingVertical: 2,
+    fontSize: 8.5,
+    backgroundColor: "#f8fafc",
+    borderWidth: 0.5,
+    borderColor: "#dadce0",
+    paddingVertical: 2.5,
     paddingHorizontal: 6,
-    borderRadius: 4,
+    borderRadius: 2,
     color: "#3c4043",
+    fontFamily: "Helvetica",
   },
 });
 
@@ -120,21 +126,21 @@ const GoogleTech = ({ data }) => {
           <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {data.phone || (data.phone_no && <Text>• {data.phone || data.phone_no}</Text>)}
+            {(data.phone || data.phone_no) && <Text>• {data.phone || data.phone_no}</Text>}
             {data.address && <Text>• {data.address}</Text>}
             {data.linkedin && (
               <Link src={data.linkedin} style={styles.link}>
-                LinkedIn
+                • LinkedIn
               </Link>
             )}
             {data.github && (
               <Link src={data.github} style={styles.link}>
-                GitHub
+                • GitHub
               </Link>
             )}
             {data.portfolio && (
               <Link src={data.portfolio} style={styles.link}>
-                Portfolio
+                • Portfolio
               </Link>
             )}
           </View>
@@ -144,7 +150,7 @@ const GoogleTech = ({ data }) => {
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Summary</Text>
-            <Text style={{ ...styles.description, lineHeight: 1.5 }}>{data.summary}</Text>
+            <Text style={styles.description}>{data.summary}</Text>
           </View>
         )}
 
@@ -155,18 +161,45 @@ const GoogleTech = ({ data }) => {
             {data.experience.map((exp, i) => (
               <View key={i} style={styles.expItem}>
                 <View style={styles.expHeader}>
-                  <Text style={styles.role}>
-                    {exp.position} <Text style={styles.company}>at {exp.companyName}</Text>
-                  </Text>
+                  <Text style={styles.role}>{exp.position}</Text>
                   <Text style={styles.date}>
-                    {formatDate(exp.startDate)} – {formatDate(exp.endDate) || "Present"}
+                    {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <View>
+                <Text style={styles.company}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
+
+        {/* Projects */}
+        {data.projects?.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Projects</Text>
+            {data.projects.map((proj, i) => (
+              <View key={i} style={styles.expItem}>
+                <View style={styles.expHeader}>
+                  <Text style={styles.role}>{proj.title}</Text>
+                  <Text style={styles.date}>{formatDate(proj.date)}</Text>
+                </View>
+                {proj.technologiesOrTopics && (
+                  <Text style={{ fontSize: 8.5, color: "#1a73e8", marginBottom: 2 }}>
+                    Technologies: {proj.technologiesOrTopics}
+                  </Text>
+                )}
+                <View style={{ marginTop: 2 }}>
+                  {splitToBullets(proj.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bullet}>
+                      <Text style={styles.bulletPoint}>•</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -184,18 +217,16 @@ const GoogleTech = ({ data }) => {
                 <View style={styles.expHeader}>
                   <Text style={styles.role}>{edu.institution}</Text>
                   <Text style={styles.date}>
-                    {formatDate(edu.startYear)} – {formatDate(edu.endYear) || "Present"}
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                   </Text>
                 </View>
-                <Text style={styles.company}>
-                  {edu.degree} {edu.grade ? `(Grade: ${edu.grade})` : ""}
-                </Text>
+                <Text style={styles.company}>{edu.degree}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -205,38 +236,10 @@ const GoogleTech = ({ data }) => {
           </View>
         )}
 
-        {/* Projects */}
-        {data.projects?.length > 0 && (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Projects</Text>
-            {data.projects.map((proj, i) => (
-              <View key={i} style={styles.expItem}>
-                <View style={styles.expHeader}>
-                  <Text style={styles.role}>{proj.title}</Text>
-                  <Text style={styles.date}>{formatDate(proj.date)}</Text>
-                </View>
-                {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#1a73e8", marginBottom: 2 }}>
-                    {proj.technologiesOrTopics}
-                  </Text>
-                )}
-                <View>
-                  {splitToBullets(proj.description).map((bullet, idx) => (
-                    <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-            ))}
-          </View>
-        )}
-
         {/* Skills */}
         {data.skills?.length > 0 && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Technical Skills</Text>
+            <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.skillSection}>
               {data.skills.map((skill, i) => (
                 <Text key={i} style={styles.skillItem}>

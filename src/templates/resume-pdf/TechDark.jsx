@@ -3,101 +3,102 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 0, // Zero padding to allow full width header
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    padding: 30,
-    backgroundColor: "#0f172a", // Slate-900
-    color: "#fff",
-    marginBottom: 20,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#0f172a",
+    paddingBottom: 14,
+    marginBottom: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   headerContent: {
     flex: 1,
   },
   name: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 4,
-    textTransform: "uppercase",
+    fontSize: 24,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
+    marginBottom: 3,
+    letterSpacing: -0.3,
   },
   role: {
-    fontSize: 12,
-    color: "#94a3b8", // Slate-400
-    marginBottom: 8,
+    fontSize: 11,
+    fontFamily: "Helvetica",
+    color: "#475569",
+    marginBottom: 6,
     textTransform: "uppercase",
-    letterSpacing: 2,
+    letterSpacing: 1.2,
   },
   contact: {
-    fontSize: 9,
-    color: "#cbd5e1", // Slate-300
-    marginTop: 2,
+    fontSize: 8.5,
+    color: "#64748b",
     flexDirection: "row",
-    gap: 8,
+    flexWrap: "wrap",
+    gap: 6,
   },
   links: {
     flexDirection: "column",
-    gap: 4,
+    gap: 3,
     alignItems: "flex-end",
   },
   linkItem: {
-    fontSize: 9,
-    color: "#38bdf8", // Sky-400
+    fontSize: 8.5,
+    color: "#0284c7",
     textDecoration: "none",
   },
   mainContent: {
-    padding: 30,
     paddingTop: 0,
   },
   section: {
-    marginBottom: 18,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
-    fontWeight: "bold",
+    fontSize: 10,
+    fontFamily: "Helvetica-Bold",
     color: "#0f172a",
-    borderBottomWidth: 2,
-    borderBottomColor: "#0f172a",
-    paddingBottom: 4,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
     marginBottom: 8,
     textTransform: "uppercase",
+    letterSpacing: 1,
   },
   itemGroup: {
-    marginBottom: 10,
+    marginBottom: 9,
   },
   itemHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   itemTitle: {
-    fontSize: 11,
-    fontWeight: "bold",
-    color: "#1e293b",
+    fontSize: 10,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   itemDate: {
-    fontSize: 9,
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
     color: "#64748b",
-    backgroundColor: "#f1f5f9",
-    padding: "2 6",
-    borderRadius: 4,
   },
   itemSubtitle: {
-    fontSize: 10,
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
     color: "#475569",
-    fontStyle: "italic",
-    marginBottom: 4,
+    marginBottom: 3,
   },
   bulletRow: {
     flexDirection: "row",
@@ -105,27 +106,30 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 10,
-    color: "#0f172a",
+    width: 8,
+    fontSize: 9,
+    color: "#475569",
   },
   bulletText: {
     flex: 1,
     fontSize: 9,
     color: "#334155",
-    lineHeight: 1.5,
+    lineHeight: 1.35,
   },
   skillRow: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 6,
+    gap: 5,
   },
   skillTag: {
-    backgroundColor: "#1e293b",
-    color: "#fff",
-    fontSize: 9,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    backgroundColor: "#f8fafc",
+    borderWidth: 0.5,
+    borderColor: "#cbd5e1",
+    color: "#1e293b",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    paddingHorizontal: 7,
+    paddingVertical: 3,
     borderRadius: 2,
   },
 });
@@ -133,16 +137,27 @@ const styles = StyleSheet.create({
 const TechDark = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      {/* Dark Header */}
+      {/* Editorial Tech Header */}
       <View style={styles.header}>
         <View style={styles.headerContent}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole || "Tech Professional"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Tech Professional"}
+          </Text>
           <View style={styles.contact}>
-            <Text>{data.email}</Text>
-            <Text>|</Text>
-            <Text>{data.phone || data.phone_no}</Text>
-            {data.address && <Text>| {data.address}</Text>}
+            {data.email && <Text>{data.email}</Text>}
+            {(data.phone || data.phone_no) && (
+              <>
+                <Text style={{ color: "#cbd5e1" }}>•</Text>
+                <Text>{data.phone || data.phone_no}</Text>
+              </>
+            )}
+            {data.address && (
+              <>
+                <Text style={{ color: "#cbd5e1" }}>•</Text>
+                <Text>{data.address}</Text>
+              </>
+            )}
           </View>
         </View>
         <View style={styles.links}>
@@ -169,7 +184,7 @@ const TechDark = ({ data }) => (
         {data.summary && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Summary</Text>
-            <Text style={{ fontSize: 9.5, lineHeight: 1.6, color: "#334155" }}>{data.summary}</Text>
+            <Text style={{ fontSize: 9, lineHeight: 1.4, color: "#334155" }}>{data.summary}</Text>
           </View>
         )}
 
@@ -203,7 +218,7 @@ const TechDark = ({ data }) => (
                 <View>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletRow}>
-                      <Text style={styles.bulletPoint}>›</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
@@ -226,19 +241,19 @@ const TechDark = ({ data }) => (
                 {proj.technologiesOrTopics && (
                   <Text
                     style={{
-                      fontFamily: "Courier",
-                      fontSize: 9,
-                      color: "#ef4444",
-                      marginBottom: 3,
+                      fontFamily: "Helvetica-Oblique",
+                      fontSize: 8.5,
+                      color: "#0369a1",
+                      marginBottom: 2,
                     }}
                   >
-                    [{proj.technologiesOrTopics}]
+                    {proj.technologiesOrTopics}
                   </Text>
                 )}
                 <View>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletRow}>
-                      <Text style={styles.bulletPoint}>›</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                     </View>
                   ))}
@@ -263,8 +278,8 @@ const TechDark = ({ data }) => (
                   <Link
                     src={cert.credentialUrl}
                     style={{
-                      fontSize: 9,
-                      color: "#38bdf8",
+                      fontSize: 8.5,
+                      color: "#0284c7",
                       textDecoration: "none",
                     }}
                   >
@@ -290,10 +305,10 @@ const TechDark = ({ data }) => (
                 </View>
                 <Text style={styles.itemSubtitle}>{edu.degree}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4, width: "100%" }}>
+                  <View style={{ marginTop: 3, width: "100%" }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bulletRow}>
-                        <Text style={styles.bulletPoint}>›</Text>
+                        <Text style={styles.bulletPoint}>•</Text>
                         <Text style={styles.bulletText}>{bullet.replace(/^•\s*/, "")}</Text>
                       </View>
                     ))}
@@ -304,9 +319,11 @@ const TechDark = ({ data }) => (
           </View>
         )}
       </View>
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

@@ -6,79 +6,141 @@ import { splitToBullets } from "@/shared/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
-    fontSize: 11,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#222",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    borderBottom: "1 solid #b0b0b0",
+    borderBottomWidth: 1,
+    borderBottomColor: "#cbd5e1",
     marginBottom: 16,
     paddingBottom: 10,
     alignItems: "center",
     textAlign: "center",
   },
   name: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 4,
-    letterSpacing: 0.5,
-    color: "#1a237e",
+    fontSize: 22,
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 3,
+    letterSpacing: -0.2,
+    color: "#0f172a",
     textTransform: "uppercase",
   },
-  contact: { fontSize: 10, color: "#444", marginBottom: 2 },
+  contact: {
+    fontSize: 8.5,
+    color: "#64748b",
+    marginBottom: 2,
+  },
   links: {
     flexDirection: "row",
     justifyContent: "center",
-    fontSize: 9,
-    color: "#1565c0",
-    marginBottom: 2,
+    fontSize: 8.5,
+    color: "#0284c7",
+    gap: 8,
+    marginTop: 2,
   },
-  section: { marginBottom: 18 },
+  section: {
+    marginBottom: 14,
+  },
   sectionHeading: {
-    fontSize: 13,
-    fontWeight: "bold",
-    color: "#1a237e",
-    borderBottom: "1 solid #b0b0b0",
-    marginBottom: 6,
+    fontSize: 10,
+    fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    marginBottom: 8,
+    paddingBottom: 2,
     letterSpacing: 0.8,
     textTransform: "uppercase",
   },
-  summaryText: { fontSize: 10, lineHeight: 1.5, color: "#333", marginTop: 3 },
-  skillList: { flexDirection: "row", flexWrap: "wrap", marginTop: 3 },
-  skill: {
-    backgroundColor: "#e3f2fd",
-    color: "#263238",
-    borderRadius: 3,
-    padding: "2 6",
-    fontSize: 11,
-    marginRight: 6,
-    marginBottom: 4,
-    fontWeight: "bold",
-  },
-  eduBlock: { marginBottom: 6 },
-  eduTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
-  eduSubtitle: { fontSize: 10, color: "#455a64" },
-  expBlock: { marginBottom: 8 },
-  expTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
-  expMeta: { fontSize: 9, color: "#1976d2", marginBottom: 1 },
-  bulletList: { marginLeft: 12, marginTop: 2, marginBottom: 2 },
-  bulletItem: { flexDirection: "row", marginBottom: 2 },
-  bulletSymbol: { width: 10, fontWeight: "bold" },
-  projBlock: { marginBottom: 8 },
-  projTitle: { fontWeight: "bold", fontSize: 11, color: "#263238" },
-  projMeta: { fontSize: 9, color: "#1976d2", marginBottom: 1 },
-  projTech: {
+  summaryText: {
     fontSize: 9,
-    color: "#1976d2",
-    marginBottom: 1,
-    fontStyle: "italic",
+    lineHeight: 1.4,
+    color: "#334155",
   },
-  projDesc: { fontSize: 9, color: "#444" },
+  skillList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 5,
+  },
+  skill: {
+    backgroundColor: "#f8fafc",
+    color: "#1e293b",
+    borderWidth: 0.5,
+    borderColor: "#cbd5e1",
+    borderRadius: 2,
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+  },
+  eduBlock: {
+    marginBottom: 6,
+  },
+  eduTitle: {
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+    color: "#0f172a",
+  },
+  eduSubtitle: {
+    fontSize: 8.5,
+    color: "#64748b",
+  },
+  expBlock: {
+    marginBottom: 9,
+  },
+  expTitle: {
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+    color: "#0f172a",
+  },
+  expMeta: {
+    fontSize: 8.5,
+    color: "#64748b",
+    marginBottom: 2,
+  },
+  bulletList: {
+    marginTop: 2,
+  },
+  bulletItem: {
+    flexDirection: "row",
+    marginBottom: 2,
+    paddingLeft: 4,
+  },
+  bulletSymbol: {
+    width: 8,
+    fontSize: 9,
+    color: "#64748b",
+  },
+  bulletContent: {
+    flex: 1,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
+  },
+  projBlock: {
+    marginBottom: 9,
+  },
+  projTitle: {
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+    color: "#0f172a",
+  },
+  projMeta: {
+    fontSize: 8.5,
+    color: "#64748b",
+    marginBottom: 1,
+  },
+  projTech: {
+    fontSize: 8.5,
+    color: "#0369a1",
+    marginBottom: 2,
+    fontFamily: "Helvetica-Oblique",
+  },
 });
-
-// Improved splitToBullets function
 
 const ClassicTemplate = ({ data }) => (
   <Document>
@@ -91,19 +153,19 @@ const ClassicTemplate = ({ data }) => (
         </Text>
         <View style={styles.links}>
           {data.linkedin && (
-            <Text>
-              <Link src={data.linkedin}>LinkedIn</Link> {"   "}
-            </Text>
+            <Link src={data.linkedin} style={{ color: "#0284c7", textDecoration: "none" }}>
+              LinkedIn
+            </Link>
           )}
           {data.github && (
-            <Text>
-              <Link src={data.github}>GitHub</Link> {"   "}
-            </Text>
+            <Link src={data.github} style={{ color: "#0284c7", textDecoration: "none" }}>
+              GitHub
+            </Link>
           )}
           {data.portfolio && (
-            <Text>
-              <Link src={data.portfolio}>Portfolio</Link>
-            </Text>
+            <Link src={data.portfolio} style={{ color: "#0284c7", textDecoration: "none" }}>
+              Portfolio
+            </Link>
           )}
         </View>
       </View>
@@ -131,54 +193,28 @@ const ClassicTemplate = ({ data }) => (
         </View>
       )}
 
-      {/* Education */}
-      {data.education?.length > 0 && (
-        <View style={styles.section}>
-          <Text style={styles.sectionHeading}>Education</Text>
-          {data.education.map((edu, i) => (
-            <View key={i} style={styles.eduBlock}>
-              <Text style={styles.eduTitle}>{edu.institution}</Text>
-              <Text style={styles.eduSubtitle}>
-                {edu.degree} | {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
-                {edu.grade ? ` | Grade: ${edu.grade}` : ""}
-              </Text>
-              {edu.description && (
-                <View style={styles.bulletList}>
-                  {splitToBullets(edu.description).map((bullet, idx) => (
-                    <View key={idx} style={styles.bulletItem}>
-                      <Text style={styles.bulletSymbol}>•</Text>
-                      <Text>{bullet}</Text>
-                    </View>
-                  ))}
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-      )}
-
       {/* Experience */}
       {data.experience?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionHeading}>Experience</Text>
           {data.experience.map((exp, i) => (
             <View key={i} style={styles.expBlock}>
-              <Text style={styles.expTitle}>
-                {exp.position} @ {exp.companyName}
-              </Text>
-              <Text style={styles.expMeta}>
-                {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
-              </Text>
-              {exp.description && (
-                <View style={styles.bulletList}>
-                  {splitToBullets(exp.description).map((bullet, idx) => (
-                    <View key={idx} style={styles.bulletItem}>
-                      <Text style={styles.bulletSymbol}>•</Text>
-                      <Text>{bullet}</Text>
-                    </View>
-                  ))}
-                </View>
-              )}
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+                <Text style={styles.expTitle}>
+                  {exp.position} @ {exp.companyName}
+                </Text>
+                <Text style={styles.expMeta}>
+                  {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
+                </Text>
+              </View>
+              <View style={styles.bulletList}>
+                {splitToBullets(exp.description).map((bullet, idx) => (
+                  <View key={idx} style={styles.bulletItem}>
+                    <Text style={styles.bulletSymbol}>•</Text>
+                    <Text style={styles.bulletContent}>{bullet}</Text>
+                  </View>
+                ))}
+              </View>
             </View>
           ))}
         </View>
@@ -190,12 +226,17 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.sectionHeading}>Projects</Text>
           {data.projects.map((proj, i) => (
             <View key={i} style={styles.projBlock}>
-              <Text style={styles.projTitle}>{proj.title}</Text>
-              <Text style={styles.projMeta}>
-                {proj.roleOrType}
-                {proj.organization && ` @ ${proj.organization}`}
-                {proj.date && ` | ${formatDate(proj.date)}`}
-              </Text>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+                <Text style={styles.projTitle}>{proj.title}</Text>
+                <Text style={styles.projMeta}>
+                  {proj.date && `${formatDate(proj.date)}`}
+                </Text>
+              </View>
+              {proj.roleOrType && (
+                <Text style={styles.projMeta}>
+                  {proj.roleOrType}{proj.organization ? ` @ ${proj.organization}` : ""}
+                </Text>
+              )}
               {proj.technologiesOrTopics && (
                 <Text style={styles.projTech}>Tech: {proj.technologiesOrTopics}</Text>
               )}
@@ -204,7 +245,37 @@ const ClassicTemplate = ({ data }) => (
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bulletItem}>
                       <Text style={styles.bulletSymbol}>•</Text>
-                      <Text>{bullet}</Text>
+                      <Text style={styles.bulletContent}>{bullet}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Education */}
+      {data.education?.length > 0 && (
+        <View style={styles.section}>
+          <Text style={styles.sectionHeading}>Education</Text>
+          {data.education.map((edu, i) => (
+            <View key={i} style={styles.eduBlock}>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+                <Text style={styles.eduTitle}>{edu.institution}</Text>
+                <Text style={styles.eduSubtitle}>
+                  {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
+                </Text>
+              </View>
+              <Text style={styles.eduSubtitle}>
+                {edu.degree}{edu.grade ? ` | Grade: ${edu.grade}` : ""}
+              </Text>
+              {edu.description && (
+                <View style={styles.bulletList}>
+                  {splitToBullets(edu.description).map((bullet, idx) => (
+                    <View key={idx} style={styles.bulletItem}>
+                      <Text style={styles.bulletSymbol}>•</Text>
+                      <Text style={styles.bulletContent}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -226,24 +297,24 @@ const ClassicTemplate = ({ data }) => (
                 {cert.year ? ` | ${formatDate(cert.year)}` : ""}
               </Text>
               {cert.credentialUrl && (
-                <Text>
-                  <Link src={cert.credentialUrl}>Certificate Link</Link>
-                </Text>
+                <Link src={cert.credentialUrl} style={{ fontSize: 8.5, color: "#0284c7", textDecoration: "none" }}>
+                  Certificate Link
+                </Link>
               )}
             </View>
           ))}
         </View>
       )}
-      {/* Hidden Signature for ATS Detection */}
-<Text style={{ 
-  fontSize: 1, 
-  color: "#fff", 
-  opacity: 0.01, // Optional: makes it even more "hidden"
-  position: "absolute", 
-  bottom: 0 
-}}>
-  NextCV Resume Optimized
-</Text>
+
+      <Text style={{ 
+        fontSize: 1, 
+        color: "#fff", 
+        opacity: 0.01,
+        position: "absolute", 
+        bottom: 0 
+      }}>
+        NextCV Resume Optimized
+      </Text>
     </Page>
   </Document>
 );

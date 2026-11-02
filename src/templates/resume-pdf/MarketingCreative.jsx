@@ -3,119 +3,121 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE, HEADER_TEXT_COLUMN_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 0,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
-    lineHeight: 1.5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    backgroundColor: "#ff4d6d", // Vibrant Pink/Red for Creative
-    padding: 30,
-    color: "#fff",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#e11d48",
+    paddingBottom: 12,
+    marginBottom: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   name: {
-    fontSize: 32,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
-    marginBottom: 10,
+    color: "#0f172a",
+    marginBottom: 3,
+    letterSpacing: -0.3,
   },
   role: {
-    marginTop: 10,
-    fontSize: 14,
-    color: "#ffe5ec",
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
+    color: "#e11d48",
     textTransform: "uppercase",
-    letterSpacing: 2,
+    letterSpacing: 1.2,
   },
   contactCol: {
     alignItems: "flex-end",
-    gap: 4,
+    gap: 3,
   },
   contactItem: {
-    fontSize: 9,
-    color: "#fff",
+    fontSize: 8.5,
+    color: "#64748b",
   },
   container: {
     flexDirection: "row",
-    height: "100%",
   },
   leftCol: {
-    width: "35%",
-    padding: 20,
-    backgroundColor: "#fff0f3", // Light pink background
+    width: "32%",
+    paddingRight: 14,
+    borderRightWidth: 0.5,
+    borderRightColor: "#fecdd3",
   },
   rightCol: {
-    width: "65%",
-    padding: 20,
+    width: "68%",
+    paddingLeft: 16,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 9.5,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 10,
-    color: "#c9184a",
+    marginBottom: 8,
+    color: "#9f1239",
     textTransform: "uppercase",
-    borderBottomWidth: 2,
-    borderBottomColor: "#ff4d6d",
+    letterSpacing: 0.8,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#fecdd3",
     paddingBottom: 2,
   },
-  // Left Column Content
   skillBadge: {
-    backgroundColor: "#ffccd5",
-    padding: "4 8",
-    marginBottom: 6,
-    borderRadius: 4,
-    color: "#800f2f",
-    fontSize: 9,
-    textAlign: "center",
+    backgroundColor: "#fff1f2",
+    borderWidth: 0.5,
+    borderColor: "#fecdd3",
+    padding: "3 6",
+    marginBottom: 4,
+    borderRadius: 2,
+    color: "#9f1239",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
   },
-  // Brand/Portfolio Section
-  portfolioItem: {
-    marginBottom: 8,
-  },
-  // Right Column Content
   jobBlock: {
-    marginBottom: 15,
+    marginBottom: 11,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
-    color: "#ff4d6d",
+    fontSize: 9,
+    color: "#be123c",
     fontFamily: "Helvetica-Bold",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    marginTop: 4,
-    color: "#333",
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
-    marginBottom: 3,
-    paddingLeft: 6,
+    marginBottom: 2,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 12,
-    color: "#ff4d6d",
+    width: 8,
+    fontSize: 9,
+    color: "#e11d48",
   },
   bulletText: {
     flex: 1,
@@ -128,22 +130,31 @@ const MarketingCreative = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <View>
-            <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
-            <Text style={styles.role}>{data.jobRole || "Creative Director"}</Text>
+          <View style={HEADER_TEXT_COLUMN_STYLE}>
+            <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+            <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+              {data.jobRole || "Creative Director"}
+            </Text>
           </View>
           <View style={styles.contactCol}>
             {data.email && <Text style={styles.contactItem}>{data.email}</Text>}
             {(data.phone || data.phone_no) && (
               <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
             )}
+            {data.address && <Text style={styles.contactItem}>{data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ ...styles.contactItem, textDecoration: "none" }}>
+              <Link
+                src={data.linkedin}
+                style={{ ...styles.contactItem, color: "#be123c", textDecoration: "none" }}
+              >
                 LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ ...styles.contactItem, textDecoration: "none" }}>
+              <Link
+                src={data.portfolio}
+                style={{ ...styles.contactItem, color: "#be123c", textDecoration: "none" }}
+              >
                 Portfolio
               </Link>
             )}
@@ -155,15 +166,17 @@ const MarketingCreative = ({ data }) => {
           <View style={styles.leftCol}>
             {/* Summary */}
             {data.summary && (
-              <View style={{ marginBottom: 20 }}>
+              <View style={{ marginBottom: 14 }}>
                 <Text style={styles.sectionTitle}>Profile</Text>
-                <Text style={{ fontSize: 10, lineHeight: 1.4 }}>{data.summary}</Text>
+                <Text style={{ fontSize: 8.5, lineHeight: 1.4, color: "#475569" }}>
+                  {data.summary}
+                </Text>
               </View>
             )}
 
             {/* Skills - Creative Tags */}
             {data.skills?.length > 0 && (
-              <View style={{ marginBottom: 20 }}>
+              <View style={{ marginBottom: 14 }}>
                 <Text style={styles.sectionTitle}>Creative Stack</Text>
                 {data.skills.map((skill, i) => (
                   <Text key={i} style={styles.skillBadge}>
@@ -178,9 +191,11 @@ const MarketingCreative = ({ data }) => {
               <View>
                 <Text style={styles.sectionTitle}>Recognition</Text>
                 {data.certificates.map((cert, i) => (
-                  <View key={i} style={{ marginBottom: 6 }}>
-                    <Text style={{ fontWeight: "bold", fontSize: 10 }}>{cert.title}</Text>
-                    <Text style={{ fontSize: 9 }}>{cert.organization}</Text>
+                  <View key={i} style={{ marginBottom: 5 }}>
+                    <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 9, color: "#0f172a" }}>
+                      {cert.title}
+                    </Text>
+                    <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
                   </View>
                 ))}
               </View>
@@ -191,7 +206,7 @@ const MarketingCreative = ({ data }) => {
           <View style={styles.rightCol}>
             {/* Experience */}
             {data.experience?.length > 0 && (
-              <View style={{ marginBottom: 20 }}>
+              <View style={{ marginBottom: 14 }}>
                 <Text style={styles.sectionTitle}>Campaign Strategy & Roles</Text>
                 {data.experience.map((exp, i) => (
                   <View key={i} style={styles.jobBlock}>
@@ -202,10 +217,10 @@ const MarketingCreative = ({ data }) => {
                       </Text>
                     </View>
                     <Text style={styles.jobCompany}>{exp.companyName}</Text>
-                    <View>
+                    <View style={{ marginTop: 2 }}>
                       {splitToBullets(exp.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
-                          <Text style={styles.bulletPoint}>›</Text>
+                          <Text style={styles.bulletPoint}>•</Text>
                           <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                         </View>
                       ))}
@@ -217,7 +232,7 @@ const MarketingCreative = ({ data }) => {
 
             {/* Projects - Portfolio Highlights */}
             {data.projects?.length > 0 && (
-              <View>
+              <View style={{ marginBottom: 14 }}>
                 <Text style={styles.sectionTitle}>Portfolio Highlights</Text>
                 {data.projects.map((proj, i) => (
                   <View key={i} style={styles.jobBlock}>
@@ -228,19 +243,19 @@ const MarketingCreative = ({ data }) => {
                     {proj.technologiesOrTopics && (
                       <Text
                         style={{
-                          fontSize: 9,
-                          color: "#ff4d6d",
+                          fontSize: 8.5,
+                          color: "#be123c",
                           marginBottom: 2,
-                          fontStyle: "italic",
+                          fontFamily: "Helvetica-Oblique",
                         }}
                       >
                         Brand/Client: {proj.technologiesOrTopics}
                       </Text>
                     )}
-                    <View>
+                    <View style={{ marginTop: 2 }}>
                       {splitToBullets(proj.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
-                          <Text style={styles.bulletPoint}>›</Text>
+                          <Text style={styles.bulletPoint}>•</Text>
                           <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                         </View>
                       ))}
@@ -249,21 +264,27 @@ const MarketingCreative = ({ data }) => {
                 ))}
               </View>
             )}
+
             {/* Education */}
             {data.education?.length > 0 && (
-              <View style={{ marginTop: 20 }}>
+              <View>
                 <Text style={styles.sectionTitle}>Education</Text>
                 {data.education.map((edu, i) => (
                   <View key={i} style={{ marginBottom: 4 }}>
-                    <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                    <Text style={{ fontSize: 9 }}>
-                      {edu.institution}, {formatDate(edu.endYear)}
-                    </Text>
+                    <View style={styles.jobHeader}>
+                      <Text
+                        style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}
+                      >
+                        {edu.degree}
+                      </Text>
+                      <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                    </View>
+                    <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                     {edu.description && (
                       <View style={{ marginTop: 2 }}>
                         {splitToBullets(edu.description).map((bullet, idx) => (
                           <View key={idx} style={styles.bullet}>
-                            <Text style={styles.bulletPoint}>›</Text>
+                            <Text style={styles.bulletPoint}>•</Text>
                             <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                           </View>
                         ))}
@@ -275,8 +296,12 @@ const MarketingCreative = ({ data }) => {
             )}
           </View>
         </View>
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

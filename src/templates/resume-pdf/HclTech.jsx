@@ -3,106 +3,128 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
+
 const styles = StyleSheet.create({
   page: {
-    padding: 35,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#222",
-    lineHeight: 1.5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 25,
-    borderBottomWidth: 4,
-    borderBottomColor: "#5e35b1", // HCL Purple-ish
-    paddingBottom: 15,
+    alignItems: "flex-start",
+    marginBottom: 16,
+    borderLeftWidth: 3,
+    borderLeftColor: "#007cc3",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#007cc3",
+    paddingLeft: 12,
+    paddingBottom: 12,
+  },
+  headerContent: {
+    width: "100%",
   },
   name: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#5e35b1",
-    marginBottom: 4,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 8,
-    fontSize: 12,
-    color: "#666",
-    fontFamily: "Helvetica-Oblique",
+    fontSize: 10.5,
+    color: "#007cc3",
+    fontFamily: "Helvetica",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactCol: {
-    alignItems: "flex-end",
-    fontSize: 9,
-    gap: 2,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    fontSize: 8.5,
+    gap: 9,
+    marginTop: 8,
+  },
+  contactItem: {
+    fontSize: 8.5,
+    color: "#64748b",
   },
   section: {
-    marginBottom: 20,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#1a237e", // Deep Blue
-    marginBottom: 10,
+    color: "#007cc3",
+    marginBottom: 8,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 14,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#333",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
-    fontFamily: "Helvetica-Bold",
-    color: "#5e35b1",
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    color: "#333",
-    marginTop: 2,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 10,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 10,
-    color: "#5e35b1",
+    width: 8,
+    fontSize: 9,
+    color: "#6d28d9",
   },
   bulletText: {
     flex: 1,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    backgroundColor: "#ede7f6", // Light Purple
-    color: "#5e35b1",
-    paddingVertical: 2,
-    paddingHorizontal: 8,
+    fontSize: 8.5,
+    backgroundColor: "#f0f9ff",
+    borderWidth: 0.5,
+    borderColor: "#bae6fd",
+    color: "#0369a1",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
     borderRadius: 2,
+    fontFamily: "Helvetica",
   },
 });
 
@@ -112,28 +134,33 @@ const HclTech = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <View>
-            <Text style={styles.name}>{data.name}</Text>
-            <Text style={styles.role}>{data.jobRole}</Text>
-          </View>
-          <View style={styles.contactCol}>
-            {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && <Text>{data.phone || data.phone_no}</Text>}
-            {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#5e35b1", textDecoration: "none" }}>
-                LinkedIn
-              </Link>
-            )}
-            {data.github && (
-              <Link src={data.github} style={{ color: "#5e35b1", textDecoration: "none" }}>
-                GitHub
-              </Link>
-            )}
-            {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#5e35b1", textDecoration: "none" }}>
-                Portfolio
-              </Link>
-            )}
+          <View style={styles.headerContent}>
+            <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+            <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+              {data.jobRole || "Technology Specialist"}
+            </Text>
+            <View style={styles.contactCol}>
+              {data.email && <Text style={styles.contactItem}>{data.email}</Text>}
+              {(data.phone || data.phone_no) && (
+                <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
+              )}
+              {data.address && <Text style={styles.contactItem}>{data.address}</Text>}
+              {data.linkedin && (
+                <Link src={data.linkedin} style={{ color: "#007cc3", textDecoration: "none" }}>
+                  LinkedIn
+                </Link>
+              )}
+              {data.github && (
+                <Link src={data.github} style={{ color: "#007cc3", textDecoration: "none" }}>
+                  GitHub
+                </Link>
+              )}
+              {data.portfolio && (
+                <Link src={data.portfolio} style={{ color: "#007cc3", textDecoration: "none" }}>
+                  Portfolio
+                </Link>
+              )}
+            </View>
           </View>
         </View>
 
@@ -157,8 +184,8 @@ const HclTech = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -184,16 +211,16 @@ const HclTech = ({ data }) => {
                 {proj.technologiesOrTopics && (
                   <Text
                     style={{
-                      fontSize: 9,
-                      color: "#1a237e",
-                      fontStyle: "italic",
+                      fontSize: 8.5,
+                      color: "#6d28d9",
+                      fontFamily: "Helvetica-Oblique",
                       marginBottom: 2,
                     }}
                   >
                     Tech: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -225,19 +252,16 @@ const HclTech = ({ data }) => {
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, i) => (
-              <View key={i} style={{ marginBottom: 6 }}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.institution}</Text>
+              <View key={i} style={{ marginBottom: 4 }}>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.institution}
+                  </Text>
                   <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
                 </View>
-                <Text style={{ fontSize: 10 }}>{edu.degree}</Text>
+                <Text style={{ fontSize: 8.5, color: "#475569" }}>{edu.degree}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
@@ -250,8 +274,12 @@ const HclTech = ({ data }) => {
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

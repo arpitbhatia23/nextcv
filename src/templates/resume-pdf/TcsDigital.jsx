@@ -3,109 +3,122 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#000",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
     lineHeight: 1.4,
   },
   header: {
-    marginBottom: 20,
-    borderBottomWidth: 3,
-    borderBottomColor: "#e91e63", // TCS Magenta-ish accent
+    marginBottom: 16,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#d81b60", // TCS Digital Accent
     paddingBottom: 10,
   },
   name: {
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
-    marginBottom: 4,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 4,
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 8,
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
+    color: "#d81b60",
+    marginBottom: 6,
+    textTransform: "uppercase",
+    letterSpacing: 1,
   },
   contactRow: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 15,
-    fontSize: 9,
-    color: "#333",
+    gap: 12,
+    fontSize: 8.5,
+    color: "#64748b",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
-    backgroundColor: "#333", // Dark header background
-    padding: "4 8",
-    marginBottom: 10,
+    color: "#0f172a",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
+    marginBottom: 8,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
     paddingLeft: 8,
-    borderLeftWidth: 2,
-    borderLeftColor: "#e91e63",
+    borderLeftWidth: 1.5,
+    borderLeftColor: "#d81b60",
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9,
     fontFamily: "Helvetica-Oblique",
-    color: "#444",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    marginTop: 2,
-    textAlign: "justify",
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 6,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 10,
-    color: "#e91e63",
+    width: 8,
+    fontSize: 9,
+    color: "#d81b60",
   },
   bulletText: {
     flex: 1,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
-  // Skills Table Style
   skillContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
-    padding: 8,
-    backgroundColor: "#f5f5f5",
+    gap: 6,
   },
   skillItem: {
-    fontSize: 9.5,
-    fontFamily: "Helvetica-Bold",
-    color: "#333",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#1e293b",
+    backgroundColor: "#fdf2f8",
+    borderWidth: 0.5,
+    borderColor: "#fbcfe8",
+    padding: "3 7",
+    borderRadius: 2,
   },
 });
 
@@ -115,19 +128,19 @@ const TcsDigital = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>{data.jobRole}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
             {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.linkedin} style={{ color: "#d81b60", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.portfolio} style={{ color: "#d81b60", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -155,7 +168,7 @@ const TcsDigital = ({ data }) => {
                   </Text>
                 </View>
                 <Text style={styles.jobCompany}>{exp.companyName}</Text>
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -179,11 +192,18 @@ const TcsDigital = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#e91e63", marginBottom: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 8.5,
+                      color: "#d81b60",
+                      marginBottom: 2,
+                      fontFamily: "Helvetica-Oblique",
+                    }}
+                  >
                     {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -204,7 +224,6 @@ const TcsDigital = ({ data }) => {
               {data.skills.map((skill, i) => (
                 <Text key={i} style={styles.skillItem}>
                   {skill.name || skill}
-                  {i < data.skills.length - 1 ? "  • " : ""}
                 </Text>
               ))}
             </View>
@@ -217,15 +236,17 @@ const TcsDigital = ({ data }) => {
             <Text style={styles.sectionTitle}>Education</Text>
             {data.education.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4, paddingLeft: 8 }}>
-                <Text style={{ fontSize: 11, fontFamily: "Helvetica-Bold" }}>
-                  {edu.institution}
-                </Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.degree} | {formatDate(edu.startYear)} -{" "}
-                  {formatDate(edu.endYear) || "Present"}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 10, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.institution}
+                  </Text>
+                  <Text style={styles.jobDate}>
+                    {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
+                  </Text>
+                </View>
+                <Text style={{ fontSize: 9, color: "#475569" }}>{edu.degree}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
@@ -241,19 +262,23 @@ const TcsDigital = ({ data }) => {
 
         {data.certificates?.length > 0 && (
           <View style={styles.section}>
-            <Text style={[styles.sectionTitle, { padding: 2 }]}>Certifications</Text>
+            <Text style={styles.sectionTitle}>Certifications</Text>
             {data.certificates.map((cert, i) => (
-              <View key={i} style={{ marginBottom: 6 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+              <View key={i} style={{ marginBottom: 4, paddingLeft: 8 }}>
+                <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
                   {String(cert.title).toUpperCase()}
                 </Text>
-                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
               </View>
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

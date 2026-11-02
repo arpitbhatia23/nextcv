@@ -1,89 +1,94 @@
 "use client";
 import React from "react";
-import { Document, Page, Text, View, StyleSheet, Link, Font } from "@react-pdf/renderer";
+import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 36,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Times-Roman",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     color: "#111827",
+    lineHeight: 1.38,
   },
   header: {
     textAlign: "center",
-    marginBottom: 24,
+    marginBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#374151",
-    paddingBottom: 12,
+    paddingBottom: 10,
   },
   name: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 4,
+    fontSize: 22,
+    fontFamily: "Times-Bold",
+    marginBottom: 3,
     textTransform: "uppercase",
-    letterSpacing: 2,
+    letterSpacing: 1.5,
   },
   subHeader: {
     fontSize: 10,
+    fontFamily: "Times-Italic",
     color: "#374151",
     marginBottom: 4,
   },
   contactRow: {
     flexDirection: "row",
     justifyContent: "center",
-    gap: 12,
-    fontSize: 9,
+    gap: 10,
+    fontSize: 8.5,
     color: "#4b5563",
-    marginTop: 4,
+    marginTop: 3,
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 12,
-    fontWeight: "bold",
+    fontSize: 10.5,
+    fontFamily: "Times-Bold",
     textTransform: "uppercase",
-    borderBottomWidth: 1,
-    borderBottomColor: "#e5e7eb",
+    letterSpacing: 0.8,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
     paddingBottom: 2,
     marginBottom: 8,
     color: "#111827",
   },
   entryBlock: {
-    marginBottom: 8,
+    marginBottom: 9,
   },
   entryTitleRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    marginBottom: 2,
+    marginBottom: 1,
   },
   entryTitle: {
-    fontSize: 11,
-    fontWeight: "bold",
-    color: "#000",
+    fontSize: 10,
+    fontFamily: "Times-Bold",
+    color: "#111827",
   },
   entryDate: {
-    fontSize: 9,
-    color: "#374151",
-    fontStyle: "italic",
+    fontSize: 8.5,
+    color: "#4b5563",
+    fontFamily: "Times-Italic",
   },
   entrySubtitle: {
-    fontSize: 10,
-    fontWeight: "bold",
+    fontSize: 9.5,
+    fontFamily: "Times-Italic",
     color: "#374151",
     marginBottom: 2,
   },
   description: {
-    fontSize: 10,
-    lineHeight: 1.4,
+    fontSize: 9,
+    lineHeight: 1.35,
+    color: "#374151",
     textAlign: "justify",
   },
   bulletList: {
-    marginLeft: 12,
+    marginLeft: 4,
     marginTop: 2,
   },
   bulletItem: {
@@ -91,16 +96,20 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   bulletMarker: {
-    width: 10,
-    fontSize: 10,
+    width: 8,
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   bulletContent: {
     flex: 1,
-    fontSize: 10,
+    fontSize: 9,
+    color: "#374151",
+    lineHeight: 1.35,
   },
   skillText: {
-    fontSize: 10,
-    lineHeight: 1.5,
+    fontSize: 9,
+    lineHeight: 1.4,
+    color: "#1f2937",
   },
 });
 
@@ -109,28 +118,40 @@ const ExecutiveGray = ({ data }) => (
     <Page size="A4" style={styles.page}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.subHeader}>{data.jobRole || "Executive Professional"}</Text>
+        <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+        <Text style={[styles.subHeader, HEADER_ROLE_STYLE]}>
+          {data.jobRole || "Executive Professional"}
+        </Text>
         <View style={styles.contactRow}>
-          <Text>{data.email}</Text>
-          <Text>•</Text>
-          <Text>{data.phone || data.phone_no}</Text>
-          <Text>•</Text>
-          <Text>{data.address}</Text>
-        </View>
-        <View style={styles.contactRow}>
-          {data.linkedin && (
-            <Link src={data.linkedin} style={{ color: "#374151", textDecoration: "none" }}>
-              LinkedIn
-            </Link>
+          {data.email && <Text>{data.email}</Text>}
+          {(data.phone || data.phone_no) && (
+            <>
+              <Text>•</Text>
+              <Text>{data.phone || data.phone_no}</Text>
+            </>
           )}
-          {data.linkedin && data.portfolio && <Text>•</Text>}
-          {data.portfolio && (
-            <Link src={data.portfolio} style={{ color: "#374151", textDecoration: "none" }}>
-              Portfolio
-            </Link>
+          {data.address && (
+            <>
+              <Text>•</Text>
+              <Text>{data.address}</Text>
+            </>
           )}
         </View>
+        {(data.linkedin || data.portfolio) && (
+          <View style={styles.contactRow}>
+            {data.linkedin && (
+              <Link src={data.linkedin} style={{ color: "#374151", textDecoration: "none" }}>
+                LinkedIn
+              </Link>
+            )}
+            {data.linkedin && data.portfolio && <Text>•</Text>}
+            {data.portfolio && (
+              <Link src={data.portfolio} style={{ color: "#374151", textDecoration: "none" }}>
+                Portfolio
+              </Link>
+            )}
+          </View>
+        )}
       </View>
 
       {/* Summary */}
@@ -201,7 +222,7 @@ const ExecutiveGray = ({ data }) => (
       {data.skills?.length > 0 && (
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Core Competencies</Text>
-          <Text style={styles.skillText}>{data.skills.map(s => s.name || s).join(" • ")}</Text>
+          <Text style={styles.skillText}>{data.skills.map(s => s.name || s).join("  •  ")}</Text>
         </View>
       )}
 
@@ -216,7 +237,14 @@ const ExecutiveGray = ({ data }) => (
                 <Text style={styles.entryDate}>{formatDate(proj.date)}</Text>
               </View>
               {proj.technologiesOrTopics && (
-                <Text style={{ fontSize: 9, fontStyle: "italic", marginBottom: 2 }}>
+                <Text
+                  style={{
+                    fontSize: 8.5,
+                    fontFamily: "Times-Italic",
+                    color: "#4b5563",
+                    marginBottom: 2,
+                  }}
+                >
                   Tech: {proj.technologiesOrTopics}
                 </Text>
               )}
@@ -250,7 +278,7 @@ const ExecutiveGray = ({ data }) => (
                   style={{
                     color: "#374151",
                     textDecoration: "none",
-                    fontSize: 9,
+                    fontSize: 8.5,
                   }}
                 >
                   View Credential
@@ -260,9 +288,11 @@ const ExecutiveGray = ({ data }) => (
           ))}
         </View>
       )}
-    
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
-      </Page>
+
+      <Text style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}>
+        NextCV Resume Optimized
+      </Text>
+    </Page>
   </Document>
 );
 

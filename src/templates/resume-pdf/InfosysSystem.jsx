@@ -3,104 +3,116 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
-    lineHeight: 1.5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    backgroundColor: "#007cc3", // Infosys Blue
-    color: "#fff",
-    padding: 20,
-    marginBottom: 20,
-    textAlign: "center",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#007cc3",
+    paddingBottom: 12,
+    marginBottom: 16,
   },
   name: {
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    marginBottom: 4,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
+  },
+  role: {
+    fontSize: 11,
+    fontFamily: "Helvetica",
+    color: "#007cc3",
+    marginBottom: 6,
+    textTransform: "uppercase",
+    letterSpacing: 1,
   },
   contactRow: {
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 9,
     flexWrap: "wrap",
-    gap: 15,
+    gap: 12,
+    fontSize: 8.5,
+    color: "#64748b",
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
     color: "#007cc3",
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-    paddingBottom: 4,
-    marginBottom: 10,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
+    marginBottom: 8,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 14,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9,
     fontFamily: "Helvetica-Bold",
-    color: "#555",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    fontStyle: "italic",
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    textAlign: "justify",
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 10,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 14,
+    width: 8,
+    fontSize: 9,
     color: "#007cc3",
-    lineHeight: 1,
   },
   bulletText: {
     flex: 1,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
-  // Skills Table
-  table: {
-    display: "table",
-    width: "auto",
-    marginBottom: 10,
-  },
-  tableRow: {
-    margin: "auto",
+  skillContainer: {
     flexDirection: "row",
-    borderBottomWidth: 1,
-    borderBottomColor: "#eee",
-    paddingVertical: 4,
+    flexWrap: "wrap",
+    gap: 5,
   },
-  tableCell: {
-    width: "50%",
-    fontSize: 10,
+  skillBadge: {
+    backgroundColor: "#f0f9ff",
+    borderWidth: 0.5,
+    borderColor: "#bae6fd",
+    padding: "3 6",
+    borderRadius: 2,
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#0284c7",
   },
 });
 
@@ -108,33 +120,37 @@ const InfosysSystem = ({ data }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header (Full Width Blue) */}
-        <View style={{ margin: -30, marginBottom: 30 }}>
-          <View style={styles.header}>
-            <Text style={styles.name}>{data.name}</Text>
-            <Text style={{ fontSize: 12, marginBottom: 8, marginTop: 4 }}>
-              {data.jobRole || "Professional Role"}
-            </Text>
-            <View style={styles.contactRow}>
-              {data.email && <Text>{data.email}</Text>}
-              {(data.phone || data.phone_no) && <Text> | {data.phone || data.phone_no}</Text>}
-              {data.linkedin && (
-                <Link src={data.linkedin} style={{ color: "#fff", textDecoration: "none" }}>
-                  | LinkedIn
-                </Link>
-              )}
-              {data.github && (
-                <Link src={data.github} style={{ color: "#fff", textDecoration: "none" }}>
-                  | GitHub
-                </Link>
-              )}
-            </View>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Professional Role"}
+          </Text>
+          <View style={styles.contactRow}>
+            {data.email && <Text>{data.email}</Text>}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
+            {data.address && <Text>| {data.address}</Text>}
+            {data.linkedin && (
+              <Link src={data.linkedin} style={{ color: "#007cc3", textDecoration: "none" }}>
+                | LinkedIn
+              </Link>
+            )}
+            {data.github && (
+              <Link src={data.github} style={{ color: "#007cc3", textDecoration: "none" }}>
+                | GitHub
+              </Link>
+            )}
+            {data.portfolio && (
+              <Link src={data.portfolio} style={{ color: "#007cc3", textDecoration: "none" }}>
+                | Portfolio
+              </Link>
+            )}
           </View>
         </View>
 
         {/* Summary */}
         {data.summary && (
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ marginBottom: 14 }}>
             <Text style={styles.sectionTitle}>Summary</Text>
             <Text style={styles.description}>{data.summary}</Text>
           </View>
@@ -142,7 +158,7 @@ const InfosysSystem = ({ data }) => {
 
         {/* Experience */}
         {data.experience?.length > 0 && (
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ marginBottom: 14 }}>
             <Text style={styles.sectionTitle}>Experience</Text>
             {data.experience.map((exp, i) => (
               <View key={i} style={styles.jobBlock}>
@@ -153,7 +169,7 @@ const InfosysSystem = ({ data }) => {
                   </Text>
                 </View>
                 <Text style={styles.jobCompany}>{exp.companyName}</Text>
-                <View style={{ marginTop: 4 }}>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
@@ -168,7 +184,7 @@ const InfosysSystem = ({ data }) => {
 
         {/* Projects */}
         {data.projects?.length > 0 && (
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ marginBottom: 14 }}>
             <Text style={styles.sectionTitle}>Key Projects</Text>
             {data.projects.map((proj, i) => (
               <View key={i} style={styles.jobBlock}>
@@ -179,9 +195,9 @@ const InfosysSystem = ({ data }) => {
                 {proj.technologiesOrTopics && (
                   <Text
                     style={{
-                      fontSize: 9,
+                      fontSize: 8.5,
                       color: "#007cc3",
-                      fontStyle: "italic",
+                      fontFamily: "Helvetica-Oblique",
                       marginBottom: 2,
                     }}
                   >
@@ -203,19 +219,12 @@ const InfosysSystem = ({ data }) => {
 
         {/* Skills */}
         {data.skills?.length > 0 && (
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ marginBottom: 14 }}>
             <Text style={styles.sectionTitle}>Technical Expertise</Text>
-            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
+            <View style={styles.skillContainer}>
               {data.skills.map((skill, i) => (
-                <View
-                  key={i}
-                  style={{
-                    backgroundColor: "#f0f8ff",
-                    padding: "4 8",
-                    borderRadius: 4,
-                  }}
-                >
-                  <Text style={{ fontSize: 9.5, color: "#007cc3" }}>{skill.name || skill}</Text>
+                <View key={i} style={styles.skillBadge}>
+                  <Text>{skill.name || skill}</Text>
                 </View>
               ))}
             </View>
@@ -228,13 +237,15 @@ const InfosysSystem = ({ data }) => {
             <View style={{ flex: 1, marginRight: 10 }}>
               <Text style={styles.sectionTitle}>Education</Text>
               {data.education.map((edu, i) => (
-                <View key={i} style={{ marginBottom: 6 }}>
-                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                  <Text style={{ fontSize: 10 }}>
+                <View key={i} style={{ marginBottom: 4 }}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={{ fontSize: 8.5, color: "#64748b" }}>
                     {edu.institution}, {formatDate(edu.endYear)}
                   </Text>
                   {edu.description && (
-                    <View style={{ marginTop: 4 }}>
+                    <View style={{ marginTop: 2 }}>
                       {splitToBullets(edu.description).map((bullet, idx) => (
                         <View key={idx} style={styles.bullet}>
                           <Text style={styles.bulletPoint}>•</Text>
@@ -247,24 +258,26 @@ const InfosysSystem = ({ data }) => {
               ))}
             </View>
           )}
-        </View>
-        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
           {data.certificates?.length > 0 && (
             <View style={{ flex: 1 }}>
               <Text style={styles.sectionTitle}>Certifications</Text>
               {data.certificates.map((cert, i) => (
-                <View key={i} style={{ marginBottom: 6 }}>
-                  <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+                <View key={i} style={{ marginBottom: 4 }}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
                     {String(cert.title).toUpperCase()}
                   </Text>
-                  <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+                  <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
                 </View>
               ))}
             </View>
           )}
         </View>
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

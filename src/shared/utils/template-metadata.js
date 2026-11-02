@@ -47,7 +47,7 @@ export const templatesMetadata = [
   {
     key: "HclTech",
     label: "Tech Professional",
-    image: "/hcl.webp",
+    image: "/hcl-stacked.svg",
   },
   {
     key: "IbmClassic",

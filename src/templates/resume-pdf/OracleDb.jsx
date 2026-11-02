@@ -3,111 +3,117 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
-    lineHeight: 1.5,
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
+    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 25,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f80000", // Oracle Red
-    paddingBottom: 15,
+    marginBottom: 16,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#dc2626", // Oracle Crimson accent
+    paddingBottom: 12,
   },
   name: {
-    fontSize: 26,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#f80000",
-    marginBottom: 4,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 6,
-    fontSize: 12,
-    color: "#444",
-    marginBottom: 8,
-    fontFamily: "Helvetica-Bold",
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
+    color: "#dc2626",
+    marginBottom: 6,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    color: "#64748b",
   },
   section: {
-    marginBottom: 20,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#333",
+    color: "#0f172a",
     textTransform: "uppercase",
-    marginBottom: 10,
-    backgroundColor: "#f5f5f5",
-    padding: "4 8",
+    marginBottom: 8,
+    borderLeftWidth: 2.5,
+    borderLeftColor: "#dc2626",
+    paddingLeft: 6,
+    letterSpacing: 0.8,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 15,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
-    alignItems: "center",
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
-    color: "#f80000",
-    fontFamily: "Helvetica-Bold",
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    fontStyle: "italic",
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    color: "#333",
-    marginTop: 2,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 10,
-    color: "#f80000",
+    width: 8,
+    fontSize: 9,
+    color: "#dc2626",
   },
   bulletText: {
     flex: 1,
   },
-  // Skills Table
   skillContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 6,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    color: "#333",
-    paddingVertical: 3,
-    paddingHorizontal: 8,
-    borderRadius: 4,
+    fontSize: 8.5,
+    borderWidth: 0.5,
+    borderColor: "#fecaca",
+    backgroundColor: "#fef2f2",
+    color: "#991b1b",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    borderRadius: 2,
+    fontFamily: "Helvetica",
   },
 });
 
@@ -117,23 +123,26 @@ const OracleDb = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.role}>{data.jobRole}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+            {data.jobRole || "Database Architect"}
+          </Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
+            {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#f80000", textDecoration: "none" }}>
+              <Link src={data.linkedin} style={{ color: "#dc2626", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.github && (
-              <Link src={data.github} style={{ color: "#f80000", textDecoration: "none" }}>
+              <Link src={data.github} style={{ color: "#dc2626", textDecoration: "none" }}>
                 | GitHub
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#f80000", textDecoration: "none" }}>
+              <Link src={data.portfolio} style={{ color: "#dc2626", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -160,8 +169,8 @@ const OracleDb = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -185,11 +194,18 @@ const OracleDb = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#f80000", marginBottom: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 8.5,
+                      color: "#dc2626",
+                      marginBottom: 2,
+                      fontFamily: "Helvetica-Oblique",
+                    }}
+                  >
                     Technology: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -222,12 +238,15 @@ const OracleDb = ({ data }) => {
             <Text style={styles.sectionTitle}>Education & Certifications</Text>
             {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.institution}, {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
@@ -239,15 +258,21 @@ const OracleDb = ({ data }) => {
               </View>
             ))}
             {data.certificates?.map((cert, i) => (
-              <View key={i} style={{ marginTop: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{cert.title}</Text>
-                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+              <View key={i} style={{ marginTop: 3 }}>
+                <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                  {cert.title}
+                </Text>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
               </View>
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

@@ -6,17 +6,17 @@ import { splitToBullets } from "@/shared/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Times-Roman",
-    backgroundColor: "#fff",
-    color: "#000",
-    lineHeight: 1.4,
+    backgroundColor: "#ffffff",
+    color: "#111827",
+    lineHeight: 1.38,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomColor: "#111827",
     paddingBottom: 10,
     textAlign: "center",
   },
@@ -25,69 +25,77 @@ const styles = StyleSheet.create({
     fontFamily: "Times-Bold",
     marginBottom: 4,
     textTransform: "uppercase",
+    letterSpacing: 0.6,
   },
   contactRow: {
     marginTop: 4,
-
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 9,
+    fontSize: 8.5,
     flexWrap: "wrap",
-    gap: 12,
+    gap: 10,
+    color: "#4b5563",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10.5,
     fontFamily: "Times-Bold",
     textTransform: "uppercase",
     marginBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "#000",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#111827",
     paddingBottom: 2,
+    letterSpacing: 0.6,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    marginBottom: 1,
     alignItems: "baseline",
   },
   jobTitle: {
     fontFamily: "Times-Bold",
-    fontSize: 10.5,
+    fontSize: 10,
+    color: "#111827",
   },
   jobCompany: {
     fontFamily: "Times-Italic",
-    fontSize: 10.5,
+    fontSize: 9.5,
+    color: "#374151",
   },
   jobDate: {
     fontFamily: "Times-Roman",
-    fontSize: 9,
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   description: {
-    fontSize: 10,
+    fontSize: 9,
     textAlign: "justify",
-    marginTop: 2,
+    color: "#374151",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 10,
+    paddingLeft: 6,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 10,
+    width: 8,
+    fontSize: 8.5,
+    color: "#4b5563",
   },
   bulletText: {
     flex: 1,
+    fontSize: 9,
+    color: "#374151",
+    lineHeight: 1.35,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -95,7 +103,8 @@ const styles = StyleSheet.create({
   },
   skillItem: {
     fontFamily: "Times-Roman",
-    fontSize: 10,
+    fontSize: 9,
+    color: "#1f2937",
   },
 });
 
@@ -108,15 +117,15 @@ const GoldmanFinance = ({ data }) => {
           <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && <Text> | {data.phone || data.phone_no}</Text>}
-            {data.address && <Text> | {data.address}</Text>}
+            {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
+            {data.address && <Text>| {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.linkedin} style={{ color: "#111827", textDecoration: "none" }}>
                 | LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#000", textDecoration: "none" }}>
+              <Link src={data.portfolio} style={{ color: "#111827", textDecoration: "none" }}>
                 | Portfolio
               </Link>
             )}
@@ -131,7 +140,7 @@ const GoldmanFinance = ({ data }) => {
           </View>
         )}
 
-        {/* Education (Finance often puts Education first) */}
+        {/* Education (Finance standard: Education first) */}
         {data.education?.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Education</Text>
@@ -147,11 +156,11 @@ const GoldmanFinance = ({ data }) => {
                   {edu.degree} {edu.grade ? `(GPA: ${edu.grade})` : ""}
                 </Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>•</Text>
-                        <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                        <Text style={styles.bulletText}>{bullet}</Text>
                       </View>
                     ))}
                   </View>
@@ -173,12 +182,12 @@ const GoldmanFinance = ({ data }) => {
                     {formatDate(exp.startDate)} – {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -201,18 +210,19 @@ const GoldmanFinance = ({ data }) => {
                   <Text
                     style={{
                       fontFamily: "Times-Italic",
-                      fontSize: 9,
+                      fontSize: 8.5,
+                      color: "#4b5563",
                       marginBottom: 2,
                     }}
                   >
                     Area: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>•</Text>
-                      <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
+                      <Text style={styles.bulletText}>{bullet}</Text>
                     </View>
                   ))}
                 </View>
@@ -229,7 +239,7 @@ const GoldmanFinance = ({ data }) => {
               {data.skills.map((skill, i) => (
                 <Text key={i} style={styles.skillItem}>
                   {skill.name || skill}
-                  {i < data.skills.length - 1 ? "; " : ""}
+                  {i < data.skills.length - 1 ? "  ;  " : ""}
                 </Text>
               ))}
             </View>
@@ -242,7 +252,7 @@ const GoldmanFinance = ({ data }) => {
             <Text style={styles.sectionTitle}>Certifications</Text>
             {data.certificates.map((cert, i) => (
               <View key={i} style={{ marginBottom: 2 }}>
-                <Text style={{ fontSize: 10 }}>
+                <Text style={{ fontSize: 9 }}>
                   <Text style={{ fontFamily: "Times-Bold" }}>{cert.title}</Text> -{" "}
                   {cert.organization} ({formatDate(cert.year)})
                 </Text>

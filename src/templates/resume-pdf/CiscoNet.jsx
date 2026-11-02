@@ -3,108 +3,121 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE, HEADER_TEXT_COLUMN_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#222",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
     lineHeight: 1.4,
   },
   header: {
-    backgroundColor: "#00bceb", // Cisco Cyan
-    color: "#fff",
-    padding: 20,
-    marginBottom: 20,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#0284c7", // Cisco Cyan/Blue accent
+    paddingBottom: 12,
+    marginBottom: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   name: {
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#fff",
-    marginBottom: 4,
+    color: "#0f172a",
+    marginBottom: 3,
     textTransform: "uppercase",
+    letterSpacing: -0.2,
   },
   role: {
-    marginTop: 8,
-    fontSize: 12,
-    color: "#e6f7ff",
+    fontSize: 10.5,
+    fontFamily: "Helvetica",
+    color: "#0284c7",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactCol: {
     alignItems: "flex-end",
-    gap: 4,
+    gap: 3,
   },
   contactItem: {
-    fontSize: 9,
-    color: "#fff",
+    fontSize: 8.5,
+    color: "#64748b",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#00bceb",
+    color: "#0284c7",
     textTransform: "uppercase",
+    letterSpacing: 0.8,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
+    paddingBottom: 3,
     marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
-    paddingBottom: 2,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
-    fontFamily: "Helvetica-Bold", // Bold company name
-    color: "#666",
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#888",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    color: "#333",
-    marginTop: 2,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 6,
-    fontSize: 10,
-    color: "#00bceb",
+    width: 8,
+    fontSize: 9,
+    color: "#0284c7",
   },
   bulletText: {
     flex: 1,
   },
-  // Skills grid
   gridContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 5,
+    gap: 5,
+    marginTop: 2,
   },
   gridItem: {
-    width: "50%",
-    marginBottom: 4,
-    fontSize: 9.5,
+    fontSize: 8.5,
+    backgroundColor: "#f0f9ff",
+    borderWidth: 0.5,
+    borderColor: "#bae6fd",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    borderRadius: 2,
+    color: "#0369a1",
+    fontFamily: "Helvetica",
   },
 });
 
@@ -112,29 +125,36 @@ const CiscoNet = ({ data }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        {/* Header - Full Width Colored */}
-        <View style={{ margin: -30, marginBottom: 30 }}>
-          <View style={styles.header}>
-            <View>
-              <Text style={styles.name}>{data.name}</Text>
-              <Text style={styles.role}>{data.jobRole}</Text>
-            </View>
-            <View style={styles.contactCol}>
-              {data.email && <Text style={styles.contactItem}>{data.email}</Text>}
-              {(data.phone || data.phone_no) && (
-                <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
-              )}
-              {data.linkedin && (
-                <Link src={data.linkedin} style={{ ...styles.contactItem, textDecoration: "none" }}>
-                  LinkedIn
-                </Link>
-              )}
-              {data.github && (
-                <Link src={data.github} style={{ ...styles.contactItem, textDecoration: "none" }}>
-                  GitHub
-                </Link>
-              )}
-            </View>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={HEADER_TEXT_COLUMN_STYLE}>
+            <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+            <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+              {data.jobRole || "Network Engineer"}
+            </Text>
+          </View>
+          <View style={styles.contactCol}>
+            {data.email && <Text style={styles.contactItem}>{data.email}</Text>}
+            {(data.phone || data.phone_no) && (
+              <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
+            )}
+            {data.address && <Text style={styles.contactItem}>{data.address}</Text>}
+            {data.linkedin && (
+              <Link
+                src={data.linkedin}
+                style={{ ...styles.contactItem, color: "#0284c7", textDecoration: "none" }}
+              >
+                LinkedIn
+              </Link>
+            )}
+            {data.github && (
+              <Link
+                src={data.github}
+                style={{ ...styles.contactItem, color: "#0284c7", textDecoration: "none" }}
+              >
+                GitHub
+              </Link>
+            )}
           </View>
         </View>
 
@@ -158,8 +178,8 @@ const CiscoNet = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -183,11 +203,18 @@ const CiscoNet = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#00bceb", marginBottom: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 8.5,
+                      color: "#0284c7",
+                      marginBottom: 2,
+                      fontFamily: "Helvetica-Oblique",
+                    }}
+                  >
                     Tech: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
                       <Text style={styles.bulletPoint}>›</Text>
@@ -200,14 +227,14 @@ const CiscoNet = ({ data }) => {
           </View>
         )}
 
-        {/* Skills - 2 Column Grid */}
+        {/* Skills */}
         {data.skills?.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Technical Expertise</Text>
             <View style={styles.gridContainer}>
               {data.skills.map((skill, i) => (
                 <Text key={i} style={styles.gridItem}>
-                  • {skill.name || skill}
+                  {skill.name || skill}
                 </Text>
               ))}
             </View>
@@ -220,12 +247,15 @@ const CiscoNet = ({ data }) => {
             <Text style={styles.sectionTitle}>Education & Certifications</Text>
             {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.institution}, {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
                         <Text style={styles.bulletPoint}>›</Text>
@@ -237,15 +267,21 @@ const CiscoNet = ({ data }) => {
               </View>
             ))}
             {data.certificates?.map((cert, i) => (
-              <View key={i} style={{ marginTop: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{cert.title}</Text>
-                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
+              <View key={i} style={{ marginTop: 3 }}>
+                <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                  {cert.title}
+                </Text>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
               </View>
             ))}
           </View>
         )}
-      
-        <Text style={{ fontSize: 1, color: '#fff', opacity: 0.01, position: 'absolute', bottom: 0 }}>NextCV Resume Optimized</Text>
+
+        <Text
+          style={{ fontSize: 1, color: "#fff", opacity: 0.01, position: "absolute", bottom: 0 }}
+        >
+          NextCV Resume Optimized
+        </Text>
       </Page>
     </Document>
   );

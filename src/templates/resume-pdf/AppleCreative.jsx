@@ -6,75 +6,81 @@ import { splitToBullets } from "@/shared/utils/splitBullets";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 50,
+    padding: 36,
     fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff",
     color: "#1d1d1f", // Apple Near Black
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 35,
+    marginBottom: 20,
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#d2d2d7",
+    paddingBottom: 14,
   },
   name: {
     fontSize: 24,
     fontFamily: "Helvetica-Bold",
     color: "#1d1d1f",
-    marginBottom: 8,
-    letterSpacing: -0.5,
-    textTransform: "uppercase",
+    marginBottom: 4,
+    letterSpacing: -0.4,
   },
   contactRow: {
     marginTop: 4,
     flexDirection: "row",
-    gap: 15,
-    fontSize: 9,
-    color: "#86868b", // Apple Grey
+    flexWrap: "wrap",
+    gap: 12,
+    fontSize: 8.5,
+    color: "#6e6e73", // Apple Secondary Grey
   },
   section: {
-    marginBottom: 25,
+    marginBottom: 16,
   },
   sectionTitle: {
-    fontSize: 10,
+    fontSize: 9.5,
     fontFamily: "Helvetica-Bold",
-    color: "#86868b",
+    color: "#6e6e73",
     textTransform: "uppercase",
-    marginBottom: 12,
-    letterSpacing: 0.5,
+    marginBottom: 8,
+    letterSpacing: 1,
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#e5e5ea",
+    paddingBottom: 2,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 16,
+    marginBottom: 11,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    marginBottom: 1,
     alignItems: "baseline",
   },
   jobTitle: {
     fontFamily: "Helvetica-Bold",
-    fontSize: 10.5,
+    fontSize: 10,
     color: "#1d1d1f",
   },
   jobCompany: {
     fontFamily: "Helvetica",
-    fontSize: 10.5,
-    color: "#1d1d1f",
+    fontSize: 9.5,
+    color: "#424245",
   },
   jobDate: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: "#86868b",
   },
   description: {
-    fontSize: 9.5,
-    color: "#424245",
+    fontSize: 9,
+    color: "#333336",
     textAlign: "left",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
-    marginBottom: 3,
-    paddingLeft: 8,
+    marginBottom: 2,
+    paddingLeft: 4,
   },
   bulletPoint: {
     width: 8,
@@ -85,15 +91,20 @@ const styles = StyleSheet.create({
   bulletText: {
     flex: 1,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    color: "#424245",
+    fontSize: 8.5,
+    color: "#1d1d1f",
+    backgroundColor: "#f5f5f7",
+    borderWidth: 0.5,
+    borderColor: "#d2d2d7",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    borderRadius: 2,
   },
 });
 
@@ -106,15 +117,16 @@ const AppleCreative = ({ data }) => {
           <Text style={styles.name}>{data.name}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
-            {(data.phone || data.phone_no) && <Text>{data.phone || data.phone_no}</Text>}
+            {(data.phone || data.phone_no) && <Text>• {data.phone || data.phone_no}</Text>}
+            {data.address && <Text>• {data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ color: "#86868b", textDecoration: "none" }}>
-                LinkedIn
+              <Link src={data.linkedin} style={{ color: "#0066cc", textDecoration: "none" }}>
+                • LinkedIn
               </Link>
             )}
             {data.portfolio && (
-              <Link src={data.portfolio} style={{ color: "#86868b", textDecoration: "none" }}>
-                Portfolio
+              <Link src={data.portfolio} style={{ color: "#0066cc", textDecoration: "none" }}>
+                • Portfolio
               </Link>
             )}
           </View>
@@ -140,11 +152,11 @@ const AppleCreative = ({ data }) => {
                     {formatDate(exp.startDate)} — {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 6 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 3 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>●</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -165,14 +177,14 @@ const AppleCreative = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#86868b", marginBottom: 4 }}>
+                  <Text style={{ fontSize: 8.5, color: "#86868b", marginBottom: 2, fontFamily: "Helvetica-Oblique" }}>
                     {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>●</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -199,10 +211,10 @@ const AppleCreative = ({ data }) => {
                   {edu.grade ? ` · ${edu.grade}` : ""}
                 </Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>●</Text>
+                        <Text style={styles.bulletPoint}>•</Text>
                         <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
@@ -234,7 +246,7 @@ const AppleCreative = ({ data }) => {
             {data.certificates.map((cert, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
                 <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 9.5 }}>{cert.title}</Text>
-                <Text style={{ fontSize: 9, color: "#86868b" }}>
+                <Text style={{ fontSize: 8.5, color: "#86868b" }}>
                   {cert.organization} · {formatDate(cert.year)}
                 </Text>
               </View>

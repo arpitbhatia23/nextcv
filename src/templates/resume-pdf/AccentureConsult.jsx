@@ -3,112 +3,121 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE, HEADER_TEXT_COLUMN_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
-    fontSize: 10,
+    padding: 34,
+    fontSize: 9.5,
     fontFamily: "Helvetica",
-    backgroundColor: "#fff",
-    color: "#333",
+    backgroundColor: "#ffffff",
+    color: "#1e293b",
     lineHeight: 1.4,
   },
   header: {
-    marginBottom: 20,
-    borderBottomWidth: 2,
-    borderBottomColor: "#a100ff", // Accenture Purple-ish accent
-    paddingBottom: 10,
+    marginBottom: 16,
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#9333ea", // Accenture Purple accent
+    paddingBottom: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
   },
+  headerContent: HEADER_TEXT_COLUMN_STYLE,
   name: {
-    fontSize: 22,
+    fontSize: 24,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
+    color: "#0f172a",
     textTransform: "uppercase",
+    letterSpacing: -0.2,
+    marginBottom: 3,
   },
   role: {
-    marginTop: 8,
-
-    fontSize: 10,
-    color: "#666",
-    marginBottom: 2,
+    fontSize: 10.5,
+    color: "#9333ea",
+    fontFamily: "Helvetica",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
   contactCol: {
     alignItems: "flex-end",
-    gap: 2,
+    gap: 3,
   },
   contactItem: {
-    fontSize: 9,
-    color: "#555",
+    fontSize: 8.5,
+    color: "#64748b",
   },
   section: {
-    marginBottom: 16,
+    marginBottom: 14,
   },
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
-    color: "#000",
+    color: "#0f172a",
     textTransform: "uppercase",
+    letterSpacing: 0.8,
     marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomWidth: 0.75,
+    borderBottomColor: "#cbd5e1",
     paddingBottom: 2,
   },
-  // Experience
   jobBlock: {
-    marginBottom: 14,
+    marginBottom: 10,
   },
   jobHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    alignItems: "baseline",
+    marginBottom: 1,
   },
   jobTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontFamily: "Helvetica-Bold",
+    color: "#0f172a",
   },
   jobCompany: {
-    fontSize: 10,
-    fontFamily: "Helvetica",
-    color: "#000",
+    fontSize: 9,
+    fontFamily: "Helvetica-Oblique",
+    color: "#475569",
   },
   jobDate: {
-    fontSize: 9,
-    color: "#666",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#64748b",
   },
   description: {
-    fontSize: 10,
-    color: "#333",
-    marginTop: 2,
+    fontSize: 9,
+    color: "#334155",
+    lineHeight: 1.35,
   },
   bullet: {
     flexDirection: "row",
     marginBottom: 2,
-    paddingLeft: 8,
+    paddingLeft: 4,
   },
   bulletPoint: {
-    width: 10,
-    fontSize: 10,
-    color: "#a100ff",
+    width: 8,
+    fontSize: 9,
+    color: "#9333ea",
   },
   bulletText: {
     flex: 1,
   },
-  // Skills
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 5,
   },
   skillItem: {
-    fontSize: 9.5,
-    color: "#333",
-    backgroundColor: "#f3f3f3",
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-    borderRadius: 4,
+    fontSize: 8.5,
+    color: "#6b21a8",
+    backgroundColor: "#faf5ff",
+    borderWidth: 0.5,
+    borderColor: "#e9d5ff",
+    paddingVertical: 2.5,
+    paddingHorizontal: 7,
+    borderRadius: 2,
+    fontFamily: "Helvetica",
   },
 });
 
@@ -118,17 +127,23 @@ const AccentureConsult = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <View>
-            <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
-            <Text style={styles.role}>{data.jobRole}</Text>
+          <View style={styles.headerContent}>
+            <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name}</Text>
+            <Text style={[styles.role, HEADER_ROLE_STYLE]}>
+              {data.jobRole || "Management Consultant"}
+            </Text>
           </View>
           <View style={styles.contactCol}>
             {data.email && <Text style={styles.contactItem}>{data.email}</Text>}
             {(data.phone || data.phone_no) && (
               <Text style={styles.contactItem}>{data.phone || data.phone_no}</Text>
             )}
+            {data.address && <Text style={styles.contactItem}>{data.address}</Text>}
             {data.linkedin && (
-              <Link src={data.linkedin} style={{ ...styles.contactItem, color: "#a100ff" }}>
+              <Link
+                src={data.linkedin}
+                style={{ ...styles.contactItem, color: "#9333ea", textDecoration: "none" }}
+              >
                 LinkedIn
               </Link>
             )}
@@ -155,11 +170,11 @@ const AccentureConsult = ({ data }) => {
                     {formatDate(exp.startDate)} - {formatDate(exp.endDate) || "Present"}
                   </Text>
                 </View>
-                <Text style={{ ...styles.jobCompany, marginBottom: 4 }}>{exp.companyName}</Text>
-                <View>
+                <Text style={{ ...styles.jobCompany, marginBottom: 2 }}>{exp.companyName}</Text>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(exp.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>-</Text>
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -180,15 +195,21 @@ const AccentureConsult = ({ data }) => {
                   <Text style={styles.jobDate}>{formatDate(proj.date)}</Text>
                 </View>
                 {proj.technologiesOrTopics && (
-                  <Text style={{ fontSize: 9, color: "#666", marginBottom: 2 }}>
+                  <Text
+                    style={{
+                      fontSize: 8.5,
+                      color: "#64748b",
+                      marginBottom: 2,
+                      fontFamily: "Helvetica-Oblique",
+                    }}
+                  >
                     Tools: {proj.technologiesOrTopics}
                   </Text>
                 )}
-                <View>
+                <View style={{ marginTop: 2 }}>
                   {splitToBullets(proj.description).map((bullet, idx) => (
                     <View key={idx} style={styles.bullet}>
-                      <Text style={styles.bulletPoint}>-</Text>
-
+                      <Text style={styles.bulletPoint}>•</Text>
                       <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                     </View>
                   ))}
@@ -212,22 +233,24 @@ const AccentureConsult = ({ data }) => {
           </View>
         )}
 
-        {/* Certs */}
+        {/* Certs & Education */}
         {(data.education?.length > 0 || data.certificates?.length > 0) && (
           <View style={styles.section}>
-            <Text style={styles.sectionTitle}>Education </Text>
+            <Text style={styles.sectionTitle}>Education</Text>
             {data.education?.map((edu, i) => (
               <View key={i} style={{ marginBottom: 4 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{edu.degree}</Text>
-                <Text style={{ fontSize: 10 }}>
-                  {edu.institution}, {formatDate(edu.endYear)}
-                </Text>
+                <View style={styles.jobHeader}>
+                  <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                    {edu.degree}
+                  </Text>
+                  <Text style={styles.jobDate}>{formatDate(edu.endYear)}</Text>
+                </View>
+                <Text style={{ fontSize: 8.5, color: "#64748b" }}>{edu.institution}</Text>
                 {edu.description && (
-                  <View style={{ marginTop: 4 }}>
+                  <View style={{ marginTop: 2 }}>
                     {splitToBullets(edu.description).map((bullet, idx) => (
                       <View key={idx} style={styles.bullet}>
-                        <Text style={styles.bulletPoint}>-</Text>
-
+                        <Text style={styles.bulletPoint}>•</Text>
                         <Text style={[styles.description, styles.bulletText]}>{bullet}</Text>
                       </View>
                     ))}
@@ -235,14 +258,19 @@ const AccentureConsult = ({ data }) => {
                 )}
               </View>
             ))}
-            {data.certificates && <Text style={styles.sectionTitle}> Certifications</Text>}
-
-            {data.certificates?.map((cert, i) => (
-              <View key={i} style={{ marginTop: 2 }}>
-                <Text style={{ fontSize: 10, fontWeight: "bold" }}>{cert.title}</Text>
-                <Text style={{ fontSize: 10 }}>{cert.organization}</Text>
-              </View>
-            ))}
+            {data.certificates?.length > 0 && (
+              <>
+                <Text style={[styles.sectionTitle, { marginTop: 8 }]}>Certifications</Text>
+                {data.certificates.map((cert, i) => (
+                  <View key={i} style={{ marginTop: 3 }}>
+                    <Text style={{ fontSize: 9.5, fontFamily: "Helvetica-Bold", color: "#0f172a" }}>
+                      {cert.title}
+                    </Text>
+                    <Text style={{ fontSize: 8.5, color: "#64748b" }}>{cert.organization}</Text>
+                  </View>
+                ))}
+              </>
+            )}
           </View>
         )}
 

@@ -3,6 +3,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE, HEADER_ROLE_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
@@ -105,8 +106,8 @@ const AcademicTeacher = ({ data }) => {
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.name}>{data.name?.toUpperCase()}</Text>
-          <Text style={styles.role}>{data.jobRole || "Educator"}</Text>
+          <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name?.toUpperCase()}</Text>
+          <Text style={[styles.role, HEADER_ROLE_STYLE]}>{data.jobRole || "Educator"}</Text>
           <View style={styles.contactRow}>
             {data.email && <Text>{data.email}</Text>}
             {(data.phone || data.phone_no) && <Text>| {data.phone || data.phone_no}</Text>}
