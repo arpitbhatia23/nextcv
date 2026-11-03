@@ -3,17 +3,131 @@ import { notFound } from "next/navigation";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import seoPages from "../seo-pages.json";
 
-const relatedGuides = [
-  ["/templates", "Explore Resume Templates (₹49 - ₹399)"],
-  ["/ats-resume-checker", "Free ATS Resume Checker"],
-  ["/tcs-resume-format-for-freshers", "TCS Resume Format Guide"],
-  ["/infosys-resume-format-for-freshers", "Infosys Resume Format"],
-  ["/wipro-resume-format-for-freshers", "Wipro Resume Format"],
-  ["/ats-friendly-resume-format-india", "ATS Resume Format India"],
-  ["/fresher-resume-format-india", "Fresher Resume Guide"],
-];
-
 const getPage = slug => seoPages.find(page => page.slug === slug);
+const RELATED_GUIDE_LIMIT = 4;
+const RELATED_GUIDE_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "best",
+  "between",
+  "does",
+  "format",
+  "formats",
+  "fresher",
+  "freshers",
+  "for",
+  "from",
+  "guide",
+  "how",
+  "in",
+  "india",
+  "layout",
+  "meaning",
+  "of",
+  "on",
+  "one",
+  "or",
+  "resume",
+  "resumes",
+  "sample",
+  "samples",
+  "template",
+  "templates",
+  "the",
+  "to",
+  "vs",
+  "what",
+  "with",
+  "you",
+  "your",
+  "2026",
+]);
+
+const getGuideTerms = page => {
+  const text = [page.slug, page.title, page.h1, ...(page.keywords || [])].join(" ");
+
+  return new Set(
+    text
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(term => term.length > 1 && !RELATED_GUIDE_STOP_WORDS.has(term))
+  );
+};
+
+const getGuideTopics = page => {
+  const slug = page.slug.toLowerCase();
+  const topics = new Set();
+
+  if (/(^|-)ats(-|$)|screening/.test(slug)) topics.add("ats");
+  if (/(cognizant|ltimindtree|tech-mahindra|tcs|infosys|wipro|accenture|hcl|mnc)/.test(slug)) {
+    topics.add("employer");
+  }
+  if (/(builder|price|payment|charges)/.test(slug)) topics.add("builder");
+  if (slug.includes("cv")) topics.add("cv");
+  if (/(fresher|non-it|bca|mca|career-objective)/.test(slug)) topics.add("early-career");
+  if (slug.includes("format")) topics.add("format");
+
+  return topics;
+};
+
+const getGuideFingerprint = page =>
+  page.slug
+    .toLowerCase()
+    .split(/[^a-z0-9]+/)
+    .filter(term => term && !RELATED_GUIDE_STOP_WORDS.has(term))
+    .join("-");
+
+const getRelatedGuides = page => {
+  const guidePages = [...new Map(seoPages.map(item => [item.slug, item])).values()];
+  const documentFrequency = new Map();
+
+  for (const guide of guidePages) {
+    for (const term of getGuideTerms(guide)) {
+      documentFrequency.set(term, (documentFrequency.get(term) || 0) + 1);
+    }
+  }
+
+  const currentTerms = getGuideTerms(page);
+  const currentTopics = getGuideTopics(page);
+  const currentFingerprint = getGuideFingerprint(page);
+  const currentKeywords = new Set(
+    (page.keywords || []).map(keyword => keyword.toLowerCase().trim())
+  );
+
+  return guidePages
+    .filter(guide => guide.slug !== page.slug && getGuideFingerprint(guide) !== currentFingerprint)
+    .map(guide => {
+      let score = 0;
+      let sharedTermCount = 0;
+      const guideTopics = getGuideTopics(guide);
+      const sharesTopic = [...guideTopics].some(topic => currentTopics.has(topic));
+
+      for (const topic of guideTopics) {
+        if (currentTopics.has(topic)) score += 5;
+      }
+
+      for (const term of getGuideTerms(guide)) {
+        if (currentTerms.has(term)) {
+          sharedTermCount += 1;
+          const frequency = documentFrequency.get(term) || 1;
+          score += Math.log((guidePages.length + 1) / (frequency + 1));
+        }
+      }
+
+      const sharesKeyword = (guide.keywords || []).some(keyword =>
+        currentKeywords.has(keyword.toLowerCase().trim())
+      );
+      if (sharesKeyword) score += 4;
+
+      return { guide, score, isRelevant: sharesTopic || sharedTermCount >= 2 || sharesKeyword };
+    })
+    .filter(result => result.score > 0 && result.isRelevant)
+    .sort((a, b) => b.score - a.score || a.guide.title.localeCompare(b.guide.title))
+    .slice(0, RELATED_GUIDE_LIMIT)
+    .map(({ guide }) => guide);
+};
 
 export const dynamicParams = false;
 export const revalidate = 86400;
@@ -40,6 +154,9 @@ export default async function SeoPage({ params }) {
   const { slug } = await params;
   const page = getPage(slug);
   if (!page) notFound();
+  const hasFaqs = Array.isArray(page.faqs) && page.faqs.length > 0;
+  const showTemplates = page.showTemplates === true;
+  const relatedGuides = getRelatedGuides(page);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -75,10 +192,12 @@ export default async function SeoPage({ params }) {
 
   return (
     <div className="relative min-h-screen bg-white text-[#071644] selection:bg-indigo-100 selection:text-indigo-700">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      {hasFaqs && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -100,7 +219,7 @@ export default async function SeoPage({ params }) {
             </Link>
             <span className="text-slate-300">/</span>
             <span className="inline-flex items-center gap-1.5   px-3 py-1 text-[#3730d8] ">
-              Career Field Guide
+              Resume Resource
             </span>
             <span className="ml-auto hidden sm:inline-block text-[#365184]">
               {String(page.sections?.length || 0)} Core Sections
@@ -119,10 +238,10 @@ export default async function SeoPage({ params }) {
           {/* Quick Stats & Action bar */}
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6 border-t border-slate-200/60">
             <Link
-              href="/templates"
+              href={showTemplates ? "/templates" : "/ai-resume-builder"}
               className="inline-flex items-center justify-center gap-2  bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg"
             >
-              Build Your Resume Now
+              {showTemplates ? "Explore Resume Templates" : "Create Your Resume"}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -134,11 +253,15 @@ export default async function SeoPage({ params }) {
             </Link>
 
             <div className="flex items-center gap-4 text-xs font-medium text-[#365184]">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                Pay-Per-Resume (₹49 - ₹399)
-              </span>
-              <span>•</span>
+              {showTemplates && (
+                <>
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                    Pay-Per-Resume (₹49 - ₹399)
+                  </span>
+                  <span>•</span>
+                </>
+              )}
               <span>ATS checks are diagnostic, not a hiring guarantee</span>
             </div>
           </div>
@@ -182,16 +305,16 @@ export default async function SeoPage({ params }) {
             ) : (
               <section className=" border border-slate-200 bg-slate-50 p-6 sm:p-8">
                 <p className="text-sm sm:text-base leading-relaxed text-[#365184]">
-                  Use this guide to shape a clear, relevant resume for your next application. NextCV
-                  offers one-time download plans ranging from ₹49 to ₹399 with no monthly
-                  subscription.
+                  {showTemplates
+                    ? "Use this guide to shape a clear, relevant resume for your next application. NextCV offers one-time download plans ranging from ₹49 to ₹399 with no monthly subscription."
+                    : "Use this guide to shape a clear, relevant resume for your next application."}
                 </p>
               </section>
             )}
           </div>
 
           {/* FAQ Section */}
-          {page.faqs && page.faqs.length > 0 && (
+          {hasFaqs && (
             <section className="mt-14 pt-10 border-t border-slate-200">
               <div className="mb-6">
                 <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
@@ -227,22 +350,27 @@ export default async function SeoPage({ params }) {
           <div className="mt-14  bg-linear-to-br from-[#071644] via-[#0d2259] to-[#152e75] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
             <div className="absolute -top-24 -right-24 h-64 w-64  bg-indigo-500/20 blur-3xl pointer-events-none" />
             <div className="relative z-10 max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 px-3 py-1  bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
-                ATS Optimization Ready
-              </span>
+              {showTemplates && (
+                <span className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
+                  Resume Templates
+                </span>
+              )}
               <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                Turn This Guide Into a Winning Resume
+                {showTemplates
+                  ? "Turn This Guide Into a Strong Resume"
+                  : "Put This Guidance Into Practice"}
               </h3>
               <p className="mt-3 text-sm sm:text-base text-indigo-100/90 leading-relaxed">
-                Choose from our wide collection of professional templates starting at just ₹49 to
-                ₹399. Download a readable PDF; ATS behavior varies by employer and system.
+                {showTemplates
+                  ? "Choose a professional resume template with a one-time payment from ₹49 to ₹399. ATS behavior varies by employer and system."
+                  : "Use this guide to prepare a clear, relevant resume for your next application. ATS checks are diagnostic and cannot guarantee a hiring outcome."}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link
-                  href="/templates"
+                  href={showTemplates ? "/templates" : "/ai-resume-builder"}
                   className="w-full sm:w-auto inline-flex items-center justify-center  bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 transition-colors"
                 >
-                  Browse Resume Templates
+                  {showTemplates ? "Browse Resume Templates" : "Start a Resume"}
                 </Link>
                 <Link
                   href="/ats-resume-checker"
@@ -272,13 +400,13 @@ export default async function SeoPage({ params }) {
             </div>
             <h3 className="text-xl font-bold text-[#071644] mb-4">Related Guides</h3>
             <nav className="space-y-2" aria-label="Related guides">
-              {relatedGuides.map(([href, label]) => (
+              {relatedGuides.map(guide => (
                 <Link
-                  key={href}
-                  href={href}
+                  key={guide.slug}
+                  href={`/${guide.slug}`}
                   className="group flex items-center justify-between  bg-white border border-slate-200/80 px-4 py-3 text-sm font-semibold text-[#071644] transition-all hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-600"
                 >
-                  <span className="line-clamp-1">{label}</span>
+                  <span className="line-clamp-2">{guide.title}</span>
                   <span className="text-slate-400 group-hover:text-indigo-600 transition-colors">
                     ↗
                   </span>
@@ -286,12 +414,16 @@ export default async function SeoPage({ params }) {
               ))}
             </nav>
 
-            <div className="mt-6 pt-6 border-t border-slate-200 text-center">
-              <p className="text-xs font-medium text-[#365184]">
-                Pay per resume template. No subscription lock-in.
-              </p>
-              <p className="mt-1 text-xs font-bold text-indigo-600">₹49 to ₹399 One-Time Payment</p>
-            </div>
+            {showTemplates && (
+              <div className="mt-6 pt-6 border-t border-slate-200 text-center">
+                <p className="text-xs font-medium text-[#365184]">
+                  Pay per resume template. No subscription lock-in.
+                </p>
+                <p className="mt-1 text-xs font-bold text-indigo-600">
+                  ₹49 to ₹399 One-Time Payment
+                </p>
+              </div>
+            )}
           </div>
         </aside>
       </main>

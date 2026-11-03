@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { cache } from "react";
-import { notFound } from "next/navigation";
 import { getPortfolioBySlug } from "@/modules/portfolio/services/getPortfolio";
 import { Sparkles, ArrowLeft } from "lucide-react";
 import { createSeoMetadata } from "@/shared/utils/seo";
@@ -17,7 +16,7 @@ const PublicPortfolioViewer = dynamic(
   () => import("@/modules/portfolio/components/PublicPortfolioViewer"),
   {
     loading: () => (
-      <main className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex items-center justify-center px-6">
+      <main className="landing-theme min-h-screen bg-[#F8F7F3] text-[#17201C] flex items-center justify-center px-6">
         <div className="w-full max-w-sm">
           <Link href="/" className="inline-flex items-center gap-2 mb-12">
             <Image
@@ -85,7 +84,7 @@ export default async function PublicPortfolioPage({ params }) {
 
   if (!data?.resume) {
     return (
-      <main className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col">
+      <main className="landing-theme min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col">
         <header className="w-full border-b border-[#E3E2DC]">
           <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
             <Link href="/" className="inline-flex items-center gap-2" aria-label="NextCV home">
@@ -123,8 +122,8 @@ export default async function PublicPortfolioPage({ params }) {
 
             <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center">
               <Link
-                href="/templates"
-                className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#465B9E] px-5 text-sm font-medium text-white transition-colors hover:bg-[#344B93] focus-visible:outline f focus-visible:outline-offset-2 focus-visible:outline-[#465B9E]"
+                href="/resume-to-portfolio"
+                className="inline-flex min-h-11 items-center justify-center gap-2 bg-[#465B9E] px-5 text-sm font-medium text-white transition-colors hover:bg-[#344B93] focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#465B9E]"
               >
                 Create your portfolio
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
@@ -146,10 +145,10 @@ export default async function PublicPortfolioPage({ params }) {
                 </p>
 
                 <Link
-                  href="/templates"
+                  href="/resume-to-portfolio"
                   className="text-xs font-semibold text-[#465B9E] transition-colors hover:text-[#344B93]"
                 >
-                  Explore resume templates →
+                  Explore the portfolio builder →
                 </Link>
               </div>
             </div>

@@ -207,13 +207,13 @@ export default function PublicResumeViewer({ resume }) {
    */
 
   return (
-    <div className="min-h-screen bg-[#F8F7F3] text-[#17201C] font-sans selection:bg-[#465B9E]/15 selection:text-[#17201C] flex flex-col">
+    <div className="landing-theme flex min-h-screen flex-col bg-[#F8F7F3] font-sans text-[#17201C] selection:bg-[#465B9E]/15 selection:text-[#17201C]">
       {/* =================================================
           TOP NAVIGATION
       ================================================= */}
 
       <header className="sticky top-0 z-50 border-b border-[#E3E2DC]/90 bg-[#F8F7F3]/92 backdrop-blur-xl">
-        <div className="mx-auto flex h-17 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex min-h-17 w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-2 sm:gap-4 sm:px-6 lg:px-8">
           {/* Candidate identity */}
 
           <div className="flex min-w-0 items-center gap-3">
@@ -253,7 +253,7 @@ export default function PublicResumeViewer({ resume }) {
           <div className="flex shrink-0 items-center gap-2">
             {/* Zoom */}
 
-            <div className="hidden items-center rounded-xl border border-[#E3E2DC] bg-white p-1 text-[#66706B] shadow-[0_4px_18px_rgba(23,32,28,0.04)] md:flex">
+            <div className="flex items-center rounded-xl border border-[#E3E2DC] bg-white p-1 text-[#66706B] shadow-[0_4px_18px_rgba(23,32,28,0.04)]">
               <button
                 type="button"
                 onClick={zoomOut}
@@ -354,7 +354,7 @@ export default function PublicResumeViewer({ resume }) {
 
       <main
         ref={viewerContainerRef}
-        className="relative flex flex-1 flex-col items-center overflow-x-auto px-3 py-8 pb-36 sm:px-6 sm:py-12"
+        className="relative flex flex-1 flex-col items-center overflow-x-auto px-3 py-8 sm:px-6 sm:py-12"
       >
         {/* Very subtle editorial background */}
 
@@ -478,16 +478,12 @@ export default function PublicResumeViewer({ resume }) {
           FLOATING NEXTCV CTA
       ================================================= */}
 
-      <footer className="fixed bottom-4 left-3 right-3 z-40 sm:bottom-5 sm:left-5 sm:right-5">
-        <div className="relative mx-auto flex max-w-4xl items-center justify-between gap-4 overflow-hidden rounded-2xl border border-[#DCDAD3] bg-white/95 px-4 py-3 shadow-[0_18px_55px_rgba(23,32,28,0.13)] backdrop-blur-xl sm:px-5 sm:py-3.5">
-          {/* Subtle accent */}
-
-          <div className="absolute left-0 top-0 h-full w-0.75 bg-[#465B9E]" aria-hidden="true" />
-
+      <footer className="mt-auto border-t border-[#E3E2DC] bg-white/80 px-4 py-5 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           {/* Brand */}
 
           <Link
-            href="/"
+            href="/ai-resume-builder"
             target="_blank"
             rel="noopener noreferrer"
             className="flex min-w-0 items-center gap-3 pl-1 group"
@@ -508,7 +504,7 @@ export default function PublicResumeViewer({ resume }) {
               </span>
 
               <span className="block truncate text-[11px] text-[#8A908B]">
-                Professional resumes, made simple
+                Build and refine your resume
               </span>
             </div>
           </Link>
@@ -521,7 +517,7 @@ export default function PublicResumeViewer({ resume }) {
             </span>
 
             <Link
-              href="/"
+              href="/ai-resume-builder"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex h-9 items-center justify-center gap-1.5 rounded-xl bg-[#17201C] px-3.5 text-xs font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#2B3530] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/40 focus-visible:ring-offset-2 sm:px-4 sm:text-sm"

@@ -24,16 +24,6 @@ import {
 import { toast } from "sonner";
 import { formatDate } from "@/shared/utils/datefromater";
 
-const C = {
-  bg: "#F8F7F3",
-  text: "#17201C",
-  accent: "#465B9E",
-  hover: "#344B93",
-  muted: "#66706B",
-  border: "#E3E2DC",
-  white: "#FFFFFF",
-};
-
 const arr = value => (Array.isArray(value) ? value : []);
 
 function url(value) {
@@ -67,10 +57,10 @@ function SectionTitle({ eyebrow, title, count }) {
   return (
     <div className="mb-7 flex items-end justify-between gap-4 border-b border-[#E3E2DC] pb-4">
       <div>
-        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#465B9E]">
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#456B4A]">
           {eyebrow}
         </p>
-        <h2 className="font-serif text-2xl font-semibold tracking-tight text-[#17201C] sm:text-3xl">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[#17201C] sm:text-3xl">
           {title}
         </h2>
       </div>
@@ -89,7 +79,7 @@ function TextList({ value, limit }) {
     <ul className="mt-4 space-y-2.5">
       {visible.map((item, i) => (
         <li key={i} className="flex items-start gap-3 text-sm leading-7 text-[#66706B]">
-          <span className="mt-2.75 h-1.5 w-1.5 shrink-0 bg-[#465B9E]" />
+          <span className="mt-2.75 h-1.5 w-1.5 shrink-0 bg-[#456B4A]" />
           <span className="min-w-0">{item}</span>
         </li>
       ))}
@@ -107,11 +97,10 @@ function ContactLink({ href, icon: Icon, children, primary, external }) {
       rel={external ? "noopener noreferrer" : undefined}
       className={[
         "inline-flex min-h-11 items-center justify-center gap-2 px-4 text-sm font-medium",
-        "transition-colors duration-200 focus-visible:outline ",
-        "focus-visible:outline-offset-2 focus-visible:outline-[#465B9E]",
+        "transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#344B38]",
         primary
-          ? "bg-[#465B9E] text-white hover:bg-[#344B93]"
-          : "border border-[#E3E2DC] bg-white text-[#17201C] hover:border-[#465B9E] hover:text-[#465B9E]",
+          ? "bg-[#344B38] text-white hover:bg-[#27392A]"
+          : "border border-[#E3E2DC] bg-white text-[#17201C] hover:border-[#344B38] hover:text-[#344B38]",
       ].join(" ")}
     >
       {Icon && <Icon size={16} />}
@@ -209,10 +198,7 @@ export default function PublicPortfolioViewer({ resume }) {
   };
 
   return (
-    <div
-      className="min-h-screen bg-[#F8F7F3] font-sans text-[#17201C]"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
+    <div className="landing-theme min-h-screen bg-[linear-gradient(180deg,#ffffff_0%,#f8f7f3_24rem)] font-sans text-[#17201C]">
       {/* Navigation */}
       <header className="sticky top-0 z-40 border-b border-[#E3E2DC] bg-[#F8F7F3]/95 backdrop-blur-md">
         <div className="mx-auto flex min-h-17 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
@@ -234,7 +220,7 @@ export default function PublicPortfolioViewer({ resume }) {
               type="button"
               onClick={copyLink}
               aria-label="Share portfolio"
-              className="inline-flex h-10 items-center gap-2 border border-[#E3E2DC] bg-white px-3 text-sm transition-colors hover:border-[#465B9E] hover:text-[#465B9E] sm:px-4"
+              className="inline-flex h-10 items-center gap-2 border border-[#E3E2DC] bg-white px-3 text-sm transition-colors hover:border-[#344B38] hover:text-[#344B38] sm:px-4"
             >
               {copied ? <Check size={16} /> : <Share2 size={16} />}
               <span className="hidden sm:inline">{copied ? "Copied" : "Share"}</span>
@@ -244,7 +230,7 @@ export default function PublicPortfolioViewer({ resume }) {
               type="button"
               onClick={downloadResume}
               disabled={downloading}
-              className="inline-flex h-10 items-center gap-2 bg-[#465B9E] px-3 text-sm font-medium text-white transition-colors hover:bg-[#344B93] disabled:opacity-60 sm:px-4"
+              className="inline-flex h-10 items-center gap-2 bg-[#344B38] px-3 text-sm font-medium text-white transition-colors hover:bg-[#27392A] disabled:opacity-60 sm:px-4"
             >
               <Download size={16} />
               <span className="hidden sm:inline">
@@ -260,20 +246,17 @@ export default function PublicPortfolioViewer({ resume }) {
         {/* Hero */}
         <section className="grid gap-10 border-b border-[#E3E2DC] py-14 sm:py-20 lg:grid-cols-[1fr_280px] lg:gap-16 lg:py-24">
           <div className="max-w-3xl">
-            <p className="mb-6 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#465B9E]">
-              <span className="h-1.5 w-1.5 bg-[#465B9E]" />
+            <p className="mb-6 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#456B4A]">
+              <span className="h-1.5 w-1.5 bg-[#456B4A]" />
               Independent professional portfolio
             </p>
 
-            <h1
-              className="bwrap-break-word font-serif text-5xl font-medium leading-[1.02] tracking-[-0.045em] sm:text-7xl lg:text-[88px]"
-              style={{ fontFamily: '"Source Serif 4", Georgia, serif' }}
-            >
+            <h1 className="wrap-break-word font-display text-5xl font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
               {name}
-              <span className="text-[#465B9E]">.</span>
+              <span className="text-[#344B38]">.</span>
             </h1>
 
-            <p className="mt-5 text-lg font-medium leading-7 text-[#465B9E] sm:text-xl">
+            <p className="mt-5 text-lg font-medium leading-7 text-[#344B38] sm:text-xl">
               {jobRole}
             </p>
 
@@ -285,7 +268,7 @@ export default function PublicPortfolioViewer({ resume }) {
 
             {address && (
               <p className="mt-5 flex items-start gap-2 text-sm text-[#66706B]">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-[#465B9E]" />
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[#456B4A]" />
                 {address}
               </p>
             )}
@@ -315,7 +298,7 @@ export default function PublicPortfolioViewer({ resume }) {
           </div>
 
           {/* Profile overview */}
-          <aside className="self-start border-t-2 border-[#465B9E] pt-5 lg:mt-14">
+          <aside className="self-start border-t-2 border-[#344B38] pt-5 lg:mt-14">
             <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#66706B]">
               At a glance
             </p>
@@ -329,7 +312,7 @@ export default function PublicPortfolioViewer({ resume }) {
               ].map(item => (
                 <div key={item.label} className="flex items-center justify-between py-4">
                   <span className="text-sm text-[#66706B]">{item.label}</span>
-                  <span className="font-serif text-2xl font-semibold">
+                  <span className="font-display text-2xl font-semibold">
                     {item.value.toString().padStart(2, "0")}
                   </span>
                 </div>
@@ -338,7 +321,7 @@ export default function PublicPortfolioViewer({ resume }) {
 
             <div className="mt-5 border border-[#E3E2DC] bg-white p-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#F1F0EB] font-serif text-lg font-semibold text-[#465B9E]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#F1F5EF] font-display text-lg font-semibold text-[#344B38]">
                   {initials(name)}
                 </div>
                 <div className="min-w-0">
@@ -366,11 +349,11 @@ export default function PublicPortfolioViewer({ resume }) {
                   className="grid gap-4 border-b border-[#E3E2DC] py-7 first:pt-0 last:border-0 last:pb-0 sm:grid-cols-[1fr_190px] sm:gap-10"
                 >
                   <div className="min-w-0">
-                    <h3 className="font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+                    <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
                       {exp.position || "Position"}
                     </h3>
                     {exp.companyName && (
-                      <p className="mt-2 flex items-center gap-2 text-sm font-medium text-[#465B9E]">
+                      <p className="mt-2 flex items-center gap-2 text-sm font-medium text-[#456B4A]">
                         <Briefcase size={15} />
                         {exp.companyName}
                       </p>
@@ -412,10 +395,10 @@ export default function PublicPortfolioViewer({ resume }) {
                 return (
                   <article
                     key={`${project.title || "project"}-${i}`}
-                    className="flex min-w-0 flex-col border-b border-[#E3E2DC] py-7 first:pt-0 md:nth-[-n+2]]:pt-0"
+                    className={`flex min-w-0 flex-col border-b border-[#E3E2DC] py-7 first:pt-0 ${i < 2 ? "md:pt-0" : ""}`}
                   >
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="wrap-break-wordDS font-serif text-xl font-semibold tracking-tight sm:text-2xl">
+                      <h3 className="wrap-break-word font-display text-xl font-semibold tracking-tight sm:text-2xl">
                         {project.title || "Project"}
                       </h3>
                       {projectUrl && (
@@ -424,7 +407,7 @@ export default function PublicPortfolioViewer({ resume }) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Open ${project.title || "project"}`}
-                          className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#E3E2DC] bg-white text-[#465B9E] transition-colors hover:bg-[#465B9E] hover:text-white"
+                          className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#E3E2DC] bg-white text-[#344B38] transition-colors hover:bg-[#344B38] hover:text-white focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-[#344B38]"
                         >
                           <ArrowUpRight size={17} />
                         </a>
@@ -460,7 +443,7 @@ export default function PublicPortfolioViewer({ resume }) {
                         href={projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-5 inline-flex w-fit items-center gap-2 text-xs font-semibold text-[#465B9E] hover:text-[#344B93]"
+                        className="mt-5 inline-flex w-fit items-center gap-2 text-xs font-semibold text-[#344B38] hover:text-[#27392A]"
                       >
                         Explore project <ArrowUpRight size={14} />
                       </a>
@@ -516,12 +499,12 @@ export default function PublicPortfolioViewer({ resume }) {
                       className="border-b border-[#E3E2DC] py-5 first:pt-0 last:border-0"
                     >
                       <div className="flex items-start gap-3">
-                        <GraduationCap size={18} className="mt-1 shrink-0 text-[#465B9E]" />
+                        <GraduationCap size={18} className="mt-1 shrink-0 text-[#456B4A]" />
                         <div className="min-w-0 flex-1">
-                          <h3 className="font-serif text-lg font-semibold">
+                          <h3 className="font-display text-lg font-semibold">
                             {edu.degree || "Degree / Course"}
                           </h3>
-                          <p className="mt-2 text-sm text-[#465B9E]">
+                          <p className="mt-2 text-sm text-[#456B4A]">
                             {edu.institution || "Institution"}
                           </p>
                           {(edu.startYear || edu.endYear) && (
@@ -552,12 +535,12 @@ export default function PublicPortfolioViewer({ resume }) {
                       className="border-b border-[#E3E2DC] py-5 first:pt-0 last:border-0"
                     >
                       <div className="flex items-start gap-3">
-                        <Award size={18} className="mt-1 shrink-0 text-[#465B9E]" />
+                        <Award size={18} className="mt-1 shrink-0 text-[#456B4A]" />
                         <div className="min-w-0 flex-1">
-                          <h3 className="font-serif text-lg font-semibold">
+                          <h3 className="font-display text-lg font-semibold">
                             {cert.title || "Certification"}
                           </h3>
-                          <p className="mt-2 text-sm text-[#465B9E]">
+                          <p className="mt-2 text-sm text-[#456B4A]">
                             {cert.organization || "Issuing organization"}
                           </p>
                           {cert.year && (
@@ -571,7 +554,7 @@ export default function PublicPortfolioViewer({ resume }) {
                             href={url(cert.credentialUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex shrink-0 items-center gap-1.5 border border-[#E3E2DC] bg-white px-3 py-2 text-xs hover:border-[#465B9E] hover:text-[#465B9E]"
+                            className="inline-flex shrink-0 items-center gap-1.5 border border-[#E3E2DC] bg-white px-3 py-2 text-xs hover:border-[#344B38] hover:text-[#344B38]"
                           >
                             Verify <ExternalLink size={12} />
                           </a>
@@ -594,10 +577,7 @@ export default function PublicPortfolioViewer({ resume }) {
 
             <div className="mt-4 grid gap-7 sm:grid-cols-[1fr_auto] sm:items-end">
               <div>
-                <h2
-                  className="font-serif text-3xl font-medium tracking-tight sm:text-5xl"
-                  style={{ fontFamily: '"Source Serif 4", Georgia, serif' }}
-                >
+                <h2 className="font-display text-3xl font-medium tracking-tight sm:text-5xl">
                   Let&apos;s make something meaningful.
                 </h2>
                 <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">
@@ -611,7 +591,7 @@ export default function PublicPortfolioViewer({ resume }) {
                   href={`mailto:${email}?subject=${encodeURIComponent(
                     `Professional opportunity for ${name}`
                   )}`}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-white px-5 text-sm font-semibold text-[#17201C] transition-colors hover:bg-[#E8EAF4]"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-white px-5 text-sm font-semibold text-[#17201C] transition-colors hover:bg-[#F1F0EB]"
                 >
                   <Send size={15} /> Get in touch
                 </a>
@@ -678,13 +658,16 @@ export default function PublicPortfolioViewer({ resume }) {
               <button
                 type="button"
                 onClick={copyLink}
-                className="inline-flex items-center gap-1.5 text-[#66706B] hover:text-[#465B9E]"
+                className="inline-flex items-center gap-1.5 text-[#66706B] hover:text-[#344B38]"
               >
                 {copied ? <Check size={14} /> : <Share2 size={14} />}
                 {copied ? "Link copied" : "Share portfolio"}
               </button>
 
-              <Link href="/templates" className="font-semibold text-[#465B9E] hover:text-[#344B93]">
+              <Link
+                href="/resume-to-portfolio"
+                className="font-semibold text-[#344B38] hover:text-[#27392A]"
+              >
                 Build your portfolio →
               </Link>
             </div>

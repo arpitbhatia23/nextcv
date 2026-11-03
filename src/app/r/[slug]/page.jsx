@@ -11,7 +11,7 @@ const PublicResumeViewer = dynamic(
   () => import("@/modules/shared-resume/components/PublicResumeViewer"),
   {
     loading: () => (
-      <div className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col items-center justify-center px-6">
+      <div className="landing-theme min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col items-center justify-center px-6">
         <div className="flex flex-col items-center">
           <div
             className="w-9 h-9 rounded-full border-[3px] border-[#465B9E] border-t-transparent animate-spin"
@@ -72,7 +72,7 @@ export default async function PublicResumePage({ params }) {
 
   if (!data?.resume) {
     return (
-      <main className="min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col">
+      <main className="landing-theme min-h-screen bg-[#F8F7F3] text-[#17201C] flex flex-col">
         <div className="flex-1 flex items-center justify-center px-4 py-16 sm:px-6">
           <div className="w-full max-w-lg">
             {/* Main card */}
@@ -107,7 +107,7 @@ export default async function PublicResumePage({ params }) {
                 {/* Actions */}
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   <Link
-                    href="/"
+                    href="/ai-resume-builder"
                     className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#E3E2DC] bg-white px-4 py-3 text-sm font-semibold text-[#17201C] transition-all hover:-translate-y-0.5 hover:border-[#C8CDD9] hover:bg-[#FAFAF8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#465B9E]/30"
                   >
                     <ArrowLeft className="h-4 w-4" aria-hidden="true" />
