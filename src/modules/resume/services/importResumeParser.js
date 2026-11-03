@@ -392,7 +392,7 @@ function normalizeResume(data) {
       description: uniqueStrings(item.description),
       link: cleanUrl(item.link),
       date: cleanText(item.date),
-      technologiesOrTopics: uniqueStrings(item.technologiesOrTopics.map(normalizeSkill)),
+      technologiesOrTopics: uniqueStrings(item.technologiesOrTopics.map(normalizeSkill)).join(", "),
       organization: cleanText(item.organization),
     })),
 

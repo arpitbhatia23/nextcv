@@ -3,6 +3,7 @@ import Resume from "../models/resume.model";
 import { apiError, apiResponse } from "@/shared";
 import { NextResponse } from "next/server";
 import { redis } from "@/shared/utils/Redis";
+import { normalizeProjects } from "./normalizeProjects";
 
 export const saveResumeAsDraft = async ({ data, userId }) => {
   const requiredFields = [data.name, data.email, data.phone_no, data.address, data.summary];
@@ -25,7 +26,7 @@ export const saveResumeAsDraft = async ({ data, userId }) => {
     experience: data.experience,
     skills: data.skills,
     education: data.education,
-    projects: data.projects,
+    projects: normalizeProjects(data.projects),
     certificates: data.certificates,
   });
   const cacheKey = `resumes:user:${userId}`;

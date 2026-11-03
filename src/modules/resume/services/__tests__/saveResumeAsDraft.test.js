@@ -53,7 +53,7 @@ describe("saveResumeAsDraft service", () => {
   const mockData = {
     name: "John Doe",
     email: "john@example.com",
-    phone: "1234567890",
+    phone_no: "1234567890",
     address: "123 Main St",
     jobRole: "Developer",
     summary: "Hello",
@@ -67,7 +67,9 @@ describe("saveResumeAsDraft service", () => {
 
   it("should throw error if required fields are missing", async () => {
     const incompleteData = { ...mockData, name: "" };
-    await expect(saveResumeAsDraft({ data: incompleteData, userId })).rejects.toThrow("All required fields must be filled");
+    await expect(saveResumeAsDraft({ data: incompleteData, userId })).rejects.toThrow(
+      "All required fields must be filled"
+    );
   });
 
   it("should save draft successfully", async () => {
@@ -79,7 +81,10 @@ describe("saveResumeAsDraft service", () => {
 
     expect(Resume.create).toHaveBeenCalled();
     expect(redis.del).toHaveBeenCalledWith(`resumes:user:${userId}`);
-    expect(User.updateOne).toHaveBeenCalledWith({ _id: userId }, { $push: { resume: mockDraftId } });
+    expect(User.updateOne).toHaveBeenCalledWith(
+      { _id: userId },
+      { $push: { resume: mockDraftId } }
+    );
     expect(response.body.message).toBe("Draft generated successfully");
     expect(response.body.data).toBe(mockDraftId);
   });

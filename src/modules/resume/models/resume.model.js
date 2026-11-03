@@ -112,7 +112,7 @@ const resumeSchema = new Schema(
           type: Schema.Types.Mixed,
         },
         technologiesOrTopics: {
-          type: String,
+          type: Schema.Types.Mixed,
         },
         organization: {
           type: String,

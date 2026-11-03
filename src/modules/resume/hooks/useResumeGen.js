@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export const useResumeGen = ({ formData, selectedTemplate, type }) => {
+export const useResumeGen = ({ formData, selectedTemplate = "classicTemplate", type }) => {
   const [pdfUrl, setPdfUrl] = useState("");
 
   useEffect(() => {

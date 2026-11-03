@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { useDebouncedCallback } from "use-debounce";
 
@@ -79,7 +81,47 @@ const BG = "#F8F7F3";
 
 const WHITE = "#FFFFFF";
 
+const REQUIRED_RESUME_FIELDS = [
+  {
+    key: "name",
+    label: "Full name",
+    section: "Basic Info",
+    path: "/dashboard/builder/basicInfo",
+    isValid: value => value.length > 0,
+  },
+  {
+    key: "email",
+    label: "Valid email",
+    section: "Basic Info",
+    path: "/dashboard/builder/basicInfo",
+    isValid: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+  },
+  {
+    key: "phone_no",
+    label: "Phone number",
+    section: "Basic Info",
+    path: "/dashboard/builder/basicInfo",
+    isValid: value => value.length > 0,
+  },
+  {
+    key: "address",
+    label: "Address (at least 3 characters)",
+    section: "Basic Info",
+    path: "/dashboard/builder/basicInfo",
+    isValid: value => value.length >= 3,
+  },
+  {
+    key: "summary",
+    label: "Professional summary (at least 20 characters)",
+    section: "Summary",
+    path: "/dashboard/builder/summary",
+    isValid: value => value.length >= 20,
+  },
+];
+
 const FinalStep = () => {
+  const router = useRouter();
+
   const formData = useResumeStore(s => s.formData);
 
   const selectedTemplate = useResumeStore(s => s.selectedTemplate);
@@ -246,7 +288,32 @@ const FinalStep = () => {
     setOriginalAmount,
   });
 
+  const validateResumeBeforeSubmit = () => {
+    const missingFields = REQUIRED_RESUME_FIELDS.filter(({ key, isValid }) => {
+      const value = typeof formData?.[key] === "string" ? formData[key].trim() : "";
+      return !isValid(value);
+    });
+
+    if (missingFields.length === 0) return true;
+
+    const sections = [...new Set(missingFields.map(({ section }) => section))];
+    const firstMissingField = missingFields[0];
+
+    toast.error("Complete your resume before continuing", {
+      description: `Required: ${missingFields.map(({ label }) => label).join(", ")}. Fill these in ${sections.join(" and ")}.`,
+      descriptionClassName: "!text-gray-600 dark:!text-gray-300",
+      action: {
+        label: `Edit ${firstMissingField.section}`,
+        onClick: () => router.push(firstMissingField.path),
+      },
+    });
+
+    return false;
+  };
+
   const debouncePayment = useDebouncedCallback(() => {
+    if (!validateResumeBeforeSubmit()) return;
+
     posthog.capture("payment_started", {
       step: "review",
 
@@ -257,6 +324,8 @@ const FinalStep = () => {
   }, 1000);
 
   const debounceDraft = useDebouncedCallback(() => {
+    if (!validateResumeBeforeSubmit()) return;
+
     posthog.capture("resumesave_asdraft", {
       step: "review",
 

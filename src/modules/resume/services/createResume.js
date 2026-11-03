@@ -1,6 +1,7 @@
 import { User } from "@/modules/auth";
 import Resume from "@/modules/resume/models/resume.model";
 import { apiError } from "@/shared";
+import { normalizeProjects } from "./normalizeProjects";
 
 export const createResume = async ({
   ResumeType,
@@ -34,7 +35,7 @@ export const createResume = async ({
     skills: skills || "",
     education: education || "",
     experience: experience || "",
-    projects: projects || "",
+    projects: normalizeProjects(projects),
     jobRole: jobRole,
     certificates: certificates,
   });
