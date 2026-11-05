@@ -59,9 +59,9 @@ export default function LandingLayout({ children }) {
               "@context": "https://schema.org",
               "@type": "SoftwareApplication",
               operatingSystem: "Web",
-              name: "Get Job-Ready with AI | ATS Resume, Cover Letter & Career Tools | NextCV",
+              name: "NextCV AI Resume Builder",
               description:
-                "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+                "Create and edit an ATS-friendly resume for free with AI writing assistance, professional templates and job-description matching. One-time download plans start at ₹49.",
               applicationCategory: "Productivity",
               url: "https://www.nextcv.in",
               screenshot: "https://www.nextcv.in/opengraph-image.png",

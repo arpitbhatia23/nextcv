@@ -7,7 +7,17 @@ const questions = [
   {
     question: "Is payment recurring or one-time?",
     answer:
-      "All pricing is strictly one-time per resume download. There are no automatic renewals, hidden fees, or monthly subscriptions.",
+      "Payment is one-time for the selected download tier. NextCV does not charge a monthly subscription.",
+  },
+  {
+    question: "How much does NextCV cost?",
+    answer:
+      "You can build and edit for free. Download tiers start at ₹49, with the exact one-time price depending on the selected template tier. Compare current plans and included features on the pricing page.",
+  },
+  {
+    question: "Can AI help improve my resume?",
+    answer:
+      "Yes. AI writing assistance can help refine experience bullets, draft a professional summary and explore relevant skills. Review every suggestion and keep only details that accurately reflect your experience.",
   },
   {
     question: "Can I tailor my resume to a job description?",
@@ -22,7 +32,7 @@ const questions = [
   {
     question: "Can I create a cover letter?",
     answer:
-      "Yes. The cover letter builder connects your resume details with the target job description to generate a tailored, role-specific cover letter that you can review and edit.",
+      "Yes. The cover letter builder can use your resume and target job description to prepare a draft you can review and edit. Availability depends on the selected plan.",
   },
   {
     question: "Can I share my resume online?",
@@ -32,7 +42,7 @@ const questions = [
   {
     question: "Can I download my resume as a PDF?",
     answer:
-      "Yes. Downloading provides a high-resolution, print-ready PDF formatted to pass employer screening systems and maintain clean visual layout across devices.",
+      "Yes. A PDF download is available after you select and pay once for a template tier. Review the exported file before sending it with an application.",
   },
   {
     question: "Which resume templates work well for freshers?",

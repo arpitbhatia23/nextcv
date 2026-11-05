@@ -16,6 +16,7 @@ export default function CoverLetterSection() {
             Prepare a role-specific cover letter that complements your resume and highlights the
             experience and skills relevant to the opportunity.
           </p>
+          <p className="mt-2 text-xs text-[#737a72]">Available with selected plans.</p>
           <div className="mt-6">
             <BuildButton callbackUrl="/dashboard/cover-letter">Create Cover Letter</BuildButton>
           </div>

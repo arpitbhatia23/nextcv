@@ -164,7 +164,6 @@ export default function TemplatesSection({
                   src={template.image}
                   alt={template.alt}
                   fill
-                  unoptimized
                   priority={index === 0 && activeFilter === "All"}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.025] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
@@ -226,7 +225,6 @@ export default function TemplatesSection({
                   src={preview.image}
                   alt={preview.alt}
                   fill
-                  unoptimized
                   sizes="(max-width: 768px) 100vw, 700px"
                   className="object-contain"
                 />
