@@ -272,7 +272,10 @@ const FinalStep = () => {
     setDraftId,
   });
 
-  const { pdfUrl } = useResumeGen({ formData, selectedTemplate });
+  const { pdfUrl } = useResumeGen({
+    formData,
+    selectedTemplate: selectedTemplate || "classicTemplate",
+  });
 
   const { basePrice } = usePricing({
     selectedTemplate,
