@@ -44,10 +44,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable}  antialiased`}>
-        <main className="">
+        <div>
           {children}
           <CookieBanner />
-        </main>
+        </div>
         <script
           id="website-ldjson"
           type="application/ld+json"

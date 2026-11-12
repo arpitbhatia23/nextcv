@@ -14,6 +14,7 @@ import { usePricing } from "@/modules/payment/hooks/usePricing";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
 import { FontImports } from "./fontImport";
+import { useAuthGuard } from "@/modules/auth/hooks/useAuth";
 
 const PDFPreview = dynamic(() => import("./pdfPreview"), {
   ssr: false,
@@ -44,7 +45,7 @@ const MyResume = () => {
   const [discount, setDiscount] = useState(null);
   const [sharingResume, setSharingResume] = useState(null);
   const [portfolioResume, setPortfolioResume] = useState(null);
-
+  const { authOverlay } = useAuthGuard();
   const route = useRouter();
 
   useEffect(() => {
@@ -167,14 +168,8 @@ const MyResume = () => {
             style={{ borderColor: "#DDE2D9" }}
           >
             <div>
-              <div
-                className="h-3 w-32 mb-3 animate-pulse"
-                style={{ backgroundColor: "#DDE2D9" }}
-              />
-              <div
-                className="h-8 w-48 mb-2 animate-pulse"
-                style={{ backgroundColor: "#DDE2D9" }}
-              />
+              <div className="h-3 w-32 mb-3 animate-pulse" style={{ backgroundColor: "#DDE2D9" }} />
+              <div className="h-8 w-48 mb-2 animate-pulse" style={{ backgroundColor: "#DDE2D9" }} />
               <div
                 className="h-4 w-80 max-w-full animate-pulse"
                 style={{ backgroundColor: "#DDE2D9" }}
@@ -497,6 +492,8 @@ const MyResume = () => {
         onClose={() => setPortfolioResume(false)}
         resume={portfolioResume}
       />
+
+      {authOverlay}
     </div>
   );
 };

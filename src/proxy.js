@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 const authRoutes = ["/", "/adminlogin", "/about-us", "/contact", "/blogs", "/ats-resume-checker"];
+
 const seoDynamicSlugs = new Set([
   "accenture-resume-format-for-freshers",
   "ats-friendly-resume-checklist",
@@ -46,24 +47,51 @@ const seoDynamicSlugs = new Set([
 ]);
 
 export async function proxy(req) {
-  const { pathname } = req.nextUrl;
+  const { pathname, search } = req.nextUrl;
 
-  const needsAuthCheck = pathname.startsWith("/dashboard") || authRoutes.includes(pathname);
-  if (needsAuthCheck) {
-    const token = await getToken({ req });
+  const isLoginRoute = pathname === "/login";
 
-    if (token && authRoutes.includes(pathname)) {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
+  const isGuestAllowedRoute = pathname.startsWith("/dashboard/builder");
 
-    if (!token && pathname.startsWith("/dashboard")) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
+  const isDashboardRoute = pathname.startsWith("/dashboard");
+
+  // Keep SEO and public pages accessible.
+  const isPublicRoute =
+    authRoutes.includes(pathname) ||
+    pathname.startsWith("/blogs/") ||
+    seoDynamicSlugs.has(pathname.split("/").filter(Boolean).pop());
+
+  const token = await getToken({ req });
+
+  // Authenticated users should not revisit login.
+  if (token && isLoginRoute) {
+    const callbackUrl = req.nextUrl.searchParams.get("callbackUrl");
+
+    const safeCallback =
+      callbackUrl?.startsWith("/") && !callbackUrl.startsWith("//") ? callbackUrl : "/dashboard";
+
+    return NextResponse.redirect(new URL(safeCallback, req.url));
+  }
+
+  // Guest users can access the builder.
+  if (isDashboardRoute && isGuestAllowedRoute) {
+    return NextResponse.next();
+  }
+
+  // Protect all other dashboard pages.
+  if (isDashboardRoute && !token) {
+    const loginUrl = new URL("/login", req.url);
+
+    loginUrl.searchParams.set("callbackUrl", pathname + search);
+
+    return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/:path*"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
 };

@@ -9,6 +9,15 @@ export function InitUser({ session }) {
   useEffect(() => {
     if (session?.user) {
       setUser(session.user);
+    } else {
+      setUser({
+        id: "guest",
+        name: "Guest User",
+        email: null,
+        image: null,
+        isGuest: true,
+        role: "guest",
+      });
     }
   }, [session]);
 
