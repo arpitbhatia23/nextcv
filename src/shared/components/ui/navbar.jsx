@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ArrowLeft, Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -19,6 +19,7 @@ const links = [
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isLoginPage = pathname === "/login";
 
   const isCurrentRoute = href => pathname === href || pathname.startsWith(`${href}/`);
 
@@ -28,57 +29,75 @@ export default function Nav() {
       className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm"
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-8 lg:px-10">
-        <Link
-          href="/"
-          aria-label="NextCV home"
-          className="shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
-        >
-          <Image
-            src="/logos/nextcvlogo.png"
-            alt="NextCV"
-            width={120}
-            height={48}
-            priority
-            unoptimized
-            className="h-10 w-24 object-contain"
-          />
-        </Link>
-        <div className="hidden items-center gap-6 md:flex">
-          {links.map(link => (
+        {isLoginPage ? (
+          <>
+            <span className="flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-[#456B4A]">
+              <span className="h-2 w-2 bg-[#456B4A]" aria-hidden="true" />
+              Member access
+            </span>
             <Link
-              key={link.label}
-              href={link.href}
-              aria-current={isCurrentRoute(link.href) ? "page" : undefined}
-              className={`text-xs transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isCurrentRoute(link.href) ? "font-semibold text-primary" : "font-medium text-muted-foreground"}`}
+              href="/"
+              className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              {link.label}
+              <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+              Explore NextCV
             </Link>
-          ))}
-        </div>
-        <BuildButton className="hidden h-11 px-4 text-xs md:inline-flex">
-          Build My Resume
-        </BuildButton>
-        <div className="flex items-center gap-2 md:hidden">
-          <Button
-            variant="outline"
-            size="icon"
-            type="button"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="order-1 border-border text-foreground hover:bg-surface-muted"
-          >
-            {menuOpen ? (
-              <X aria-hidden="true" className="h-5 w-5" />
-            ) : (
-              <Menu aria-hidden="true" className="h-5 w-5" />
-            )}
-          </Button>
-          <BuildButton className="order-2 h-11 px-3 text-xs">Build Resume</BuildButton>
-        </div>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/"
+              aria-label="NextCV home"
+              className="shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
+            >
+              <Image
+                src="/logos/nextcvlogo.png"
+                alt="NextCV"
+                width={120}
+                height={48}
+                priority
+                unoptimized
+                className="h-10 w-24 object-contain"
+              />
+            </Link>
+            <div className="hidden items-center gap-6 md:flex">
+              {links.map(link => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  aria-current={isCurrentRoute(link.href) ? "page" : undefined}
+                  className={`text-xs transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isCurrentRoute(link.href) ? "font-semibold text-primary" : "font-medium text-muted-foreground"}`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <BuildButton className="hidden h-11 px-4 text-xs md:inline-flex">
+              Build My Resume
+            </BuildButton>
+            <div className="flex items-center gap-2 md:hidden">
+              <Button
+                variant="outline"
+                size="icon"
+                type="button"
+                aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-navigation"
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="order-1 border-border text-foreground hover:bg-surface-muted"
+              >
+                {menuOpen ? (
+                  <X aria-hidden="true" className="h-5 w-5" />
+                ) : (
+                  <Menu aria-hidden="true" className="h-5 w-5" />
+                )}
+              </Button>
+              <BuildButton className="order-2 h-11 px-3 text-xs">Build Resume</BuildButton>
+            </div>
+          </>
+        )}
       </div>
-      {menuOpen && (
+      {!isLoginPage && menuOpen && (
         <div
           id="mobile-navigation"
           className="border-t border-border bg-background px-4 py-3 md:hidden"

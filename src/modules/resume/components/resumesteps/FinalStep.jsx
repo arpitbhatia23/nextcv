@@ -54,6 +54,7 @@ import dynamic from "next/dynamic";
 import { FontImports } from "../fontImport";
 
 import { Tips } from "../Tips";
+import { useAuthGuard } from "@/modules/auth/hooks/useAuth";
 
 const PDFPreview = dynamic(() => import("../pdfPreview"), {
   ssr: false,
@@ -155,6 +156,7 @@ const FinalStep = () => {
   const [discount, setDiscount] = useState(null);
 
   const templates = templatesMetadata;
+  const { authOverlay, requireAuth } = useAuthGuard();
 
   useEffect(() => {
     posthog.capture("builderstepviewed", {
@@ -323,7 +325,9 @@ const FinalStep = () => {
       step_number: 9,
     });
 
-    handelPayment();
+    requireAuth(() => {
+      handelPayment();
+    });
   }, 1000);
 
   const debounceDraft = useDebouncedCallback(() => {
@@ -335,7 +339,9 @@ const FinalStep = () => {
       step_number: 9,
     });
 
-    handleSaveDraft();
+    requireAuth(() => {
+      handleSaveDraft();
+    });
   }, 1000);
 
   const debounceCoupon = useDebouncedCallback(coupon => {
@@ -344,8 +350,9 @@ const FinalStep = () => {
 
       step_number: 9,
     });
-
-    handleCoupon(coupon);
+    requireAuth(() => {
+      handleCoupon(coupon);
+    });
   }, 1000);
 
   const openPreview = event => {
@@ -1004,7 +1011,7 @@ const FinalStep = () => {
       )}
 
       <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
-
+      {authOverlay}
       {isRedirecting && <RedirectToPayment />}
     </div>
   );

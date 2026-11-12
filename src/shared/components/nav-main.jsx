@@ -1,4 +1,5 @@
 "use client";
+
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -6,6 +7,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/shared/components/ui/sidebar";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -13,43 +15,60 @@ export function NavMain({ items }) {
   const pathname = usePathname();
 
   return (
-    <SidebarGroup>
-      <SidebarGroupContent className="flex flex-col gap-1">
-        <SidebarMenu>
+    <SidebarGroup className="p-0">
+      <SidebarGroupContent>
+        <SidebarMenu className="gap-2">
           {items.map(item => {
-            const isActive = pathname?.startsWith(item.url);
+            const isActive =
+              pathname === item.url ||
+              (item.url !== "/dashboard" && pathname.startsWith(`${item.url}/`));
+
             return (
               <SidebarMenuItem key={item.title}>
-                <Link href={item?.url}>
-                  <SidebarMenuButton
-                    tooltip={item.title}
-                    className={`flex items-center justify-start gap-4 py-6 px-3 transition-all duration-200 group shadow-none ${
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive}
+                  tooltip={item.title}
+                  className={`
+                    h-12 w-full rounded-md
+                    justify-start gap-3 px-2
+                    transition-all duration-200
+                    group-data-[collapsible=icon]:size-10!
+                    group-data-[collapsible=icon]:justify-center!
+                    group-data-[collapsible=icon]:p-0!
+                    ${
                       isActive
                         ? "bg-[#E5ECE2] text-[#344B38] font-semibold"
                         : "text-[#4F5B51] hover:bg-[#E8EFE5] hover:text-[#344B38]"
-                    }`}
-                  >
-                    <div
-                      className={`flex items-center justify-center w-9 h-9 border transition-all duration-200 ${
-                        isActive
-                          ? "bg-white border-[#DDE2D9] text-[#456B4A]"
-                          : "bg-white border-[#DDE2D9] text-[#456B4A]/80 group-hover:text-[#456B4A]"
-                      }`}
-                    >
-                      <span className="transition-colors">
-                        {item.icon && <item.icon size={18} strokeWidth={1.75} />}
-                      </span>
-                    </div>
-                    <span className="font-sans text-sm transition-colors">
+                    }
+                  `}
+                >
+                  <Link href={item.url}>
+                    {item.icon && (
+                      <div
+                        className={`
+                          flex size-9 shrink-0 items-center justify-center
+                          border border-[#DDE2D9] bg-white
+                          transition-colors
+                          group-data-[collapsible=icon]:size-8!
+                          ${isActive ? "text-[#456B4A]" : "text-[#456B4A]/80"}
+                        `}
+                      >
+                        <item.icon size={18} strokeWidth={1.75} />
+                      </div>
+                    )}
+
+                    <span className="min-w-0 flex-1 truncate font-sans text-sm group-data-[collapsible=icon]:hidden">
                       {item.title}
                     </span>
+
                     {item.badge && (
-                      <span className="ml-auto text-white text-[9px] font-bold px-2 py-1 uppercase tracking-widest font-mono bg-[#344B38]">
+                      <span className="ml-auto bg-[#344B38] px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-white group-data-[collapsible=icon]:hidden">
                         {item.badge}
                       </span>
                     )}
-                  </SidebarMenuButton>
-                </Link>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             );
           })}

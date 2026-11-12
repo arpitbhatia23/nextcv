@@ -352,6 +352,10 @@ body:has(.landing-theme) {
   overflow-x: clip;
 }
 
+.landing-theme:has([data-login-shell]) > footer {
+  display: none;
+}
+
 .landing-theme [class~="min-h-screen"] {
   color: var(--landing-ink);
   background-color: var(--landing-background);

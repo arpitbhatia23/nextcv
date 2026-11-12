@@ -1,34 +1,66 @@
 "use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar";
-import { DropdownMenu, DropdownMenuTrigger } from "@/shared/components/ui/dropdown-menu";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/shared/components/ui/dropdown-menu";
+
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/shared/components/ui/sidebar";
+
 import { ChevronsUpDown } from "lucide-react";
 
 export function NavUser({ user }) {
+  const initials = user?.name ? user.name.slice(0, 2).toUpperCase() : "CN";
+
   return (
-    <SidebarMenu>
+    <SidebarMenu className="w-full">
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="hover:bg-[#E8EFE5] data-[state=open]:bg-[#E8EFE5] transition-colors"
+              tooltip={user?.name || "Guest user"}
+              className="
+                h-12 w-full min-w-0 justify-start gap-3 px-2
+                group-data-[collapsible=icon]:size-10!
+                group-data-[collapsible=icon]:min-w-10!
+                group-data-[collapsible=icon]:p-1!
+                group-data-[collapsible=icon]:justify-center!
+              "
             >
-              <Avatar className="h-8 w-8 border border-[#DDE2D9]">
-                <AvatarImage src={user?.image} alt={user?.name} />
-                <AvatarFallback className="bg-[#344B38] text-white font-sans text-xs font-semibold">
-                  {user?.name ? user.name[0] + user.name[1] : "cn"}
+              <Avatar
+                className="
+                size-8 shrink-0 overflow-hidden rounded-full
+                [&>img]:size-full [&>img]:object-cover
+                group-data-[collapsible=icon]:size-8!
+              "
+              >
+                <AvatarImage src={user?.image || ""} alt={user?.name || "User"} />
+
+                <AvatarFallback className="bg-[#344B38] text-white text-xs">
+                  {initials}
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-sans text-sm font-medium text-[#1C261E]">
-                  {user?.name}
-                </span>
-                <span className="truncate font-sans text-xs text-[#5A665B]">{user?.email}</span>
+
+              <div className="grid min-w-0 flex-1 text-left text-sm group-data-[collapsible=icon]:hidden">
+                <span className="truncate font-medium">{user?.name || "Guest user"}</span>
+
+                <span className="truncate text-xs text-[#5A665B]">{user?.email || ""}</span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4 text-[#456B4A]" />
+
+              <ChevronsUpDown className="ml-auto size-4 shrink-0 group-data-[collapsible=icon]:hidden" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
+
+          <DropdownMenuContent side="right" align="end" className="w-56">
+            <div className="px-2 py-2">
+              <p className="text-sm font-medium">{user?.name || "Guest user"}</p>
+              <p className="text-xs text-muted-foreground truncate">{user?.email || ""}</p>
+            </div>
+          </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>

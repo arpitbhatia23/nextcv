@@ -4,15 +4,16 @@ import { SidebarInset, SidebarProvider } from "@/shared/components/ui/sidebar";
 import AuthProvider from "@/context/authprovider";
 
 import { InitUser } from "@/modules/auth/components/initUser";
-import { requiredAuth } from "@/shared";
 import { Toaster } from "@/shared/components/ui/sonner";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/modules/auth";
 export const metadata = {
   title: "Dashboard ",
   description: "Manage your resumes and create new ones with AI assistance",
 };
 
 export default async function RootLayout({ children }) {
-  const session = await requiredAuth();
+  const session = await getServerSession(authOptions);
 
   return (
     <>
@@ -38,7 +39,7 @@ export default async function RootLayout({ children }) {
       <section className={` antialiased`}>
         <AuthProvider>
           <InitUser session={session} />
-          <SidebarProvider>
+          <SidebarProvider defaultOpen={false}>
             <AppSidebar />
             <SidebarInset>
               <SiteHeader />
