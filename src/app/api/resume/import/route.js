@@ -194,6 +194,7 @@ export async function POST(req) {
 
   // ── 7. Store result in Redis cache ────────────────────────
   try {
+    console.log(mappedResume);
     await redis.set(cacheKey, JSON.stringify(mappedResume), "EX", CACHE_TTL_SECONDS);
     console.log(`[import] Cache SET for ${hash.slice(0, 8)} (TTL ${CACHE_TTL_SECONDS}s)`);
   } catch (cacheErr) {

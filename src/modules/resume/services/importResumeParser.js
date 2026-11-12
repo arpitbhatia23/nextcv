@@ -52,7 +52,16 @@ const ProjectSchema = z.object({
   description: z.array(z.string()),
   link: z.string(),
   date: z.string(),
-  technologiesOrTopics: z.array(z.string()),
+  technologiesOrTopics: z.preprocess(
+    value =>
+      typeof value === "string"
+        ? value
+            .split(",")
+            .map(topic => topic.trim())
+            .filter(Boolean)
+        : value,
+    z.array(z.string())
+  ),
   organization: z.string(),
 });
 
@@ -491,6 +500,7 @@ function parseModelResponse(content) {
 ============================================================================ */
 
 async function requestGroqResume(model, resumeText, signal) {
+  console.log(resumeText);
   const completion = await groq.chat.completions.create(
     {
       model,
@@ -501,7 +511,7 @@ async function requestGroqResume(model, resumeText, signal) {
        * Increase/decrease based on your real resume dataset.
        * 2200 is generally enough for structured resume extraction.
        */
-      max_tokens: 3000,
+      max_tokens: 7000,
 
       messages: [
         {
