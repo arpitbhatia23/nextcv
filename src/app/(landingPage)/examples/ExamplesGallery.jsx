@@ -8,7 +8,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
 import BuildButton from "@/shared/components/landing/BuildButton";
 
-const EXAMPLES_DATA = [
+export const EXAMPLES_DATA = [
   {
     id: "fullstack-dev",
     role: "Full Stack Developer",
@@ -24,6 +24,56 @@ const EXAMPLES_DATA = [
       "Built responsive web applications serving 50,000+ monthly active users with Next.js & Tailwind CSS.",
       "Optimized MongoDB aggregations and index pipelines, reducing database response times by 40%.",
       "Integrated Razorpay payment gateways and OAuth authentication with 99.9% uptime.",
+    ],
+  },
+  {
+    id: "bcom-accounts-fresher",
+    role: "BCom Accounts Fresher",
+    category: "Finance & Accounting",
+    expLevel: "Fresher / 0 Exp",
+    atsScore: 94,
+    templateName: "Classic Accounting Template",
+    templateImg: "/classic.webp",
+    summary:
+      "Detail-oriented B.Com graduate with strong basics in accounting, GST filing, ledger management, and reconciliations. Ready to support finance operations with accuracy and accountability.",
+    skills: [
+      "Accounting",
+      "Tally",
+      "GST",
+      "Bookkeeping",
+      "MS Excel",
+      "Invoice Processing",
+      "Ledger Reconciliation",
+    ],
+    bullets: [
+      "Maintained daily accounting records and reconciled ledger entries to support accurate monthly close reports.",
+      "Prepared GST and invoice documentation, ensuring timely filing and error-free financial records.",
+      "Used Excel formulas and dashboards to track expenses, vendor payments, and outstanding balances.",
+    ],
+  },
+  {
+    id: "accountant",
+    role: "Accountant",
+    category: "Finance & Accounting",
+    expLevel: "0 - 2 Years Exp",
+    atsScore: 96,
+    templateName: "Finance Professional Template",
+    templateImg: "/executivegray.webp",
+    summary:
+      "Finance professional with hands-on experience in accounts reconciliation, expense management, journal entries, and compliance tracking for business operations.",
+    skills: [
+      "Accounting",
+      "Bookkeeping",
+      "Excel",
+      "Journal Entries",
+      "Tally",
+      "GST Compliance",
+      "Cash Flow",
+    ],
+    bullets: [
+      "Recorded and reviewed financial transactions to ensure accurate trial balance, profit loss statements, and balance sheet reporting.",
+      "Supported month-end close by reconciling vendor statements, bank entries, and expense reimbursements.",
+      "Maintained compliance checks for tax filings, GST return preparation, and document retention workflows.",
     ],
   },
   {
@@ -95,6 +145,98 @@ const EXAMPLES_DATA = [
     ],
   },
   {
+    id: "business-operations",
+    role: "Business Operations",
+    category: "Business & Operations",
+    expLevel: "Fresher / 1 - 2 Years Exp",
+    atsScore: 95,
+    templateName: "Operations Executive Template",
+    templateImg: "/professionalclean.webp",
+    summary:
+      "Operations-focused candidate skilled in process coordination, team scheduling, vendor communication, reporting, and daily business support across cross-functional teams.",
+    skills: [
+      "Operations",
+      "Coordination",
+      "Vendor Management",
+      "Reporting",
+      "MS Excel",
+      "Communication",
+      "Process Improvement",
+    ],
+    bullets: [
+      "Coordinated daily operations across departments to ensure timely task completion and smooth workflow management.",
+      "Prepared operation dashboards and performance reports that reduced delays in issue tracking and follow-up workflows.",
+      "Managed external vendor updates, task scheduling, and documentation to maintain on-time business support.",
+    ],
+  },
+  {
+    id: "finance-fresher",
+    role: "Finance Fresher",
+    category: "Finance & Accounting",
+    expLevel: "Fresher / 0 Exp",
+    atsScore: 93,
+    templateName: "Bright Finance Template",
+    templateImg: "/minimalist.webp",
+    summary:
+      "Aspiring finance professional with knowledge of financial statements, invoice processing, Excel analysis, and core accounting functions. Motivated to support business finance operations.",
+    skills: ["Finance", "Excel", "Accounts", "Invoices", "Reporting", "Cash Flow", "MS Office"],
+    bullets: [
+      "Analyzed expense data and prepared organized financial summaries to support budgeting and reporting tasks.",
+      "Maintained accurate records of invoices and payment schedules while ensuring compliance with internal documentation standards.",
+      "Used Excel to reconcile data, identify discrepancies, and improve the speed of monthly financial reporting.",
+    ],
+  },
+  {
+    id: "marketing-fresher",
+    role: "Marketing Fresher",
+    category: "Marketing & Sales",
+    expLevel: "Fresher / 0 Exp",
+    atsScore: 94,
+    templateName: "Creative Campaign Template",
+    templateImg: "/creativeteal.webp",
+    summary:
+      "Recent graduate with a passion for brand communication, social media promotions, customer engagement, and marketing campaign planning across digital channels.",
+    skills: [
+      "Marketing",
+      "Social Media",
+      "Campaign Planning",
+      "Content Writing",
+      "SEO",
+      "Market Research",
+      "Canva",
+    ],
+    bullets: [
+      "Supported social media content planning and campaign execution to improve reach, engagement, and follower growth.",
+      "Conducted audience research and competitor analysis to identify campaign themes aligned with target customer behavior.",
+      "Created branded creatives and promotional content using Canva and marketing insights to support digital outreach.",
+    ],
+  },
+  {
+    id: "hr-fresher",
+    role: "HR Fresher",
+    category: "HR & People",
+    expLevel: "Fresher / 0 Exp",
+    atsScore: 92,
+    templateName: "People Operations Template",
+    templateImg: "/modern.webp",
+    summary:
+      "HR graduate focused on employee engagement, onboarding support, document coordination, and recruitment operations. Strong interest in people processes and organizational culture.",
+    skills: [
+      "HR",
+      "Recruitment",
+      "Onboarding",
+      "Employee Engagement",
+      "Documentation",
+      "Communication",
+      "MS Excel",
+    ],
+    bullets: [
+      "Assisted recruitment coordination by scheduling interviews, maintaining candidate records, and tracking hiring updates.",
+      "Supported onboarding activities including documentation, employee welcome communication, and new joiner coordination.",
+      "Helped maintain organized HR files and employee records to improve process efficiency and service quality.",
+    ],
+  },
+  {
     id: "digital-marketing",
     role: "Digital Marketing Specialist",
     category: "Marketing & Sales",
@@ -159,8 +301,19 @@ const CATEGORIES = [
   "Tech & IT",
   "Freshers & Graduates",
   "Business & Operations",
+  "Finance & Accounting",
   "Marketing & Sales",
+  "HR & People",
   "Design & Creative",
+];
+
+export const EMPTY_SEARCH_SUGGESTIONS = [
+  "BCom Accounts Fresher",
+  "Accountant",
+  "Business Operations",
+  "Finance Fresher",
+  "Marketing Fresher",
+  "HR Fresher",
 ];
 
 export default function ExamplesGallery() {
@@ -207,7 +360,7 @@ export default function ExamplesGallery() {
           <Input
             id="example-search"
             type="text"
-            placeholder="Search role e.g. Full Stack Developer, TCS Fresher, Data Analyst..."
+            placeholder="Search role e.g. BCom Accounts Fresher, Accountant, Marketing Fresher, HR Fresher..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             className="h-12 pl-12 rounded-none!"
@@ -330,11 +483,38 @@ export default function ExamplesGallery() {
         <div className="text-center py-16 bg-slate-50  border border-slate-200">
           <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
           <h3 className="text-lg font-bold text-slate-900 mb-2">
-            No examples found for "{searchQuery}"
+            No examples found for "{searchQuery || "this search"}"
           </h3>
           <p className="text-slate-500 text-sm">
-            Try searching for another role like software engineer or data analyst.
+            Try a common role from your target industry or reset the filters to browse more options.
           </p>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            {EMPTY_SEARCH_SUGGESTIONS.map(suggestion => (
+              <button
+                key={suggestion}
+                type="button"
+                onClick={() => {
+                  setSearchQuery(suggestion);
+                  setActiveCategory("All");
+                }}
+                className="border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-primary/40 hover:text-primary"
+              >
+                {suggestion}
+              </button>
+            ))}
+
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery("");
+                setActiveCategory("All");
+              }}
+              className="border border-primary/20 bg-primary/5 px-3 py-2 text-xs font-semibold text-primary"
+            >
+              Reset filters
+            </button>
+          </div>
         </div>
       )}
 

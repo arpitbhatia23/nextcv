@@ -139,7 +139,13 @@ const resumeSections = [
   "Certifications and achievements relevant to the role",
 ];
 
-export default function TemplatesPage() {
+export default async function TemplatesPage({ searchParams }) {
+  const params = await searchParams;
+  const requestedPlan = typeof params?.plan === "string" ? params.plan.toLowerCase() : "all";
+  const initialPlan = ["basic", "standard", "premium", "elite"].includes(requestedPlan)
+    ? requestedPlan
+    : "all";
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <script
@@ -211,6 +217,7 @@ export default function TemplatesPage() {
       <section aria-label="Browse resume templates">
         <TemplatesSection
           showViewAll={false}
+          initialPlan={initialPlan}
           title="Browse Resume Templates"
           description="Explore six starting points by style and career stage. Preview a layout before choosing the template for your resume."
         />

@@ -229,7 +229,7 @@ export default function AIWriterPage() {
             },
             {
               q: "Does this cost extra on NextCV?",
-              a: "No! Access to our AI Writer features is included in our simple ₹399 one-time payment with no subscription trap.",
+              a: "AI-assisted resume writing is available starting at ₹49 with our one-time payment plans. Explore pricing to find the right option.",
             },
             {
               q: "Is using AI on a resume allowed?",
@@ -251,7 +251,8 @@ export default function AIWriterPage() {
             Write Your ATS Resume With AI Today
           </h2>
           <p className="text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
-            Build a high-impact, professional resume in under 5 minutes for just ₹399.
+            Build and edit your resume for free, then choose a one-time plan starting at ₹49 when
+            you are ready to download.
           </p>
           <div>
             <Link

@@ -55,7 +55,7 @@ const productSuite = [
       "Create personalized, role-specific cover letters using your resume and target job details. Choose a tone—Professional, Enthusiastic, or Concise—and edit drafts in real-time.",
     action: "Explore Cover Letter Generator",
     href: "/ai-cover-letter-generator",
-    badge: "Included with Elite",
+    badge: "Separate purchase · ₹79",
     features: [
       "Select saved resume or upload PDF/DOCX (up to 5 MB)",
       "Context-aware matching with job descriptions",
@@ -105,25 +105,25 @@ export default function ProductPage() {
     "@graph": [
       {
         "@type": "CollectionPage",
-        "name": "NextCV Product Suite",
-        "description":
+        name: "NextCV Product Suite",
+        description:
           "Explore NextCV's connected product suite: AI Resume Builder, AI Cover Letter Generator, Shareable Resume Link, and Resume-to-Portfolio Builder.",
-        "url": "https://www.nextcv.in/product",
+        url: "https://www.nextcv.in/product",
       },
       {
         "@type": "BreadcrumbList",
-        "itemListElement": [
+        itemListElement: [
           {
             "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.nextcv.in/",
+            position: 1,
+            name: "Home",
+            item: "https://www.nextcv.in/",
           },
           {
             "@type": "ListItem",
-            "position": 2,
-            "name": "Products",
-            "item": "https://www.nextcv.in/product",
+            position: 2,
+            name: "Products",
+            item: "https://www.nextcv.in/product",
           },
         ],
       },
@@ -149,7 +149,8 @@ export default function ProductPage() {
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#5B625C]">
               NextCV unites AI resume drafting, job-specific cover letters, online sharing links,
-              and interactive portfolios into a single, straightforward workflow with one-time transparent pricing.
+              and interactive portfolios into a single, straightforward workflow with one-time
+              transparent pricing.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -164,7 +165,8 @@ export default function ProductPage() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-[#8A908B]">
-              Free to build and edit · One-time payment starting at ₹49 · No monthly subscription trap
+              Free to build and edit · One-time payment starting at ₹49 · No monthly subscription
+              trap
             </p>
           </div>
         </div>
@@ -209,9 +211,7 @@ export default function ProductPage() {
 
                     <p className="mt-1 text-xs font-medium text-[#465B9E]">{product.subtitle}</p>
 
-                    <p className="mt-4 text-sm leading-6 text-[#5B625C]">
-                      {product.description}
-                    </p>
+                    <p className="mt-4 text-sm leading-6 text-[#5B625C]">{product.description}</p>
 
                     <Link
                       href={product.href}
@@ -252,8 +252,8 @@ export default function ProductPage() {
               Enter your experience once. Use it everywhere.
             </h2>
             <p className="mt-3 text-sm leading-6 text-[#5B625C]">
-              Your resume details automatically feed your AI cover letter generator, public sharing profile,
-              and personal portfolio website without duplicate data entry.
+              Your resume details automatically feed your AI cover letter generator, public sharing
+              profile, and personal portfolio website without duplicate data entry.
             </p>
           </div>
 
@@ -269,26 +269,29 @@ export default function ProductPage() {
               {
                 step: "02",
                 name: "AI Cover Letter",
-                text: "Select your resume source or upload file; AI tailors letter to job description.",
+                text: "Select your resume source or upload file; AI tailors the letter to the job description.",
                 route: "/dashboard/cover-letter",
-                badge: "API: /api/cover-letter/gen",
+                badge: "Separate purchase · ₹79",
               },
               {
                 step: "03",
                 name: "Shareable Link",
-                text: "Generate public resume slug with Pause Sharing and Delete Link controls.",
+                text: "Generate a public resume link with pause-sharing and link controls.",
                 route: "/shareable-resume",
-                badge: "API: /api/r/create & /status",
+                badge: "Premium & Elite",
               },
               {
                 step: "04",
                 name: "Portfolio Website",
                 text: "One-click website generation from resume data for Elite plan users.",
                 route: "/resume-to-portfolio",
-                badge: "API: /api/p/create & /status",
+                badge: "Elite plan",
               },
             ].map(item => (
-              <div key={item.step} className="border border-[#E3E2DC] bg-white p-6 shadow-xs flex flex-col justify-between">
+              <div
+                key={item.step}
+                className="border border-[#E3E2DC] bg-white p-6 shadow-xs flex flex-col justify-between"
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs font-bold text-[#465B9E]">{item.step}</span>
@@ -296,11 +299,15 @@ export default function ProductPage() {
                       {item.badge}
                     </span>
                   </div>
-                  <h3 className="mt-3 font-serif text-lg font-medium text-[#17201C]">{item.name}</h3>
+                  <h3 className="mt-3 font-serif text-lg font-medium text-[#17201C]">
+                    {item.name}
+                  </h3>
                   <p className="mt-2 text-xs leading-5 text-[#5B625C]">{item.text}</p>
                 </div>
                 <div className="mt-4 pt-3 border-t border-[#F1F0EB]">
-                  <span className="font-mono text-[10px] text-[#465B9E] font-medium">{item.route}</span>
+                  <span className="font-mono text-[10px] text-[#465B9E] font-medium">
+                    {item.route}
+                  </span>
                 </div>
               </div>
             ))}

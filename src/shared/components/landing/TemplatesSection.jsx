@@ -6,13 +6,19 @@ import Link from "next/link";
 import { ArrowUpRight, Check, Eye, X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import BuildButton from "./BuildButton";
+import resumeTemplateCatalog from "@/shared/utils/resumeTemplateCatlog";
 
 const filters = ["All", "ATS", "Modern", "Classic", "Tech", "Creative", "Freshers"];
+const planFilters = ["all", "basic", "standard", "premium", "elite"];
+const catalogTemplates = resumeTemplateCatalog.flatMap(tier =>
+  tier.templates.map(template => ({ ...template, tierName: tier.tierName }))
+);
 
 const templates = [
   {
     image: "/milimalist.webp",
     title: "Minimal",
+    catalogKey: "MinimalistTemplate",
     audience: "Software engineers · Freshers · MNC applications",
     categories: ["ATS", "Freshers"],
     alt: "Minimal resume layout preview",
@@ -20,6 +26,7 @@ const templates = [
   {
     image: "/classic.webp",
     title: "Classic",
+    catalogKey: "classicTemplate",
     audience: "Business roles · Traditional industries · Experienced candidates",
     categories: ["ATS", "Classic"],
     alt: "Classic resume layout preview",
@@ -27,6 +34,7 @@ const templates = [
   {
     image: "/modern.webp",
     title: "Modern",
+    catalogKey: "modernTemplate",
     audience: "Early-career professionals · Product and operations roles",
     categories: ["Modern", "Freshers"],
     alt: "Modern resume layout preview",
@@ -34,6 +42,7 @@ const templates = [
   {
     image: "/techdark.webp",
     title: "Tech",
+    catalogKey: "TechDark",
     audience: "Developers · Engineering roles · Digital teams",
     categories: ["Tech", "Modern"],
     alt: "Technology resume layout preview",
@@ -41,6 +50,7 @@ const templates = [
   {
     image: "/creativeteal.webp",
     title: "Creative",
+    catalogKey: "CreativeTeal",
     audience: "Designers · Marketing · Creative portfolios",
     categories: ["Creative", "Modern"],
     alt: "Creative resume layout preview",
@@ -48,6 +58,7 @@ const templates = [
   {
     image: "/professionalclean.webp",
     title: "Professional",
+    catalogKey: "ProfessionalClean",
     audience: "Students · Graduates · First applications",
     categories: ["ATS", "Classic", "Freshers"],
     alt: "Professional resume layout preview",
@@ -56,19 +67,32 @@ const templates = [
 
 export default function TemplatesSection({
   showViewAll = true,
+  initialPlan = "all",
   title = "Resume Templates for Different Career Goals",
   description = "Choose a resume template that fits your experience and career goals, then personalize it with your own education, skills, projects, and work history.",
 } = {}) {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [activePlan, setActivePlan] = useState(initialPlan);
   const [preview, setPreview] = useState(null);
   const closeButtonRef = useRef(null);
   const dialogRef = useRef(null);
   const triggerRef = useRef(null);
 
-  const visibleTemplates =
-    activeFilter === "All"
-      ? templates
-      : templates.filter(template => template.categories.includes(activeFilter));
+  const templatesWithPrices = templates.map(template => {
+    const catalogTemplate = catalogTemplates.find(
+      item => item.templateName === template.catalogKey
+    );
+    return {
+      ...template,
+      tierName: catalogTemplate?.tierName || "Standard",
+      price: catalogTemplate?.priceDiscounted || 99,
+    };
+  });
+  const visibleTemplates = templatesWithPrices.filter(template => {
+    const matchesCategory = activeFilter === "All" || template.categories.includes(activeFilter);
+    const matchesPlan = activePlan === "all" || template.tierName.toLowerCase() === activePlan;
+    return matchesCategory && matchesPlan;
+  });
 
   useEffect(() => {
     if (!preview) {
@@ -148,6 +172,27 @@ export default function TemplatesSection({
           ))}
         </div>
 
+        <div
+          className="mt-4 flex flex-wrap items-center gap-2"
+          role="group"
+          aria-label="Filter by plan"
+        >
+          <span className="mr-1 text-xs font-semibold text-[#626962]">Plan</span>
+          {planFilters.map(plan => (
+            <Button
+              key={plan}
+              variant={activePlan === plan ? "default" : "outline"}
+              size="sm"
+              type="button"
+              aria-pressed={activePlan === plan}
+              onClick={() => setActivePlan(plan)}
+              className="min-h-9 px-3 text-xs capitalize"
+            >
+              {plan === "all" ? "All plans" : plan}
+            </Button>
+          ))}
+        </div>
+
         <div className="mt-5 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           {visibleTemplates.map((template, index) => (
             <article key={template.title} className="group min-w-0">
@@ -176,6 +221,9 @@ export default function TemplatesSection({
                 <div className="min-w-0">
                   <h3 className="text-sm font-semibold text-[#202a23]">{template.title}</h3>
                   <p className="mt-1.5 text-xs leading-5 text-[#697068]">{template.audience}</p>
+                  <span className="mt-2 inline-flex border border-[#d9deeb] bg-[#f4f6fa] px-2 py-1 text-xs font-semibold text-[#344b93]">
+                    {template.tierName} · ₹{template.price}
+                  </span>
                 </div>
                 <BuildButton className="min-h-10 shrink-0 px-3 py-2 text-xs">
                   Use Template
@@ -205,7 +253,9 @@ export default function TemplatesSection({
                 <h3 id="template-preview-title" className="text-sm font-semibold text-[#202a23]">
                   {preview.title} template
                 </h3>
-                <p className="mt-0.5 text-xs text-[#687068]">{preview.audience}</p>
+                <p className="mt-0.5 text-xs text-[#687068]">
+                  {preview.tierName} · ₹{preview.price} · {preview.audience}
+                </p>
               </div>
               <Button
                 variant="ghost"

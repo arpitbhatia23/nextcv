@@ -54,7 +54,11 @@ const plans = [
       "AI-assisted resume writing",
       "Instant UPI & card checkout",
     ],
-    unavailable: ["Resume sharing link", "Professional portfolio", "AI cover letter"],
+    unavailable: [
+      "Resume sharing link",
+      "Professional portfolio",
+      "AI cover letter (separate ₹79 purchase)",
+    ],
   },
   {
     name: "Standard",
@@ -70,7 +74,11 @@ const plans = [
       "High-resolution PDF download",
       "AI-assisted content generation",
     ],
-    unavailable: ["Resume sharing link", "Professional portfolio", "AI cover letter"],
+    unavailable: [
+      "Resume sharing link",
+      "Professional portfolio",
+      "AI cover letter (separate ₹79 purchase)",
+    ],
   },
   {
     name: "Premium",
@@ -87,12 +95,12 @@ const plans = [
       "AI writer tools",
       "High-resolution PDF download",
     ],
-    unavailable: ["Professional portfolio website"],
+    unavailable: ["Professional portfolio website", "AI cover letter (separate ₹79 purchase)"],
   },
   {
     name: "Elite",
     price: 399,
-    description: "The complete package — premium resume, sharing link, cover letter and portfolio.",
+    description: "A premium resume with a sharing link and professional portfolio website.",
     icon: Crown,
     popular: false,
     href: "/templates?plan=elite",
@@ -105,7 +113,7 @@ const plans = [
       "High-resolution PDF download",
       "Advanced AI writing tools",
     ],
-    unavailable: [],
+    unavailable: ["AI cover letter (separate ₹79 purchase)"],
   },
 ];
 
@@ -131,6 +139,11 @@ const faqs = [
       "Yes. Elite includes a normal high-resolution PDF resume download along with the online resume sharing link and portfolio website.",
   },
   {
+    question: "Is the AI Cover Letter included in a resume plan?",
+    answer:
+      "No. The AI Cover Letter is a separate product available for a one-time payment of ₹79. It is not included with Basic, Standard, Premium, or Elite resume plans.",
+  },
+  {
     question: "Do I need a monthly subscription?",
     answer:
       "No. NextCV uses one-time payments for the selected resume plan. There is no mandatory monthly subscription for creating your resume.",
@@ -143,7 +156,7 @@ const faqs = [
   {
     question: "What is the difference between Premium and Elite?",
     answer:
-      "Premium gives you a professional resume with a live sharing link. Elite adds the professional portfolio website, portfolio sharing ",
+      "Premium includes a professional resume and live sharing link. Elite adds a professional portfolio website and portfolio sharing. The AI Cover Letter is available separately for ₹79.",
   },
 ];
 
@@ -384,7 +397,7 @@ export default function PricingPage() {
 
           <div className="mx-auto mt-8 max-w-3xl  border border-border bg-surface-muted p-5 text-center">
             <p className="text-sm font-semibold text-foreground">
-              Elite = Resume + Resume Sharing + Portfolio + Cover Letter
+              Elite = Resume + Resume Sharing + Portfolio
             </p>
 
             <p className="mt-1 text-xs text-muted-foreground">
@@ -539,7 +552,7 @@ export default function PricingPage() {
                     ["Basic", "₹49", "✓", "—", "—", "—"],
                     ["Standard", "₹99", "✓", "—", "—", "—"],
                     ["Premium", "₹199", "✓", "✓ Resume", "—", "—"],
-                    ["Elite", "₹399", "✓", "✓ Resume", "✓ Portfolio", "_"],
+                    ["Elite", "₹399", "✓", "✓ Resume", "✓ Portfolio", "Separate · ₹79"],
                   ].map(row => (
                     <tr key={row[0]} className="border-b border-slate-100 last:border-0">
                       {row.map((cell, index) => (

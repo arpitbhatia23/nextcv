@@ -53,7 +53,7 @@ const faqs = [
   {
     question: "Is the AI cover letter generator free?",
     answer:
-      "You can draft and review cover letters in the builder. Cover letter creation and downloads are included with the Elite plan or available through the cover letter tool.",
+      "You can draft and review a cover letter in the builder. Unlocking the finished cover letter is a separate one-time ₹79 purchase and is not included in any resume plan, including Elite.",
   },
   {
     question: "Should I review an AI-generated cover letter before sending it?",
@@ -237,9 +237,8 @@ export default function AICoverLetterPage() {
               Step-by-step: How the Cover Letter Studio operates
             </h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              The exact 4-step workflow implemented in NextCV at{" "}
-              <code className="font-mono text-xs text-[#17201C]">/dashboard/cover-letter</code>,
-              powered by Gemini AI and real-time PDF rendering.
+              Add your resume and job details, create a tailored draft, review it, and unlock your
+              finished cover letter with a separate one-time payment of ₹79.
             </p>
           </div>
 
@@ -249,32 +248,32 @@ export default function AICoverLetterPage() {
                 step: "01",
                 badge: "Step 01",
                 title: "Choose Resume Source",
-                desc: "Choose between 'My Resumes' (fetches paid resumes via /api/resume/getAllResume) or 'Upload Resume' (supports external .pdf/.docx up to 5 MB parsed via /api/resume/import).",
-                detail: "Feeds active resume job role, skills, and experience into the prompt.",
+                desc: "Choose a resume saved in your account or upload a PDF or DOCX file up to 5 MB.",
+                detail: "Your role, skills, and experience help personalize the draft.",
                 icon: FileText,
               },
               {
                 step: "02",
                 badge: "Step 02",
                 title: "Job Details & Tone Selection",
-                desc: "Enter the Target Company Name and paste the full Job Description. Select your writing tone (Professional, Enthusiastic, Concise, Confident) and desired length.",
-                detail: "Validates company and resume presence before generation.",
+                desc: "Add the company name and job description, then choose a writing tone and length.",
+                detail: "Use the job details to tailor the letter to the position.",
                 icon: Building,
               },
               {
                 step: "03",
                 badge: "Step 03",
                 title: "AI Generation & Realtime Editor",
-                desc: "Click 'Generate Cover Letter' to call /api/cover-letter/gen. Inspect the draft in the interactive text editor where you can personalize lines and adjust wording.",
-                detail: "Drafts can be saved to your account via /api/cover-letter/savedraft.",
+                desc: "Generate a first draft, then edit the wording and details to make it your own.",
+                detail: "Save your draft to return to it later.",
                 icon: Wand2,
               },
               {
                 step: "04",
                 badge: "Step 04",
                 title: "Live PDF Preview & Download",
-                desc: "Inspect the side-by-side vector PDF preview in real-time. Apply discount coupons (e.g. FIRST20) and download your print-ready PDF letter.",
-                detail: "One-click download or save to 'My Cover Letters'.",
+                desc: "Preview the finished letter before unlocking its print-ready PDF for ₹79.",
+                detail: "One-time cover-letter purchase; no resume plan required.",
                 icon: Check,
               },
             ].map(item => {
@@ -394,14 +393,14 @@ export default function AICoverLetterPage() {
                     href="/pricing"
                     className="inline-flex h-11 items-center justify-center gap-2 border border-[#E3E2DC] bg-white px-5 text-xs font-semibold text-[#17201C] hover:bg-[#F1F0EB]"
                   >
-                    View Elite Plan (Includes Both)
+                    View Resume Plans
                   </Link>
                 </div>
               </div>
 
               <div className="border border-[#E3E2DC] bg-white p-6">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[#8A908B]">
-                  Elite Bundle Summary
+                  Resume Plans and Cover Letters
                 </p>
                 <ul className="mt-4 space-y-3 text-xs text-[#5B625C]">
                   <li className="flex items-center gap-2">
@@ -410,7 +409,7 @@ export default function AICoverLetterPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
-                    AI Cover Letter generator access
+                    AI Cover Letter available separately for ₹79
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
@@ -436,7 +435,7 @@ export default function AICoverLetterPage() {
             </div>
             <h2 className="mt-4 font-serif text-3xl text-[#17201C]">Frequently Asked Questions</h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              Details on inputs, privacy, tone selection, and draft editing.
+              Details on inputs, pricing, tone selection, and draft editing.
             </p>
           </div>
 

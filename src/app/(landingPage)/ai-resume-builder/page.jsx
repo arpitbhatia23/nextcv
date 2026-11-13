@@ -519,7 +519,7 @@ export default function AIResumeBuilderPage() {
                 name: "Elite",
                 price: "₹399",
                 detail:
-                  "Complete suite: resume, sharing link, portfolio website, cover letter generator.",
+                  "Resume, sharing link, and portfolio website. Cover letters are a separate ₹79 purchase.",
               },
             ].map(p => (
               <div

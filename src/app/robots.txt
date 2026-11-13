@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.nextcv.in/sitemap.xml 
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /payement/
+Disallow: /adminlogin
+Disallow: /login
+Sitemap: https://www.nextcv.in/sitemap.xml
