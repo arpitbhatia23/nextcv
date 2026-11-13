@@ -15,9 +15,9 @@ import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder India for Freshers & Professionals | NextCV",
+  title: "AI Resume Builder India for Freshers | NextCV",
   description:
-    "Create an ATS-friendly resume with NextCV. Use AI writing tools, professional resume templates and job-description matching. Build free, download from ₹49. No subscription.",
+    "Build an ATS-friendly resume with AI writing, templates and job matching. Edit for free; download from ₹49 with no subscription.",
   path: "",
   keywords: [
     "resume builder",

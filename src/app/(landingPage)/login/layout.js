@@ -14,6 +14,10 @@ export const metadata = {
   },
   description:
     "Everything you need to apply with confidence. Build an ATS resume, improve your content with AI, create tailored cover letters, and prepare for your next job.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 
   alternates: {
     canonical: "https://www.nextcv.in/login",

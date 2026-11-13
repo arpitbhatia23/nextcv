@@ -1,0 +1,29 @@
+# NextCV
+
+> NextCV is an online resume builder for Indian freshers and job seekers, offering ATS-oriented resume templates, AI-assisted resume writing, and career tools.
+
+NextCV helps users create, edit, and preview resumes online before purchasing a watermark-free PDF download. Its pricing model uses one-time payments rather than recurring subscriptions.
+
+## Main Website
+
+- [NextCV Homepage](https://www.nextcv.in/): Official website and resume-building product.
+
+## Product Features
+
+- [AI Resume Builder](https://www.nextcv.in/ai-resume-builder): Create and edit a resume using ATS-oriented templates and AI writing assistance.
+- [ATS Resume Checker](https://www.nextcv.in/ats-resume-checker): Review resume readability, structure, and relevant job-description keywords.
+- [AI Cover Letter Generator](https://www.nextcv.in/ai-cover-letter-generator): Create and edit a role-specific cover letter.
+- [Public Resume Sharing](https://www.nextcv.in/shareable-resume): Publish a resume link with available privacy controls.
+- [Resume-to-Portfolio Builder](https://www.nextcv.in/resume-to-portfolio): Create a public portfolio from resume information.
+- [Career Guides](https://www.nextcv.in/career): Browse career, resume, and interview guides.
+- [Resume Builder Comparisons](https://www.nextcv.in/resume-builder-comparison): Compare resume-building services and alternatives.
+
+## Pricing
+
+- [Pricing](https://www.nextcv.in/pricing): Check the live website for current plans, prices, and included features.
+
+## Important Information
+
+- Resume templates are designed to support ATS readability; actual parsing and hiring outcomes depend on the resume, employer, and recruitment system.
+- AI-generated content should be reviewed and corrected by the user before applying for jobs.
+- Product features, prices, and policies may change. Refer to the official website for current information.

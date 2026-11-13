@@ -22,9 +22,9 @@ import RelatedProducts from "@/shared/components/products/RelatedProducts";
 import ProductConversionBanner from "@/shared/components/products/ProductConversionBanner";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder for Freshers | ATS-Friendly Resumes – NextCV",
+  title: "AI Resume Builder for Freshers | ATS-Friendly | NextCV",
   description:
-    "Build an ATS-friendly resume with AI assistance. Organize education, projects, skills and experience, improve bullet points with AI, and download a professional PDF.",
+    "Build an ATS-friendly resume with AI assistance. Organize education, projects and skills, refine bullet points, and preview a polished PDF.",
   path: "/ai-resume-builder",
   keywords: [
     "ai resume builder",
