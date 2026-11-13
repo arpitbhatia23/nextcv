@@ -18,10 +18,10 @@ import Script from "next/script";
 
 import ATSChecker from "@/shared/components/ats-checker/ATSChecker";
 
-const pageTitle = "Free ATS Resume Checker – Check Your Resume Score | NextCV";
+const pageTitle = "Free ATS Resume Checker | Check Your Resume Score | NextCV";
 
 const pageDescription =
-  "Check your resume's ATS compatibility for free. Upload a PDF or DOCX to review formatting, section structure, readability and job-description keyword gaps. Get practical suggestions with NextCV.";
+  "Check your resume's ATS compatibility free. Upload a PDF or DOCX to review readability, formatting, sections and relevant job-description keywords.";
 
 const pageUrl = "https://www.nextcv.in/ats-resume-checker";
 

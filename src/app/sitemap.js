@@ -4,9 +4,6 @@ import careerPages from "./(landingPage)/career-pages.json" with { type: "json" 
 import { SITE_URL } from "@/shared/utils/seo";
 import { comparisonPages } from "./(landingPage)/comparison_pages";
 
-// Fallback timestamp used when a source does not provide a modification date.
-const BUILD_FALLBACK_DATE = new Date("2026-10-05T04:38:16.000Z");
-
 export default async function sitemap() {
   const baseUrl = SITE_URL.replace(/\/$/, "");
 
@@ -47,10 +44,9 @@ export default async function sitemap() {
     { path: "/contact" },
     { path: "/privacy-policy" },
     { path: "/terms" },
-  ].map(page => ({
-    url: `${baseUrl}${page.path}`,
-    lastModified: BUILD_FALLBACK_DATE,
-  }));
+    { path: "/career" },
+    { path: "/resume-builder-comparison" },
+  ].map(page => ({ url: `${baseUrl}${page.path}` }));
 
   /* =========================================================
      SEO LANDING PAGES
@@ -60,7 +56,6 @@ export default async function sitemap() {
     .filter(page => page?.slug)
     .map(page => ({
       url: `${baseUrl}/${page.slug.replace(/^\/+|\/+$/g, "")}`,
-      lastModified: BUILD_FALLBACK_DATE,
     }));
 
   /* =========================================================
@@ -71,7 +66,6 @@ export default async function sitemap() {
     .filter(page => page?.slug)
     .map(page => ({
       url: `${baseUrl}/career/${page.slug.replace(/^\/+|\/+$/g, "")}`,
-      lastModified: BUILD_FALLBACK_DATE,
     }));
 
   /* =========================================================
@@ -82,7 +76,7 @@ export default async function sitemap() {
     .filter(blog => blog?.slug)
     .map(blog => ({
       url: `${baseUrl}/blogs/${blog.slug.replace(/^\/+|\/+$/g, "")}`,
-      lastModified: blog._updatedAt ? new Date(blog._updatedAt) : BUILD_FALLBACK_DATE,
+      ...(blog._updatedAt ? { lastModified: new Date(blog._updatedAt) } : {}),
     }));
 
   /* =========================================================
@@ -93,7 +87,7 @@ export default async function sitemap() {
     .filter(page => page?.slug)
     .map(page => ({
       url: `${baseUrl}/resume-builder-comparison/${page.slug.replace(/^\/+|\/+$/g, "")}`,
-      lastModified: page?._updatedAt ? new Date(page._updatedAt) : BUILD_FALLBACK_DATE,
+      ...(page?._updatedAt ? { lastModified: new Date(page._updatedAt) } : {}),
     }));
 
   /* =========================================================
