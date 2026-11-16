@@ -36,7 +36,8 @@ const COLORS = {
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
-    backgroundColor: COLORS.white,
+    position: "relative",
+    backgroundColor: "#f6f8fb",
     fontFamily: "Helvetica",
     color: COLORS.text,
     fontSize: 8.2,
@@ -48,15 +49,22 @@ const styles = StyleSheet.create({
   ----------------------------- */
 
   sidebar: {
-    width: "26.5%",
+    width: "31%",
     minHeight: "100%",
-    backgroundColor: "#f8fafc",
-    color: "#1e293b",
-    borderRightWidth: 0.75,
-    borderRightColor: "#e2e8f0",
-    paddingTop: 22,
-    paddingHorizontal: 20,
+    backgroundColor: COLORS.navy,
+    color: COLORS.white,
+    paddingTop: 24,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingBottom: 22,
+  },
+  navyEdge: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 8,
+    backgroundColor: COLORS.navy,
   },
 
   avatarWrapper: {
@@ -65,52 +73,55 @@ const styles = StyleSheet.create({
   },
 
   avatar: {
-    width: 66,
-    height: 66,
-    borderRadius: 33,
-    backgroundColor: COLORS.blue,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "#f3f7ff",
+    borderWidth: 2,
+    borderColor: "rgba(255,255,255,0.7)",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 12,
   },
 
   avatarText: {
-    color: COLORS.white,
+    color: COLORS.navy,
     fontSize: 22,
     fontFamily: "Helvetica-Bold",
   },
 
   sidebarName: {
-    color: "#0f172a",
-    fontSize: 14,
+    color: COLORS.white,
+    fontSize: 15,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
     marginBottom: 4,
   },
 
   sidebarRole: {
-    color: "#2563eb",
+    color: "#dbeafe",
     fontSize: 8.5,
     textAlign: "center",
   },
 
   sidebarSection: {
-    marginTop: 22,
+    marginTop: 18,
   },
 
   sidebarSectionBorder: {
-    marginTop: 20,
-    paddingTop: 18,
-    borderTopWidth: 0.6,
-    borderTopColor: "#e2e8f0",
+    marginTop: 16,
+    paddingTop: 16,
+    borderTopWidth: 0.8,
+    borderTopColor: "rgba(255,255,255,0.18)",
   },
 
   sidebarTitle: {
-    color: "#0f172a",
-    fontSize: 7.4,
+    color: "#e2e8f0",
+    fontSize: 7.3,
     fontFamily: "Helvetica-Bold",
     marginBottom: 10,
     textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
 
   contactItem: {
@@ -129,7 +140,7 @@ const styles = StyleSheet.create({
     width: 11,
     height: 11,
     borderRadius: 2,
-    backgroundColor: "#65aaff",
+    backgroundColor: "#dfeafc",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -142,14 +153,14 @@ const styles = StyleSheet.create({
 
   contactText: {
     flex: 1,
-    color: "#475569",
+    color: "#dfeafc",
     fontSize: 7.1,
     lineHeight: 1.35,
   },
 
   contactLink: {
     flex: 1,
-    color: "#475569",
+    color: "#dfeafc",
     fontSize: 7.1,
     lineHeight: 1.35,
     textDecoration: "none",
@@ -161,10 +172,10 @@ const styles = StyleSheet.create({
   },
 
   skillPill: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "rgba(255,255,255,0.1)",
     borderWidth: 0.5,
-    borderColor: "#cbd5e1",
-    borderRadius: 9,
+    borderColor: "rgba(255,255,255,0.18)",
+    borderRadius: 8,
     paddingVertical: 3,
     paddingHorizontal: 7,
     marginRight: 4,
@@ -172,31 +183,32 @@ const styles = StyleSheet.create({
   },
 
   skillPillText: {
-    color: "#1e293b",
+    color: "#f8fbff",
     fontSize: 6.2,
   },
 
   sidebarPrimaryText: {
-    color: COLORS.white,
+    color: "#f8fbff",
     fontSize: 7.5,
     fontFamily: "Helvetica-Bold",
     marginBottom: 3,
   },
 
   sidebarSecondaryText: {
-    color: "#cbd5e1",
+    color: "#dfeafc",
     fontSize: 6.8,
     lineHeight: 1.45,
   },
 
   sidebarListItem: {
-    color: "#334155",
+    color: "#eaf2ff",
     fontSize: 7.1,
     marginBottom: 7,
   },
 
   educationItem: {
-    marginBottom: 11,
+    marginBottom: 10,
+    paddingBottom: 2,
   },
 
   /* -----------------------------
@@ -204,10 +216,11 @@ const styles = StyleSheet.create({
   ----------------------------- */
 
   main: {
-    width: "73.5%",
-    paddingTop: 25,
-    paddingHorizontal: 25,
-    paddingBottom: 22,
+    width: "69%",
+    paddingTop: 24,
+    paddingHorizontal: 22,
+    paddingBottom: 18,
+    backgroundColor: "#f9fbfd",
   },
 
   section: {
@@ -215,13 +228,15 @@ const styles = StyleSheet.create({
   },
 
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: "Helvetica-Bold",
     color: "#101828",
     paddingBottom: 5,
     marginBottom: 8,
     borderBottomWidth: 0.8,
-    borderBottomColor: COLORS.blue,
+    borderBottomColor: "#d9e2f1",
+    textTransform: "uppercase",
+    letterSpacing: 0.4,
   },
 
   summary: {
@@ -311,10 +326,10 @@ const styles = StyleSheet.create({
   projectCard: {
     width: "48.7%",
     minHeight: 72,
-    backgroundColor: COLORS.card,
-    borderWidth: 0.6,
-    borderColor: "#e1e7ef",
-    borderRadius: 4,
+    backgroundColor: "#ffffff",
+    borderWidth: 0.7,
+    borderColor: "#e5ebf5",
+    borderRadius: 8,
     padding: 10,
     marginBottom: 10,
   },
@@ -428,7 +443,7 @@ const EmailIcon = () => (
     <Path
       d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.8}
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -437,7 +452,7 @@ const EmailIcon = () => (
     <Path
       d="M22 6L12 13L2 6"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.8}
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -450,7 +465,7 @@ const PhoneIcon = () => (
     <Path
       d="M22 16.92V20A2 2 0 0 1 19.82 22A19.79 19.79 0 0 1 11.19 18.93A19.5 19.5 0 0 1 5.07 12.81A19.79 19.79 0 0 1 2 4.18A2 2 0 0 1 4 2H7.09A2 2 0 0 1 9.09 3.72C9.21 4.62 9.42 5.5 9.72 6.34A2 2 0 0 1 9.27 8.45L7.97 9.75A16 16 0 0 0 14.25 16.03L15.55 14.73A2 2 0 0 1 17.66 14.28C18.5 14.58 19.38 14.79 20.28 14.91A2 2 0 0 1 22 16.92Z"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.7}
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -463,26 +478,26 @@ const LocationIcon = () => (
     <Path
       d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10A9 9 0 0 1 21 10Z"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.7}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
 
-    <Circle cx="12" cy="10" r="3" fill="none" stroke="#65aaff" strokeWidth={1.7} />
+    <Circle cx="12" cy="10" r="3" fill="none" stroke="#dfeafc" strokeWidth={1.7} />
   </Svg>
 );
 
 const PortfolioIcon = () => (
   <Svg width={10} height={10} viewBox="0 0 24 24">
-    <Circle cx="12" cy="12" r="9" fill="none" stroke="#65aaff" strokeWidth={1.7} />
+    <Circle cx="12" cy="12" r="9" fill="none" stroke="#dfeafc" strokeWidth={1.7} />
 
-    <Path d="M3 12H21" fill="none" stroke="#65aaff" strokeWidth={1.7} strokeLinecap="round" />
+    <Path d="M3 12H21" fill="none" stroke="#dfeafc" strokeWidth={1.7} strokeLinecap="round" />
 
     <Path
       d="M12 3C14.5 5.5 15.8 8.5 15.8 12C15.8 15.5 14.5 18.5 12 21"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.7}
       strokeLinecap="round"
     />
@@ -490,7 +505,7 @@ const PortfolioIcon = () => (
     <Path
       d="M12 3C9.5 5.5 8.2 8.5 8.2 12C8.2 15.5 9.5 18.5 12 21"
       fill="none"
-      stroke="#65aaff"
+      stroke="#dfeafc"
       strokeWidth={1.7}
       strokeLinecap="round"
     />
@@ -700,6 +715,8 @@ const NavyEdge = ({ data = {} }) => {
   return (
     <Document title={`${data.name || "Resume"} - Resume`} author={data.name || "NextCV User"}>
       <Page size="A4" style={styles.page}>
+        <View style={styles.navyEdge} />
+
         {/* LEFT SIDEBAR */}
         <View style={styles.sidebar}>
           <View style={styles.avatarWrapper}>

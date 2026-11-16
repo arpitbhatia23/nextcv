@@ -50,6 +50,7 @@
     "dotenv": "^17.4.2",
     "framer-motion": "^12.18.1",
     "groq-sdk": "^1.2.0",
+    "google-auth-library": "^10.3.0",
     "ioredis": "^5.10.1",
     "jszip": "^3.10.1",
     "lucide-react": "^0.513.0",

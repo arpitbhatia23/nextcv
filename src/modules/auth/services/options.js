@@ -1,9 +1,13 @@
 import Credentialsprovider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { OAuth2Client } from "google-auth-library";
 import dbConnect from "@/shared/utils/dbConnect";
 import bcrypt from "bcryptjs";
 import { sendWellcomeMessage } from "@/templates/email/sendWelcomeMail";
 import User from "../models/user.model";
+
+const googleOAuthClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 const authOptions = {
   providers: [
     Credentialsprovider({
@@ -34,6 +38,37 @@ const authOptions = {
       },
     }),
 
+    Credentialsprovider({
+      id: "google-one-tap",
+      name: "Google One Tap",
+      credentials: {
+        idToken: { label: "Google ID token", type: "text" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.idToken || !process.env.GOOGLE_CLIENT_ID) return null;
+
+        try {
+          const ticket = await googleOAuthClient.verifyIdToken({
+            idToken: credentials.idToken,
+            audience: process.env.GOOGLE_CLIENT_ID,
+          });
+          const profile = ticket.getPayload();
+
+          if (!profile?.sub || !profile.email || !profile.email_verified) return null;
+
+          return {
+            id: profile.sub,
+            name: profile.name || profile.email,
+            email: profile.email,
+            image: profile.picture,
+          };
+        } catch (error) {
+          console.error("Google One Tap token verification failed", error);
+          return null;
+        }
+      },
+    }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -43,6 +78,7 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       await dbConnect();
+      const now = new Date();
       const finduser = await User.findOne({ email: user?.email });
       if (!finduser) {
         const newUser = await User.create({
@@ -50,6 +86,8 @@ const authOptions = {
           email: user.email,
           role: "user",
           provider: account.provider,
+          lastActive: now,
+          lastLogin: now,
         });
 
         try {
@@ -60,8 +98,8 @@ const authOptions = {
         user.id = newUser._id;
         user.role = newUser.role;
       } else {
-        // Update lastLogin on every login
-        finduser.lastLogin = new Date();
+        finduser.lastLogin = now;
+        finduser.lastActive = now;
         await finduser.save();
         user.id = finduser._id;
         user.role = finduser.role;

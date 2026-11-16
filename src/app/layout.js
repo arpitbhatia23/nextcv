@@ -1,6 +1,7 @@
 import { Geist } from "next/font/google";
 import "./globals.css";
 import CookieBanner from "@/shared/components/cookies";
+import CountinueAsGoogle from "@/modules/auth/components/CountinueAsGoogle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,6 +48,7 @@ export default function RootLayout({ children }) {
         <div>
           {children}
           <CookieBanner />
+          <CountinueAsGoogle clientId={process.env.GOOGLE_CLIENT_ID} />
         </div>
         <script
           id="website-ldjson"

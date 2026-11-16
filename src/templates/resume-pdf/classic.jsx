@@ -3,6 +3,7 @@ import React from "react";
 import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/renderer";
 import { formatDate } from "@/shared/utils/datefromater";
 import { splitToBullets } from "@/shared/utils/splitBullets";
+import { HEADER_NAME_STYLE } from "./headerTypography";
 
 const styles = StyleSheet.create({
   page: {
@@ -12,12 +13,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     color: "#1e293b",
     lineHeight: 1.4,
+    position: "relative",
+  },
+  navyEdge: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 6,
+    backgroundColor: "#111c33",
   },
   header: {
     borderBottomWidth: 1,
     borderBottomColor: "#cbd5e1",
-    marginBottom: 16,
-    paddingBottom: 10,
+    marginBottom: 12,
+    paddingBottom: 8,
     alignItems: "center",
     textAlign: "center",
   },
@@ -39,7 +49,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontSize: 8.5,
     color: "#0284c7",
-    gap: 8,
     marginTop: 2,
   },
   section: {
@@ -64,7 +73,6 @@ const styles = StyleSheet.create({
   skillList: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 5,
   },
   skill: {
     backgroundColor: "#f8fafc",
@@ -145,20 +153,28 @@ const styles = StyleSheet.create({
 const ClassicTemplate = ({ data }) => (
   <Document>
     <Page size="A4" style={styles.page}>
+      <View style={styles.navyEdge} />
+
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.name}>{data.name || "Your Name"}</Text>
-        <Text style={styles.contact}>
+        <Text style={[styles.name, HEADER_NAME_STYLE]}>{data.name || "Your Name"}</Text>
+        <Text style={[styles.contact]}>
           {data.email} | {data?.phone || data.phone_no} | {data.address}
         </Text>
         <View style={styles.links}>
           {data.linkedin && (
-            <Link src={data.linkedin} style={{ color: "#0284c7", textDecoration: "none" }}>
+            <Link
+              src={data.linkedin}
+              style={{ color: "#0284c7", textDecoration: "none", marginRight: 8 }}
+            >
               LinkedIn
             </Link>
           )}
           {data.github && (
-            <Link src={data.github} style={{ color: "#0284c7", textDecoration: "none" }}>
+            <Link
+              src={data.github}
+              style={{ color: "#0284c7", textDecoration: "none", marginRight: 8 }}
+            >
               GitHub
             </Link>
           )}
@@ -184,7 +200,7 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.sectionHeading}>Skills</Text>
           <View style={styles.skillList}>
             {data.skills.map((skill, i) => (
-              <Text key={i} style={styles.skill}>
+              <Text key={i} style={[styles.skill, { marginRight: 5, marginBottom: 5 }]}>
                 {skill.name ?? skill}
                 {skill.level ? ` (${skill.level})` : ""}
               </Text>
@@ -199,7 +215,13 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.sectionHeading}>Experience</Text>
           {data.experience.map((exp, i) => (
             <View key={i} style={styles.expBlock}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                }}
+              >
                 <Text style={styles.expTitle}>
                   {exp.position} @ {exp.companyName}
                 </Text>
@@ -226,15 +248,20 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.sectionHeading}>Projects</Text>
           {data.projects.map((proj, i) => (
             <View key={i} style={styles.projBlock}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                }}
+              >
                 <Text style={styles.projTitle}>{proj.title}</Text>
-                <Text style={styles.projMeta}>
-                  {proj.date && `${formatDate(proj.date)}`}
-                </Text>
+                <Text style={styles.projMeta}>{proj.date && `${formatDate(proj.date)}`}</Text>
               </View>
               {proj.roleOrType && (
                 <Text style={styles.projMeta}>
-                  {proj.roleOrType}{proj.organization ? ` @ ${proj.organization}` : ""}
+                  {proj.roleOrType}
+                  {proj.organization ? ` @ ${proj.organization}` : ""}
                 </Text>
               )}
               {proj.technologiesOrTopics && (
@@ -261,14 +288,21 @@ const ClassicTemplate = ({ data }) => (
           <Text style={styles.sectionHeading}>Education</Text>
           {data.education.map((edu, i) => (
             <View key={i} style={styles.eduBlock}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "baseline" }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                }}
+              >
                 <Text style={styles.eduTitle}>{edu.institution}</Text>
                 <Text style={styles.eduSubtitle}>
                   {formatDate(edu.startYear)} - {formatDate(edu.endYear) || "Present"}
                 </Text>
               </View>
               <Text style={styles.eduSubtitle}>
-                {edu.degree}{edu.grade ? ` | Grade: ${edu.grade}` : ""}
+                {edu.degree}
+                {edu.grade ? ` | Grade: ${edu.grade}` : ""}
               </Text>
               {edu.description && (
                 <View style={styles.bulletList}>
@@ -297,7 +331,10 @@ const ClassicTemplate = ({ data }) => (
                 {cert.year ? ` | ${formatDate(cert.year)}` : ""}
               </Text>
               {cert.credentialUrl && (
-                <Link src={cert.credentialUrl} style={{ fontSize: 8.5, color: "#0284c7", textDecoration: "none" }}>
+                <Link
+                  src={cert.credentialUrl}
+                  style={{ fontSize: 8.5, color: "#0284c7", textDecoration: "none" }}
+                >
                   Certificate Link
                 </Link>
               )}
@@ -306,13 +343,15 @@ const ClassicTemplate = ({ data }) => (
         </View>
       )}
 
-      <Text style={{ 
-        fontSize: 1, 
-        color: "#fff", 
-        opacity: 0.01,
-        position: "absolute", 
-        bottom: 0 
-      }}>
+      <Text
+        style={{
+          fontSize: 1,
+          color: "#fff",
+          opacity: 0.01,
+          position: "absolute",
+          bottom: 0,
+        }}
+      >
         NextCV Resume Optimized
       </Text>
     </Page>
