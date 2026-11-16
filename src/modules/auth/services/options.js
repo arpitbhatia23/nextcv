@@ -43,6 +43,7 @@ const authOptions = {
   callbacks: {
     async signIn({ user, account }) {
       await dbConnect();
+      const now = new Date();
       const finduser = await User.findOne({ email: user?.email });
       if (!finduser) {
         const newUser = await User.create({
@@ -50,6 +51,8 @@ const authOptions = {
           email: user.email,
           role: "user",
           provider: account.provider,
+          lastActive: now,
+          lastLogin: now,
         });
 
         try {
@@ -60,8 +63,8 @@ const authOptions = {
         user.id = newUser._id;
         user.role = newUser.role;
       } else {
-        // Update lastLogin on every login
-        finduser.lastLogin = new Date();
+        finduser.lastLogin = now;
+        finduser.lastActive = now;
         await finduser.save();
         user.id = finduser._id;
         user.role = finduser.role;

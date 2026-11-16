@@ -35,6 +35,10 @@ const userSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    lastLogin: {
+      type: Date,
+      default: Date.now,
+    },
     reminderCount: {
       type: Number,
       default: 0,
