@@ -14,6 +14,15 @@ const resumeTemplateCatalog = [
         discountPercent: 50,
         tag: "Popular",
       },
+      {
+        templateName: "classicTemplate",
+        style: "Classic ATS Layout",
+        priceOriginal: 99,
+        priceDiscounted: 49,
+        savings: 50,
+        discountPercent: 50,
+        tag: "Classic",
+      },
     ],
   },
 
@@ -48,14 +57,6 @@ const resumeTemplateCatalog = [
         savings: 100,
         discountPercent: 50,
         tag: "Recommended",
-      },
-      {
-        templateName: "classicTemplate",
-        style: "Classic Layout",
-        priceOriginal: 199,
-        priceDiscounted: 99,
-        savings: 100,
-        discountPercent: 50,
       },
     ],
   },
@@ -330,7 +331,6 @@ const resumeTemplateCatalog = [
       },
       {
         templateName: "InfographicLite",
-        style: "Visual Data",
         priceOriginal: 799,
         priceDiscounted: 399,
         savings: 400,

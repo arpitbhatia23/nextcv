@@ -1,252 +1,172 @@
 "use client";
 
-import { useEffect, useState, useRef, useId } from "react";
-
-import { LazyMotion, m, useMotionValue, animate, domAnimation } from "framer-motion";
+import React, { useEffect, useId, useRef, useState } from "react";
+import { LazyMotion, m, useMotionValue, domAnimation } from "framer-motion";
 
 const testimonials = [
   {
     name: "Rahul Sharma",
     role: "Fresher · Chandigarh",
-    text: "I was struggling to make my first resume. The templates made it much easier to organize my projects, skills and education.",
+    text: "I wanted a clear format for my first resume. The template made it easier to organize my projects, skills and education.",
     initials: "RS",
     color: "bg-indigo-100 text-indigo-700",
   },
   {
     name: "Priya Verma",
     role: "Software Developer · Bengaluru",
-    text: "I liked that I could make changes without spending too much time fixing formatting. It kept the process simple.",
+    text: "I liked being able to edit the resume and adjust the layout without repeatedly fixing spacing and sections.",
     initials: "PV",
     color: "bg-emerald-100 text-emerald-700",
   },
   {
     name: "Amanpreet Singh",
     role: "Final-year Student · Punjab",
-    text: "Useful for getting my resume ready for placements. I could put my college projects and technical skills into a proper format.",
+    text: "The builder was useful for putting my college projects and technical skills into a clean resume format.",
     initials: "AS",
     color: "bg-amber-100 text-amber-700",
   },
   {
     name: "Sneha Patel",
     role: "Job Seeker · Ahmedabad",
-    text: "The resume review gave me a better idea of what I needed to improve before applying for jobs.",
+    text: "The resume review helped me understand which sections and keywords I should improve before applying.",
     initials: "SP",
     color: "bg-rose-100 text-rose-700",
   },
   {
     name: "Arjun Mehta",
     role: "Frontend Developer · Pune",
-    text: "Clean layouts and easy editing. I didn't have to keep adjusting spacing and sections manually.",
+    text: "I could keep the layout consistent while changing resume details for different applications.",
     initials: "AM",
     color: "bg-blue-100 text-blue-700",
   },
   {
     name: "Neha Kumari",
     role: "Recent Graduate · Jaipur",
-    text: "I wanted a simple resume for entry-level roles. It helped me bring everything together without overcomplicating it.",
+    text: "It helped me bring my education, skills and projects together into a simple resume for entry-level roles.",
     initials: "NK",
     color: "bg-purple-100 text-purple-700",
   },
 ];
 
 const stats = [
-  {
-    number: 1350,
-    suffix: "+",
-    title: "Users",
-    color: "text-indigo-800",
-  },
-  {
-    number: 49,
-    prefix: "₹",
-    title: "Starting price",
-    color: "text-emerald-800",
-  },
-  {
-    display: "No",
-    title: "Subscriptions",
-    color: "text-slate-800",
-  },
+  { display: "Free", title: "Build and edit", color: "text-indigo-800" },
+  { display: "₹49", title: "Starting download price", color: "text-emerald-800" },
+  { display: "No", title: "Mandatory subscription", color: "text-slate-800" },
 ];
-
-function AnimatedCounter({ to, prefix = "", suffix = "", className = "" }) {
-  const count = useMotionValue(0);
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    const controls = animate(count, to, {
-      duration: 2,
-      ease: "easeOut",
-      onUpdate: latest => {
-        setDisplay(Math.round(latest));
-      },
-    });
-
-    return () => controls.stop();
-  }, [to, count]);
-
-  return (
-    <span className={`text-sm sm:text-lg font-bold ${className}`}>
-      {prefix}
-      {display.toLocaleString("en-IN")}
-      {suffix}
-    </span>
-  );
-}
 
 export default function TestimonialCarousel() {
   const id = useId();
-  const containerRef = useRef < HTMLDivElement > null;
-
+  const containerRef = useRef(null);
   const [width, setWidth] = useState(0);
   const [paused, setPaused] = useState(false);
-
   const x = useMotionValue(0);
 
-  // Measure one copy of the repeated content
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) return undefined;
 
-    const measure = () => {
-      setWidth(container.scrollWidth / 3);
-    };
-
+    const measure = () => setWidth(container.scrollWidth / 3);
     measure();
 
     const observer = new ResizeObserver(measure);
     observer.observe(container);
-
     return () => observer.disconnect();
   }, []);
 
-  // Infinite marquee
   useEffect(() => {
-    if (!width || paused) return;
+    if (!width || paused) return undefined;
 
     let frame;
-    const speed = 0.45;
-
     const animateScroll = () => {
       const current = x.get();
-
-      if (Math.abs(current) >= width) {
-        x.set(0);
-      } else {
-        x.set(current - speed);
-      }
-
+      x.set(Math.abs(current) >= width ? 0 : current - 0.45);
       frame = requestAnimationFrame(animateScroll);
     };
 
     frame = requestAnimationFrame(animateScroll);
-
     return () => cancelAnimationFrame(frame);
   }, [width, paused, x]);
 
   return (
     <LazyMotion features={domAnimation}>
       <section
-        aria-label="NextCV features and user information"
-        className="py-24 bg-slate-50 border-t border-slate-200"
+        aria-label="Example NextCV testimonials"
+        className="border-t border-slate-200 bg-slate-50 py-20 sm:py-24"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-4">
-              Make resume building <span className="text-indigo-600">a little simpler.</span>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="mb-12 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+              Example user stories
+            </p>
+            <h2 className="mt-3 font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
+              Make resume building <span className="text-[#5268a8]">a little simpler.</span>
             </h2>
-
-            <p className="mx-auto max-w-2xl text-xs sm:text-sm leading-6 text-slate-600">
-              Create your resume, explore different layouts and review your content before applying
-              for your next opportunity.
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600">
+              Preview-style testimonials for the product design. Replace these with verified
+              customer feedback before publishing as claims.
             </p>
           </div>
 
-          {/* Feature Carousel */}
           <div
-            className="overflow-hidden relative -mx-6 lg:-mx-8"
+            className="relative -mx-5 overflow-hidden sm:-mx-8 lg:-mx-10"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
             onFocus={() => setPaused(true)}
             onBlur={() => setPaused(false)}
           >
-            {/* Fade edges */}
-            <div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-linear-to-r from-slate-50 to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-linear-to-l from-slate-50 to-transparent" />
 
-            <div className="absolute top-0 right-0 w-24 h-full bg-linear-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-
-            <m.div ref={containerRef} className="flex w-max gap-8 px-8 py-4" style={{ x }}>
+            <m.div
+              ref={containerRef}
+              className="flex w-max gap-5 px-5 py-4 sm:px-8 lg:px-10"
+              style={{ x }}
+            >
               {[...testimonials, ...testimonials, ...testimonials].map((item, idx) => (
                 <article
                   key={`${id}-${idx}`}
-                  className="w-87.5 shrink-0 bg-white p-8 rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-100 flex flex-col justify-between min-h-61.25"
+                  className="flex min-h-56 w-80 shrink-0 flex-col justify-between border border-slate-200 bg-white p-7 shadow-lg shadow-slate-200/50"
                 >
                   <div>
                     <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm mb-6 ${item.color}`}
+                      className={`mb-5 flex h-11 w-11 items-center justify-center rounded-full text-xs font-bold ${item.color}`}
                     >
                       {item.initials}
                     </div>
-
-                    <h3 className="text-slate-900 font-semibold text-sm mb-1">{item.name}</h3>
-
-                    <p className="text-xs text-slate-500 mb-3">{item.role}</p>
-
-                    <p className="text-slate-600 text-sm leading-7">{item.text}</p>
+                    <h3 className="text-sm font-semibold text-slate-900">{item.name}</h3>
+                    <p className="mt-1 text-xs text-slate-500">{item.role}</p>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">“{item.text}”</p>
                   </div>
                 </article>
               ))}
             </m.div>
           </div>
 
-          {/* Stats */}
-          <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-3">
-            {stats.map((stat, idx) => (
+          <div className="mt-12 grid grid-cols-1 gap-3 md:grid-cols-3">
+            {stats.map(stat => (
               <div
-                key={idx}
-                className="text-center p-5 bg-white rounded-xl border border-slate-100 shadow-sm"
+                key={stat.title}
+                className="border border-slate-100 bg-white p-5 text-center shadow-sm"
               >
-                {stat.number !== undefined ? (
-                  <AnimatedCounter
-                    to={stat.number}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    className={stat.color}
-                  />
-                ) : (
-                  <span className={`text-sm sm:text-lg font-bold ${stat.color}`}>
-                    {stat.display}
-                  </span>
-                )}
-
-                <p className="text-slate-500 font-medium mt-2 uppercase tracking-wide text-xs sm:text-sm">
+                <span className={`text-lg font-bold ${stat.color}`}>{stat.display}</span>
+                <p className="mt-2 text-xs font-medium uppercase tracking-wide text-slate-500">
                   {stat.title}
                 </p>
               </div>
             ))}
           </div>
 
-          {/* Bottom CTA */}
-          <div className="mt-12 bg-slate-900 rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-indigo-600/20 blur-3xl rounded-full pointer-events-none" />
-
-            <div className="relative z-10 text-center">
-              <h3 className="text-sm sm:text-base font-bold mb-3">Ready to work on your resume?</h3>
-
-              <p className="text-slate-300 mb-5 text-xs sm:text-sm">
-                Start building for free. Download when you're ready, with pricing starting at{" "}
-                <span className="text-white font-bold">₹49</span>. No subscription.
-              </p>
-
-              <a
-                href="/dashboard"
-                className="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-              >
-                Build My Resume
-                <span className="ml-2">→</span>
-              </a>
-            </div>
+          <div className="mt-10 border border-slate-800 bg-slate-900 p-8 text-center text-white sm:p-10">
+            <h3 className="text-base font-bold">Ready to work on your resume?</h3>
+            <p className="mt-3 text-sm text-slate-300">
+              Start building for free. Download when you're ready, starting at ₹49.
+            </p>
+            <a
+              href="/dashboard/builder"
+              className="mt-5 inline-flex items-center justify-center bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:bg-slate-100"
+            >
+              Build My Resume <span className="ml-2">→</span>
+            </a>
           </div>
         </div>
       </section>
