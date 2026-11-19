@@ -12,6 +12,12 @@ import {
   Code2,
   Laptop,
   Briefcase,
+  ExternalLink,
+  Terminal,
+  Cpu,
+  Layout,
+  FileText,
+  Lock,
 } from "lucide-react";
 import ProductScreenshot from "@/shared/components/products/ProductScreenshot";
 import ProductBreadcrumbs from "@/shared/components/products/ProductBreadcrumbs";
@@ -19,74 +25,92 @@ import RelatedProducts from "@/shared/components/products/RelatedProducts";
 import ProductConversionBanner from "@/shared/components/products/ProductConversionBanner";
 
 export const metadata = createSeoMetadata({
-  title: "Resume to Portfolio Website Builder | NextCV",
+  title: "Resume to Portfolio Builder: Turn Resume into Website | NextCV",
   description:
-    "Turn your resume into a professional portfolio website with NextCV. Showcase your skills, experience, education, and projects with a shareable online portfolio. No coding required.",
+    "Convert your resume into a personal portfolio website in 1 click with NextCV. Showcase projects, skills, & live demos with a custom URL. No coding required.",
   path: "/resume-to-portfolio",
   keywords: [
     "resume to portfolio",
     "resume to portfolio website",
+    "convert resume to website",
+    "turn resume into website",
     "AI portfolio builder",
     "create portfolio website from resume",
-    "resume to website converter",
-    "online portfolio maker",
-    "portfolio website builder for students",
-    "portfolio website for freshers",
-    "AI portfolio generator from resume",
     "developer portfolio generator",
+    "portfolio website for freshers",
+    "student portfolio website builder",
+    "online portfolio maker",
   ],
 });
 
 const faqs = [
   {
-    question: "What is a resume-to-portfolio builder?",
+    question: "How does NextCV turn a resume into a portfolio website?",
     answer:
-      "A resume-to-portfolio builder turns the information in your resume, including your professional summary, skills, education, work experience, and projects, into a personal portfolio website that you can share online.",
+      "NextCV automatically extracts your resume summary, work experience, education, technical skills, and projects to generate a structured, mobile-responsive portfolio website with dedicated sections, interactive links, and custom hosting.",
   },
   {
-    question: "How do I turn my resume into a portfolio website?",
+    question: "Do I need to know how to code or configure web hosting?",
     answer:
-      "Create your resume with NextCV, choose the Elite plan to unlock portfolio creation, and generate your portfolio using your existing resume information. Review your details before publishing your portfolio and sharing its link.",
+      "No coding knowledge is required. You do not need to write HTML, CSS, or JavaScript, nor configure servers, Vercel, or Netlify. NextCV hosts your portfolio with free SSL on our global CDN.",
   },
   {
-    question: "Can I build a portfolio without coding?",
+    question: "Do I need to pay for monthly web hosting for my portfolio?",
     answer:
-      "Yes. You do not need to write HTML, CSS, or JavaScript or configure hosting. NextCV helps you create a responsive portfolio website without requiring coding knowledge.",
+      "No. Unlike traditional website builders (e.g. Wix, Squarespace) that charge ₹800–₹1,500 every month, NextCV includes lifetime cloud hosting with the one-time Elite plan payment of ₹399. There are zero recurring subscription fees.",
   },
   {
-    question: "What information appears in my portfolio?",
+    question: "Can I add live demo links and GitHub repositories to my portfolio?",
     answer:
-      "Your portfolio can showcase your profile, professional summary, skills, education, work experience, and projects. Review your published portfolio to ensure the information displayed is accurate and appropriate to share.",
+      "Yes. You can add external links to your live deployed applications, GitHub repositories, Figma prototypes, research papers, and live demos directly onto each project card.",
   },
   {
-    question: "Can I edit my portfolio after creating it?",
+    question: "What is the difference between a resume sharing link and a portfolio website?",
     answer:
-      "You can manage your portfolio using the available portfolio controls. Review the available editing options in your dashboard before making changes, and keep your portfolio information up to date.",
+      "A resume sharing link (nextcv.in/r/slug) displays a digital web view of your 1-page ATS resume. A portfolio website (nextcv.in/p/slug) is an expansive personal website with dedicated sections for project deep-dives, live links, skills matrices, and contact details.",
   },
   {
-    question: "Can I share my portfolio with recruiters?",
+    question: "Can I edit my portfolio details after publishing?",
     answer:
-      "Yes. Your published portfolio has a shareable public link, such as nextcv.in/p/your-slug. Include it in job applications, email introductions, your LinkedIn profile, or your GitHub bio.",
+      "Yes. You can update your skills, projects, and contact info anytime from your NextCV dashboard. Any changes you save sync immediately to your live public portfolio URL.",
   },
   {
-    question: "Is portfolio creation free?",
+    question: "How do I share my portfolio with recruiters?",
     answer:
-      "Portfolio creation is included with the NextCV Elite plan, priced at ₹399 as a one-time payment. It is not included in the Basic plan at ₹49 or the Standard plan at ₹99. Check the pricing page for the latest plan details.",
+      "Your published portfolio receives a clean, personalized link (such as nextcv.in/p/your-slug). You can add it to your LinkedIn profile headline, resume contact header, GitHub bio, or email signatures.",
   },
   {
-    question: "Can my portfolio appear in Google Search?",
+    question: "Is portfolio creation included with a resume download?",
     answer:
-      "A published portfolio has a public URL, but that does not guarantee that Google will index or rank it. Search visibility depends on factors such as crawlability, indexing eligibility, content quality, and competition.",
+      "Yes. The Elite plan (₹399) includes the full personal portfolio website, live resume sharing links, and unlimited high-resolution ATS PDF resume downloads with one single payment.",
+  },
+];
+
+const portfolioSections = [
+  {
+    icon: Layout,
+    title: "Hero Bio & Social Hub",
+    desc: "Display your professional headshot, headline, concise bio, and direct links to your GitHub, LinkedIn, and social profiles.",
   },
   {
-    question: "Is an online portfolio better than a PDF resume?",
-    answer:
-      "They serve different purposes. A PDF resume is useful for formal job applications and applicant tracking systems, while an online portfolio provides more room to showcase projects, skills, and supporting links. Using both can help you present your qualifications more effectively.",
+    icon: Code2,
+    title: "Interactive Project Showcase",
+    desc: "Showcase detailed project cards featuring tech stack tags, problem breakdowns, GitHub source code links, and live demo buttons.",
   },
   {
-    question: "Who should create an online portfolio?",
-    answer:
-      "Students, freshers, software developers, designers, and professionals changing careers can use an online portfolio to showcase projects, practical skills, and relevant experience to potential employers.",
+    icon: Cpu,
+    title: "Categorized Technical Skills",
+    desc: "Organize skills into visual badges across Languages, Frameworks, Cloud, Databases, and Developer Tools.",
+  },
+  {
+    icon: Briefcase,
+    title: "Career & Education Timeline",
+    desc: "A clean chronological timeline presenting your professional work history, internships, university degrees, and certifications.",
+  },
+  {
+    icon: Globe,
+    title: "1-Click Recruiter Contact",
+    desc: "Allow hiring managers to contact you immediately via email or phone without filling out long recruiter forms.",
   },
 ];
 
@@ -101,19 +125,29 @@ export default function ResumeToPortfolioPage() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
-        name: "NextCV Resume to Portfolio Builder",
+        name: "NextCV Resume to Portfolio Website Builder",
         applicationCategory: "BusinessApplication",
-        operatingSystem: "Web",
+        operatingSystem: "All",
+        browserRequirements: "Requires JavaScript. Requires HTML5.",
         url: "https://www.nextcv.in/resume-to-portfolio",
         description:
-          "Create a professional online portfolio from your resume with NextCV. Showcase your projects, skills, education, and experience without coding.",
+          "Convert your resume into a live personal portfolio website without writing code. Includes free SSL hosting, interactive project showcases, and custom portfolio links.",
         offers: {
           "@type": "Offer",
           price: "399",
           priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
           description:
-            "One-time Elite plan payment. Portfolio creation is included with the Elite plan.",
+            "One-time Elite plan payment. Includes complete portfolio suite, resume builder, and ATS PDF downloads with zero recurring subscriptions.",
         },
+        featureList: [
+          "1-Click Resume-to-Website Conversion",
+          "Interactive GitHub & Live Project Showcase",
+          "Free Cloud Hosting with SSL",
+          "Custom Public Portfolio URL",
+          "Mobile-Responsive Layout",
+          "Zero Coding Required",
+        ],
       },
       {
         "@type": "BreadcrumbList",
@@ -155,37 +189,30 @@ export default function ResumeToPortfolioPage() {
   const workflowSteps = [
     {
       step: "01",
-      badge: "Get Started",
-      title: "Create Your Resume",
-      desc: "Add your professional summary, education, skills, work experience, and projects to your NextCV resume.",
+      badge: "Step 1",
+      title: "Build Your Resume",
+      desc: "Input your summary, experience, technical skills, and projects into NextCV's guided builder.",
       icon: Layers,
     },
     {
       step: "02",
-      badge: "Choose Your Plan",
-      title: "Unlock Portfolio Access",
-      desc: "Choose the Elite plan for ₹399 as a one-time payment to access portfolio creation.",
+      badge: "Step 2",
+      title: "Unlock Elite Plan",
+      desc: "Select the Elite plan (₹399 one-time payment) to unlock portfolio generation and unlimited resume downloads.",
       icon: Crown,
     },
     {
       step: "03",
-      badge: "Generate",
-      title: "Build Your Portfolio",
-      desc: "Create your portfolio using your existing resume information without entering the same details again.",
+      badge: "Step 3",
+      title: "1-Click Generation",
+      desc: "Click 'Generate Portfolio' to convert your structured resume data into an interactive website instantly.",
       icon: Sparkles,
     },
     {
       step: "04",
-      badge: "Personalize",
-      title: "Review Your Details",
-      desc: "Review your profile, skills, experience, and projects. Check your information and contact details before publishing.",
-      icon: Laptop,
-    },
-    {
-      step: "05",
-      badge: "Publish & Share",
-      title: "Share Your Website",
-      desc: "Publish your portfolio and share its public link with recruiters or add it to your LinkedIn profile, GitHub bio, and job applications.",
+      badge: "Step 4",
+      title: "Publish & Share",
+      desc: "Get your personalized URL (nextcv.in/p/your-name) and share it on LinkedIn, GitHub, and job applications.",
       icon: Globe,
     },
   ];
@@ -194,17 +221,17 @@ export default function ResumeToPortfolioPage() {
     {
       icon: Code2,
       title: "Software & Web Developers",
-      desc: "Showcase your GitHub repositories, technical skills, frameworks, and software projects in one professional online portfolio.",
+      desc: "Highlight GitHub repositories, technical frameworks, live project demos, and system architectures that recruiters can test immediately.",
     },
     {
       icon: Laptop,
       title: "Students & Freshers",
-      desc: "Present academic projects, internships, certifications, and technical skills when applying for internships and entry-level jobs.",
+      desc: "Stand out in campus placements by showcasing capstone projects, coding profiles, hackathons, and certifications on your own website.",
     },
     {
       icon: Briefcase,
-      title: "Career Switchers",
-      desc: "Demonstrate your transferable skills and newly acquired expertise through relevant projects and professional experience.",
+      title: "Freelancers & Career Switchers",
+      desc: "Demonstrate hands-on deliverables, client case studies, and transferable skills to establish immediate trust with hiring managers.",
     },
   ];
 
@@ -230,13 +257,13 @@ export default function ResumeToPortfolioPage() {
               </div>
 
               <h1 className="mt-4 font-serif text-3xl font-medium leading-[1.1] text-[#17201C] sm:text-4xl lg:text-5xl">
-                Turn Your Resume into a Professional Portfolio Website
+                Turn Your Resume into a Live Portfolio Website (No Coding)
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5B625C]">
-                Transform your resume into a professional online portfolio. Showcase your skills,
-                projects, education, and experience with a website you can share with recruiters. No
-                coding required.
+                Convert your existing resume into a structured, mobile-ready personal portfolio
+                website in one click. Showcase projects, live code demos, GitHub repositories, and
+                skills with free SSL hosting.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -252,22 +279,22 @@ export default function ResumeToPortfolioPage() {
                   href="/pricing"
                   className="inline-flex h-12 items-center justify-center gap-2 border border-[#E3E2DC] bg-white px-5 text-sm font-semibold text-[#17201C] transition-colors hover:bg-[#F1F0EB]"
                 >
-                  View Elite Plan (₹399)
+                  View Elite Plan (₹399 One-Time)
                 </Link>
               </div>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#5B625C]">
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  No coding required
+                  100% No coding required
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Built from your resume
+                  Free SSL cloud hosting
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Shareable public portfolio link
+                  Personalized public URL
                 </span>
               </div>
             </div>
@@ -285,7 +312,50 @@ export default function ResumeToPortfolioPage() {
         </div>
       </section>
 
-      {/* Resume vs Portfolio */}
+      {/* Auto-Generated Portfolio Anatomy */}
+      <section className="border-b border-[#E3E2DC] bg-[#FAF9F6] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
+              Portfolio Architecture
+            </p>
+
+            <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
+              What Gets Auto-Generated on Your Portfolio Website
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-[#5B625C]">
+              Your resume data is automatically structured into 5 beautiful, recruiter-optimized
+              web sections without requiring a single line of code.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {portfolioSections.map(section => {
+              const Icon = section.icon;
+
+              return (
+                <div
+                  key={section.title}
+                  className="border border-[#E3E2DC] bg-white p-5 shadow-xs transition-colors hover:border-[#465B9E]/50"
+                >
+                  <div className="flex h-9 w-9 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                    <Icon className="h-4 w-4" />
+                  </div>
+
+                  <h3 className="mt-4 font-serif text-base font-medium text-[#17201C]">
+                    {section.title}
+                  </h3>
+
+                  <p className="mt-2 text-xs leading-5 text-[#5B625C]">{section.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Resume vs Portfolio Comparison */}
       <section className="border-b border-[#E3E2DC] bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
@@ -294,17 +364,17 @@ export default function ResumeToPortfolioPage() {
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              Why Pair a Resume with an Online Portfolio?
+              Resume PDF vs. Portfolio Website: Why Modern Recruiters Want Both
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              Your resume summarizes your qualifications. An online portfolio gives recruiters more
-              ways to explore your projects and practical skills.
+              Your resume passes automated ATS filters; your online portfolio convinces hiring
+              managers to schedule the interview.
             </p>
           </div>
 
           <div className="mt-10 overflow-x-auto border border-[#E3E2DC]">
-            <table className="w-full min-w-140text-left text-xs">
+            <table className="w-full min-w-140 text-left text-xs">
               <thead>
                 <tr className="border-b border-[#E3E2DC] bg-[#FAF9F6] font-mono uppercase tracking-wider text-[#8A908B]">
                   <th className="p-4 sm:p-5">Feature</th>
@@ -316,37 +386,39 @@ export default function ResumeToPortfolioPage() {
               <tbody className="divide-y divide-[#E3E2DC] text-[#5B625C]">
                 <tr>
                   <td className="p-4 font-semibold text-[#17201C] sm:p-5">Format</td>
-                  <td className="p-4 sm:p-5">Downloadable PDF document</td>
-                  <td className="p-4 text-[#17201C] sm:p-5">Responsive online website</td>
+                  <td className="p-4 sm:p-5">Downloadable 1-page PDF document</td>
+                  <td className="p-4 text-[#17201C] sm:p-5">Interactive, responsive website</td>
                 </tr>
 
                 <tr>
                   <td className="p-4 font-semibold text-[#17201C] sm:p-5">Project Showcase</td>
-                  <td className="p-4 sm:p-5">Concise descriptions and bullet points</td>
+                  <td className="p-4 sm:p-5">Concise bullet points (space-limited)</td>
                   <td className="p-4 text-[#17201C] sm:p-5">
-                    Dedicated project sections and supporting links
+                    Live demo links, GitHub source repositories, and screenshots
                   </td>
                 </tr>
 
                 <tr>
-                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Sharing</td>
-                  <td className="p-4 sm:p-5">Attach to job applications</td>
+                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Distribution</td>
+                  <td className="p-4 sm:p-5">Uploaded to company ATS portals</td>
                   <td className="p-4 text-[#17201C] sm:p-5">
-                    Share through LinkedIn, GitHub, and email
+                    Featured on LinkedIn, GitHub, email signatures & WhatsApp
                   </td>
                 </tr>
 
                 <tr>
-                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Hosting</td>
-                  <td className="p-4 sm:p-5">Stored as a document</td>
-                  <td className="p-4 text-[#17201C] sm:p-5">Published online through NextCV</td>
+                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Hosting & Cost</td>
+                  <td className="p-4 sm:p-5">Stored locally on your device</td>
+                  <td className="p-4 text-[#17201C] sm:p-5">
+                    Free cloud SSL hosting included (No ₹999/mo domain fees)
+                  </td>
                 </tr>
 
                 <tr>
-                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Best Use</td>
-                  <td className="p-4 sm:p-5">Formal job applications and ATS submissions</td>
+                  <td className="p-4 font-semibold text-[#17201C] sm:p-5">Best Suited For</td>
+                  <td className="p-4 sm:p-5">Initial screening & ATS keyword matching</td>
                   <td className="p-4 text-[#17201C] sm:p-5">
-                    Demonstrating projects and professional capabilities
+                    Proving technical competence in technical & interview loops
                   </td>
                 </tr>
               </tbody>
@@ -360,20 +432,20 @@ export default function ResumeToPortfolioPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
-              Simple Portfolio Creation
+              Simple 4-Step Process
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              How to Turn Your Resume into a Portfolio Website
+              How to Convert Your Resume to a Portfolio in 4 Simple Steps
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              Create a professional portfolio in a few simple steps. Reuse your resume information,
-              review your details, and publish a website you can share with recruiters.
+              Reuse your resume information without entering data twice. Review your details and
+              publish a high-impact website in minutes.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {workflowSteps.map(item => {
               const Icon = item.icon;
 
@@ -410,7 +482,7 @@ export default function ResumeToPortfolioPage() {
         </div>
       </section>
 
-      {/* Portfolio Screenshots */}
+      {/* Product Screenshots */}
       <section className="border-b border-[#E3E2DC] bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
@@ -423,8 +495,7 @@ export default function ResumeToPortfolioPage() {
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              See how your resume information can become a professional portfolio that presents your
-              work clearly.
+              See how your resume content is transformed into an elegant personal website.
             </p>
           </div>
 
@@ -433,17 +504,17 @@ export default function ResumeToPortfolioPage() {
               <ProductScreenshot
                 src="/products/portfolio/creation-flow.png"
                 alt="NextCV portfolio creation experience using resume information"
-                caption="Start creating a portfolio using the information already available in your resume."
-                label="Portfolio Creation"
+                caption="Generate a personal website using the information already in your resume."
+                label="Portfolio Studio"
               />
 
               <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
-                Reuse Your Resume Information
+                Instant Data Synchronization
               </h3>
 
               <p className="mt-1 text-xs leading-5 text-[#5B625C]">
-                Present your project titles, skills, and descriptions without having to enter the
-                same information again.
+                Your skills, work milestones, and project descriptions populate automatically with zero
+                manual retyping.
               </p>
             </div>
 
@@ -451,38 +522,38 @@ export default function ResumeToPortfolioPage() {
               <ProductScreenshot
                 src="/products/portfolio/creation-flow.png"
                 alt="NextCV portfolio customization experience"
-                caption="Review your portfolio content and available customization options before sharing."
-                label="Portfolio Customization"
+                caption="Review your portfolio content and available links before sharing with recruiters."
+                label="Live Customization"
               />
 
               <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
-                Review Your Portfolio
+                Tailor Live Links & Repositories
               </h3>
 
               <p className="mt-1 text-xs leading-5 text-[#5B625C]">
-                Check your profile, experience, projects, and contact details so your published
-                portfolio presents accurate information.
+                Add custom GitHub links, live app deployments, and design files to show real evidence
+                of your work.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Use Cases */}
+      {/* Who It's For */}
       <section className="border-b border-[#E3E2DC] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
-              Who It's For
+              Target Audience
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              Who Benefits Most from an Online Portfolio?
+              Who Needs an Online Portfolio? (Developers, Freshers & Designers)
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              A portfolio can help you demonstrate practical skills and showcase work that may not
-              fit into a traditional resume.
+              A personal website helps candidates in competitive fields showcase real, verifiable
+              proof of their work.
             </p>
           </div>
 
@@ -516,10 +587,12 @@ export default function ResumeToPortfolioPage() {
               <HelpCircle className="h-5 w-5" />
             </div>
 
-            <h2 className="mt-4 font-serif text-3xl text-[#17201C]">Frequently Asked Questions</h2>
+            <h2 className="mt-4 font-serif text-3xl text-[#17201C]">
+              Frequently Asked Questions About Resume-to-Portfolio Conversion
+            </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              Learn how to create, publish, and share your portfolio with NextCV.
+              Learn how to create, host, and share your personal portfolio with NextCV.
             </p>
           </div>
 
@@ -550,8 +623,8 @@ export default function ResumeToPortfolioPage() {
       {/* Final CTA */}
       <ProductConversionBanner
         badge="Elite Portfolio"
-        title="Showcase Your Work to Recruiters"
-        description="Turn your resume into a professional online portfolio. Showcase your skills, projects, and experience with a shareable website. Included with the NextCV Elite plan for ₹399 as a one-time payment."
+        title="Showcase Your Work with a Live Portfolio Website"
+        description="Convert your resume into a personalized portfolio with dedicated project cards, live demos, and free cloud SSL hosting. Included with the NextCV Elite plan for ₹399 as a one-time payment."
         primaryCtaText="Get Elite with Portfolio"
         primaryCtaHref="/templates?plan=elite"
         secondaryCtaText="Compare All Plans"

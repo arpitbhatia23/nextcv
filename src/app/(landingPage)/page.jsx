@@ -11,13 +11,14 @@ import CoverLetterSection from "@/shared/components/landing/CoverLetterSection";
 import PricingSection from "@/shared/components/landing/PricingSection";
 import FAQSection from "@/shared/components/landing/FAQSection";
 import LandingFinalCTA from "@/shared/components/landing/LandingFinalCTA";
+import TestimonialCarousel from "@/shared/components/testimonial/Testimonial";
 
 export const revalidate = 3600; // Cache for 1 hour
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder India for Freshers | NextCV",
+  title: "AI ATS Resume Builder for India | NextCV",
   description:
-    "Build an ATS-friendly resume with AI writing, templates and job matching. Edit for free; download from ₹49 with no subscription.",
+    "Create an ATS-friendly resume with AI writing, modern templates and job matching. Build free, then download for a one-time price starting at ₹49.",
   path: "",
   keywords: [
     "resume builder",
@@ -48,6 +49,7 @@ export default function Home() {
       <ATSKeywordSection />
       <AIWritingSection />
       <TemplatesSection />
+      <TestimonialCarousel />
       <AudienceSection />
       <ShareProfileSection />
       <CoverLetterSection />

@@ -1,28 +1,78 @@
 import Link from "next/link";
 import careerPages from "../career-pages.json";
 import { createSeoMetadata } from "@/shared/utils/seo";
+import {
+  Briefcase,
+  Layers,
+  TrendingUp,
+  FileText,
+  CheckCircle2,
+  ArrowRight,
+  Sparkles,
+  Search,
+  ShieldCheck,
+} from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Career Guide: Get Hired, Build Your Resume & Ace Interviews | NextCV",
+  title: "Career Guides: Job Paths, Salaries & Interview Tips | NextCV",
   description:
-    "Get practical career tips to build a better resume, find jobs, prepare for interviews, improve your skills, and get hired faster.",
+    "Explore 120+ comprehensive career guides. Learn in-demand skills, salary benchmarks in India, day-to-day responsibilities, interview loops, and resume tips.",
   path: "/career",
   keywords: [
+    "career guides",
     "career guide",
-    "career advice",
-    "career guidance",
+    "career advice India",
+    "career paths and salaries",
+    "software engineer career guide",
     "job search tips",
-    "career development",
-    "career growth",
-    "job interview tips",
-    "resume tips",
-    "job application tips",
-    "career tips for freshers",
+    "interview preparation guide",
+    "tech career roadmaps",
     "career guide for freshers",
-    "how to get a job",
+    "highest paying jobs in India",
+    "resume tips by industry",
   ],
 });
+
 const ITEMS_PER_PAGE = 9;
+
+const popularRoles = [
+  { name: "Software Engineer", slug: "software-engineer-career-guide" },
+  { name: "Data Scientist", slug: "data-scientist-career-guide" },
+  { name: "Product Manager", slug: "product-manager-career-guide" },
+  { name: "UX Designer", slug: "ux-designer-career-guide" },
+  { name: "Data Analyst", slug: "data-analyst-career-guide" },
+  { name: "Business Analyst", slug: "business-analyst-career-guide" },
+  { name: "Digital Marketing", slug: "digital-marketing-manager-career-guide" },
+  { name: "HR Manager", slug: "hr-manager-career-guide" },
+];
+
+const guidePillars = [
+  {
+    icon: Briefcase,
+    title: "Responsibilities & Realities",
+    desc: "Understand what professionals actually do day-to-day, key decision frameworks, and cross-team workflows.",
+  },
+  {
+    icon: Layers,
+    title: "Must-Have vs. Bonus Skills",
+    desc: "Distinguish between baseline technical requirements, core tools, and high-leverage differentiating competencies.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Salary Benchmarks in India",
+    desc: "Realistic compensation bands (LPA) across Junior (0–2 yrs), Mid-level (3–6 yrs), and Senior (7+ yrs) stages.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Interview Loops & STAR Prep",
+    desc: "Breakdowns of recruiter screens, technical assessments, system design, and structured behavioral questions.",
+  },
+  {
+    icon: FileText,
+    title: "ATS Resume Writing Strategy",
+    desc: "Proven action verbs, quantifiable achievement bullets, and formatting rules to pass automated filters.",
+  },
+];
 
 function slugify(value = "") {
   return value
@@ -108,10 +158,6 @@ function getPageNumbers(currentPage, totalPages) {
 }
 
 export default async function CareerList({ searchParams }) {
-  /*
-   * Next.js App Router:
-   * searchParams is a Promise in newer Next.js versions.
-   */
   const params = await searchParams;
 
   const rawPage = Number(params?.page) || 1;
@@ -128,8 +174,61 @@ export default async function CareerList({ searchParams }) {
 
   const pageNumbers = getPageNumbers(page, totalPages);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: "NextCV Career Guides Hub",
+        url: "https://www.nextcv.in/career",
+        description:
+          "Comprehensive career guides covering job roles, in-demand technical skills, salary benchmarks in India, and interview preparation roadmaps.",
+        publisher: {
+          "@type": "Organization",
+          name: "NextCV",
+          url: "https://www.nextcv.in",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.nextcv.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Career Guides",
+            item: "https://www.nextcv.in/career",
+          },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        name: `Career Guides - Page ${page}`,
+        numberOfItems: currentItems.length,
+        itemListElement: currentItems.map((item, idx) => ({
+          "@type": "ListItem",
+          position: startIdx + idx + 1,
+          name: getTitle(item),
+          url: `https://www.nextcv.in/career/${getSlug(item)}`,
+        })),
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#fafaf9] text-[#18181b]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* =====================================================
           HERO
       ====================================================== */}
@@ -137,37 +236,56 @@ export default async function CareerList({ searchParams }) {
         {/* Decorative background */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-32 -top-32 h-80 w-80  bg-orange-100/70 blur-3xl"
+          className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 bg-orange-100/70 blur-3xl"
         />
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-32 top-20 h-96 w-96  bg-blue-100/60 blur-3xl"
+          className="pointer-events-none absolute -right-32 top-20 h-96 w-96 bg-blue-100/60 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8 lg:px-12 lg:pb-20 lg:pt-32">
           <div className="max-w-4xl">
             {/* Eyebrow */}
-            <div className="mb-6 inline-flex items-center gap-2  border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 shadow-sm">
-              <span className="h-1.5 w-1.5  bg-orange-500" />
-              Career Guides
+            <div className="mb-6 inline-flex items-center gap-2 border border-black/8 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 shadow-sm">
+              <span className="h-1.5 w-1.5 bg-orange-500" />
+              120+ In-Depth Career Guides
             </div>
 
             {/* Heading */}
-            <h1 className="font-serif text-5xl font-medium leading-[0.98] tracking-[-0.04em] text-zinc-950 sm:text-6xl lg:text-7xl">
-              Build your career
+            <h1 className="font-serif text-4xl font-medium leading-[1.05] tracking-[-0.03em] text-zinc-950 sm:text-5xl lg:text-6xl">
+              Comprehensive Career Guides:
               <br />
-              <span className="text-zinc-400">with better information.</span>
+              <span className="text-zinc-500">Job Roles, Salaries & Roadmaps</span>
             </h1>
 
             {/* Description */}
             <p className="mt-7 max-w-2xl text-base leading-7 text-zinc-600 sm:text-lg">
-              Practical career guides covering interviews, companies, salaries, hiring processes,
-              skills, and everything you need to prepare for your next opportunity.
+              Explore 120+ practical career guides covering in-demand technical skills, salary
+              benchmarks in India, daily responsibilities, interview loops, and ATS resume tips.
             </p>
 
+            {/* Popular Roles Quick Links */}
+            <div className="mt-8">
+              <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                Popular Career Paths:
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {popularRoles.map(role => (
+                  <Link
+                    key={role.slug}
+                    href={`/career/${role.slug}`}
+                    className="inline-flex items-center gap-1.5 border border-black/8 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 transition hover:border-orange-300 hover:bg-orange-50 hover:text-orange-700"
+                  >
+                    {role.name}
+                    <ArrowRight className="h-3 w-3 text-zinc-400" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Stats */}
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-black/8 pt-8">
               <div>
                 <div className="text-2xl font-semibold tracking-tight text-zinc-950">
                   {totalItems}+
@@ -179,17 +297,19 @@ export default async function CareerList({ searchParams }) {
               <div className="hidden h-10 w-px bg-black/10 sm:block" />
 
               <div>
-                <div className="text-2xl font-semibold tracking-tight text-zinc-950">Updated</div>
+                <div className="text-2xl font-semibold tracking-tight text-zinc-950">
+                  India Salaries
+                </div>
 
-                <div className="mt-1 text-sm text-zinc-500">Regularly</div>
+                <div className="mt-1 text-sm text-zinc-500">LPA benchmarks</div>
               </div>
 
               <div className="hidden h-10 w-px bg-black/10 sm:block" />
 
               <div>
-                <div className="text-2xl font-semibold tracking-tight text-zinc-950">Free</div>
+                <div className="text-2xl font-semibold tracking-tight text-zinc-950">100% Free</div>
 
-                <div className="mt-1 text-sm text-zinc-500">For everyone</div>
+                <div className="mt-1 text-sm text-zinc-500">Open access for all</div>
               </div>
             </div>
           </div>
@@ -197,18 +317,58 @@ export default async function CareerList({ searchParams }) {
       </section>
 
       {/* =====================================================
-          CONTENT
+          PILLARS / WHAT WE COVER
+      ====================================================== */}
+      <section className="border-b border-black/6 bg-[#FAF9F6] py-14 sm:py-16">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.15em] text-orange-600">
+              Inside Every Guide
+            </p>
+            <h2 className="mt-2 font-serif text-3xl font-medium tracking-tight text-zinc-950">
+              What Each Career Guide Covers
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
+              Our guides are engineered to give job seekers clear, actionable frameworks rather than
+              generic career advice.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {guidePillars.map(pillar => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={pillar.title}
+                  className="border border-black/[0.07] bg-white p-5 shadow-xs transition hover:border-orange-300"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center bg-orange-50 text-orange-600">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-serif text-base font-medium text-zinc-950">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-5 text-zinc-500">{pillar.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          CONTENT / CARDS
       ====================================================== */}
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-12 lg:py-20">
         {/* Section header */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-2 text-sm font-semibold uppercase tracking-[0.15em] text-orange-600">
-              Explore
+              Directory
             </p>
 
             <h2 className="font-serif text-3xl font-medium tracking-[-0.03em] text-zinc-950 sm:text-4xl">
-              Latest career guides
+              Explore All 120+ Career Roadmaps
             </h2>
           </div>
 
@@ -217,13 +377,11 @@ export default async function CareerList({ searchParams }) {
             <span className="font-medium text-zinc-700">
               {Math.min(startIdx + currentItems.length, totalItems)}
             </span>{" "}
-            of <span className="font-medium text-zinc-700">{totalItems}</span>
+            of <span className="font-medium text-zinc-700">{totalItems} guides</span>
           </p>
         </div>
 
-        {/* ===================================================
-            CARDS
-        ==================================================== */}
+        {/* CARDS */}
         {currentItems.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {currentItems.map((item, index) => {
@@ -236,7 +394,7 @@ export default async function CareerList({ searchParams }) {
               return (
                 <article
                   key={`${slug}-${index}`}
-                  className="group relative flex h-full flex-col overflow-hidden  border border-black/[0.07] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-black/12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
+                  className="group relative flex h-full flex-col overflow-hidden border border-black/[0.07] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-black/12 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
                 >
                   {/* Top accent */}
                   <div className="h-1 w-full bg-linear-to-r from-orange-400 via-orange-500 to-amber-400 opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
@@ -244,7 +402,7 @@ export default async function CareerList({ searchParams }) {
                   <div className="flex flex-1 flex-col p-7">
                     {/* Meta */}
                     <div className="mb-5 flex items-center justify-between gap-3">
-                      <span className="inline-flex max-w-[70%] items-center truncate  bg-zinc-100 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-600">
+                      <span className="inline-flex max-w-[70%] items-center truncate bg-zinc-100 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-600">
                         {category}
                       </span>
 
@@ -276,29 +434,7 @@ export default async function CareerList({ searchParams }) {
                         className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 transition-all duration-200 group-hover:gap-3 group-hover:text-orange-600"
                       >
                         Read guide
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="transition-transform duration-200 group-hover:translate-x-1"
-                        >
-                          <path
-                            d="M3 8H13"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-
-                          <path
-                            d="M9 4L13 8L9 12"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                       </Link>
                     </div>
                   </div>
@@ -307,16 +443,14 @@ export default async function CareerList({ searchParams }) {
             })}
           </div>
         ) : (
-          <div className=" border border-black/[0.07] bg-white px-6 py-20 text-center">
-            <h3 className="font-serif text-2xl font-medium text-zinc-950">
-              No career guides found
-            </h3>
+          <div className="border border-black/[0.07] bg-white px-6 py-20 text-center">
+            <h3 className="font-serif text-2xl font-medium text-zinc-950">No career guides found</h3>
 
-            <p className="mt-3 text-sm text-zinc-500">Try going back to the first page.</p>
+            <p className="mt-3 text-sm text-zinc-500">Try returning to the first page.</p>
 
             <Link
               href="/career?page=1"
-              className="mt-7 inline-flex  bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+              className="mt-7 inline-flex bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
             >
               View career guides
             </Link>
@@ -335,12 +469,11 @@ export default async function CareerList({ searchParams }) {
             {page > 1 ? (
               <Link
                 href={`/career?page=${page - 1}`}
-                className="inline-flex h-11 items-center gap-2  border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
+                className="inline-flex h-11 items-center gap-2 border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
                 aria-label="Previous page"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M13 8H3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-
                   <path
                     d="M7 4L3 8L7 12"
                     stroke="currentColor"
@@ -354,11 +487,10 @@ export default async function CareerList({ searchParams }) {
             ) : (
               <span
                 aria-disabled="true"
-                className="inline-flex h-11 cursor-not-allowed items-center gap-2  border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
+                className="inline-flex h-11 cursor-not-allowed items-center gap-2 border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M13 8H3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-
                   <path
                     d="M7 4L3 8L7 12"
                     stroke="currentColor"
@@ -393,7 +525,7 @@ export default async function CareerList({ searchParams }) {
                     href={`/career?page=${item}`}
                     aria-current={isActive ? "page" : undefined}
                     className={[
-                      "flex h-11 min-w-11 items-center justify-center  px-3 text-sm font-semibold transition-all",
+                      "flex h-11 min-w-11 items-center justify-center px-3 text-sm font-semibold transition-all",
                       isActive
                         ? "bg-zinc-950 text-white shadow-sm"
                         : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950",
@@ -409,13 +541,12 @@ export default async function CareerList({ searchParams }) {
             {page < totalPages ? (
               <Link
                 href={`/career?page=${page + 1}`}
-                className="inline-flex h-11 items-center gap-2  border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
+                className="inline-flex h-11 items-center gap-2 border border-black/8 bg-white px-5 text-sm font-semibold text-zinc-700 transition-all hover:border-black/15 hover:bg-zinc-50 hover:text-zinc-950"
                 aria-label="Next page"
               >
                 Next
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-
                   <path
                     d="M9 4L13 8L9 12"
                     stroke="currentColor"
@@ -428,12 +559,11 @@ export default async function CareerList({ searchParams }) {
             ) : (
               <span
                 aria-disabled="true"
-                className="inline-flex h-11 cursor-not-allowed items-center gap-2  border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
+                className="inline-flex h-11 cursor-not-allowed items-center gap-2 border border-black/5 bg-zinc-100 px-5 text-sm font-semibold text-zinc-300"
               >
                 Next
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-
                   <path
                     d="M9 4L13 8L9 12"
                     stroke="currentColor"
@@ -452,16 +582,16 @@ export default async function CareerList({ searchParams }) {
           CTA
       ====================================================== */}
       <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 lg:px-12 lg:pb-24">
-        <div className="relative overflow-hidden  bg-zinc-950 px-7 py-12 sm:px-10 sm:py-14 lg:px-14">
+        <div className="relative overflow-hidden bg-zinc-950 px-7 py-12 sm:px-10 sm:py-14 lg:px-14">
           {/* Background decoration */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64  bg-orange-500/20 blur-3xl"
+            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 bg-orange-500/20 blur-3xl"
           />
 
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72  bg-blue-500/10 blur-3xl"
+            className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 bg-blue-500/10 blur-3xl"
           />
 
           <div className="relative max-w-3xl">
@@ -469,32 +599,29 @@ export default async function CareerList({ searchParams }) {
               Ready for your next opportunity?
             </p>
 
-            <h2 className="mt-4 font-serif text-4xl font-medium leading-tight tracking-[-0.03em] text-white sm:text-5xl">
-              Turn your experience into a resume that gets noticed.
+            <h2 className="mt-4 font-serif text-3xl font-medium leading-tight tracking-[-0.03em] text-white sm:text-4xl lg:text-5xl">
+              Build a Resume Tailored to Your Target Career
             </h2>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">
-              Create a professional resume with NextCV and present your skills, projects, and
-              experience with confidence.
+              Combine role-specific insights from our career guides with NextCV&apos;s ATS resume
+              builder. Pass automated screening filters and land more interviews.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
-                href="/"
-                className="inline-flex items-center gap-2  bg-white px-6 py-3.5 text-sm font-semibold text-zinc-950 transition hover:bg-orange-500 hover:text-white"
+                href="/ats-resume-builder"
+                className="inline-flex items-center justify-center gap-2 bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-orange-600"
               >
-                Build your resume
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                Build ATS Resume Free
+                <ArrowRight className="h-4 w-4" />
+              </Link>
 
-                  <path
-                    d="M9 4L13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <Link
+                href="/ats-resume-checker"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Check Resume Score
               </Link>
             </div>
           </div>

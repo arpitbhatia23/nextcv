@@ -21,8 +21,9 @@ export default function ATSKeywordSection() {
               Check Your Resume Against a Job Description
             </h2>
             <p className="mt-5 max-w-lg text-sm leading-6 text-[#c0c9c2]">
-              See how your resume aligns with a target role, identify missing keywords and skills,
-              and find practical ways to improve your application.
+              Compare resume content with a job description to identify matched and missing skills,
+              keywords and role requirements. Use the compatibility score as an editing guide—not a
+              guarantee of ATS acceptance or hiring outcomes.
             </p>
             <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               {auditItems.map(item => (

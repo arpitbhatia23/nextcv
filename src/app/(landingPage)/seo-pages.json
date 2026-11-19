@@ -465,63 +465,71 @@
   },
   {
     "slug": "tcs-resume-format-for-freshers",
-    "title": "TCS Resume Format for Freshers: What to Include",
-    "description": "A TCS fresher resume guide: how NQT-based applications work, which details must match your profile, and how to describe projects for interviews.",
-    "h1": "TCS resume format for freshers",
+    "title": "TCS Resume Format for Freshers: NQT & Interview Guide (2026)",
+    "description": "Download the ideal TCS resume format for freshers. Learn section order, NQT details, sample project bullets for Ninja, Digital & Prime, and document checklist.",
+    "h1": "TCS Resume Format for Freshers: NQT, Ninja & Digital Guide",
     "keywords": [
       "tcs resume format for freshers",
+      "tcs nqt resume format",
       "tcs fresher resume sample",
-      "tcs nqt resume",
+      "tcs ninja resume format",
+      "tcs digital resume format",
+      "tcs prime resume format",
       "resume for tcs interview",
-      "tcs resume for engineering freshers"
+      "tcs resume for engineering freshers",
+      "tcs nqt resume pdf"
     ],
     "sections": [
       {
-        "title": "How fresher applications reach TCS",
-        "content": "TCS runs the National Qualifier Test (NQT) as a route into fresher hiring, and its careers page for the test carries a note that the eligibility shown there is initial, generic guidance. Campus drives and individual job postings are other routes. Which one applies to you decides which forms you fill in and when a resume is requested.\n\nNo article can tell you the current dates, cut-offs or eligibility. Read the live TCS page for your batch and your degree before you prepare anything."
+        "title": "TCS Hiring Tracks: NQT, Ninja, Digital & Prime Resumes",
+        "content": "TCS hires freshers primarily through the National Qualifier Test (NQT), on-campus drives, and off-campus smart hiring across three major salary tiers: TCS Ninja (~₹3.36 LPA), TCS Digital (~₹7.2 LPA), and TCS Prime (~₹9 – ₹11.5 LPA). Your resume should reflect the tier you target: Ninja requires solid fundamentals in C/C++, Java, or Python, SQL, and OOP concepts; Digital requires full-stack development, cloud (AWS/Azure), or machine learning; and Prime demands competitive programming, advanced data structures, and system design aptitude."
       },
       {
-        "title": "Why consistency matters more than design here",
-        "content": "Large fresher drives involve profile forms, test registrations and document checks. Your resume should repeat exactly what you entered elsewhere: degree and branch names, year of passing, CGPA or percentage and any answers about gaps or arrears. If a form asks and your resume says something different, you will have to explain the difference later.\n\nSo before you polish the layout, copy your details from your marksheets and use them everywhere."
+        "title": "TCS NextStep Portal & Marksheet Consistency (Avoid BGV Rejection)",
+        "content": "TCS enforces strict document verification through the NextStep portal and third-party Background Verification (BGV). Your resume must match your marksheets and registration profile down to the exact decimal: 10th and 12th percentages, B.Tech/BCA/MCA CGPA, branch title, pass-out year, and active backlogs. Any discrepancy between your resume, your NextStep profile, and your physical certificates can cause immediate disqualification during document screening."
       },
       {
-        "title": "A sensible section order for an engineering fresher",
-        "content": "Start with your name and contact line, then education, skills, projects, internships or training, certifications and achievements. A two-line summary is optional. If a project or internship is your strongest evidence for the role, move it above education.\n\nKeep it to one page, in a single column, using ordinary headings. The structural advice in NextCV's ATS-friendly format guide applies here without change."
+        "title": "Ideal 1-Page Section Hierarchy for TCS Freshers",
+        "content": "Keep your resume strictly to a single page in a clean, single-column ATS layout. Use this recruiter-approved order: 1) Header: Full Name, Professional Email, Phone Number, Location, LinkedIn, GitHub, and your TCS NextStep Reference ID (DT/CT Number); 2) Career Objective or Professional Summary (optional, max 2 lines); 3) Education Table: Degree, Institution, Board/University, Year, and CGPA/Percentage; 4) Technical Skills categorized by type; 5) Academic & Capstone Projects (2–3 projects with STAR bullets); 6) Internships, Virtual Experiences, or Certifications; 7) Achievements & Coding Profiles (LeetCode, HackerRank, Smart India Hackathon)."
       },
       {
-        "title": "Describing projects for a technical interview",
-        "content": "Interviewers often start from a project you list and ask you to explain it, so write each entry as something you can talk through. State what the application did, which parts you built, and the tools. A CSE example: 'Built an inventory tracker in Java with MySQL; wrote the stock-update and report modules; handled input validation.' An ECE example: 'Interfaced a temperature sensor with an Arduino board and logged readings over serial; wrote the calibration routine.'\n\nIf you could not explain a line for five minutes, shorten it or remove it."
+        "title": "How to Write Technical Project Bullets (CSE, ECE & Non-IT)",
+        "content": "TCS technical interviewers often spend 15–20 minutes probing your projects. Structure each bullet using the STAR formula (Action Verb + Tech Stack + What You Built + Measurable Outcome). For CSE/IT: 'Developed a full-stack student management portal using React, Node.js, and MongoDB; implemented JWT authentication and RESTful APIs handling 200+ record queries.' For ECE/EEE: 'Engineered an automated IoT temperature monitoring system using ESP32 microcontrollers and MQTT protocol, logging sensor data to a cloud dashboard.' For Non-IT (Mechanical/Civil): Highlight programming and analytical tools: 'Automated thermal simulation data processing using Python and Pandas, reducing report generation time by 40%.'"
       },
       {
-        "title": "Skills to list and how to word them",
-        "content": "Group skills by type: programming languages, databases, web or core-engineering tools, and basic computing subjects such as data structures. List the ones you have actually used in a project, an assignment or a coding platform. If a posting names a tool you only know a little, mention it inside the relevant project line rather than in a confident skills row."
+        "title": "Categorized Technical Skills for TCS Technical Interviews",
+        "content": "Avoid a long unformatted list of tools. Categorize skills clearly: Programming Languages (Java, Python, C++, SQL), Web Technologies (HTML5, CSS3, React, Node.js), Databases & Tools (MySQL, MongoDB, Git, GitHub, VS Code), and Core CS Subjects (Data Structures & Algorithms, Object-Oriented Programming, DBMS, Computer Networks, Operating Systems). Only list languages in which you can write clean syntax and explain core logic on a whiteboard."
       },
       {
-        "title": "If you are from BCA, BSc or MCA",
-        "content": "Degree eligibility differs by drive and changes between cycles, so check the current TCS page for your qualification instead of relying on a forum post. In the resume itself, BCA and BSc applicants should lead with programming coursework and the final-year project, and MCA applicants with the advanced project or dissertation, since the degree title alone says less than the work behind it."
+        "title": "TCS Resume Guidance for BCA, BSc (IT), and MCA Graduates",
+        "content": "TCS recruits BCA and BSc (IT/CS) graduates through the TCS Smart Hiring and Ignite programmes, and MCA graduates through NQT and on-campus drives. For BCA and BSc candidates, emphasize core programming coursework, database query skills, and final-year web projects. For MCA candidates, interviewers expect advanced software engineering practices, multi-tier architectures, enterprise frameworks (Spring Boot, Django, or MERN), and internship deliverables."
       },
       {
-        "title": "Mistakes common in high-volume fresher drives",
-        "content": "Sending the same resume to twenty companies without reading any of the postings is the main one. Others are naming the wrong company in a summary line, listing every language you have touched, leaving out your CGPA scale, and letting a certificate from an unrelated course take up space that a project should have. Re-read the file once as if you were the interviewer."
+        "title": "Top 6 Resume Mistakes That Disqualify Freshers at TCS",
+        "content": "Avoid these critical errors: 1) Using complex multi-column graphic templates that scramble in ATS parsers; 2) Fabricating projects or listing technologies you cannot explain in technical rounds; 3) Omitting your TCS NextStep DT/CT reference number; 4) Listing percentage without the base scale (e.g., 8.2 CGPA out of 10); 5) Copying generic objectives from the internet; 6) Typos in technical terms (e.g., writing 'Github' instead of 'GitHub' or 'Javascrip')."
       }
     ],
     "showTemplates": true,
     "faqs": [
       {
-        "q": "Does TCS require a particular resume format?",
-        "a": "NextCV cannot confirm that TCS requires a specific resume template, so do not assume one. Requirements can vary by drive, so follow whatever the portal, your placement cell or the recruiter's email specifies."
+        "q": "Should I include my TCS NextStep DT/CT number on my resume?",
+        "a": "Yes. Adding your TCS NextStep Reference ID (e.g., DT2026XXXXXX or CT2026XXXXXX) in your contact header makes it effortless for HR and technical panellists to pull up your NQT scores and application dossier during interview rounds."
       },
       {
-        "q": "Should I mention my NQT result on the resume?",
-        "a": "Only if you have a result you can state accurately and it is relevant, for example under achievements with the test name and year. Do not describe scores or ranks you cannot show if asked."
+        "q": "What is the difference between a TCS Ninja and TCS Digital resume?",
+        "a": "A TCS Ninja resume emphasizes foundational core programming (C/C++, Java, or Python), SQL, and academic coursework. A TCS Digital resume highlights advanced full-stack web frameworks, cloud deployments (AWS/Azure), machine learning projects, or competitive coding achievements."
       },
       {
-        "q": "Can I reuse my TCS resume for other companies?",
-        "a": "Yes for the core content. Change the summary line, the order of skills and the lead project to suit each posting, and remove any reference to another company's name."
+        "q": "Is a 1-page resume strictly required for TCS fresher drives?",
+        "a": "Yes. High-volume TCS campus and NQT drives screen thousands of applicants. A clean, single-column, 1-page resume ensures recruiters and interview panellists can scan your education, skills, and projects within 15 seconds."
       },
       {
-        "q": "How much should I write about a final-year project?",
-        "a": "Two or three lines are enough on the resume: purpose, your contribution and tools. Keep the rest for the interview, where you can explain design choices and what you would change."
+        "q": "Can non-CSE / non-IT engineering freshers apply to TCS with this format?",
+        "a": "Yes. Mechanical, Civil, Electrical, and Chemical engineering freshers can use this format. Highlight your foundational programming language (Python, C++, or Java), core engineering projects, and any software automation or data analysis tools you utilized."
+      },
+      {
+        "q": "Where can I build an ATS-friendly resume for TCS NQT?",
+        "a": "You can use NextCV's ATS-compliant resume builder to create a single-column, recruiter-approved resume tailored for TCS NQT and download a high-resolution vector PDF."
       }
     ]
   },
@@ -1819,59 +1827,65 @@
   },
   {
     "slug": "resume-builder-price-in-india",
-    "title": "Resume Making Charges in India: Builder, Writer or DIY",
-    "description": "Compare resume making charges in India across DIY, online builders, local services and professional writers, with questions to ask before you pay.",
-    "h1": "Resume making charges in India: DIY, builder or writer",
+    "title": "Resume Builder Price in India: Resume Making Charges (2026)",
+    "description": "Compare resume making charges in India: Cyber cafes (₹50-150), online builders (₹49-399 one-time), and resume writers (₹1,500-10,000). Avoid subscription traps.",
+    "h1": "Resume Builder Price in India: 2026 Cost Comparison & Charges",
     "keywords": [
+      "resume builder price in india",
       "resume making charges in india",
       "resume writing service cost india",
-      "professional resume writer india",
-      "resume maker vs resume writer",
-      "cyber cafe resume charges"
+      "cyber cafe resume charges",
+      "resume maker price india",
+      "professional resume writer cost india",
+      "cheap resume builder india"
     ],
     "sections": [
       {
-        "title": "Four ways to get a resume made",
-        "content": "You can write it yourself, use an online builder, ask a local typing or print service to format it, or hire a professional resume writer. They differ in cost, control and the quality of content. Charges also vary by city and provider, so ask for a written quote and compare final totals."
+        "title": "4 Ways to Get a Resume Made in India (and What Each Costs)",
+        "content": "Job seekers in India generally have four options: self-service online resume builders (₹49 – ₹399), local cyber cafes or print shops (₹50 – ₹150), professional resume writing agencies (₹1,500 – ₹10,000+), or free DIY word processing in Google Docs/Word (₹0). Each model varies drastically in cost, turnaround time, ATS compatibility, and content quality."
       },
       {
-        "title": "DIY in a word processor",
-        "content": "The cost is your time. You control the content and the layout. The risks are inconsistent formatting and exports that look different on other devices. Use a plain, single-column layout and check the exported PDF."
+        "title": "Online AI Resume Builders (₹49 – ₹399 One-Time)",
+        "content": "Online builders provide modern ATS-friendly templates, structural guidance, and AI-assisted bullet point optimization. While foreign builders often trap users with recurring auto-debits (₹1,200 – ₹2,500/month), modern Indian builders like NextCV offer transparent one-time payment plans (Basic ₹49, Standard ₹99, Premium ₹199, Elite ₹399) via instant UPI checkout with zero subscriptions."
       },
       {
-        "title": "Online resume builders",
-        "content": "They provide templates, structure and sometimes writing suggestions. Check what the free part includes, what a download costs, whether the fee recurs and whether you can edit later. Review any AI-written lines against your real experience before using them."
+        "title": "Local Cyber Cafes & Typing Shops (₹50 – ₹150)",
+        "content": "Neighbourhood cyber cafes and printing kiosks are common across Indian cities, charging ₹50 to ₹150 for typing and printing a resume. While affordable and fast, they frequently use outdated multi-column Word templates that fail modern Applicant Tracking Systems (ATS). If using a cyber cafe, always demand the editable DOCX file and verify spellings carefully."
       },
       {
-        "title": "Local typing and print services",
-        "content": "A neighbourhood service can type and print quickly, usually from the details you hand over. Ask for the editable file as well as the printout, check spelling of names and scores and look at the layout. If the file is image-only, it will be harder to use online."
+        "title": "Professional Resume Writing Agencies (₹1,500 – ₹10,000+)",
+        "content": "Full-service professional resume writers conduct 1-on-1 interviews to draft customized resumes from scratch. Prices range from ₹1,500 for freshers to ₹10,000+ for senior leadership and executives. Turnaround takes 3 to 7 days. Beware of any agency promising 'guaranteed job placement' or '100% interview calls'—no legitimate writer can guarantee employer hiring decisions."
       },
       {
-        "title": "Professional resume writers",
-        "content": "A writer may interview you, rewrite your content and format the result. This tends to cost more than a builder and suits candidates with complex histories or senior roles. Ask for samples, the number of revisions included and a clear scope. Be cautious about promises of guaranteed interviews or job offers; no writer can promise those."
+        "title": "DIY in MS Word or Google Docs (Free / ₹0)",
+        "content": "Writing your own resume is completely free. You maintain 100% control over every word and format choice. The primary challenge is manual formatting—tables, text boxes, and inconsistent margins can break ATS parsing when converted to PDF. Stick to a clean, single-column layout with standard section headings."
       },
       {
-        "title": "Questions to ask before paying",
-        "content": "What exactly is included? How many edits? What formats will I receive? Is payment one-time? Can I get the editable file? Who owns the content? A clear answer to each is a good sign. For NextCV's own pricing, read its public pricing page for the current model and amounts."
+        "title": "Checklist: 6 Critical Questions Before Paying Any Service",
+        "content": "Before making any payment, confirm: 1) Is the charge a one-time fee or a recurring monthly subscription? 2) Does the payment support UPI (Google Pay, PhonePe, Paytm)? 3) Will I receive an unwatermarked, high-resolution vector PDF? 4) Is the layout single-column and ATS-compliant? 5) Can I re-edit and update the resume later without paying again? 6) Who owns the final copyright and source files?"
       }
     ],
-    "showTemplates": false,
+    "showTemplates": true,
     "faqs": [
       {
-        "q": "Do freshers need to pay for a resume writer?",
-        "a": "Usually not. A fresher with projects or internships can write a good resume with a builder or a template, then ask a senior to review it."
+        "q": "How much does a resume builder cost in India?",
+        "a": "Online resume builders in India typically charge between ₹49 and ₹399 for one-time, watermark-free ATS PDF downloads. NextCV offers transparent one-time plans starting from ₹49 via UPI with zero recurring subscription charges."
       },
       {
-        "q": "Should I pay someone who promises a guaranteed job?",
-        "a": "No. No service can guarantee interviews or placement. Look for providers who describe their scope and revisions clearly."
+        "q": "How much do local cyber cafes charge for resume making in India?",
+        "a": "Neighbourhood cyber cafes and typing centers in India typically charge ₹50 to ₹150 for typing and printing a 1-page resume. However, they rarely provide ATS optimization or digital sharing links."
       },
       {
-        "q": "Can I get the editable file from a local service?",
-        "a": "Ask for it before paying. Having a Word or Google Docs file lets you update the resume later."
+        "q": "Do freshers need to hire an expensive professional resume writer?",
+        "a": "Usually no. Freshers and recent college graduates rarely need to spend ₹2,000 to ₹5,000 on resume writers. A modern ATS resume builder with AI suggestions or clean formatting templates is more than enough to showcase academic projects and internships."
       },
       {
-        "q": "Where can I check NextCV's price?",
-        "a": "On NextCV's public pricing page, which shows the current amounts and terms."
+        "q": "How can I avoid hidden resume subscription charges?",
+        "a": "Avoid entering credit card details on foreign builders offering '₹99 14-day trials', as they frequently set up recurring auto-debits of ₹1,499+ per month. Prefer services like NextCV that support one-time UPI payments with no auto-renewal mandates."
+      },
+      {
+        "q": "Can I make and download a resume for free in India?",
+        "a": "Yes. You can draft and preview your resume completely free on NextCV or format it yourself in Google Docs. When downloading high-resolution, unwatermarked ATS PDFs, NextCV plans start at just ₹49."
       }
     ]
   },

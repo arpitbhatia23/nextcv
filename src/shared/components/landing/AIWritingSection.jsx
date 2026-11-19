@@ -75,6 +75,10 @@ export default function AIWritingSection() {
               AI assistance. Create clearer, role-relevant content while keeping your resume
               accurate to your actual experience.
             </p>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-[#626962]">
+              AI suggestions are a starting point. Review every draft for accuracy, remove
+              unsupported claims, and keep details that genuinely reflect your experience.
+            </p>
             <ul className="mt-7 divide-y divide-[#d9dce5] border-y border-[#d9dce5]">
               {tools.map(tool => (
                 <li key={tool.title} className="flex gap-3 py-4">

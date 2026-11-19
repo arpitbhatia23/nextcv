@@ -16,6 +16,10 @@ export default function LandingFinalCTA() {
             Build your resume, improve it for your target role, and prepare for your next
             application with NextCV.
           </p>
+          <p className="mt-3 text-xs text-[#aeb9b1]">
+            Product and pricing reviewed for accuracy — November 2026. Pricing and features may
+            change.
+          </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row">
           <BuildButton className="bg-[#e8e9db] text-[#1d2b24] hover:bg-white active:bg-[#d8dbc8] focus-visible:ring-white focus-visible:ring-offset-[#17231f]" />

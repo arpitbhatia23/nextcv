@@ -2,9 +2,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import seoPages from "../seo-pages.json";
+import {
+  ArrowRight,
+  BookOpen,
+  Check,
+  ChevronRight,
+  Clock,
+  HelpCircle,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 const getPage = slug => seoPages.find(page => page.slug === slug);
-const RELATED_GUIDE_LIMIT = 4;
+const RELATED_GUIDE_LIMIT = 5;
 const RELATED_GUIDE_STOP_WORDS = new Set([
   "a",
   "an",
@@ -129,6 +139,71 @@ const getRelatedGuides = page => {
     .map(({ guide }) => guide);
 };
 
+function renderBold(text) {
+  if (!text.includes("**")) return text;
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={idx} className="font-semibold text-[#17201C]">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
+function FormattedSectionContent({ content }) {
+  if (!content) return null;
+
+  // Split by double line breaks for distinct editorial paragraphs
+  const paragraphs = content.split(/\n\s*\n/).filter(Boolean);
+
+  return (
+    <div className="mt-5 space-y-5 text-base sm:text-lg leading-[1.8] text-[#343A35]">
+      {paragraphs.map((pText, pIdx) => {
+        const lines = pText.split("\n");
+        const hasBullets = lines.some(l => l.trim().startsWith("- ") || l.trim().startsWith("* "));
+
+        if (hasBullets) {
+          return (
+            <div key={pIdx} className="my-5 space-y-3 pl-1">
+              {lines.map((line, lIdx) => {
+                const trimmed = line.trim();
+                if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+                  const bulletText = trimmed.replace(/^[-*]\s+/, "");
+                  return (
+                    <div
+                      key={lIdx}
+                      className="flex items-start gap-3.5 text-base sm:text-lg leading-[1.75] text-[#343A35]"
+                    >
+                      <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-[#465B9E] shrink-0" />
+                      <span>{renderBold(bulletText)}</span>
+                    </div>
+                  );
+                }
+                if (trimmed.length === 0) return null;
+                return (
+                  <p key={lIdx} className="text-base sm:text-lg leading-[1.8] text-[#343A35]">
+                    {renderBold(trimmed)}
+                  </p>
+                );
+              })}
+            </div>
+          );
+        }
+
+        return (
+          <p key={pIdx} className="text-base sm:text-lg leading-[1.8] text-[#343A35]">
+            {renderBold(pText)}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 export const dynamicParams = false;
 export const revalidate = 86400;
 
@@ -154,9 +229,17 @@ export default async function SeoPage({ params }) {
   const { slug } = await params;
   const page = getPage(slug);
   if (!page) notFound();
+
   const hasFaqs = Array.isArray(page.faqs) && page.faqs.length > 0;
   const showTemplates = page.showTemplates === true;
   const relatedGuides = getRelatedGuides(page);
+
+  // Compute read time
+  const totalWords = (page.sections || []).reduce(
+    (acc, s) => acc + (s.content || "").split(/\s+/).length,
+    0
+  );
+  const readTime = Math.max(3, Math.ceil(totalWords / 200));
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -191,7 +274,7 @@ export default async function SeoPage({ params }) {
   };
 
   return (
-    <div className="relative min-h-screen bg-white text-[#071644] selection:bg-indigo-100 selection:text-indigo-700">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#17201C] selection:bg-[#e4ebff] selection:text-[#17201C]">
       {hasFaqs && (
         <script
           type="application/ld+json"
@@ -203,230 +286,254 @@ export default async function SeoPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      {/* Hero Background glow */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-120 bg-linear-to-b from-[#eef2ff]/80 via-[#f5f7ff]/40 to-transparent" />
+      {/* Editorial Article Header */}
+      <header className="mx-auto max-w-4xl px-5 pb-12 pt-28 sm:px-8 sm:pb-16 sm:pt-36">
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-xs text-[#6F7670]">
+          <Link href="/" className="transition-colors hover:text-[#465B9E]">
+            Home
+          </Link>
+          <ChevronRight className="h-3 w-3 text-[#A8ADA7]" />
+          <span className="text-[#465B9E] font-medium">Career Guide</span>
+          <ChevronRight className="h-3 w-3 text-[#A8ADA7]" />
+          <span className="text-[#969C95] truncate max-w-56">{page.title}</span>
+        </nav>
 
-      {/* Hero Header */}
-      <header className="relative  pb-10 sm:pt-16 sm:pb-14 border-b border-slate-100 ">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20">
-          {/* Breadcrumbs & Badge */}
-          <div className="mb-6 flex flex-wrap items-center gap-3 text-xs font-semibold">
-            <Link
-              href="/"
-              className="text-[#365184] hover:text-indigo-600 transition-colors flex items-center gap-1.5"
-            >
-              <span>Home</span>
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="inline-flex items-center gap-1.5   px-3 py-1 text-[#3730d8] ">
-              Resume Resource
+        {/* Title */}
+        <h1 className="font-serif text-3xl font-normal leading-[1.12] tracking-tight text-[#17201C] sm:text-5xl lg:text-6xl">
+          {page.h1}
+        </h1>
+
+        {/* Subtitle / Lead Paragraph */}
+        <p className="mt-6 text-lg sm:text-xl font-normal leading-relaxed text-[#555C56]">
+          {page.description}
+        </p>
+
+        {/* Editorial Metadata Bar */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#EAE7DF] py-4 text-xs text-[#6F7670]">
+          <div className="flex items-center gap-3">
+            <span className="font-medium text-[#17201C]">NextCV Editorial Team</span>
+            <span>·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5 text-[#89908A]" />
+              {readTime} min read
             </span>
-            <span className="ml-auto hidden sm:inline-block text-[#365184]">
-              {String(page.sections?.length || 0)} Core Sections
-            </span>
+            <span>·</span>
+            <span className="text-emerald-700 font-medium">Verified for 2026 hiring</span>
           </div>
 
-          <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#071644] leading-tight sm:leading-tight">
-              {page.h1}
-            </h1>
-            <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#365184] max-w-3xl">
-              {page.description}
-            </p>
-          </div>
-
-          {/* Quick Stats & Action bar */}
-          <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-6 border-t border-slate-200/60">
+          <div className="flex items-center gap-3">
             <Link
-              href={showTemplates ? "/templates" : "/ai-resume-builder"}
-              className="inline-flex items-center justify-center gap-2  bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-indigo-700 hover:shadow-lg"
+              href={showTemplates ? "/templates" : "/ats-resume-builder"}
+              className="font-medium text-[#465B9E] hover:underline"
             >
-              {showTemplates ? "Explore Resume Templates" : "Create Your Resume"}
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
+              {showTemplates ? "View Templates →" : "Build Resume →"}
             </Link>
-
-            <div className="flex items-center gap-4 text-xs font-medium text-[#365184]">
-              {showTemplates && (
-                <>
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                    Pay-Per-Resume (₹49 - ₹399)
-                  </span>
-                  <span>•</span>
-                </>
-              )}
-              <span>ATS checks are diagnostic, not a hiring guarantee</span>
-            </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content Layout */}
-      <main className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8">
-        {/* Main Article Body */}
-        <article className="min-w-0">
-          <div className="mb-8 flex items-center justify-between border-b border-slate-200 pb-4">
-            <h2 className="text-lg font-bold text-[#071644]">Step-by-Step Guide</h2>
-            <span className="text-xs font-medium text-[#365184] bg-slate-100 px-2.5 py-1 ">
-              {page.faqs?.length ? `${page.faqs.length} FAQs Included` : "Detailed Walkthrough"}
-            </span>
-          </div>
+      {/* Main Reading Canvas */}
+      <div className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-10">
+        <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_300px]">
+          {/* Main Unbroken Article Body */}
+          <article className="min-w-0 max-w-3xl">
+            {/* Lead Takeaway Callout */}
+            <div className="mb-14 border-l-2 border-[#465B9E] bg-[#F4F1EA]/60 py-4 pl-6 pr-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#465B9E]">
+                Quick Summary
+              </p>
+              <p className="mt-2 text-sm sm:text-base leading-relaxed text-[#4A514B]">
+                This guide covers the exact formatting rules, section order, and wording expected by Indian employers and automated Applicant Tracking Systems. Follow these {page.sections?.length || 0} guidelines to create a clean, single-column resume.
+              </p>
+            </div>
 
-          {/* Sections List */}
-          <div className="space-y-6">
-            {page.sections && page.sections.length > 0 ? (
-              page.sections.map((section, index) => (
-                <section
-                  key={section.title || index}
-                  className="group  border border-slate-200 bg-white p-6 sm:p-8 shadow-xs transition-all duration-200 hover:border-indigo-300 hover:shadow-md"
-                >
-                  <div className="flex items-start gap-4 sm:gap-6">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center  bg-indigo-50 text-indigo-600 font-extrabold text-base border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                      {String(index + 1).padStart(2, "0")}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl sm:text-2xl font-bold text-[#071644] leading-tight">
+            {/* Continuous Article Sections (No Cards, Pure Flowing Prose) */}
+            <div className="divide-y divide-[#EAE7DF]">
+              {page.sections && page.sections.length > 0 ? (
+                page.sections.map((section, index) => {
+                  const stepNum = String(index + 1).padStart(2, "0");
+                  const sectionId = `section-${index + 1}`;
+
+                  return (
+                    <section
+                      key={section.title || index}
+                      id={sectionId}
+                      className="scroll-mt-28 py-12 first:pt-0 last:pb-0"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-xs font-semibold text-[#465B9E]">
+                          {stepNum}
+                        </span>
+                        <div className="h-px w-8 bg-[#D8D4C8]" />
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-[#8A918B]">
+                          Section {stepNum}
+                        </span>
+                      </div>
+
+                      <h2 className="mt-4 font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[#17201C]">
                         {section.title}
-                      </h3>
-                      <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#365184]">
-                        {section.content}
-                      </p>
-                    </div>
-                  </div>
+                      </h2>
+
+                      <FormattedSectionContent content={section.content} />
+                    </section>
+                  );
+                })
+              ) : (
+                <section className="py-8">
+                  <p className="text-base sm:text-lg leading-relaxed text-[#343A35]">
+                    {showTemplates
+                      ? "Use this guide to shape a clear, relevant resume for your next application. NextCV offers one-time download plans ranging from ₹49 to ₹399 with no monthly subscription."
+                      : "Use this guide to shape a clear, relevant resume for your next application."}
+                  </p>
                 </section>
-              ))
-            ) : (
-              <section className=" border border-slate-200 bg-slate-50 p-6 sm:p-8">
-                <p className="text-sm sm:text-base leading-relaxed text-[#365184]">
-                  {showTemplates
-                    ? "Use this guide to shape a clear, relevant resume for your next application. NextCV offers one-time download plans ranging from ₹49 to ₹399 with no monthly subscription."
-                    : "Use this guide to shape a clear, relevant resume for your next application."}
-                </p>
+              )}
+            </div>
+
+            {/* Frequently Asked Questions (Seamless Editorial Accordion) */}
+            {hasFaqs && (
+              <section id="faqs" className="scroll-mt-28 mt-20 border-t border-[#EAE7DF] pt-16">
+                <div className="mb-8">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#465B9E]">
+                    Questions & Answers
+                  </span>
+                  <h2 className="mt-3 font-serif text-2xl sm:text-3xl font-medium tracking-tight text-[#17201C]">
+                    Frequently Asked Questions
+                  </h2>
+                </div>
+
+                <div className="divide-y divide-[#EAE7DF]">
+                  {page.faqs.map((faq, idx) => (
+                    <details
+                      key={faq.q || idx}
+                      className="group py-6 first:pt-2 last:pb-2"
+                    >
+                      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-serif text-lg sm:text-xl font-normal text-[#17201C]">
+                        <span>{faq.q}</span>
+                        <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-lg font-light text-[#737A74] transition-transform duration-200 group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-4 text-base leading-relaxed text-[#555C56]">
+                        {faq.a}
+                      </p>
+                    </details>
+                  ))}
+                </div>
               </section>
             )}
-          </div>
 
-          {/* FAQ Section */}
-          {hasFaqs && (
-            <section className="mt-14 pt-10 border-t border-slate-200">
-              <div className="mb-6">
-                <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600">
-                  Got Questions?
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#071644] mt-1">
-                  Frequently Asked Questions
-                </h2>
-              </div>
-
-              <div className="space-y-4">
-                {page.faqs.map((faq, idx) => (
-                  <details
-                    key={faq.q || idx}
-                    className="group  border border-slate-200 bg-white p-5 sm:p-6 transition-all hover:border-indigo-200"
+            {/* End of Article Callout */}
+            <div className="mt-20 border-t border-[#EAE7DF] pt-12">
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="font-serif text-2xl font-medium text-[#17201C]">
+                    Ready to build your resume?
+                  </h3>
+                  <p className="mt-1 text-sm text-[#555C56]">
+                    Apply these guidelines with NextCV&apos;s ATS-compliant builder. One-time payment from ₹49.
+                  </p>
+                </div>
+                <div className="flex shrink-0 items-center gap-3">
+                  <Link
+                    href={showTemplates ? "/templates" : "/ats-resume-builder"}
+                    className="inline-flex items-center justify-center gap-2 bg-[#465B9E] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#344B93]"
                   >
-                    <summary className="cursor-pointer list-none text-base font-bold text-[#071644] flex items-center justify-between gap-4">
-                      <span>{faq.q}</span>
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 font-medium text-lg transition-transform group-open:rotate-45 group-open:bg-indigo-100 group-open:text-indigo-600">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-4 border-t border-slate-100 pt-4 text-sm sm:text-base leading-relaxed text-[#365184]">
-                      {faq.a}
-                    </p>
-                  </details>
-                ))}
+                    {showTemplates ? "Browse Templates" : "Build Resume"}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/ats-resume-checker"
+                    className="inline-flex items-center justify-center border border-[#D5D1C6] px-5 py-3 text-sm font-medium text-[#17201C] transition-colors hover:bg-[#F4F1EA]"
+                  >
+                    Check ATS Score
+                  </Link>
+                </div>
               </div>
-            </section>
-          )}
+            </div>
+          </article>
 
-          {/* Bottom Call to Action Card */}
-          <div className="mt-14  bg-linear-to-br from-[#071644] via-[#0d2259] to-[#152e75] p-8 sm:p-12 text-center text-white shadow-xl relative overflow-hidden">
-            <div className="absolute -top-24 -right-24 h-64 w-64  bg-indigo-500/20 blur-3xl pointer-events-none" />
-            <div className="relative z-10 max-w-2xl mx-auto">
-              {showTemplates && (
-                <span className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/20 text-indigo-200 border border-indigo-400/30 text-xs font-medium mb-4">
-                  Resume Templates
-                </span>
+          {/* Minimalist Borderless Sticky Sidebar */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-32 space-y-12">
+              {/* Table of Contents */}
+              {page.sections && page.sections.length > 0 && (
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#838A84]">
+                    Table of Contents
+                  </p>
+                  <nav className="mt-4 space-y-3 text-xs leading-relaxed">
+                    {page.sections.map((section, idx) => (
+                      <a
+                        key={idx}
+                        href={`#section-${idx + 1}`}
+                        className="group flex items-start gap-2.5 text-[#555C56] transition-colors hover:text-[#465B9E]"
+                      >
+                        <span className="font-mono text-[#A8ADA7] group-hover:text-[#465B9E]">
+                          {String(idx + 1).padStart(2, "0")}
+                        </span>
+                        <span className="line-clamp-2">{section.title}</span>
+                      </a>
+                    ))}
+                    {hasFaqs && (
+                      <a
+                        href="#faqs"
+                        className="group flex items-start gap-2.5 text-[#555C56] transition-colors hover:text-[#465B9E] pt-2 border-t border-[#EAE7DF]"
+                      >
+                        <span className="font-mono text-[#A8ADA7] group-hover:text-[#465B9E]">
+                          ?
+                        </span>
+                        <span>Frequently Asked Questions</span>
+                      </a>
+                    )}
+                  </nav>
+                </div>
               )}
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                {showTemplates
-                  ? "Turn This Guide Into a Strong Resume"
-                  : "Put This Guidance Into Practice"}
-              </h3>
-              <p className="mt-3 text-sm sm:text-base text-indigo-100/90 leading-relaxed">
-                {showTemplates
-                  ? "Choose a professional resume template with a one-time payment from ₹49 to ₹399. ATS behavior varies by employer and system."
-                  : "Use this guide to prepare a clear, relevant resume for your next application. ATS checks are diagnostic and cannot guarantee a hiring outcome."}
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+              {/* Related Guides (Minimalist Editorial Links) */}
+              {relatedGuides.length > 0 && (
+                <div className="border-t border-[#EAE7DF] pt-8">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#838A84]">
+                    Related Reading
+                  </p>
+                  <div className="mt-4 space-y-3.5">
+                    {relatedGuides.map(guide => (
+                      <Link
+                        key={guide.slug}
+                        href={`/${guide.slug}`}
+                        className="group block"
+                      >
+                        <p className="text-xs font-medium leading-snug text-[#17201C] group-hover:text-[#465B9E] transition-colors line-clamp-2">
+                          {guide.title}
+                        </p>
+                        <span className="mt-1 inline-flex items-center gap-1 text-[11px] text-[#838A84] group-hover:text-[#465B9E] transition-colors">
+                          Read guide <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Pricing Callout (Borderless) */}
+              <div className="border-t border-[#EAE7DF] pt-8">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#838A84]">
+                  NextCV Transparent Pricing
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-[#555C56]">
+                  Pay once from ₹49 per resume. No recurring subscriptions or automatic credit card renewals.
+                </p>
                 <Link
-                  href={showTemplates ? "/templates" : "/ai-resume-builder"}
-                  className="w-full sm:w-auto inline-flex items-center justify-center  bg-indigo-600 px-8 py-3.5 text-sm font-semibold text-white shadow-md hover:bg-indigo-500 transition-colors"
+                  href="/pricing"
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-[#465B9E] hover:underline"
                 >
-                  {showTemplates ? "Browse Resume Templates" : "Start a Resume"}
-                </Link>
-                <Link
-                  href="/ats-resume-checker"
-                  className="w-full sm:w-auto inline-flex items-center justify-center border border-white/20 bg-white/10 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
-                >
-                  Check Existing ATS Score
+                  View Plans & FIRST20 Coupon <ArrowRight className="h-3 w-3" />
                 </Link>
               </div>
             </div>
-          </div>
-        </article>
-
-        {/* Sidebar */}
-        <aside className="space-y-6">
-          {/* Related Guides Card */}
-          <div className="sticky top-24  border border-slate-200 bg-slate-50/80 p-6 backdrop-blur-xs">
-            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mb-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
-              Resources & Tools
-            </div>
-            <h3 className="text-xl font-bold text-[#071644] mb-4">Related Guides</h3>
-            <nav className="space-y-2" aria-label="Related guides">
-              {relatedGuides.map(guide => (
-                <Link
-                  key={guide.slug}
-                  href={`/${guide.slug}`}
-                  className="group flex items-center justify-between  bg-white border border-slate-200/80 px-4 py-3 text-sm font-semibold text-[#071644] transition-all hover:border-indigo-300 hover:bg-indigo-50/40 hover:text-indigo-600"
-                >
-                  <span className="line-clamp-2">{guide.title}</span>
-                  <span className="text-slate-400 group-hover:text-indigo-600 transition-colors">
-                    ↗
-                  </span>
-                </Link>
-              ))}
-            </nav>
-
-            {showTemplates && (
-              <div className="mt-6 pt-6 border-t border-slate-200 text-center">
-                <p className="text-xs font-medium text-[#365184]">
-                  Pay per resume template. No subscription lock-in.
-                </p>
-                <p className="mt-1 text-xs font-bold text-indigo-600">
-                  ₹49 to ₹399 One-Time Payment
-                </p>
-              </div>
-            )}
-          </div>
-        </aside>
-      </main>
+          </aside>
+        </div>
+      </div>
     </div>
   );
 }

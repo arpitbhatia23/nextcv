@@ -17,24 +17,28 @@ import {
   FileText,
   Layers,
   Percent,
+  CreditCard,
 } from "lucide-react";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Price: Build & Download PDF from ₹49 | NextCV",
+  title: "Resume Builder Pricing: Download ATS PDF from ₹49 | NextCV",
   description:
-    "Create an ATS-friendly resume with NextCV from ₹49. Pay once, build your resume with AI, and download a professional PDF without a monthly subscription.",
+    "Build an ATS-friendly resume for free and download PDF from ₹49. Pay once with UPI or card—no auto-debit or monthly subscription. Get 20% off with FIRST20.",
   path: "/pricing",
   keywords: [
-    "resume builder pricing India",
+    "resume builder pricing",
     "resume maker price India",
     "resume builder ₹49",
+    "resume builder without subscription",
+    "ats resume builder pricing",
+    "one time payment resume builder",
+    "affordable resume maker",
     "resume builder ₹99",
     "resume builder ₹199",
     "resume builder ₹399",
     "resume sharing link",
     "online resume portfolio",
     "portfolio website for resume",
-    "AI resume builder",
     "NextCV pricing",
   ],
 });
@@ -119,44 +123,54 @@ const plans = [
 
 const faqs = [
   {
+    question: "Do I need a monthly subscription to download my resume on NextCV?",
+    answer:
+      "No. NextCV uses 100% transparent one-time payments starting from ₹49. There are no automatic renewals, recurring card charges, or hidden subscriptions.",
+  },
+  {
+    question: "Is building and editing my resume free?",
+    answer:
+      "Yes. You can create your account, try templates, customize sections, write with AI, and preview your ATS-friendly resume completely free. You only pay when you are ready to download the high-resolution PDF or create a public sharing link.",
+  },
+  {
     question: "How does the FIRST20 coupon work?",
     answer:
-      "Use coupon code FIRST20 at checkout to receive 20% OFF your first payment. The discount applies only to the first eligible payment.",
+      "Use coupon code FIRST20 at checkout to receive 20% OFF your first payment. The discount applies immediately to your eligible checkout amount.",
+  },
+  {
+    question: "What payment methods are supported in India?",
+    answer:
+      "We support all popular Indian payment options including UPI (Google Pay, PhonePe, Paytm, BHIM), RuPay, Visa, Mastercard, and Net Banking with instant activation.",
   },
   {
     question: "Which plans include a Resume Sharing Link?",
     answer:
-      "Premium and Elite include a public Resume Sharing Link. You can share your resume through a web link on LinkedIn, WhatsApp, email or anywhere else.",
+      "Premium (₹199) and Elite (₹399) include a public Resume Sharing Link. You can share your resume as a clean web page on LinkedIn, WhatsApp, email, or job applications.",
   },
   {
     question: "Which plan includes the Portfolio Website?",
     answer:
-      "The professional Portfolio Website is included with the Elite ₹399 plan. You can turn your resume information into a personal portfolio with sections such as your profile, experience, projects, skills, education and contact information.",
+      "The professional Portfolio Website is included with the Elite ₹399 plan. You can automatically turn your resume into an impressive personal portfolio website showcasing your skills, experience, and projects.",
   },
   {
     question: "Does Elite include normal PDF resume download?",
     answer:
-      "Yes. Elite includes a normal high-resolution PDF resume download along with the online resume sharing link and portfolio website.",
+      "Yes. Elite includes a high-resolution ATS-optimized PDF resume download along with the online resume sharing link and hosted portfolio website.",
   },
   {
     question: "Is the AI Cover Letter included in a resume plan?",
     answer:
-      "No. The AI Cover Letter is a separate product available for a one-time payment of ₹79. It is not included with Basic, Standard, Premium, or Elite resume plans.",
-  },
-  {
-    question: "Do I need a monthly subscription?",
-    answer:
-      "No. NextCV uses one-time payments for the selected resume plan. There is no mandatory monthly subscription for creating your resume.",
+      "No. The AI Cover Letter builder is a separate tool available for a one-time payment of ₹79. It is not included with resume plans.",
   },
   {
     question: "Can I edit my resume after purchasing?",
     answer:
-      "Yes. You can continue editing your resume and update your information before downloading or sharing it.",
+      "Yes. You can return to your dashboard, make edits, and update your information anytime before re-downloading or updating your live resume link.",
   },
   {
     question: "What is the difference between Premium and Elite?",
     answer:
-      "Premium includes a professional resume and live sharing link. Elite adds a professional portfolio website and portfolio sharing. The AI Cover Letter is available separately for ₹79.",
+      "Premium includes 20+ resume templates, AI tools, and a live web resume sharing link. Elite adds a full personal portfolio website generated directly from your resume data.",
   },
 ];
 
@@ -171,7 +185,7 @@ function DiscountPrice({ price }) {
         <span className="mb-1 text-sm text-muted-foreground line-through">₹{price}</span>
       </div>
 
-      <div className="mt-2 inline-flex items-center gap-1.5  border border-success/20 bg-success/5 px-2.5 py-1 text-xs font-semibold text-success">
+      <div className="mt-2 inline-flex items-center gap-1.5 border border-success/20 bg-success/5 px-2.5 py-1 text-xs font-semibold text-success">
         <Percent className="h-3 w-3" />
         With FIRST20
       </div>
@@ -180,32 +194,112 @@ function DiscountPrice({ price }) {
 }
 
 export default function PricingPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        name: "NextCV AI Resume Builder",
+        description:
+          "ATS-friendly resume builder with transparent one-time payment options starting from ₹49. No recurring monthly subscriptions.",
+        brand: {
+          "@type": "Brand",
+          name: "NextCV",
+        },
+        offers: {
+          "@type": "AggregateOffer",
+          priceCurrency: "INR",
+          lowPrice: "49",
+          highPrice: "399",
+          offerCount: "4",
+          offers: plans.map(p => ({
+            "@type": "Offer",
+            name: `${p.name} Plan`,
+            price: String(p.price),
+            priceCurrency: "INR",
+            availability: "https://schema.org/InStock",
+            url: "https://www.nextcv.in/pricing",
+          })),
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(faq => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.nextcv.in",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Pricing",
+            item: "https://www.nextcv.in/pricing",
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* HERO */}
       <section className="border-b border-border bg-background">
         <div className="nc-container pb-14 pt-28 sm:pb-20 sm:pt-32">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-5 inline-flex items-center gap-2  border border-success/20 bg-success/5 px-4 py-2 text-xs font-semibold text-success">
+            <div className="mb-5 inline-flex items-center gap-2 border border-success/20 bg-success/5 px-4 py-2 text-xs font-semibold text-success">
               <Sparkles className="h-4 w-4" />
               FIRST20 · 20% off your first payment
             </div>
 
             <h1 className="font-display text-4xl leading-tight text-foreground sm:text-5xl">
-              Simple pricing.
+              Simple, one-time pricing.
               <br />
-              <span className="text-muted-foreground">Professional resumes.</span>
+              <span className="text-muted-foreground">Download ATS resumes from ₹49.</span>
             </h1>
 
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-              Build and edit your resume for free. Pay once when you are ready to download, and
-              choose a tier based on the features you need.
+              Build and edit your resume for free. When you are ready to download or share, pay once
+              with zero hidden fees or recurring subscriptions.
             </p>
 
+            {/* TRUST PILLS */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1.5 font-medium">
+                <Check className="h-4 w-4 text-success" />
+                Free to build & preview
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <Check className="h-4 w-4 text-success" />
+                Pay only on download
+              </span>
+              <span className="flex items-center gap-1.5 font-medium">
+                <Check className="h-4 w-4 text-success" />
+                Instant UPI & Card checkout
+              </span>
+            </div>
+
             {/* COUPON */}
-            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center justify-between gap-4  border border-border bg-surface-muted p-4 sm:flex-row sm:px-5">
+            <div className="mx-auto mt-8 flex max-w-xl flex-col items-center justify-between gap-4 border border-border bg-surface-muted p-4 sm:flex-row sm:px-5">
               <div className="flex items-center gap-3 text-left">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center  bg-primary text-white">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary text-white">
                   <Percent className="h-5 w-5" />
                 </div>
 
@@ -213,11 +307,11 @@ export default function PricingPage() {
                   <p className="text-sm font-semibold text-foreground">
                     Save 20% on your first payment
                   </p>
-                  <p className="text-xs text-muted-foreground">Apply this code at checkout</p>
+                  <p className="text-xs text-muted-foreground">Apply coupon at checkout</p>
                 </div>
               </div>
 
-              <div className=" border border-dashed border-success/50 bg-surface px-4 py-2 font-mono text-sm font-bold tracking-widest text-success">
+              <div className="border border-dashed border-success/50 bg-surface px-4 py-2 font-mono text-sm font-bold tracking-widest text-success">
                 FIRST20
               </div>
             </div>
@@ -234,11 +328,11 @@ export default function PricingPage() {
             </p>
 
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-              Pay once. Build your resume.
+              Pay once. Download & share anytime.
             </h2>
 
             <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
-              Start with the plan you need and upgrade when you want more.
+              Select the tier that matches your career goals. Upgrade whenever you need more.
             </p>
           </div>
 
@@ -253,7 +347,7 @@ export default function PricingPage() {
                 >
                   {plan.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <div className="inline-flex items-center gap-1.5 whitespace-nowrap  bg-primary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                      <div className="inline-flex items-center gap-1.5 whitespace-nowrap bg-primary px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-white">
                         <Star className="h-3 w-3 fill-current" />
                         Most Popular
                       </div>
@@ -269,7 +363,7 @@ export default function PricingPage() {
                       </h3>
                     </div>
 
-                    <div className="flex h-10 w-10 items-center justify-center  bg-surface-muted text-primary">
+                    <div className="flex h-10 w-10 items-center justify-center bg-surface-muted text-primary">
                       <Icon className="h-5 w-5" />
                     </div>
                   </CardHeader>
@@ -288,7 +382,7 @@ export default function PricingPage() {
                         key={feature}
                         className={`flex items-start gap-2.5 text-sm ${
                           plan.name === "Elite" && feature === "Professional portfolio website"
-                            ? " border border-primary/20 bg-accent p-2.5 font-semibold text-primary"
+                            ? "border border-primary/20 bg-accent p-2.5 font-semibold text-primary"
                             : "text-foreground"
                         }`}
                       >
@@ -346,18 +440,18 @@ export default function PricingPage() {
       <section className="border-y border-border bg-surface py-16 sm:py-20">
         <div className="nc-container">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2  border border-primary/20 bg-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+            <span className="inline-flex items-center gap-2 border border-primary/20 bg-accent px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
               <Crown className="h-3.5 w-3.5" />
               Elite feature
             </span>
 
             <h2 className="mt-5 font-display text-3xl text-foreground sm:text-4xl">
-              Turn your resume into a personal portfolio
+              Turn your resume into a personal portfolio website
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-base">
               Elite lets you transform your resume information into a clean, professional portfolio
-              website that you can share with recruiters, clients and your professional network.
+              website that you can share with recruiters, clients, and your professional network.
             </p>
           </div>
 
@@ -366,7 +460,7 @@ export default function PricingPage() {
               {
                 icon: FileText,
                 title: "Create your resume",
-                text: "Build your resume using NextCV's templates and AI writing tools.",
+                text: "Build your resume using NextCV's ATS templates and AI writing tools.",
               },
               {
                 icon: Layers,
@@ -383,7 +477,7 @@ export default function PricingPage() {
 
               return (
                 <div key={item.title} className="nc-card p-6">
-                  <div className="flex h-11 w-11 items-center justify-center  bg-surface-muted text-primary">
+                  <div className="flex h-11 w-11 items-center justify-center bg-surface-muted text-primary">
                     <Icon className="h-5 w-5" />
                   </div>
 
@@ -395,13 +489,13 @@ export default function PricingPage() {
             })}
           </div>
 
-          <div className="mx-auto mt-8 max-w-3xl  border border-border bg-surface-muted p-5 text-center">
+          <div className="mx-auto mt-8 max-w-3xl border border-border bg-surface-muted p-5 text-center">
             <p className="text-sm font-semibold text-foreground">
-              Elite = Resume + Resume Sharing + Portfolio
+              Elite = Resume + Resume Sharing + Portfolio Website
             </p>
 
             <p className="mt-1 text-xs text-muted-foreground">
-              Everything you need to present your professional profile online.
+              Everything you need to present your professional profile online in one place.
             </p>
           </div>
         </div>
@@ -412,12 +506,12 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <div className="grid gap-5 lg:grid-cols-2">
             {/* RESUME SHARING */}
-            <div className=" border border-slate-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
+            <div className="border border-slate-200 bg-white p-7 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center bg-slate-950 text-white">
                 <Globe className="h-6 w-6" />
               </div>
 
-              <span className="mt-5 inline-flex  border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
+              <span className="mt-5 inline-flex border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-slate-600">
                 Premium & Elite
               </span>
 
@@ -435,12 +529,12 @@ export default function PricingPage() {
             </div>
 
             {/* PORTFOLIO */}
-            <div className=" border border-violet-200 bg-white p-7 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center  bg-violet-600 text-white">
+            <div className="border border-violet-200 bg-white p-7 shadow-sm">
+              <div className="flex h-12 w-12 items-center justify-center bg-violet-600 text-white">
                 <Layers className="h-6 w-6" />
               </div>
 
-              <span className="mt-5 inline-flex  border border-violet-200 bg-violet-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-violet-700">
+              <span className="mt-5 inline-flex border border-violet-200 bg-violet-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-violet-700">
                 Elite Only
               </span>
 
@@ -465,11 +559,11 @@ export default function PricingPage() {
         <div className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-400">
-              Why NextCV
+              Why Job Seekers Choose NextCV
             </p>
 
             <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950">
-              Everything stays simple
+              Zero subscription traps. Complete peace of mind.
             </h2>
           </div>
 
@@ -477,18 +571,18 @@ export default function PricingPage() {
             {[
               {
                 icon: ShieldCheck,
-                title: "No monthly subscription",
-                text: "Choose the resume plan you need and pay once.",
+                title: "No monthly subscriptions",
+                text: "Traditional builders charge recurring fees. NextCV gives you 100% one-time payments from ₹49 with zero surprise renewals.",
               },
               {
                 icon: Download,
-                title: "High-quality PDF",
-                text: "Download your finished resume as a professional PDF.",
+                title: "ATS-optimized vector PDF",
+                text: "Download clean, recruiter-approved PDFs formatted to pass Applicant Tracking Systems used by top companies.",
               },
               {
                 icon: Zap,
-                title: "AI-powered tools",
-                text: "Create summaries, bullets and other resume content faster.",
+                title: "Built-in AI content tools",
+                text: "Refine bullet points, craft professional summaries, and optimize skills with intelligent AI suggestions.",
               },
             ].map(item => {
               const Icon = item.icon;
@@ -496,9 +590,9 @@ export default function PricingPage() {
               return (
                 <div
                   key={item.title}
-                  className=" border border-slate-200 bg-white p-6 text-center shadow-sm"
+                  className="border border-slate-200 bg-white p-6 text-center shadow-sm"
                 >
-                  <div className="mx-auto flex h-11 w-11 items-center justify-center  bg-slate-100 text-slate-800">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center bg-slate-100 text-slate-800">
                     <Icon className="h-5 w-5" />
                   </div>
 
@@ -516,12 +610,16 @@ export default function PricingPage() {
       <section className="bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-black tracking-tight text-slate-950">Compare plans</h2>
+            <h2 className="text-3xl font-black tracking-tight text-slate-950">
+              Compare plan features
+            </h2>
 
-            <p className="mt-3 text-sm text-slate-500">Choose based on what you need today.</p>
+            <p className="mt-3 text-sm text-slate-500">
+              Choose the exact package tailored to your job search stage.
+            </p>
           </div>
 
-          <div className="mt-10 overflow-hidden  border border-slate-200 bg-white shadow-sm">
+          <div className="mt-10 overflow-hidden border border-slate-200 bg-white shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full min-w-190 border-collapse text-left">
                 <thead>
@@ -533,10 +631,10 @@ export default function PricingPage() {
                       Price
                     </th>
                     <th className="px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-500">
-                      Resume
+                      Resume PDF
                     </th>
                     <th className="px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-500">
-                      Sharing
+                      Sharing Link
                     </th>
                     <th className="px-5 py-4 text-xs font-black uppercase tracking-wider text-slate-500">
                       Portfolio
@@ -552,7 +650,22 @@ export default function PricingPage() {
                     ["Basic", "₹49", "✓", "—", "—", "—"],
                     ["Standard", "₹99", "✓", "—", "—", "—"],
                     ["Premium", "₹199", "✓", "✓ Resume", "—", "—"],
-                    ["Elite", "₹399", "✓", "✓ Resume", "✓ Portfolio", "Separate · ₹79"],
+                    [
+                      "Elite",
+                      "₹399",
+                      "✓",
+                      "✓ Resume",
+                      "✓ Portfolio",
+                      (
+                        <Link
+                          key="cl"
+                          href="/ai-cover-letter-builder"
+                          className="font-medium text-primary underline hover:text-primary/80"
+                        >
+                          Separate · ₹79
+                        </Link>
+                      ),
+                    ],
                   ].map(row => (
                     <tr key={row[0]} className="border-b border-slate-100 last:border-0">
                       {row.map((cell, index) => (
@@ -577,10 +690,10 @@ export default function PricingPage() {
       {/* COUPON BANNER */}
       <section className="bg-white py-14 sm:py-16">
         <div className="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
-          <div className="overflow-hidden  bg-slate-950 p-7 text-white sm:p-10">
+          <div className="overflow-hidden bg-slate-950 p-7 text-white sm:p-10">
             <div className="flex flex-col items-center justify-between gap-7 md:flex-row">
               <div>
-                <div className="inline-flex items-center gap-2  bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
+                <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1.5 text-xs font-bold text-white">
                   <Sparkles className="h-3.5 w-3.5" />
                   LIMITED INTRODUCTORY OFFER
                 </div>
@@ -590,11 +703,11 @@ export default function PricingPage() {
                 </h2>
 
                 <p className="mt-2 max-w-xl text-sm leading-6 text-slate-300">
-                  Choose any eligible plan and apply the coupon at checkout.
+                  Choose any eligible plan and apply coupon code FIRST20 at checkout.
                 </p>
               </div>
 
-              <div className="shrink-0  border border-white/20 bg-white px-6 py-4 text-center text-slate-950">
+              <div className="shrink-0 border border-white/20 bg-white px-6 py-4 text-center text-slate-950">
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                   Coupon Code
                 </p>
@@ -612,12 +725,12 @@ export default function PricingPage() {
       <section className="border-t border-slate-100 bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-5 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="mx-auto flex h-11 w-11 items-center justify-center  bg-white text-slate-800 shadow-sm ring-1 ring-slate-200">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center bg-white text-slate-800 shadow-sm ring-1 ring-slate-200">
               <HelpCircle className="h-5 w-5" />
             </div>
 
             <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-950">
-              Frequently asked questions
+              Frequently asked questions about NextCV pricing
             </h2>
           </div>
 
@@ -625,12 +738,12 @@ export default function PricingPage() {
             {faqs.map(faq => (
               <details
                 key={faq.question}
-                className="group  border border-slate-200 bg-white p-5 shadow-sm"
+                className="group border border-slate-200 bg-white p-5 shadow-sm"
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-sm font-bold text-slate-950">
                   <span>{faq.question}</span>
 
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center  bg-slate-100 text-slate-600 transition-transform group-open:rotate-45">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-slate-100 text-slate-600 transition-transform group-open:rotate-45">
                     <span className="text-lg leading-none">+</span>
                   </span>
                 </summary>
@@ -645,23 +758,22 @@ export default function PricingPage() {
       {/* FINAL CTA */}
       <section className="border-t border-slate-100 bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-6 lg:px-8">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center  bg-slate-950 text-white">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center bg-slate-950 text-white">
             <Sparkles className="h-6 w-6" />
           </div>
 
           <h2 className="mt-6 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">
-            Build your resume from ₹49
+            Build your ATS resume from ₹49
           </h2>
 
           <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-500 sm:text-base">
-            Use <strong className="text-slate-900">FIRST20</strong> to save 20% on your first
-            payment. Choose Elite when you want your resume, online profile and portfolio in one
-            place.
+            Use code <strong className="text-slate-900">FIRST20</strong> to get 20% off your first
+            payment. Pay once via UPI or card with zero recurring subscription charges.
           </p>
 
           <Link
             href="/templates"
-            className="mt-7 inline-flex h-12 items-center justify-center gap-2  bg-slate-950 px-7 text-sm font-bold text-white transition hover:bg-slate-800"
+            className="mt-7 inline-flex h-12 items-center justify-center gap-2 bg-slate-950 px-7 text-sm font-bold text-white transition hover:bg-slate-800"
           >
             Browse Templates
             <ArrowRight className="h-4 w-4" />
@@ -675,12 +787,12 @@ export default function PricingPage() {
 
             <span className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-emerald-600" />
-              PDF download
+              ATS-compliant PDF download
             </span>
 
             <span className="flex items-center gap-1.5">
               <Check className="h-3.5 w-3.5 text-emerald-600" />
-              FIRST20 available
+              FIRST20 coupon available
             </span>
           </div>
         </div>

@@ -14,6 +14,10 @@ import {
   Smartphone,
   Eye,
   FileCheck,
+  Linkedin,
+  MessageSquare,
+  Mail,
+  RefreshCw,
 } from "lucide-react";
 import BuildButton from "@/shared/components/landing/BuildButton";
 import ProductScreenshot from "@/shared/components/products/ProductScreenshot";
@@ -22,17 +26,19 @@ import RelatedProducts from "@/shared/components/products/RelatedProducts";
 import ProductConversionBanner from "@/shared/components/products/ProductConversionBanner";
 
 export const metadata = createSeoMetadata({
-  title: "Create a Shareable Resume Link Online | NextCV",
+  title: "Create a Shareable Resume Link for LinkedIn & Web | NextCV",
   description:
-    "Create a shareable resume link with NextCV. Let recruiters view your professional profile online and share it through LinkedIn, email, WhatsApp, or job applications.",
+    "Create an interactive shareable resume link with NextCV. Share a mobile-friendly profile via LinkedIn, WhatsApp, & email with instant updates & privacy controls.",
   path: "/shareable-resume",
   keywords: [
     "shareable resume link",
     "online resume link",
     "share resume online",
     "public resume link",
-    "create online resume",
-    "digital resume online",
+    "resume link for linkedin",
+    "digital resume link",
+    "live resume link",
+    "web resume link generator",
     "resume website builder",
   ],
 });
@@ -41,12 +47,22 @@ const faqs = [
   {
     question: "What is a shareable resume link?",
     answer:
-      "A shareable resume link is a URL that lets people view your resume online. Instead of relying only on a PDF attachment, you can send a link that recruiters and hiring managers can open in their web browser.",
+      "A shareable resume link is a clean web URL (such as nextcv.in/r/your-name) that lets recruiters view your professional resume online as a responsive web page, without requiring PDF downloads.",
   },
   {
     question: "How can I create a resume link?",
     answer:
-      "Create your resume with NextCV, open the sharing option for an eligible resume, and follow the available steps to generate your public link. Once it is ready, copy the link and share it with recruiters.",
+      "Create your resume with NextCV, select the Premium or Elite plan, and generate your live public link from your dashboard. Once created, copy the URL and share it on LinkedIn, WhatsApp, email, or job applications.",
+  },
+  {
+    question: "What happens if I update my resume after sharing the link?",
+    answer:
+      "Your shareable resume link updates automatically in real time whenever you edit your resume in your NextCV dashboard. Anyone who opens your link will always see your most recent experience, skills, and projects without you having to re-send files.",
+  },
+  {
+    question: "How do I add my resume link to my LinkedIn profile?",
+    answer:
+      "Copy your live NextCV link and paste it into your LinkedIn profile's Featured section as a link, add it to your Contact Info website field, or include it in your About summary so recruiters browsing your profile can open it immediately.",
   },
   {
     question: "How do I share my resume with recruiters?",
@@ -54,39 +70,29 @@ const faqs = [
       "You can include your resume link in job applications, email introductions, WhatsApp messages, your LinkedIn profile, or your GitHub profile. Keep a PDF version available when an employer specifically requests an attachment.",
   },
   {
-    question: "Can I share my resume on LinkedIn?",
-    answer:
-      "Yes. You can add your resume link to your LinkedIn profile or share it in a message. A public resume page gives people a convenient way to access your professional information from a supported mobile or desktop browser.",
-  },
-  {
     question: "Can recruiters view my public resume without an account?",
     answer:
-      "A public resume link is intended to make your profile accessible to visitors without requiring them to create a NextCV account. Access depends on the resume's current sharing status and the availability of the page.",
+      "Yes. A public resume link allows recruiters, hiring managers, and clients to view your resume in any web browser without needing to create an account or sign in.",
   },
   {
     question: "Is a public resume link private?",
     answer:
-      "A public resume link is not private. Anyone who can access the active link may be able to view the information displayed on it. Only include information you are comfortable sharing publicly. Use the available sharing controls to pause access or delete your link.",
+      "A public resume link is accessible to anyone who has the active URL. Only include professional contact details you are comfortable sharing publicly. You can pause or delete access at any time from your dashboard.",
   },
   {
     question: "Can I pause or delete my resume link?",
     answer:
-      "NextCV provides sharing controls for eligible public resumes. Where available, you can pause sharing to restrict public access or delete the link. Review the status displayed in your dashboard to confirm the current state of your resume.",
+      "Yes. NextCV gives you full privacy controls in your dashboard. You can temporarily pause sharing to make your resume link inactive, or permanently delete the link whenever you wish.",
   },
   {
     question: "Does NextCV charge for resume sharing?",
     answer:
-      "Resume sharing is included with eligible Premium and Elite plans, priced at ₹199 and ₹399 respectively as one-time payments. It is not included in the Basic plan priced at ₹49. Check the pricing page for current plan details.",
-  },
-  {
-    question: "Can my shared resume appear in Google Search?",
-    answer:
-      "A public URL does not guarantee that Google will index your resume. Search visibility depends on factors such as crawlability, indexing directives, content quality, and Google's indexing decisions. A shareable link can still be useful even if it does not appear in search results.",
+      "Resume sharing is included with the Premium (₹199) and Elite (₹399) plans as a one-time payment with zero monthly subscriptions. Both plans include full PDF downloads as well.",
   },
   {
     question: "Should I share a resume link or a PDF?",
     answer:
-      "Both formats are useful. A resume link is convenient for networking and sharing online, while a PDF is often required for formal job applications and applicant tracking systems. Keep your PDF ready whenever an employer requests one.",
+      "Both formats serve distinct purposes. A shareable resume link is ideal for networking, LinkedIn bios, and fast mobile viewing, while a PDF is recommended for formal application tracking system (ATS) portals.",
   },
 ];
 
@@ -98,12 +104,25 @@ export default function ShareableResumePage() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
-        name: "NextCV Shareable Resume",
+        name: "NextCV Shareable Resume Link Generator",
         applicationCategory: "BusinessApplication",
-        operatingSystem: "Web",
+        operatingSystem: "All",
         url: "https://www.nextcv.in/shareable-resume",
         description:
-          "Create and share a professional online resume link with NextCV. Make your professional profile accessible online and manage sharing through the available controls.",
+          "Create and share an interactive online resume link with NextCV. Make your professional profile instantly accessible across LinkedIn, WhatsApp, and email with 1-click privacy controls.",
+        offers: {
+          "@type": "Offer",
+          price: "199",
+          priceCurrency: "INR",
+          availability: "https://schema.org/InStock",
+        },
+        featureList: [
+          "Live Public Resume URL",
+          "1-Click LinkedIn & WhatsApp Sharing",
+          "Automatic Real-Time Content Sync",
+          "Pause and Revoke Sharing Controls",
+          "Mobile-Responsive Layout",
+        ],
       },
       {
         "@type": "BreadcrumbList",
@@ -154,14 +173,14 @@ export default function ShareableResumePage() {
       step: "02",
       badge: "Sharing Access",
       title: "Choose an Eligible Plan",
-      desc: "Select a plan that includes resume sharing. Premium and Elite offer sharing features with a one-time payment.",
+      desc: "Select Premium (₹199) or Elite (₹399), which include live resume sharing links via a transparent one-time payment.",
       icon: ShieldCheck,
     },
     {
       step: "03",
       badge: "Create Your Link",
       title: "Generate a Shareable URL",
-      desc: "Open the sharing option for your eligible resume and follow the instructions to create your public resume link.",
+      desc: "Generate your unique web link (e.g. nextcv.in/r/your-name) with a single click right from your dashboard.",
       icon: Globe,
     },
     {
@@ -202,13 +221,13 @@ export default function ShareableResumePage() {
               </div>
 
               <h1 className="mt-4 font-serif text-3xl font-medium leading-[1.1] text-[#17201C] sm:text-4xl lg:text-5xl">
-                Create a Resume Link You Can Share Anywhere
+                Create a Shareable Resume Link for LinkedIn, WhatsApp & Email
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5B625C]">
-                Make your resume easier to access with a shareable online link. Give recruiters a
-                convenient way to view your professional profile without relying only on PDF
-                attachments.
+                Make your resume instantly accessible with a live online link. Give recruiters a
+                mobile-friendly way to view your verified career profile with automatic real-time
+                updates.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -226,19 +245,19 @@ export default function ShareableResumePage() {
               </div>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#5B625C]">
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Easy-to-share resume URL
+                  Personalized resume URL
                 </span>
 
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Available sharing controls
+                  Auto-updates when you edit
                 </span>
 
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 font-medium">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Mobile-friendly access
+                  1-click pause & privacy controls
                 </span>
               </div>
             </div>
@@ -256,6 +275,88 @@ export default function ShareableResumePage() {
         </div>
       </section>
 
+      {/* Where to Share Your Resume Link */}
+      <section className="border-b border-[#E3E2DC] bg-[#FAF9F6] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
+              Channels & Platforms
+            </p>
+
+            <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
+              Where to Use Your Online Resume Link
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-[#5B625C]">
+              Share your live CV anywhere a web link is supported. Make an immediate impression on
+              recruiters across all top channels.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                <Linkedin className="h-5 w-5" />
+              </div>
+
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                LinkedIn Profile & Bio
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-[#5B625C]">
+                Feature your live resume in your LinkedIn Featured section, Contact Info, or About
+                summary to catch recruiters browsing your profile.
+              </p>
+            </div>
+
+            <div className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                <MessageSquare className="h-5 w-5" />
+              </div>
+
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                WhatsApp & Direct Chats
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-[#5B625C]">
+                Send a fast tap-to-view link in direct recruiter conversations without forcing hiring
+                managers to download files on mobile data.
+              </p>
+            </div>
+
+            <div className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                <Mail className="h-5 w-5" />
+              </div>
+
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                Email Signatures & Outreach
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-[#5B625C]">
+                Embed your link in cold emails and professional signatures for instant credibility
+                with prospective employers and clients.
+              </p>
+            </div>
+
+            <div className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
+              <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                <Globe className="h-5 w-5" />
+              </div>
+
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                Portals & Freelance Pitches
+              </h3>
+
+              <p className="mt-2 text-xs leading-5 text-[#5B625C]">
+                Paste into the Portfolio URL or Website field in online job applications, gig
+                platforms, and freelance proposals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Resume Link vs PDF */}
       <section className="border-b border-[#E3E2DC] bg-white py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
@@ -265,12 +366,12 @@ export default function ShareableResumePage() {
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              Resume Link vs. PDF Attachment
+              Resume Link vs. Traditional PDF: Why You Need Both
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              A shareable resume link complements your downloadable PDF. Each format is useful in
-              different situations.
+              A shareable resume link complements your downloadable PDF. Each format delivers
+              distinct advantages across your job search.
             </p>
           </div>
 
@@ -283,17 +384,17 @@ export default function ShareableResumePage() {
               <ul className="mt-4 space-y-3 text-xs leading-5 text-[#5B625C]">
                 <li className="flex items-start gap-2">
                   <span className="text-[#8A908B]">•</span>
-                  Useful for formal applications and employers that require a PDF.
+                  Essential for formal corporate applications and company ATS upload fields.
                 </li>
 
                 <li className="flex items-start gap-2">
                   <span className="text-[#8A908B]">•</span>
-                  Can be downloaded, stored, and attached to job applications.
+                  Preserves static vector formatting for offline storage and printing.
                 </li>
 
                 <li className="flex items-start gap-2">
                   <span className="text-[#8A908B]">•</span>
-                  Previously sent copies do not automatically reflect later changes to your resume.
+                  Cannot be updated once sent—requires sending revised versions for any edits.
                 </li>
               </ul>
             </div>
@@ -306,17 +407,23 @@ export default function ShareableResumePage() {
               <ul className="mt-4 space-y-3 text-xs leading-5 text-[#17201C]">
                 <li className="flex items-start gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                  Convenient to open from a supported mobile or desktop browser.
+                  <strong>Always up to date:</strong> Any edits in your dashboard sync instantly to
+                  your live link.
                 </li>
 
                 <li className="flex items-start gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                  Easy to include in LinkedIn profiles, WhatsApp messages, and email introductions.
+                  Fast 1-tap mobile experience on smartphones, tablets, and laptops.
                 </li>
 
                 <li className="flex items-start gap-2">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-                  Sharing controls help you manage access to your public resume.
+                  Ideal for LinkedIn DMs, WhatsApp chats, and email signatures.
+                </li>
+
+                <li className="flex items-start gap-2">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                  1-click privacy controls: pause or delete access anytime.
                 </li>
               </ul>
             </div>
@@ -333,7 +440,7 @@ export default function ShareableResumePage() {
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              How to Create and Share Your Resume Link
+              How to Create and Share Your Resume Link in 5 Steps
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
@@ -388,11 +495,11 @@ export default function ShareableResumePage() {
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              Explore the Online Resume Experience
+              Interactive, Mobile-First Online Resume Experience
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              See how your resume can be shared online and viewed across different devices.
+              See how your resume is presented online and optimized across every screen size.
             </p>
           </div>
 
@@ -444,12 +551,11 @@ export default function ShareableResumePage() {
             </p>
 
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
-              Understand Your Resume Sharing Settings
+              Full Privacy Control: Pause, Revoke, or Delete Your Link Anytime
             </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
-              Know who can access your public resume and how to manage the information you choose to
-              share.
+              You stay in complete control over who can view your public resume and when.
             </p>
           </div>
 
@@ -464,9 +570,8 @@ export default function ShareableResumePage() {
               </h3>
 
               <p className="mt-2 text-xs leading-5 text-[#5B625C]">
-                Anyone who can access an active public resume link may be able to view the
-                information displayed on the page. Avoid including sensitive personal information
-                that recruiters do not need.
+                Anyone who has the active URL can view the page. You control exactly what
+                information to include before publishing.
               </p>
             </div>
 
@@ -475,27 +580,24 @@ export default function ShareableResumePage() {
                 <Pause className="h-5 w-5" />
               </div>
 
-              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">Manage Sharing</h3>
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">1-Click Pause</h3>
 
               <p className="mt-2 text-xs leading-5 text-[#5B625C]">
-                Use the available pause or deletion controls to manage your resume link. Check your
-                dashboard to confirm whether sharing is currently active.
+                Paused sharing temporarily deactivates public viewing when you are not actively
+                interviewing, with zero data loss.
               </p>
             </div>
 
             <div className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
               <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
-                <Lock className="h-5 w-5" />
+                <Trash2 className="h-5 w-5" />
               </div>
 
-              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
-                Search Engine Visibility
-              </h3>
+              <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">Permanent Deletion</h3>
 
               <p className="mt-2 text-xs leading-5 text-[#5B625C]">
-                Sharing a public URL does not guarantee Google indexing. Search visibility depends
-                on crawlability, indexing directives, content, and search engine decisions. A public
-                link should not be treated as a private document.
+                Delete your shareable link completely at any time. The public URL will immediately
+                stop resolving.
               </p>
             </div>
           </div>
@@ -510,7 +612,9 @@ export default function ShareableResumePage() {
               <HelpCircle className="h-5 w-5" />
             </div>
 
-            <h2 className="mt-4 font-serif text-3xl text-[#17201C]">Frequently Asked Questions</h2>
+            <h2 className="mt-4 font-serif text-3xl text-[#17201C]">
+              Frequently Asked Questions About Shareable Resume Links
+            </h2>
 
             <p className="mt-2 text-sm leading-6 text-[#5B625C]">
               Find answers about creating, sharing, and managing your online resume link.
@@ -544,8 +648,8 @@ export default function ShareableResumePage() {
       {/* Final CTA */}
       <ProductConversionBanner
         badge="Online Resume Link"
-        title="Make Your Resume Easier to Share"
-        description="Create a professional resume, generate a shareable online link, and manage public access through the available sharing controls."
+        title="Make Your Resume Easier to Share Online"
+        description="Create your professional resume, generate a live shareable link for LinkedIn and WhatsApp, and manage access with built-in privacy controls."
         primaryCtaText="Build Your Resume"
         primaryCtaHref="/dashboard/builder"
         secondaryCtaText="Explore Plans"
