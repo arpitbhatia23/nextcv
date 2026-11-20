@@ -8,23 +8,25 @@ import {
   Share2,
   Sparkles,
   WandSparkles,
-  Layers,
-  HelpCircle,
+  ScanText,
+  ChevronDown,
 } from "lucide-react";
 import BuildButton from "@/shared/components/landing/BuildButton";
 
 export const metadata = createSeoMetadata({
-  title: "NextCV Products: AI Resume, Cover Letter, Sharing & Portfolio Tools",
+  title: "NextCV Products: AI Resume Builder, ATS Checker & More",
   description:
-    "Explore the NextCV career product suite: AI Resume Builder, AI Cover Letter Generator, Shareable Online Resume, and Resume-to-Portfolio Builder.",
+    "Free to build. One-time price from ₹49. NextCV's AI Resume Builder, ATS Checker, Cover Letter Generator, Shareable Link & Portfolio tools — no subscriptions.",
   path: "/product",
   keywords: [
-    "NextCV product",
-    "AI resume builder",
+    "NextCV product suite",
+    "AI resume builder india",
+    "ATS resume checker free",
     "AI cover letter generator",
-    "shareable resume link",
-    "resume to portfolio",
-    "career tools India",
+    "shareable resume link india",
+    "resume to portfolio website builder",
+    "online resume tools india",
+    "free resume builder india",
   ],
 });
 
@@ -48,11 +50,28 @@ const productSuite = [
   },
   {
     number: "02",
+    icon: ScanText,
+    title: "Free ATS Resume Checker",
+    subtitle: "Instant ATS score with keyword gap analysis",
+    description:
+      "Upload any resume PDF and get a real-time ATS compatibility score, keyword match analysis against your target job description, and prioritized fixes — all free, no account needed.",
+    action: "Check Your ATS Score Free",
+    href: "/ats-resume-checker",
+    badge: "Free · No login required",
+    features: [
+      "Instant ATS score from 0–100",
+      "Keyword match gap report vs job description",
+      "Format & section structure feedback",
+      "Works with any uploaded PDF resume",
+    ],
+  },
+  {
+    number: "03",
     icon: WandSparkles,
     title: "AI Cover Letter Generator",
     subtitle: "Tailored to your resume & target job description",
     description:
-      "Create personalized, role-specific cover letters using your resume and target job details. Choose a tone—Professional, Enthusiastic, or Concise—and edit drafts in real-time.",
+      "Create personalized, role-specific cover letters using your resume and target job details. Choose a tone — Professional, Enthusiastic, or Concise — and edit drafts in real-time.",
     action: "Explore Cover Letter Generator",
     href: "/ai-cover-letter-generator",
     badge: "Separate purchase · ₹79",
@@ -64,7 +83,7 @@ const productSuite = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     icon: Share2,
     title: "Shareable Resume Link",
     subtitle: "Web-ready resume URL with instant recruiter access",
@@ -81,7 +100,7 @@ const productSuite = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     icon: Globe,
     title: "Resume-to-Portfolio Builder",
     subtitle: "Convert resume data into a personal website",
@@ -99,6 +118,29 @@ const productSuite = [
   },
 ];
 
+const faqs = [
+  {
+    q: "Is NextCV free to use?",
+    a: "Yes. You can build, edit, and preview your resume entirely for free on NextCV. A one-time payment starting at ₹49 is required only when you download your final PDF. There are no monthly subscriptions or auto-debit charges.",
+  },
+  {
+    q: "What is the ATS Resume Checker and how does it work?",
+    a: "The NextCV ATS Resume Checker is a free tool that scans your uploaded resume PDF, extracts text, and compares it against your target job description to calculate an ATS compatibility score (0–100). It identifies missing keywords, formatting issues, and section gaps that prevent your resume from clearing automated shortlisting systems.",
+  },
+  {
+    q: "Can I use the AI Cover Letter Generator with any resume?",
+    a: "Yes. You can either select a resume you have already built in NextCV or upload any PDF or DOCX file (up to 5 MB). The AI then reads your resume details and your target job description to generate a personalized, role-specific cover letter in seconds.",
+  },
+  {
+    q: "What is a Shareable Resume Link and who can view it?",
+    a: "A Shareable Resume Link is a public URL (e.g. nextcv.in/r/yourname) that hosts your resume as a mobile-optimized web page. Anyone with the link — recruiters, hiring managers, or LinkedIn connections — can view it instantly without logging into an account. You can revoke access at any time using the Pause Sharing toggle.",
+  },
+  {
+    q: "How is the Resume-to-Portfolio Builder different from a Shareable Resume Link?",
+    a: "A Shareable Resume Link shows your resume in a clean document format. The Portfolio Builder converts your resume data into a full personal website (nextcv.in/p/yourname) with dedicated sections for projects, tech stacks, work experience timelines, and a contact/download button — designed to impress for developer, design, and creative roles.",
+  },
+];
+
 export default function ProductPage() {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -107,8 +149,53 @@ export default function ProductPage() {
         "@type": "CollectionPage",
         name: "NextCV Product Suite",
         description:
-          "Explore NextCV's connected product suite: AI Resume Builder, AI Cover Letter Generator, Shareable Resume Link, and Resume-to-Portfolio Builder.",
+          "NextCV's connected AI career tools: AI Resume Builder (₹49), free ATS Resume Checker, AI Cover Letter Generator (₹79), Shareable Resume Link, and Resume-to-Portfolio Builder (₹399).",
         url: "https://www.nextcv.in/product",
+      },
+      {
+        "@type": "ItemList",
+        name: "NextCV Product Suite",
+        numberOfItems: 5,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            url: "https://www.nextcv.in/ai-resume-builder",
+            name: "AI Resume Builder",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            url: "https://www.nextcv.in/ats-resume-checker",
+            name: "Free ATS Resume Checker",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            url: "https://www.nextcv.in/ai-cover-letter-generator",
+            name: "AI Cover Letter Generator",
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            url: "https://www.nextcv.in/shareable-resume",
+            name: "Shareable Resume Link",
+          },
+          {
+            "@type": "ListItem",
+            position: 5,
+            url: "https://www.nextcv.in/resume-to-portfolio",
+            name: "Resume-to-Portfolio Builder",
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(({ q, a }) => ({
+          "@type": "Question",
+          name: q,
+          acceptedAnswer: { "@type": "Answer", text: a },
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -145,12 +232,12 @@ export default function ProductPage() {
               <Sparkles aria-hidden="true" className="h-4 w-4" /> Connected Career Product Suite
             </p>
             <h1 className="mt-4 font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.1] text-[#17201C]">
-              Four dedicated tools. One cohesive career platform.
+              Five dedicated tools. One cohesive career platform.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#5B625C]">
-              NextCV unites AI resume drafting, job-specific cover letters, online sharing links,
-              and interactive portfolios into a single, straightforward workflow with one-time
-              transparent pricing.
+              NextCV unites AI resume drafting, free ATS scoring, job-specific cover letters,
+              online sharing links, and interactive portfolios into a single workflow — with
+              one-time transparent pricing and no monthly subscription traps.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -165,8 +252,7 @@ export default function ProductPage() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-[#8A908B]">
-              Free to build and edit · One-time payment starting at ₹49 · No monthly subscription
-              trap
+              Free to build and edit · ATS Checker always free · One-time payment from ₹49 · No monthly subscription
             </p>
           </div>
         </div>
@@ -315,6 +401,31 @@ export default function ProductPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="py-16 sm:py-20 border-b border-[#E3E2DC] bg-white">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8 lg:px-10">
+          <div className="mb-10">
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-[#465B9E]">
+              Common Questions
+            </span>
+            <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
+              Frequently asked questions
+            </h2>
+          </div>
+          <dl className="divide-y divide-[#E3E2DC]">
+            {faqs.map(({ q, a }) => (
+              <div key={q} className="py-6">
+                <dt className="flex items-start justify-between gap-4">
+                  <span className="text-sm font-semibold text-[#17201C]">{q}</span>
+                  <ChevronDown className="h-4 w-4 shrink-0 text-[#8A908B] mt-0.5" aria-hidden="true" />
+                </dt>
+                <dd className="mt-3 text-sm leading-6 text-[#5B625C]">{a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       {/* Bottom CTA */}
       <section className="bg-[#17201C] py-16 text-white sm:py-20">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-10">
@@ -326,7 +437,7 @@ export default function ProductPage() {
               Build your resume free. Upgrade only when you download.
             </h2>
             <p className="mt-3 text-sm text-[#A0A49F]">
-              One-time pricing starting from ₹49. No recurring subscriptions.
+              One-time pricing starting from ₹49. ATS checker always free. No recurring subscriptions.
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">

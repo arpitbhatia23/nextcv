@@ -58,8 +58,99 @@ export default async function CareerPage({ params }) {
   const wordCount = (career.content || "").split(/\s+/).length;
   const readTime = Math.max(1, Math.round(wordCount / 200));
 
+  // Extract FAQs for Schema if available
+  const faqSection = sections.find(
+    s =>
+      s.id === "frequently-asked-questions" ||
+      (s.heading && s.heading.toLowerCase().includes("frequently asked questions"))
+  );
+
+  const faqItems = [];
+  if (faqSection && faqSection.content) {
+    const parts = faqSection.content.split(/(?=###\s+)/);
+    parts
+      .filter(p => p.startsWith("###"))
+      .forEach(p => {
+        const lines = p.split("\n");
+        const q = lines[0].replace("###", "").trim();
+        const a = lines.slice(1).join("\n").trim();
+        if (q && a) {
+          faqItems.push({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: a,
+            },
+          });
+        }
+      });
+  }
+
+  const jsonLdGraph = [
+    {
+      "@type": "Article",
+      "@id": `https://www.nextcv.in/career/${career.slug}#article`,
+      headline: career.seo?.title || career.title,
+      description: career.seo?.description || career.hero?.description,
+      inLanguage: "en-IN",
+      mainEntityOfPage: `https://www.nextcv.in/career/${career.slug}`,
+      publisher: {
+        "@type": "Organization",
+        name: "NextCV",
+        url: "https://www.nextcv.in",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.nextcv.in/logo.png",
+        },
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `https://www.nextcv.in/career/${career.slug}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.nextcv.in",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Career Guides",
+          item: "https://www.nextcv.in/career",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: career.title,
+          item: `https://www.nextcv.in/career/${career.slug}`,
+        },
+      ],
+    },
+  ];
+
+  if (faqItems.length > 0) {
+    jsonLdGraph.push({
+      "@type": "FAQPage",
+      "@id": `https://www.nextcv.in/career/${career.slug}#faq`,
+      mainEntity: faqItems,
+    });
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": jsonLdGraph,
+  };
+
   return (
     <main className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* ------------------------------------------------------------------ */}
       {/* HERO                                                               */}
       {/* ------------------------------------------------------------------ */}

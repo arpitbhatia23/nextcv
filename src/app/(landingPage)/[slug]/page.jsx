@@ -2,16 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import seoPages from "../seo-pages.json";
-import {
-  ArrowRight,
-  BookOpen,
-  Check,
-  ChevronRight,
-  Clock,
-  HelpCircle,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 
 const getPage = slug => seoPages.find(page => page.slug === slug);
 const RELATED_GUIDE_LIMIT = 5;
@@ -288,17 +279,6 @@ export default async function SeoPage({ params }) {
 
       {/* Editorial Article Header */}
       <header className="mx-auto max-w-4xl px-5 pb-12 pt-28 sm:px-8 sm:pb-16 sm:pt-36">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-xs text-[#6F7670]">
-          <Link href="/" className="transition-colors hover:text-[#465B9E]">
-            Home
-          </Link>
-          <ChevronRight className="h-3 w-3 text-[#A8ADA7]" />
-          <span className="text-[#465B9E] font-medium">Career Guide</span>
-          <ChevronRight className="h-3 w-3 text-[#A8ADA7]" />
-          <span className="text-[#969C95] truncate max-w-56">{page.title}</span>
-        </nav>
-
         {/* Title */}
         <h1 className="font-serif text-3xl font-normal leading-[1.12] tracking-tight text-[#17201C] sm:text-5xl lg:text-6xl">
           {page.h1}
@@ -344,7 +324,9 @@ export default async function SeoPage({ params }) {
                 Quick Summary
               </p>
               <p className="mt-2 text-sm sm:text-base leading-relaxed text-[#4A514B]">
-                This guide covers the exact formatting rules, section order, and wording expected by Indian employers and automated Applicant Tracking Systems. Follow these {page.sections?.length || 0} guidelines to create a clean, single-column resume.
+                This guide covers the exact formatting rules, section order, and wording expected by
+                Indian employers and automated Applicant Tracking Systems. Follow these{" "}
+                {page.sections?.length || 0} guidelines to create a clean, single-column resume.
               </p>
             </div>
 
@@ -404,19 +386,14 @@ export default async function SeoPage({ params }) {
 
                 <div className="divide-y divide-[#EAE7DF]">
                   {page.faqs.map((faq, idx) => (
-                    <details
-                      key={faq.q || idx}
-                      className="group py-6 first:pt-2 last:pb-2"
-                    >
+                    <details key={faq.q || idx} className="group py-6 first:pt-2 last:pb-2">
                       <summary className="flex cursor-pointer list-none items-start justify-between gap-4 font-serif text-lg sm:text-xl font-normal text-[#17201C]">
                         <span>{faq.q}</span>
                         <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center text-lg font-light text-[#737A74] transition-transform duration-200 group-open:rotate-45">
                           +
                         </span>
                       </summary>
-                      <p className="mt-4 text-base leading-relaxed text-[#555C56]">
-                        {faq.a}
-                      </p>
+                      <p className="mt-4 text-base leading-relaxed text-[#555C56]">{faq.a}</p>
                     </details>
                   ))}
                 </div>
@@ -431,7 +408,8 @@ export default async function SeoPage({ params }) {
                     Ready to build your resume?
                   </h3>
                   <p className="mt-1 text-sm text-[#555C56]">
-                    Apply these guidelines with NextCV&apos;s ATS-compliant builder. One-time payment from ₹49.
+                    Apply these guidelines with NextCV&apos;s ATS-compliant builder. One-time
+                    payment from ₹49.
                   </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
@@ -498,16 +476,13 @@ export default async function SeoPage({ params }) {
                   </p>
                   <div className="mt-4 space-y-3.5">
                     {relatedGuides.map(guide => (
-                      <Link
-                        key={guide.slug}
-                        href={`/${guide.slug}`}
-                        className="group block"
-                      >
+                      <Link key={guide.slug} href={`/${guide.slug}`} className="group block">
                         <p className="text-xs font-medium leading-snug text-[#17201C] group-hover:text-[#465B9E] transition-colors line-clamp-2">
                           {guide.title}
                         </p>
                         <span className="mt-1 inline-flex items-center gap-1 text-[11px] text-[#838A84] group-hover:text-[#465B9E] transition-colors">
-                          Read guide <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                          Read guide{" "}
+                          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                         </span>
                       </Link>
                     ))}
@@ -521,7 +496,8 @@ export default async function SeoPage({ params }) {
                   NextCV Transparent Pricing
                 </p>
                 <p className="mt-2 text-xs leading-relaxed text-[#555C56]">
-                  Pay once from ₹49 per resume. No recurring subscriptions or automatic credit card renewals.
+                  Pay once from ₹49 per resume. No recurring subscriptions or automatic credit card
+                  renewals.
                 </p>
                 <Link
                   href="/pricing"

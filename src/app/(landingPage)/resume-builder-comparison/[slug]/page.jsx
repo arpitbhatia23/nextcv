@@ -699,8 +699,62 @@ export default async function ComparisonPage({ params }) {
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        name: page.seo?.title || page.hero?.title,
+        description: page.seo?.description || page.hero?.description,
+        url: `https://www.nextcv.in/resume-builder-comparison/${page.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.nextcv.in/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Resume Builder Comparison",
+            item: "https://www.nextcv.in/resume-builder-comparison",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: page.hero?.title || `NextCV vs ${page.competitor}`,
+            item: `https://www.nextcv.in/resume-builder-comparison/${page.slug}`,
+          },
+        ],
+      },
+      ...(page.faq?.length
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: page.faq.map(item => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ------------------------------------------------ */}
       {/* HERO */}
       {/* ------------------------------------------------ */}
