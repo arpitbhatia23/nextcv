@@ -101,10 +101,6 @@ export default function TestimonialCarousel() {
             <h2 className="mt-3 font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
               Make resume building <span className="text-[#5268a8]">a little simpler.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-600">
-              Preview-style testimonials for the product design. Replace these with verified
-              customer feedback before publishing as claims.
-            </p>
           </div>
 
           <div
