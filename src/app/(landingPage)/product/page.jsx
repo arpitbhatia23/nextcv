@@ -235,13 +235,13 @@ export default function ProductPage() {
               Five dedicated tools. One cohesive career platform.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#5B625C]">
-              NextCV unites AI resume drafting, free ATS scoring, job-specific cover letters,
-              online sharing links, and interactive portfolios into a single workflow — with
-              one-time transparent pricing and no monthly subscription traps.
+              NextCV unites AI resume drafting, free ATS scoring, job-specific cover letters, online
+              sharing links, and interactive portfolios into a single workflow — with one-time
+              transparent pricing and no monthly subscription traps.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <BuildButton className="h-12 bg-[#465B9E] px-6 text-sm font-semibold text-white hover:bg-[#344B93]">
+              <BuildButton className="h-12  px-6 text-sm font-semibold text-white">
                 Start Building Free
               </BuildButton>
               <Link
@@ -252,7 +252,8 @@ export default function ProductPage() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-[#8A908B]">
-              Free to build and edit · ATS Checker always free · One-time payment from ₹49 · No monthly subscription
+              Free to build and edit · ATS Checker always free · One-time payment from ₹49 · No
+              monthly subscription
             </p>
           </div>
         </div>
@@ -417,7 +418,10 @@ export default function ProductPage() {
               <div key={q} className="py-6">
                 <dt className="flex items-start justify-between gap-4">
                   <span className="text-sm font-semibold text-[#17201C]">{q}</span>
-                  <ChevronDown className="h-4 w-4 shrink-0 text-[#8A908B] mt-0.5" aria-hidden="true" />
+                  <ChevronDown
+                    className="h-4 w-4 shrink-0 text-[#8A908B] mt-0.5"
+                    aria-hidden="true"
+                  />
                 </dt>
                 <dd className="mt-3 text-sm leading-6 text-[#5B625C]">{a}</dd>
               </div>
@@ -437,7 +441,8 @@ export default function ProductPage() {
               Build your resume free. Upgrade only when you download.
             </h2>
             <p className="mt-3 text-sm text-[#A0A49F]">
-              One-time pricing starting from ₹49. ATS checker always free. No recurring subscriptions.
+              One-time pricing starting from ₹49. ATS checker always free. No recurring
+              subscriptions.
             </p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">

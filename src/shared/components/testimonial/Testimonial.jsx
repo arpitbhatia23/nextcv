@@ -9,7 +9,7 @@ const testimonials = [
     role: "Fresher · Chandigarh",
     text: "I wanted a clear format for my first resume. The template made it easier to organize my projects, skills and education.",
     initials: "RS",
-    color: "bg-indigo-100 text-indigo-700",
+    color: "bg-neutral-200 text-neutral-900",
   },
   {
     name: "Priya Verma",
@@ -37,7 +37,7 @@ const testimonials = [
     role: "Frontend Developer · Pune",
     text: "I could keep the layout consistent while changing resume details for different applications.",
     initials: "AM",
-    color: "bg-blue-100 text-blue-700",
+    color: "bg-neutral-200 text-neutral-900",
   },
   {
     name: "Neha Kumari",
@@ -49,7 +49,7 @@ const testimonials = [
 ];
 
 const stats = [
-  { display: "Free", title: "Build and edit", color: "text-indigo-800" },
+  { display: "Free", title: "Build and edit", color: "text-neutral-950" },
   { display: "₹49", title: "Starting download price", color: "text-emerald-800" },
   { display: "No", title: "Mandatory subscription", color: "text-slate-800" },
 ];
@@ -95,11 +95,11 @@ export default function TestimonialCarousel() {
       >
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="mb-12 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
               Example user stories
             </p>
             <h2 className="mt-3 font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
-              Make resume building <span className="text-[#5268a8]">a little simpler.</span>
+              Make resume building <span className="text-[#111111]">a little simpler.</span>
             </h2>
           </div>
 

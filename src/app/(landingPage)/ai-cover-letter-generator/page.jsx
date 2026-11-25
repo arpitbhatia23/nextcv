@@ -1,24 +1,35 @@
 import Link from "next/link";
 import { createSeoMetadata } from "@/shared/utils/seo";
-import { FileText, Sparkles, Check, ArrowRight, HelpCircle, Building, Wand2 } from "lucide-react";
+import {
+  FileText,
+  Sparkles,
+  Check,
+  ArrowRight,
+  HelpCircle,
+  Building,
+  Wand2,
+  Briefcase,
+  GraduationCap,
+  Send,
+} from "lucide-react";
 import ProductScreenshot from "@/shared/components/products/ProductScreenshot";
 import ProductBreadcrumbs from "@/shared/components/products/ProductBreadcrumbs";
 import RelatedProducts from "@/shared/components/products/RelatedProducts";
 import ProductConversionBanner from "@/shared/components/products/ProductConversionBanner";
 
 export const metadata = createSeoMetadata({
-  title: "AI Cover Letter Generator from Resume & Job Description | NextCV",
+  title: "AI Cover Letter Generator (2026): Resume & JD Match | NextCV",
   description:
-    "Generate a job-specific cover letter tailored to your resume, company name, and job description with NextCV. Choose tone, edit drafts, and download clean PDFs.",
+    "Generate a tailored cover letter from your resume & job description with AI (2026). Draft free, pick your tone & export clean PDFs for ₹79 one-time via UPI.",
   path: "/ai-cover-letter-generator",
   keywords: [
     "ai cover letter generator",
-    "cover letter ai",
-    "ai cover letter",
-    "free ai cover letter generator",
-    "cover letter ai generator",
-    "cover letter generator ai",
     "ai cover letter generator from resume",
+    "cover letter generator india",
+    "job description cover letter ai",
+    "cover letter for freshers india",
+    "ai cover letter writer",
+    "cover letter builder pdf download",
     "ai resume and cover letter builder",
     "cover letter based on resume ai",
   ],
@@ -28,37 +39,37 @@ const faqs = [
   {
     question: "What is an AI cover letter generator?",
     answer:
-      "An AI cover letter generator analyzes your resume background and matches it against a specific company name and job description to draft a tailored letter explaining why you are a strong fit.",
+      "An AI cover letter generator analyzes your resume background and matches it against a specific company name and job description to draft a tailored letter explaining why your skills and projects fit the role.",
   },
   {
     question: "Can NextCV generate a cover letter from my resume?",
     answer:
-      "Yes. You can select an existing resume saved in your NextCV dashboard or upload an external PDF/DOCX resume (up to 5 MB) directly in the generator tool.",
+      "Yes. You can select any resume saved in your NextCV dashboard or upload an external PDF/DOCX resume (up to 5 MB) directly inside the Cover Letter Studio.",
   },
   {
     question: "Can I use a job description to personalize a cover letter?",
     answer:
-      "Yes. Pasting the target company's job description allows the AI model to incorporate relevant technical keywords and match your achievements with their required qualifications.",
+      "Yes. Pasting the target company's job description allows the AI to weave in relevant keywords and connect your quantified achievements directly to their core requirements.",
   },
   {
-    question: "Can I choose the writing tone?",
+    question: "Do Indian recruiters and startups actually read cover letters?",
     answer:
-      "Yes. NextCV supports writing styles including Professional, Enthusiastic, Concise, and Confident to suit corporate MNC roles, modern startups, or academic applications.",
+      "Yes—especially for startups (Wellfound, LinkedIn, YC), internships, off-campus cold emails, and career-switch roles where your resume alone doesn't explain your motivation. A crisp, 3-paragraph job-matched letter helps you stand out immediately.",
   },
   {
-    question: "Can I edit the generated cover letter?",
+    question: "Can I choose the writing tone and edit the draft?",
     answer:
-      "Yes. You have full control to edit paragraphs, add personal anecdotes, alter salutations, and customize bullet points before finalizing.",
+      "Yes. Choose between Professional, Enthusiastic, Concise, and Confident tones to match corporate MNCs or fast-moving startups, then customize every line in the live editor before finalizing.",
   },
   {
-    question: "Is the AI cover letter generator free?",
+    question: "Is the AI cover letter generator free, and can I pay via UPI?",
     answer:
-      "You can draft and review a cover letter in the builder. Unlocking the finished cover letter is a separate one-time ₹79 purchase and is not included in any resume plan, including Elite.",
+      "Drafting, editing, and previewing your cover letter is free. Unlocking the finished, watermark-free PDF is a separate one-time ₹79 purchase via UPI (Google Pay, PhonePe, Paytm), RuPay, or card—with zero monthly subscriptions and not bundled into resume plans.",
   },
   {
     question: "Should I review an AI-generated cover letter before sending it?",
     answer:
-      "Always. AI provides a strong first draft, but reviewing the letter ensures accurate details about your personal motivations, projects, and specific interest in the employer.",
+      "Always. AI builds a strong, job-matched first draft, and a quick human review ensures your personal project details, company interest, and contact info are 100% accurate.",
   },
 ];
 
@@ -73,15 +84,29 @@ export default function AICoverLetterPage() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
+        "@id": "https://www.nextcv.in/ai-cover-letter-generator#app",
         name: "NextCV AI Cover Letter Generator",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
+        inLanguage: "en-IN",
         url: "https://www.nextcv.in/ai-cover-letter-generator",
         description:
-          "Create a personalized cover letter using your resume, target company, and job description.",
+          "Generate a tailored cover letter from your resume, target company, and job description with AI. Draft for free and export clean PDFs for ₹79 one-time via UPI.",
+        featureList: [
+          "Generate directly from NextCV resume or uploaded PDF/DOCX",
+          "Job description keyword & role alignment",
+          "Multiple writing tones (Professional, Enthusiastic, Concise, Confident)",
+          "Live draft editor & print-ready PDF export for ₹79 via UPI",
+        ],
+        offers: {
+          "@type": "Offer",
+          price: "79",
+          priceCurrency: "INR",
+        },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": "https://www.nextcv.in/ai-cover-letter-generator#breadcrumb",
         itemListElement: [
           {
             "@type": "ListItem",
@@ -105,6 +130,7 @@ export default function AICoverLetterPage() {
       },
       {
         "@type": "FAQPage",
+        "@id": "https://www.nextcv.in/ai-cover-letter-generator#faq",
         mainEntity: faqs.map(faq => ({
           "@type": "Question",
           name: faq.question,
@@ -121,7 +147,9 @@ export default function AICoverLetterPage() {
     <div className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       {/* Hero */}
@@ -141,9 +169,9 @@ export default function AICoverLetterPage() {
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5B625C]">
-                Create a personalized cover letter using your resume, target company, and job
-                description. Review the draft, choose a writing style, and tailor it before
-                applying.
+                Turn your resume and target job description into a personalized cover letter in
+                seconds. Draft and edit for free, pick your tone, and unlock a clean PDF for ₹79
+                one-time via UPI—no subscriptions.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -166,15 +194,15 @@ export default function AICoverLetterPage() {
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#5B625C]">
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Select saved resume or upload PDF
+                  Draft &amp; edit free
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Multiple writing tones
+                  ₹79 one-time PDF via UPI
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Live draft editor
+                  Zero recurring subscriptions
                 </span>
               </div>
             </div>
@@ -205,7 +233,7 @@ export default function AICoverLetterPage() {
               </h2>
               <p className="mt-3 text-sm leading-6 text-[#5B625C]">
                 Sending the same generic template to 50 companies with just the company name changed
-                fails to highlight why your specific experience matters for their open position.
+                fails to highlight why your specific projects or experience matter for their role.
               </p>
             </div>
 
@@ -218,27 +246,27 @@ export default function AICoverLetterPage() {
               </h2>
               <p className="mt-3 text-sm leading-6 text-[#5B625C]">
                 NextCV connects the exact technologies and accomplishments in your resume with the
-                responsibilities outlined in the job description, producing a cohesive rationale for
-                your candidacy.
+                responsibilities outlined in the job description, producing a cohesive pitch for
+                your application.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How it works - Exact 100% Codebase Workflow */}
+      {/* How it works - Exact Codebase Workflow */}
       <section className="py-16 sm:py-20 border-b border-[#E3E2DC]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
-              Exact Generation Flow
+              Guided Generation Flow
             </p>
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
               Step-by-step: How the Cover Letter Studio operates
             </h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              Add your resume and job details, create a tailored draft, review it, and unlock your
-              finished cover letter with a separate one-time payment of ₹79.
+              Add your resume and job details, generate a tailored draft for free, and unlock your
+              print-ready PDF with a one-time ₹79 UPI payment.
             </p>
           </div>
 
@@ -248,32 +276,32 @@ export default function AICoverLetterPage() {
                 step: "01",
                 badge: "Step 01",
                 title: "Choose Resume Source",
-                desc: "Choose a resume saved in your account or upload a PDF or DOCX file up to 5 MB.",
-                detail: "Your role, skills, and experience help personalize the draft.",
+                desc: "Select a resume saved in your NextCV account or upload an existing PDF or DOCX file up to 5 MB.",
+                detail: "Your role, skills, and projects anchor the draft.",
                 icon: FileText,
               },
               {
                 step: "02",
                 badge: "Step 02",
                 title: "Job Details & Tone Selection",
-                desc: "Add the company name and job description, then choose a writing tone and length.",
-                detail: "Use the job details to tailor the letter to the position.",
+                desc: "Enter the company name and paste the job description, then pick a writing tone and letter length.",
+                detail: "Matches your pitch directly to the role.",
                 icon: Building,
               },
               {
                 step: "03",
                 badge: "Step 03",
                 title: "AI Generation & Realtime Editor",
-                desc: "Generate a first draft, then edit the wording and details to make it your own.",
-                detail: "Save your draft to return to it later.",
+                desc: "Generate a tailored first draft, then edit phrasing and personal details in the live editor.",
+                detail: "Save drafts and refine anytime for free.",
                 icon: Wand2,
               },
               {
                 step: "04",
                 badge: "Step 04",
                 title: "Live PDF Preview & Download",
-                desc: "Preview the finished letter before unlocking its print-ready PDF for ₹79.",
-                detail: "One-time cover-letter purchase; no resume plan required.",
+                desc: "Preview the finished letter before unlocking its watermark-free PDF for ₹79 via UPI.",
+                detail: "One-time purchase; no monthly subscription.",
                 icon: Check,
               },
             ].map(item => {
@@ -365,8 +393,55 @@ export default function AICoverLetterPage() {
         </div>
       </section>
 
-      {/* Combined Resume + Cover Letter Workflow */}
+      {/* Indian Hiring Use Cases */}
       <section className="py-16 sm:py-20 border-b border-[#E3E2DC]">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
+              Where Cover Letters Win Interviews
+            </p>
+            <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
+              Built for startups, internships &amp; off-campus outreach
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                icon: GraduationCap,
+                title: "Internships & First Jobs",
+                desc: "Explain how your coursework, hackathons, and deployed projects translate into day-one value when you lack formal experience.",
+              },
+              {
+                icon: Send,
+                title: "Off-Campus Cold Emails & Referrals",
+                desc: "Turn a Concise-tone draft into a crisp outreach note for hiring managers on LinkedIn, Wellfound, or direct email.",
+              },
+              {
+                icon: Briefcase,
+                title: "Career Switches & Senior Roles",
+                desc: "Connect transferable achievements across domains clearly so recruiters immediately understand your transition story.",
+              },
+            ].map(item => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
+                  <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-5 text-[#5B625C]">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Combined Resume + Cover Letter Workflow */}
+      <section className="bg-white py-16 sm:py-20 border-b border-[#E3E2DC]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="border border-[#E3E2DC] bg-[#FAF9F6] p-8 sm:p-12">
             <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
@@ -378,9 +453,15 @@ export default function AICoverLetterPage() {
                   Pair your cover letter with an ATS Resume
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-[#5B625C]">
-                  Recruiters appreciate consistency. When your resume bullet points and cover letter
-                  narrative reflect the same milestones and technologies, your entire application
-                  feels polished.
+                  Recruiters appreciate consistency. Build your single-column resume, verify your
+                  keyword match with our free{" "}
+                  <Link
+                    href="/ats-resume-checker"
+                    className="font-semibold text-[#465B9E] underline"
+                  >
+                    AI ATS Resume Checker
+                  </Link>
+                  , and generate a matching cover letter in minutes.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-4">
                   <Link
@@ -388,6 +469,12 @@ export default function AICoverLetterPage() {
                     className="inline-flex h-11 items-center justify-center gap-2 border border-transparent bg-[#465B9E] px-5 text-xs font-semibold text-white hover:bg-[#344B93]"
                   >
                     Build Resume First <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                  <Link
+                    href="/templates"
+                    className="inline-flex h-11 items-center justify-center gap-2 border border-[#E3E2DC] bg-white px-5 text-xs font-semibold text-[#17201C] hover:bg-[#F1F0EB]"
+                  >
+                    Browse ATS Templates
                   </Link>
                   <Link
                     href="/pricing"
@@ -405,19 +492,19 @@ export default function AICoverLetterPage() {
                 <ul className="mt-4 space-y-3 text-xs text-[#5B625C]">
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
-                    High-resolution ATS resume PDF download
+                    High-resolution ATS resume PDF from ₹49
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
-                    AI Cover Letter available separately for ₹79
+                    AI Cover Letter available separately for ₹79 via UPI
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
-                    Public resume sharing link
+                    Public resume sharing link (/r/yourname)
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="h-3.5 w-3.5 text-emerald-600" />
-                    Online portfolio website builder
+                    Online portfolio website builder (/p/yourname)
                   </li>
                 </ul>
               </div>
@@ -435,7 +522,7 @@ export default function AICoverLetterPage() {
             </div>
             <h2 className="mt-4 font-serif text-3xl text-[#17201C]">Frequently Asked Questions</h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              Details on inputs, pricing, tone selection, and draft editing.
+              Details on resume inputs, UPI pricing, tone selection, and draft editing.
             </p>
           </div>
 
@@ -465,7 +552,7 @@ export default function AICoverLetterPage() {
       <ProductConversionBanner
         badge="Tailored Applications"
         title="Draft your next cover letter in minutes"
-        description="Stop sending identical generic letters. Match your real experience with company job descriptions using NextCV."
+        description="Stop sending identical generic letters. Match your resume with target job descriptions for free, and export clean PDFs for ₹79 one-time via UPI."
         primaryCtaText="Launch Cover Letter Generator"
         primaryCtaHref="/dashboard/cover-letter"
       />

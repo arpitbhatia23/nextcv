@@ -56,7 +56,7 @@ export default function FAQSection() {
     <section id="faq" className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-4xl px-5 sm:px-8">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
             A few useful details
           </p>
           <h2 className="mt-3 font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
@@ -66,7 +66,7 @@ export default function FAQSection() {
         <div className="mt-8 divide-y divide-[#e7e6e0] border-y border-[#e7e6e0]">
           {questions.map(item => (
             <details key={item.question} className="group py-1">
-              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-4 text-left text-sm font-semibold text-[#273229] marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#5268b6] [&::-webkit-details-marker]:hidden">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 py-4 text-left text-sm font-semibold text-[#273229] marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#111111] [&::-webkit-details-marker]:hidden">
                 <span>{item.question}</span>
                 <span
                   aria-hidden="true"

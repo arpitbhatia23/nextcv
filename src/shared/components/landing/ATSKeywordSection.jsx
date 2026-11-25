@@ -44,7 +44,7 @@ export default function ATSKeywordSection() {
           <div className="min-w-0  border border-white/15 bg-[#f8f8f4] p-4 text-[#202a23] shadow-[0_28px_80px_-44px_rgba(0,0,0,0.72)] sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#e3e5df] pb-4">
               <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 items-center justify-center bg-[#e8ebf3] text-[#455b9d]">
+                <div className="flex h-8 w-8 items-center justify-center bg-[#ecebe6] text-[#111111]">
                   <FileSearch aria-hidden="true" className="h-4 w-4" />
                 </div>
                 <div>

@@ -6,7 +6,7 @@ export default function ShareProfileSection() {
     <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:px-10">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
             Beyond the attachment
           </p>
           <h2 className="mt-3 max-w-lg font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
@@ -18,18 +18,18 @@ export default function ShareProfileSection() {
           </p>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-xs text-[#555e56]">
             <li className="flex items-center gap-2">
-              <Linkedin aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> LinkedIn
+              <Linkedin aria-hidden="true" className="h-4 w-4 text-[#111111]" /> LinkedIn
             </li>
             <li className="flex items-center gap-2">
-              <Smartphone aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> WhatsApp
+              <Smartphone aria-hidden="true" className="h-4 w-4 text-[#111111]" /> WhatsApp
             </li>
             <li className="flex items-center gap-2">
-              <Mail aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> Email
+              <Mail aria-hidden="true" className="h-4 w-4 text-[#111111]" /> Email
             </li>
           </ul>
           <Link
             href="/pricing"
-            className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#344b93] underline decoration-[#aeb8d5] underline-offset-4 hover:text-[#26366d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
+            className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#111111] underline decoration-[#8c8c85] underline-offset-4 hover:text-[#000000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
           >
             Compare plans <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
           </Link>
@@ -40,13 +40,13 @@ export default function ShareProfileSection() {
           <article className="relative ml-auto w-[94%] overflow-hidden  border border-[#dbded8] bg-[#f8f8f4] shadow-[0_22px_60px_-44px_rgba(31,42,35,0.55)]">
             <div className="flex items-center justify-between border-b border-[#e2e4de] px-4 py-3 sm:px-5">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#29352e]">
-                <Globe2 aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> Example profile
+                <Globe2 aria-hidden="true" className="h-4 w-4 text-[#111111]" /> Example profile
               </div>
               <span className="text-[10px] text-[#767d75]">Public profile preview</span>
             </div>
             <div className="grid gap-5 p-5 sm:grid-cols-[0.72fr_1.28fr] sm:p-7">
               <div className="flex flex-row items-center gap-3 sm:flex-col sm:items-start">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#dce2ef] font-serif text-xl text-[#344b75]">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#e5e4dd] font-serif text-xl text-[#111111]">
                   JL
                 </div>
                 <div>
@@ -58,7 +58,7 @@ export default function ShareProfileSection() {
                 </div>
               </div>
               <div className="min-w-0">
-                <p className="text-[9px] font-semibold uppercase tracking-widest text-[#5268a8]">
+                <p className="text-[9px] font-semibold uppercase tracking-widest text-[#111111]">
                   About
                 </p>
                 <p className="mt-2 text-xs leading-5 text-[#59625b]">

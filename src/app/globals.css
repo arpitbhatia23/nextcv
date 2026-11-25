@@ -190,8 +190,8 @@
   --nc-surface-muted: #f2f1ec;
   --nc-border: #e3e2dc;
   --nc-border-strong: #d6d5ce;
-  --nc-primary: #344b93;
-  --nc-primary-hover: #293e7b;
+  --nc-primary: #111111;
+  --nc-primary-hover: #262626;
   --nc-success: #15803d;
   --nc-warning: #b45309;
   --nc-danger: #dc2626;
@@ -216,13 +216,13 @@
   --popover-foreground: var(--nc-foreground);
   --primary: var(--nc-primary);
   --primary-foreground: #ffffff;
-  --accent: #eef0f5;
-  --accent-foreground: #263b82;
+  --accent: #f1f0ea;
+  --accent-foreground: #17201c;
   --muted: #f1f0ea;
   --muted-foreground: var(--landing-muted);
   --border: #e2e0d9;
   --input: #d7d6cf;
-  --ring: #5268b6;
+  --ring: #111111;
   --font-sans: var(--font-geist-sans);
   --font-display: var(--nc-font-display);
   --radius: var(--nc-radius-control);

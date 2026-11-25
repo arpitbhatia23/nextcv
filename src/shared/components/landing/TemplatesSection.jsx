@@ -151,7 +151,7 @@ export default function TemplatesSection({
         {/* Section header */}
         <div className="flex flex-col gap-5 border-b border-[#e2e0d9] pb-7 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
               A good starting point
             </p>
 
@@ -165,7 +165,7 @@ export default function TemplatesSection({
           {showViewAll && (
             <Link
               href="/templates"
-              className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#344b93] underline decoration-[#aeb8d5] underline-offset-4 hover:text-[#26366d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
+              className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-[#111111] underline decoration-[#8c8c85] underline-offset-4 hover:text-[#000000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
             >
               View all resume templates
               <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
@@ -205,7 +205,7 @@ export default function TemplatesSection({
                   triggerRef.current = event.currentTarget;
                   setPreview(template);
                 }}
-                className="relative block aspect-4/3 w-full overflow-hidden border border-[#dfded8] bg-[#eeede8] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
+                className="relative block aspect-4/3 w-full overflow-hidden border border-[#dfded8] bg-[#eeede8] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
                 aria-label={`Preview ${template.title} resume template`}
               >
                 <Image
@@ -230,7 +230,7 @@ export default function TemplatesSection({
 
                   <p className="mt-1.5 text-xs leading-5 text-[#697068]">{template.audience}</p>
 
-                  <span className="mt-2 inline-flex border border-[#d9deeb] bg-[#f4f6fa] px-2 py-1 text-xs font-semibold text-[#344b93]">
+                  <span className="mt-2 inline-flex border border-[#dfded8] bg-[#f2f1ec] px-2 py-1 text-xs font-semibold text-[#111111]">
                     {template.tierName} · ₹{template.price}
                   </span>
                 </div>
@@ -268,7 +268,7 @@ export default function TemplatesSection({
 
             <Link
               href="/templates"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-[#344b93] hover:text-[#26366d]"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#111111] hover:text-[#000000]"
             >
               Explore all templates
               <ArrowUpRight className="h-4 w-4" />
@@ -335,7 +335,7 @@ export default function TemplatesSection({
             {/* Modal footer */}
             <div className="flex flex-col gap-3 border-t border-[#e1dfd7] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
               <p className="flex items-center gap-2 text-xs text-[#626962]">
-                <Check aria-hidden="true" className="h-4 w-4 text-[#5268a8]" />
+                <Check aria-hidden="true" className="h-4 w-4 text-[#111111]" />
                 Free to build; pay once when ready to download.
               </p>
 

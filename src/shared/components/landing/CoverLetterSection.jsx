@@ -6,7 +6,7 @@ export default function CoverLetterSection() {
     <section className="border-y border-[#e5e2d9] bg-[#f0efe9] py-16 sm:py-20">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-10">
         <div>
-          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
             <Sparkles aria-hidden="true" className="h-4 w-4" /> Cover letter builder
           </p>
           <h2 className="mt-3 max-w-xl font-serif text-3xl leading-tight text-[#17201C] sm:text-4xl">
@@ -24,7 +24,7 @@ export default function CoverLetterSection() {
 
         <div className=" border border-[#deddd6] bg-white p-4 shadow-sm sm:p-5">
           <div className="flex items-center gap-2 border-b border-[#ebeae5] pb-3 text-xs font-semibold text-[#374138]">
-            <FileText aria-hidden="true" className="h-4 w-4 text-[#5268a8]" /> Application inputs
+            <FileText aria-hidden="true" className="h-4 w-4 text-[#111111]" /> Application inputs
           </div>
           <div className="grid gap-2 py-4 sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
             <div className="border border-[#e4e5df] bg-[#fafaf8] p-3">
@@ -41,7 +41,7 @@ export default function CoverLetterSection() {
               <p className="mt-1 text-xs font-medium text-[#303a32]">Role requirements</p>
             </div>
             <Plus aria-hidden="true" className="mx-auto h-4 w-4 text-[#929890] sm:mx-0" />
-            <div className="border border-[#d9deeb] bg-[#f4f6fa] p-3">
+            <div className="border border-[#dfded8] bg-[#f2f1ec] p-3">
               <span className="text-[9px] font-semibold uppercase tracking-[0.08em] text-[#66749d]">
                 Target role
               </span>

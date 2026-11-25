@@ -198,23 +198,25 @@ export default function PricingPage() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Product",
+        "@type": "Service",
+        "@id": "https://www.nextcv.in/pricing#service",
         name: "NextCV AI Resume Builder",
+        serviceType: "AI Resume Builder & Career Platform",
         description:
           "ATS-friendly resume builder with transparent one-time payment options starting from ₹49. No recurring monthly subscriptions.",
-        brand: {
-          "@type": "Brand",
+        areaServed: "IN",
+        provider: {
+          "@type": "Organization",
           name: "NextCV",
+          url: "https://www.nextcv.in",
         },
-        offers: {
-          "@type": "AggregateOffer",
-          priceCurrency: "INR",
-          lowPrice: "49",
-          highPrice: "399",
-          offerCount: "4",
-          offers: plans.map(p => ({
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "NextCV One-Time Resume Plans",
+          itemListElement: plans.map(p => ({
             "@type": "Offer",
             name: `${p.name} Plan`,
+            description: p.description,
             price: String(p.price),
             priceCurrency: "INR",
             availability: "https://schema.org/InStock",
@@ -659,7 +661,7 @@ export default function PricingPage() {
                       (
                         <Link
                           key="cl"
-                          href="/ai-cover-letter-builder"
+                          href="/ai-cover-letter-generator"
                           className="font-medium text-primary underline hover:text-primary/80"
                         >
                           Separate · ₹79

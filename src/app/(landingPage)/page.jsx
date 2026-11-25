@@ -42,7 +42,7 @@ export const metadata = createSeoMetadata({
 
 export default function Home() {
   return (
-    <div className="overflow-hidden bg-[#F8F7F3] text-[#17201C] selection:bg-[#dce4ff] selection:text-[#17201C]">
+    <div className="overflow-hidden bg-[#F8F7F3] text-[#17201C] selection:bg-[#e5e4dd] selection:text-[#17201C]">
       <LandingHero />
       <ValuePropsSection />
       <WorkflowSection />

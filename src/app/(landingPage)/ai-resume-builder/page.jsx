@@ -22,20 +22,20 @@ import RelatedProducts from "@/shared/components/products/RelatedProducts";
 import ProductConversionBanner from "@/shared/components/products/ProductConversionBanner";
 
 export const metadata = createSeoMetadata({
-  title: "AI Resume Builder for Freshers | ATS-Friendly | NextCV",
+  title: "AI Resume Builder India (2026): ATS & Free Edit | NextCV",
   description:
-    "Build an ATS-friendly resume with AI assistance. Organize education, projects and skills, refine bullet points, and preview a polished PDF.",
+    "Build an ATS-friendly resume with Gemini AI on NextCV. Refine STAR bullets, preview live PDFs free & export from ₹49 one-time via UPI. No subscription.",
   path: "/ai-resume-builder",
   keywords: [
     "ai resume builder",
-    "ai powered resume builder",
-    "ai resume builder free",
+    "ai resume builder india",
     "free ai resume builder",
-    "resume builder ai",
-    "online ai resume builder",
     "ai ats resume builder",
-    "resume builder with ai",
-    "free ai resume builder and download",
+    "gemini ai resume builder",
+    "ats resume builder for freshers",
+    "resume builder with upi payment",
+    "one time payment resume builder",
+    "ai resume maker pdf download",
   ],
 });
 
@@ -43,37 +43,37 @@ const faqs = [
   {
     question: "What is an AI resume builder?",
     answer:
-      "An AI resume builder is a digital tool that assists you in writing, structuring, and formatting a resume. NextCV pairs Gemini AI writing suggestions for summaries, bullet points, and skills with clean ATS-compliant resume layouts.",
+      "An AI resume builder helps you write, structure, and format a job-ready resume without staring at a blank page. NextCV pairs Gemini AI writing assistance for summaries and STAR-method bullet points with clean, single-column ATS-compliant resume layouts.",
   },
   {
-    question: "How does NextCV help create a resume?",
+    question: "How does NextCV help create an ATS-friendly resume?",
     answer:
-      "NextCV guides you step-by-step through entering your contact details, education, technical skills, projects, and work experience. It offers AI suggestions to polish bullet points and gives you instant real-time PDF previews.",
+      "NextCV guides you step-by-step through contact details, education, technical skills, projects, and experience. You can refine rough notes into quantified action-verb bullets with AI, preview your live PDF layout in real time, and verify your score on our free AI ATS Resume Checker.",
   },
   {
-    question: "Can freshers use NextCV?",
+    question: "Can freshers and experienced professionals both use NextCV?",
     answer:
-      "Yes. NextCV is built specifically with freshers and college students in mind. Templates emphasize academic achievements, capstone projects, coding profiles, internships, and technical coursework.",
+      "Yes. Freshers can highlight CGPA, academic projects, internships, and coding profiles, while experienced professionals can emphasize work history, leadership scope, and measurable business outcomes across role-specific layouts.",
   },
   {
-    question: "Is the resume builder free?",
+    question: "Is the AI resume builder free to use?",
     answer:
-      "Building, editing, structuring, and previewing your resume on NextCV is 100% free. When you are ready to download a high-resolution, watermark-free PDF, one-time payment plans start at ₹49 with no recurring monthly subscriptions.",
+      "Yes. Building, editing, using AI bullet refinement, checking your ATS score, and sharing your web resume (/r/yourname) are free on NextCV. You only pay a one-time fee starting at ₹49 when you export a watermark-free vector PDF.",
   },
   {
-    question: "Can I download my resume as a PDF?",
+    question: "Can I pay via UPI without a recurring subscription?",
     answer:
-      "Yes. Once unlocked through our one-time plans (Basic ₹49, Standard ₹99, Premium ₹199, Elite ₹399), you can download clean, vector-rendered PDFs formatted according to industry standards.",
+      "Yes. NextCV supports native Indian UPI (Google Pay, PhonePe, Paytm, BHIM) and RuPay cards with zero recurring monthly subscriptions or hidden auto-debits. One-time PDF export plans are Basic (₹49), Standard (₹99), Premium (₹199), and Elite (₹399).",
   },
   {
-    question: "Are the templates ATS-friendly?",
+    question: "Do NextCV templates work with Indian ATS portals like Workday and Darwinbox?",
     answer:
-      "Yes. NextCV templates follow single-column and cleanly segmented multi-column hierarchies that applicant tracking systems and recruiters can parse accurately. Note that no software can guarantee an interview or an ATS score because individual corporate filters vary.",
+      "Yes. NextCV templates use clean vector text layers, standard section headings, and logical reading order so enterprise parsers like Workday, Darwinbox, Taleo, and Naukri Resdex extract every section accurately—without the text scrambling common in graphic Canva templates.",
   },
   {
-    question: "Can I edit my resume after creating it?",
+    question: "Can I edit my resume after downloading the PDF?",
     answer:
-      "Yes. Your drafts and purchased resumes remain saved in your account dashboard so you can update them as your career advances.",
+      "Yes. Your drafts and unlocked resumes remain saved in your NextCV dashboard so you can update skills, projects, or roles anytime as your career progresses.",
   },
 ];
 
@@ -85,20 +85,32 @@ export default function AIResumeBuilderPage() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
+        "@id": "https://www.nextcv.in/ai-resume-builder#app",
         name: "NextCV AI Resume Builder",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
+        inLanguage: "en-IN",
         url: "https://www.nextcv.in/ai-resume-builder",
         description:
-          "Build an ATS-friendly resume with AI assistance. Organize your experience, improve bullet points, and preview before downloading.",
+          "Build an ATS-friendly resume with Gemini AI assistance. Refine STAR bullet points, preview live PDFs for free, and export from ₹49 one-time via UPI.",
+        featureList: [
+          "Gemini AI STAR bullet & summary refinement",
+          "ATS-verified single-column & modern layouts",
+          "Real-time live PDF margin preview",
+          "Free AI ATS score check & public resume link",
+          "One-time UPI checkout starting at ₹49",
+        ],
         offers: {
-          "@type": "Offer",
-          price: "49",
+          "@type": "AggregateOffer",
+          lowPrice: "49",
+          highPrice: "399",
+          offerCount: "4",
           priceCurrency: "INR",
         },
       },
       {
         "@type": "BreadcrumbList",
+        "@id": "https://www.nextcv.in/ai-resume-builder#breadcrumb",
         itemListElement: [
           {
             "@type": "ListItem",
@@ -122,6 +134,7 @@ export default function AIResumeBuilderPage() {
       },
       {
         "@type": "FAQPage",
+        "@id": "https://www.nextcv.in/ai-resume-builder#faq",
         mainEntity: faqs.map(faq => ({
           "@type": "Question",
           name: faq.question,
@@ -138,7 +151,9 @@ export default function AIResumeBuilderPage() {
     <div className="min-h-screen bg-[#F8F7F3] text-[#17201C]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       {/* Hero */}
@@ -158,8 +173,9 @@ export default function AIResumeBuilderPage() {
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-[#5B625C]">
-                Create a professional resume with AI assistance. Organize your experience, improve
-                bullet points, choose a template, and review your resume before downloading.
+                Create a recruiter-ready resume with Gemini AI assistance. Turn rough experience
+                into quantified STAR bullet points, pick an ATS-verified layout, and export vector
+                PDFs starting at ₹49 one-time via UPI.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -178,15 +194,15 @@ export default function AIResumeBuilderPage() {
               <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#5B625C]">
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  Free to edit & preview
+                  Free to edit &amp; preview
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  One-time plans from ₹49
+                  One-time UPI plans from ₹49
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Check className="h-3.5 w-3.5 text-emerald-600" />
-                  No recurring subscription
+                  Zero recurring subscriptions
                 </span>
               </div>
             </div>
@@ -210,15 +226,15 @@ export default function AIResumeBuilderPage() {
           <div className="grid gap-10 md:grid-cols-2">
             <div className="border border-[#E3E2DC] bg-[#FAF9F6] p-8">
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-rose-700">
-                The Fresher Dilemma
+                The Job Seeker Dilemma
               </span>
               <h2 className="mt-3 font-serif text-2xl text-[#17201C]">
-                Writer&apos;s block and confusing ATS guidelines
+                Writer&apos;s block, ATS rejections &amp; ₹2,000/mo paywalls
               </h2>
               <p className="mt-3 text-sm leading-6 text-[#5B625C]">
-                Many freshers struggle to write professional bullet points that explain technical
-                coursework or college projects with impact. Using overly complex, multi-column Word
-                documents often results in parsing failures in recruiter systems.
+                Most candidates struggle to turn coursework or daily tasks into quantified STAR
+                bullets. Worse, graphic tools like Canva break ATS parsers like Darwinbox and
+                Workday, while foreign builders trap users in $24/month credit-card subscriptions.
               </p>
             </div>
 
@@ -227,31 +243,34 @@ export default function AIResumeBuilderPage() {
                 The NextCV Approach
               </span>
               <h2 className="mt-3 font-serif text-2xl text-[#17201C]">
-                Guided drafting with AI clarity and tested templates
+                Guided Gemini AI drafting, verified ATS layouts &amp; ₹49 UPI export
               </h2>
               <p className="mt-3 text-sm leading-6 text-[#5B625C]">
-                NextCV lets you type rough bullet points and uses AI to refine them with strong
-                action verbs, measurable impact, and clean structure. You review and tweak every
-                line before picking an ATS-optimized template.
+                Type rough notes and let Gemini AI refine them into strong action-verb bullets with
+                measurable impact. Preview your exact PDF for free, check your score on our{" "}
+                <Link href="/ats-resume-checker" className="font-semibold text-[#465B9E] underline">
+                  ATS Resume Checker
+                </Link>
+                , and pay once via UPI only when downloading.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How it Works - Exact 100% Codebase Flow */}
+      {/* How it Works - Guided Builder Workflow */}
       <section className="py-16 sm:py-20 border-b border-[#E3E2DC]">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
           <div className="max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#465B9E]">
-              Exact Creation Flow
+              Guided Creation Flow
             </p>
             <h2 className="mt-3 font-serif text-3xl text-[#17201C] sm:text-4xl">
               Step-by-step: How to build your resume in NextCV
             </h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              The exact sequence of steps you navigate inside the NextCV builder—from starting
-              method to final vector PDF download.
+              A structured 9-step studio designed to take you from blank screen or existing PDF to a
+              clean, recruiter-ready resume in minutes.
             </p>
           </div>
 
@@ -261,72 +280,72 @@ export default function AIResumeBuilderPage() {
                 step: "01",
                 badge: "Start Method",
                 title: "Start Method & Template Selection",
-                desc: "Choose between starting from scratch or importing an existing PDF/DOCX resume. Select from Basic, Standard, Premium, or Elite ATS layouts.",
-                route: "/dashboard/builder/template-selection",
+                desc: "Start from scratch or import an existing PDF/DOCX resume. Choose from Basic, Standard, Premium, or Elite ATS layouts.",
+                outcome: "ATS Layout Selected",
                 icon: Layers,
               },
               {
                 step: "02",
                 badge: "Basic Details",
                 title: "Contact Info & Target Job Role",
-                desc: "Enter your full name, phone number, email address, location, target job title, LinkedIn URL, GitHub profile, and optional target job description.",
-                route: "/dashboard/builder/basicInfo",
+                desc: "Add your name, phone, email, location, target job title, LinkedIn URL, GitHub profile, and optional target job description.",
+                outcome: "Header & Links Verified",
                 icon: FileText,
               },
               {
                 step: "03",
                 badge: "Education",
                 title: "Degree & Institution History",
-                desc: "Add your college or university, degree/major, graduation year range, CGPA or percentage, and optional relevant coursework.",
-                route: "/dashboard/builder/education",
+                desc: "Enter your college or university, degree/major, graduation dates, CGPA or percentage, and relevant academic coursework.",
+                outcome: "Academic Cutoffs Clear",
                 icon: GraduationCap,
               },
               {
                 step: "04",
                 badge: "Skills",
                 title: "Technical & Professional Skills",
-                desc: "Organize your technical proficiencies, frameworks, programming languages, and industry tools into clean, recruiter-scannable tags.",
-                route: "/dashboard/builder/skills",
+                desc: "Organize programming languages, frameworks, and domain tools into clean, ATS-scannable categories without graphic bars.",
+                outcome: "Keywords Categorized",
                 icon: Sliders,
               },
               {
                 step: "05",
                 badge: "Experience",
                 title: "Work History & Internships",
-                desc: "List company names, job titles, employment dates, and bullet points. Use built-in AI bullet generation to quantify your team impact.",
-                route: "/dashboard/builder/experience",
+                desc: "Add companies, roles, dates, and impact bullets. Use one-click Gemini AI bullet refinement to quantify your achievements.",
+                outcome: "STAR Bullets Polished",
                 icon: Briefcase,
               },
               {
                 step: "06",
                 badge: "Projects",
                 title: "Academic & Personal Projects",
-                desc: "Highlight capstone projects, hackathon prototypes, live links, and tech stacks used (crucial for fresher resumes).",
-                route: "/dashboard/builder/projects",
+                desc: "Showcase capstone projects, hackathon builds, live URLs, and tech stacks—essential for fresher and tech shortlisting.",
+                outcome: "Proof of Work Added",
                 icon: Wand2,
               },
               {
                 step: "07",
                 badge: "Certifications",
                 title: "Licenses & Verified Credentials",
-                desc: "Add recognized course certifications, issuing organizations, dates completed, and credential URLs.",
-                route: "/dashboard/builder/certificate",
+                desc: "Include recognized technical certifications, issuing organizations, completion dates, and verifiable credential links.",
+                outcome: "Credentials Linked",
                 icon: ShieldCheck,
               },
               {
                 step: "08",
                 badge: "Summary",
                 title: "Professional Summary & Objective",
-                desc: "Draft a 2-3 sentence career summary tailored to your target position, with one-click AI summary assistance.",
-                route: "/dashboard/builder/summary",
+                desc: "Generate a crisp 2–3 line career summary tailored to your target job title using built-in AI summary assistance.",
+                outcome: "Role Pitch Tailored",
                 icon: Sparkles,
               },
               {
                 step: "09",
                 badge: "Final Review & Download",
                 title: "Live PDF Preview & Unlock",
-                desc: "Inspect margin spacing, apply coupon code (FIRST20 for 20% off), complete checkout, and download your watermark-free PDF.",
-                route: "/dashboard/builder/review",
+                desc: "Inspect exact 1-page margin spacing, apply coupon FIRST20 for 20% off, pay via UPI, and export your watermark-free PDF.",
+                outcome: "Vector PDF Ready",
                 icon: Download,
               },
             ].map(item => {
@@ -356,10 +375,8 @@ export default function AIResumeBuilderPage() {
                     <p className="mt-2 text-xs leading-5 text-[#5B625C]">{item.desc}</p>
                   </div>
                   <div className="mt-5 pt-3 border-t border-[#F1F0EB] flex items-center justify-between">
-                    <span className="font-mono text-[10px] text-[#8A908B] truncate max-w-45">
-                      {item.route}
-                    </span>
-                    <span className="text-[10px] font-semibold text-[#465B9E]">Active Step →</span>
+                    <span className="font-mono text-[10px] text-[#8A908B]">{item.outcome}</span>
+                    <span className="text-[10px] font-semibold text-[#465B9E]">Included Free →</span>
                   </div>
                 </div>
               );
@@ -379,7 +396,8 @@ export default function AIResumeBuilderPage() {
               Inside the NextCV Resume Studio
             </h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              Real components and tools built to make resume preparation straightforward.
+              Built for speed, clean typography, and effortless ATS readability across Indian hiring
+              portals.
             </p>
           </div>
 
@@ -395,7 +413,7 @@ export default function AIResumeBuilderPage() {
                 Tailored Template Selection
               </h3>
               <p className="mt-1 text-xs leading-5 text-[#5B625C]">
-                Filter formats suited for MNC campus placements, software development, data
+                Filter layouts tuned for MNC campus placements, software development, data
                 analytics, or non-technical roles.
               </p>
             </div>
@@ -411,8 +429,8 @@ export default function AIResumeBuilderPage() {
                 Contextual AI Writing
               </h3>
               <p className="mt-1 text-xs leading-5 text-[#5B625C]">
-                Turn simple project descriptions into strong, action-oriented bullet points with
-                Gemini AI.
+                Turn simple project descriptions into strong, action-oriented STAR bullet points
+                with Gemini AI.
               </p>
             </div>
 
@@ -424,7 +442,7 @@ export default function AIResumeBuilderPage() {
                 label="Live PDF Preview"
               />
               <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
-                Exact Print & PDF Preview
+                Exact Print &amp; PDF Preview
               </h3>
               <p className="mt-1 text-xs leading-5 text-[#5B625C]">
                 Review line-by-line formatting to ensure your resume fits naturally onto a single
@@ -452,29 +470,46 @@ export default function AIResumeBuilderPage() {
               {
                 icon: GraduationCap,
                 title: "College Students & Freshers",
-                desc: "Structure final year projects, internships, and technical certifications effectively when you have limited full-time experience.",
+                desc: "Structure final-year projects, internships, CGPA, and technical certifications effectively—see our fresher resume format guide for Indian campuses.",
+                href: "/fresher-resume-format-india",
+                linkLabel: "Fresher Resume Guide →",
               },
               {
                 icon: Briefcase,
                 title: "Job Seekers Targeting MNCs",
-                desc: "Build clean, ATS-compliant formats standard across Indian tech recruiters like TCS, Infosys, Wipro, and Accenture.",
+                desc: "Build clean, ATS-compliant layouts verified for Indian tech recruiters including TCS, Infosys, Wipro, Cognizant, and Accenture.",
+                href: "/ats-friendly-resume-format-india",
+                linkLabel: "ATS Format Rules →",
               },
               {
                 icon: Users,
-                title: "Career Switchers",
-                desc: "Use AI bullet assistance to reframe transferable skills and emphasize relevant accomplishments for new industries.",
+                title: "Experienced Pros & Switchers",
+                desc: "Use Gemini AI bullet refinement to quantify impact, reframe transferable skills, and avoid ₹2,000/month foreign builder subscriptions.",
+                href: "/resume-builder-comparison",
+                linkLabel: "Compare Resume Builders →",
               },
             ].map(aud => {
               const Icon = aud.icon;
               return (
-                <div key={aud.title} className="border border-[#E3E2DC] bg-white p-6 shadow-xs">
-                  <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
-                    <Icon className="h-5 w-5" />
+                <div
+                  key={aud.title}
+                  className="border border-[#E3E2DC] bg-white p-6 shadow-xs flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex h-10 w-10 items-center justify-center bg-[#EEF0F7] text-[#465B9E]">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
+                      {aud.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-5 text-[#5B625C]">{aud.desc}</p>
                   </div>
-                  <h3 className="mt-4 font-serif text-lg font-medium text-[#17201C]">
-                    {aud.title}
-                  </h3>
-                  <p className="mt-2 text-xs leading-5 text-[#5B625C]">{aud.desc}</p>
+                  <Link
+                    href={aud.href}
+                    className="mt-4 inline-block text-xs font-semibold text-[#465B9E] hover:underline"
+                  >
+                    {aud.linkLabel}
+                  </Link>
                 </div>
               );
             })}
@@ -493,7 +528,8 @@ export default function AIResumeBuilderPage() {
               How NextCV pricing works
             </h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              No recurring credit card charges or recurring subscriptions.
+              Pay once via Google Pay, PhonePe, Paytm UPI, or RuPay—zero recurring subscriptions or
+              credit card traps.
             </p>
           </div>
 
@@ -534,7 +570,7 @@ export default function AIResumeBuilderPage() {
                   <p className="mt-3 text-xs leading-5 text-[#5B625C]">{p.detail}</p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-[#E3E2DC] text-[11px] text-[#8A908B]">
-                  One-time payment
+                  One-time UPI / Card payment
                 </div>
               </div>
             ))}
@@ -561,7 +597,7 @@ export default function AIResumeBuilderPage() {
             </div>
             <h2 className="mt-4 font-serif text-3xl text-[#17201C]">Frequently Asked Questions</h2>
             <p className="mt-2 text-sm text-[#5B625C]">
-              Answers about ATS compliance, templates, editing, and pricing.
+              Answers about Gemini AI drafting, ATS compliance, UPI checkout, and one-time pricing.
             </p>
           </div>
 
@@ -591,7 +627,7 @@ export default function AIResumeBuilderPage() {
       <ProductConversionBanner
         badge="AI Resume Studio"
         title="Build your job-ready resume in minutes"
-        description="Select a template, customize bullet points with Gemini AI, and review your live preview. Pay once only when you want to download."
+        description="Select an ATS-verified template, refine bullet points with Gemini AI, and preview live. Pay once via UPI starting at ₹49 only when downloading."
         primaryCtaText="Build Your Resume Now"
         primaryCtaHref="/dashboard/builder"
       />

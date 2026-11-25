@@ -33,7 +33,7 @@ export default function ValuePropsSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="grid gap-7 md:grid-cols-[0.7fr_1.3fr] md:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
               A clearer way to get started
             </p>
             <h2
@@ -46,7 +46,7 @@ export default function ValuePropsSection() {
           <div className="grid gap-x-7 gap-y-6 sm:grid-cols-2">
             {valueProps.map(({ icon: Icon, title, description }) => (
               <article key={title} className="flex gap-3 border-t border-[#e8e7e1] pt-4">
-                <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#5268a8]" />
+                <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-[#111111]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[#202a23]">{title}</h3>
                   <p className="mt-1.5 text-xs leading-5 text-[#626962]">{description}</p>

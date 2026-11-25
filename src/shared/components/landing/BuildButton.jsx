@@ -25,7 +25,7 @@ export default function BuildButton({
       type="button"
       onClick={handleClick}
       disabled={loading}
-      className={`rounded-none! h-12 bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 ${className}`}
+      className={`rounded-none! h-12 bg-black px-5 text-sm font-semibold text-primary-foreground shadow-sm ${className}`}
     >
       {loading ? (
         <>

@@ -34,7 +34,7 @@ export default function AudienceSection() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#5268a8]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#111111]">
             For every career stage
           </p>
           <h2

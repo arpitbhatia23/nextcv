@@ -48,7 +48,7 @@ export default function Nav() {
             <Link
               href="/"
               aria-label="NextCV home"
-              className="shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
+              className="shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
             >
               <Image
                 src="/logos/nextcvlogo.png"

@@ -10,7 +10,7 @@ export default function LandingHero() {
     <section className="relative overflow-hidden border-b border-[#e7e5df] bg-[#F8F7F3] pt-24 sm:pt-28 lg:pt-32">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 sm:px-8 sm:pb-20 lg:grid-cols-[0.88fr_1.12fr] lg:gap-12 lg:px-10 lg:pb-24">
         <div className="relative z-10 max-w-xl">
-          <p className="inline-flex items-center gap-2 border border-[#deded7] bg-white/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#465b9e]">
+          <p className="inline-flex items-center gap-2 border border-[#deded7] bg-white/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#111111]">
             Resume builder for India
           </p>
 
@@ -27,7 +27,7 @@ export default function LandingHero() {
             <BuildButton className="w-full sm:w-auto">Build My Resume</BuildButton>
             <Link
               href="/ats-resume-checker"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#c9cbc8] bg-white/80 px-5 py-3 text-sm font-semibold text-[#26342c] transition-colors hover:border-[#8995bd] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6] focus-visible:ring-offset-2"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#c9cbc8] bg-white/80 px-5 py-3 text-sm font-semibold text-[#26342c] transition-colors hover:border-[#111111] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111] focus-visible:ring-offset-2"
             >
               Check My Resume <ArrowDownRight aria-hidden="true" className="h-4 w-4" />
             </Link>
@@ -36,7 +36,7 @@ export default function LandingHero() {
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 border-t border-[#dfddd6] pt-5 text-xs text-[#555e56]">
             {valuePoints.map(point => (
               <li key={point} className="inline-flex items-center gap-1.5">
-                <Check aria-hidden="true" className="h-3.5 w-3.5 text-[#5268a8]" />
+                <Check aria-hidden="true" className="h-3.5 w-3.5 text-[#111111]" />
                 {point}
               </li>
             ))}
@@ -61,7 +61,7 @@ export default function LandingHero() {
             <span>Inside the NextCV resume builder</span>
             <Link
               href="/ai-resume-builder"
-              className="font-semibold text-[#344b93] underline decoration-[#aeb8d5] underline-offset-4 hover:text-[#26366d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5268b6]"
+              className="font-semibold text-[#111111] underline decoration-[#8c8c85] underline-offset-4 hover:text-[#000000] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111111]"
             >
               See how it works
             </Link>

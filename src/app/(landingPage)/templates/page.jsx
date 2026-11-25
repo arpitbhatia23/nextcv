@@ -16,20 +16,20 @@ import BuildButton from "@/shared/components/landing/BuildButton";
 import TemplatesSection from "@/shared/components/landing/TemplatesSection";
 
 export const metadata = createSeoMetadata({
-  title: "Resume Templates for Freshers & Professionals in India | NextCV",
+  title: "ATS Resume Templates (2026): Freshers & Pros India | NextCV",
   description:
-    "Explore professional resume templates for freshers and experienced professionals in India. Compare simple, modern and ATS-friendly resume formats, preview designs, and build your resume with NextCV.",
+    "Browse ATS-friendly resume templates for Indian freshers & pros (2026). Preview clean, recruiter-ready layouts & export PDFs from ₹49 one-time via UPI.",
   path: "/templates",
   keywords: [
     "resume templates",
-    "resume template",
-    "resume templates for freshers",
-    "resume template for freshers India",
-    "resume format India",
     "ATS-friendly resume templates",
-    "professional resume templates",
+    "resume templates for freshers India",
+    "resume format India",
     "simple resume template",
-    "resume format for freshers",
+    "fresher resume format PDF",
+    "one page resume template India",
+    "IT resume templates India",
+    "professional resume templates",
     "Indian resume format",
   ],
 });
@@ -38,75 +38,139 @@ const faqs = [
   {
     question: "Which resume format is best for freshers in India?",
     answer:
-      "A simple, reverse-chronological or content-focused resume format is a useful starting point for freshers in India. Highlight education, relevant skills, internships, academic projects, certifications and achievements. Choose a layout that makes your qualifications easy to scan.",
+      "A clean, single-column reverse-chronological layout is the strongest format for Indian freshers. Place your education (with CGPA/percentage), core technical skills, internships, and 2–3 deployed academic or personal projects near the top so campus and off-campus recruiters can scan your fit in under 6 seconds.",
   },
   {
-    question: "Which resume template is suitable for ATS?",
+    question: "Are NextCV resume templates ATS-friendly?",
     answer:
-      "A resume template with readable text, clear section headings and a logical reading order is a sensible starting point for applicant tracking systems. Avoid relying on decorative elements to communicate important information. No template can guarantee that every employer's ATS will parse or rank a resume correctly.",
+      "Yes. NextCV's ATS templates are engineered with clean vector text layers, standard section headings, and logical top-to-bottom reading order so enterprise parsers like Workday, Darwinbox, Taleo, and Naukri Resdex extract every detail accurately—unlike multi-column graphic templates from Canva.",
   },
   {
-    question: "Can I use these resume templates for IT jobs?",
+    question: "Can I use these resume templates for IT & MNC campus placements?",
     answer:
-      "Yes. Choose a template that gives appropriate space to technical skills, projects, internships and work experience. Tailor the content to the role and include relevant technologies and achievements that you can explain confidently.",
+      "Yes. Our Basic, Standard, and Premium tiers include layouts tailored for TCS, Infosys, Wipro, Cognizant, Accenture, and product MNC hiring drives, with dedicated space for technical stacks, coding profiles, academic cutoffs, and quantified project outcomes.",
   },
   {
     question: "Can experienced professionals use these resume templates?",
     answer:
-      "Yes. Experienced professionals can choose a layout that highlights work history, measurable achievements, relevant skills and career progression. Give the most relevant experience appropriate prominence and tailor your resume to the role.",
+      "Yes. Mid-level and senior professionals can select Classic, Modern, or Executive layouts that prioritize recent work history, leadership scope, and measurable STAR/X-Y-Z achievements while keeping formatting crisp and recruiter-ready.",
   },
   {
     question: "Can I preview a resume template before using it?",
     answer:
-      "Yes. Open a template preview to inspect its layout and choose Use Template to start building your resume.",
+      "Yes. Click Preview on any template card to inspect its full layout, typography, and section hierarchy before choosing Use Template to start editing with your own details.",
   },
   {
     question: "Can I build and edit my resume for free?",
     answer:
-      "You can build and edit your resume for free on NextCV. Paid download plans are one-time payments ranging from ₹49 to ₹399, depending on the selected template and included features. There is no monthly subscription. Check the pricing page for the current plan details.",
+      "Yes. Building, editing, AI bullet refinement, ATS score checking, and live web resume sharing (/r/yourname) are free on NextCV. When you are ready to export a print-ready vector PDF, one-time plans start at just ₹49 via UPI (Basic ₹49, Standard ₹99, Premium ₹199, Elite ₹399) with zero monthly subscriptions.",
   },
   {
-    question: "Should I use a photo in my Indian resume?",
+    question: "Should I include a photo on my Indian resume?",
     answer:
-      "A photo is not necessary for most standard professional and IT applications unless the employer specifically requests one. Follow the instructions in the job posting and prioritize relevant qualifications, skills and achievements.",
+      "For standard IT, software engineering, consulting, and corporate roles in India, skip the photo. Most enterprise ATS systems ignore images, and recruiters prefer clean text density. Only add a photo if an employer or specific industry (such as aviation or hospitality) explicitly requests one.",
   },
   {
-    question: "How can I improve my resume for a specific job?",
+    question: "How can I check if my resume passes ATS before applying?",
     answer:
-      "Read the job description carefully, identify the relevant skills and responsibilities, and update your resume using accurate examples from your experience. You can also use the NextCV ATS Resume Checker to review your resume before applying.",
+      "After building your resume, run it through the free NextCV AI ATS Resume Checker against your target job description to spot missing keywords, weak bullet points, or section formatting gaps before you submit your application.",
   },
 ];
 
-const breadcrumbSchema = {
+const showcasedTemplates = [
+  {
+    name: "Minimal ATS Resume Template",
+    description: "Single-column minimalist layout for software engineers, freshers, and MNC applications.",
+    url: "https://www.nextcv.in/templates",
+  },
+  {
+    name: "Classic ATS Resume Template",
+    description: "Traditional reverse-chronological format for business, finance, and consulting roles.",
+    url: "https://www.nextcv.in/templates",
+  },
+  {
+    name: "Modern Resume Template",
+    description: "Balanced clean hierarchy for early-career professionals and product roles.",
+    url: "https://www.nextcv.in/templates",
+  },
+  {
+    name: "Tech Resume Template",
+    description: "Developer-focused layout highlighting programming stacks, GitHub links, and deployed projects.",
+    url: "https://www.nextcv.in/templates",
+  },
+  {
+    name: "Creative Resume Template",
+    description: "Structured modern layout for marketing, content, and design applicants.",
+    url: "https://www.nextcv.in/templates",
+  },
+  {
+    name: "Professional Clean Resume Template",
+    description: "Placement-ready fresher format emphasizing education, internships, and certifications.",
+    url: "https://www.nextcv.in/templates",
+  },
+];
+
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
+  "@graph": [
     {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://www.nextcv.in/",
+      "@type": "CollectionPage",
+      "@id": "https://www.nextcv.in/templates#collection",
+      name: "ATS Resume Templates for Freshers & Professionals in India",
+      description:
+        "Browse ATS-friendly resume templates for Indian freshers and experienced professionals. Preview clean layouts and export vector PDFs starting at ₹49 one-time via UPI.",
+      url: "https://www.nextcv.in/templates",
+      inLanguage: "en-IN",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "NextCV",
+        url: "https://www.nextcv.in",
+      },
     },
     {
-      "@type": "ListItem",
-      position: 2,
-      name: "Resume Templates",
-      item: "https://www.nextcv.in/templates",
+      "@type": "ItemList",
+      "@id": "https://www.nextcv.in/templates#list",
+      name: "Featured NextCV Resume Templates",
+      numberOfItems: showcasedTemplates.length,
+      itemListElement: showcasedTemplates.map((tpl, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        name: tpl.name,
+        description: tpl.description,
+        url: tpl.url,
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.nextcv.in/templates#breadcrumb",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.nextcv.in/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Resume Templates",
+          item: "https://www.nextcv.in/templates",
+        },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.nextcv.in/templates#faq",
+      mainEntity: faqs.map(faq => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
     },
   ],
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map(faq => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
 };
 
 const formatTips = [
@@ -114,29 +178,65 @@ const formatTips = [
     icon: GraduationCap,
     title: "Resume templates for freshers",
     description:
-      "Highlight education, internships, academic projects, certifications and skills when you have limited full-time experience.",
+      "Put your degree, CGPA, technical skills, internships, and deployed capstone projects front and center for campus and off-campus drives.",
   },
   {
     icon: BriefcaseBusiness,
     title: "Professional resume formats",
     description:
-      "Give relevant work experience, responsibilities and measurable achievements a clear place in your resume.",
+      "Lead with recent work history, leadership scope, and quantified STAR achievements tailored to mid-level and senior hiring managers.",
   },
   {
     icon: ShieldCheck,
-    title: "ATS-friendly resume templates",
+    title: "ATS-friendly vector PDFs",
     description:
-      "Prefer readable text, familiar headings and a clear content hierarchy. Review the exported document before submitting it.",
+      "Built with clean text layers, standard headings, and zero graphic rating bars so Darwinbox, Workday, Taleo, and Naukri Resdex parse every line.",
+  },
+];
+
+const templateTiers = [
+  {
+    tier: "Basic",
+    price: "₹49",
+    audience: "Students & Freshers",
+    details: "Clean single-column ATS & modern layouts ideal for campus placements and mass IT hiring.",
+  },
+  {
+    tier: "Standard",
+    price: "₹99",
+    audience: "IT & Service MNCs",
+    details: "Company-tuned ATS templates optimized for TCS Digital, Infosys, and compact 1-page tech CVs.",
+  },
+  {
+    tier: "Premium",
+    price: "₹199",
+    audience: "Corporate & Specialized Roles",
+    details: "Expanded role-specific layouts for consulting, healthcare, operations, and mid-career switches.",
+  },
+  {
+    tier: "Elite",
+    price: "₹399",
+    audience: "Senior & Executive Tracks",
+    details: "High-density executive and leadership formats for senior engineers, managers, and directors.",
   },
 ];
 
 const resumeSections = [
-  "Contact information and professional links",
-  "A concise professional summary, when useful",
-  "Relevant technical and professional skills",
-  "Education and academic qualifications",
-  "Projects, internships and work experience",
-  "Certifications and achievements relevant to the role",
+  "Contact details with clickable LinkedIn, GitHub & portfolio links",
+  "Concise 2–3 line summary tailored to your target job title",
+  "Categorized technical and domain skills (zero fake rating bars)",
+  "Education with institution, graduation year, and CGPA/percentage",
+  "Deployed projects, internships, and quantified work achievements",
+  "Verified certifications and competitive coding/hackathon ranks",
+];
+
+const popularFormatGuides = [
+  { label: "ATS-Friendly Resume Format India", href: "/ats-friendly-resume-format-india" },
+  { label: "Fresher Resume Format India", href: "/fresher-resume-format-india" },
+  { label: "TCS Resume Format for Freshers", href: "/tcs-resume-format-for-freshers" },
+  { label: "Infosys Resume Format for Freshers", href: "/infosys-resume-format-for-freshers" },
+  { label: "MNC Resume Format for Freshers", href: "/mnc-resume-format-for-freshers" },
+  { label: "Non-IT Resume for Freshers", href: "/non-it-resume-for-freshers" },
 ];
 
 export default async function TemplatesPage({ searchParams }) {
@@ -151,14 +251,7 @@ export default async function TemplatesPage({ searchParams }) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
 
@@ -168,17 +261,17 @@ export default async function TemplatesPage({ searchParams }) {
           <div className="max-w-3xl">
             <p className="inline-flex items-center gap-2 border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-primary">
               <FileText aria-hidden="true" className="h-4 w-4" />
-              Resume templates for the Indian job market
+              ATS-verified resume templates for the Indian job market
             </p>
 
             <h1 className="mt-5 font-display text-4xl leading-tight text-foreground sm:text-5xl">
-              Resume Templates for Freshers and Professionals in India
+              ATS Resume Templates for Freshers and Professionals in India
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
-              Explore simple, modern and ATS-friendly resume templates for students, freshers, IT
-              professionals and experienced candidates. Compare resume formats, preview a design,
-              and build a resume tailored to your next job application with NextCV.
+              Explore clean, recruiter-ready resume templates built for Indian campus placements,
+              IT services, startups, and product MNCs. Preview layouts, refine bullets with AI, and
+              export vector PDFs starting at ₹49 one-time via UPI.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -191,15 +284,16 @@ export default async function TemplatesPage({ searchParams }) {
             </div>
 
             <p className="mt-4 text-xs text-muted-foreground">
-              Free to build and edit · ₹49–₹399 one-time download plans · No monthly subscription
+              Free to build, edit &amp; ATS-scan · ₹49–₹399 one-time PDF export via UPI · Zero
+              monthly subscriptions
             </p>
           </div>
 
           <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
             {[
-              "Resume formats for freshers",
-              "Professional resume layouts",
-              "ATS-conscious designs",
+              "Tested on Indian & MNC ATS",
+              "Clean single-column & modern layouts",
+              "Free web link & portfolio included",
             ].map(item => (
               <div
                 key={item}
@@ -219,7 +313,7 @@ export default async function TemplatesPage({ searchParams }) {
           showViewAll={false}
           initialPlan={initialPlan}
           title="Browse Resume Templates"
-          description="Explore six starting points by style and career stage. Preview a layout before choosing the template for your resume."
+          description="Filter by career stage or layout style, preview any template in full resolution, and start customizing for free."
         />
       </section>
 
@@ -236,10 +330,10 @@ export default async function TemplatesPage({ searchParams }) {
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
-              The best resume template is one that makes your relevant qualifications easy to find.
-              Your career stage, experience and target role should guide your choice. A fresher
-              applying for a campus placement may need to emphasize education and projects, while an
-              experienced candidate may need more room for career achievements.
+              The right resume template highlights your strongest qualifications in the first half
+              of page one. Freshers applying to campus drives should foreground education, technical
+              skills, and deployed projects, while experienced professionals should prioritize recent
+              roles and quantified impact.
             </p>
           </div>
 
@@ -251,6 +345,41 @@ export default async function TemplatesPage({ searchParams }) {
                 <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
               </article>
             ))}
+          </div>
+
+          {/* Transparent One-Time Tiers */}
+          <div className="mt-10 border-t border-border pt-10">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Transparent One-Time Download Tiers (No Auto-Debit)
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Build, edit, and share your web resume for free. Pay once via UPI, RuPay, or card
+                  only when you export a PDF.
+                </p>
+              </div>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1 text-sm font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
+              >
+                Compare all plans
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {templateTiers.map(item => (
+                <div key={item.tier} className="border border-border bg-background p-5">
+                  <div className="flex items-baseline justify-between">
+                    <span className="text-sm font-semibold text-foreground">{item.tier}</span>
+                    <span className="font-display text-xl text-primary">{item.price}</span>
+                  </div>
+                  <p className="mt-1 text-xs font-medium text-muted-foreground">{item.audience}</p>
+                  <p className="mt-3 text-xs leading-5 text-muted-foreground">{item.details}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -269,21 +398,26 @@ export default async function TemplatesPage({ searchParams }) {
               </h2>
 
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                If you are applying for your first job, choose a resume format that brings your
-                education, skills, projects and internships into focus. You do not need years of
-                work experience to create a useful resume. Relevant academic projects, practical
-                coursework, certifications and personal projects can help demonstrate your abilities
-                when described accurately.
+                You do not need years of corporate work history to land interviews at top IT firms
+                or startups. Choose a fresher-friendly layout that spotlights your degree, CGPA,
+                technical stack, internships, and 2–3 deployed projects with real links.
               </p>
 
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                For campus placements and entry-level IT jobs, keep your sections organized and
-                tailor the content to the job description. Use the same terminology as the role
-                where it accurately reflects your skills and experience.
+                For campus placements at TCS, Infosys, Cognizant, Wipro, and Accenture, keep your
+                resume to one clean page and align your bullet points with the exact keywords in
+                the job description.
               </p>
 
-              <div className="mt-6">
+              <div className="mt-6 flex flex-wrap gap-4">
                 <BuildButton>Build a Fresher Resume</BuildButton>
+                <Link
+                  href="/fresher-resume-format-india"
+                  className="inline-flex items-center gap-2 self-center text-sm font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
+                >
+                  Read the Fresher Resume Guide
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
+                </Link>
               </div>
             </div>
 
@@ -302,8 +436,8 @@ export default async function TemplatesPage({ searchParams }) {
               </ul>
 
               <p className="mt-5 border-t border-border pt-5 text-sm leading-6 text-muted-foreground">
-                Include only sections that are relevant to you. You do not need to add every
-                possible section to your resume.
+                Keep your layout focused—skip filler declarations, marital status, full home
+                addresses, and generic hobbies unless directly relevant.
               </p>
             </div>
           </div>
@@ -316,31 +450,32 @@ export default async function TemplatesPage({ searchParams }) {
           <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Readability matters
+                Built for machine &amp; human screening
               </p>
 
               <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-                ATS-Friendly Resume Templates: What to Look For
+                Why NextCV ATS Templates Outperform Graphic Resumes
               </h2>
 
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                An ATS-friendly resume format aims to keep information readable and logically
-                organized. Use clear section headings, consistent dates and text that accurately
-                describes your qualifications. Avoid placing essential information only in
-                decorative graphics or images.
+                Graphic design tools like Canva often export resumes as flattened shapes, floating
+                text boxes, and multi-column tables. Enterprise ATS engines used in India—such as
+                Workday, Darwinbox, Taleo, and Naukri Resdex—frequently scramble or drop text from
+                those files.
               </p>
 
               <p className="mt-4 text-sm leading-7 text-muted-foreground">
-                Applicant tracking systems differ, and a template alone cannot guarantee a high
-                score, successful parsing or an interview. Check your exported resume and tailor its
-                content to each position before applying.
+                NextCV templates use structured semantic headings, standard readable fonts, and
+                clean vector PDF generation so both automated parsers and human recruiters read
+                your qualifications in exact order. Verify your score anytime with our free AI ATS
+                Resume Checker.
               </p>
 
               <Link
                 href="/ats-resume-checker"
                 className="mt-6 inline-flex items-center gap-2 font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
               >
-                Check your resume with the ATS Resume Checker
+                Scan your resume free with the ATS Checker
                 <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
             </div>
@@ -353,18 +488,18 @@ export default async function TemplatesPage({ searchParams }) {
               </h3>
 
               <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
-                <li>Check that headings and dates are consistent.</li>
-                <li>Review spelling, contact details and links.</li>
-                <li>Use relevant skills from the job description accurately.</li>
-                <li>Open the exported file to check its layout.</li>
-                <li>Remove content that does not support your application.</li>
+                <li>Use standard headings (Experience, Projects, Skills, Education).</li>
+                <li>Verify clickable LinkedIn, GitHub, and NextCV portfolio links.</li>
+                <li>Match role-specific keywords from the job description honestly.</li>
+                <li>Replace visual skill bars or percentages with categorized skills.</li>
+                <li>Run a free ATS check before exporting your final PDF.</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Resume format guide */}
+      {/* Resume format guide & internal links */}
       <section className="nc-section bg-background">
         <div className="nc-container max-w-4xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
@@ -377,53 +512,53 @@ export default async function TemplatesPage({ searchParams }) {
 
           <div className="mt-6 space-y-5 text-sm leading-7 text-muted-foreground">
             <p>
-              When comparing resume formats in India, start with the requirements of the job rather
-              than the appearance of the template alone. Most candidates benefit from clear
-              sections, readable text and a layout that brings relevant qualifications to the
-              forefront.
+              Start with your target role rather than visual decoration alone. Recruiter eye-tracking
+              studies show hiring managers spend roughly 6 seconds on an initial scan—your template
+              should make titles, dates, skills, and outcomes effortless to spot.
             </p>
 
             <p>
-              <strong className="text-foreground">For freshers:</strong> emphasize education,
-              skills, projects, internships and certifications. Keep the most relevant information
-              easy to locate.
+              <strong className="text-foreground">For freshers &amp; campus placements:</strong>{" "}
+              choose a single-column Minimal or Professional template that places education, core
+              skills, internships, and 2–3 quantified projects on page one.
             </p>
 
             <p>
-              <strong className="text-foreground">For experienced professionals:</strong> highlight
-              recent relevant roles, responsibilities and achievements. Include measurable outcomes
-              where you have accurate figures to support them.
+              <strong className="text-foreground">For experienced professionals:</strong> use a
+              Classic or Modern layout that leads with a sharp summary, recent roles, and measurable
+              business metrics (revenue, latency, cost savings, or conversion lift).
             </p>
 
             <p>
-              <strong className="text-foreground">For technical and IT roles:</strong> make relevant
-              programming languages, tools, technical projects and experience easy to scan. Adjust
-              the order of sections to suit your background.
-            </p>
-
-            <p>
-              A resume format should support your content, not replace it. Select a template that
-              suits your experience, tailor the information to the vacancy, and review the final
-              document before sending it to an employer.
+              <strong className="text-foreground">For tech, product &amp; design roles:</strong>{" "}
+              pair your clean ATS PDF with a live{" "}
+              <Link href="/shareable-resume" className="font-medium text-primary underline">
+                shareable resume link
+              </Link>{" "}
+              and a 1-click{" "}
+              <Link href="/resume-to-portfolio" className="font-medium text-primary underline">
+                personal portfolio website
+              </Link>{" "}
+              so hiring managers can inspect live demos directly.
             </p>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-4 border-t border-border pt-6">
-            <Link
-              href="/examples"
-              className="inline-flex items-center gap-2 font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
-            >
-              Browse resume examples
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
-
-            <Link
-              href="/ats-resume-checker"
-              className="inline-flex items-center gap-2 font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
-            >
-              Check ATS readability
-              <ArrowRight aria-hidden="true" className="h-4 w-4" />
-            </Link>
+          <div className="mt-8 border-t border-border pt-6">
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Company &amp; Role Format Guides
+            </p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+              {popularFormatGuides.map(guide => (
+                <Link
+                  key={guide.href}
+                  href={guide.href}
+                  className="inline-flex items-center justify-between border border-border bg-surface px-4 py-3 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
+                >
+                  <span>{guide.label}</span>
+                  <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-primary" />
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -437,14 +572,13 @@ export default async function TemplatesPage({ searchParams }) {
             </p>
 
             <h2 className="mt-3 font-display text-3xl text-foreground sm:text-4xl">
-              Build Your Resume with NextCV
+              Build Your Resume, Link &amp; Portfolio with NextCV
             </h2>
 
             <p className="mt-4 text-sm leading-7 text-muted-foreground">
-              After choosing a resume template, add your details, education, skills, projects and
-              experience. Use AI writing assistance where helpful, then review and edit the content
-              to ensure it accurately represents you. Choose a suitable template and check the final
-              resume before applying.
+              Pick a template, enter your background once, refine bullet points with AI writing
+              assistance, verify ATS compatibility for free, and publish both a downloadable PDF and
+              a shareable career portfolio.
             </p>
           </div>
 
@@ -452,18 +586,18 @@ export default async function TemplatesPage({ searchParams }) {
             {[
               {
                 icon: LayoutTemplate,
-                title: "Choose a template",
-                description: "Compare available layouts and preview your preferred design.",
+                title: "1. Choose a template",
+                description: "Preview ATS-verified layouts for freshers, IT roles, and MNC drives.",
               },
               {
                 icon: Sparkles,
-                title: "Improve your content",
-                description: "Use available AI writing tools to draft and refine resume content.",
+                title: "2. Refine with AI & ATS check",
+                description: "Rewrite weak bullets into STAR format and check your ATS score free.",
               },
               {
                 icon: FileText,
-                title: "Review your resume",
-                description: "Check your information and final document before applying.",
+                title: "3. Export PDF & share live",
+                description: "Download your PDF from ₹49 via UPI and get a free /r/slug & /p/slug link.",
               },
             ].map(({ icon: Icon, title, description }) => (
               <article key={title} className="border border-border bg-background p-5">
@@ -476,10 +610,10 @@ export default async function TemplatesPage({ searchParams }) {
 
           <div className="mt-8 flex flex-col gap-4 bg-slate-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
             <div>
-              <h2 className="font-display text-2xl">Ready to build your resume?</h2>
+              <h2 className="font-display text-2xl">Ready to build your ATS resume?</h2>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Start building and editing for free. Review the available one-time download plans
-                when you are ready.
+                Create and edit for free. One-time PDF exports start at ₹49 via UPI—no recurring
+                subscriptions.
               </p>
             </div>
 
@@ -501,8 +635,8 @@ export default async function TemplatesPage({ searchParams }) {
             </h2>
 
             <p className="mt-4 max-w-2xl text-sm leading-6 text-muted-foreground">
-              Learn how to choose a resume format, create a fresher resume and review your document
-              before applying.
+              Answers on ATS compatibility, fresher resume layouts, UPI pricing, and how to stand
+              out in Indian hiring drives.
             </p>
           </div>
 
@@ -547,6 +681,13 @@ export default async function TemplatesPage({ searchParams }) {
               href="/ats-resume-checker"
             >
               Try the ATS Resume Checker
+            </Link>
+
+            <Link
+              className="font-medium text-primary underline decoration-border-strong underline-offset-4 hover:text-primary/80"
+              href="/resume-builder-comparison"
+            >
+              Compare NextCV vs Zety &amp; Canva
             </Link>
           </div>
         </div>
