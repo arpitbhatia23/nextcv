@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import careerPages from "../../career-pages.json";
 import { createSeoMetadata } from "@/shared/utils/seo";
 import { CareerHero } from "@/shared/components/career/CareerHero";
+import Link from "next/link";
 import { CareerTableOfContents } from "@/shared/components/career/CareerTableOfContents";
 import { CareerSection } from "@/shared/components/career/CareerSection";
 import { CareerCTA } from "@/shared/components/career/CareerCTA";
@@ -161,6 +162,24 @@ export default async function CareerPage({ params }) {
         readTime={readTime}
         category={getCategory(career.title)}
       />
+      {/* NextCV Tools – internal links */}
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href="/ai-resume-builder" className="inline-flex items-center rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600">
+          AI Resume Builder
+        </Link>
+        <Link href="/ai-cover-letter-generator" className="inline-flex items-center rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600">
+          AI Cover‑Letter Generator
+        </Link>
+        <Link href="/ats-resume-checker" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
+          ATS Resume Checker
+        </Link>
+        <Link href="/pricing" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
+          Pricing (₹49)
+        </Link>
+        <Link href="/templates" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
+          Resume Templates
+        </Link>
+      </div>
 
       {/* ------------------------------------------------------------------ */}
       {/* MAIN CONTENT                                                      */}
