@@ -1329,8 +1329,8 @@
   },
   {
     "slug": "common-ats-resume-mistakes",
-    "title": "Common ATS Resume Mistakes and How to Fix Each One",
-    "description": "Seven common resume mistakes that cause parsing or readability problems, with before-and-after examples and fixes for Indian job seekers.",
+    "title": "7 Common ATS Resume Mistakes & How to Fix Them | NextCV",
+    "description": "Avoid 7 common ATS resume mistakes that break parsing in India. See before-and-after fixes and test your resume free with NextCV’s ATS checker.",
     "h1": "Common ATS resume mistakes and how to correct them",
     "keywords": [
       "common ats resume mistakes",
@@ -1342,50 +1342,62 @@
     "sections": [
       {
         "title": "Mistake 1: Contact details in the header, footer or a text box",
-        "content": "Some parsers do not read header and footer areas or text boxes, and Greenhouse lists these among the layouts that can cause a failed parse. The result can be a candidate record with no phone or email. Fix: place your name and contact line as normal text at the top of the page body."
+        "content": "Many Applicant Tracking Systems (such as older Taleo setups, custom campus portals, and strict PDF extractors) skip the document header, footer, and floating text boxes entirely. Greenhouse also lists text boxes and header/footer placements among the layouts that can cause a failed parse.\n\nWhen this happens, your resume may upload successfully, but the recruiter sees a candidate profile with a missing phone number, email address, or LinkedIn link.\n\n**Before (Fails in headers/text boxes):**\n- Placing your name, phone number, and email inside a Word header or a floating sidebar box.\n\n**After (Clean body-text fix):**\n- Place your full name as normal body text at the very top of page 1, followed by one clean contact line: `Bengaluru, IN | +91 98XXXXXXXX | name@email.com | linkedin.com/in/yourname`.\n- Keep page numbers out of the resume or place them cleanly without hiding critical details in footers."
       },
       {
         "title": "Mistake 2: Two columns, tables, icons and skill bars",
-        "content": "These look neat but can scramble reading order. A sidebar's skills might appear in the middle of your education section, and an icon carries no text at all. Fix: use one column and plain labels such as 'Phone:' and 'Email:' or a simple line with separators."
+        "content": "Two-column layouts, nested tables, star ratings, and progress bars look tidy to the human eye, but PDF text extractors read left-to-right across the entire page width or follow internal object order. A sidebar listing your skills can get merged straight into the middle of your education or internship dates.\n\nIcons (like a tiny phone or envelope SVG) carry zero readable text unless paired with an explicit label, and visual skill bars (for example, 'Python: 4/5 dots') give parsers nothing to index.\n\n**Before (Scrambled by parsers):**\n- Two-column Canva template with a dark left sidebar, phone/mail icons without labels, and horizontal progress bars for Java, SQL, and React.\n\n**After (Single-column ATS fix):**\n- Use a single-column layout from top to bottom.\n- Replace icons with plain text labels (`Phone:`, `Email:`, `GitHub:`).\n- Replace progress bars with grouped text skills: `Languages: Python, Java, SQL | Frameworks: React, Node.js`."
       },
       {
-        "title": "Mistake 3: Image-only files and oversized documents",
-        "content": "A scan or screenshot saved as a PDF contains a picture of text, not text. Greenhouse documents that image uploads and files over 2.5 MB can fail to parse. Fix: export a text-based PDF or DOCX from your source document and test that you can select the text. Compress or remove heavy images."
+        "title": "Mistake 3: Image-only files, scanned PDFs and oversized documents",
+        "content": "Exporting a resume from Photoshop, Figma, or certain Canva settings can flatten your text into a single raster image. To an ATS, a picture of text contains zero words—so your profile returns empty on every keyword search.\n\nOversized files also fail silently on Indian job portals. Greenhouse documents that image uploads and files over 2.5 MB can fail to parse, and many Naukri or campus placement portals cap uploads at 1–2 MB.\n\n**Before (Unreadable upload):**\n- A 4.2 MB scanned PDF or flattened PNG-in-PDF where clicking and dragging does not highlight individual words.\n\n**After (Text-selectable export):**\n- Export directly as a text-based PDF or `.docx` from Word, Google Docs, or an ATS-safe builder like NextCV.\n- Open the exported PDF and press `Ctrl+A` then `Ctrl+C` to confirm every word is selectable.\n- Keep the file size well under 1 MB by removing decorative backgrounds and embedded photos."
       },
       {
         "title": "Mistake 4: Creative or unclear section headings",
-        "content": "'My Journey', 'What I Do' and 'Things I Have Built' make people and software hunt for the sections they expect. Fix: use Education, Skills, Projects, Experience or Internships, and Certifications. You can still write a distinctive project description underneath."
+        "content": "ATS parsers rely on predictable section headers to map your text into structured database fields (`Education`, `Experience`, `Skills`). When you use playful headings like 'My Journey', 'What I Bring to the Table', or 'Things I Built', software may misclassify your internship under education or drop it completely.\n\n**Before (Ambiguous headers):**\n- `About Me`, `My Tech Arsenal`, `Where I Studied`, `Cool Stuff I Built`\n\n**After (Standard ATS headers):**\n- `Professional Summary` (optional, 2–3 lines)\n- `Skills` or `Technical Skills`\n- `Experience` or `Internships`\n- `Projects`\n- `Education`\n- `Certifications` (if relevant)\n\nYou can still show personality in your project descriptions underneath—just keep the section labels standard."
       },
       {
         "title": "Mistake 5: Keyword stuffing, hidden text and unsupported skills",
-        "content": "Listing thirty tools, repeating a term in every line, or hiding extra keywords in white text makes the resume look inflated and can be exposed when the text is extracted. Fix: list the skills you can discuss and show the important ones inside projects or internship bullets."
+        "content": "Copying half of a job description into your skills list—or hiding white-colored keywords at the bottom of the page—is one of the fastest ways to lose credibility. Modern parsers extract all text regardless of font color, exposing hidden keyword blocks to recruiters in plain-text view.\n\nEven without hidden text, listing 35 tools you barely touched makes it hard for interviewers to tell what you actually know.\n\n**Before (Inflated & risky):**\n- `Skills: Python, Java, C++, Rust, Go, Kubernetes, Terraform, TensorFlow, PyTorch, AWS, Azure, GCP, SAP, Salesforce...` with zero mention of half of them in your projects.\n\n**After (Targeted & substantiated):**\n- List 8–15 genuine skills aligned with the target role.\n- Back up your top skills inside your `Experience` or `Projects` bullets so both the ATS keyword match and the human reviewer see real proof."
       },
       {
-        "title": "Mistake 6: Vague bullets with no evidence",
-        "content": "Before: 'Responsible for working on a team project.' After: 'Built the login and order modules of a canteen ordering app in React and Node.js with a four-person team.' The second line tells the reader what you did and which tools you used, which also gives relevant keywords a context."
+        "title": "Mistake 6: Vague bullets with no evidence or outcomes",
+        "content": "Weak bullets hurt both automated relevance scoring and recruiter shortlisting. Lines starting with 'Responsible for...' or 'Worked on...' omit the tools used, the scope of the work, and the outcome.\n\n**Before (Generic responsibility):**\n- `Responsible for working on a team project for college canteen ordering.`\n- `Helped the marketing team with social media and reports.`\n\n**After (Action + tool + outcome):**\n- `Built the login and order modules of a canteen ordering app in React and Node.js with a 4-person team, cutting manual order tracking time by 40%.`\n- `Automated weekly campaign performance reports in Excel (Pivot Tables, VLOOKUP) and Google Analytics for 3 client accounts.`\n\nSpecific verbs and tools give ATS search queries exact matches while giving hiring managers a reason to call you."
       },
       {
-        "title": "Mistake 7: Inconsistent dates, abbreviations and names",
-        "content": "Mixed date styles, 'Jan 24', '2024' and '01/24' in one resume, make it harder to read durations. Using only short forms for your institute or employer can also weaken recognition. Fix: use one date format and write full names of your institute and employers at least once."
+        "title": "Mistake 7: Inconsistent dates, abbreviations and Indian portal traps",
+        "content": "Mixing date formats—such as `Jan 24`, `2024`, and `01/24`—inside the same resume confuses timeline parsers (like Workday) that calculate total years of experience. Similarly, using only acronyms for your college or past company can weaken keyword matching.\n\nIndian candidates also run into legacy format habits that waste prime top-of-page space and trigger formatting clutter:\n- **Unnecessary personal tables:** Father's name, date of birth, marital status, passport number, and a formal `'I hereby declare...'` footer are rarely needed for corporate or tech applications.\n- **Inconsistent CGPA / percentage formatting:** Write grades clearly as `CGPA: 8.4/10` or `82%` rather than bare numbers.\n\n**Before (Inconsistent timeline):**\n- `01/24 - 05/24` in one role, `June 2023 – Dec 2023` in another, plus a 6-row personal details table at the bottom.\n\n**After (Uniform & clean):**\n- Use one consistent date format throughout, such as `Jan 2024 – May 2024`.\n- Write the full name of your university and employer at least once before any abbreviation."
+      },
+      {
+        "title": "How to run a 60-second ATS check before you apply",
+        "content": "Before uploading your resume to Naukri, LinkedIn, Workday, or a company career page, run this quick three-step verification:\n- **Plain-text copy test:** Open your PDF, press `Ctrl+A` and `Ctrl+C`, and paste into Notepad or a blank text editor. Read from top to bottom—if your skills appear inside your education block or your phone number vanishes, switch to a single-column layout.\n- **File size & name check:** Confirm the file is under 1 MB and named professionally (for example, `Aarav_Sharma_Software_Engineer_Resume.pdf`).\n- **Role alignment check:** Run your resume through NextCV’s free ATS Resume Checker against the target job description to catch missing keywords and formatting issues before submitting."
       }
     ],
     "showTemplates": false,
     "faqs": [
       {
         "q": "Will a single mistake cause automatic rejection?",
-        "a": "Usually not on its own. The more realistic risks are that your details are read incorrectly, your profile is harder to find in search, or a person finds the resume confusing. Some employers do add automatic rules tied to screening answers."
+        "a": "Usually not on its own. The more realistic risks are that your details are parsed into the wrong fields, your profile fails to appear in recruiter keyword searches, or a human reviewer skips a cluttered layout. Some employers do add automatic knock-out questions tied to application forms."
       },
       {
-        "q": "Are Canva resumes a problem?",
-        "a": "Not necessarily, but many templates use columns, icons and text laid over images. Export, select the text, and check the plain-text result. If it merges or scrambles, switch to a simpler layout."
+        "q": "Are Canva resumes a problem for ATS?",
+        "a": "Not always, but many Canva templates use multi-column text boxes, icons, and graphics layered over backgrounds. Export your PDF, copy all text into Notepad, and inspect the reading order. If lines scramble or text is unselectable, switch to a single-column ATS template."
       },
       {
         "q": "Is a two-page resume a mistake?",
-        "a": "No. For a fresher, one page is a sensible aim, but a second page is fine when it holds relevant, non-repetitive content, as it might for a candidate with several years of experience."
+        "a": "No. For freshers and students, one clean page is usually best. A two-page resume is completely fine once you have 3+ years of relevant experience, provided every section adds non-repetitive value."
+      },
+      {
+        "q": "Is PDF or DOCX better for ATS in India?",
+        "a": "A text-based PDF preserves your layout across devices and works well with modern ATS platforms like Greenhouse, Lever, and Workday. Use DOCX only if a portal or recruiter specifically asks for a Word document."
+      },
+      {
+        "q": "Should I include a photo, date of birth, or declaration on an Indian resume?",
+        "a": "No, unless an employer explicitly asks for them (such as certain hospitality, aviation, or government forms). Leaving out photos, father's name, and declaration paragraphs saves space and prevents parsing clutter."
       },
       {
         "q": "Can I fix a mistake after I have applied?",
-        "a": "Usually you cannot edit a submitted application, though some portals let you update your profile. Fix the file and use the corrected version for the next application, or contact the recruiter if a serious error needs correcting."
+        "a": "Usually you cannot edit a submitted application, though some portals like Workday or Naukri let you update your profile file. Fix the issue in your master file immediately for upcoming applications."
       }
     ]
   },

@@ -245,6 +245,28 @@ export default async function SeoPage({ params }) {
     })),
   };
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: page.h1 || page.title,
+    description: page.description,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.nextcv.in/${page.slug}`,
+    },
+    author: {
+      "@type": "Organization",
+      name: "NextCV Editorial Team",
+      url: "https://www.nextcv.in/about-us",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "NextCV",
+      url: "https://www.nextcv.in",
+    },
+    keywords: Array.isArray(page.keywords) ? page.keywords.join(", ") : undefined,
+  };
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -266,6 +288,10 @@ export default async function SeoPage({ params }) {
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#17201C] selection:bg-[#e4ebff] selection:text-[#17201C]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {hasFaqs && (
         <script
           type="application/ld+json"
@@ -292,7 +318,9 @@ export default async function SeoPage({ params }) {
         {/* Editorial Metadata Bar */}
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#EAE7DF] py-4 text-xs text-[#6F7670]">
           <div className="flex items-center gap-3">
-            <span className="font-medium text-[#17201C]">NextCV Editorial Team</span>
+            <Link href="/about-us" className="font-medium text-[#17201C] hover:underline">
+              NextCV Editorial Team
+            </Link>
             <span>·</span>
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-[#89908A]" />
