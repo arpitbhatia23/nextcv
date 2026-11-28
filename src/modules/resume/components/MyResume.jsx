@@ -15,6 +15,8 @@ import { useIsMobile } from "@/shared/hooks/use-mobile";
 import dynamic from "next/dynamic";
 import { FontImports } from "./fontImport";
 import { useAuthGuard } from "@/modules/auth/hooks/useAuth";
+import useResumeStore from "@/store/useResumeStore";
+import LocalResumeDraftsSection from "./LocalResumeDraftsSection";
 
 const PDFPreview = dynamic(() => import("./pdfPreview"), {
   ssr: false,
@@ -47,13 +49,27 @@ const MyResume = () => {
   const [portfolioResume, setPortfolioResume] = useState(null);
   const { authOverlay } = useAuthGuard();
   const route = useRouter();
+  const createResume = useResumeStore(s => s.createResume);
+  const localDraftsCount = useResumeStore(
+    s => (s.resumes || []).filter(r => r.status !== "completed").length
+  );
+
+  const handleCreateNewResume = () => {
+    createResume("Untitled Resume", { currentStep: "template-selection" });
+    route.push("/dashboard/builder/template-selection");
+  };
 
   useEffect(() => {
     const fetchResume = async () => {
       setLoading(true);
-      const res = await axios.get("/api/resume/getAllResume");
-      setResumes(res.data.data);
-      setLoading(false);
+      try {
+        const res = await axios.get("/api/resume/getAllResume");
+        setResumes(res.data.data || { draft: [], paid: [] });
+      } catch {
+        setResumes({ draft: [], paid: [] });
+      } finally {
+        setLoading(false);
+      }
     };
     fetchResume();
   }, []);
@@ -222,7 +238,7 @@ const MyResume = () => {
             </p>
           </div>
           <Button
-            onClick={() => route.push("/dashboard/builder")}
+            onClick={handleCreateNewResume}
             className="h-10 px-5 text-white shadow-none hover:opacity-90 transition-opacity cursor-pointer"
             style={{ backgroundColor: "#344B38" }}
             id="tour-create-new-button"
@@ -398,14 +414,14 @@ const MyResume = () => {
                 className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#344B38] data-[state=active]:text-[#344B38]"
                 style={{ color: "#5A665B" }}
               >
-                Unlocked ({paidResumes?.length || 0})
+                My Resumes ({paidResumes?.length || 0})
               </TabsTrigger>
               <TabsTrigger
                 value="Draft-Resume"
                 className="bg-transparent border-b-2 border-transparent rounded-none px-2 py-3 font-sans text-sm font-medium shadow-none transition-all data-[state=active]:border-[#344B38] data-[state=active]:text-[#344B38]"
                 style={{ color: "#5A665B" }}
               >
-                Drafts ({draftResumes?.length || 0})
+                Resume Drafts ({(draftResumes?.length || 0) + localDraftsCount})
               </TabsTrigger>
             </TabsList>
           </div>
@@ -447,15 +463,35 @@ const MyResume = () => {
             )}
           </TabsContent>
 
-          <TabsContent value="Draft-Resume" className="outline-none">
-            {!draftResumes || draftResumes.length === 0 ? (
+          <TabsContent value="Draft-Resume" className="outline-none space-y-8">
+            <LocalResumeDraftsSection showCompleted={false} />
+            {draftResumes && draftResumes.length > 0 ? (
+              <div className="space-y-4">
+                <h3 className="font-mono text-[10px] tracking-widest uppercase text-[#5A665B]">
+                  Saved Cloud Drafts ({draftResumes.length})
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-2">
+                  {draftResumes.map(resume => (
+                    <ResumeCard
+                      key={resume?.resumedata._id}
+                      resume={resume?.resumedata}
+                      onPreview={handleViewResume}
+                      onDownload={handleDownload}
+                      onEdit={handleEdit}
+                      onDelete={handleDelete}
+                      getTemplateDisplayName={getTemplateDisplayName}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : localDraftsCount === 0 ? (
               <EmptyState
                 icon={PenLine}
                 title="Start your first resume"
                 body="Create a new resume to get started. It will be saved here automatically."
                 action={
                   <Button
-                    onClick={() => route.push("/dashboard/builder")}
+                    onClick={handleCreateNewResume}
                     className="cursor-pointer text-white"
                     style={{ backgroundColor: "#344B38" }}
                   >
@@ -463,21 +499,7 @@ const MyResume = () => {
                   </Button>
                 }
               />
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 pt-2">
-                {draftResumes.map(resume => (
-                  <ResumeCard
-                    key={resume?.resumedata._id}
-                    resume={resume?.resumedata}
-                    onPreview={handleViewResume}
-                    onDownload={handleDownload}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    getTemplateDisplayName={getTemplateDisplayName}
-                  />
-                ))}
-              </div>
-            )}
+            ) : null}
           </TabsContent>
         </Tabs>
       </div>

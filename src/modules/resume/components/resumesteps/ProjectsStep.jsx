@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Edit2, Trash2, FolderKanban, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -68,15 +68,10 @@ const ProjectsStep = () => {
 
   // Sync local list → store on every change (including empty array deletions)
   useEffect(() => {
-    if (formData.projects.length > 0) {
-      console.log(formData.projects[0].id);
-      setProjectList(
-        (formData.projects || []).map((p, i) => {
-          return { ...p, id: p.id ?? Date.now() + i };
-        })
-      );
-    }
-  }, [formData.projects]);
+    setProjectList(
+      (formData?.projects || []).map((p, i) => ({ ...p, id: p.id ?? Date.now() + i }))
+    );
+  }, [formData?.projects]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 

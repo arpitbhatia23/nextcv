@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -86,11 +86,9 @@ const CertificateStep = () => {
   });
 
   useEffect(() => {
-    if (formData?.certificates?.length > 0) {
-      setCertList(
-        (formData.certificates || []).map((c, i) => ({ ...c, id: c.id ?? Date.now() + i }))
-      );
-    }
+    setCertList(
+      (formData?.certificates || []).map((c, i) => ({ ...c, id: c.id ?? Date.now() + i }))
+    );
   }, [formData?.certificates]);
 
   /*

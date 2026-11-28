@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Edit2, Trash2, GraduationCap, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -76,12 +76,9 @@ const EducationStep = () => {
   });
 
   useEffect(() => {
-    console.log(formData.education);
-    if (formData.education.length > 0) {
-      setEducationList(
-        (formData.education || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
-      );
-    }
+    setEducationList(
+      (formData?.education || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
+    );
   }, [formData?.education]);
 
   // useEffect(() => {

@@ -16,7 +16,7 @@ export const usePayment = ({
   draftId,
 }) => {
   const { error, isLoading, Razorpay } = useRazorpay();
-  const clearDraft = useResumeStore(s => s.clearStorage);
+  const markResumeCompleted = useResumeStore(s => s.markResumeCompleted);
   const [isRedirecting, setisRedirecting] = useState(false);
   const handelPayment = async () => {
     if (couponCode && !applied) {
@@ -101,7 +101,7 @@ export const usePayment = ({
                 step: "review",
                 step_number: 9,
               });
-              clearDraft();
+              markResumeCompleted();
               window.location.href = data.data.redirecturl;
               return;
             }

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useForm } from "react-hook-form";
 import {
@@ -47,6 +47,8 @@ const inputStyle = { backgroundColor: "#F8F7F3", borderColor: "#E3E2DC", color: 
 const BasicInfoStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
+  const hasHydrated = useResumeStore(s => s._hasHydrated);
+  const activeResumeId = useResumeStore(s => s.activeResumeId);
   const [openJd, setOpenJd] = useState(false);
   const [openSocial, setOpenSocail] = useState(false);
   const [isloading, setIsLoading] = useState(false);
@@ -76,20 +78,36 @@ const BasicInfoStep = () => {
   });
 
   useEffect(() => {
-    if (formData) {
-      form.reset({
-        name: formData.name ?? "",
-        phone_no: formData.phone_no ?? "",
-        email: formData.email ?? "",
-        linkedin: formData.linkedin ?? "",
-        github: formData.github ?? "",
-        portfolio: formData.portfolio ?? "",
-        address: formData.address ?? "",
-        jobRole: formData.jobRole ?? "",
-        jobDescription: formData.jobDescription ?? "",
-      });
-    }
-  }, [formData, form]);
+    if (!hasHydrated) return;
+    const current = useResumeStore.getState().formData;
+    form.reset({
+      name: current?.name ?? "",
+      phone_no: current?.phone_no ?? "",
+      email: current?.email ?? "",
+      linkedin: current?.linkedin ?? "",
+      github: current?.github ?? "",
+      portfolio: current?.portfolio ?? "",
+      address: current?.address ?? "",
+      jobRole: current?.jobRole ?? "",
+      jobDescription: current?.jobDescription ?? "",
+    });
+  }, [hasHydrated, activeResumeId, form]);
+
+  // Auto-save Basic Info changes to local draft store as user types
+  useEffect(() => {
+    if (!hasHydrated) return;
+    let timer;
+    const subscription = form.watch(values => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        updateForm(values);
+      }, 300);
+    });
+    return () => {
+      clearTimeout(timer);
+      subscription.unsubscribe();
+    };
+  }, [hasHydrated, form, updateForm]);
 
   const handlesave = values => {
     setIsLoading(true);

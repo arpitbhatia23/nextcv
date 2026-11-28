@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -26,6 +26,7 @@ const SummaryStep = () => {
   const formData = useResumeStore(s => s.formData);
   const updateForm = useResumeStore(s => s.updateForm);
   const hasHydrated = useResumeStore(s => s._hasHydrated);
+  const activeResumeId = useResumeStore(s => s.activeResumeId);
 
   const router = useRouter();
 
@@ -46,19 +47,20 @@ const SummaryStep = () => {
 
   const watchedSummary = form.watch("summary");
 
-  // Zustand -> React Hook Form after hydration
+  // Zustand -> React Hook Form after hydration or resume switch
   useEffect(() => {
     if (!hasHydrated) return;
 
     form.reset({
       summary: formData.summary || "",
     });
-  }, [hasHydrated]);
+  }, [hasHydrated, activeResumeId]);
 
   // React Hook Form -> Zustand
   useEffect(() => {
     if (!hasHydrated) return;
     if (watchedSummary === undefined) return;
+    if (watchedSummary === (useResumeStore.getState().formData?.summary || "")) return;
 
     updateForm({
       summary: watchedSummary,

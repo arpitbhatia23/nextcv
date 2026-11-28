@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   FileText,
   User,
@@ -15,6 +15,7 @@ import {
   Leaf,
 } from "lucide-react";
 import useResumeStore from "@/store/useResumeStore";
+import { useResumeAutoSave } from "@/modules/resume/hooks/useResumeAutoSave";
 
 const stepsConfig = [
   { key: "start", label: "Start", icon: Play },
@@ -89,22 +90,16 @@ const FontImports = () => (
 export default function StepNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const formData = useResumeStore(state => state.formData);
-  const selectedTemplate = useResumeStore(state => state.selectedTemplate);
-  const [saveStatus, setSaveStatus] = useState("saved");
-
-  useEffect(() => {
-    setSaveStatus("saving");
-    const savedTimer = setTimeout(() => setSaveStatus("saved"), 350);
-    return () => clearTimeout(savedTimer);
-  }, [formData, selectedTemplate]);
+  const saveStatus = useResumeStore(state => state.saveStatus);
+  const { activeResume } = useResumeAutoSave();
 
   const currentStep = useMemo(() => {
     if (pathname === "/dashboard/builder" || pathname === "/dashboard/builder/") {
       return 0;
     }
     const builderPath = pathname.replace("/dashboard/builder/", "");
-    const index = stepsConfig.findIndex(step => step.key === builderPath);
+    if (builderPath === "template-selection") return 1;
+    const index = stepsConfig?.findIndex(step => step.key === builderPath);
     return index >= 0 ? index : 1;
   }, [pathname]);
 
@@ -140,6 +135,14 @@ export default function StepNav() {
             <h2 className="font-display whitespace-nowrap text-base font-medium text-[#263A2A]">
               Resume Studio
             </h2>
+            {activeResume?.title && (
+              <>
+                <span className="hidden h-1.5 w-1.5 bg-[#DDE3D9] sm:inline-block" />
+                <span className="hidden max-w-45 truncate text-xs font-medium text-[#456B4A] sm:inline-block">
+                  {activeResume.title}
+                </span>
+              </>
+            )}
             <span className="hidden h-1.5 w-1.5 bg-[#DDE3D9] sm:inline-block" />
             <span className="hidden font-mono text-[11px] tracking-wider text-[#667466] sm:inline-block">
               ATS-OPTIMIZED
@@ -150,18 +153,32 @@ export default function StepNav() {
             <div
               aria-live="polite"
               className={`flex items-center gap-1.5 font-mono text-[10px] tracking-wider ${
-                saveStatus === "saving" ? "text-[#687568]" : "text-[#356344]"
+                saveStatus === "error"
+                  ? "text-red-600"
+                  : saveStatus === "saving"
+                    ? "text-[#687568]"
+                    : "text-[#356344]"
               }`}
             >
               <span
                 className={`h-1.5 w-1.5 ${
-                  saveStatus === "saving" ? "animate-pulse bg-amber-500" : "bg-[#3F7950]"
+                  saveStatus === "error"
+                    ? "bg-red-600"
+                    : saveStatus === "saving"
+                      ? "animate-pulse bg-amber-500"
+                      : "bg-[#3F7950]"
                 }`}
               />
               <span className="hidden sm:inline">
-                {saveStatus === "saving" ? "UPDATING DRAFT" : "DRAFT SAVED LOCALLY"}
+                {saveStatus === "error"
+                  ? "AUTO-SAVE FAILED"
+                  : saveStatus === "saving"
+                    ? "SAVING..."
+                    : "AUTO-SAVE: SAVED"}
               </span>
-              <span className="sm:hidden">{saveStatus === "saving" ? "SAVING" : "SAVED"}</span>
+              <span className="sm:hidden">
+                {saveStatus === "error" ? "FAILED" : saveStatus === "saving" ? "SAVING" : "SAVED"}
+              </span>
             </div>
             <div className="font-mono text-[10px] tracking-widest text-[#788477]">
               {currentStep + 1}/{stepsConfig.length}

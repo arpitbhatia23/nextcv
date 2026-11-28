@@ -10,7 +10,12 @@ export default function ResumeStartPage() {
   const router = useRouter();
   const [showImport, setShowImport] = useState(false);
 
+  const createResume = useResumeStore(state => state.createResume);
+
   const handleCreate = () => {
+    const store = useResumeStore.getState();
+
+    createResume("Untitled Resume", { currentStep: "template-selection" });
     router.push("/dashboard/builder/template-selection");
   };
 
@@ -20,9 +25,17 @@ export default function ResumeStartPage() {
         <ImportResume
           onBack={() => setShowImport(false)}
           onImportComplete={resume => {
-            console.log(resume);
-            if (resume.data) {
-              useResumeStore.getState().updateForm(resume.data);
+            if (resume?.data) {
+              const title = resume.data?.name ? `${resume.data.name}'s Resume` : "Imported Resume";
+              const store = useResumeStore.getState();
+              if (typeof store.createResume === "function") {
+                store.createResume(title, {
+                  formData: resume.data,
+                  currentStep: "review",
+                });
+              } else {
+                store.updateForm(resume.data);
+              }
             }
             router.push("/dashboard/builder/review");
           }}

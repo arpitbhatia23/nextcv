@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft, Wrench } from "lucide-react";
@@ -56,10 +56,8 @@ const SkillStep = () => {
   });
 
   useEffect(() => {
-    if (formData?.skills.length > 0) {
-      setSkillList((formData.skills || []).map((s, i) => ({ ...s, id: s.id ?? Date.now() + i })));
-    }
-  }, [formData]);
+    setSkillList((formData?.skills || []).map((s, i) => ({ ...s, id: s.id ?? Date.now() + i })));
+  }, [formData?.skills]);
 
   // ✅ Add skill (supports comma separated)
   const onSubmit = values => {

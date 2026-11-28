@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { FontImports } from "@/modules/resume/components/fontImport";
+import LocalResumeDraftsSection from "@/modules/resume/components/LocalResumeDraftsSection";
 
 const UserDashboard = () => {
   const steps = [
@@ -55,7 +56,20 @@ const UserDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen font-sans selection:bg-[#344B38] selection:text-white bg-[#F1F5EF] text-[#1C261E]">
+    <div className="min-h-screen font-sans selection:bg-[#344B38] selection:text-white bg-linear-to-br from-[#F4FAF5] to-[#E8F0EB] text-[#1C261E]">
+      <style>{`
+          :root {
+            --primary:#344B38;
+            --secondary:#456B4A;
+            --accent:#B3382C;
+            --bg-light:#F4FAF5;
+            --bg-dark:#E8F0EB;
+            --card:#FFFFFF;
+            --border:#DDE2D9;
+            --text-main:#1C261E;
+            --text-muted:#5A665B;
+          }
+        `}</style>
       <FontImports />
       <div className="max-w-7xl mx-auto p-4 md:p-8 lg:p-12">
         <header className="pb-6 mb-12 border-b border-[#DDE2D9]">
@@ -138,6 +152,9 @@ const UserDashboard = () => {
                 </CardContent>
               </Card>
             </Link>
+
+            {/* Resume Drafts & Resume Where You Left Off */}
+            <LocalResumeDraftsSection />
 
             {/* Step Guide */}
             <section>

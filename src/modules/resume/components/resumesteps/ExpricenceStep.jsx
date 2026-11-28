@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Briefcase, Edit2, Trash2, Sparkles, ArrowRight, ArrowLeft } from "lucide-react";
@@ -64,11 +64,9 @@ const ExperienceStep = () => {
   });
 
   useEffect(() => {
-    if (formData.experience.length > 0) {
-      setExperienceList(
-        (formData.experience || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
-      );
-    }
+    setExperienceList(
+      (formData?.experience || []).map((e, i) => ({ ...e, id: e.id ?? Date.now() + i }))
+    );
   }, [formData?.experience]);
 
   const onSubmit = values => {
