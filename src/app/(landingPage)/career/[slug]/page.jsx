@@ -96,13 +96,22 @@ export default async function CareerPage({ params }) {
       description: career.seo?.description || career.hero?.description,
       inLanguage: "en-IN",
       mainEntityOfPage: `https://www.nextcv.in/career/${career.slug}`,
+      author: career.hero?.author
+        ? {
+            "@type": "Organization",
+            name: career.hero.author,
+            url: "https://www.nextcv.in/about-us",
+          }
+        : undefined,
+      dateModified: career.hero?.updatedAt,
+      datePublished: career.hero?.publishedAt || career.hero?.updatedAt,
       publisher: {
         "@type": "Organization",
         name: "NextCV",
         url: "https://www.nextcv.in",
         logo: {
           "@type": "ImageObject",
-          url: "https://www.nextcv.in/logo.png",
+          url: "https://www.nextcv.in/logos/nextcvlogo.png",
         },
       },
     },
@@ -161,24 +170,82 @@ export default async function CareerPage({ params }) {
         description={career.hero?.description}
         readTime={readTime}
         category={getCategory(career.title)}
+        author={career.hero?.author}
+        updatedAt={career.hero?.updatedAt}
       />
       {/* NextCV Tools – internal links */}
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link href="/ai-resume-builder" className="inline-flex items-center rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600">
-          AI Resume Builder
-        </Link>
-        <Link href="/ai-cover-letter-generator" className="inline-flex items-center rounded bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600">
-          AI Cover‑Letter Generator
-        </Link>
-        <Link href="/ats-resume-checker" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
-          ATS Resume Checker
-        </Link>
-        <Link href="/pricing" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
-          Pricing (₹49)
-        </Link>
-        <Link href="/templates" className="inline-flex items-center rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-100">
-          Resume Templates
-        </Link>
+      <div className="relative z-10 mx-auto -mt-7 max-w-7xl px-6 sm:px-8 lg:px-12">
+        <nav
+          aria-label="NextCV career tools"
+          className="grid gap-2 rounded-2xl border border-[#DFE1DA] bg-white/95 p-2 shadow-[0_16px_50px_rgba(23,32,28,0.10)] backdrop-blur sm:grid-cols-2 lg:grid-cols-5"
+        >
+          <Link
+            href="/ai-resume-builder"
+            className="group flex min-h-14 items-center justify-between rounded-xl bg-[#17201C] px-4 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#344B93] hover:shadow-md"
+          >
+            <span>AI Resume Builder</span>
+            <span
+              aria-hidden="true"
+              className="ml-3 transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+
+          <Link
+            href="/ai-cover-letter-generator"
+            className="group flex min-h-14 items-center justify-between rounded-xl border border-transparent px-4 py-3 text-sm font-semibold text-[#344B93] transition duration-200 hover:border-[#465B9E]/20 hover:bg-[#F1F3FA]"
+          >
+            <span>AI Cover Letter</span>
+            <span
+              aria-hidden="true"
+              className="ml-3 text-[#465B9E] transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+
+          <Link
+            href="/ats-resume-checker"
+            className="group flex min-h-14 items-center justify-between rounded-xl border border-transparent px-4 py-3 text-sm font-semibold text-[#344B93] transition duration-200 hover:border-[#465B9E]/20 hover:bg-[#F1F3FA]"
+          >
+            <span>ATS Resume Checker</span>
+            <span
+              aria-hidden="true"
+              className="ml-3 text-[#465B9E] transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+
+          <Link
+            href="/pricing"
+            className="group flex min-h-14 items-center justify-between rounded-xl border border-transparent px-4 py-3 text-sm font-semibold text-[#344B93] transition duration-200 hover:border-[#465B9E]/20 hover:bg-[#F1F3FA]"
+          >
+            <span>
+              Pricing <span className="text-[#7A7F79]">₹49</span>
+            </span>
+            <span
+              aria-hidden="true"
+              className="ml-3 text-[#465B9E] transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+
+          <Link
+            href="/templates"
+            className="group flex min-h-14 items-center justify-between rounded-xl border border-transparent px-4 py-3 text-sm font-semibold text-[#344B93] transition duration-200 hover:border-[#465B9E]/20 hover:bg-[#F1F3FA]"
+          >
+            <span>Resume Templates</span>
+            <span
+              aria-hidden="true"
+              className="ml-3 text-[#465B9E] transition-transform duration-200 group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </nav>
       </div>
 
       {/* ------------------------------------------------------------------ */}

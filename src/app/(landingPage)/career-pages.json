@@ -106,13 +106,7 @@
       "entryLevel": "₹4.5L – ₹8.5L LPA",
       "midLevel": "₹12.0L – ₹24.0L LPA",
       "seniorLevel": "₹28.0L – ₹55.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Pune",
-        "Gurugram / NCR",
-        "Chennai / Mumbai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Pune", "Gurugram / NCR", "Chennai / Mumbai"],
       "marketDemand": "Very High",
       "keyDrivers": "Distributed Systems, Cloud Architecture, Full-Stack TypeScript/Go/Java, Generative AI APIs"
     }
@@ -224,13 +218,7 @@
       "entryLevel": "₹6.0L – ₹12.0L LPA",
       "midLevel": "₹14.0L – ₹28.0L LPA",
       "seniorLevel": "₹30.0L – ₹65.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Gurugram / NCR",
-        "Pune",
-        "Mumbai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Gurugram / NCR", "Pune", "Mumbai"],
       "marketDemand": "Very High",
       "keyDrivers": "Machine Learning Models, GenAI & LLM Fine-Tuning, Advanced SQL, MLOps & Business ROI"
     }
@@ -342,13 +330,7 @@
       "entryLevel": "₹4.0L – ₹8.0L LPA",
       "midLevel": "₹8.0L – ₹16.0L LPA",
       "seniorLevel": "₹16.0L – ₹32.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram / NCR",
-        "Hyderabad",
-        "Mumbai",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram / NCR", "Hyderabad", "Mumbai", "Pune"],
       "marketDemand": "Very High",
       "keyDrivers": "Advanced SQL & CTEs, Power BI & DAX, Python Data Wrangling, Business Acumen & Storytelling"
     }
@@ -460,13 +442,7 @@
       "entryLevel": "₹8.0L – ₹18.0L LPA (APM)",
       "midLevel": "₹18.0L – ₹35.0L LPA (PM-1/PM-2)",
       "seniorLevel": "₹32.0L – ₹65.0L+ LPA (SPM/Director)",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram / NCR",
-        "Mumbai",
-        "Hyderabad",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram / NCR", "Mumbai", "Hyderabad", "Pune"],
       "marketDemand": "Very High",
       "keyDrivers": "Product Sense & Strategy, Metric Trees (LTV/CAC/Retention), Technical Fluency & SQL, Cross-Functional Execution"
     }
@@ -578,13 +554,7 @@
       "entryLevel": "₹4.5L – ₹9.0L LPA",
       "midLevel": "₹10.0L – ₹20.0L LPA",
       "seniorLevel": "₹20.0L – ₹40.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Gurugram / NCR",
-        "Pune",
-        "Hyderabad"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Gurugram / NCR", "Pune", "Hyderabad"],
       "marketDemand": "High",
       "keyDrivers": "Figma Design Systems & Auto-Layout, User Research & Usability Testing, Information Architecture, Accessibility (WCAG)"
     }
@@ -696,13 +666,7 @@
       "entryLevel": "₹3.5L – ₹7.0L LPA",
       "midLevel": "₹7.5L – ₹15.0L LPA",
       "seniorLevel": "₹16.0L – ₹30.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Gurugram / NCR",
-        "Pune",
-        "Hyderabad"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Gurugram / NCR", "Pune", "Hyderabad"],
       "marketDemand": "High",
       "keyDrivers": "Figma Design Systems & Variables, Visual Hierarchy & Typography, Micro-interactions (Lottie/Rive), Responsive Component Architecture"
     }
@@ -814,13 +778,7 @@
       "entryLevel": "₹3.5L – ₹6.5L LPA",
       "midLevel": "₹8.0L – ₹16.0L LPA",
       "seniorLevel": "₹18.0L – ₹35.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram / NCR",
-        "Mumbai",
-        "Delhi",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram / NCR", "Mumbai", "Delhi", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Performance Marketing (Meta & Google Ads), Full-Funnel Attribution & CAPI, SEO & Content Moats, Retention Automation"
     }
@@ -932,13 +890,7 @@
       "entryLevel": "₹3.0L – ₹5.5L LPA",
       "midLevel": "₹6.5L – ₹14.0L LPA",
       "seniorLevel": "₹15.0L – ₹30.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram / NCR",
-        "Noida",
-        "Mumbai",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram / NCR", "Noida", "Mumbai", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Technical SEO & Core Web Vitals, Programmatic SEO Architecture, JSON-LD Schema Markup, AI Search Citation Potential"
     }
@@ -1050,13 +1002,7 @@
       "entryLevel": "₹2.5L – ₹5.0L LPA",
       "midLevel": "₹6.0L – ₹12.0L LPA (B2B SaaS / Tech)",
       "seniorLevel": "₹14.0L – ₹25.0L+ LPA (Lead / Strategist)",
-      "topLocations": [
-        "Bengaluru",
-        "Delhi NCR",
-        "Mumbai",
-        "Pune",
-        "Remote"
-      ],
+      "topLocations": ["Bengaluru", "Delhi NCR", "Mumbai", "Pune", "Remote"],
       "marketDemand": "High for Specialized Niches",
       "keyDrivers": "B2B SaaS & Tech Writing, SEO Keyword Optimization, Conversion Copywriting, Editorial Research"
     }
@@ -1168,13 +1114,7 @@
       "entryLevel": "₹4.5L – ₹7.5L LPA",
       "midLevel": "₹8.0L – ₹15.0L LPA",
       "seniorLevel": "₹16.0L – ₹30.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram",
-        "Hyderabad",
-        "Pune",
-        "Mumbai"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram", "Hyderabad", "Pune", "Mumbai"],
       "marketDemand": "High",
       "keyDrivers": "BRD/FRD documentation, Agile workflows, SQL, Client stakeholder management"
     }
@@ -1286,13 +1226,7 @@
       "entryLevel": "₹3.2L – ₹5.5L LPA",
       "midLevel": "₹6.5L – ₹13.0L LPA",
       "seniorLevel": "₹14.0L – ₹28.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Gurugram",
-        "Hyderabad",
-        "Chennai"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Gurugram", "Hyderabad", "Chennai"],
       "marketDemand": "High",
       "keyDrivers": "Talent acquisition, HR Ops, Employee engagement, Compliance & Policy"
     }
@@ -1404,12 +1338,7 @@
       "entryLevel": "₹3.0L – ₹5.5L LPA",
       "midLevel": "₹6.0L – ₹12.0L LPA",
       "seniorLevel": "₹13.0L – ₹24.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Gurugram",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Gurugram", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Tech sourcing (LinkedIn/Github), Boolean search, Candidate pipeline speed"
     }
@@ -1521,13 +1450,7 @@
       "entryLevel": "₹3.0L – ₹5.0L LPA + Incentives",
       "midLevel": "₹5.5L – ₹11.0L LPA + Incentives",
       "seniorLevel": "₹12.0L – ₹25.0L+ LPA + OTE",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Delhi NCR",
-        "Pune",
-        "Hyderabad"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Delhi NCR", "Pune", "Hyderabad"],
       "marketDemand": "High",
       "keyDrivers": "Lead conversion rate, B2B SaaS sales, Deal closure, Pipeline management"
     }
@@ -1639,12 +1562,7 @@
       "entryLevel": "₹3.5L – ₹6.0L LPA",
       "midLevel": "₹7.0L – ₹13.5L LPA",
       "seniorLevel": "₹14.0L – ₹26.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Gurugram",
-        "Hyderabad"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Gurugram", "Hyderabad"],
       "marketDemand": "High",
       "keyDrivers": "Client retention, Account expansion/upsell, Relationship management"
     }
@@ -1756,12 +1674,7 @@
       "entryLevel": "₹4.0L – ₹7.0L LPA",
       "midLevel": "₹7.5L – ₹14.0L LPA",
       "seniorLevel": "₹15.0L – ₹30.0L+ LPA",
-      "topLocations": [
-        "Mumbai",
-        "Bengaluru",
-        "Gurugram",
-        "Hyderabad"
-      ],
+      "topLocations": ["Mumbai", "Bengaluru", "Gurugram", "Hyderabad"],
       "marketDemand": "High",
       "keyDrivers": "Financial modeling, Forecasting, Valuation, Advanced Excel & SQL"
     }
@@ -1873,13 +1786,7 @@
       "entryLevel": "₹2.5L – ₹4.5L LPA",
       "midLevel": "₹4.8L – ₹9.0L LPA",
       "seniorLevel": "₹10.0L – ₹18.0L+ LPA",
-      "topLocations": [
-        "Mumbai",
-        "Delhi NCR",
-        "Bengaluru",
-        "Chennai",
-        "Kolkata"
-      ],
+      "topLocations": ["Mumbai", "Delhi NCR", "Bengaluru", "Chennai", "Kolkata"],
       "marketDemand": "Stable / High",
       "keyDrivers": "GST, Tally Prime / SAP, Financial reporting, Statutory audits"
     }
@@ -1991,11 +1898,7 @@
       "entryLevel": "₹9.0L – ₹18.0L LPA (Global Investment Banks: ₹16L – ₹30L)",
       "midLevel": "₹18.0L – ₹35.0L LPA",
       "seniorLevel": "₹38.0L – ₹80.0L+ LPA",
-      "topLocations": [
-        "Mumbai",
-        "Bengaluru",
-        "Gurugram"
-      ],
+      "topLocations": ["Mumbai", "Bengaluru", "Gurugram"],
       "marketDemand": "High (Competitive)",
       "keyDrivers": "LBO/DCF Financial modeling, M&A deal execution, Pitchbook generation"
     }
@@ -2107,13 +2010,7 @@
       "entryLevel": "₹6.0L – ₹10.0L LPA (Associate PM)",
       "midLevel": "₹11.0L – ₹19.0L LPA",
       "seniorLevel": "₹20.0L – ₹38.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Pune",
-        "Gurugram",
-        "Chennai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Pune", "Gurugram", "Chennai"],
       "marketDemand": "High",
       "keyDrivers": "PMP / Scrum Master certification, Delivery tracking, Risk mitigation"
     }
@@ -2225,13 +2122,7 @@
       "entryLevel": "₹5.0L – ₹9.0L LPA",
       "midLevel": "₹10.0L – ₹20.0L LPA",
       "seniorLevel": "₹22.0L – ₹42.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Pune",
-        "Gurugram",
-        "Chennai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Pune", "Gurugram", "Chennai"],
       "marketDemand": "Very High",
       "keyDrivers": "AWS/Azure/GCP, Kubernetes, Docker, CI/CD pipelines, Infrastructure as Code (Terraform)"
     }
@@ -2343,13 +2234,7 @@
       "entryLevel": "₹4.8L – ₹8.5L LPA",
       "midLevel": "₹9.5L – ₹18.0L LPA",
       "seniorLevel": "₹19.0L – ₹36.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Gurugram",
-        "Pune",
-        "Mumbai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Gurugram", "Pune", "Mumbai"],
       "marketDemand": "Very High",
       "keyDrivers": "SIEM tools, Penetration testing, CEH/CISSP certifications, Network security"
     }
@@ -2461,13 +2346,7 @@
       "entryLevel": "₹3.0L – ₹5.0L LPA",
       "midLevel": "₹5.5L – ₹10.5L LPA",
       "seniorLevel": "₹11.0L – ₹22.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Pune",
-        "Chennai",
-        "Mumbai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Pune", "Chennai", "Mumbai"],
       "marketDemand": "Moderate to High",
       "keyDrivers": "CCNA/CCNP, Routing & Switching, Firewalls, Cloud networking"
     }
@@ -2579,13 +2458,7 @@
       "entryLevel": "₹3.0L – ₹5.5L LPA",
       "midLevel": "₹5.8L – ₹11.0L LPA",
       "seniorLevel": "₹12.0L – ₹24.0L+ LPA",
-      "topLocations": [
-        "Pune",
-        "Chennai",
-        "Bengaluru",
-        "Ahmedabad",
-        "Coimbatore"
-      ],
+      "topLocations": ["Pune", "Chennai", "Bengaluru", "Ahmedabad", "Coimbatore"],
       "marketDemand": "Moderate",
       "keyDrivers": "CAD/CAM (SolidWorks, AutoCAD), Thermal analysis, Manufacturing processes"
     }
@@ -2697,13 +2570,7 @@
       "entryLevel": "₹2.8L – ₹4.8L LPA",
       "midLevel": "₹5.0L – ₹10.0L LPA",
       "seniorLevel": "₹11.0L – ₹22.0L+ LPA",
-      "topLocations": [
-        "Mumbai",
-        "Bengaluru",
-        "Delhi NCR",
-        "Hyderabad",
-        "Pune"
-      ],
+      "topLocations": ["Mumbai", "Bengaluru", "Delhi NCR", "Hyderabad", "Pune"],
       "marketDemand": "Moderate",
       "keyDrivers": "AutoCAD, Structural analysis (STAAD Pro), Site management, Estimation"
     }
@@ -2815,13 +2682,7 @@
       "entryLevel": "₹3.0L – ₹5.5L LPA",
       "midLevel": "₹5.8L – ₹11.5L LPA",
       "seniorLevel": "₹12.0L – ₹25.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Pune",
-        "Chennai",
-        "Hyderabad",
-        "Vadodara"
-      ],
+      "topLocations": ["Bengaluru", "Pune", "Chennai", "Hyderabad", "Vadodara"],
       "marketDemand": "Moderate to High",
       "keyDrivers": "PLC/SCADA, Circuit design, Power systems, EV/Automation tech"
     }
@@ -2933,13 +2794,7 @@
       "entryLevel": "₹2.4L – ₹4.2L LPA",
       "midLevel": "₹4.5L – ₹7.5L LPA",
       "seniorLevel": "₹8.0L – ₹15.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Delhi NCR",
-        "Chennai",
-        "Hyderabad"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Delhi NCR", "Chennai", "Hyderabad"],
       "marketDemand": "Very High",
       "keyDrivers": "ICU/Critical Care specialization, NABH hospital experience, Overseas licensing (NCLEX)"
     }
@@ -3051,13 +2906,7 @@
       "entryLevel": "₹2.5L – ₹4.5L LPA",
       "midLevel": "₹4.8L – ₹8.5L LPA",
       "seniorLevel": "₹9.0L – ₹16.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Delhi NCR",
-        "Mumbai",
-        "Hyderabad",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Delhi NCR", "Mumbai", "Hyderabad", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "B.Ed / CTET qualifications, International school experience (IB/IGCSE), Subject expertise"
     }
@@ -3169,12 +3018,7 @@
       "entryLevel": "₹2.8L – ₹4.8L LPA",
       "midLevel": "₹5.0L – ₹9.5L LPA",
       "seniorLevel": "₹10.0L – ₹20.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Delhi NCR",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Delhi NCR", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Portfolio quality, Adobe Illustrator/Photoshop, Branding & Visual identity"
     }
@@ -3286,13 +3130,7 @@
       "entryLevel": "₹2.2L – ₹4.0L LPA",
       "midLevel": "₹4.2L – ₹7.5L LPA",
       "seniorLevel": "₹8.0L – ₹15.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Hyderabad",
-        "Gurugram",
-        "Pune",
-        "Chennai"
-      ],
+      "topLocations": ["Bengaluru", "Hyderabad", "Gurugram", "Pune", "Chennai"],
       "marketDemand": "High",
       "keyDrivers": "English communication, CRM tools (Zendesk/Salesforce), SLA adherence, International voice process"
     }
@@ -3404,13 +3242,7 @@
       "entryLevel": "₹4.0L – ₹7.0L LPA",
       "midLevel": "₹7.5L – ₹14.0L LPA",
       "seniorLevel": "₹15.0L – ₹32.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Gurugram",
-        "Mumbai",
-        "Hyderabad",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Gurugram", "Mumbai", "Hyderabad", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Process optimization, Six Sigma / Lean certification, Logistics & Supply chain coordination"
     }
@@ -3522,13 +3354,7 @@
       "entryLevel": "₹4.0L – ₹7.0L LPA",
       "midLevel": "₹7.5L – ₹14.0L LPA",
       "seniorLevel": "₹15.0L – ₹28.0L+ LPA",
-      "topLocations": [
-        "Bengaluru",
-        "Mumbai",
-        "Gurugram",
-        "Chennai",
-        "Pune"
-      ],
+      "topLocations": ["Bengaluru", "Mumbai", "Gurugram", "Chennai", "Pune"],
       "marketDemand": "High",
       "keyDrivers": "Inventory forecasting, SAP/Oracle SCM, SQL & Data analytics, Logistics management"
     }
